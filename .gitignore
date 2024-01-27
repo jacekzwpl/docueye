@@ -365,3 +365,4 @@ client-app/.yarn/cache/
 
 temp/
 Documentation/workspace.json
+ExampleWorkspace/workspace.json

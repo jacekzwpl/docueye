@@ -30,21 +30,18 @@ docker compose up -d
 ```
 Thats it :). If everything goes es expected You can now access DocuEye at http://localhost:8080  
 If You manage to run application You can see empty workspaces list. So it's time to import one.  
-At this time there is no additional cli to do this (there will be see [features roadmap](Documentation/docs/0003-features-roadmap.md) for details). Instead of this You can use powershell or curl. Example script to import workspace can be found [here](example-workspace/import.ps1)  
+At this time there is no additional cli to do this (there will be see [features roadmap](Documentation/docs/0003-features-roadmap.md) for details). Instead of this You can use powershell or curl. Example script to import workspace can be found [here](ExampleWorkspace/import.ps1)  
 To run import using powershell:  
 ```Powershell
-cd .\example-workspace
+cd .\ExampleWorkspace
 
 .\import.ps1 -workspaceDir $PWD -workspaceId "638d0822-12c7-4998-8647-9c7af7ad2989" -adminToken "docueyedmintoken" -docueyeAddress "http://localhost:8080"
 # In this example $PWD is current directory path. 
-# If You are using docker desktop with wsl on windows operating system this might not work. You have to change it to format //<diskname>/path/to/directory ex. //c/myrepos/docueye/example-workspace
+# If You are using docker desktop with wsl on windows operating system this might not work. You have to change it to format //<diskname>/path/to/directory ex. //c/myrepos/docueye/ExampleWorkspace
 ```  
-What is going on here  
-DoucuEye is using workspace.json gereated by [structurizr cli export](https://docs.structurizr.com/cli/export).  So first thing we have to do is to export worskpace int json format: 
-```
-docker run -it --rm -v <path to catalog with your workspace.dsl file>:/usr/local/structurizr structurizr/cli export --workspace workspace.dsl -format json
-```
-After that creating json file with our workspace data we build request and run import using DocuEye import endpoint. See the [example script](example-workspace/import.ps1) or [import endpoint description](Documentation/docs/0001-import-endpoint.md) for more details.
+**What is going on here**  
+DoucuEye is using workspace.json gereated by [structurizr cli export](https://docs.structurizr.com/cli/export).  So first thing we have to do is to export worskpace into json format.  
+After that creating json file with our workspace data we build request and run import using DocuEye import endpoint. See the [example script](ExampleWorkspace/import.ps1) or [import endpoint description](Documentation/docs/0001-import-endpoint.md) for more details.
 
 ## Contributing
 I welcome all contributors. But before making PR-s start with create issue that we can discuss the change.
