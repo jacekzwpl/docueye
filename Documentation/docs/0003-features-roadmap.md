@@ -13,6 +13,7 @@ DocuEye is still work in progress. Below You can see features that I am going to
 | Autolayout configuration | Currently all diagrams are autolayouted TopBottom. In future i want to support configuration of this.|
 | Manual layout saving | Currently you can move diagram elements and export diagram to png for some presentation or workshop. In some cases especially when working with larger number of elements in one diagram it can be useful to save manual layout in DocueEye |  
 | Filtered views | Currently there is no support for filtered views |
+| Integration with OIDC | Currently all workspaces are public there is no restrictions for viewing them. In future there will be possibility to integrate with OIDC tools to authenticate user and authorize access to workspaces |
 
 
 ### Features that exists on structurizr dsl that currently i do not plan to implement
