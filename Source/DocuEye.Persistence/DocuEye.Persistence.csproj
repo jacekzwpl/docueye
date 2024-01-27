@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocuEye.ChangeTracker.Persistence\DocuEye.ChangeTracker.Persistence.csproj" />
+    <ProjectReference Include="..\DocuEye.DocsKeeper.Persistence\DocuEye.DocsKeeper.Persistence.csproj" />
+    <ProjectReference Include="..\DocuEye.ModelKeeper.Persistence\DocuEye.ModelKeeper.Persistence.csproj" />
+    <ProjectReference Include="..\DocuEye.ViewsKeeper.Persistence\DocuEye.ViewsKeeper.Persistence.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspaceImporter.Persistence\DocuEye.WorkspaceImporter.Persistence.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Persistence\DocuEye.WorkspacesKeeper.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

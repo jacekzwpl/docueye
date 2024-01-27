@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+<ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
+  </ItemGroup>
+
+<ItemGroup>
+  <ProjectReference Include="..\DocuEye.Infrastructure.Persistence.Model\DocuEye.Infrastructure.Persistence.Model.csproj" />
+</ItemGroup>
+</Project>
