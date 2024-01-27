@@ -1,0 +1,17 @@
+services:
+  docueyedb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=docueye
+      - MONGO_INITDB_ROOT_PASSWORD=docueye
+  docueye:
+    image: docueye-test:0.4.0
+    ports:
+      - 8080:8080
+    restart: always
+    environment:
+      - DocuEye__Database__ConnectionString=mongodb://docueye:docueye@docueyedb:27017/
+      - DocuEye__Database__Name=docueye
+      - DocuEye__AdminToken=docueyedmintoken
