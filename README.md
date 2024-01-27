@@ -9,7 +9,7 @@ DocuEye is a tool that lets You visualize views and documentation created using 
     - Diagram navigation
     - Export to PNG
 - Elements catalog - You can search, navigate through your model elements 
-    - View element properties. [See extra DocueEye properties]()
+    - View element properties. [See extra DocueEye properties](Documentation/docs/0004-element-extra-properties.md)
     - View element dependence's
     - View element consumers
     - View element children
