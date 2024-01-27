@@ -1,10 +1,20 @@
 Param(
-    [string]$workspaceDir = "//c/nCode/ArchPortal/Documentation",
-    [string]$adminToken = "docueyedmintoken",
-    [string]$workspaceId = "6b4e03fa-1ada-4ec8-8e9f-550350334e91",
+    [Parameter(Mandatory,
+    HelpMessage="Local directory with workspace.tpl file.")]
+    [string]$workspaceDir,
+    [Parameter(Mandatory,
+    HelpMessage="The Admin token from DocuEye configuration")]
+    [string]$adminToken,
+    [Parameter(Mandatory,
+    HelpMessage="The ID of the Workspace. If not provided the new workspace will be created. Also if workspace with given id does not exists new workspace will be created.")]
+    [string]$workspaceId,
+    [Parameter(HelpMessage="Unique import key. If not provided, one will be generated.")]
     [string]$importKey = (New-Guid).Guid,
+    [Parameter(HelpMessage="Link to source version from whitch workspace is imported ex. link to PR or commit on github.")]
     [string]$sourceLink = $null,
-    [string]$docueyeAddress = "http://localhost:8080"
+    [Parameter(Mandatory,
+    HelpMessage="DocuEye address ex. http://localhost:8080")]
+    [string]$docueyeAddress
 )
 
 #export workspace to json format
