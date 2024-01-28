@@ -32,6 +32,7 @@
     <ProjectReference Include="..\DocuEye.ChangeTracker.Api\DocuEye.ChangeTracker.Api.csproj" />
     <ProjectReference Include="..\DocuEye.ChangeTracker.Persistence\DocuEye.ChangeTracker.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Api\DocuEye.DocsKeeper.Api.csproj" />
+    <ProjectReference Include="..\DocuEye.Infrastructure.DataProtection\DocuEye.Infrastructure.DataProtection.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Api\DocuEye.ModelKeeper.Api.csproj" />
     <ProjectReference Include="..\DocuEye.Persistence\DocuEye.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Api\DocuEye.ViewsKeeper.Api.csproj" />

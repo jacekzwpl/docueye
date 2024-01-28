@@ -4,6 +4,7 @@ using DocuEye.ChangeTracker.Persistence;
 using DocuEye.DocsKeeper.Application.Commands.SaveImages;
 using DocuEye.DocsKeeper.Application.Mappings;
 using DocuEye.DocsKeeper.Persistence;
+using DocuEye.Infrastructure.DataProtection;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Application.Mappings;
 using DocuEye.ModelKeeper.Persistence;
@@ -89,6 +90,9 @@ namespace DocuEye.Web
             builder.Services.AddSingleton<IModelKeeperDBContext>(x => x.GetRequiredService<MongoDBContext>());
             builder.Services.AddSingleton<IWorkspacesKeeperDBContext>(x => x.GetRequiredService<MongoDBContext>());
             builder.Services.AddSingleton<IWorkspaceImporterDBContext>(x => x.GetRequiredService<MongoDBContext>());
+            builder.Services.AddSingleton<IDataProtectionDBContext>(x => x.GetRequiredService<MongoDBContext>());
+
+            builder.Services.AddDataProtection().PersistKeysToMongoDB();
 
             ChangeTrackerBsonClassMapping.Register();
             ViewsKeeperBsonClassMapping.Register();

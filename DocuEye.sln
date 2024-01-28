@@ -109,6 +109,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.WorkspaceImporter.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Infrastructure.HttpProblemDetails", "Source\DocuEye.Infrastructure.HttpProblemDetails\DocuEye.Infrastructure.HttpProblemDetails.csproj", "{792E4CEF-D4BD-45A8-8120-5ACB7A75D261}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Infrastructure.DataProtection", "Source\DocuEye.Infrastructure.DataProtection\DocuEye.Infrastructure.DataProtection.csproj", "{9E2080FF-EE36-4CE5-A483-1D72971C565A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -295,6 +297,10 @@ Global
 		{792E4CEF-D4BD-45A8-8120-5ACB7A75D261}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{792E4CEF-D4BD-45A8-8120-5ACB7A75D261}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{792E4CEF-D4BD-45A8-8120-5ACB7A75D261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E2080FF-EE36-4CE5-A483-1D72971C565A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E2080FF-EE36-4CE5-A483-1D72971C565A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E2080FF-EE36-4CE5-A483-1D72971C565A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E2080FF-EE36-4CE5-A483-1D72971C565A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -343,6 +349,7 @@ Global
 		{C81AA44A-8720-4042-B7D3-1DCF8B81BA86} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
 		{EB48315A-2B6D-4ADA-A826-6B1F7CEEF445} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
 		{792E4CEF-D4BD-45A8-8120-5ACB7A75D261} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
+		{9E2080FF-EE36-4CE5-A483-1D72971C565A} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
