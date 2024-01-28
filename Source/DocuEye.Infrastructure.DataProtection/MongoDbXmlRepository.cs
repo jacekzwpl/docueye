@@ -8,15 +8,22 @@ using System.Xml.Linq;
 
 namespace DocuEye.Infrastructure.DataProtection
 {
+    /// <summary>
+    /// An IXmlRepository backed by an Mongo database.
+    /// </summary>
     public class MongoDbXmlRepository : IXmlRepository
     {
         private readonly IServiceProvider serviceProvider;
-
+        /// <summary>
+        /// Creates a new instance
+        /// </summary>
+        /// <param name="serviceProvider"></param>
         public MongoDbXmlRepository(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
         }
 
+        /// <inheritdoc />
         public IReadOnlyCollection<XElement> GetAllElements()
         {
 
@@ -27,6 +34,7 @@ namespace DocuEye.Infrastructure.DataProtection
                 .ToList().AsReadOnly();
         }
 
+        /// <inheritdoc />
         public void StoreElement(XElement element, string friendlyName)
         {
             var dbContext = this.serviceProvider.GetRequiredService<IDataProtectionDBContext>();
