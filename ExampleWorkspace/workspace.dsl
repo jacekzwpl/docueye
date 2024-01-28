@@ -114,6 +114,10 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             title "Filtered exclude all"
         }
 
+        filtered "onlineshopContainers" exclude "Person" "onlineshopContainers6" {
+            title "Exclude Person"
+        }
+
         theme default
     }
     
