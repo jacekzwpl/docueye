@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.DataProtection.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -9,28 +10,34 @@ namespace DocuEye.Infrastructure.DataProtection
 {
     public class MongoDbXmlRepository : IXmlRepository
     {
-        private readonly IDataProtectionDBContext dbContext; 
+        private readonly IServiceProvider serviceProvider;
 
-        public MongoDbXmlRepository(IDataProtectionDBContext dbContext)
+        public MongoDbXmlRepository(IServiceProvider serviceProvider)
         {
-            this.dbContext = dbContext;
+            this.serviceProvider = serviceProvider;
         }
 
         public IReadOnlyCollection<XElement> GetAllElements()
         {
-            var keys = this.dbContext.DataProtectionKeys.Find(o => true).GetAwaiter().GetResult();
-            return keys.Select(element => XElement.Parse(element.Key)).ToList().AsReadOnly();
-           
+
+            var dbContext = this.serviceProvider.GetRequiredService<IDataProtectionDBContext>();
+            var keys = dbContext.DataProtectionKeys.Find(o => true)
+                .GetAwaiter().GetResult();
+            return keys.Select(element => XElement.Parse(element.Key))
+                .ToList().AsReadOnly();
         }
 
         public void StoreElement(XElement element, string friendlyName)
         {
+            var dbContext = this.serviceProvider.GetRequiredService<IDataProtectionDBContext>();
             var keyElement = new DataProtectionKey
             {
                 Id = Guid.NewGuid().ToString(),
-                Key = element.ToString(SaveOptions.DisableFormatting)
+                Key = element.ToString(SaveOptions.DisableFormatting),
+                FrendlyName = friendlyName
             };
-            this.dbContext.DataProtectionKeys.InsertOneAsync(keyElement).GetAwaiter().GetResult();
+            dbContext.DataProtectionKeys.InsertOneAsync(keyElement)
+                .GetAwaiter().GetResult();
         }
     }
 }

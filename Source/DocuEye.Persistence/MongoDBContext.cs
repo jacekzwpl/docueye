@@ -2,6 +2,7 @@
 using DocuEye.ChangeTracker.Persistence;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.DocsKeeper.Persistence;
+using DocuEye.Infrastructure.DataProtection;
 using DocuEye.Infrastructure.MongoDB;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Persistence;
@@ -25,7 +26,8 @@ namespace DocuEye.Persistence
         IDocsKeeperDBContext, 
         IModelKeeperDBContext,
         IWorkspacesKeeperDBContext,
-        IWorkspaceImporterDBContext
+        IWorkspaceImporterDBContext,
+        IDataProtectionDBContext
     {
         private MongoClient client;
         private IMongoDatabase database;
@@ -70,7 +72,11 @@ namespace DocuEye.Persistence
         /// Name of collection containing workspaces imports
         /// </summary>
         private const string workspaceImportsCollectionName = "WorkspaceImports";
-        
+        /// <summary>
+        /// Name of collection containing data protection keys
+        /// </summary>
+        private const string dataProtectionKeysCollectionName = "DataProtectionKeys";
+
         /// <summary>
         /// Creates db context instance
         /// </summary>
@@ -260,6 +266,17 @@ namespace DocuEye.Persistence
                 return new GenericCollection<WorkspaceImport>(this.database.GetCollection<WorkspaceImport>(workspaceImportsCollectionName));
             }
         }
+        /// <summary>
+        /// Collection of all Data Protection Keys
+        /// </summary>
+        public IGenericCollection<DataProtectionKey> DataProtectionKeys
+        {
+            get
+            {
+                return new GenericCollection<DataProtectionKey>(this.database.GetCollection<DataProtectionKey>(dataProtectionKeysCollectionName));
+            }
+        }
+
         /// <summary>
         /// Creates DB indexes
         /// </summary>
