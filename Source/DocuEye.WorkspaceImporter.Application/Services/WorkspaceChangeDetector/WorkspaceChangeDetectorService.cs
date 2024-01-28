@@ -258,6 +258,37 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 result.ImagesViewsToAdd.Add(explodedView.View);
             }
 
+            foreach(var filteredView in explodeViewsResult.FilteredViews)
+            {
+                filteredView.Id = Guid.NewGuid().ToString();
+                filteredView.WorkspaceId = workspaceId;
+                if(filteredView.Mode?.ToLower() == "exclude")
+                {
+                    if(!filteredView.Tags.Contains("*"))
+                    {
+                        filteredView.Elements = result.GetElementsByViewKey(filteredView.BaseViewKey)
+                            .Where(o => !o.Tags.Any(tag => filteredView.Tags.Contains(tag))).ToArray();
+                        filteredView.Relationships = result.GetRelationshipsByViewKey(filteredView.BaseViewKey)
+                            .Where(o => !o.Tags.Any(tag => filteredView.Tags.Contains(tag))).ToArray();
+                    }
+                }else
+                {
+                    if (!filteredView.Tags.Contains("*"))
+                    {
+                        filteredView.Elements = result.GetElementsByViewKey(filteredView.BaseViewKey)
+                            .Where(o => o.Tags.Any(tag => filteredView.Tags.Contains(tag))).ToArray();
+                        filteredView.Relationships = result.GetRelationshipsByViewKey(filteredView.BaseViewKey)
+                            .Where(o => o.Tags.Any(tag => filteredView.Tags.Contains(tag))).ToArray();
+                    }else
+                    {
+                        filteredView.Elements = result.GetElementsByViewKey(filteredView.BaseViewKey).ToArray();
+                        filteredView.Relationships = result.GetRelationshipsByViewKey(filteredView.BaseViewKey).ToArray();
+                    }
+                }
+
+                result.FilteredViewsToAdd.Add(filteredView);
+            }
+
 
             return result;
         }

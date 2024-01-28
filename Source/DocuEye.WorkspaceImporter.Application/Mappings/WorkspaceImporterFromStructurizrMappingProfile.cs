@@ -190,8 +190,11 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForPath(dest => dest.View.Content, opt => opt.MapFrom(src => src.Content))
                 .ForPath(dest => dest.View.ContentType, opt => opt.MapFrom(src => src.ContentType))
                 .ForMember(dest => dest.StructurizrElementId, opt => opt.MapFrom(src => src.ElementId));
+            
+            CreateMap<StructurizrFilteredView, FilteredView>()
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.FilteredView));
 
-           
+
 
             CreateMap<StructurizrConfigurationStyles, ViewConfiguration>()
                 .ForMember(dest => dest.ElementStyles, opt => opt.MapFrom(src => src.Elements))

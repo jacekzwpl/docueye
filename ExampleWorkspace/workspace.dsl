@@ -69,6 +69,8 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
                     "docueye.sourcecodeurl" "https://github.com/jacekzwpl/docueye"
                 }
             }
+
+
         }
 
         relation1 = client -> onlineshop.web "Do shopping" "HTTPS"
@@ -87,13 +89,29 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     views {
 
         systemContext onlineshop "onlineshopContext" {
+            title "Online Shop"
             include * 
             autoLayout
         }
 
         container onlineshop "onlineshopContainers" { 
+            title "Online shop containers"
             include * 
             autoLayout
+        }
+
+        filtered "onlineshopContainers" include "Element" "onlineshopContainers2" {
+            title "Filtered Element"
+        }
+        filtered "onlineshopContainers" include "*" "onlineshopContainers3" {
+            title "Filtered all"
+        }
+
+        filtered "onlineshopContainers" exclude "Relationship" "onlineshopContainers4" {
+            title "Filtered Exclude relationship"
+        }
+        filtered "onlineshopContainers" exclude "*" "onlineshopContainers5" {
+            title "Filtered exclude all"
         }
 
         theme default

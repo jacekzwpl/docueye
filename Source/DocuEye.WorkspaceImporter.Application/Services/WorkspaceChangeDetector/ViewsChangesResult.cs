@@ -2,6 +2,7 @@
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspacesKeeper.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
 {
@@ -64,8 +65,75 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(this.DeploymentViewsToAdd));
                 workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(this.DynamicViewsToAdd));
                 workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(this.ImagesViewsToAdd));
+                workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(this.FilteredViewsToAdd));
                 return workspaceViews;
             } 
+        }
+        /// <summary>
+        /// Gets elements from view of given key
+        /// </summary>
+        /// <param name="viewKey">View key</param>
+        /// <returns>List of view elements</returns>
+        public IEnumerable<ElementView> GetElementsByViewKey(string viewKey)
+        {
+            StaticDiagramView? view = this.SystemLandscapeViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if(view != null)
+            {
+                return view.Elements;
+            }
+
+            view = this.SystemContextViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if (view != null)
+            {
+                return view.Elements;
+            }
+
+            view = this.ContainerViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if (view != null)
+            {
+                return view.Elements;
+            }
+
+            view = this.ComponentViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if (view != null)
+            {
+                return view.Elements;
+            }
+
+            return Enumerable.Empty<ElementView>();
+        }
+        /// <summary>
+        /// Gets elationships from view of given key
+        /// </summary>
+        /// <param name="viewKey">view key</param>
+        /// <returns>List of view relationships</returns>
+        public IEnumerable<RelationshipView> GetRelationshipsByViewKey(string viewKey)
+        {
+            StaticDiagramView? view = this.SystemLandscapeViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if (view != null)
+            {
+                return view.Relationships;
+            }
+
+            view = this.SystemContextViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if (view != null)
+            {
+                return view.Relationships;
+            }
+
+            view = this.ContainerViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if (view != null)
+            {
+                return view.Relationships;
+            }
+
+            view = this.ComponentViewsToAdd.FirstOrDefault(o => o.Key == viewKey);
+            if (view != null)
+            {
+                return view.Relationships;
+            }
+
+            return Enumerable.Empty<RelationshipView>();
         }
 
     }
