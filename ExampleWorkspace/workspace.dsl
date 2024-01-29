@@ -100,24 +100,6 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             autoLayout
         }
 
-        filtered "onlineshopContainers" include "Element" "onlineshopContainers2" {
-            title "Filtered Element"
-        }
-        filtered "onlineshopContainers" include "*" "onlineshopContainers3" {
-            title "Filtered all"
-        }
-
-        filtered "onlineshopContainers" exclude "Relationship" "onlineshopContainers4" {
-            title "Filtered Exclude relationship"
-        }
-        filtered "onlineshopContainers" exclude "*" "onlineshopContainers5" {
-            title "Filtered exclude all"
-        }
-
-        filtered "onlineshopContainers" exclude "Person" "onlineshopContainers6" {
-            title "Exclude Person"
-        }
-
         theme default
     }
     
