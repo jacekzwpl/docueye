@@ -53,8 +53,8 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetWorkspaceDocumentation
                     !string.IsNullOrEmpty(link.Url) && !link.Url.StartsWith("http") ?
                     imageUrl + link.Url 
                     : link.Url)
-                .Build();
-
+                .UseAdvancedExtensions().Build();
+            
             var html = Markdown.ToHtml(stringBuilder.ToString(), pipeline);
             return new DocumentationContent()
             {
