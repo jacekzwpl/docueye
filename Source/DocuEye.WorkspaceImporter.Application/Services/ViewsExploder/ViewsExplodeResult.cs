@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DocuEye.ViewsKeeper.Model;
+using System.Collections.Generic;
 
 namespace DocuEye.WorkspaceImporter.Application.Services.ViewsExploder
 {
@@ -35,6 +36,10 @@ namespace DocuEye.WorkspaceImporter.Application.Services.ViewsExploder
         /// List of exploded images views
         /// </summary>
         public List<ExplodedImageView> ImagesViews { get; set; } = new List<ExplodedImageView>();
+        /// <summary>
+        /// List of filtered views exploded from structurizr dsl
+        /// </summary>
+        public List<FilteredView> FilteredViews { get; set; } = new List<FilteredView>();
 
     }
 }

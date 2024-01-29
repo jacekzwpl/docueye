@@ -111,6 +111,21 @@ const ViewDiagram = (props: IViewDiagramProps) => {
             });
     }, [setIsLoading, setEdges, setNodes]);
 
+    const loadFilteredView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
+        setIsLoading(true);
+        DocuEyeApi.ViewsApi
+            .apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, viewId)
+            .then((response: AxiosResponse<ComponentView>) => {
+                if (response.data.elements && response.data.relationships) {
+                    const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView");
+                    setNodes(layoutedNodes);
+                    setEdges(layoutedEdges);
+                }
+            }).finally(() => {
+                setIsLoading(false);
+            });
+    }, [setIsLoading, setEdges, setNodes]);
+
     const loadDeploymentView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
@@ -209,6 +224,12 @@ const ViewDiagram = (props: IViewDiagramProps) => {
         }
 
         if (selectedView && workspaceId) {
+            if (selectedView.viewType === "FilteredView") {
+                loadFilteredView(workspaceId, selectedView.id, viewConfiguration);
+            }
+        }
+
+        if (selectedView && workspaceId) {
             if (selectedView.viewType === "DeploymentView") {
                 loadDeploymentView(workspaceId, selectedView.id, viewConfiguration);
             }
@@ -231,6 +252,7 @@ const ViewDiagram = (props: IViewDiagramProps) => {
         loadSystemContextView,
         loadContainerView,
         loadComponentView,
+        loadFilteredView,
         loadDeploymentView,
         loadDynamicView,
         loadImageView,

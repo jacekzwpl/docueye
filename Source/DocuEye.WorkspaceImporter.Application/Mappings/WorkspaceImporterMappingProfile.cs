@@ -31,8 +31,8 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => SetViewName(src.ViewType, src.Key, src.Title, src.Description)));
             CreateMap<ImageView, WorkspaceView>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => SetViewName(src.ViewType, src.Key, src.Title, src.Description)));
-            //CreateMap<FilteredView, WorkspaceView>()
-            //   .ForMember(dest => dest.Name, opt => opt.MapFrom(src => SetViewName(src.ViewType, src.Key, src.Title, src.Description)));
+            CreateMap<FilteredView, WorkspaceView>()
+               .ForMember(dest => dest.Name, opt => opt.MapFrom(src => SetViewName(src.ViewType, src.Key, src.Title, src.Description)));
 
 
         }

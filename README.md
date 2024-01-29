@@ -37,11 +37,10 @@ cd .\ExampleWorkspace
 
 .\import.ps1 -workspaceDir $PWD -workspaceId "638d0822-12c7-4998-8647-9c7af7ad2989" -adminToken "docueyedmintoken" -docueyeAddress "http://localhost:8080"
 # In this example $PWD is current directory path. 
-# If You are using docker desktop with wsl on windows operating system this might not work. You have to change it to format //<diskname>/path/to/directory ex. //c/myrepos/docueye/ExampleWorkspace
 ```  
 **What is going on here**  
 DoucuEye is using workspace.json gereated by [structurizr cli export](https://docs.structurizr.com/cli/export).  So first thing we have to do is to export worskpace into json format.  
-After that creating json file with our workspace data we build request and run import using DocuEye import endpoint. See the [example script](ExampleWorkspace/import.ps1) or [import endpoint description](Documentation/docs/0001-import-endpoint.md) for more details.
+After creating json file with our workspace data we build request and run import using DocuEye import endpoint. See the [example script](ExampleWorkspace/import.ps1) or [import endpoint description](Documentation/docs/0001-import-endpoint.md) for more details.
 
 ## Contributing
 I welcome all contributors. But before making PR-s start with create issue that we can discuss the change.

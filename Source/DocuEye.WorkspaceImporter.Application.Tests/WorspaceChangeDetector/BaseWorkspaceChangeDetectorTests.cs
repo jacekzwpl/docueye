@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.ModelKeeper.Model;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Application.Mappings;
 using DocuEye.WorkspaceImporter.Application.Services.ModelExploder;
 using DocuEye.WorkspaceImporter.Application.Services.ViewsExploder;
@@ -294,6 +295,32 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
                 },
                 SystemContextViews = new List<ExplodedSystemContextView> {
                     new ExplodedSystemContextView()
+                    {
+                        View = new SystemContextView()
+                        {
+                            Key = "SystemContext1"
+                        },
+                        Elements = new List<ExplodedElementView>()
+                        {
+                            new ExplodedElementView() {
+                                Tags = new string[] { "Test" }
+                            },
+                            new ExplodedElementView() {
+                                Tags = new string[] { "Test1" }
+                            }
+                        },
+                        Relationships = new List<ExplodedRelationshipView>()
+                        {
+                            new ExplodedRelationshipView()
+                            {
+                                Tags = new string[] { "Test" }
+                            },
+                            new ExplodedRelationshipView()
+                            {
+                                Tags = new string[] { "Test1" }
+                            }
+                        }
+                    }
                 },
                 ContainerViews = new List<ExplodedContainerView> {
                     new ExplodedContainerView()
@@ -309,6 +336,15 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
                 },
                 ImagesViews = new List<ExplodedImageView> {
                     new ExplodedImageView()
+                },
+                FilteredViews = new List<FilteredView> {
+                    new FilteredView()
+                    {
+                        Key = "Filtered1",
+                        BaseViewKey = "SystemContext1",
+                        Tags = new string [] { "Test" },
+                        Mode = "Include"
+                    }
                 }
             };
         }

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using DocuEye.Structurizr.Model;
+using DocuEye.ViewsKeeper.Model;
+using System.Collections.Generic;
 
 namespace DocuEye.WorkspaceImporter.Application.Services.ViewsExploder
 {
@@ -83,6 +85,11 @@ namespace DocuEye.WorkspaceImporter.Application.Services.ViewsExploder
                 {
                     result.ImagesViews.Add(this.mapper.Map<ExplodedImageView>(structurizrView));
                 }
+            }
+
+            if (structurizrViews.FilteredViews != null)
+            {
+                result.FilteredViews = this.mapper.Map<List<FilteredView>>(structurizrViews.FilteredViews);
             }
 
             return result;
