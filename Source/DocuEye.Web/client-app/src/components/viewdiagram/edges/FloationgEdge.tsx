@@ -48,8 +48,6 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
     // target position points out of node edge. 
 
     //Handle those situations
-
-
     if (nsx > (sourceNode.positionAbsolute?.x || 0) + (sourceNode.width ?? 0) && sourcePos === Position.Top) {
       nsourcePos = Position.Right;
       nsx = sx;
@@ -109,8 +107,6 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
     ntargetPos = targetPos;
   }
 
-
-
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX: nsx,
     sourceY: nsy,
@@ -119,6 +115,20 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
     targetX: ntx,
     targetY: nty,
   });
+
+
+  //Set label position
+  let labelXPos = 0;
+  let labelYPos = 0;
+  //Set label offset
+  if(identicalIndex > 0 && (targetPos === Position.Top || targetPos === Position.Bottom)) {
+    labelXPos = labelX;
+    labelYPos = labelY + (10*identicalIndex)
+  }else {
+    labelXPos = labelX;
+    labelYPos = labelY;
+  }
+  
 
   return (
     <>
@@ -133,7 +143,7 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
         <div
           style={{
             position: 'absolute',
-            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
+            transform: `translate(-50%, -50%) translate(${labelXPos}px,${labelYPos}px)`,
             //background: '#ffcc00',
             //padding: 10,
             //borderRadius: 5,
