@@ -17,7 +17,9 @@ DocuEye is a tool that lets You visualize views and documentation created using 
     - View element decisions
 - Decisions viewer - You can view all decisions defined at workspace or element level
 - Documentation viewer - You can view documentation defined at workspace or element level
-- Change Tracker - DocuEye tracks changes in the model on every import. You can view history of changes in Your model. [See what to do to change tracker works as expected](Documentation/docs/0002-change-tracker.md)
+- Change Tracker - DocuEye tracks changes in the model on every import. You can view history of changes in Your model. [See what to do to change tracker works as expected](Documentation/docs/0002-change-tracker.md)  
+
+See [features roadmap](Documentation/docs/0003-features-roadmap.md) if You want to know what features will be implemented in nearest feature.
 
 ## Getting started
 
