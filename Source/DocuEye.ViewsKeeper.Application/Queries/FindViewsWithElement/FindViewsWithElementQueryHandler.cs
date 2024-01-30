@@ -51,7 +51,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement
                 .Find(o => o.ViewType == ViewType.DynamicView && o.WorkspaceId == request.WorkspaceId && (o.ElementId == request.ElementId || o.Elements.Any(e => e.Id == request.ElementId)));
             result.AddRange(this.mapper.Map<IEnumerable<ViewWithElement>>(dynamicViews));
             var deploymentViews = await this.dbContext.DeploymentViews
-                .Find(o => o.ViewType == ViewType.DeploymentView && o.WorkspaceId == request.WorkspaceId && (o.SoftwareSystemId == request.ElementId || o.Elements.Any(e => e.InstanceOfId == request.ElementId)));
+                .Find(o => o.ViewType == ViewType.DeploymentView && o.WorkspaceId == request.WorkspaceId && (o.SoftwareSystemId == request.ElementId || o.Elements.Any(e => e.InstanceOfId == request.ElementId || e.Id == request.ElementId)));
             result.AddRange(this.mapper.Map<IEnumerable<ViewWithElement>>(deploymentViews));
 
 
