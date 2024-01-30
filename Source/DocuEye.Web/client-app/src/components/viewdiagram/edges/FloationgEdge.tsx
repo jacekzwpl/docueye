@@ -11,7 +11,7 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
   const identicalIndex = useStore((s: ReactFlowState) => {
     const edgeExists = s.edges.filter(
       (e) => {
-        return (e.source === source && e.target === target)
+        return (e.source === source && e.target === target) || (e.source === target && e.target === source)
       }
     );
 
