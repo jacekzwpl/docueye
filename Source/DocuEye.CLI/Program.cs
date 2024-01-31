@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -11,7 +12,7 @@ var logger = LoggerFactory.Create(config =>
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 builder.Configuration.AddCommandLine(args);
 
-//
+//builder.Services.AddHttpClient();
 
 using IHost host = builder.Build();
 bool isImport = false;
