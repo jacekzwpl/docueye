@@ -46,7 +46,14 @@ namespace DocuEye.CLI.ApiClient.Tests
             Assert.That(result.IsSuccess, Is.EqualTo(true), "Request should return success status");
         }
 
-      
+
+        [Test]
+        public async Task WhenImportWorkspaceEndpointNotReturnsSuccessStatusCodeThenResultHasErrorMessageAndFailureStatus()
+        {
+            Assert.Fail();
+        }
+
+
 
 
     }
