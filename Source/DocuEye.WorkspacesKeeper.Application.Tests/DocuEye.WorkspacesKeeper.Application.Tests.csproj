@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.Infrastructure.Tests.FakeMongoDB\DocuEye.Infrastructure.Tests.FakeMongoDB.csproj" />
+    <ProjectReference Include="..\DocuEye.Infrastructure.Tests.Http\DocuEye.Infrastructure.Tests.Http.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application\DocuEye.WorkspacesKeeper.Application.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,8 @@
 ﻿using DocuEye.CLI.ApiClient.Model;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DocuEye.CLI.ApiClient
@@ -13,6 +15,8 @@ namespace DocuEye.CLI.ApiClient
         {
             this.httpClient = httpClient;
         }
+
+        
 
         public Task<ImportWorkspaceResult> ImportWorkspace(ImportWorkspaceRequest request)
         {

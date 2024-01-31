@@ -119,6 +119,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.CLI.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.CLI.ApiClient", "Source\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj", "{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.CLI.ApiClient.Tests", "Source\DocuEye.CLI.ApiClient.Tests\DocuEye.CLI.ApiClient.Tests.csproj", "{11684A15-289A-415E-AC0E-9D4138693859}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Infrastructure.Tests.Http", "Source\DocuEye.Infrastructure.Tests.Http\DocuEye.Infrastructure.Tests.Http.csproj", "{CE0C3442-E558-49FF-B597-B159CFD80F52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -321,6 +325,14 @@ Global
 		{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11684A15-289A-415E-AC0E-9D4138693859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11684A15-289A-415E-AC0E-9D4138693859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11684A15-289A-415E-AC0E-9D4138693859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11684A15-289A-415E-AC0E-9D4138693859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE0C3442-E558-49FF-B597-B159CFD80F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE0C3442-E558-49FF-B597-B159CFD80F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE0C3442-E558-49FF-B597-B159CFD80F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE0C3442-E558-49FF-B597-B159CFD80F52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -373,6 +385,8 @@ Global
 		{39345E05-78E3-4AAF-80F0-3981900E46F3} = {7E8C9BBB-68F4-4C90-A69A-06FE72392690}
 		{211DB833-616C-4EB9-8EBE-57F3C20977FD} = {7E8C9BBB-68F4-4C90-A69A-06FE72392690}
 		{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1} = {7E8C9BBB-68F4-4C90-A69A-06FE72392690}
+		{11684A15-289A-415E-AC0E-9D4138693859} = {7E8C9BBB-68F4-4C90-A69A-06FE72392690}
+		{CE0C3442-E558-49FF-B597-B159CFD80F52} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
