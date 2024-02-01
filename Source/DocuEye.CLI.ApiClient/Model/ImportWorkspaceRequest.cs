@@ -1,7 +1,4 @@
 ﻿using DocuEye.Structurizr.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DocuEye.CLI.ApiClient.Model
 {

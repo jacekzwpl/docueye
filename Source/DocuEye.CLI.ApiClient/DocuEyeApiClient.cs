@@ -1,6 +1,4 @@
 ﻿using DocuEye.CLI.ApiClient.Model;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -19,7 +17,8 @@ namespace DocuEye.CLI.ApiClient
             this.httpClient = httpClient;
             this.serializerOptions = new JsonSerializerOptions()
             {
-                NumberHandling = JsonNumberHandling.AllowReadingFromString
+                NumberHandling = JsonNumberHandling.AllowReadingFromString,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
         }
 
@@ -27,7 +26,7 @@ namespace DocuEye.CLI.ApiClient
 
         public async Task<ImportWorkspaceResult> ImportWorkspace(ImportWorkspaceRequest request)
         {
-            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspace/import");
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import");
             message.Content = new StringContent(JsonSerializer.Serialize(request, this.serializerOptions), Encoding.UTF8, "application/json");
             using (var response = await this.httpClient.SendAsync(message))
             {
@@ -41,7 +40,7 @@ namespace DocuEye.CLI.ApiClient
                         return new ImportWorkspaceResult()
                         {
                             IsSuccess = false,
-                            Message = "There was no conntent in response. Import staus is unkown"
+                            Message = "There was no conntent in response. Import staus is unknown."
                         };
                     }
                     return data;
@@ -54,7 +53,7 @@ namespace DocuEye.CLI.ApiClient
                         return new ImportWorkspaceResult()
                         {
                             IsSuccess = false,
-                            Message = "There was no conntent in response. Import staus is unkown"
+                            Message = "There was no conntent in response. Import staus is unknown"
                         };
                     }
                     return new ImportWorkspaceResult()
@@ -67,7 +66,7 @@ namespace DocuEye.CLI.ApiClient
                     return new ImportWorkspaceResult()
                     {
                         IsSuccess = false,
-                        Message = "There was no conntent in response. Import staus is unkown"
+                        Message = "There was no conntent in response. Import staus is unknown"
                     };
                 }
             }
