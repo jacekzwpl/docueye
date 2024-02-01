@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DocuEye.Structurizr.Model\DocuEye.Structurizr.Model.csproj" />
   </ItemGroup>
 

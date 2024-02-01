@@ -29,6 +29,7 @@ namespace DocuEye.CLI.ApiClient.Tests
                 }), Encoding.UTF8, "application/json")
             });
             var fakeHttpClient = new HttpClient(fakeHttpMessageHandler);
+            fakeHttpClient.BaseAddress = new Uri("https://docueye.com");
 
             var request = new ImportWorkspaceRequest()
             {
@@ -50,7 +51,35 @@ namespace DocuEye.CLI.ApiClient.Tests
         [Test]
         public async Task WhenImportWorkspaceEndpointNotReturnsSuccessStatusCodeThenResultHasErrorMessageAndFailureStatus()
         {
-            Assert.Fail();
+            // Arrange
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler(new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                Content = new StringContent(JsonSerializer.Serialize(new
+                {
+                    Title = "test problem title",
+                    Status = 400,
+                    Detail = "Test error description"
+                }), Encoding.UTF8, "application/problem+json")
+            });
+            var fakeHttpClient = new HttpClient(fakeHttpMessageHandler);
+            fakeHttpClient.BaseAddress = new Uri("https://docueye.com");
+
+            var request = new ImportWorkspaceRequest()
+            {
+                ImportKey = "test",
+                WorkspaceData = new StructurizrWorkspace()
+            };
+
+
+            // Act
+            var client = new DocuEyeApiClient(fakeHttpClient);
+            var result = await client.ImportWorkspace(request);
+
+            // Assert
+            Assert.That(result, !Is.Null, "Request should return object");
+            Assert.That(result.IsSuccess, Is.EqualTo(false), "Request should return success status");
+            Assert.That(result.Message?.Length, Is.GreaterThan(0), "Request should return message with content");
         }
 
 
