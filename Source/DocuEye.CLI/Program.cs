@@ -14,32 +14,38 @@ var logger = LoggerFactory.Create(config =>
     config.AddConsole();
 }).CreateLogger("StartupLogger");
 
-HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+
 //builder.Configuration.AddCommandLine(args);
 
-var result = Parser.Default.ParseArguments<CommandLineOptions>(args);
-
-builder.Services.AddHttpClient<IDocuEyeApiClient, DocuEyeApiClient>(
-    o => { 
-        o.BaseAddress = new Uri(result.Value.DocueyeAddress);
-        o.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", result.Value.AdminToken);
+Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed<CommandLineOptions>(options =>
+{
+    HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+    builder.Services.AddHttpClient<IDocuEyeApiClient, DocuEyeApiClient>(
+    o => {
+        o.BaseAddress = new Uri(options.DocueyeAddress);
+        o.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", options.AdminToken);
     }
 );
 
-builder.Services.AddLogging(builder => builder.AddConsole());
+    builder.Services.AddLogging(builder => builder.AddConsole());
 
-builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
+    builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
+    using IHost host = builder.Build();
 
-
-using IHost host = builder.Build();
-bool isImport = false;
-Boolean.TryParse(builder.Configuration["import"], out isImport);
-
-logger.LogInformation(builder.Configuration["adminToken"]);
+});
 
 
 
-var importService = host.Services.GetRequiredService<IImportWorkspaceService>();
+
+
+//bool isImport = false;
+//Boolean.TryParse(builder.Configuration["import"], out isImport);
+
+//logger.LogInformation(builder.Configuration["adminToken"]);
+
+
+
+//var importService = host.Services.GetRequiredService<IImportWorkspaceService>();
 /*
 var parameters = new ImportWorkspaceParameters(
     Guid.NewGuid().ToString(), 
