@@ -1,9 +1,8 @@
-﻿using DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles;
+﻿using DocuEye.Infrastructure.Tests.Http;
+using DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles;
 using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
 using Moq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 
