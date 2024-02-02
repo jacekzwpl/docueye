@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DocuEye.CLI": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
