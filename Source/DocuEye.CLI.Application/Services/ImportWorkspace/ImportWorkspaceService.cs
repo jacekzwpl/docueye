@@ -2,7 +2,6 @@
 using DocuEye.CLI.ApiClient.Model;
 using DocuEye.Structurizr.Model;
 using Microsoft.Extensions.Logging;
-using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -10,13 +9,20 @@ using System.Threading.Tasks;
 
 namespace DocuEye.CLI.Application.Services.ImportWorkspace
 {
+    /// <summary>
+    /// Implements logic of workspace import
+    /// </summary>
     public class ImportWorkspaceService : IImportWorkspaceService
     {
 
         private readonly IDocuEyeApiClient apiClient;
         private readonly ILogger<ImportWorkspaceService> logger;
         private JsonSerializerOptions serializerOptions;
-
+        /// <summary>
+        /// Creates instance
+        /// </summary>
+        /// <param name="apiClient">DocuEye api client instance</param>
+        /// <param name="logger">ILogger instance</param>
         public ImportWorkspaceService(IDocuEyeApiClient apiClient, ILogger<ImportWorkspaceService> logger)
         {
             this.apiClient = apiClient;
@@ -27,7 +33,8 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
         }
-
+        
+        /// <inheritdoc />
         public async Task<bool> Import(ImportWorkspaceParameters parameters)
         {
             this.logger.LogInformation("Reading workspace data file");

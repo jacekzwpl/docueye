@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace DocuEye.CLI.ApiClient
 {
+    /// <summary>
+    /// DocuEye Api client
+    /// </summary>
     public class DocuEyeApiClient : IDocuEyeApiClient
     {
         private readonly HttpClient httpClient;
         private JsonSerializerOptions serializerOptions;
-
+        /// <summary>
+        /// Creates new instance
+        /// </summary>
+        /// <param name="httpClient">HttpClient instance</param>
         public DocuEyeApiClient(HttpClient httpClient)
         {
             this.httpClient = httpClient;
@@ -22,8 +28,7 @@ namespace DocuEye.CLI.ApiClient
             };
         }
 
-        
-
+        /// <inheritdoc />
         public async Task<ImportWorkspaceResult> ImportWorkspace(ImportWorkspaceRequest request)
         {
             var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import");
