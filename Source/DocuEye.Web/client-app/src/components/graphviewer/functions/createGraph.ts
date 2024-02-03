@@ -32,21 +32,38 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
 
     const node = svg
         .append("g")
-        
         .selectAll("circle")
         .data(nodes)
         .join("circle")
-        .attr("stroke", (d:any) => {
+        .attr("stroke", (d: any) => {
             return d.style.stroke;
         })
-        .attr("stroke-width", (d:any) => {
+        .attr("stroke-width", (d: any) => {
             return d.style.strokeWidth;
         })
         .attr("r", 20)
-        .attr("fill", (d:any) => {
+        .attr("fill", (d: any) => {
             return d.style.background;
         })
         .call(drag(simulation));
+
+    //const label = svg.append("g").selectAll("text")
+    
+        //node//.append("g")
+        //.selectAll("text")
+        //.data(nodes)
+        //.enter()
+        //.append("text")
+        //.attr("cy", function(d) {
+        //    return 0;
+        //})
+        //.attr("cx", function(d) {
+        //    return 25;
+        //})
+        //.attr('text-anchor', 'middle')
+        //.attr('dominant-baseline', 'central')
+        ///.text(d => { return "Ala ma kota" })
+        //.call(drag(simulation));
 
     simulation.on("tick", () => {
         //update link positions
@@ -60,6 +77,11 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
         node
             .attr("cx", d => d.x)
             .attr("cy", d => d.y);
+
+        // update label positions
+        //label
+        //    .attr("x", d => { return d.x + 80; })
+        //    .attr("y", d => { return d.y; })
 
     });
     return {
