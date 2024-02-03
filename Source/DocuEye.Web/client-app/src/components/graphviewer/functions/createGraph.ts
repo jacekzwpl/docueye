@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { drag } from "./drag";
+import { nodeClick } from "./nodeClick";
 
 export const createGraph = (container: any, nodesData: any, linksData: any) => {
     const containerRect = container.getBoundingClientRect();
@@ -9,12 +10,13 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
     const links: any[] = linksData.map((d: any) => Object.assign({}, d));
     const nodes: any[] = nodesData.map((d: any) => Object.assign({}, d));
 
+    const distance = Math.min(width, height) / 3;
     const simulation = d3
         .forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id((d: any) => d.id))
-        .force("charge", d3.forceManyBody().strength(-1650))
-        .force("x", d3.forceX())
-        .force("y", d3.forceY());
+        .force("link", d3.forceLink(links).distance(distance).id((d: any) => d.id))
+        .force("charge", d3.forceManyBody().strength(-distance))
+    //.force("x", d3.forceX())
+    //.force("y", d3.forceY());
 
     const svg = d3
         .select(container)
@@ -29,6 +31,7 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
         .data(links)
         .join("line")
         .attr("stroke-width", d => Math.sqrt(d.value));
+
 
     const node = svg
         .append("g")
@@ -45,25 +48,30 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
         .attr("fill", (d: any) => {
             return d.style.background;
         })
+        .attr('cursor', 'pointer')
+        .call(drag(simulation)).on('click',nodeClick)
+
+    const label = svg.append("g")
+        .attr("class", "labels")
+        .selectAll("text")
+        .data(nodes)
+        .enter()
+        .append("text")
+        .attr('font-size', "11px")
+        .text(d => { return d.data.name })
         .call(drag(simulation));
 
-    //const label = svg.append("g").selectAll("text")
-    
-        //node//.append("g")
-        //.selectAll("text")
-        //.data(nodes)
-        //.enter()
-        //.append("text")
-        //.attr("cy", function(d) {
-        //    return 0;
-        //})
-        //.attr("cx", function(d) {
-        //    return 25;
-        //})
-        //.attr('text-anchor', 'middle')
-        //.attr('dominant-baseline', 'central')
-        ///.text(d => { return "Ala ma kota" })
-        //.call(drag(simulation));
+    const labelType = svg.append("g")
+        .attr("class", "labels")
+        .selectAll("text")
+        .data(nodes)
+        .enter()
+        .append("text")
+        .attr('font-size', "9px")
+        .text(d => { return `[${d.data.type}]` })
+        .call(drag(simulation));
+
+
 
     simulation.on("tick", () => {
         //update link positions
@@ -79,9 +87,13 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
             .attr("cy", d => d.y);
 
         // update label positions
-        //label
-        //    .attr("x", d => { return d.x + 80; })
-        //    .attr("y", d => { return d.y; })
+        label
+            .attr("x", d => { return d.x + 20; })
+            .attr("y", d => { return d.y; })
+
+        labelType
+            .attr("x", d => { return d.x + 20; })
+            .attr("y", d => { return d.y + 10; })
 
     });
     return {
