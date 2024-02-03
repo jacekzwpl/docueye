@@ -24,7 +24,7 @@ namespace DocuEye.CLI.ApiClient
             this.serializerOptions = new JsonSerializerOptions()
             {
                 NumberHandling = JsonNumberHandling.AllowReadingFromString,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNameCaseInsensitive = true
             };
         }
 
