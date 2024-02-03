@@ -75,6 +75,8 @@ export const GraphView = () => {
         navigate('/workspace/' + workspaceId + '/graph/' + newValue.id);
     }
 
+
+
     return (
         <Box padding={2} >
             <Box paddingBottom={2} >

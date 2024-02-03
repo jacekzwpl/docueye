@@ -57,7 +57,9 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
     });
     return {
         destroy: () => {
+            //console.log(simulation);
             simulation.stop();
+            //console.log("cleaned up");
         },
         nodes: () => {
             return svg.node();

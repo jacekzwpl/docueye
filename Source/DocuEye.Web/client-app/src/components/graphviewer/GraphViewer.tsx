@@ -10,7 +10,7 @@ import Loader from "../loader";
 
 export const GraphViewer = (props: IGraphViewerProps) => {
     const container = useRef<any>();
-
+    let destroyFn:() => void;
     const [selectedView, setSelectedView] = useState(props.selectedView);
     const [workspaceId, setWorkspaceId] = useState(props.workspaceId);
 
@@ -28,7 +28,8 @@ export const GraphViewer = (props: IGraphViewerProps) => {
                         target: relationship.destinationId
                     })
                 })
-                createGraph(container.current, response.data.elements, links);
+                const { destroy } = createGraph(container.current, response.data.elements, links);
+                destroyFn = destroy;
             }).finally(() => {
                 setIsLoading(false);
             });
@@ -48,7 +49,8 @@ export const GraphViewer = (props: IGraphViewerProps) => {
                             target: relationship.destinationId
                         })
                     })
-                    createGraph(container.current, response.data.elements, links);
+                    const { destroy } = createGraph(container.current, response.data.elements, links);
+                    destroyFn = destroy;
                 }
             }).finally(() => {
                 setIsLoading(false);
@@ -58,6 +60,9 @@ export const GraphViewer = (props: IGraphViewerProps) => {
 
     useEffect(() => {
         if (selectedView && workspaceId && container.current) {
+            if(destroyFn) {
+                destroyFn();
+            }
             d3.select(container.current).select("svg").remove();
             if (selectedView.viewType === "SystemLandscapeView") {
                 loadSystemLandscapeView(workspaceId, selectedView.id);
@@ -75,6 +80,14 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             setWorkspaceId(props.workspaceId);
         }
     }, [props, selectedView])
+
+    useEffect(() => {
+        return () => {
+            if(destroyFn) {
+                destroyFn();
+            }
+        };
+    },[])
 
     return (
         <>
