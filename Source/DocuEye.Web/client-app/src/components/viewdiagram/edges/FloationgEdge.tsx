@@ -3,9 +3,7 @@ import { useStore, getBezierPath, EdgeLabelRenderer, Position, ReactFlowState } 
 import { getEdgeParams } from './utils';
 
 
-const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth }: any) => {
-
-
+const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth, data }: any) => {
   const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
   const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
   const identicalIndex = useStore((s: ReactFlowState) => {
@@ -129,6 +127,14 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
     labelYPos = labelY;
   }
   
+  //set label text
+  let labelText = label ?? "";
+  if(data && data.technology && data.technology !== "") {
+    labelText = labelText + ` [${data.technology}]`;
+  }
+  
+   
+
 
   return (
     <>
@@ -139,7 +145,7 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
         markerEnd={markerEnd}
         style={style}
       />
-      {label && <EdgeLabelRenderer>
+      {labelText !== "" && <EdgeLabelRenderer>
         <div
           style={{
             position: 'absolute',
@@ -154,7 +160,7 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth 
           }}
         //className="nodrag nopan"
         >
-          {label}
+          {labelText}
         </div>
       </EdgeLabelRenderer>}
       {/*

@@ -61,6 +61,7 @@ export const prepareDiagramElements = (
             source: relation.sourceId,
             target: relation.destinationId,
             label: relation.description,
+            data: {technology: relation.technology},
             labelWidth: relationStyle.width,
             type: 'floating', //relation.type, //'floating', //'floating',//'default',
             markerEnd: {
