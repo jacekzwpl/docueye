@@ -1,101 +1,131 @@
-//import { useEffect } from "react";
+import { Box, Toolbar } from "@mui/material";
+import { useEffect, useRef } from "react";
+import { createGraph } from "../../components/graphviewer/functions/createGraph";
 
-//declare var $: any;
-//declare var structurizr: any;
+const nodesData = [
+    {
+        "id": 1,
+        "name": "Andy",
+        "gender": "male"
+    },
+    {
+        "id": 2,
+        "name": "Betty",
+        "gender": "female"
+    },
+    {
+        "id": 3,
+        "name": "Cate",
+        "gender": "female"
+    },
+    {
+        "id": 4,
+        "name": "Dave",
+        "gender": "male"
+    },
+    {
+        "id": 5,
+        "name": "Ellen",
+        "gender": "female"
+    },
+    {
+        "id": 6,
+        "name": "Fiona",
+        "gender": "female"
+    },
+    {
+        "id": 7,
+        "name": "Garry",
+        "gender": "male"
+    },
+    {
+        "id": 8,
+        "name": "Holly",
+        "gender": "female"
+    },
+    {
+        "id": 9,
+        "name": "Iris",
+        "gender": "female"
+    },
+    {
+        "id": 10,
+        "name": "Jane",
+        "gender": "female"
+    }
+]
+const linksData = [
+    {
+        "source": 1,
+        "target": 2
+    },
+    {
+        "source": 1,
+        "target": 5
+    },
+    {
+        "source": 1,
+        "target": 6
+    },
+    {
+        "source": 2,
+        "target": 3
+    },
+    {
+        "source": 2,
+        "target": 7
+    },
+    {
+        "source": 3,
+        "target": 4
+    },
+    {
+        "source": 8,
+        "target": 3
+    },
+    {
+        "source": 4,
+        "target": 5
+    },
+    {
+        "source": 4,
+        "target": 9
+    },
+    {
+        "source": 5,
+        "target": 10
+    },{
+        "source": 10,
+        "target": 5
+    }
+]
 
 export const Graph = () => {
 
-/*
-  //let diagram: any;
-  const relationshipsBySourceAndDestination:any[] = [];
+    const container = useRef<any>();
 
-  useEffect(() => {
-    $.ajax({url: 'workspace.json',
-    success: function(data:any){
-        console.log(data);
-        //JSON.parse(data);
-        structurizr.workspace = new structurizr.Workspace(data);
+    useEffect(() => {
 
-        structurizr.ui.loadThemes(() => {
-            init();
-        });
+        let destroyFn;
 
-        
-         //setTimeout( () => { 
-          
-         //}, 5000 );
-
-    }});
-
-  }, []);
-
-  const init = () =>{
-
-    const graph:any = { nodes: [], links: []};
-    const elements:any[] = [];
-    const elementIds:any[] = [];
-
-    const view = structurizr.workspace.findViewByKey("Containers");
-
-    view.elements.forEach(function(elementView:any) {
-        const element = structurizr.workspace.findElementById(elementView.id);
-        if (element) {
-            elements.push(element);
-            elementIds.push(element.id);
+        if (container.current) {
+            console.log("aa")
+            const { destroy } = createGraph(container.current, nodesData, linksData);
+            destroyFn = destroy;
         }
-    });
+        return destroyFn;
 
-    elements.sort(function(a, b) {
-        return a.name.localeCompare(b.name);
-    });
+    }, [container])
 
-    elements.forEach(function(element) {
-        const elementStyle = structurizr.ui.findElementStyle(element, false);
-        graph.nodes.push({
-            id: element.id,
-            name: element.name,
-            description: element.description,
-            style: elementStyle,
-            type: element.type,
-            tags: element.tags,
-            element: element
-        });
-
-        registerRelationship(element.id, element.id); // this prevents the nodes in the graph linking to themselves
-
-        const elementType = structurizr.workspace.getTerminologyFor(element);
-        const html = '<span class="label smaller" style="background: ' + elementStyle.background + '; color: ' + elementStyle.color + '"> ' + structurizr.util.escapeHtml(elementType) + '</span> ' + structurizr.util.escapeHtml(element.name);
-        //quickNavigation.addHandler(html, function() {
-        //    highlightNode(element.id);
-       // });
-
-        if (element.relationships) {
-            element.relationships.forEach(function(relationship:any) {
-                if (elementIds.indexOf(relationship.sourceId) > -1 && elementIds.indexOf(relationship.destinationId) > -1) {
-                    registerRelationship(relationship.sourceId, relationship.destinationId);
-
-                    graph.links.push({
-                        id: relationship.id,
-                        source: relationship.sourceId,
-                        target: relationship.destinationId,
-                        type: 'Relationship',
-                        description: relationship.description,
-                        style: structurizr.ui.findRelationshipStyle(relationship),
-                        relationship: relationship
-                    });
-                }
-            });
-        }
-    });
-
-  }
-
-  const registerRelationship = (sourceId:any, destinationId:any) => {
-    const key = sourceId + "," + destinationId;
-    relationshipsBySourceAndDestination.push(key);
-  }
-*/
     return (
-        <div id="diagram" style={{width: 1000, height: 600}}></div>
+        <Box padding={2} >
+            <Box paddingBottom={2} >
+                <Toolbar>
+                </Toolbar>
+            </Box>
+            <Box ref={container} padding={2} height={'calc(100vh - 168px)'} >
+
+            </Box>
+        </Box>
     );
 };

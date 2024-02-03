@@ -36,6 +36,13 @@ export const MainMenu = () => {
         <ListItemText primary="Diagrams" />
       </ListItemButton> }
       {currentWorkspace.value &&
+      <ListItemButton onClick={() => goToPage('/workspace/' + currentWorkspace.value?.id + '/graph')}>
+        <ListItemIcon>
+          <AccountTreeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Graphs" />
+      </ListItemButton> }
+      {currentWorkspace.value &&
       <ListItemButton onClick={() => goToPage('/workspace/' + currentWorkspace.value?.id + '/documentation')}>
         <ListItemIcon>
           <AssignmentIcon />
