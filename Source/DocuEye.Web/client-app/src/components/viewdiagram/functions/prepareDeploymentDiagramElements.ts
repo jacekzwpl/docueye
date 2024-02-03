@@ -80,6 +80,7 @@ export const prepareDeploymentDiagramElements = (elements: ElementView[], relati
             target: relation.destinationId,
             label: relation.description,
             labelWidth: relationStyle.width,
+            data: {technology: relation.technology},
             isLayoutedEdge: isLayoutedEdge,
             type: 'floating', //relation.type, //'floating', //'floating',//'default',
             markerEnd: {
