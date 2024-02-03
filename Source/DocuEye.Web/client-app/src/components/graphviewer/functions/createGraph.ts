@@ -12,7 +12,7 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
     const simulation = d3
         .forceSimulation(nodes)
         .force("link", d3.forceLink(links).id((d: any) => d.id))
-        .force("charge", d3.forceManyBody().strength(-150))
+        .force("charge", d3.forceManyBody().strength(-1650))
         .force("x", d3.forceX())
         .force("y", d3.forceY());
 
@@ -32,13 +32,20 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
 
     const node = svg
         .append("g")
-        .attr("stroke", "#fff")
-        .attr("stroke-width", 2)
+        
         .selectAll("circle")
         .data(nodes)
         .join("circle")
-        .attr("r", 12)
-        .attr("fill", "#FF0000")
+        .attr("stroke", (d:any) => {
+            return d.style.stroke;
+        })
+        .attr("stroke-width", (d:any) => {
+            return d.style.strokeWidth;
+        })
+        .attr("r", 20)
+        .attr("fill", (d:any) => {
+            return d.style.background;
+        })
         .call(drag(simulation));
 
     simulation.on("tick", () => {

@@ -1,11 +1,12 @@
 import { Autocomplete, Box, TextField, Toolbar } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DocuEyeApi from "../../../api";
 import GraphViewer from "../../../components/graphviewer";
 import Loader from "../../../components/loader";
 import store from "../../../store";
+import { IViewConfigurationState } from "../../../store/slices/viewConfiguration/IViewConfigurationState";
 import { setViewConfiguration } from "../../../store/slices/viewConfiguration/viewConfigurationSlice";
 import { setWorkspaceData } from "../../../store/slices/workspace/workspaceSlice";
 
@@ -17,6 +18,8 @@ export const GraphView = () => {
     const [selectedView, setSelectedView] = useState<any | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const viewConfiguration: IViewConfigurationState =
+        useSelector((state: any) => state.viewConfiguration);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -42,7 +45,7 @@ export const GraphView = () => {
 
                 const avViews: any[] = [];
                 getWorkspaceResponse.data.views?.forEach(view => {
-                    if(view.viewType !== "ImageView") {
+                    if(view.viewType !== "ImageView" && view.viewType !== "DeploymentView" && view.viewType !== "DynamicView") {
                         avViews.push({ id: view.id, label: view.name, viewType: view.viewType });
                     }
                 });
@@ -95,7 +98,8 @@ export const GraphView = () => {
                 </Toolbar>
             </Box>
             <GraphViewer selectedView={selectedView}
-                        workspaceId={workspaceId} />
+                        workspaceId={workspaceId}
+                        viewConfiguration={viewConfiguration.value} />
             {isLoading && <Loader />}
         </Box>
     );
