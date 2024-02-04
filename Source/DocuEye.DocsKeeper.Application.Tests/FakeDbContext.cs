@@ -17,6 +17,7 @@ namespace DocuEye.DocsKeeper.Application.Tests
            this.decisions = this.CreateDecisions();
            this.documentations = this.CreateDocumentations();
            this.images = this.CreateImages();
+           this.documentationFiles = this.CreateDocumentationFiles();
         }
 
         public IGenericCollection<Image> Images
@@ -49,6 +50,23 @@ namespace DocuEye.DocsKeeper.Application.Tests
             {
                 return new FakeGenericCollection<DocumentationFile>(this.documentationFiles);
             }
+        }
+
+
+        private List<DocumentationFile> CreateDocumentationFiles()
+        {
+            return new List<DocumentationFile>()
+            {
+                new DocumentationFile()
+                {
+                    Id = "fileId1",
+                    WorkspaceId = "workspacetest1",
+                    ElementId = "elementtestId1",
+                    Name = "swagger.json",
+                    Content = "www",
+                    Type = "application/json"
+                }
+            };
         }
 
         private List<Image> CreateImages()
