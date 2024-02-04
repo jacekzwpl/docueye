@@ -1,4 +1,5 @@
 import { ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
+import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
 import { getElementStyle } from "../../viewdiagram/functions/getElementStyle";
 import { getRelationshipStyle } from "../../viewdiagram/functions/getRelationshipStyle";
 
@@ -6,6 +7,7 @@ export const prepareGraphElements = (elementViews: ElementView[], relationshipVi
     const links: any[] = [];
     const elements: any[] = [];
     elementViews.forEach((element) => {
+        element.type = getTerminologyTerm(element.type, viewConfiguration?.terminology);
         elements.push({
             id: element.id,
             data: element,
