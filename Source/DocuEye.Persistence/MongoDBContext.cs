@@ -76,6 +76,10 @@ namespace DocuEye.Persistence
         /// Name of collection containing data protection keys
         /// </summary>
         private const string dataProtectionKeysCollectionName = "DataProtectionKeys";
+        /// <summary>
+        /// Name of collection containing documentation files
+        /// </summary>
+        private const string documentationFilesCollectionName = "DocumentationFiles";
 
         /// <summary>
         /// Creates db context instance
@@ -276,6 +280,14 @@ namespace DocuEye.Persistence
                 return new GenericCollection<DataProtectionKey>(this.database.GetCollection<DataProtectionKey>(dataProtectionKeysCollectionName));
             }
         }
+        /// <inheritdoc />
+        public IGenericCollection<DocumentationFile> DocumentationFiles
+        {
+            get
+            {
+                return new GenericCollection<DocumentationFile>(this.database.GetCollection<DocumentationFile>(documentationFilesCollectionName));
+            }
+        }
 
         /// <summary>
         /// Creates DB indexes
@@ -291,6 +303,7 @@ namespace DocuEye.Persistence
             await this.CreateDocumentationsCollectionIndexes();
             await this.CreateDecisionsCollectionIndexes();
             await this.CreateModelChangesCollectionIndexes();
+            await this.CreateDocumentationFilesCollectionIndexes();
         }
         /// <summary>
         /// Creates indexes for Elements collection
@@ -373,6 +386,19 @@ namespace DocuEye.Persistence
             await collection.Indexes.CreateOneAsync(elementIndexModel);
             var importIndexModel = new CreateIndexModel<ModelChange>(logBuilder.Ascending(x => x.ImportId));
             await collection.Indexes.CreateOneAsync(importIndexModel);
+        }
+
+        /// <summary>
+        /// Creates indexes for Documentation files collection
+        /// </summary>
+        private async Task CreateDocumentationFilesCollectionIndexes()
+        {
+            var collection = this.database.GetCollection<DocumentationFile>(documentationFilesCollectionName);
+            var logBuilder = Builders<DocumentationFile>.IndexKeys;
+            var workspaceIndexModel = new CreateIndexModel<DocumentationFile>(logBuilder.Ascending(x => x.WorkspaceId));
+            await collection.Indexes.CreateOneAsync(workspaceIndexModel);
+            var elementIndexModel = new CreateIndexModel<DocumentationFile>(logBuilder.Ascending(x => x.ElementId));
+            await collection.Indexes.CreateOneAsync(elementIndexModel);
         }
     }
 }

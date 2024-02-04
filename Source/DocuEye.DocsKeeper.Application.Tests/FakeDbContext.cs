@@ -11,6 +11,7 @@ namespace DocuEye.DocsKeeper.Application.Tests
         private List<Image> images;
         private List<Documentation> documentations;
         private List<Decision> decisions;
+        private List<DocumentationFile> documentationFiles;
         public FakeDbContext() { 
         
            this.decisions = this.CreateDecisions();
@@ -39,6 +40,14 @@ namespace DocuEye.DocsKeeper.Application.Tests
             get
             {
                 return new FakeGenericCollection<Decision>(this.decisions);
+            }
+        }
+
+        public IGenericCollection<DocumentationFile> DocumentationFiles
+        {
+            get
+            {
+                return new FakeGenericCollection<DocumentationFile>(this.documentationFiles);
             }
         }
 

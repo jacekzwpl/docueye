@@ -21,5 +21,9 @@ namespace DocuEye.DocsKeeper.Persistence
         /// Collection of decisions
         /// </summary>
         IGenericCollection<Decision> Decisions { get; }
+        /// <summary>
+        /// Collection of documentation files
+        /// </summary>
+        IGenericCollection<DocumentationFile> DocumentationFiles { get; }
     }
 }
