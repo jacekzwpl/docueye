@@ -7,8 +7,7 @@ import { createGraph } from "./functions/createGraph";
 import { IGraphViewerProps } from "./IGraphViewerProps";
 import * as d3 from "d3";
 import Loader from "../loader";
-import { getElementStyle } from "../viewdiagram/functions/getElementStyle";
-import { getRelationshipStyle } from "../viewdiagram/functions/getRelationshipStyle";
+import { prepareGraphElements } from "./functions/prepareGraphElements";
 
 export const GraphViewer = (props: IGraphViewerProps) => {
     const container = useRef<any>();
@@ -25,22 +24,7 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId, viewId)
             .then((response: AxiosResponse<SystemLandscapeView>) => {
                 if (response.data.elements && response.data.relationships) {
-                    const links: any[] = [];
-                    const elements: any[] = [];
-                    response.data.elements.forEach((element) => {
-                        elements.push({
-                            id: element.id,
-                            data: element,
-                            style: getElementStyle(element, viewConfiguration)
-                        })
-                    })
-                    response.data.relationships?.forEach((relationship) => {
-                        links.push({
-                            source: relationship.sourceId,
-                            target: relationship.destinationId,
-                            style: getRelationshipStyle(relationship, viewConfiguration)
-                        })
-                    })
+                    const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
                     const { destroy } = createGraph(container.current, elements, links);
                     destroyFn = destroy;
                 }
@@ -56,22 +40,7 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId, viewId)
             .then((response: AxiosResponse<SystemContextView>) => {
                 if (response.data.elements && response.data.relationships) {
-                    const links: any[] = [];
-                    const elements: any[] = [];
-                    response.data.elements.forEach((element) => {
-                        elements.push({
-                            id: element.id,
-                            data: element,
-                            style: getElementStyle(element, viewConfiguration)
-                        })
-                    })
-                    response.data.relationships?.forEach((relationship) => {
-                        links.push({
-                            source: relationship.sourceId,
-                            target: relationship.destinationId,
-                            style: getRelationshipStyle(relationship, viewConfiguration)
-                        })
-                    })
+                    const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
                     const { destroy } = createGraph(container.current, elements, links);
                     destroyFn = destroy;
                 }
@@ -87,22 +56,7 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId, viewId)
             .then((response: AxiosResponse<ContainerView>) => {
                 if (response.data.elements && response.data.relationships) {
-                    const links: any[] = [];
-                    const elements: any[] = [];
-                    response.data.elements.forEach((element) => {
-                        elements.push({
-                            id: element.id,
-                            data: element,
-                            style: getElementStyle(element, viewConfiguration)
-                        })
-                    })
-                    response.data.relationships?.forEach((relationship) => {
-                        links.push({
-                            source: relationship.sourceId,
-                            target: relationship.destinationId,
-                            style: getRelationshipStyle(relationship, viewConfiguration)
-                        })
-                    })
+                    const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
                     const { destroy } = createGraph(container.current, elements, links);
                     destroyFn = destroy;
                 }
@@ -118,22 +72,7 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId, viewId)
             .then((response: AxiosResponse<ComponentView>) => {
                 if (response.data.elements && response.data.relationships) {
-                    const links: any[] = [];
-                    const elements: any[] = [];
-                    response.data.elements.forEach((element) => {
-                        elements.push({
-                            id: element.id,
-                            data: element,
-                            style: getElementStyle(element, viewConfiguration)
-                        })
-                    })
-                    response.data.relationships?.forEach((relationship) => {
-                        links.push({
-                            source: relationship.sourceId,
-                            target: relationship.destinationId,
-                            style: getRelationshipStyle(relationship, viewConfiguration)
-                        })
-                    })
+                    const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
                     const { destroy } = createGraph(container.current, elements, links);
                     destroyFn = destroy;
                 }
@@ -149,22 +88,7 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, viewId)
             .then((response: AxiosResponse<FilteredView>) => {
                 if (response.data.elements && response.data.relationships) {
-                    const links: any[] = [];
-                    const elements: any[] = [];
-                    response.data.elements.forEach((element) => {
-                        elements.push({
-                            id: element.id,
-                            data: element,
-                            style: getElementStyle(element, viewConfiguration)
-                        })
-                    })
-                    response.data.relationships?.forEach((relationship) => {
-                        links.push({
-                            source: relationship.sourceId,
-                            target: relationship.destinationId,
-                            style: getRelationshipStyle(relationship, viewConfiguration)
-                        })
-                    })
+                    const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
                     const { destroy } = createGraph(container.current, elements, links);
                     destroyFn = destroy;
                 }
@@ -196,7 +120,7 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             if (selectedView.viewType === "ComponentView") {
                 loadComponentView(workspaceId, selectedView.id, viewConfiguration);
             }
-            
+
             if (selectedView.viewType === "FilteredView") {
                 loadFilteredView(workspaceId, selectedView.id, viewConfiguration);
             }
@@ -232,3 +156,5 @@ export const GraphViewer = (props: IGraphViewerProps) => {
 };
 
 export default GraphViewer;
+
+
