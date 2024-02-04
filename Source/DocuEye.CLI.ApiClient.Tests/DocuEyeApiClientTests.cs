@@ -1,6 +1,7 @@
 using DocuEye.CLI.ApiClient.Model;
 using DocuEye.Infrastructure.Tests.Http;
 using DocuEye.Structurizr.Model;
+using DocuEye.WorkspaceImporter.Api.Model;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -22,7 +23,7 @@ namespace DocuEye.CLI.ApiClient.Tests
             var fakeHttpMessageHandler = new FakeHttpMessageHandler(new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(JsonSerializer.Serialize<ImportWorkspaceResult>(new ImportWorkspaceResult()
+                Content = new StringContent(JsonSerializer.Serialize<ImportWorkspaceResponse>(new ImportWorkspaceResponse()
                 {
                     WorkspaceId = "testworkspaceId",
                     IsSuccess = true,

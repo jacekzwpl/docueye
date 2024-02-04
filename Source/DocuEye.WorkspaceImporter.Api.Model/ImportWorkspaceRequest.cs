@@ -1,6 +1,6 @@
 ﻿using DocuEye.Structurizr.Model;
 
-namespace DocuEye.CLI.ApiClient.Model
+namespace DocuEye.WorkspaceImporter.Api.Model
 {
     public class ImportWorkspaceRequest
     {

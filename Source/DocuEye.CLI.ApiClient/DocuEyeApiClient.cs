@@ -1,4 +1,5 @@
 ﻿using DocuEye.CLI.ApiClient.Model;
+using DocuEye.WorkspaceImporter.Api.Model;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -29,7 +30,7 @@ namespace DocuEye.CLI.ApiClient
         }
 
         /// <inheritdoc />
-        public async Task<ImportWorkspaceResult> ImportWorkspace(ImportWorkspaceRequest request)
+        public async Task<ImportWorkspaceResponse> ImportWorkspace(ImportWorkspaceRequest request)
         {
             var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import");
             message.Content = new StringContent(JsonSerializer.Serialize(request, this.serializerOptions), Encoding.UTF8, "application/json");
@@ -39,10 +40,10 @@ namespace DocuEye.CLI.ApiClient
                 if(response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<ImportWorkspaceResult>(responseBody, this.serializerOptions);
+                    var data = JsonSerializer.Deserialize<ImportWorkspaceResponse>(responseBody, this.serializerOptions);
                     if (data == null)
                     {
-                        return new ImportWorkspaceResult()
+                        return new ImportWorkspaceResponse()
                         {
                             IsSuccess = false,
                             Message = "There was no conntent in response. Import staus is unknown."
@@ -55,20 +56,20 @@ namespace DocuEye.CLI.ApiClient
                     var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
                     if(problemData == null)
                     {
-                        return new ImportWorkspaceResult()
+                        return new ImportWorkspaceResponse()
                         {
                             IsSuccess = false,
                             Message = "There was no conntent in response. Import staus is unknown"
                         };
                     }
-                    return new ImportWorkspaceResult()
+                    return new ImportWorkspaceResponse()
                     {
                         IsSuccess = false,
                         Message = problemData.Detail ?? problemData.Title
                     };
                 }else
                 {
-                    return new ImportWorkspaceResult()
+                    return new ImportWorkspaceResponse()
                     {
                         IsSuccess = false,
                         Message = "There was no conntent in response. Import staus is unknown"

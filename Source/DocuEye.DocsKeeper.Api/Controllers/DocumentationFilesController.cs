@@ -22,19 +22,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
             this.mediator = mediator;
         }
 
-        [Route("openapi/{elementId}")]
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> SaveOpenApiDocumentationFile(SaveOpenApiFileCommand command)
-        {
-            if(!new string[] { ".json",".yaml",".yml" }.Contains(Path.GetExtension(command.Name)))
-            {
-                return this.BadRequest(new BadRequestProblemDetails("File type not supported", "Supportet file types are \".json\",\".yaml\",\".yml\""));
-            }
-
-            await this.mediator.Send(command);
-            return this.Ok();
-        }
+        
 
         [Route("openapi/{elementId}")]
         [HttpGet]

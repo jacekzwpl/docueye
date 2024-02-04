@@ -9,10 +9,6 @@ namespace DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile
         public string Content { get; set; } = null!;
         public string Name { get; set; } = null!;
 
-        public SaveOpenApiFileCommand()
-        {
-
-        }
 
         public SaveOpenApiFileCommand(string workspaceId, string elementId, string content, string name)
         {
