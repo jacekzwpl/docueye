@@ -13,6 +13,15 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { AutomaticLayout } from './automatic-layout';
+// May contain unused imports in some cases
+// @ts-ignore
+import { ElementView } from './element-view';
+// May contain unused imports in some cases
+// @ts-ignore
+import { RelationshipView } from './relationship-view';
 
 /**
  * 
@@ -56,6 +65,30 @@ export interface FilteredView {
      * @memberof FilteredView
      */
     'viewType'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FilteredView
+     */
+    'paperSize'?: string | null;
+    /**
+     * 
+     * @type {Array<ElementView>}
+     * @memberof FilteredView
+     */
+    'elements'?: Array<ElementView> | null;
+    /**
+     * 
+     * @type {Array<RelationshipView>}
+     * @memberof FilteredView
+     */
+    'relationships'?: Array<RelationshipView> | null;
+    /**
+     * 
+     * @type {AutomaticLayout}
+     * @memberof FilteredView
+     */
+    'automaticLayout'?: AutomaticLayout;
     /**
      * 
      * @type {string}

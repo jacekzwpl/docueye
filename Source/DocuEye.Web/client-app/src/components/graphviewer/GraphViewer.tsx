@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { AxiosResponse } from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
 import DocuEyeApi from "../../api";
-import { SystemContextView, SystemLandscapeView, ViewConfiguration } from "../../api/docueye-api";
+import { ComponentView, ContainerView, FilteredView, SystemContextView, SystemLandscapeView, ViewConfiguration } from "../../api/docueye-api";
 import { createGraph } from "./functions/createGraph";
 import { IGraphViewerProps } from "./IGraphViewerProps";
 import * as d3 from "d3";
@@ -81,17 +81,124 @@ export const GraphViewer = (props: IGraphViewerProps) => {
     }, [setIsLoading]);
 
 
+    const loadContainerView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
+        setIsLoading(true);
+        DocuEyeApi.ViewsApi
+            .apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId, viewId)
+            .then((response: AxiosResponse<ContainerView>) => {
+                if (response.data.elements && response.data.relationships) {
+                    const links: any[] = [];
+                    const elements: any[] = [];
+                    response.data.elements.forEach((element) => {
+                        elements.push({
+                            id: element.id,
+                            data: element,
+                            style: getElementStyle(element, viewConfiguration)
+                        })
+                    })
+                    response.data.relationships?.forEach((relationship) => {
+                        links.push({
+                            source: relationship.sourceId,
+                            target: relationship.destinationId,
+                            style: getRelationshipStyle(relationship, viewConfiguration)
+                        })
+                    })
+                    const { destroy } = createGraph(container.current, elements, links);
+                    destroyFn = destroy;
+                }
+
+            }).finally(() => {
+                setIsLoading(false);
+            });
+    }, [setIsLoading]);
+
+    const loadComponentView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
+        setIsLoading(true);
+        DocuEyeApi.ViewsApi
+            .apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId, viewId)
+            .then((response: AxiosResponse<ComponentView>) => {
+                if (response.data.elements && response.data.relationships) {
+                    const links: any[] = [];
+                    const elements: any[] = [];
+                    response.data.elements.forEach((element) => {
+                        elements.push({
+                            id: element.id,
+                            data: element,
+                            style: getElementStyle(element, viewConfiguration)
+                        })
+                    })
+                    response.data.relationships?.forEach((relationship) => {
+                        links.push({
+                            source: relationship.sourceId,
+                            target: relationship.destinationId,
+                            style: getRelationshipStyle(relationship, viewConfiguration)
+                        })
+                    })
+                    const { destroy } = createGraph(container.current, elements, links);
+                    destroyFn = destroy;
+                }
+
+            }).finally(() => {
+                setIsLoading(false);
+            });
+    }, [setIsLoading]);
+
+    const loadFilteredView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
+        setIsLoading(true);
+        DocuEyeApi.ViewsApi
+            .apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, viewId)
+            .then((response: AxiosResponse<FilteredView>) => {
+                if (response.data.elements && response.data.relationships) {
+                    const links: any[] = [];
+                    const elements: any[] = [];
+                    response.data.elements.forEach((element) => {
+                        elements.push({
+                            id: element.id,
+                            data: element,
+                            style: getElementStyle(element, viewConfiguration)
+                        })
+                    })
+                    response.data.relationships?.forEach((relationship) => {
+                        links.push({
+                            source: relationship.sourceId,
+                            target: relationship.destinationId,
+                            style: getRelationshipStyle(relationship, viewConfiguration)
+                        })
+                    })
+                    const { destroy } = createGraph(container.current, elements, links);
+                    destroyFn = destroy;
+                }
+            }).finally(() => {
+                setIsLoading(false);
+            });
+    }, [setIsLoading]);
+
+
     useEffect(() => {
         if (selectedView && workspaceId && container.current) {
             if (destroyFn) {
                 destroyFn();
             }
             d3.select(container.current).select("svg").remove();
+
             if (selectedView.viewType === "SystemLandscapeView") {
                 loadSystemLandscapeView(workspaceId, selectedView.id, viewConfiguration);
             }
+
             if (selectedView.viewType === "SystemContextView") {
                 loadSystemContextView(workspaceId, selectedView.id, viewConfiguration);
+            }
+
+            if (selectedView.viewType === "ContainerView") {
+                loadContainerView(workspaceId, selectedView.id, viewConfiguration);
+            }
+
+            if (selectedView.viewType === "ComponentView") {
+                loadComponentView(workspaceId, selectedView.id, viewConfiguration);
+            }
+            
+            if (selectedView.viewType === "FilteredView") {
+                loadFilteredView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
 
