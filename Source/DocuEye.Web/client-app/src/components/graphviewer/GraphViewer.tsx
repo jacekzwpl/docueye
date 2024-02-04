@@ -8,6 +8,7 @@ import { IGraphViewerProps } from "./IGraphViewerProps";
 import * as d3 from "d3";
 import Loader from "../loader";
 import { getElementStyle } from "../viewdiagram/functions/getElementStyle";
+import { getRelationshipStyle } from "../viewdiagram/functions/getRelationshipStyle";
 
 export const GraphViewer = (props: IGraphViewerProps) => {
     const container = useRef<any>();
@@ -36,7 +37,8 @@ export const GraphViewer = (props: IGraphViewerProps) => {
                     response.data.relationships?.forEach((relationship) => {
                         links.push({
                             source: relationship.sourceId,
-                            target: relationship.destinationId
+                            target: relationship.destinationId,
+                            style: getRelationshipStyle(relationship, viewConfiguration)
                         })
                     })
                     const { destroy } = createGraph(container.current, elements, links);
@@ -66,7 +68,8 @@ export const GraphViewer = (props: IGraphViewerProps) => {
                     response.data.relationships?.forEach((relationship) => {
                         links.push({
                             source: relationship.sourceId,
-                            target: relationship.destinationId
+                            target: relationship.destinationId,
+                            style: getRelationshipStyle(relationship, viewConfiguration)
                         })
                     })
                     const { destroy } = createGraph(container.current, elements, links);

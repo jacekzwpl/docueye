@@ -23,29 +23,42 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
         .append("svg")
         .attr("viewBox", [-width / 2, -height / 2, width, height]);
 
+    const arrowColors:any[] = [];
+    links.forEach((link:any) => {
+        const index = arrowColors.findIndex((arrowColor) => {return arrowColor.color === link.style.color})
+        if(index === -1) {
+            arrowColors.push({
+                id: "arrow-" + link.style.color.replace("#", ""),
+                color: link.style.color
+            })
+        }
+        console.log(link.style.color);
+    });
 
     svg.append("defs").selectAll("marker")
-        .data(['arrow1'])
+        .data(arrowColors)
         .join("marker")
-        .attr("id", d => `arrow1`)
+        .attr("id", d => d.id)
         .attr("viewBox", "0 0 12 12")
         .attr("refX", 32)
         .attr("refY", 6)
         .attr("markerWidth", 12)
         .attr("markerHeight", 12)
         .attr("orient", "auto")
+        .attr("fill", (d) => d.color)
         .append("path")
         .attr("d", "M0,0 L12,6 L0,12 L0,0");
 
     const link = svg
         .append("g")
-        .attr("stroke", "#999")
-        .attr("stroke-opacity", 0.6)
         .selectAll("line")
         .data(links)
         .join("line")
+        .attr("stroke", (d: any) => {
+            return d.style.color;
+        })
         .attr("marker-end", function (d) {
-            return "url(#arrow1)";
+            return `url(#arrow-${d.style.color.replace("#","")})`;
         })
         .attr("stroke-width", d => Math.sqrt(d.value));
 
