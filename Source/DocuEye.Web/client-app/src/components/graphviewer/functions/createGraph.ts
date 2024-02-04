@@ -127,7 +127,7 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
     });
     return {
         destroy: () => {
-            simulation.stop();
+            //simulation.stop();
             //console.log("cleaned up");
         },
         nodes: () => {

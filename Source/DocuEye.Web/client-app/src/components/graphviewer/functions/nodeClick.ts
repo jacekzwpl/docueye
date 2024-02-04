@@ -38,9 +38,11 @@ export const nodeClick = (node: any) => {
         line.target.id !== contextNodeId
     });
 
-
     //Find circles that are not connected to context node
     const notConnectedCircles = circles.filter((circle: any) => {
+      if(!circle) {
+        return false;
+      }
       //check if circle is source or target of connected lines
       const foundedIndex = connectedLines.nodes().findIndex((line: any) => {
         return line.__data__.source.id === circle.data.id ||
@@ -51,6 +53,9 @@ export const nodeClick = (node: any) => {
 
     //Find all circles that are connected to context node
     const connectedCircles = circles.filter((circle: any) => {
+      if(!circle) {
+        return false;
+      }
       const foundedIndex = connectedLines.nodes().findIndex((line: any) => {
         return line.__data__.source.id === circle.data.id ||
           line.__data__.target.id === circle.data.id || circle.data.id === contextNodeId
