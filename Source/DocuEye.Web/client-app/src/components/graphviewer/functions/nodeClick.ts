@@ -17,7 +17,7 @@ export const nodeClick = (node: any) => {
   if (selected && selected.__data__.id === contextNodeId) {
     node.target.attributes['data-selected'] = "0";
     isResetView = true;
-  } else if(selected && selected.__data__.id === contextNodeId) {
+  } else if(selected && selected.__data__.id !== contextNodeId) {
     selected.attributes["data-selected"] = "0";
     node.target.attributes['data-selected'] = "1";
   }else {
