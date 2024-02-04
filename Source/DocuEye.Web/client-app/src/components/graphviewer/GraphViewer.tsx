@@ -11,7 +11,8 @@ import { prepareGraphElements } from "./functions/prepareGraphElements";
 
 export const GraphViewer = (props: IGraphViewerProps) => {
     const container = useRef<any>();
-    let destroyFn: () => void;
+    //let destroyFn: () => void;
+    const [graphResult,setGraphResult] = useState<any>(null);
     const [selectedView, setSelectedView] = useState(props.selectedView);
     const [workspaceId, setWorkspaceId] = useState(props.workspaceId);
     const [viewConfiguration, setViewConfiguration] = useState(props.viewConfiguration);
@@ -25,14 +26,14 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .then((response: AxiosResponse<SystemLandscapeView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
-                    const { destroy } = createGraph(container.current, elements, links);
-                    destroyFn = destroy;
+                    const graphResult = createGraph(container.current, elements, links);
+                    setGraphResult(graphResult);
                 }
             }).finally(() => {
                 setIsLoading(false);
             });
 
-    }, [setIsLoading]);
+    }, [setIsLoading,setGraphResult]);
 
     const loadSystemContextView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
         setIsLoading(true);
@@ -41,13 +42,15 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .then((response: AxiosResponse<SystemContextView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
-                    const { destroy } = createGraph(container.current, elements, links);
-                    destroyFn = destroy;
+                    //const { destroy } = createGraph(container.current, elements, links);
+                    //destroyFn = destroy;
+                    const graphResult = createGraph(container.current, elements, links)
+                    setGraphResult(graphResult);
                 }
             }).finally(() => {
                 setIsLoading(false);
             });
-    }, [setIsLoading]);
+    }, [setIsLoading, setGraphResult]);
 
 
     const loadContainerView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
@@ -57,14 +60,14 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .then((response: AxiosResponse<ContainerView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
-                    const { destroy } = createGraph(container.current, elements, links);
-                    destroyFn = destroy;
+                    const graphResult = createGraph(container.current, elements, links)
+                    setGraphResult(graphResult);
                 }
 
             }).finally(() => {
                 setIsLoading(false);
             });
-    }, [setIsLoading]);
+    }, [setIsLoading, setGraphResult]);
 
     const loadComponentView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
         setIsLoading(true);
@@ -73,14 +76,14 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .then((response: AxiosResponse<ComponentView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
-                    const { destroy } = createGraph(container.current, elements, links);
-                    destroyFn = destroy;
+                    const graphResult = createGraph(container.current, elements, links)
+                    setGraphResult(graphResult);
                 }
 
             }).finally(() => {
                 setIsLoading(false);
             });
-    }, [setIsLoading]);
+    }, [setIsLoading,setGraphResult]);
 
     const loadFilteredView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
         setIsLoading(true);
@@ -89,20 +92,18 @@ export const GraphViewer = (props: IGraphViewerProps) => {
             .then((response: AxiosResponse<FilteredView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {elements, links} = prepareGraphElements(response.data.elements, response.data.relationships, viewConfiguration);
-                    const { destroy } = createGraph(container.current, elements, links);
-                    destroyFn = destroy;
+                    const graphResult = createGraph(container.current, elements, links)
+                    setGraphResult(graphResult);
                 }
             }).finally(() => {
                 setIsLoading(false);
             });
-    }, [setIsLoading]);
+    }, [setIsLoading, setGraphResult]);
 
 
     useEffect(() => {
         if (selectedView && workspaceId && container.current) {
-            if (destroyFn) {
-                destroyFn();
-            }
+
             d3.select(container.current).select("svg").remove();
 
             if (selectedView.viewType === "SystemLandscapeView") {
@@ -127,7 +128,12 @@ export const GraphViewer = (props: IGraphViewerProps) => {
         }
 
     }, [container, selectedView, workspaceId, viewConfiguration,
-        loadSystemLandscapeView, loadSystemContextView])
+        loadSystemLandscapeView, 
+        loadSystemContextView,
+        loadContainerView,
+        loadComponentView,
+        loadFilteredView
+    ])
 
     useEffect(() => {
         if (!selectedView || selectedView?.id !== props.selectedView?.id) {
@@ -139,11 +145,11 @@ export const GraphViewer = (props: IGraphViewerProps) => {
 
     useEffect(() => {
         return () => {
-            if (destroyFn) {
-                destroyFn();
+            if (graphResult?.destroy) {
+                graphResult?.destroy();
             }
         };
-    }, [])
+    }, [graphResult])
 
     return (
         <>

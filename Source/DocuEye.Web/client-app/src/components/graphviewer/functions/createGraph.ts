@@ -32,7 +32,6 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
                 color: link.style.color
             })
         }
-        console.log(link.style.color);
     });
 
     svg.append("defs").selectAll("marker")
@@ -128,7 +127,6 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
     });
     return {
         destroy: () => {
-            //console.log(simulation);
             simulation.stop();
             //console.log("cleaned up");
         },
