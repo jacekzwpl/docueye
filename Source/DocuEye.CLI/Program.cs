@@ -33,7 +33,7 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
     {
         var importService = host.Services.GetRequiredService<IImportWorkspaceService>();
         var parameters = new ImportWorkspaceParameters(
-            options.ImportKey,
+            options.ImportKey ?? Guid.NewGuid().ToString(),
             options.WorkspaceFile,
             options.WorkspaceId,
             options.SourceLink);
