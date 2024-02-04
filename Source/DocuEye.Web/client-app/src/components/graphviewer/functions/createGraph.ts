@@ -23,6 +23,20 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
         .append("svg")
         .attr("viewBox", [-width / 2, -height / 2, width, height]);
 
+
+    svg.append("defs").selectAll("marker")
+        .data(['arrow1'])
+        .join("marker")
+        .attr("id", d => `arrow1`)
+        .attr("viewBox", "0 0 12 12")
+        .attr("refX", 32)
+        .attr("refY", 6)
+        .attr("markerWidth", 12)
+        .attr("markerHeight", 12)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,0 L12,6 L0,12 L0,0");
+
     const link = svg
         .append("g")
         .attr("stroke", "#999")
@@ -30,6 +44,9 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
         .selectAll("line")
         .data(links)
         .join("line")
+        .attr("marker-end", function (d) {
+            return "url(#arrow1)";
+        })
         .attr("stroke-width", d => Math.sqrt(d.value));
 
 
@@ -49,7 +66,7 @@ export const createGraph = (container: any, nodesData: any, linksData: any) => {
             return d.style.background;
         })
         .attr('cursor', 'pointer')
-        .call(drag(simulation)).on('click',nodeClick)
+        .call(drag(simulation)).on('click', nodeClick)
 
     const label = svg.append("g")
         .attr("class", "labels")
