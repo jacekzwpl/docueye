@@ -64,7 +64,8 @@ namespace DocuEye.DocsKeeper.Application.Tests
                     ElementId = "elementtestId1",
                     Name = "swagger.json",
                     Content = "www",
-                    Type = "application/json"
+                    MediaType = "application/json",
+                    Type = DocumentationFileType.OpenApiDefinition
                 }
             };
         }

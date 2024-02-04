@@ -19,9 +19,12 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetOpenApiFile
             this.dbContext = dbContext;
         }
 
-        public Task<DocumentationFile?> Handle(GetOpenApiFileQuery request, CancellationToken cancellationToken)
+        public async Task<DocumentationFile?> Handle(GetOpenApiFileQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await this.dbContext.DocumentationFiles
+                .FindOne(o => o.WorkspaceId == request.WorkspaceId
+                && o.ElementId == request.ElementId
+                && o.Type == DocumentationFileType.OpenApiDefinition);
         }
     }
 }
