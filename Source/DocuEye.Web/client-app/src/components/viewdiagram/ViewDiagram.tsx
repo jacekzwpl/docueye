@@ -166,9 +166,6 @@ const ViewDiagram = (props: IViewDiagramProps) => {
                     }
                 }
 
-
-                
-
             }).finally(() => {
                 setIsLoading(false);
             });
