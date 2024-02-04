@@ -7,7 +7,7 @@ import 'reactflow/dist/style.css';
 import './edges/floatingedges.css'
 import { edgeTypes } from "./edges";
 import { AxiosResponse } from "axios";
-import { ComponentView, ContainerView, DeploymentView, DynamicView, Element, ImageView, SystemContextView, SystemLandscapeView, ViewConfiguration } from "../../api/docueye-api";
+import { ComponentView, ContainerView, DeploymentView, DynamicView, Element, FilteredView, ImageView, SystemContextView, SystemLandscapeView, ViewConfiguration } from "../../api/docueye-api";
 import Loader from "../loader";
 import { prepareDiagramElements } from "./functions/prepareDiagramElements";
 import { prepareDynamicDiagramElements } from "./functions/prepareDynamicDiagramElements";
@@ -115,7 +115,7 @@ const ViewDiagram = (props: IViewDiagramProps) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<ComponentView>) => {
+            .then((response: AxiosResponse<FilteredView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView");
                     setNodes(layoutedNodes);
@@ -165,9 +165,6 @@ const ViewDiagram = (props: IViewDiagramProps) => {
                         setEdges(layoutedEdges);
                     }
                 }
-
-
-                
 
             }).finally(() => {
                 setIsLoading(false);
