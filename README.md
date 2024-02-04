@@ -3,11 +3,14 @@ DocuEye is a tool that lets You visualize views and documentation created using 
 
 ## Features
 - Import workspace via REST API
+- Dedicated CLI
 - Diagram viewer - You can view all diagrams in nice user friendly way (in my opinion :))
     - Automatic layout
     - Manual move elements
     - Diagram navigation
     - Export to PNG
+- Graph viewer - You can view diagrams as graphs
+    - Focusing on selected node
 - Elements catalog - You can search, navigate through your model elements 
     - View element properties. [See extra DocueEye properties](Documentation/docs/0004-element-extra-properties.md)
     - View element dependence's

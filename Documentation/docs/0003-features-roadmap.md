@@ -6,7 +6,6 @@ DocuEye is still work in progress. Below You can see features that I am going to
 
 | Feature | Description | 
 | ---- | ------ |
-| Alternative Graph's views | Currently views are presented only as diagrams but if it comes to analyze dependence's graphs can be better choice |
 | Styling elements | Element styles are supported but not every feature that can be found in structurizr dsl is. Currently: <br /> Shapes are icons (Shapes that does no effect Box,RoundedBox,Circle,Ellipse,Cylinder,Pipe) <br /> If shape is defined icon does no effect <br /> Width and height does no effect. <br /> In future I want to support  these features. |
 | Relationship Styles | Currently: properties position, dashed and routing does no effect. In future I want to support  these properties. |
 | Autolayout configuration | Currently all diagrams are autolayouted TopBottom. In future i want to support configuration of this.|
