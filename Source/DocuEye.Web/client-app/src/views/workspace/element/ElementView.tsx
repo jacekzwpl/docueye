@@ -101,7 +101,7 @@ export const ElementView = () => {
                 <DecisionsTimeline workspaceId={workspaceId} elementId={element?.id} />
             </TabPanel>
             <TabPanel value="5"  >
-                <ElementOpenApi />
+                <ElementOpenApi workspaceId={workspaceId} elementId={element?.id}  />
             </TabPanel>
         </TabContext>
         {isLoading && <Loader />}

@@ -3,6 +3,8 @@
 api.ts
 api/app-api.ts
 api/decisions-api.ts
+api/documentation-files-api.ts
+api/documentation-files-import-api.ts
 api/documentations-api.ts
 api/elements-api.ts
 api/model-changes-api.ts
@@ -33,8 +35,9 @@ models/filtered-view.ts
 models/founded-decision.ts
 models/founded-workspace.ts
 models/image-view.ts
-models/import-workspace-command.ts
-models/import-workspace-result.ts
+models/import-open-api-file-request.ts
+models/import-workspace-request.ts
+models/import-workspace-response.ts
 models/index.ts
 models/model-change.ts
 models/relationship-style.ts

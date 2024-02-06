@@ -37,7 +37,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
             }
 
             var arr = Convert.FromBase64String(result.Content);
-            return this.File(arr, result.Type ?? "application/octet-stream", Path.GetFileName(result.Name));
+            return this.File(arr, result.MediaType ?? "application/octet-stream", Path.GetFileName(result.Name));
         }
     }
 }

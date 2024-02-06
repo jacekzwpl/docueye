@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using DocuEye.CLI;
 using DocuEye.CLI.ApiClient;
+using DocuEye.CLI.Application.Services.ImportOpenApiFile;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +28,7 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
     builder.Services.AddLogging(builder => builder.AddConsole());
 
     builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
+    builder.Services.AddTransient<IImportOpenApiFileService, ImportOpenApiFileService>();
     using IHost host = builder.Build();
 
     if (options.Import == "workspace")
@@ -39,6 +41,41 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
             options.SourceLink);
         var result = await importService.Import(parameters);
         if(!result)
+        {
+            Environment.ExitCode = -1;
+        }
+    }else if(options.Import == "openapi")
+    {
+        if (string.IsNullOrEmpty(options.ElementId))
+        {
+            logger.LogError("elementId is required for openapi import");
+            Environment.ExitCode = -1;
+            return;
+        }
+
+        if (string.IsNullOrEmpty(options.WorkspaceId))
+        {
+            logger.LogError("workspaceId is required for openapi import");
+            Environment.ExitCode = -1;
+            return;
+        }
+
+        if (string.IsNullOrEmpty(options.OpenApiFile))
+        {
+            logger.LogError("openApiFile is required for openapi import");
+            Environment.ExitCode = -1;
+            return;
+        }
+
+        var importService = host.Services.GetRequiredService<IImportOpenApiFileService>();
+        var parameters = new ImportOpenApiFileParameters()
+        {
+           ElementId = options.ElementId,
+           WorkspaceId = options.WorkspaceId,
+           OpenApiFile = options.OpenApiFile
+        };
+        var result = await importService.Import(parameters);
+        if (!result)
         {
             Environment.ExitCode = -1;
         }

@@ -5,7 +5,7 @@ import {
     WorkspacesApi, 
     ViewsApi, 
     DocumentationsApi, 
-    DecisionsApi } from "./docueye-api";
+    DecisionsApi,DocumentationFilesApi } from "./docueye-api";
 
 
 const DocuEyeApi = {
@@ -15,7 +15,8 @@ const DocuEyeApi = {
     DecisionsApi: new DecisionsApi(undefined, ""),
     ViewsApi: new ViewsApi(undefined, ""),
     WorkspacesApi: new WorkspacesApi(undefined, ""),
-    ModelChangesApi: new ModelChangesApi(undefined, "")
+    ModelChangesApi: new ModelChangesApi(undefined, ""),
+    DocumentationFilesApi: new DocumentationFilesApi(undefined, "")
 };
 
 //export * from "./interceptors";

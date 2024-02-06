@@ -16,6 +16,8 @@
 
 export * from './api/app-api';
 export * from './api/decisions-api';
+export * from './api/documentation-files-api';
+export * from './api/documentation-files-import-api';
 export * from './api/documentations-api';
 export * from './api/elements-api';
 export * from './api/model-changes-api';

@@ -22,9 +22,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ImportWorkspaceCommand } from '../models';
+import { ImportWorkspaceRequest } from '../models';
 // @ts-ignore
-import { ImportWorkspaceResult } from '../models';
+import { ImportWorkspaceResponse } from '../models';
 /**
  * WorkspacesImportApi - axios parameter creator
  * @export
@@ -33,11 +33,11 @@ export const WorkspacesImportApiAxiosParamCreator = function (configuration?: Co
     return {
         /**
          * 
-         * @param {ImportWorkspaceCommand} [importWorkspaceCommand] 
+         * @param {ImportWorkspaceRequest} [importWorkspaceRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesImportPut: async (importWorkspaceCommand?: ImportWorkspaceCommand, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiWorkspacesImportPut: async (importWorkspaceRequest?: ImportWorkspaceRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/workspaces/import`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -57,7 +57,7 @@ export const WorkspacesImportApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(importWorkspaceCommand, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(importWorkspaceRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -76,12 +76,12 @@ export const WorkspacesImportApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {ImportWorkspaceCommand} [importWorkspaceCommand] 
+         * @param {ImportWorkspaceRequest} [importWorkspaceRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesImportPut(importWorkspaceCommand?: ImportWorkspaceCommand, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImportWorkspaceResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesImportPut(importWorkspaceCommand, options);
+        async apiWorkspacesImportPut(importWorkspaceRequest?: ImportWorkspaceRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImportWorkspaceResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesImportPut(importWorkspaceRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['WorkspacesImportApi.apiWorkspacesImportPut']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
@@ -98,12 +98,12 @@ export const WorkspacesImportApiFactory = function (configuration?: Configuratio
     return {
         /**
          * 
-         * @param {ImportWorkspaceCommand} [importWorkspaceCommand] 
+         * @param {ImportWorkspaceRequest} [importWorkspaceRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesImportPut(importWorkspaceCommand?: ImportWorkspaceCommand, options?: any): AxiosPromise<ImportWorkspaceResult> {
-            return localVarFp.apiWorkspacesImportPut(importWorkspaceCommand, options).then((request) => request(axios, basePath));
+        apiWorkspacesImportPut(importWorkspaceRequest?: ImportWorkspaceRequest, options?: any): AxiosPromise<ImportWorkspaceResponse> {
+            return localVarFp.apiWorkspacesImportPut(importWorkspaceRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -117,13 +117,13 @@ export const WorkspacesImportApiFactory = function (configuration?: Configuratio
 export class WorkspacesImportApi extends BaseAPI {
     /**
      * 
-     * @param {ImportWorkspaceCommand} [importWorkspaceCommand] 
+     * @param {ImportWorkspaceRequest} [importWorkspaceRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspacesImportApi
      */
-    public apiWorkspacesImportPut(importWorkspaceCommand?: ImportWorkspaceCommand, options?: RawAxiosRequestConfig) {
-        return WorkspacesImportApiFp(this.configuration).apiWorkspacesImportPut(importWorkspaceCommand, options).then((request) => request(this.axios, this.basePath));
+    public apiWorkspacesImportPut(importWorkspaceRequest?: ImportWorkspaceRequest, options?: RawAxiosRequestConfig) {
+        return WorkspacesImportApiFp(this.configuration).apiWorkspacesImportPut(importWorkspaceRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

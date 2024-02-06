@@ -1,10 +1,21 @@
+import { useEffect, useState } from "react"
 import SwaggerUI from "swagger-ui-react"
 import "swagger-ui-react/swagger-ui.css"
+import DocuEyeApi from "../../../../api"
+import { IElementOpenApiProps } from "./IElementOpenApiProps"
 
-export const ElementOpenApi = () => {
+export const ElementOpenApi = (props: IElementOpenApiProps) => {
+    const [url, setUrl] = useState<string>("")
+    useEffect(() => {
+        if(props.elementId && props.workspaceId) {
+            setUrl(`/api/workspaces/${props.workspaceId}/documentationfiles/openapi/${props.elementId}`);
+        }
+        
+    },[props])
+
     return (
        <>
-        <SwaggerUI url="https://localhost:3000/swagger.yml" />
+        {url !== "" && <SwaggerUI url={url}  /> }
        </>
     )
 }
