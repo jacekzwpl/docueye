@@ -15,6 +15,7 @@ import DecisionsTimeline from "../../../components/decisionstimeline";
 import DocumentationViewer from "../../../components/documentationviewer";
 import ElementConsumers from "./consumers";
 import { setWorkspaceData } from "../../../store/slices/workspace/workspaceSlice";
+import { ElementOpenApi } from "./openapi/ElementOpenApi";
 
 export const ElementView = () => {
 
@@ -82,6 +83,7 @@ export const ElementView = () => {
                 <Tab label="Consumers" value="2" />
                 <Tab label="Documentation" value="3" />
                 <Tab label="Decisions" value="4" />
+                <Tab label="Open Api" value="5" />
             </Tabs>
             <TabPanel value="0"  >
                 {element && <OverView element={element} /> }
@@ -97,6 +99,9 @@ export const ElementView = () => {
             </TabPanel>
             <TabPanel value="4"  >
                 <DecisionsTimeline workspaceId={workspaceId} elementId={element?.id} />
+            </TabPanel>
+            <TabPanel value="5"  >
+                <ElementOpenApi workspaceId={workspaceId} elementId={element?.id}  />
             </TabPanel>
         </TabContext>
         {isLoading && <Loader />}

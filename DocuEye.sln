@@ -115,13 +115,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{7E8C9BBB-68F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.CLI", "Source\DocuEye.CLI\DocuEye.CLI.csproj", "{39345E05-78E3-4AAF-80F0-3981900E46F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.CLI.Application", "Source\DocuEye.CLI.Application\DocuEye.CLI.Application.csproj", "{211DB833-616C-4EB9-8EBE-57F3C20977FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.CLI.Application", "Source\DocuEye.CLI.Application\DocuEye.CLI.Application.csproj", "{211DB833-616C-4EB9-8EBE-57F3C20977FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.CLI.ApiClient", "Source\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj", "{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.CLI.ApiClient", "Source\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj", "{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.CLI.ApiClient.Tests", "Source\DocuEye.CLI.ApiClient.Tests\DocuEye.CLI.ApiClient.Tests.csproj", "{11684A15-289A-415E-AC0E-9D4138693859}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.CLI.ApiClient.Tests", "Source\DocuEye.CLI.ApiClient.Tests\DocuEye.CLI.ApiClient.Tests.csproj", "{11684A15-289A-415E-AC0E-9D4138693859}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Infrastructure.Tests.Http", "Source\DocuEye.Infrastructure.Tests.Http\DocuEye.Infrastructure.Tests.Http.csproj", "{CE0C3442-E558-49FF-B597-B159CFD80F52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Infrastructure.Tests.Http", "Source\DocuEye.Infrastructure.Tests.Http\DocuEye.Infrastructure.Tests.Http.csproj", "{CE0C3442-E558-49FF-B597-B159CFD80F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspaceImporter.Api.Model", "Source\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj", "{A31157DC-69B9-46E1-B196-19B531791420}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -333,6 +335,10 @@ Global
 		{CE0C3442-E558-49FF-B597-B159CFD80F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE0C3442-E558-49FF-B597-B159CFD80F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE0C3442-E558-49FF-B597-B159CFD80F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A31157DC-69B9-46E1-B196-19B531791420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A31157DC-69B9-46E1-B196-19B531791420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A31157DC-69B9-46E1-B196-19B531791420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A31157DC-69B9-46E1-B196-19B531791420}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -387,6 +393,7 @@ Global
 		{3E51AAA2-47F4-42D4-BCED-C1E2634D98B1} = {7E8C9BBB-68F4-4C90-A69A-06FE72392690}
 		{11684A15-289A-415E-AC0E-9D4138693859} = {7E8C9BBB-68F4-4C90-A69A-06FE72392690}
 		{CE0C3442-E558-49FF-B597-B159CFD80F52} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
+		{A31157DC-69B9-46E1-B196-19B531791420} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}

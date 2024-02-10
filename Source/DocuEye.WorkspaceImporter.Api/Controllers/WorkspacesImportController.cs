@@ -1,7 +1,9 @@
-﻿using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
+﻿using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Api.Controllers
@@ -31,10 +33,22 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         [Route("import")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResult>> Import(ImportWorkspaceCommand command)
+        public async Task<ActionResult<ImportWorkspaceResponse>> Import(ImportWorkspaceRequest data)
         {
+            var command = new ImportWorkspaceCommand()
+            {
+                ImportKey = data.ImportKey,
+                WorkspaceId = data.WorkspaceId,
+                SourceLink = data.SourceLink,
+                WorkspaceData = data.WorkspaceData
+            };
             var result = await this.mediator.Send<ImportWorkspaceResult>(command);
-            return this.Ok(result);
+            return this.Ok(new ImportWorkspaceResponse()
+            {
+                IsSuccess = result.IsSuccess,
+                WorkspaceId = result.WorkspaceId,
+                Message = result.Message
+            });
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using DocuEye.CLI.ApiClient.Model;
+using DocuEye.WorkspaceImporter.Api.Model;
 using System.Threading.Tasks;
 
 namespace DocuEye.CLI.ApiClient
@@ -14,6 +15,7 @@ namespace DocuEye.CLI.ApiClient
         /// </summary>
         /// <param name="request">Import workspace request</param>
         /// <returns>Import workspace result</returns>
-        Task<ImportWorkspaceResult> ImportWorkspace(ImportWorkspaceRequest request);
+        Task<ImportWorkspaceResponse> ImportWorkspace(ImportWorkspaceRequest request);
+        Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request);
     }
 }

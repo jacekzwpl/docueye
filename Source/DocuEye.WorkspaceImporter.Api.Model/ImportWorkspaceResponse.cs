@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DocuEye.CLI.ApiClient.Model
+﻿namespace DocuEye.WorkspaceImporter.Api.Model
 {
-    public class ImportWorkspaceResult
+    public class ImportWorkspaceResponse
     {
         /// <summary>
         /// Workspace ID

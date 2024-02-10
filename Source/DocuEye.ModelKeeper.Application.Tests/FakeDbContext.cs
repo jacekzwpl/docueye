@@ -45,6 +45,7 @@ namespace DocuEye.ViewsKeeper.Application.Tests
                 {
                     Id = "SoftwareSystemId1",
                     Name = "My System 1",
+                    DslId = "DSL-SoftwareSystemId1",
                     WorkspaceId = "workspacetest1",
                     Type = ElementType.SoftwareSystem
                 },

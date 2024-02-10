@@ -11,11 +11,13 @@ namespace DocuEye.DocsKeeper.Application.Tests
         private List<Image> images;
         private List<Documentation> documentations;
         private List<Decision> decisions;
+        private List<DocumentationFile> documentationFiles;
         public FakeDbContext() { 
         
            this.decisions = this.CreateDecisions();
            this.documentations = this.CreateDocumentations();
            this.images = this.CreateImages();
+           this.documentationFiles = this.CreateDocumentationFiles();
         }
 
         public IGenericCollection<Image> Images
@@ -40,6 +42,32 @@ namespace DocuEye.DocsKeeper.Application.Tests
             {
                 return new FakeGenericCollection<Decision>(this.decisions);
             }
+        }
+
+        public IGenericCollection<DocumentationFile> DocumentationFiles
+        {
+            get
+            {
+                return new FakeGenericCollection<DocumentationFile>(this.documentationFiles);
+            }
+        }
+
+
+        private List<DocumentationFile> CreateDocumentationFiles()
+        {
+            return new List<DocumentationFile>()
+            {
+                new DocumentationFile()
+                {
+                    Id = "fileId1",
+                    WorkspaceId = "workspacetest1",
+                    ElementId = "elementtestId1",
+                    Name = "swagger.json",
+                    Content = "www",
+                    MediaType = "application/json",
+                    Type = DocumentationFileType.OpenApiDefinition
+                }
+            };
         }
 
         private List<Image> CreateImages()

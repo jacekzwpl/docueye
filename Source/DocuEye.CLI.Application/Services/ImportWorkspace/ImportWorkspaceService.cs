@@ -1,6 +1,6 @@
 ﻿using DocuEye.CLI.ApiClient;
-using DocuEye.CLI.ApiClient.Model;
 using DocuEye.Structurizr.Model;
+using DocuEye.WorkspaceImporter.Api.Model;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Text.Json;

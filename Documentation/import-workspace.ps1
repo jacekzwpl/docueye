@@ -1,8 +1,5 @@
 Param(
     [Parameter(Mandatory,
-    HelpMessage="Local directory with workspace.tpl file.")]
-    [string]$workspaceDir,
-    [Parameter(Mandatory,
     HelpMessage="The Admin token from DocuEye configuration")]
     [string]$adminToken,
     [Parameter(Mandatory,
@@ -10,32 +7,23 @@ Param(
     [string]$workspaceId,
     [Parameter(HelpMessage="Unique import key. If not provided, one will be generated.")]
     [string]$importKey = (New-Guid).Guid,
-    [Parameter(HelpMessage="Link to source version from whitch workspace is imported ex. link to PR or commit on github.")]
-    [string]$sourceLink = $null,
     [Parameter(Mandatory,
     HelpMessage="DocuEye address ex. http://localhost:8080")]
     [string]$docueyeAddress
 )
 
+####
+# .\import-workspace.ps1 -docueyeAddress http://localhost:8080 -adminToken docueyedmintoken -workspaceId 8ff549b9-af3b-4e76-9cdf-aaa3218398a4 
+####
+
+
 #export workspace to json format
-docker run -it --rm -v "$($workspaceDir):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
-#read json file content
-$workspaceData = Get-Content -Path workspace.json -Raw | ConvertFrom-Json -Depth 100
-
-# build request headers
-$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-$headers.Add("Content-Type", "application/json")
-$headers.Add("Authorization", "Basic $adminToken")
-
-#build request body
-$body = @{
-    workspaceId = $workspaceId
-    importKey = $importKey
-    sourceLink = $sourceLink
-    workspaceData = $workspaceData
-}
-$bodyStr = $body | ConvertTo-Json -Depth 100 
-
-#run import
-$response = Invoke-RestMethod "$docueyeAddress/api/workspaces/import" -Method 'PUT' -Headers $headers -Body $bodyStr
-$response | ConvertTo-Json -Depth 100
+docker run -it --rm -v "$($PWD):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
+#import workspace to DocuEye
+docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
+--import=workspace  `
+--docueyeAddress="$docueyeAddress"  `
+--adminToken="$adminToken"  `
+--importKey="$importKey"  `
+--workspaceId="$workspaceId"  `
+--workspaceFile=./import/workspace.json
