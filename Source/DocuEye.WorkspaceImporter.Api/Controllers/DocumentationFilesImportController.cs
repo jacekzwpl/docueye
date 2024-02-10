@@ -28,6 +28,12 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
             this.mediator = mediator;
         }
         
+        /// <summary>
+        /// Imports openapi definition for element in workspace
+        /// </summary>
+        /// <param name="workspaceId">Workspace ID</param>
+        /// <param name="data">Request data</param>
+        /// <returns></returns>
         [Route("openapi")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
