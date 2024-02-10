@@ -46,10 +46,12 @@ namespace DocuEye.CLI.Application.Services.ImportOpenApiFile
             var content = Convert.ToBase64String(bytes);
             
             this.logger.LogInformation("Importing openapi");
-            var result = await this.apiClient.ImportOpenApiFile(parameters.WorkspaceId, parameters.ElementId, new ImportOpenApiFileRequest()
+            var result = await this.apiClient.ImportOpenApiFile(parameters.WorkspaceId, new ImportOpenApiFileRequest()
             {
                 Content = content,
-                Name = Path.GetFileName(parameters.OpenApiFile)
+                Name = Path.GetFileName(parameters.OpenApiFile),
+                ElementDslId = parameters.ElementDslId,
+                ElementId = parameters.ElementId
             });
 
 

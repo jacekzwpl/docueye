@@ -30,9 +30,9 @@ namespace DocuEye.CLI.ApiClient
             };
         }
 
-        public async Task<string?> ImportOpenApiFile(string workspaceId, string elementId, ImportOpenApiFileRequest request)
+        public async Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request)
         {
-            var message = new HttpRequestMessage(HttpMethod.Put, string.Format("api/workspaces/{0}/docfile/openapi/{1}", workspaceId, elementId));
+            var message = new HttpRequestMessage(HttpMethod.Put, string.Format("api/workspaces/{0}/docfile/openapi", workspaceId));
             message.Content = new StringContent(JsonSerializer.Serialize(request, this.serializerOptions), Encoding.UTF8, "application/json");
             using (var response = await this.httpClient.SendAsync(message))
             {

@@ -10,7 +10,8 @@ namespace DocuEye.CLI.Application.Services.ImportOpenApiFile
         /// The ID of the Workspace.
         /// </summary>
         public string WorkspaceId { get; set; }
-        public string ElementId { get; set; }
+        public string? ElementId { get; set; }
+        public string? ElementDslId { get; set; }
         public string OpenApiFile { get; set; }
     }
 }

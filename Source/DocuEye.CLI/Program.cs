@@ -33,6 +33,12 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
 
     if (options.Import == "workspace")
     {
+        if (string.IsNullOrEmpty(options.WorkspaceFile))
+        {
+            logger.LogError("workspaceFile is required for workspace import");
+            Environment.ExitCode = -1;
+            return;
+        }
         var importService = host.Services.GetRequiredService<IImportWorkspaceService>();
         var parameters = new ImportWorkspaceParameters(
             options.ImportKey ?? Guid.NewGuid().ToString(),
@@ -46,9 +52,9 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
         }
     }else if(options.Import == "openapi")
     {
-        if (string.IsNullOrEmpty(options.ElementId))
+        if (string.IsNullOrEmpty(options.ElementId) && string.IsNullOrEmpty(options.ElementDslId))
         {
-            logger.LogError("elementId is required for openapi import");
+            logger.LogError("elementId or elementDslId is required for openapi import");
             Environment.ExitCode = -1;
             return;
         }
@@ -71,6 +77,7 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
         var parameters = new ImportOpenApiFileParameters()
         {
            ElementId = options.ElementId,
+           ElementDslId = options.ElementDslId,
            WorkspaceId = options.WorkspaceId,
            OpenApiFile = options.OpenApiFile
         };

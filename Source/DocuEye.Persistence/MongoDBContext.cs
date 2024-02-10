@@ -312,8 +312,10 @@ namespace DocuEye.Persistence
         {
             var collection = this.database.GetCollection<Element>(elementsCollectionName);
             var logBuilder = Builders<Element>.IndexKeys;
-            var indexModel = new CreateIndexModel<Element>(logBuilder.Ascending(x => x.WorkspaceId));
-            await collection.Indexes.CreateOneAsync(indexModel);
+            var workspaceIndexModel = new CreateIndexModel<Element>(logBuilder.Ascending(x => x.WorkspaceId));
+            await collection.Indexes.CreateOneAsync(workspaceIndexModel);
+            var dslIndexModel = new CreateIndexModel<Element>(logBuilder.Ascending(x => x.DslId));
+            await collection.Indexes.CreateOneAsync(dslIndexModel);
         }
         /// <summary>
         /// Creates indexes for Relationships collection

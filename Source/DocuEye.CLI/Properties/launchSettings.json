@@ -1,7 +1,8 @@
 {
   "profiles": {
     "DocuEye.CLI": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--import=openapi --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --openApiFile=\"C:\\nCode\\docueye\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\" --elementDslId=onlineshop.basket"
     },
     "Docker": {
       "commandName": "Docker"

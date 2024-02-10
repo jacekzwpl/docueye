@@ -25,6 +25,8 @@ namespace DocuEye.CLI
         public string? SourceLink { get; set; }
         [Option("elementId", Required = false, HelpText = "The ID of element for witchi this import is created.")]
         public string? ElementId { get; set; }
+        [Option("elementDslId", Required = false, HelpText = "The ID of element for witchi this import is created.")]
+        public string? ElementDslId { get; set; }
         [Option("openApiFile", Required = false, HelpText = "Path to openapi specification file.")]
         public string? OpenApiFile { get; set; }
 

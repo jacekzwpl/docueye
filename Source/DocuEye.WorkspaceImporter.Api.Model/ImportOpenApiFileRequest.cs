@@ -8,5 +8,8 @@ namespace DocuEye.WorkspaceImporter.Api.Model
     {
         public string Content { get; set; } = null!;
         public string Name { get; set; } = null!;
+
+        public string? ElementDslId { get; set; }
+        public string? ElementId { get; set; }
     }
 }

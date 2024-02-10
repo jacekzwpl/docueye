@@ -1,5 +1,7 @@
 ﻿using DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile;
 using DocuEye.Infrastructure.HttpProblemDetails;
+using DocuEye.ModelKeeper.Application.Queries.GetElementByDslId;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -26,14 +28,40 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
             this.mediator = mediator;
         }
         
-        [Route("openapi/{elementId}")]
+        [Route("openapi")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> SaveOpenApiDocumentationFile([FromRoute]string workspaceId, [FromRoute]string elementId, ImportOpenApiFileRequest data)
+        public async Task<IActionResult> SaveOpenApiDocumentationFile([FromRoute]string workspaceId, ImportOpenApiFileRequest data)
         {
             if (!new string[] { ".json", ".yaml", ".yml" }.Contains(Path.GetExtension(data.Name)))
             {
-                return this.BadRequest(new BadRequestProblemDetails("File type not supported", "Supportet file types are \".json\",\".yaml\",\".yml\""));
+                return this.BadRequest(new BadRequestProblemDetails(
+                    "File type not supported", 
+                    "Supported file types are \".json\",\".yaml\",\".yml\""));
+            }
+
+            if(string.IsNullOrEmpty(data.ElementId) && string.IsNullOrEmpty(data.ElementDslId))
+            {
+                return this.BadRequest(new BadRequestProblemDetails(
+                    "Element identifier is missing", 
+                    "To import openapi definition ElementId or ElementDslId must be provided."));
+            }
+            var elementId = string.Empty;
+            
+            if(!string.IsNullOrEmpty(data.ElementId))
+            {
+                elementId = data.ElementId;
+            }else
+            {
+                var query = new GetElementByDslIdQuery(data.ElementDslId ?? "", workspaceId);
+                var element = await this.mediator.Send<Element?>(query);
+                if(element == null)
+                {
+                    return this.NotFound(new NotFoundProblemDetails(
+                        "Element not found", 
+                        string.Format("Element with dsl id = {0} was not found in workspace.", data.ElementDslId)));
+                }
+                elementId = element.Id;
             }
 
             var command = new SaveOpenApiFileCommand(workspaceId, elementId, data.Content, data.Name);
