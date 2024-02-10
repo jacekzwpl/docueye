@@ -8,11 +8,7 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     model {
         client = person "Client" "Online shop client"
 
-        emailsystem = softwareSystem "Email System" {
-            test = container "Test Container"
-        }
-
-        
+        emailsystem = softwareSystem "Email System"
 
         onlineshop = softwareSystem "Online Shop" "Online shop system" {
             
