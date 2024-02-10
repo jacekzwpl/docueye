@@ -1,8 +1,5 @@
 Param(
     [Parameter(Mandatory,
-    HelpMessage="Local directory with workspace.tpl file.")]
-    [string]$workspaceDir,
-    [Parameter(Mandatory,
     HelpMessage="The Admin token from DocuEye configuration")]
     [string]$adminToken,
     [Parameter(Mandatory,
@@ -16,9 +13,9 @@ Param(
 )
 
 #export workspace to json format
-docker run -it --rm -v "$($workspaceDir):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
+docker run -it --rm -v "$($PWD):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
 #import workspace to DocuEye
-docker run -it --rm --network="host" -v "$($workspaceDir):/app/import" jacekzwpl/docueye-cli  `
+docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
 --import=workspace  `
 --docueyeAddress="$docueyeAddress"  `
 --adminToken="$adminToken"  `
