@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Handle, Position } from "reactflow";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import LinkIcon from '@mui/icons-material/Link';
+import TopicIcon from '@mui/icons-material/Topic';
 import { IconButton } from "@mui/material";
 import CustomNodeShapeIcon from "./CustomNodeShapeIcon";
 import { useNavigate } from "react-router-dom";
@@ -12,13 +13,14 @@ const CustomNode = (nodeData: any) => {
   
   const navigate = useNavigate();
   
+  const onGoToElementClick = (elementId: string) => {
+    const viewConfigurationState = store.getState().viewConfiguration;
+    navigate(`/workspace/${viewConfigurationState.value?.id}/element/${elementId}`);
+  }
+
   const onGoToDiagramClick = (diagramId: string) => {
     const viewConfigurationState = store.getState().viewConfiguration;
     navigate(`/workspace/${viewConfigurationState.value?.id}/view/${diagramId}`);
-  }
-
-  const hasButtons = (data: any):boolean => {
-    return data.diagramId || data.url;
   }
 
   const openUrl = (url:string) => {
@@ -89,20 +91,22 @@ const CustomNode = (nodeData: any) => {
           display: 'block', 
           margin: '0 auto', 
           padding: 1 }}>{diplayNodeType(nodeData.data.typeName,nodeData.data.technology)}</div>}
-        { hasButtons(nodeData.data) && 
         <div style={{ 
           fontSize: metadataFontSize(nodeData.data.style?.fontSize), 
           color: nodeData.data.style?.color ?? '#FFFFFF', 
           display: 'block', 
           margin: '0 auto', 
           padding: 1 }}>
+          <IconButton aria-label="go to element" size="small" onClick={() => onGoToElementClick(nodeData.id)}>
+            <TopicIcon sx={{color: nodeData.data.style?.color ?? '#FFFFFF'}} fontSize="small" />
+          </IconButton>
           { nodeData.data.diagramId && <IconButton aria-label="go to diagram" size="small" onClick={() => onGoToDiagramClick(nodeData.data.diagramId)}>
             <AddCircleOutlineIcon sx={{color: nodeData.data.style?.color ?? '#FFFFFF'}} fontSize="small" />
           </IconButton> }
           { nodeData.data.url && <IconButton aria-label="go to url" size="small" onClick={() => openUrl(nodeData.data.url)}>
             <LinkIcon sx={{color: nodeData.data.style?.color ?? '#FFFFFF'}} fontSize="small" />
           </IconButton> }
-        </div> }
+        </div>
         {nodeData.data.style?.description && <div style={{ 
           fontSize: nodeData.data.style?.fontSize ?? 11, 
           color: nodeData.data.style?.color ?? '#FFFFFF', 
