@@ -555,7 +555,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                             elementId,
                             import.Id,
                             import.Key,
-                            import.SourceLink, 
+                            import.SourceLink,
+                            newElement.Name,
                             existingElement.GetDataChanges(newElement)));
                         result.ElementsToChange.Add(mapper.Map<Element>(newElement));
                     }
