@@ -33,6 +33,8 @@ namespace DocuEye.WorkspaceImporter.Application.Events
         /// Details about element changes
         /// </summary>
         public IDictionary<string, Tuple<string, string>> Changes { get; set; } = new Dictionary<string, Tuple<string, string>>();
+        
+        public string ElementName { get; set; }
         /// <summary>
         /// Creates instance
         /// </summary>
@@ -41,13 +43,14 @@ namespace DocuEye.WorkspaceImporter.Application.Events
         /// <param name="importId">Import Id</param>
         /// <param name="importKey">Import Key</param>
         /// <param name="importLink">Import Link</param>
-        public ElementChangedEvent(string workspaceId, string elementId, string importId, string importKey, string? importLink)
+        public ElementChangedEvent(string workspaceId, string elementId, string importId, string importKey, string? importLink, string elementName)
         {
             WorkspaceId = workspaceId;
             ElementId = elementId;
             ImportId = importId;
             ImportKey = importKey;
             ImportLink = importLink;
+            ElementName = elementName;  
         }
         /// <summary>
         /// Creates instance
@@ -58,7 +61,7 @@ namespace DocuEye.WorkspaceImporter.Application.Events
         /// <param name="importKey">Import Key</param>
         /// <param name="importLink">Import Link</param>
         /// <param name="changes">Details about element changes</param>
-        public ElementChangedEvent(string workspaceId, string elementId, string importId, string importKey, string? importLink, IDictionary<string, Tuple<string, string>> changes)
+        public ElementChangedEvent(string workspaceId, string elementId, string importId, string importKey, string? importLink, string elementName, IDictionary<string, Tuple<string, string>> changes)
         {
             WorkspaceId = workspaceId;
             ElementId = elementId;
@@ -66,6 +69,7 @@ namespace DocuEye.WorkspaceImporter.Application.Events
             ImportKey = importKey;
             ImportLink = importLink;
             Changes = changes;
+            ElementName = elementName;
         }
     }
 }

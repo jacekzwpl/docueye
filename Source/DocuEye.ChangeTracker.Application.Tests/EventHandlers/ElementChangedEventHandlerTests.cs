@@ -14,7 +14,8 @@ namespace DocuEye.ChangeTracker.Application.Tests.EventHandlers
                 Guid.NewGuid().ToString(),
                 Guid.NewGuid().ToString(),
                 Guid.NewGuid().ToString(),
-                null
+                null,
+                "TestName"
                 );
 
             // Act
@@ -35,7 +36,8 @@ namespace DocuEye.ChangeTracker.Application.Tests.EventHandlers
                 "elementtest1",
                 "importtest1",
                 "importkey",
-                null
+                null,
+                "TestName"
                 );
 
             // Act

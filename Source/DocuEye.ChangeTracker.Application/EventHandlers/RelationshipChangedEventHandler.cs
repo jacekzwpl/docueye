@@ -51,6 +51,14 @@ namespace DocuEye.ChangeTracker.Application.EventHandlers
                             values.Item1, values.Item2));
                 }
 
+                var description = descriptionBuilder.ToString();
+                if (string.IsNullOrWhiteSpace(description))
+                {
+                    description = string.Format(
+                        "Relationship between {0} and {1} has been updated.",
+                        notification.SourceElementName,
+                        notification.DestinationElementName);
+                }
 
                 await this.dbContext.ModelChanges.InsertOneAsync(new ModelChange()
                 {
@@ -61,7 +69,7 @@ namespace DocuEye.ChangeTracker.Application.EventHandlers
                     ImportId = notification.ImportId,
                     ImportKey = notification.ImportKey,
                     ImportLink = notification.ImportLink,
-                    Description = descriptionBuilder.ToString(),
+                    Description = description,
                     Type = ModelChangeType.RelationshipUpdated
                 });
             }
