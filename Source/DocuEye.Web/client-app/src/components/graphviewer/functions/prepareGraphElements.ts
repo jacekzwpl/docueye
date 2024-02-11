@@ -1,4 +1,5 @@
 import { ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
+import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
 import { getElementStyle } from "../../viewdiagram/functions/getElementStyle";
 import { getRelationshipStyle } from "../../viewdiagram/functions/getRelationshipStyle";
@@ -21,5 +22,8 @@ export const prepareGraphElements = (elementViews: ElementView[], relationshipVi
             style: getRelationshipStyle(relationship, viewConfiguration)
         })
     })
+    if(elements.length === 0) {
+        snackbarUtils.info("This graph is empty.");
+    }
     return {elements, links}
 }
