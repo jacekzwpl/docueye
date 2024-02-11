@@ -35,7 +35,8 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
         public async Task<IEnumerable<ElementDependence>> Handle(GetElementDependencesQuery request, CancellationToken cancellationToken)
         {
             var relationships = await this.dbContext.Relationships
-                .Find(o => o.SourceId == request.Id && o.WorkspaceId == request.WorkspaceId);
+                .Find(o => o.SourceId == request.Id && o.WorkspaceId == request.WorkspaceId 
+                    && o.LinkedRelationshipId == null);
             var relationshipsId = relationships.Select(o => o.DestinationId).ToArray();
 
             var elements = await this.dbContext.Elements
