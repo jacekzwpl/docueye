@@ -1,5 +1,6 @@
 import { MarkerType } from "reactflow";
 import { Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
+import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
 import { drawDeploymentNode } from "./drawDeploymentNode";
 import { getElementStyle } from "./getElementStyle";
@@ -98,7 +99,10 @@ export const prepareDeploymentDiagramElements = (elements: ElementView[], relati
         });
 
     });
-
+    if(newNodes.length === 0) {
+        snackbarUtils.info("This diagram is empty.");
+        return { layoutedNodes: [], layoutedEdges: [] }
+    }
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
         orderedNodes,
         newEdges.filter((obj) => { return obj.isLayoutedEdge === true })
