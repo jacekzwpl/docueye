@@ -1,5 +1,6 @@
 # DocuEye
-DocuEye is a tool that lets You visualize views and documentation created using [Structurizr DSL](https://structurizr.com/). 
+DocuEye is a tool that lets You visualize views and documentation created using [Structurizr DSL](https://structurizr.com/).  
+Currently there is no demo but you can see [DocuEye product page](https://docueye.com) to see some screenshots and features description. 
 
 ## Features
 - Import workspace via REST API
