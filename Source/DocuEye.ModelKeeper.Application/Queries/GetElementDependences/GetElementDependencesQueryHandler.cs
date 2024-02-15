@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Persistence;
 using MediatR;
 using System;
@@ -34,9 +35,18 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
         /// <returns>List of element dependences</returns>
         public async Task<IEnumerable<ElementDependence>> Handle(GetElementDependencesQuery request, CancellationToken cancellationToken)
         {
-            var relationships = await this.dbContext.Relationships
-                .Find(o => o.SourceId == request.Id && o.WorkspaceId == request.WorkspaceId 
+            IEnumerable<Relationship> relationships = Enumerable.Empty<Relationship>();
+            if(!request.GetLinked)
+            {
+                relationships = await this.dbContext.Relationships
+                .Find(o => o.SourceId == request.Id && o.WorkspaceId == request.WorkspaceId
                     && o.LinkedRelationshipId == null);
+            }else
+            {
+                relationships = await this.dbContext.Relationships
+                .Find(o => o.SourceId == request.Id && o.WorkspaceId == request.WorkspaceId);
+            }
+
             var relationshipsId = relationships.Select(o => o.DestinationId).ToArray();
 
             var elements = await this.dbContext.Elements

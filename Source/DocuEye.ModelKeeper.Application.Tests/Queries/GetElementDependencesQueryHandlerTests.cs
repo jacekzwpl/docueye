@@ -6,7 +6,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
     public class GetElementDependencesQueryHandlerTests : BaseModelKeeperTests
     {
         [Test]
-        public async Task WhenHanldeGetElementDependencesQueryThenAllDependencesAreReturned()
+        public async Task WhenGetElementDependencesThenAllDependencesWithOutLinkedAreReturned()
         {
             // Arrange
             var query = new GetElementDependencesQuery("ContainerId2", "workspacetest1");
@@ -16,7 +16,21 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var items = await handler.Handle(query, default);
 
             // Assert
-            Assert.That(items.Count, Is.EqualTo(1), "Hanlder should return 1 item.");
+            Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
+        }
+
+        [Test]
+        public async Task WhenGetElementDependencesWithLinkedThenAllDependencesAreReturned()
+        {
+            // Arrange
+            var query = new GetElementDependencesQuery("ContainerId2", "workspacetest1", true);
+
+            // Act
+            var handler = new GetElementDependencesQueryHandler(this.dbContext, this.mapper);
+            var items = await handler.Handle(query, default);
+
+            // Assert
+            Assert.That(items.Count, Is.EqualTo(3), "Hanlder should return 3 items.");
         }
 
         [Test]
