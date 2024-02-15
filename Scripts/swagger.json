@@ -691,10 +691,11 @@
             }
           },
           {
-            "name": "type",
+            "name": "getLinked",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "default": false
             }
           }
         ],
