@@ -10,7 +10,7 @@ Param(
     [Parameter(Mandatory,
     HelpMessage="DocuEye address ex. http://localhost:8080")]
     [string]$docueyeAddress,
-    [Parameter(Mandatory,
+    [Parameter(
     HelpMessage="Indicates that script will use dotnet tool insead of docueeye-cli docker image")]
     [switch]$useDotNetTool
 )

@@ -1,6 +1,9 @@
 import dagre from '@dagrejs/dagre';
+import { getRankDirection } from './getRankDirection';
 
-export const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB') => {
+export const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TopBottom') => {
+
+    direction = getRankDirection(direction);
 
     const dagreGraph = new dagre.graphlib.Graph({
         compound: true,
