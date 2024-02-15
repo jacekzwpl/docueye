@@ -237,7 +237,7 @@
         }
       }
     },
-    "/api/workspaces/{workspaceId}/docfile/openapi/{elementId}": {
+    "/api/workspaces/{workspaceId}/docfile/openapi": {
       "put": {
         "tags": [
           "DocumentationFilesImport"
@@ -245,14 +245,6 @@
         "parameters": [
           {
             "name": "workspaceId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "elementId",
             "in": "path",
             "required": true,
             "schema": {
@@ -635,10 +627,11 @@
             }
           },
           {
-            "name": "type",
+            "name": "getLinked",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "default": false
             }
           }
         ],
@@ -2252,6 +2245,14 @@
             "nullable": true
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "elementDslId": {
+            "type": "string",
+            "nullable": true
+          },
+          "elementId": {
             "type": "string",
             "nullable": true
           }

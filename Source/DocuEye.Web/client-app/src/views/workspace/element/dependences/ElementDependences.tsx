@@ -38,13 +38,13 @@ export const ElementDependences = (props: IElementDependencesProps) => {
         }
         setIsLoading(true);
         DocuEyeApi.ElementsApi
-            .apiWorkspacesWorkspaceIdElementsIdDependencesGet(props.element.workspaceId, props.element.id)
+            .apiWorkspacesWorkspaceIdElementsIdDependencesGet(props.element.workspaceId, props.element.id, showImplied)
             .then((response: AxiosResponse<ElementDependence[]>) => {
                 setDependences(response.data);
             }).finally(() => {
                 setIsLoading(false);
             })
-    }, [props, setIsLoading, setDependences])
+    }, [props, setIsLoading, setDependences, showImplied])
 
     return (<Card variant="outlined">
         <CardContent>
@@ -56,8 +56,8 @@ export const ElementDependences = (props: IElementDependencesProps) => {
             {!isLoading && dependences.length > 0 &&
                 <>
                     <Toolbar>
-                        <FormControlLabel control={<Switch checked={showImplied} onChange={handleShowImpliedChange} />} label="Show implied relationships" />
-                        <Tooltip title="Implied relationships are relationships that result from other explicitly defined relationships.">
+                        <FormControlLabel control={<Switch checked={showImplied} onChange={handleShowImpliedChange} />} label="Show implied dependencies" />
+                        <Tooltip title="Implied dependencies are dependencies that result from other explicitly defined dependencies.">
                             <InfoIcon />
                         </Tooltip>
                     </Toolbar>

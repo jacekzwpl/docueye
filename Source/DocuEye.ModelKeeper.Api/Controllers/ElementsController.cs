@@ -84,13 +84,13 @@ namespace DocuEye.ModelKeeper.Api.Controllers
         /// </summary>
         /// <param name="workspaceId">Workspace Id</param>
         /// <param name="id">Element Id</param>
-        /// <param name="type">Type of dependences</param>
+        /// <param name="getLinked">Indicates if linked relationships should be included in dependeces result</param>
         /// <returns></returns>
         [Route("{id}/dependences")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ElementDependence>>> GetElementDependences([FromRoute] string workspaceId, [FromRoute] string id, [FromQuery] string? type = null)
+        public async Task<ActionResult<IEnumerable<ElementDependence>>> GetElementDependences([FromRoute] string workspaceId, [FromRoute] string id, [FromQuery] bool getLinked = false)
         {
-            var query = new GetElementDependencesQuery(id, workspaceId);
+            var query = new GetElementDependencesQuery(id, workspaceId, getLinked);
             var result = await this.mediator.Send<IEnumerable<ElementDependence>>(query);
             return this.Ok(result);
         }

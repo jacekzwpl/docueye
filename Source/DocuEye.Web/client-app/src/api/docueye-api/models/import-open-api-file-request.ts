@@ -32,5 +32,17 @@ export interface ImportOpenApiFileRequest {
      * @memberof ImportOpenApiFileRequest
      */
     'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImportOpenApiFileRequest
+     */
+    'elementDslId'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImportOpenApiFileRequest
+     */
+    'elementId'?: string | null;
 }
 

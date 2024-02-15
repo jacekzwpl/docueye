@@ -79,7 +79,7 @@ export const ElementView = () => {
                 aria-label="full width tabs example"
             >
                 <Tab label="Overview" value="0" />
-                <Tab label="Dependences" value="1" />
+                <Tab label="Dependencies" value="1" />
                 <Tab label="Consumers" value="2" />
                 <Tab label="Documentation" value="3" />
                 <Tab label="Decisions" value="4" />
