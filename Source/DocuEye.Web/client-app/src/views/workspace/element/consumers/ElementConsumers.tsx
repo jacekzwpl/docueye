@@ -1,4 +1,4 @@
-import { Card, CardContent, Link, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Card, CardContent, FormControlLabel, Link, Switch, Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import Loader from "../../../../components/loader";
 import { IViewConfigurationState } from "../../../../store/slices/viewConfiguration/IViewConfigurationState";
 import { getTerminologyTerm } from "../../../../terminology/getTerminologyTerm";
 import { IElementConsumers } from "./IElementConsumers";
+import InfoIcon from '@mui/icons-material/Info';
 
 export const ElementConsumers = (props: IElementConsumers) => {
     const navigate = useNavigate();
@@ -17,6 +18,12 @@ export const ElementConsumers = (props: IElementConsumers) => {
 
     const [consumers, setConsumers] = useState<ElementConsumer[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const [showImplied, setShowImplied] = useState<boolean>(false);
+    const handleShowImpliedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setShowImplied(event.target.checked);
+    };
+
     const goToElement = (id: string | null | undefined) => {
         if (!id) {
             return;
@@ -30,19 +37,26 @@ export const ElementConsumers = (props: IElementConsumers) => {
         }
         setIsLoading(true);
         DocuEyeApi.ElementsApi
-            .apiWorkspacesWorkspaceIdElementsIdConsumersGet(props.element.workspaceId, props.element.id)
+            .apiWorkspacesWorkspaceIdElementsIdConsumersGet(props.element.workspaceId, props.element.id, showImplied)
             .then((response: AxiosResponse<ElementConsumer[]>) => {
                 setConsumers(response.data);
             }).finally(() => {
                 setIsLoading(false);
             })
-    }, [props, setConsumers, setIsLoading])
+    }, [props, setConsumers, setIsLoading, showImplied])
 
     return (<Card variant="outlined">
         <CardContent>
+            <Toolbar>
+                <FormControlLabel control={<Switch checked={showImplied} onChange={handleShowImpliedChange} />} label="Show implied consumers" />
+                <Tooltip title="Implied consumers are consumers that are not explicitly defined but result from other explicitly defined relationships.">
+                    <InfoIcon />
+                </Tooltip>
+            </Toolbar>
             {!isLoading && consumers.length === 0 &&
                 <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
-                    Element has no children
+                    {showImplied && "Element has no consumers"}
+                    {!showImplied && "Element has no explicitly defined consumers"}
                 </Typography>
             }
             {!isLoading && consumers.length > 0 &&
@@ -62,7 +76,7 @@ export const ElementConsumers = (props: IElementConsumers) => {
                                 <TableCell align="right">
                                     <Link align="right" component="button"
                                         variant="body2" onClick={() => goToElement(consumer.id)}>
-                                            {consumer.name}
+                                        {consumer.name}
                                     </Link>
                                 </TableCell>
                                 <TableCell align="right">{getTerminologyTerm(consumer.type, viewConfiguration.value?.terminology)}</TableCell>
