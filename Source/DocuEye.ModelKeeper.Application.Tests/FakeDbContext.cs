@@ -154,6 +154,14 @@ namespace DocuEye.ViewsKeeper.Application.Tests
                     SourceId = "ContainerId2",
                     DestinationId = "SoftwareSystemId2",
                     LinkedRelationshipId = "RelationshipId3"
+                },
+                new Relationship()
+                {
+                    Id = "RelationshipId5",
+                    WorkspaceId = "workspacetest1",
+                    SourceId = "SoftwareSystemId2",
+                    DestinationId = "ContainerId1",
+                    LinkedRelationshipId = "RelationshipId1"
                 }
             };
         }

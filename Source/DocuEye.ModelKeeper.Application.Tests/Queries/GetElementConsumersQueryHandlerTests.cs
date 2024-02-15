@@ -6,7 +6,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
     public class GetElementConsumersQueryHandlerTests : BaseModelKeeperTests
     {
         [Test]
-        public async Task WhenHanldeGetElementConsumersQueryThenAllConsumersAreReturned()
+        public async Task WhenGetElementConsumersThenAllConsumersWithOutLinkedAreReturned()
         {
             // Arrange
             var query = new GetElementConsumersQuery("ContainerId1", "workspacetest1");
@@ -17,6 +17,20 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
+        }
+
+        [Test]
+        public async Task WhenGetElementConsumersWithLinkedThenAllConsumersAreReturned()
+        {
+            // Arrange
+            var query = new GetElementConsumersQuery("ContainerId1", "workspacetest1", true);
+
+            // Act
+            var handler = new GetElementConsumersQueryHandler(this.dbContext, this.mapper);
+            var items = await handler.Handle(query, default);
+
+            // Assert
+            Assert.That(items.Count, Is.EqualTo(3), "Hanlder should return 3 items.");
         }
 
         [Test]

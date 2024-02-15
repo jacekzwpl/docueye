@@ -17,7 +17,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
         /// </summary>
         public string WorkspaceId { get; set; }
         /// <summary>
-        /// Indicates if linked dependence's should be returned
+        /// Indicates if linked dependencies should be returned
         /// </summary>
         public bool GetLinked { get; set; }
         /// <summary>

@@ -16,7 +16,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var items = await handler.Handle(query, default);
 
             // Assert
-            Assert.That(items.Count, Is.EqualTo(4), "Hanlder should return 4 items.");
+            Assert.That(items.Count, Is.EqualTo(5), "Hanlder should return 5 items.");
         }
     }
 }
