@@ -136,11 +136,11 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
          * 
          * @param {string} workspaceId 
          * @param {string} id 
-         * @param {string} [type] 
+         * @param {boolean} [getLinked] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdConsumersGet: async (workspaceId: string, id: string, type?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiWorkspacesWorkspaceIdElementsIdConsumersGet: async (workspaceId: string, id: string, getLinked?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('apiWorkspacesWorkspaceIdElementsIdConsumersGet', 'workspaceId', workspaceId)
             // verify required parameter 'id' is not null or undefined
@@ -159,8 +159,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (type !== undefined) {
-                localVarQueryParameter['type'] = type;
+            if (getLinked !== undefined) {
+                localVarQueryParameter['getLinked'] = getLinked;
             }
 
 
@@ -178,11 +178,11 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
          * 
          * @param {string} workspaceId 
          * @param {string} id 
-         * @param {string} [type] 
+         * @param {boolean} [getLinked] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdDependencesGet: async (workspaceId: string, id: string, type?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiWorkspacesWorkspaceIdElementsIdDependencesGet: async (workspaceId: string, id: string, getLinked?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('apiWorkspacesWorkspaceIdElementsIdDependencesGet', 'workspaceId', workspaceId)
             // verify required parameter 'id' is not null or undefined
@@ -201,8 +201,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (type !== undefined) {
-                localVarQueryParameter['type'] = type;
+            if (getLinked !== undefined) {
+                localVarQueryParameter['getLinked'] = getLinked;
             }
 
 
@@ -297,12 +297,12 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} workspaceId 
          * @param {string} id 
-         * @param {string} [type] 
+         * @param {boolean} [getLinked] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, type?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ElementConsumer>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, type, options);
+        async apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ElementConsumer>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, getLinked, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdConsumersGet']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
@@ -311,12 +311,12 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} workspaceId 
          * @param {string} id 
-         * @param {string} [type] 
+         * @param {boolean} [getLinked] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, type?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ElementDependence>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, type, options);
+        async apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ElementDependence>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, getLinked, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdDependencesGet']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
@@ -372,23 +372,23 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
          * 
          * @param {string} workspaceId 
          * @param {string} id 
-         * @param {string} [type] 
+         * @param {boolean} [getLinked] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, type?: string, options?: any): AxiosPromise<Array<ElementConsumer>> {
-            return localVarFp.apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, type, options).then((request) => request(axios, basePath));
+        apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, getLinked?: boolean, options?: any): AxiosPromise<Array<ElementConsumer>> {
+            return localVarFp.apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, getLinked, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} workspaceId 
          * @param {string} id 
-         * @param {string} [type] 
+         * @param {boolean} [getLinked] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, type?: string, options?: any): AxiosPromise<Array<ElementDependence>> {
-            return localVarFp.apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, type, options).then((request) => request(axios, basePath));
+        apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, getLinked?: boolean, options?: any): AxiosPromise<Array<ElementDependence>> {
+            return localVarFp.apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, getLinked, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -442,26 +442,26 @@ export class ElementsApi extends BaseAPI {
      * 
      * @param {string} workspaceId 
      * @param {string} id 
-     * @param {string} [type] 
+     * @param {boolean} [getLinked] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElementsApi
      */
-    public apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, type?: string, options?: RawAxiosRequestConfig) {
-        return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, type, options).then((request) => request(this.axios, this.basePath));
+    public apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig) {
+        return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, getLinked, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} workspaceId 
      * @param {string} id 
-     * @param {string} [type] 
+     * @param {boolean} [getLinked] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElementsApi
      */
-    public apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, type?: string, options?: RawAxiosRequestConfig) {
-        return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, type, options).then((request) => request(this.axios, this.basePath));
+    public apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig) {
+        return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, getLinked, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

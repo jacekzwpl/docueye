@@ -17,14 +17,20 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementConsumers
         /// </summary>
         public string WorkspaceId { get; set; }
         /// <summary>
+        /// Indicates if linked dependencies should be returned
+        /// </summary>
+        public bool GetLinked { get; set; }
+        /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="id">The ID of the element</param>
         /// <param name="workspaceId">The ID of workspace</param>
-        public GetElementConsumersQuery(string id, string workspaceId)
+        /// <param name="getLinked">Indicates if linked dependencies should be returned</param>
+        public GetElementConsumersQuery(string id, string workspaceId, bool getLinked = false)
         {
             this.Id = id;
             this.WorkspaceId = workspaceId;
+            this.GetLinked = getLinked;
         }
     }
 }

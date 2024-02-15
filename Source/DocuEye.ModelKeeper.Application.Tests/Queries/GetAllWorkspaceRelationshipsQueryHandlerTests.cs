@@ -1,10 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ViewsKeeper.Application.Tests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocuEye.ModelKeeper.Application.Tests.Queries
 {
@@ -21,7 +16,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var items = await handler.Handle(query, default);
 
             // Assert
-            Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
+            Assert.That(items.Count, Is.EqualTo(5), "Hanlder should return 5 items.");
         }
     }
 }

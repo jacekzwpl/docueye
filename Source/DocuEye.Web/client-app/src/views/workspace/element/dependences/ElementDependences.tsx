@@ -1,4 +1,4 @@
-import { Link, Card, CardContent, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material"
+import { Link, Card, CardContent, Table, TableBody, TableCell, TableHead, TableRow, Typography, Toolbar, FormControlLabel, Switch, Tooltip } from "@mui/material"
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import Loader from "../../../../components/loader";
 import { IViewConfigurationState } from "../../../../store/slices/viewConfiguration/IViewConfigurationState";
 import { getTerminologyTerm } from "../../../../terminology/getTerminologyTerm";
 import { IElementDependencesProps } from "./IElementDependencesProps";
+import InfoIcon from '@mui/icons-material/Info';
 
 export const ElementDependences = (props: IElementDependencesProps) => {
 
@@ -17,6 +18,13 @@ export const ElementDependences = (props: IElementDependencesProps) => {
         useSelector((state: any) => state.viewConfiguration);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [dependences, setDependences] = useState<ElementDependence[]>([]);
+
+    const [showImplied, setShowImplied] = useState<boolean>(false);
+    const handleShowImpliedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setShowImplied(event.target.checked);
+    };
+
+
     const goToElement = (id: string | null | undefined) => {
         if (!id) {
             return;
@@ -30,19 +38,26 @@ export const ElementDependences = (props: IElementDependencesProps) => {
         }
         setIsLoading(true);
         DocuEyeApi.ElementsApi
-            .apiWorkspacesWorkspaceIdElementsIdDependencesGet(props.element.workspaceId, props.element.id)
+            .apiWorkspacesWorkspaceIdElementsIdDependencesGet(props.element.workspaceId, props.element.id, showImplied)
             .then((response: AxiosResponse<ElementDependence[]>) => {
                 setDependences(response.data);
             }).finally(() => {
                 setIsLoading(false);
             })
-    }, [props, setIsLoading, setDependences])
+    }, [props, setIsLoading, setDependences, showImplied])
 
     return (<Card variant="outlined">
         <CardContent>
+            <Toolbar>
+                <FormControlLabel control={<Switch checked={showImplied} onChange={handleShowImpliedChange} />} label="Show implied dependencies" />
+                <Tooltip title="Implied dependencies are dependencies that are not explicitly defined but result from other explicitly defined relationships.">
+                    <InfoIcon />
+                </Tooltip>
+            </Toolbar>
             {!isLoading && dependences.length === 0 &&
                 <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
-                    Element has no dependences
+                    {showImplied && "Element has no dependencies"}
+                    {!showImplied && "Element has no explicitly defined dependencies"}
                 </Typography>
             }
             {!isLoading && dependences.length > 0 &&

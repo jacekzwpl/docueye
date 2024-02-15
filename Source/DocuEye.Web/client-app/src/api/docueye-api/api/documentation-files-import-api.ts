@@ -32,19 +32,15 @@ export const DocumentationFilesImportApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {string} workspaceId 
-         * @param {string} elementId 
          * @param {ImportOpenApiFileRequest} [importOpenApiFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut: async (workspaceId: string, elementId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiWorkspacesWorkspaceIdDocfileOpenapiPut: async (workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut', 'workspaceId', workspaceId)
-            // verify required parameter 'elementId' is not null or undefined
-            assertParamExists('apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut', 'elementId', elementId)
-            const localVarPath = `/api/workspaces/{workspaceId}/docfile/openapi/{elementId}`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"elementId"}}`, encodeURIComponent(String(elementId)));
+            assertParamExists('apiWorkspacesWorkspaceIdDocfileOpenapiPut', 'workspaceId', workspaceId)
+            const localVarPath = `/api/workspaces/{workspaceId}/docfile/openapi`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -83,15 +79,14 @@ export const DocumentationFilesImportApiFp = function(configuration?: Configurat
         /**
          * 
          * @param {string} workspaceId 
-         * @param {string} elementId 
          * @param {ImportOpenApiFileRequest} [importOpenApiFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut(workspaceId: string, elementId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut(workspaceId, elementId, importOpenApiFileRequest, options);
+        async apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId, importOpenApiFileRequest, options);
             const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DocumentationFilesImportApi.apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut']?.[index]?.url;
+            const operationBasePath = operationServerMap['DocumentationFilesImportApi.apiWorkspacesWorkspaceIdDocfileOpenapiPut']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
@@ -107,13 +102,12 @@ export const DocumentationFilesImportApiFactory = function (configuration?: Conf
         /**
          * 
          * @param {string} workspaceId 
-         * @param {string} elementId 
          * @param {ImportOpenApiFileRequest} [importOpenApiFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut(workspaceId: string, elementId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut(workspaceId, elementId, importOpenApiFileRequest, options).then((request) => request(axios, basePath));
+        apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId, importOpenApiFileRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -128,14 +122,13 @@ export class DocumentationFilesImportApi extends BaseAPI {
     /**
      * 
      * @param {string} workspaceId 
-     * @param {string} elementId 
      * @param {ImportOpenApiFileRequest} [importOpenApiFileRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DocumentationFilesImportApi
      */
-    public apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut(workspaceId: string, elementId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: RawAxiosRequestConfig) {
-        return DocumentationFilesImportApiFp(this.configuration).apiWorkspacesWorkspaceIdDocfileOpenapiElementIdPut(workspaceId, elementId, importOpenApiFileRequest, options).then((request) => request(this.axios, this.basePath));
+    public apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: RawAxiosRequestConfig) {
+        return DocumentationFilesImportApiFp(this.configuration).apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId, importOpenApiFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
