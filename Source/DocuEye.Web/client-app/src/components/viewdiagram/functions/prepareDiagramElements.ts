@@ -1,5 +1,5 @@
 import { MarkerType } from "reactflow";
-import { Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
+import { AutomaticLayout, Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
 import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
 import { getElementStyle } from "./getElementStyle";
@@ -12,7 +12,8 @@ export const prepareDiagramElements = (
     relations: RelationshipView[],
     viewConfiguration: ViewConfiguration | null | undefined,
     viewType: string,
-    contextElement?: Element) => {
+    contextElement?: Element, 
+    autolayout?: AutomaticLayout) => {
     const newNodes: any[] = [];
     const newEdges: any[] = [];
     const groupNodes: any[] = [];
@@ -85,7 +86,8 @@ export const prepareDiagramElements = (
     }
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
         newNodes,
-        newEdges
+        newEdges,
+        autolayout?.rankDirection ?? "TopBottom"
     );
     return { layoutedNodes: layoutedNodes, layoutedEdges: layoutedEdges }
 }

@@ -1,5 +1,5 @@
 import { MarkerType } from "reactflow";
-import { Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
+import { AutomaticLayout, Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
 import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
 import { drawDeploymentNode } from "./drawDeploymentNode";
@@ -9,7 +9,7 @@ import { getParentGroup } from "./getParentGroup";
 import { getRelationshipStyle } from "./getRelationshipStyle";
 import { orderDeploymentDiagramNodes } from "./orderDeploymentDiagramNodes";
 
-export const prepareDeploymentDiagramElements = (elements: ElementView[], relations: RelationshipView[], viewConfiguration?: ViewConfiguration | null, contextElement?: Element) => {
+export const prepareDeploymentDiagramElements = (elements: ElementView[], relations: RelationshipView[], viewConfiguration?: ViewConfiguration | null, contextElement?: Element, autolayout?: AutomaticLayout) => {
     let newNodes: any[] = [];
     let newGroups: any[] = [];
     let instancesGroups: any[] = [];
@@ -105,7 +105,8 @@ export const prepareDeploymentDiagramElements = (elements: ElementView[], relati
     }
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
         orderedNodes,
-        newEdges.filter((obj) => { return obj.isLayoutedEdge === true })
+        newEdges.filter((obj) => { return obj.isLayoutedEdge === true }),
+        autolayout?.rankDirection ?? "TopBottom"
     );
     return {
         layoutedNodes: layoutedNodes,
