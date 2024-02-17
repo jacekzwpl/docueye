@@ -91,13 +91,13 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
         systemContext onlineshop "onlineshopContext" {
             title "Online Shop"
             include * 
-            autoLayout
+            autoLayout tb
         }
 
         container onlineshop "onlineshopContainers" { 
             title "Online shop containers"
             include * 
-            autoLayout
+            autoLayout tb
         }
 
         theme default

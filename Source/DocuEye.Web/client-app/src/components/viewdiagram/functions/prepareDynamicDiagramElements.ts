@@ -1,5 +1,5 @@
 import { MarkerType } from "reactflow";
-import { DynamicRelationshipView, ElementView, Element, ViewConfiguration } from "../../../api/docueye-api";
+import { DynamicRelationshipView, ElementView, Element, ViewConfiguration, AutomaticLayout } from "../../../api/docueye-api";
 import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
 import { getElementStyle } from "./getElementStyle";
@@ -7,7 +7,7 @@ import { getLayoutedElements } from "./getLayoutedElements";
 import { getParentGroup } from "./getParentGroup";
 import { getRelationshipStyle } from "./getRelationshipStyle";
 
-export const prepareDynamicDiagramElements = (elements: ElementView[], relations: DynamicRelationshipView[], viewConfiguration?: ViewConfiguration | null, contextElement?: Element) => {
+export const prepareDynamicDiagramElements = (elements: ElementView[], relations: DynamicRelationshipView[], viewConfiguration?: ViewConfiguration | null, contextElement?: Element, autolayout?: AutomaticLayout) => {
     const newNodes: any[] = [];
     const newEdges: any[] = [];
     const groupNodes: any[] = [];
@@ -73,7 +73,8 @@ export const prepareDynamicDiagramElements = (elements: ElementView[], relations
     }
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
         newNodes,
-        newEdges
+        newEdges,
+        autolayout?.rankDirection ?? "TopBottom"
     );
     return { layoutedNodes: layoutedNodes, layoutedEdges: layoutedEdges }
 }
