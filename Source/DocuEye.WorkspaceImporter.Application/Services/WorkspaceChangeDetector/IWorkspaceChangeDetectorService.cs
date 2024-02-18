@@ -1,6 +1,7 @@
 ﻿using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.Structurizr.Model;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Application.Services.DecisionsExploder;
 using DocuEye.WorkspaceImporter.Application.Services.ModelExploder;
 using DocuEye.WorkspaceImporter.Application.Services.ViewsExploder;
@@ -42,7 +43,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
         /// <param name="newElements">Elements exploded form structurizr json</param>
         /// <param name="newRelationships">Relationshios exploded from structurizr json</param>
         /// <returns>Result of detecting changes in views</returns>
-        ViewsChangesResult DetectViewsChanges(string workspaceId, ViewsExplodeResult explodeViewsResult, IEnumerable<ExplodedElement> newElements, IEnumerable<ExplodedRelationship> newRelationships);
+        ViewsChangesResult DetectViewsChanges(string workspaceId, ViewsExplodeResult explodeViewsResult, IEnumerable<ExplodedElement> newElements, IEnumerable<ExplodedRelationship> newRelationships, IEnumerable<BaseView> existingViews);
         /// <summary>
         /// Detects decisions changes 
         /// </summary>

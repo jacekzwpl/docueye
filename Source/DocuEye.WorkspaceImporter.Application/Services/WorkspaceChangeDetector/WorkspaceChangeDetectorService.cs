@@ -132,7 +132,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
         /// <param name="newElements">Elements exploded form structurizr json</param>
         /// <param name="newRelationships">Relationships exploded from structurizr json</param>
         /// <returns>Result of detecting changes in views</returns>
-        public ViewsChangesResult DetectViewsChanges(string workspaceId, ViewsExplodeResult explodeViewsResult, IEnumerable<ExplodedElement> newElements, IEnumerable<ExplodedRelationship> newRelationships)
+        public ViewsChangesResult DetectViewsChanges(string workspaceId, ViewsExplodeResult explodeViewsResult, IEnumerable<ExplodedElement> newElements, IEnumerable<ExplodedRelationship> newRelationships, IEnumerable<BaseView> existingViews)
         {
             var result = new ViewsChangesResult(this.mapper);
 
@@ -142,7 +142,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
 
             foreach (var explodedView in explodeViewsResult.ComponentViews)
             {
-                explodedView.View.Id = Guid.NewGuid().ToString();
+                var existingView = existingViews.SingleOrDefault(o=> o.Key == explodedView.View.Key);
+                explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 var contextElement = newElements
                     .FirstOrDefault(o => o.StructurizrId == explodedView.StructurizrContainerId);
@@ -162,7 +163,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
 
             foreach (var explodedView in explodeViewsResult.ContainerViews)
             {
-                explodedView.View.Id = Guid.NewGuid().ToString();
+                var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
+                explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 var contextElement = newElements
                     .FirstOrDefault(o => o.StructurizrId == explodedView.StructurizrSoftwareSystemId);
@@ -182,7 +184,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
 
             foreach (var explodedView in explodeViewsResult.SystemContextViews)
             {
-                explodedView.View.Id = Guid.NewGuid().ToString();
+                var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
+                explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 var contextElement = newElements
                     .FirstOrDefault(o => o.StructurizrId == explodedView.StructurizrSoftwareSystemId);
@@ -204,7 +207,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
             {
                 var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, systemContextElementDiagrams);
                 var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
-                explodedView.View.Id = Guid.NewGuid().ToString();
+                var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
+                explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 explodedView.View.Elements = viewElements;
                 explodedView.View.Relationships = viewRelationships;
@@ -215,7 +219,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
             {
                 var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, new Dictionary<string, string>());
                 var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
-                explodedView.View.Id = Guid.NewGuid().ToString();
+                var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
+                explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 explodedView.View.Elements = viewElements;
                 explodedView.View.Relationships = viewRelationships;
@@ -232,7 +237,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
             {
                 var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, new Dictionary<string, string>());
                 var viewRelationships = this.DetectDynamicRelationshipsView(explodedView.Relationships, newRelationships);
-                explodedView.View.Id = Guid.NewGuid().ToString();
+                var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
+                explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 explodedView.View.Elements = viewElements;
                 explodedView.View.Relationships = viewRelationships;
@@ -246,8 +252,9 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
             }
 
             foreach (var explodedView in explodeViewsResult.ImagesViews)
-            { 
-                explodedView.View.Id = Guid.NewGuid().ToString();
+            {
+                var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
+                explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 var contextElement = newElements
                     .FirstOrDefault(o => o.StructurizrId == explodedView.StructurizrElementId);
@@ -260,7 +267,8 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
 
             foreach(var filteredView in explodeViewsResult.FilteredViews)
             {
-                filteredView.Id = Guid.NewGuid().ToString();
+                var existingView = existingViews.SingleOrDefault(o => o.Key == filteredView.Key);
+                filteredView.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 filteredView.WorkspaceId = workspaceId;
                 if(filteredView.Mode?.ToLower() == "exclude")
                 {
