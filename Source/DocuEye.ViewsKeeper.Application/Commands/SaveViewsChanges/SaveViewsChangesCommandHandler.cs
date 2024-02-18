@@ -242,7 +242,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
 
         private async Task<IEnumerable<BaseView>> GetExisting(string workspaceId, string viewType)
         {
-            return await this.dbContext.SystemContextViews
+            return await this.dbContext.AllViews
                     .Find(o => o.WorkspaceId == workspaceId
                     && o.ViewType == viewType);
         }
