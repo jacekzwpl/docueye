@@ -232,7 +232,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
             }
         }
 
-        private async Task DeleteMissing(string workspaceId, string[] keys, string viewType)
+        private async Task DeleteMissing(string workspaceId, IEnumerable<string?> keys, string viewType)
         {
             await this.dbContext.AllViews.DeleteManyAsync(
                     o => o.WorkspaceId == workspaceId
