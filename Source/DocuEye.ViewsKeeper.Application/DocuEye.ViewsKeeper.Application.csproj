@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Application.Commands\DocuEye.ViewsKeeper.Application.Commands.csproj" />
+    <ProjectReference Include="..\DocuEye.ViewsKeeper.Application.Queries\DocuEye.ViewsKeeper.Application.Queries.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Model\DocuEye.ViewsKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Persistence\DocuEye.ViewsKeeper.Persistence.csproj" />
   </ItemGroup>

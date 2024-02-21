@@ -123,7 +123,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.CLI.ApiClient.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Infrastructure.Tests.Http", "Source\DocuEye.Infrastructure.Tests.Http\DocuEye.Infrastructure.Tests.Http.csproj", "{CE0C3442-E558-49FF-B597-B159CFD80F52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspaceImporter.Api.Model", "Source\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj", "{A31157DC-69B9-46E1-B196-19B531791420}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.WorkspaceImporter.Api.Model", "Source\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj", "{A31157DC-69B9-46E1-B196-19B531791420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.ViewsKeeper.Application.Queries", "Source\DocuEye.ViewsKeeper.Application.Queries\DocuEye.ViewsKeeper.Application.Queries.csproj", "{37A9F14F-D9DA-4594-9187-89C65360A34C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -339,6 +341,10 @@ Global
 		{A31157DC-69B9-46E1-B196-19B531791420}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A31157DC-69B9-46E1-B196-19B531791420}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A31157DC-69B9-46E1-B196-19B531791420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37A9F14F-D9DA-4594-9187-89C65360A34C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37A9F14F-D9DA-4594-9187-89C65360A34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37A9F14F-D9DA-4594-9187-89C65360A34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37A9F14F-D9DA-4594-9187-89C65360A34C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -394,6 +400,7 @@ Global
 		{11684A15-289A-415E-AC0E-9D4138693859} = {7E8C9BBB-68F4-4C90-A69A-06FE72392690}
 		{CE0C3442-E558-49FF-B597-B159CFD80F52} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
 		{A31157DC-69B9-46E1-B196-19B531791420} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
+		{37A9F14F-D9DA-4594-9187-89C65360A34C} = {8D1B1D91-B4DE-4DF9-A253-14777B4B4E40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
