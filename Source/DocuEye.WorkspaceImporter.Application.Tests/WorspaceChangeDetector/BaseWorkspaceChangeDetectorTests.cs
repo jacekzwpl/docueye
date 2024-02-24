@@ -20,6 +20,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
         protected List<ExplodedElement> explodedElements;
         protected List<Relationship> existingRelationships;
         protected List<ExplodedRelationship> explodedRelationships;
+        protected List<BaseView> existingViews;
 
         protected ViewsExplodeResult explodedViewsResult;
 
@@ -44,6 +45,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
             this.existingRelationships = this.CreateExistingRelationships();
             this.explodedRelationships = this.CreateExplodedRelationships();
             this.explodedViewsResult = this.CreateViewsExplodeResult();
+            this.existingViews = new List<BaseView>();
         }
 
         private List<Element> CreateExistingElements()
