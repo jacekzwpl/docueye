@@ -334,8 +334,12 @@ namespace DocuEye.Persistence
         {
             var collection = this.database.GetCollection<BaseView>(viewsCollectionName);
             var logBuilder = Builders<BaseView>.IndexKeys;
-            var indexModel = new CreateIndexModel<BaseView>(logBuilder.Ascending(x => x.WorkspaceId));
-            await collection.Indexes.CreateOneAsync(indexModel);
+            var workspaceIndexModel = new CreateIndexModel<BaseView>(logBuilder.Ascending(x => x.WorkspaceId));
+            await collection.Indexes.CreateOneAsync(workspaceIndexModel);
+            var keyIndexModel = new CreateIndexModel<BaseView>(logBuilder.Ascending(x => x.Key));
+            await collection.Indexes.CreateOneAsync(keyIndexModel);
+            var viewTypeIndexModel = new CreateIndexModel<BaseView>(logBuilder.Ascending(x => x.ViewType));
+            await collection.Indexes.CreateOneAsync(viewTypeIndexModel);
         }
         /// <summary>
         /// Creates indexes for Images collection
