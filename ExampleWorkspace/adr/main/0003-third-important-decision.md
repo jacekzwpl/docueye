@@ -1,4 +1,4 @@
-# 1. Third important decision
+# 3. Third important decision
 
 Date: 2027-01-27
 
