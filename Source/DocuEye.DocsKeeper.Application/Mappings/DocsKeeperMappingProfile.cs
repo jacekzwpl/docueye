@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.DocsKeeper.Application.Queries.FindDecisions;
+using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.DocsKeeper.Model;
 
 namespace DocuEye.DocsKeeper.Application.Mappings
@@ -14,6 +15,7 @@ namespace DocuEye.DocsKeeper.Application.Mappings
         /// </summary>
         public DocsKeeperMappingProfile() {
             CreateMap<Decision, FoundedDecision>();
+            CreateMap<Decision, DecisionsListItem>();
         }
     }
 }

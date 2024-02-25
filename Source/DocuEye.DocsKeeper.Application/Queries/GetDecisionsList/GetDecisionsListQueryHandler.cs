@@ -31,7 +31,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionsList
         {
             var decisions = await this.dbContext.Decisions
                 .Find(
-                    o => o.WorkspaceId == request.WorkspaceId && o.ElementId == request.ElementId);
+                    o => o.WorkspaceId == request.WorkspaceId);
             return this.mapper.Map<IEnumerable<DecisionsListItem>>(decisions);
         }
     }

@@ -9,15 +9,10 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionsList
         /// Workspace id
         /// </summary>
         public string WorkspaceId { get; set; }
-        /// <summary>
-        /// Element id
-        /// </summary>
-        public string? ElementId { get; set; }
 
-        public GetDecisionsListQuery(string worspaceId, string? elementId = null)
+        public GetDecisionsListQuery(string worspaceId)
         {
             this.WorkspaceId = worspaceId;
-            this.ElementId = elementId;
         }
     }
 }
