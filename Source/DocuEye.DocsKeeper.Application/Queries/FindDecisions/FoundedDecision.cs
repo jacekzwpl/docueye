@@ -26,6 +26,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.FindDecisions
         /// The title of the decision.
         /// </summary>
         public string Title { get; set; } = null!;
+       
         /// <summary>
         /// Decision links
         /// </summary>

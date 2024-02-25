@@ -2,6 +2,7 @@
 using DocuEye.DocsKeeper.Application.Commads.SaveDecisions;
 using DocuEye.DocsKeeper.Application.Commads.SaveDocumentationChanges;
 using DocuEye.DocsKeeper.Application.Commads.SaveImages;
+using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Application.Commands.SaveRelationships;
@@ -137,9 +138,12 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace
             //Get existing relationships for comparison
             var existingRelationships = await this.mediator
                 .Send<IEnumerable<Relationship>>(new GetAllWorkspaceRelationshipsQuery(workspace.Id));
-
+            // Get exiting views for comparision
             var existingViews = await this.mediator
                 .Send<IEnumerable<BaseView>>(new GetAllViewsQuery(workspace.Id));
+            // Get Existing decisions for comparision
+            var existingDecisions = await this.mediator
+                .Send<IEnumerable<DecisionsListItem>>(new GetDecisionsListQuery(workspace.Id));
 
             //Explode data in structurizr format
             var explodeModelResult = this.modelExploder.ExplodeModel(request.WorkspaceData.Model);
@@ -147,13 +151,13 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace
             var explodedDecisions = this.decisionsExloder.Explode(request.WorkspaceData.Documentation);
 
             // Detect changes in model data
-            var elementsChangesResult = await this.detector.DetectElementsChanges(workspace.Id, import, explodeModelResult.Elements, existingElements);
+            var elementsChangesResult = await this.detector.DetectElementsChanges(workspace.Id, import, explodeModelResult.Elements, existingElements, existingDecisions);
             var relationshipsChnagesResult = await this.detector.DetectRelaionshipsChanges(workspace.Id, import, explodeModelResult.Relationships, existingRelationships, explodeModelResult.Elements);
             //Detect changes in additional data
             var viewChnagesResult = this.detector.DetectViewsChanges(workspace.Id, explodeViewsResult, explodeModelResult.Elements, explodeModelResult.Relationships, existingViews);
 
             var workspaceDocumentation = this.detector.DetectDocumentationChanges(workspace.Id, request.WorkspaceData.Documentation);
-            var workspaceDecisions = this.detector.DetectDecisionChnages(workspace.Id, workspaceDocumentation.Id, null, explodedDecisions);
+            var workspaceDecisions = this.detector.DetectDecisionChnages(workspace.Id, workspaceDocumentation.Id, null, explodedDecisions, existingDecisions);
             var workspaceDocumentationImages = this.detector.DetectImagesChanges(workspace.Id, workspaceDocumentation.Id, request.WorkspaceData.Documentation?.Images);
             var viewConfiguration = this.viewConfigurationDetector.DetectViewConfigurationChanges(workspace.Id, request.WorkspaceData);
 

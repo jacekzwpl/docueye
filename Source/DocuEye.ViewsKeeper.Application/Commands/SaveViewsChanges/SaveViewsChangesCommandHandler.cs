@@ -31,18 +31,18 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
         public async Task Handle(SaveViewsChangesCommand request, CancellationToken cancellationToken)
         {
             //Delete missing 
-            List<string> missingIds = new List<string>();
-            missingIds.AddRange(request.SystemLandscapeViews.Select(o => o.Id).ToArray());
-            missingIds.AddRange(request.SystemContextViews.Select(o => o.Id).ToArray());
-            missingIds.AddRange(request.ContainerViews.Select(o => o.Id).ToArray());
-            missingIds.AddRange(request.ComponentViews.Select(o => o.Id).ToArray());
-            missingIds.AddRange(request.DeploymentViews.Select(o => o.Id).ToArray());
-            missingIds.AddRange(request.DynamicViews.Select(o => o.Id).ToArray());
-            missingIds.AddRange(request.FilteredViews.Select(o => o.Id).ToArray());
-            missingIds.AddRange(request.ImagesViews.Select(o => o.Id).ToArray());
+            List<string> existingIds = new List<string>();
+            existingIds.AddRange(request.SystemLandscapeViews.Select(o => o.Id).ToArray());
+            existingIds.AddRange(request.SystemContextViews.Select(o => o.Id).ToArray());
+            existingIds.AddRange(request.ContainerViews.Select(o => o.Id).ToArray());
+            existingIds.AddRange(request.ComponentViews.Select(o => o.Id).ToArray());
+            existingIds.AddRange(request.DeploymentViews.Select(o => o.Id).ToArray());
+            existingIds.AddRange(request.DynamicViews.Select(o => o.Id).ToArray());
+            existingIds.AddRange(request.FilteredViews.Select(o => o.Id).ToArray());
+            existingIds.AddRange(request.ImagesViews.Select(o => o.Id).ToArray());
             await this.dbContext.AllViews.DeleteManyAsync(
                     o => o.WorkspaceId == request.WorkspaceId
-                    && !missingIds.Contains(o.Id));
+                    && !existingIds.Contains(o.Id));
 
 
             // Create new views

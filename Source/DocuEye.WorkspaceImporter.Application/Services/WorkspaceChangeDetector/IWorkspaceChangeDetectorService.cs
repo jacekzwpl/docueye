@@ -1,4 +1,5 @@
-﻿using DocuEye.DocsKeeper.Model;
+﻿using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
+using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.Structurizr.Model;
 using DocuEye.ViewsKeeper.Model;
@@ -24,7 +25,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
         /// <param name="newElements">Elements exploded from structurizr json</param>
         /// <param name="existingElements">Elements that exists in workspace</param>
         /// <returns>Result of detecting elements changes </returns>
-        Task<ElementsChangesResult> DetectElementsChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements);
+        Task<ElementsChangesResult> DetectElementsChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions);
         /// <summary>
         /// Detects relationships changes
         /// </summary>
@@ -52,7 +53,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
         /// <param name="elementId">The ID of element that decisions belong to</param>
         /// <param name="newDecisions">Decisions exploded from structurizr json</param>
         /// <returns>List of decisions to save in the workspace</returns>
-        IEnumerable<Decision> DetectDecisionChnages(string worspaceId, string documentationId, string? elementId, IEnumerable<ExplodedDecision> newDecisions);
+        IEnumerable<Decision> DetectDecisionChnages(string worspaceId, string documentationId, string? elementId, IEnumerable<ExplodedDecision> newDecisions, IEnumerable<DecisionsListItem> existingDecisions);
         /// <summary>
         /// Detects changes in images
         /// </summary>

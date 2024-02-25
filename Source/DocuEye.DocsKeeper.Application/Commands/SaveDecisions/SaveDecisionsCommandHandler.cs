@@ -33,12 +33,15 @@ namespace DocuEye.DocsKeeper.Application.Commands.SaveDecisions
         /// <returns></returns>
         public async Task Handle(SaveDecisionsCommand request, CancellationToken cancellationToken)
         {
-            //Delete all decisions
-            await this.dbContext.Decisions.DeleteManyAsync(o => o.WorkspaceId == request.WorkspaceId);
-            // Create new decisions
-            if (request.DecisionsToAdd.Count() > 0)
+            //Delete decisions that are not exists any more
+            var ids = request.DecisionsToAdd.Select(x => x.Id).ToArray();
+            await this.dbContext.Decisions.DeleteManyAsync(
+                    o => o.WorkspaceId == request.WorkspaceId
+                    && !ids.Contains(o.Id));
+
+            foreach(var decision in  request.DecisionsToAdd)
             {
-                await this.dbContext.Decisions.InsertManyAsync(request.DecisionsToAdd);
+                await this.dbContext.Decisions.UpsertOneAsync(decision);
             }
 
         }

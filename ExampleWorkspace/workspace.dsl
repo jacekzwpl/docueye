@@ -11,7 +11,6 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
         emailsystem = softwareSystem "Email System"
 
         onlineshop = softwareSystem "Online Shop" "Online shop system" {
-            
             web = container "Web Application" {
                 !docs docs/onlineshop/web
                 !adrs adr/onlineshop/web

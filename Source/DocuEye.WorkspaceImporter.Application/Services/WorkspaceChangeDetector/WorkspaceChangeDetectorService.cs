@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.Structurizr.Model;
@@ -92,8 +93,18 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
         /// <param name="elementId">The ID of element that decisions belong to</param>
         /// <param name="newDecisions">Decisions exploded from structurizr json</param>
         /// <returns>List of decisions to save in the workspace</returns>
-        public IEnumerable<Decision> DetectDecisionChnages(string worspaceId, string documentationId, string? elementId, IEnumerable<ExplodedDecision> newDecisions)
+        public IEnumerable<Decision> DetectDecisionChnages(string worspaceId, string documentationId, string? elementId, IEnumerable<ExplodedDecision> newDecisions, IEnumerable<DecisionsListItem> existingDecisions)
         {
+            //Apply ID from existing decision
+            foreach(var newDecision in newDecisions)
+            {
+                var existing = existingDecisions.FirstOrDefault(o => o.DslId == newDecision.DslId && o.ElementId == elementId);
+                if(existing != null)
+                {
+                    newDecision.Id = existing.Id;
+                }
+            }
+
             List<Decision> decisions = new List<Decision>();
             foreach (var newDecision in newDecisions)
             {
@@ -495,17 +506,17 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
         /// <param name="newElements">Elements exploded from structurizr json</param>
         /// <param name="existingElements">Elements that exists in workspace</param>
         /// <returns>Result of detecting elements changes </returns>
-        public async Task<ElementsChangesResult> DetectElementsChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements) {
+        public async Task<ElementsChangesResult> DetectElementsChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions) {
             var changesResult = new ElementsChangesResult();
 
-            var systemsResult = await this.DetectSoftwareSystemChanges(workspaceId, import, newElements, existingElements);
-            var containersResult = await this.DetectContainersChanges(workspaceId, import, newElements, existingElements);
-            var componentsResult = await this.DetectComponentsChanges(workspaceId, import, newElements, existingElements);
-            var peopleResult = await this.DetectPeopleChanges(workspaceId, import, newElements, existingElements);
-            var deploymentNodesResult = await this.DetectDeploymentNodesChanges(workspaceId, import, newElements, existingElements);
-            var containerInstancesResult = await this.DetectContainerInstancesChanges(workspaceId, import, newElements, existingElements);
-            var systemInstancesResult = await this.DetectSoftwareSystemInstancesChanges(workspaceId, import, newElements, existingElements);
-            var infrastrucureNodesResult = await this.DetectInfrastructureNodesChanges(workspaceId, import, newElements, existingElements);
+            var systemsResult = await this.DetectSoftwareSystemChanges(workspaceId, import, newElements, existingElements, existingDecisions);
+            var containersResult = await this.DetectContainersChanges(workspaceId, import, newElements, existingElements, existingDecisions);
+            var componentsResult = await this.DetectComponentsChanges(workspaceId, import, newElements, existingElements, existingDecisions);
+            var peopleResult = await this.DetectPeopleChanges(workspaceId, import, newElements, existingElements, existingDecisions);
+            var deploymentNodesResult = await this.DetectDeploymentNodesChanges(workspaceId, import, newElements, existingElements, existingDecisions);
+            var containerInstancesResult = await this.DetectContainerInstancesChanges(workspaceId, import, newElements, existingElements, existingDecisions);
+            var systemInstancesResult = await this.DetectSoftwareSystemInstancesChanges(workspaceId, import, newElements, existingElements, existingDecisions);
+            var infrastrucureNodesResult = await this.DetectInfrastructureNodesChanges(workspaceId, import, newElements, existingElements, existingDecisions);
             changesResult.AddResult(systemsResult);
             changesResult.AddResult(containersResult);
             changesResult.AddResult(componentsResult);
@@ -518,7 +529,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
             return changesResult;
         }
 
-        private async Task<ElementsChangesResult> DetectChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, string elementType, string? parentElementType = null)
+        private async Task<ElementsChangesResult> DetectChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions, string elementType, string? parentElementType = null)
         {
             var result = new ElementsChangesResult();
             foreach (var newElement in newElements.Where(o => o.Type == elementType))
@@ -613,7 +624,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
 
                     if(newElement.DocumentationDecisions != null)
                     {
-                        var decisions = this.DetectDecisionChnages(workspaceId, elementDoc.Id, elementId, newElement.DocumentationDecisions);
+                        var decisions = this.DetectDecisionChnages(workspaceId, elementDoc.Id, elementId, newElement.DocumentationDecisions, existingDecisions);
                         foreach(var decision in decisions)
                         {
                             decision.DocumentationId = elementDoc.Id;
@@ -663,44 +674,44 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
             return null;
         }
 
-        private async Task<ElementsChangesResult> DetectSoftwareSystemChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectSoftwareSystemChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.SoftwareSystem);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.SoftwareSystem);
         }
 
-        private async Task<ElementsChangesResult> DetectContainersChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectContainersChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.Container, ElementType.SoftwareSystem);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.Container, ElementType.SoftwareSystem);
         }
 
-        private async Task<ElementsChangesResult> DetectComponentsChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectComponentsChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.Component, ElementType.Container);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.Component, ElementType.Container);
         }
 
-        private async Task<ElementsChangesResult> DetectPeopleChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectPeopleChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.Person);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.Person);
         }
 
-        private async Task<ElementsChangesResult> DetectDeploymentNodesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectDeploymentNodesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.DeploymentNode, ElementType.DeploymentNode);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.DeploymentNode, ElementType.DeploymentNode);
         }
 
-        private async Task<ElementsChangesResult> DetectContainerInstancesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectContainerInstancesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.ContainerInstance, ElementType.DeploymentNode);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.ContainerInstance, ElementType.DeploymentNode);
         }
 
-        private async Task<ElementsChangesResult> DetectSoftwareSystemInstancesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectSoftwareSystemInstancesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.SoftwareSystemInstance, ElementType.DeploymentNode);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.SoftwareSystemInstance, ElementType.DeploymentNode);
         }
 
-        private async Task<ElementsChangesResult> DetectInfrastructureNodesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements)
+        private async Task<ElementsChangesResult> DetectInfrastructureNodesChanges(string workspaceId, WorkspaceImport import, IEnumerable<ExplodedElement> newElements, IEnumerable<Element> existingElements, IEnumerable<DecisionsListItem> existingDecisions)
         {
-            return await this.DetectChanges(workspaceId, import, newElements, existingElements, ElementType.InfrastructureNode, ElementType.DeploymentNode);
+            return await this.DetectChanges(workspaceId, import, newElements, existingElements, existingDecisions, ElementType.InfrastructureNode, ElementType.DeploymentNode);
         }
 
     }

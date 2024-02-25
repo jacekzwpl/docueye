@@ -1,4 +1,4 @@
-# 1. Second important decision
+# 2. Second important decision
 
 Date: 2027-01-25
 

@@ -12,7 +12,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
             
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships);
+            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships, this.existingViews);
 
             // Assert
             Assert.That(result.SystemLandscapeViewsToAdd.Count, Is.EqualTo(1), "There should be 1 SystemLandscapeView to add.");
@@ -34,7 +34,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships);
+            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships, this.existingViews);
 
             // Assert
             Assert.That(result.FilteredViewsToAdd.Count, Is.EqualTo(1), "There should be 1 FilteredView to add.");
@@ -51,7 +51,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships);
+            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships, this.existingViews);
 
             // Assert
             Assert.That(result.FilteredViewsToAdd.Count, Is.EqualTo(1), "There should be 1 FilteredView to add.");
@@ -69,7 +69,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships);
+            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships, this.existingViews);
 
             // Assert
             Assert.That(result.FilteredViewsToAdd.Count, Is.EqualTo(1), "There should be 1 FilteredView to add.");
@@ -86,7 +86,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships);
+            var result = detector.DetectViewsChanges("wId", this.explodedViewsResult, this.explodedElements, this.explodedRelationships, this.existingViews);
 
             // Assert
             var sourceView = result.SystemContextViewsToAdd.First(o => o.Key == "SystemContext1");
