@@ -14,9 +14,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
-    # - name: Install dependencies
-    #   run: dotnet restore DocuEye.sln
-    # - name: Build .net
-    #   run: dotnet build DocuEye.sln --no-restore
     - name: Test
       run: dotnet test DocuEye.sln
+    - name: Build docueye
+      run: docker build -t jacekzwpl/docueye:test-build -f ./Source/DocuEye.Web/Dockerfile .
+    - name: Build docueye-cli
+      run: docker build -t jacekzwpl/docueye-cli:test-build -f ./Source/DocuEye.Cli/Dockerfile .
