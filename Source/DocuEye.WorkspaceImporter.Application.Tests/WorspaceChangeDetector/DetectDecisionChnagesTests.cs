@@ -24,7 +24,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = detector.DetectDecisionChnages("wId", "documentationId", null, explodedDecisions);
+            var result = detector.DetectDecisionChnages("wId", "documentationId", null, explodedDecisions, this.existingDecisions);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(2), "There should be 2 decisions returned.");

@@ -13,7 +13,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements);
+            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements, this.existingDecisions);
 
             // Assert
             Assert.That(result.ElementsToAdd?.Count, Is.EqualTo(0), "There should not be any elements to add in detector results.");
@@ -34,7 +34,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements);
+            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements, this.existingDecisions);
 
             // Assert
             Assert.That(result.ElementsToAdd?.Count, Is.EqualTo(1), "There should be 1 element to add in detector results.");
@@ -51,7 +51,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements);
+            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements, this.existingDecisions);
 
             // Assert
             Assert.That(result.ElementsToAdd?.Count, Is.EqualTo(0), "There should not be no elements to add in detector results.");
@@ -69,7 +69,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements);
+            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements, this.existingDecisions);
 
             // Assert
             Assert.That(result.ElementsToAdd?.Count, Is.EqualTo(1), "There should not be 1 element to add in detector results.");
@@ -88,7 +88,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
 
             // Act
             var detector = new WorkspaceChangeDetectorService(this.mapper, this.mediator);
-            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements);
+            var result = await detector.DetectElementsChanges("wId", this.import, this.explodedElements, this.existingElements, this.existingDecisions);
 
             // Assert
             Assert.That(result.ElementsToAdd?.Count, Is.EqualTo(0), "There should not be no elements to add in detector results.");

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Application.Mappings;
@@ -21,6 +22,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
         protected List<Relationship> existingRelationships;
         protected List<ExplodedRelationship> explodedRelationships;
         protected List<BaseView> existingViews;
+        protected List<DecisionsListItem> existingDecisions;
 
         protected ViewsExplodeResult explodedViewsResult;
 
@@ -46,6 +48,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.WorspaceChangeDetector
             this.explodedRelationships = this.CreateExplodedRelationships();
             this.explodedViewsResult = this.CreateViewsExplodeResult();
             this.existingViews = new List<BaseView>();
+            this.existingDecisions = new List<DecisionsListItem>();
         }
 
         private List<Element> CreateExistingElements()
