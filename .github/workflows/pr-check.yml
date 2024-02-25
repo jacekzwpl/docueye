@@ -19,4 +19,4 @@ jobs:
     - name: Build docueye
       run: docker build -t jacekzwpl/docueye:test-build -f ./Source/DocuEye.Web/Dockerfile .
     - name: Build docueye-cli
-      run: docker build -t jacekzwpl/docueye-cli:test-build -f ./Source/DocuEye.Cli/Dockerfile .
+      run: docker build -t jacekzwpl/docueye-cli:test-build -f ./Source/DocuEye.CLI/Dockerfile .
