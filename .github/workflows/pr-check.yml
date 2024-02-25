@@ -1,6 +1,7 @@
 name: PR Check
 run-name: PR Check
 on: 
+  push: 
   pull_request:
     branches:
       - main
@@ -16,4 +17,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore DocuEye.sln
     - name: Build .net
-      run: dotnet build DocuEye.sln
+      run: dotnet build DocuEye.sln --no-restore
+    - name: Test
+      run: dotnet test DocuEye.sln --no-restore
