@@ -1,0 +1,33 @@
+name: PR Check
+run-name: PR Check
+on: 
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+  actions: read
+  checks: write
+jobs:
+  test_and_build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+    - name: Test
+      run: dotnet test DocuEye.sln --logger "trx;LogFileName=test-results.trx"
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: DotNET Tests
+        path: "**/test-results.trx"                            
+        reporter: dotnet-trx
+        fail-on-error: true
+    - name: Build docueye
+      run: docker build -t jacekzwpl/docueye:test-build -f ./Source/DocuEye.Web/Dockerfile .
+    - name: Build docueye-cli
+      run: docker build -t jacekzwpl/docueye-cli:test-build -f ./Source/DocuEye.CLI/Dockerfile .
