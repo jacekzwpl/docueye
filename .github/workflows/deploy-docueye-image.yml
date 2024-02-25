@@ -1,0 +1,27 @@
+name: Deploy docueye image
+run-name: 'Deploy docueye image ${{ github.event.inputs.docueye_version }}' 
+on: 
+  workflow_dispatch:
+    inputs:
+      docueye_version:
+        description: 'DocuEye version'
+        required: true
+jobs:
+  deploy_image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build docueye image
+      run: docker build -t jacekzwpl/docueye:${{ github.event.inputs.docueye_version }} -f ./Source/DocuEye.Web/Dockerfile .
+    - name: Tag with latest
+      run: docker tag jacekzwpl/docueye:${{ github.event.inputs.docueye_version }} jacekzwpl/docueye:latest
+    - name: Push Docker image ${{ github.event.inputs.docueye_version }}
+      run: docker push jacekzwpl/docueye:${{ github.event.inputs.docueye_version }}
+    - name: Push Docker image latest
+      run: docker push jacekzwpl/docueye:latest
+    
