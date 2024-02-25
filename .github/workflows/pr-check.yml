@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  test_and_build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -15,7 +15,15 @@ jobs:
       with:
         dotnet-version: '8.0.x'
     - name: Test
-      run: dotnet test DocuEye.sln
+      run: dotnet test DocuEye.sln --logger "trx;LogFileName=test-results.trx"
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: DotNET Tests
+        path: "**/test-results.trx"                            
+        reporter: dotnet-trx
+        fail-on-error: true
     - name: Build docueye
       run: docker build -t jacekzwpl/docueye:test-build -f ./Source/DocuEye.Web/Dockerfile .
     - name: Build docueye-cli
