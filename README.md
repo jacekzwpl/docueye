@@ -14,7 +14,7 @@ Currently there is no demo but you can see [DocuEye product page](https://docuey
     - Focusing on selected node
 - Elements catalog - You can search, navigate through your model elements 
     - View element properties. [See extra DocueEye properties](Documentation/docs/0004-element-extra-properties.md)
-    - View element dependence's
+    - View element dependencies
     - View element consumers
     - View element children
     - View element documentation
