@@ -134,7 +134,7 @@ namespace DocuEye.Web
                     //options.ClaimActions.MapJsonKey("account_id", "account_id");
 
                     options.GetClaimsFromUserInfoEndpoint = true;
-                    options.RequireHttpsMetadata = false;
+                    options.RequireHttpsMetadata = builder.Environment.IsDevelopment() ? false : true;
                     options.SaveTokens = true;
 
                     options.UsePkce = true;
