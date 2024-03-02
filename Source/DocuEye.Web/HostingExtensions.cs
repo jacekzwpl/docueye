@@ -22,7 +22,11 @@ using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Mappings;
 using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Net;
 
 namespace DocuEye.Web
 {
@@ -92,13 +96,73 @@ namespace DocuEye.Web
             builder.Services.AddSingleton<IWorkspaceImporterDBContext>(x => x.GetRequiredService<MongoDBContext>());
             builder.Services.AddSingleton<IDataProtectionDBContext>(x => x.GetRequiredService<MongoDBContext>());
 
-            builder.Services.AddDataProtection().PersistKeysToMongoDB();
-
             ChangeTrackerBsonClassMapping.Register();
             ViewsKeeperBsonClassMapping.Register();
 
-            builder.Services.AddAuthentication("BasicTokenAuthentication")
+            startupLogger.LogInformation("Register DataProtection services");
+            builder.Services.AddDataProtection().PersistKeysToMongoDB();
+
+            startupLogger.LogInformation("Register Authentication services");
+            // Read OIDC settings
+            var oidcSettings = new OidcSettings();
+            builder.Configuration.GetSection("DocuEye:OIDC").Bind(oidcSettings);
+            if(oidcSettings.Enabled)
+            {
+                builder.Services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    options.DefaultSignOutScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+                {
+                    options.Authority = oidcSettings.Authority;
+
+                    options.ClientId = oidcSettings.ClientId;
+                    options.ClientSecret = oidcSettings.ClientSecret;
+                    options.ResponseType = OpenIdConnectResponseType.Code;
+
+                    //options.Scope.Clear();
+                    //foreach (var scope in oidcSettings.Scopes)
+                    //{
+                    //    options.Scope.Add(scope);
+                    //}
+
+                    //options.ClaimActions.MapJsonKey("system_role", "system_role");
+                    //options.ClaimActions.MapJsonKey("display_name", "display_name");
+                    //options.ClaimActions.MapJsonKey("account_id", "account_id");
+
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.RequireHttpsMetadata = false;
+                    options.SaveTokens = true;
+
+                    options.UsePkce = true;
+
+                    options.Events.OnRedirectToIdentityProvider = context => {
+
+                        if (context.Request.Path.StartsWithSegments("/api"))
+                        {
+                            if (context.Response.StatusCode == (int)HttpStatusCode.OK)
+                            {
+                                context.Response.StatusCode = 401;
+                            }
+
+                            context.HandleResponse();
+                        }
+
+                        return Task.CompletedTask;
+                    };
+                });
+            }
+            else
+            {
+                builder.Services.AddAuthentication("BasicTokenAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicTokenAuthenticationHandler>("BasicTokenAuthentication", null);
+            }
+            
+            
+            
             builder.Services.AddAuthorization();
 
             startupLogger.LogInformation("Register MediatR services");

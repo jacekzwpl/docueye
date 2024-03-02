@@ -5,6 +5,7 @@ using DocuEye.WorkspacesKeeper.Application.Queries.GetViewConfiguration;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace DocuEye.Workspaces.Api.Controllers
     /// </summary>
     [Route("api/workspaces")]
     [ApiController]
+    [Authorize]
     public class WorkspacesController : ControllerBase
     {
         private readonly IMediator mediator;
