@@ -34,7 +34,23 @@ export const initResponseInterceptors = () => {
                 snackbarUtils.info(error.response.data.detail);
             }
         }
-
+        if(error.response.status === 400) {
+            if(error.response.data.title) {
+                snackbarUtils.error(error.response.data.title);
+            }else {
+                snackbarUtils.error("Bad request");
+            }
+            if(error.response.data.detail) {
+                snackbarUtils.info(error.response.data.detail);
+            }
+        }
+        if (error.response.status === 401) {
+            if (process.env.REACT_APP_SERVER_URL) {
+                window.location.href = process.env.REACT_APP_SERVER_URL + "/auth/login";
+            } else {
+                window.location.href = "/";
+            }
+        }
         if(error.response.status === 500) {
             snackbarUtils.error("Unexpected error occurred");
         }

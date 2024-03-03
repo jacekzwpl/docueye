@@ -4,6 +4,7 @@ using DocuEye.ChangeTracker.Persistence;
 using DocuEye.DocsKeeper.Application.Commands.SaveImages;
 using DocuEye.DocsKeeper.Application.Mappings;
 using DocuEye.DocsKeeper.Persistence;
+using DocuEye.Infrastructure.Auth;
 using DocuEye.Infrastructure.DataProtection;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Application.Mappings;
@@ -22,11 +23,7 @@ using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Mappings;
 using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System.Net;
 
 namespace DocuEye.Web
 {
@@ -108,52 +105,8 @@ namespace DocuEye.Web
             builder.Configuration.GetSection("DocuEye:OIDC").Bind(oidcSettings);
             if(oidcSettings.Enabled)
             {
-                builder.Services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                    options.DefaultSignOutScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                })
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
-                {
-                    options.Authority = oidcSettings.Authority;
 
-                    options.ClientId = oidcSettings.ClientId;
-                    options.ClientSecret = oidcSettings.ClientSecret;
-                    options.ResponseType = OpenIdConnectResponseType.Code;
-
-                    //options.Scope.Clear();
-                    //foreach (var scope in oidcSettings.Scopes)
-                    //{
-                    //    options.Scope.Add(scope);
-                    //}
-
-                    //options.ClaimActions.MapJsonKey("system_role", "system_role");
-                    //options.ClaimActions.MapJsonKey("display_name", "display_name");
-                    //options.ClaimActions.MapJsonKey("account_id", "account_id");
-
-                    options.GetClaimsFromUserInfoEndpoint = true;
-                    options.RequireHttpsMetadata = builder.Environment.IsDevelopment() ? false : true;
-                    options.SaveTokens = true;
-
-                    options.UsePkce = true;
-
-                    options.Events.OnRedirectToIdentityProvider = context => {
-
-                        if (context.Request.Path.StartsWithSegments("/api"))
-                        {
-                            if (context.Response.StatusCode == (int)HttpStatusCode.OK)
-                            {
-                                context.Response.StatusCode = 401;
-                            }
-
-                            context.HandleResponse();
-                        }
-
-                        return Task.CompletedTask;
-                    };
-                });
+                builder.AddOidcAuthentication(oidcSettings);
             }
             else
             {

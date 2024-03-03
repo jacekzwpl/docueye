@@ -27,11 +27,11 @@ namespace DocuEye.Infrastructure.Auth
                     options.ClientSecret = oidcSettings.ClientSecret;
                     options.ResponseType = OpenIdConnectResponseType.Code;
 
-                    //options.Scope.Clear();
-                    //foreach (var scope in oidcSettings.Scopes)
-                    //{
-                    //    options.Scope.Add(scope);
-                    //}
+                    options.Scope.Clear();
+                    foreach (var scope in oidcSettings.Scopes)
+                    {
+                        options.Scope.Add(scope);
+                    }
 
                     //options.ClaimActions.MapJsonKey("system_role", "system_role");
                     //options.ClaimActions.MapJsonKey("display_name", "display_name");

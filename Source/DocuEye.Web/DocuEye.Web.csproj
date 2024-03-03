@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -33,6 +32,7 @@
     <ProjectReference Include="..\DocuEye.ChangeTracker.Api\DocuEye.ChangeTracker.Api.csproj" />
     <ProjectReference Include="..\DocuEye.ChangeTracker.Persistence\DocuEye.ChangeTracker.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Api\DocuEye.DocsKeeper.Api.csproj" />
+    <ProjectReference Include="..\DocuEye.Infrastructure.Auth\DocuEye.Infrastructure.Auth.csproj" />
     <ProjectReference Include="..\DocuEye.Infrastructure.DataProtection\DocuEye.Infrastructure.DataProtection.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Api\DocuEye.ModelKeeper.Api.csproj" />
     <ProjectReference Include="..\DocuEye.Persistence\DocuEye.Persistence.csproj" />
