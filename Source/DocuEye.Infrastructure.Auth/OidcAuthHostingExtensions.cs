@@ -19,7 +19,13 @@ namespace DocuEye.Infrastructure.Auth
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
                 options.DefaultSignOutScheme = OpenIdConnectDefaults.AuthenticationScheme;
             })
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.Events.OnRedirectToAccessDenied = context => {
+                        context.Response.StatusCode = 403;
+                        return Task.CompletedTask;
+                    };
+                })
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
                 {
                     options.Authority = oidcSettings.Authority;
@@ -34,7 +40,7 @@ namespace DocuEye.Infrastructure.Auth
                         options.Scope.Add(scope);
                     }
 
-                    options.ClaimActions.MapJsonKey("realm_access", "realm_access");
+                    options.ClaimActions.MapJsonKey("roles", "realm_access_roles");
                     //options.ClaimActions.MapJsonKey("display_name", "display_name");
                     //options.ClaimActions.MapJsonKey("account_id", "account_id");
 

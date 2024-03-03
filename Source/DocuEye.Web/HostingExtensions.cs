@@ -14,6 +14,7 @@ using DocuEye.Persistence;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
 using DocuEye.ViewsKeeper.Application.Mappings;
 using DocuEye.ViewsKeeper.Persistence;
+using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
 using DocuEye.WorkspaceImporter.Application;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
@@ -67,7 +68,7 @@ namespace DocuEye.Web
 
         public static WebApplicationBuilder ConfigureServices(this WebApplicationBuilder builder, ILogger startupLogger)
         {
-            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             startupLogger.LogInformation("Configure services");
 
             var connectionString = builder.Configuration["DocuEye:Database:ConnectionString"];
@@ -81,6 +82,10 @@ namespace DocuEye.Web
             {
                 throw new Exception("There is no database name configuration.");
             }
+
+            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddMemoryCache();
+
 
             startupLogger.LogInformation("Register MongoDBContext");
             builder.Services.AddSingleton<MongoDBContext>((serviceProvider) =>
@@ -103,6 +108,9 @@ namespace DocuEye.Web
             builder.Services.AddDataProtection().PersistKeysToMongoDB();
 
             startupLogger.LogInformation("Register Authentication services");
+
+            builder.Services.TryAddSingleton<IWorkspaceAuthProvider, WorkspaceAuthProvider>();
+
             // Read OIDC settings
             var oidcSettings = new OidcSettings();
             builder.Configuration.GetSection("DocuEye:OIDC").Bind(oidcSettings);
