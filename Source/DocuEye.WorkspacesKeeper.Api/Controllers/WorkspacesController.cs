@@ -18,7 +18,7 @@ namespace DocuEye.Workspaces.Api.Controllers
     /// </summary>
     [Route("api/workspaces")]
     [ApiController]
-    [Authorize]
+    [Authorize(Policy = "Workspace")]
     public class WorkspacesController : ControllerBase
     {
         private readonly IMediator mediator;

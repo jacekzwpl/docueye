@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,7 +34,7 @@ namespace DocuEye.Infrastructure.Auth
                         options.Scope.Add(scope);
                     }
 
-                    //options.ClaimActions.MapJsonKey("system_role", "system_role");
+                    options.ClaimActions.MapJsonKey("realm_access", "realm_access");
                     //options.ClaimActions.MapJsonKey("display_name", "display_name");
                     //options.ClaimActions.MapJsonKey("account_id", "account_id");
 

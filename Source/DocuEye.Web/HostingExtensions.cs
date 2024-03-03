@@ -5,6 +5,7 @@ using DocuEye.DocsKeeper.Application.Commands.SaveImages;
 using DocuEye.DocsKeeper.Application.Mappings;
 using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.Auth;
+using DocuEye.Infrastructure.Auth.Requirements;
 using DocuEye.Infrastructure.DataProtection;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Application.Mappings;
@@ -23,7 +24,9 @@ using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Mappings;
 using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace DocuEye.Web
 {
@@ -64,7 +67,7 @@ namespace DocuEye.Web
 
         public static WebApplicationBuilder ConfigureServices(this WebApplicationBuilder builder, ILogger startupLogger)
         {
-
+            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             startupLogger.LogInformation("Configure services");
 
             var connectionString = builder.Configuration["DocuEye:Database:ConnectionString"];
@@ -113,10 +116,17 @@ namespace DocuEye.Web
                 builder.Services.AddAuthentication("BasicTokenAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicTokenAuthenticationHandler>("BasicTokenAuthentication", null);
             }
+
+            builder.Services.AddSingleton<IAuthorizationHandler, WorkspaceAccessRequirementHandler>();
             
-            
-            
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Workspace", policy => {
+
+                    //policy.RequireAuthenticatedUser();
+                    policy.AddRequirements(new WorkspaceAccessRequirement(oidcSettings.Enabled));
+                });
+            });
 
             startupLogger.LogInformation("Register MediatR services");
             builder.Services.AddMediatR(cfg => {
