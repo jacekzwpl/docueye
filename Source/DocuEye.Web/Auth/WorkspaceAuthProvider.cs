@@ -6,7 +6,7 @@ namespace DocuEye.Web.Auth
     {
         public IEnumerable<string> GetWorkspaceUsers(string workspaceId)
         {
-            return new string[] { "TeamAe" };
+            return new string[] { "TeamA" };
         }
     }
 }

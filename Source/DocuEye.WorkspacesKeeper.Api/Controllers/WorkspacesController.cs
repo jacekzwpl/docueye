@@ -1,4 +1,5 @@
-﻿using DocuEye.Infrastructure.HttpProblemDetails;
+﻿using DocuEye.Infrastructure.Auth;
+using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetViewConfiguration;
@@ -42,6 +43,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// <param name="skip">Number of items to skip</param>
         /// <returns>List of workspaces matching criteria</returns>
         [HttpGet]
+        [Authorize(Policy = PolicyNames.General)]
         public async Task<ActionResult<IEnumerable<FoundedWorkspace>>> Get([FromQuery] string? name = null, [FromQuery]int? limit = null, [FromQuery] int? skip = null)
         {
             var query = new FindWorkspacesQuery()
@@ -61,7 +63,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// <returns>Workspace data</returns>
         [Route("{id}")]
         [HttpGet]
-        [Authorize(Policy = "Workspace")]
+        [Authorize(Policy = PolicyNames.Workspace)]
         public async Task<ActionResult<Workspace>> Get([FromRoute]string id)
         {
             var query = new GetWorkspaceQuery(id);
@@ -79,6 +81,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// <returns>Workspace view configuration</returns>
         [Route("{id}/viewconfiguration")]
         [HttpGet]
+        [Authorize(Policy = PolicyNames.Workspace)]
         public async Task<ActionResult<ViewConfiguration>> GetViewConfiguration([FromRoute] string id)
         {
             var query = new GetViewConfigurationQuery(id);

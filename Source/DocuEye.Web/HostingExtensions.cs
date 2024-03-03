@@ -129,10 +129,19 @@ namespace DocuEye.Web
             
             builder.Services.AddAuthorization(options =>
             {
-                options.AddPolicy("Workspace", policy => {
-
-                    //policy.RequireAuthenticatedUser();
+                options.AddPolicy(PolicyNames.Workspace, policy => {
+                    if(oidcSettings.Enabled)
+                    {
+                        policy.RequireAuthenticatedUser();
+                    }
                     policy.AddRequirements(new WorkspaceAccessRequirement(oidcSettings.Enabled));
+                });
+
+                options.AddPolicy(PolicyNames.General, policy => {
+                    if (oidcSettings.Enabled)
+                    {
+                        policy.RequireAuthenticatedUser();
+                    }
                 });
             });
 
@@ -205,6 +214,7 @@ namespace DocuEye.Web
                 name: "default",
                 pattern: "{controller}/{action=Index}/{id?}");
 
+         
             app.MapFallbackToFile("index.html");
 
             return app;

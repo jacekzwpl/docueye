@@ -40,9 +40,7 @@ namespace DocuEye.Infrastructure.Auth
                         options.Scope.Add(scope);
                     }
 
-                    options.ClaimActions.MapJsonKey("roles", "realm_access_roles");
-                    //options.ClaimActions.MapJsonKey("display_name", "display_name");
-                    //options.ClaimActions.MapJsonKey("account_id", "account_id");
+                    options.ClaimActions.MapJsonKey("roles", oidcSettings.RolesClaim);
 
                     options.GetClaimsFromUserInfoEndpoint = true;
                     options.RequireHttpsMetadata = builder.Environment.IsDevelopment() ? false : true;
