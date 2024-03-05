@@ -204,6 +204,10 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
 
             CreateMap<StructurizrTerminology, Terminology>();
 
+            CreateMap<StructurizrWorkspaceConfigurationUser, WorkspaceAccessRule>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Username))
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
+
         }
 
         private static List<string>? SplitStringToList(string? str, string separator)

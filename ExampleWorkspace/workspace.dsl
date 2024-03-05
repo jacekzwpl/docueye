@@ -5,6 +5,12 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     !docs docs/main 
     !adrs adr/main 
 
+    configuration {
+        users {
+            TeamA read
+        }
+    }
+
     model {
         client = person "Client" "Online shop client"
 
@@ -99,7 +105,10 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             autoLayout tb
         }
 
-        theme default
+        themes default
+
     }
+
+    
     
 }
