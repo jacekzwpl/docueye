@@ -8,6 +8,6 @@ namespace DocuEye.Infrastructure.Auth
 {
     public interface IWorkspaceAuthProvider
     {
-        IEnumerable<string> GetWorkspaceUsers(string workspaceId);
+        Task<IEnumerable<string>> GetWorkspaceUsers(string workspaceId);
     }
 }

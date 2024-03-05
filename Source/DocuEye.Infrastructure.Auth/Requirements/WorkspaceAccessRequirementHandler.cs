@@ -32,7 +32,7 @@ namespace DocuEye.Infrastructure.Auth.Requirements
             }
 
 
-            var workspaceUsers = this.workspaceAuthProvider.GetWorkspaceUsers(workspaceId.ToString());
+            var workspaceUsers = this.workspaceAuthProvider.GetWorkspaceUsers(workspaceId.ToString()).GetAwaiter().GetResult();
             var roleExists = context.User.Claims.Any(o => o.Type == "roles" && workspaceUsers.Contains(o.Value));
             if(roleExists)
             {
