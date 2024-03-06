@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocuEye.Infrastructure.Auth
 {
-    public interface IWorkspaceAuthProvider
+    public class WorkspaceAuthConfiguration
     {
-        Task<WorkspaceAuthConfiguration> GetWorkspaceAuthConfig(string workspaceId);
+        public IEnumerable<string> Names { get; set; } = Enumerable.Empty<string>();
+        public bool IsPrivate { get; set; } = false;
     }
 }

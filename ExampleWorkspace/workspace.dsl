@@ -6,6 +6,7 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     !adrs adr/main 
 
     configuration {
+        visibility private
         users {
             TeamA read
         }

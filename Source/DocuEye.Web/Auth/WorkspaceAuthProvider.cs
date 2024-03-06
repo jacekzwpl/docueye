@@ -16,15 +16,31 @@ namespace DocuEye.Web.Auth
             this.mediator = mediator;
             this.memoryCache = memoryCache;
         }
-        public async Task<IEnumerable<string>> GetWorkspaceUsers(string workspaceId)
+        public async Task<WorkspaceAuthConfiguration> GetWorkspaceAuthConfig(string workspaceId)
         {
-            var query = new GetWorkspaceQuery(workspaceId);
-            var workspace = await this.mediator.Send<Workspace?>(query);
-            if(workspace == null)
+            var cacheKey = string.Format("workspace:{0}:auth:config", workspaceId);
+            var cachedAuthConfig = this.memoryCache.Get<WorkspaceAuthConfiguration>(cacheKey);
+            if(cachedAuthConfig == null)
             {
-                return new string[] {  };
+                var query = new GetWorkspaceQuery(workspaceId);
+                var workspace = await this.mediator.Send<Workspace?>(query);
+                if (workspace == null)
+                {
+                    return new WorkspaceAuthConfiguration();
+                }
+                var namesList = workspace.AccessRules.Select(o => o.Name).ToArray();
+                var authConfig = new WorkspaceAuthConfiguration()
+                {
+                    Names = namesList,
+                    IsPrivate = workspace.IsPrivate
+                };
+                this.memoryCache.Set(cacheKey, authConfig, new TimeSpan(0,5,0));
+                return authConfig;
+            }else
+            {
+                return cachedAuthConfig;
             }
-            return workspace.AccessRules.Select(o => o.Name).ToArray();
+            
         }
     }
 }

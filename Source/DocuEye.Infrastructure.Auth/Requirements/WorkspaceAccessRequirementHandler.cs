@@ -32,8 +32,14 @@ namespace DocuEye.Infrastructure.Auth.Requirements
             }
 
 
-            var workspaceUsers = this.workspaceAuthProvider.GetWorkspaceUsers(workspaceId.ToString()).GetAwaiter().GetResult();
-            var roleExists = context.User.Claims.Any(o => o.Type == "roles" && workspaceUsers.Contains(o.Value));
+            var authConfiguration = this.workspaceAuthProvider.GetWorkspaceAuthConfig(workspaceId.ToString()).GetAwaiter().GetResult();
+            if(!authConfiguration.IsPrivate)
+            {
+                context.Succeed(requirement);
+                return Task.CompletedTask;
+            }
+            
+            var roleExists = context.User.Claims.Any(o => o.Type == "roles" && authConfiguration.Names.Contains(o.Value));
             if(roleExists)
             {
                 context.Succeed(requirement);

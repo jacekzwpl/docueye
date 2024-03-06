@@ -6,7 +6,7 @@ namespace DocuEye.Structurizr.Model
 {
     public class StructurizrWorkspaceConfiguration
     {
-        public string Visibility { get; set; } = "private";
+        public string? Visibility { get; set; }
         public IEnumerable<StructurizrWorkspaceConfigurationUser>? Users { get; set; }
     }
 }
