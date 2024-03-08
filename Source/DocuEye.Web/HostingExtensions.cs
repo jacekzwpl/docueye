@@ -126,7 +126,8 @@ namespace DocuEye.Web
             }
 
             builder.Services.AddSingleton<IAuthorizationHandler, WorkspaceAccessRequirementHandler>();
-            
+            builder.Services.AddSingleton<IAuthorizationHandler, ScopeRequirementHandler>();
+
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy(PolicyNames.Workspace, policy => {
@@ -142,6 +143,12 @@ namespace DocuEye.Web
                     {
                         policy.RequireAuthenticatedUser();
                     }
+                });
+
+                options.AddPolicy(PolicyNames.ImportScope, policy => {
+
+                    policy.AddRequirements(new ScopeRequirement(oidcSettings.ImportScope, oidcSettings.Enabled));
+
                 });
             });
 

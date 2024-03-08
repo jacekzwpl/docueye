@@ -1,4 +1,5 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model;
+﻿using DocuEye.Infrastructure.Auth;
+using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +14,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
     /// </summary>
     [Route("api/workspaces")]
     [ApiController]
-    [Authorize]
+    [Authorize(Policy = PolicyNames.ImportScope)]
     public class WorkspacesImportController : ControllerBase
     {
         private readonly IMediator mediator;

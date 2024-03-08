@@ -7,7 +7,7 @@
         public string ClientId { get; set; } = string.Empty;
         public string ClientSecret { get; set; } = string.Empty;
         public IEnumerable<string> Scopes { get; set; } = Enumerable.Empty<string>();
-
         public string RolesClaim { get; set; } = "realm_access_roles";
+        public string ImportScope { get; set; } = "docueye.import";
     }
 }

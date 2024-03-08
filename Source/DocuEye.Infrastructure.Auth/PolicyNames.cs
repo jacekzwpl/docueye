@@ -10,5 +10,6 @@ namespace DocuEye.Infrastructure.Auth
     {
         public const string General = "General";
         public const string Workspace = "Workspace";
+        public const string ImportScope = "ImportScope";
     }
 }
