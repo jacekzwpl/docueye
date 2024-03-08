@@ -1,12 +1,12 @@
 ﻿using CommandLine;
 using DocuEye.CLI;
 using DocuEye.CLI.ApiClient;
+using DocuEye.CLI.ApiClient.Auth;
 using DocuEye.CLI.Application.Services.ImportOpenApiFile;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Net.Http.Headers;
 
 
 var logger = LoggerFactory.Create(config =>
@@ -17,13 +17,19 @@ var logger = LoggerFactory.Create(config =>
 await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (options) =>
 {
     HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+    builder.Services.AddSingleton<AuthenticationOptions>(provider =>
+    {
+        return new AuthenticationOptions(options.AdminToken, options.OidcAuthority, options.OidcClientId, options.OidcClientSecret);
+    });
+    builder.Services.AddTransient<AuthenticationHandler>();
+
     builder.Services.AddHttpClient<IDocuEyeApiClient, DocuEyeApiClient>(
         o =>
         {
             o.BaseAddress = new Uri(options.DocueyeAddress);
-            o.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", options.AdminToken);
+            //o.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", options.AdminToken);
         }
-    );
+    ).AddHttpMessageHandler<AuthenticationHandler>();
 
     builder.Services.AddLogging(builder => builder.AddConsole());
 
