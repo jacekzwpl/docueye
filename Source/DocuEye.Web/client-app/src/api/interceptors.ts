@@ -1,5 +1,6 @@
 import axios from "axios";
 import { snackbarUtils } from "../snackbar/snackbarUtils";
+import globalRouter from "../router/globalRouter";
 
 
 export const initRequestInterceptors = (csrfToken: string) => {
@@ -52,6 +53,9 @@ export const initResponseInterceptors = () => {
             }
             if(error.response.data.detail) {
                 snackbarUtils.info(error.response.data.detail);
+            }
+            if(globalRouter.navigate) {
+                globalRouter.navigate("/errors/forbidden");
             }
         }
 
