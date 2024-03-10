@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.DocsKeeper.Application\DocuEye.DocsKeeper.Application.csproj" />
+    <ProjectReference Include="..\DocuEye.Infrastructure.Auth\DocuEye.Infrastructure.Auth.csproj" />
     <ProjectReference Include="..\DocuEye.Infrastructure.HttpProblemDetails\DocuEye.Infrastructure.HttpProblemDetails.csproj" />
   </ItemGroup>
 

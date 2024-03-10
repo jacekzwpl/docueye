@@ -1,4 +1,5 @@
 ﻿using DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile;
+using DocuEye.Infrastructure.Auth;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.ModelKeeper.Application.Queries.GetElementByDslId;
 using DocuEye.ModelKeeper.Model;
@@ -15,7 +16,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
 {
     [Route("api/workspaces/{workspaceId}/docfile")]
     [ApiController]
-    [Authorize]
+    [Authorize(Policy = PolicyNames.ImportScope)]
     public class DocumentationFilesImportController : ControllerBase
     {
         private readonly IMediator mediator;

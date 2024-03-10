@@ -1,7 +1,9 @@
 ﻿using DocuEye.DocsKeeper.Application.Queries.FindDecisions;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisionContent;
+using DocuEye.Infrastructure.Auth;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
     /// </summary>
     [Route("api/workspaces/{workspaceId}/decisions")]
     [ApiController]
+    [Authorize(Policy = PolicyNames.Workspace)]
     public class DecisionsController : ControllerBase
     {
         private readonly IMediator mediator;

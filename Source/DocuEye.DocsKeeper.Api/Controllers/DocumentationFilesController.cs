@@ -1,6 +1,7 @@
 ﻿using DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile;
 using DocuEye.DocsKeeper.Application.Queries.GetOpenApiFile;
 using DocuEye.DocsKeeper.Model;
+using DocuEye.Infrastructure.Auth;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +15,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
 {
     [Route("api/workspaces/{workspaceId}/documentationfiles")]
     [ApiController]
+    [Authorize(Policy = PolicyNames.Workspace)]
     public class DocumentationFilesController : ControllerBase
     {
         private readonly IMediator mediator;

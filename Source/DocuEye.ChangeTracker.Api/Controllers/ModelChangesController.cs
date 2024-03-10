@@ -1,6 +1,8 @@
 ﻿using DocuEye.ChangeTracker.Application.Queries.FindModelChanges;
 using DocuEye.ChangeTracker.Model;
+using DocuEye.Infrastructure.Auth;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DocuEye.ChangeTracker.Api.Controllers
@@ -10,6 +12,7 @@ namespace DocuEye.ChangeTracker.Api.Controllers
     /// </summary>
     [Route("api/modelchanges")]
     [ApiController]
+    [Authorize(Policy = PolicyNames.Workspace)]
     public class ModelChangesController : ControllerBase
     {
         private readonly IMediator mediator;

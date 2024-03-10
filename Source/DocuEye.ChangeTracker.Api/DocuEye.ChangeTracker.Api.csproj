@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.ChangeTracker.Application\DocuEye.ChangeTracker.Application.csproj" />
+    <ProjectReference Include="..\DocuEye.Infrastructure.Auth\DocuEye.Infrastructure.Auth.csproj" />
   </ItemGroup>
 
 </Project>

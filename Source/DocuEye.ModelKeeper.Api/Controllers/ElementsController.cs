@@ -1,4 +1,5 @@
-﻿using DocuEye.Infrastructure.HttpProblemDetails;
+﻿using DocuEye.Infrastructure.Auth;
+using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.ModelKeeper.Application.Queries.GetChildElements;
 using DocuEye.ModelKeeper.Application.Queries.GetElement;
 using DocuEye.ModelKeeper.Application.Queries.GetElementConsumers;
@@ -6,6 +7,7 @@ using DocuEye.ModelKeeper.Application.Queries.GetElementDependences;
 using DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements;
 using DocuEye.ModelKeeper.Model;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace DocuEye.ModelKeeper.Api.Controllers
     /// </summary>
     [Route("api/workspaces/{workspaceId}/elements")]
     [ApiController]
+    [Authorize(Policy = PolicyNames.Workspace)]
     public class ElementsController : ControllerBase
     {
         private readonly IMediator mediator;

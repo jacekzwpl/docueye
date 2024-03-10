@@ -1,4 +1,5 @@
-﻿using DocuEye.Infrastructure.HttpProblemDetails;
+﻿using DocuEye.Infrastructure.Auth;
+using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement;
 using DocuEye.ViewsKeeper.Application.Queries.GetComponentView;
 using DocuEye.ViewsKeeper.Application.Queries.GetContainerView;
@@ -10,6 +11,7 @@ using DocuEye.ViewsKeeper.Application.Queries.GetSystemContextView;
 using DocuEye.ViewsKeeper.Application.Queries.GetSystemLandscapeView;
 using DocuEye.ViewsKeeper.Model;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DocuEye.ViewsKeeper.Api.Controllers
@@ -19,6 +21,7 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
     /// </summary>
     [Route("api/workspaces/{workspaceId}/views")]
     [ApiController]
+    [Authorize(Policy = PolicyNames.Workspace)]
     public class ViewsController : ControllerBase
     {
 
