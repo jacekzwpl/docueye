@@ -9,5 +9,6 @@
         public IEnumerable<string> Scopes { get; set; } = Enumerable.Empty<string>();
         public string RolesClaim { get; set; } = "realm_access_roles";
         public string ImportScope { get; set; } = "docueye.import";
+        public string Audience { get; set; } = "docueye-web";
     }
 }

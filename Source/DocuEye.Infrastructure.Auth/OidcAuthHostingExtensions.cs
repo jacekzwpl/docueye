@@ -32,7 +32,6 @@ namespace DocuEye.Infrastructure.Auth
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
                 {
                     options.Authority = oidcSettings.Authority;
-
                     options.ClientId = oidcSettings.ClientId;
                     options.ClientSecret = oidcSettings.ClientSecret;
                     options.ResponseType = OpenIdConnectResponseType.Code;
@@ -70,7 +69,7 @@ namespace DocuEye.Infrastructure.Auth
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
                     options.Authority = oidcSettings.Authority;
-                    options.Audience = "docueye-web";
+                    options.Audience = oidcSettings.Audience;
                     options.RequireHttpsMetadata = builder.Environment.IsDevelopment() ? false : true;
 
                     options.TokenValidationParameters.ValidTypes = new[] { "at+jwt", "JWT" };
