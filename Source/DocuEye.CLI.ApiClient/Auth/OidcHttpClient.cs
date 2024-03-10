@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IdentityModel.Client;
+using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocuEye.CLI.ApiClient.Auth
@@ -9,14 +8,45 @@ namespace DocuEye.CLI.ApiClient.Auth
     public class OidcHttpClient
     {
         private readonly HttpClient httpClient;
+        private IDiscoveryCache? discoCache;
         public OidcHttpClient(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
 
-        public async Task<string> GetAccessToken()
+        public async Task<string?> GetAccessToken(AuthenticationOptions authOptions)
         {
-            return string.Empty;
+            if (string.IsNullOrEmpty(authOptions.OidcClientId))
+            {
+                throw new ArgumentException("OIDC client id is missing.");
+            }
+            if (string.IsNullOrEmpty(authOptions.OidcAuthority))
+            {
+                throw new ArgumentException("OIDC authority is missing.");
+            }
+
+            if (this.discoCache == null)
+            {
+                this.discoCache = new DiscoveryCache(authOptions.OidcAuthority);
+            }
+
+            
+
+            var disco = await this.discoCache.GetAsync();
+            if (disco.IsError) throw new Exception(disco.Error);
+
+            var response = await this.httpClient.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            {
+                Address = disco.TokenEndpoint,
+
+                ClientId = authOptions.OidcClientId,
+                ClientSecret = authOptions.OidcClientSecret,
+                Scope = authOptions.OidcScopes
+            });
+            if (response.IsError) throw new Exception(response.Error);
+
+            return response.AccessToken;
+
         }
     }
 }

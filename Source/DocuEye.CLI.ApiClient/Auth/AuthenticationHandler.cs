@@ -12,23 +12,28 @@ namespace DocuEye.CLI.ApiClient.Auth
     {
 
         private readonly AuthenticationOptions authOptions;
+        private readonly OidcHttpClient oidcClient;
 
-        public AuthenticationHandler(AuthenticationOptions authOptions)
+        public AuthenticationHandler(AuthenticationOptions authOptions, OidcHttpClient oidcClient)
         {
             this.authOptions = authOptions;
+            this.oidcClient = oidcClient;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-
-
-            if (string.IsNullOrEmpty(this.authOptions.AdminToken))
+            if (!string.IsNullOrEmpty(this.authOptions.AdminToken))
             {
-                //var authMessage = base.SendAsync
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", this.authOptions.AdminToken);
             }
             else
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", this.authOptions.AdminToken);
+                var token = await this.oidcClient.GetAccessToken(this.authOptions);
+                if (token == null)
+                {
+                    throw new Exception("Access token is empty.");
+                }
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
 
 

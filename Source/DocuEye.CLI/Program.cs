@@ -19,9 +19,13 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
     HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
     builder.Services.AddSingleton<AuthenticationOptions>(provider =>
     {
-        return new AuthenticationOptions(options.AdminToken, options.OidcAuthority, options.OidcClientId, options.OidcClientSecret);
+        return new AuthenticationOptions(options.AdminToken, options.OidcAuthority, options.OidcClientId, options.OidcClientSecret, options.OidcScopes);
     });
+
+    builder.Services.AddHttpClient<OidcHttpClient>();
     builder.Services.AddTransient<AuthenticationHandler>();
+
+    
 
     builder.Services.AddHttpClient<IDocuEyeApiClient, DocuEyeApiClient>(
         o =>

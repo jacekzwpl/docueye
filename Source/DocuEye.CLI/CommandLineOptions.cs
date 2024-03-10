@@ -44,6 +44,8 @@ namespace DocuEye.CLI
         public string? OidcClientId { get; set; }
         [Option("oidcClientSecret", Required = false, HelpText = "")]
         public string? OidcClientSecret { get; set; }
+        [Option("oidcScopes", Required = false, HelpText = "")]
+        public string? OidcScopes { get; set; }
 
 
     }
