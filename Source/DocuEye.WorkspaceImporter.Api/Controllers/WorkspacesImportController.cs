@@ -2,6 +2,7 @@
 using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -21,7 +23,8 @@ namespace DocuEye.Infrastructure.Auth
             })
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    options.Events.OnRedirectToAccessDenied = context => {
+                    options.Events.OnRedirectToAccessDenied = context =>
+                    {
                         context.Response.StatusCode = 403;
                         return Task.CompletedTask;
                     };
@@ -63,9 +66,18 @@ namespace DocuEye.Infrastructure.Auth
 
                         return Task.CompletedTask;
                     };
+                })
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+                {
+                    options.Authority = oidcSettings.Authority;
+                    options.Audience = "docueye-web";
+                    options.RequireHttpsMetadata = builder.Environment.IsDevelopment() ? false : true;
+
+                    options.TokenValidationParameters.ValidTypes = new[] { "at+jwt", "JWT" };
                 });
 
             return builder;
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,8 +12,9 @@ namespace DocuEye.Infrastructure.Auth.Requirements
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ScopeRequirement requirement)
         {
-            var scopes = context.User.Claims.Where(o => o.Type == "scope");
-            if (scopes.Any(o => o.Value == requirement.ScopeName))
+            var scopes = this.ScopeValues(context.User.Claims.Where(o => o.Type == "scope"));
+
+            if (scopes.Contains(requirement.ScopeName))
             {
                 context.Succeed(requirement);
                 return Task.CompletedTask;
@@ -22,6 +24,20 @@ namespace DocuEye.Infrastructure.Auth.Requirements
                 return Task.CompletedTask;
             }
 
+        }
+
+        private string[] ScopeValues(IEnumerable<Claim> scopeClaims)
+        {
+            var scopes = new List<string>();
+            foreach(var claim in scopeClaims)
+            {
+                if(claim.Value.Contains(' '))
+                {
+                    var values = claim.Value.Split(' ');
+                    scopes.AddRange(values);
+                }
+            }
+            return scopes.ToArray();
         }
     }
 }

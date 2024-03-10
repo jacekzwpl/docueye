@@ -44,7 +44,7 @@ namespace DocuEye.CLI.ApiClient.Auth
                 Scope = authOptions.OidcScopes
             });
             if (response.IsError) throw new Exception(response.Error);
-
+            Console.WriteLine(response.AccessToken);
             return response.AccessToken;
 
         }

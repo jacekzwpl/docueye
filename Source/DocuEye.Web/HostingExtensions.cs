@@ -25,6 +25,7 @@ using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Mappings;
 using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -146,7 +147,7 @@ namespace DocuEye.Web
                 });
 
                 options.AddPolicy(PolicyNames.ImportScope, policy => {
-
+                    policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
                     policy.AddRequirements(new ScopeRequirement(oidcSettings.ImportScope, oidcSettings.Enabled));
 
                 });
