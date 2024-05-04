@@ -96,6 +96,7 @@ namespace DocuEye.Web
 
             ChangeTrackerBsonClassMapping.Register();
             ViewsKeeperBsonClassMapping.Register();
+            WorkspacesKeeperBsonClassMapping.Register();
 
             builder.Services.AddAuthentication("BasicTokenAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicTokenAuthenticationHandler>("BasicTokenAuthentication", null);
