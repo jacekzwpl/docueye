@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/runtime:8.0.3 AS base
 USER app
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0.201 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.203 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Source/DocuEye.CLI/DocuEye.CLI.csproj", "Source/DocuEye.CLI/"]
