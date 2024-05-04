@@ -1,5 +1,5 @@
 Param(
-    [Parameter(Mandatory,
+    [Parameter(
     HelpMessage="The Admin token from DocuEye configuration")]
     [string]$adminToken,
     [Parameter(Mandatory,
@@ -18,7 +18,7 @@ Param(
 ####
 # .\import.ps1 -docueyeAddress http://localhost:8080 -adminToken docueyedmintoken -workspaceId 638d0822-12c7-4998-8647-9c7af7ad2989 
 ####
-
+# .\import.ps1 -docueyeAddress https://localhost:7041 -workspaceId 638d0822-12c7-4998-8647-9c7af7ad2989 -useDotNetTool
 
 #export workspace to json format
 docker run -it --rm -v "$($PWD):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
@@ -32,11 +32,13 @@ docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-
 --workspaceId="$workspaceId"  `
 --workspaceFile=./import/workspace.json
 }else {
-docueye --import=workspace  `
+dotnet "C:\nCode\docueye\Source\DocuEye.CLI\bin\Debug\net8.0\DocuEye.CLI.dll" --import=workspace  `
 --docueyeAddress="$docueyeAddress"  `
---adminToken="$adminToken"  `
 --importKey="$importKey"  `
 --workspaceId="$workspaceId"  `
---workspaceFile=workspace.json
+--workspaceFile=workspace.json  `
+--oidcAuthority="http://localhost:8080/realms/myrealm"  `
+--oidcClientId="docueye-cli"  `
+--oidcClientSecret="2LLHwLhE5vlFgFuB9hirpRDqwSm8o7as"
 }
 

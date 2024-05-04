@@ -8,7 +8,7 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     configuration {
         visibility private
         users {
-            TeamA read
+            TeamB read
         }
     }
 
