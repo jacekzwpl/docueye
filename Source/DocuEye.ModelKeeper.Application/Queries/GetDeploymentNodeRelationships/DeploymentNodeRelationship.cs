@@ -10,8 +10,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
         public string SourceNodeName { get; set; }
         public string DestinationNodeId { get; set; }
         public string DestinationNodeName { get; set; }
-        public string RelationshipTechnology {  get; set; }
-        public string RelationshipDescription { get; set; }
+        public IList<DeploymentNodeRelationshipItem> Items { get; set; }
         
     }
 }

@@ -4,6 +4,8 @@ export * from './component-view';
 export * from './container-view';
 export * from './decision-content';
 export * from './decision-link';
+export * from './deployment-node-relationship';
+export * from './deployment-node-relationship-item';
 export * from './deployment-view';
 export * from './documentation-content';
 export * from './dynamic-relationship-view';

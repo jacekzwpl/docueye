@@ -43,15 +43,44 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
                     {
                         if(source.NodeId != dest.NodeId)
                         {
-                            result.Add(new DeploymentNodeRelationship()
+                            var resultRelationship = result.FirstOrDefault(o => o.SourceNodeId == source.NodeId && o.DestinationNodeId == dest.NodeId);
+                            if(resultRelationship == null)
                             {
-                                SourceNodeId = source.NodeId,
-                                SourceNodeName = source.NodeName,
-                                DestinationNodeId = dest.NodeId,
-                                DestinationNodeName = dest.NodeName,
-                                RelationshipTechnology = relationship.Technology,
-                                RelationshipDescription = relationship.Description
-                            });
+                                result.Add(new DeploymentNodeRelationship()
+                                {
+                                    SourceNodeId = source.NodeId,
+                                    SourceNodeName = source.NodeName,
+                                    DestinationNodeId = dest.NodeId,
+                                    DestinationNodeName = dest.NodeName,
+                                    Items = new List<DeploymentNodeRelationshipItem>() { 
+                                        new DeploymentNodeRelationshipItem() { 
+                                            Technology = relationship.Technology,
+                                            Descriptions = new List<string>()
+                                            {
+                                                relationship.Description
+                                            }
+                                        } 
+                                    }
+                                });
+                            }else
+                            {
+                                var item = resultRelationship.Items.FirstOrDefault(o => o.Technology == relationship.Technology);
+                                if(item == null)
+                                {
+                                    resultRelationship.Items.Add(new DeploymentNodeRelationshipItem()
+                                    {
+                                        Technology = relationship.Technology,
+                                        Descriptions = new List<string>()
+                                            {
+                                                relationship.Description
+                                            }
+                                    });
+                                }else
+                                {
+                                    item.Descriptions.Add(relationship.Description);
+                                }
+                            }
+                            
                         }
                     }
                 }

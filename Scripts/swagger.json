@@ -732,6 +732,54 @@
         }
       }
     },
+    "/api/workspaces/{workspaceId}/elements/deploymentnodesmatrix": {
+      "get": {
+        "tags": [
+          "Elements"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeploymentNodeRelationship"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeploymentNodeRelationship"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeploymentNodeRelationship"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/modelchanges": {
       "get": {
         "tags": [
@@ -1619,6 +1667,52 @@
           },
           "description": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeploymentNodeRelationship": {
+        "type": "object",
+        "properties": {
+          "sourceNodeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceNodeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinationNodeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinationNodeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeploymentNodeRelationshipItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeploymentNodeRelationshipItem": {
+        "type": "object",
+        "properties": {
+          "technology": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },

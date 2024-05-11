@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, ope
 // @ts-ignore
 import { ChildElement } from '../models';
 // @ts-ignore
+import { DeploymentNodeRelationship } from '../models';
+// @ts-ignore
 import { Element } from '../models';
 // @ts-ignore
 import { ElementConsumer } from '../models';
@@ -37,6 +39,39 @@ import { WorkspaceCatalogElement } from '../models';
  */
 export const ElementsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet', 'workspaceId', workspaceId)
+            const localVarPath = `/api/workspaces/{workspaceId}/elements/deploymentnodesmatrix`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {string} workspaceId 
@@ -266,6 +301,18 @@ export const ElementsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DeploymentNodeRelationship>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
          * @param {string} [name] 
          * @param {string} [type] 
          * @param {number} [limit] 
@@ -347,6 +394,15 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId: string, options?: any): AxiosPromise<Array<DeploymentNodeRelationship>> {
+            return localVarFp.apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
          * @param {string} [name] 
          * @param {string} [type] 
          * @param {number} [limit] 
@@ -410,6 +466,17 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
  * @extends {BaseAPI}
  */
 export class ElementsApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ElementsApi
+     */
+    public apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId: string, options?: RawAxiosRequestConfig) {
+        return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {string} workspaceId 
