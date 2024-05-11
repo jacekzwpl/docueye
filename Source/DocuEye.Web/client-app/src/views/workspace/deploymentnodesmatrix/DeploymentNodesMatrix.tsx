@@ -13,7 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import { RelationshipDescriptionDialog } from "./RelationshipDescriptionDialog";
 
-export const RelationshipMatrix = () => {
+export const DeploymentNodesMatrix = () => {
     let { workspaceId } = useParams();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [relationships, setRelationships] = useState<DeploymentNodeRelationship[]>([]);
