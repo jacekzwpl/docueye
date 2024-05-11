@@ -103,7 +103,7 @@ export const RelationshipMatrix = () => {
                                         left: 0,
                                         zIndex: 3,
                                         background: "white",
-                                    }}>Source/Destination</TableCell>
+                                    }}>Deployment Nodes</TableCell>
                                     {nodes.map((node) => (
                                         <TableCell sx={{ minWidth: 100 }} key={node.id}><strong>{node.name}</strong></TableCell>
                                     ))}
