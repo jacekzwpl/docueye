@@ -84,20 +84,20 @@ export const RelationshipMatrix = () => {
         <Box padding={2} >
             <Card variant="outlined" >
                 <CardContent>
-                    <TableContainer sx={{height: 'calc(100vh - 158px)'}}>
-                        <Table stickyHeader sx={{ minWidth: 650}} aria-label="elements table">
+                    <TableContainer sx={{ height: 'calc(100vh - 158px)' }}>
+                        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="elements table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell sx={{
                                         position: "sticky",
                                         left: 0,
-                                        zIndex:3,
+                                        zIndex: 3,
                                         background: "white",
                                     }}>Source/Destination</TableCell>
                                     {nodes.map((node) => (
-                                        <TableCell sx={{minWidth: 100}} key={node.id}><strong>{node.name}</strong></TableCell>
+                                        <TableCell sx={{ minWidth: 100 }} key={node.id}><strong>{node.name}</strong></TableCell>
                                     ))}
-                                    
+
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -106,7 +106,7 @@ export const RelationshipMatrix = () => {
                                         <TableCell sx={{
                                             position: "sticky",
                                             left: 0,
-                                            zIndex:2,
+                                            zIndex: 2,
                                             background: "white"
                                         }}><strong>{sourceNode.name}</strong></TableCell>
                                         {nodes.map((destNode) => {
