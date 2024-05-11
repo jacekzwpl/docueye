@@ -55,10 +55,10 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
                                     Items = new List<DeploymentNodeRelationshipItem>() { 
                                         new DeploymentNodeRelationshipItem() { 
                                             Technology = relationship.Technology,
-                                            Descriptions = new List<string>()
+                                            Descriptions = relationship.Description != null ? new List<string>()
                                             {
                                                 relationship.Description
-                                            }
+                                            } : new List<string>()
                                         } 
                                     }
                                 });
@@ -70,14 +70,18 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
                                     resultRelationship.Items.Add(new DeploymentNodeRelationshipItem()
                                     {
                                         Technology = relationship.Technology,
-                                        Descriptions = new List<string>()
+                                        Descriptions = relationship.Description != null ? new List<string>()
                                             {
                                                 relationship.Description
-                                            }
+                                            } : new List<string>()
                                     });
                                 }else
                                 {
-                                    item.Descriptions.Add(relationship.Description);
+                                    if(relationship.Description != null)
+                                    {
+                                        item.Descriptions.Add(relationship.Description);
+                                    }
+                                    
                                 }
                             }
                             
@@ -114,16 +118,20 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
             };
 
             var elements = await this.dbContext.Elements.Find(
-                o => ids.Contains(o.ParentId) && types.Contains(o.Type));
+                o => o.ParentId != null && ids.Contains(o.ParentId) && types.Contains(o.Type));
             var result = new List<DeploymentNodeElement>();
             foreach( var element in elements)
             {
-                result.Add(new DeploymentNodeElement()
+                if(element.InstanceOfId != null)
                 {
-                    ElementId = element.InstanceOfId,
-                    NodeId = node.Id,
-                    NodeName = node.Name
-                });
+                    result.Add(new DeploymentNodeElement()
+                    {
+                        ElementId = element.InstanceOfId,
+                        NodeId = node.Id,
+                        NodeName = node.Name
+                    });
+                }
+                
             }
             return result;
         }

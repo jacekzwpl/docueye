@@ -6,7 +6,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
 {
     public class DeploymentNodeRelationshipItem
     {
-        public string Technology {  get; set; }
-        public IList<string> Descriptions { get; set; }
+        public string? Technology {  get; set; }
+        public IList<string> Descriptions { get; set; } = null!;
     }
 }
