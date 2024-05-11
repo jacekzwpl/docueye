@@ -94,7 +94,10 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             }
 
             kubernetes = deploymentNode "Kubernetes" {
-                ccatalogInstance = containerInstance onlineshop.catalog
+                properties {
+                    "docueye.ownerteam" "Operations Team"
+                }
+                catalogInstance = containerInstance onlineshop.catalog
                 basketInstance = containerInstance onlineshop.basket
                 ordersInstance = containerInstance onlineshop.orders
                 paymentInstance = containerInstance onlineshop.payment
