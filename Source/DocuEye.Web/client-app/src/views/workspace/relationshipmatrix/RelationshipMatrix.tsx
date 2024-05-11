@@ -11,6 +11,7 @@ import { Box, Card, CardContent, IconButton, Table, TableBody, TableCell, TableC
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
+import { RelationshipDescriptionDialog } from "./RelationshipDescriptionDialog";
 
 export const RelationshipMatrix = () => {
     let { workspaceId } = useParams();
@@ -18,6 +19,9 @@ export const RelationshipMatrix = () => {
     const [relationships, setRelationships] = useState<DeploymentNodeRelationship[]>([]);
     const [nodes, setNodes] = useState<any[]>([]);
     const dispatch = useDispatch();
+    const [descriptionOpened, setDescriptionOpened] = useState<boolean>(false);
+    const [descriptionData, setDescriptionData] = useState<{ fromSource?: DeploymentNodeRelationship, fromDestination?: DeploymentNodeRelationship }>({});
+
 
     useEffect(() => {
         if (!workspaceId) {
@@ -80,6 +84,12 @@ export const RelationshipMatrix = () => {
         }
     }
 
+    const openDescriptionDialog = (fromSource?: DeploymentNodeRelationship, fromDestination?: DeploymentNodeRelationship) => {
+        console.log(fromSource, fromDestination);
+        setDescriptionData({ fromSource, fromDestination });
+        setDescriptionOpened(true);
+    }
+
     return (
         <Box padding={2} >
             <Card variant="outlined" >
@@ -112,9 +122,9 @@ export const RelationshipMatrix = () => {
                                         {nodes.map((destNode) => {
                                             const dataR = getNodesRelation(sourceNode.id, destNode.id);
                                             return (<TableCell key={destNode.id}>
-                                                {dataR.fromSource && !dataR.fromDestination && <IconButton><ArrowUpwardIcon /></IconButton>}
-                                                {!dataR.fromSource && dataR.fromDestination && <IconButton><ArrowBackIcon /></IconButton>}
-                                                {dataR.fromSource && dataR.fromDestination && <IconButton><SyncAltIcon /></IconButton>}
+                                                {dataR.fromSource && !dataR.fromDestination && <IconButton onClick={() => openDescriptionDialog(dataR.fromSource)}><ArrowUpwardIcon /></IconButton>}
+                                                {!dataR.fromSource && dataR.fromDestination && <IconButton onClick={() => openDescriptionDialog(undefined, dataR.fromDestination)}><ArrowBackIcon /></IconButton>}
+                                                {dataR.fromSource && dataR.fromDestination && <IconButton onClick={() => openDescriptionDialog(dataR.fromSource, dataR.fromDestination)}><SyncAltIcon /></IconButton>}
                                             </TableCell>)
                                         })}
                                     </TableRow>
@@ -125,5 +135,9 @@ export const RelationshipMatrix = () => {
                 </CardContent>
             </Card>
             {isLoading && <Loader />}
+            <RelationshipDescriptionDialog 
+                data={descriptionData}
+                onClose={() => setDescriptionOpened(false)} 
+                open={descriptionOpened} />
         </Box>)
 }
