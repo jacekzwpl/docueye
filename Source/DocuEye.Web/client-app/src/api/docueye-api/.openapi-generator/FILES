@@ -22,6 +22,8 @@ models/component-view.ts
 models/container-view.ts
 models/decision-content.ts
 models/decision-link.ts
+models/deployment-node-relationship-item.ts
+models/deployment-node-relationship.ts
 models/deployment-view.ts
 models/documentation-content.ts
 models/dynamic-relationship-view.ts

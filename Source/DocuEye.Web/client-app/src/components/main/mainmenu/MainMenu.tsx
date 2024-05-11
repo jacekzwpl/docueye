@@ -7,6 +7,7 @@ import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
+import PivotTableChartIcon from '@mui/icons-material/PivotTableChart';
 import { IWorkspaceState } from "../../../store/slices/workspace/IWorkspaceState";
 import { useSelector } from "react-redux";
 
@@ -63,6 +64,13 @@ export const MainMenu = () => {
           <AppsIcon />
         </ListItemIcon>
         <ListItemText primary="Elements" />
+      </ListItemButton> }
+      {currentWorkspace.value &&
+      <ListItemButton onClick={() => goToPage('/workspace/' + currentWorkspace.value?.id + '/deploymentnodesmatrix')}>
+        <ListItemIcon>
+          <PivotTableChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Nodes Matrix" />
       </ListItemButton> }
       {currentWorkspace.value &&
       <ListItemButton onClick={() => goToPage('/workspace/' + currentWorkspace.value?.id + '/modelchanges')}>

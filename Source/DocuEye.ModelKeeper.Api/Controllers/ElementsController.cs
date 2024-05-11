@@ -1,5 +1,6 @@
 ﻿using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.ModelKeeper.Application.Queries.GetChildElements;
+using DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships;
 using DocuEye.ModelKeeper.Application.Queries.GetElement;
 using DocuEye.ModelKeeper.Application.Queries.GetElementConsumers;
 using DocuEye.ModelKeeper.Application.Queries.GetElementDependences;
@@ -110,6 +111,15 @@ namespace DocuEye.ModelKeeper.Api.Controllers
             return this.Ok(result);
         }
 
-        
+        [Route("deploymentnodesmatrix")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<DeploymentNodeRelationship>>> GetDeploymentNodeRelationship([FromRoute] string workspaceId)
+        {
+            var query = new GetDeploymentNodeRelationshipsQuery(workspaceId);
+            var result = await this.mediator.Send<IEnumerable<DeploymentNodeRelationship>>(query);
+            return this.Ok(result);
+        }
+
+
     }
 }

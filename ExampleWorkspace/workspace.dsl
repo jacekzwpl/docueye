@@ -83,6 +83,35 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
         relation7 = onlineshop.catalog -> onlineshop.catalogdb "Reads/Writes data" "TCP 1433"
         relation8 = onlineshop.orders -> onlineshop.ordersdb "Reads/Writes data" "TCP 1433"
         relation9 = onlineshop.basket -> onlineshop.basketdb "Reads/Writes data" "TCP 6379"
+
+        production = deploymentEnvironment "Production" {
+            exchangeServer = deploymentNode "Exchange Server" {
+                emailsystemInstance = softwareSystemInstance emailsystem
+            }
+
+            webserver = deploymentNode "Web Server" {
+                webinstance = containerInstance onlineshop.web
+            }
+
+            kubernetes = deploymentNode "Kubernetes" {
+                properties {
+                    "docueye.ownerteam" "Operations Team"
+                }
+                catalogInstance = containerInstance onlineshop.catalog
+                basketInstance = containerInstance onlineshop.basket
+                ordersInstance = containerInstance onlineshop.orders
+                paymentInstance = containerInstance onlineshop.payment
+            }
+
+            sqlserver = deploymentNode "SQL Server" {
+                catalogdbInstance = containerInstance onlineshop.catalogdb
+                ordersdbInstance = containerInstance onlineshop.ordersdb
+            }
+
+            redisserver = deploymentNode "Redis Server" {
+                basketdbInstance = containerInstance onlineshop.basketdb
+            }
+        }
     }
 
     views {
@@ -95,6 +124,12 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
 
         container onlineshop "onlineshopContainers" { 
             title "Online shop containers"
+            include * 
+            autoLayout tb
+        }
+
+        deployment onlineshop "Production" "onlineshopDeployment" { 
+            title "Online shop deployment"
             include * 
             autoLayout tb
         }
