@@ -84,28 +84,20 @@ export const RelationshipMatrix = () => {
         <Box padding={2} >
             <Card variant="outlined" >
                 <CardContent>
-                    <TableContainer sx={{height: 'calc(100vh - 168px)'}}>
+                    <TableContainer sx={{height: 'calc(100vh - 158px)'}}>
                         <Table stickyHeader sx={{ minWidth: 650}} aria-label="elements table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell sx={{
                                         position: "sticky",
                                         left: 0,
+                                        zIndex:3,
                                         background: "white",
-                                        boxShadow: "5px 2px 5px grey",
-                                        borderRight: "2px solid black"
                                     }}>Source/Destination</TableCell>
                                     {nodes.map((node) => (
                                         <TableCell sx={{minWidth: 100}} key={node.id}><strong>{node.name}</strong></TableCell>
                                     ))}
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
-                                    <TableCell sx={{minWidth: 100}} ><strong>aaaa1</strong></TableCell>
+                                    
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -114,9 +106,8 @@ export const RelationshipMatrix = () => {
                                         <TableCell sx={{
                                             position: "sticky",
                                             left: 0,
-                                            background: "white",
-                                            boxShadow: "5px 2px 5px grey",
-                                            borderRight: "2px solid black"
+                                            zIndex:2,
+                                            background: "white"
                                         }}><strong>{sourceNode.name}</strong></TableCell>
                                         {nodes.map((destNode) => {
                                             const dataR = getNodesRelation(sourceNode.id, destNode.id);
@@ -126,14 +117,6 @@ export const RelationshipMatrix = () => {
                                                 {dataR.fromSource && dataR.fromDestination && <IconButton><SyncAltIcon /></IconButton>}
                                             </TableCell>)
                                         })}
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
-                                        <TableCell ><strong>aaaa1</strong></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
