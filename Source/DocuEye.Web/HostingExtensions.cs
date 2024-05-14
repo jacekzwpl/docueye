@@ -32,7 +32,7 @@ namespace DocuEye.Web
         public static IConfigurationBuilder UseConfiguration<T>(this IConfigurationBuilder builder, ILogger startupLogger, bool useEnvironment = true, string[]? environmentPrefixes = null) where T : class
         {
             
-            var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
+            var devEnvironmentVariable = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
                                 devEnvironmentVariable.ToLower() == "development";
             startupLogger.LogInformation("Adding appsettings.json as configuration source");
