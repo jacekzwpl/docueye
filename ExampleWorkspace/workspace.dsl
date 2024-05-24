@@ -86,14 +86,17 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
 
         production = deploymentEnvironment "Production" {
             exchangeServer = deploymentNode "Exchange Server" {
+                technology "Mail Server"
                 emailsystemInstance = softwareSystemInstance emailsystem
             }
 
             webserver = deploymentNode "Web Server" {
+                technology "IIS"
                 webinstance = containerInstance onlineshop.web
             }
 
             kubernetes = deploymentNode "Kubernetes" {
+                technology "Kubernetes Cluster"
                 properties {
                     "docueye.ownerteam" "Operations Team"
                 }
@@ -104,11 +107,13 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             }
 
             sqlserver = deploymentNode "SQL Server" {
+                technology "SQL Server"
                 catalogdbInstance = containerInstance onlineshop.catalogdb
                 ordersdbInstance = containerInstance onlineshop.ordersdb
             }
 
             redisserver = deploymentNode "Redis Server" {
+                technology "Redis Server"
                 basketdbInstance = containerInstance onlineshop.basketdb
             }
         }

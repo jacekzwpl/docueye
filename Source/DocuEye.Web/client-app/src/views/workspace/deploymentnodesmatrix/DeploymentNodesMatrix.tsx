@@ -57,10 +57,10 @@ export const DeploymentNodesMatrix = () => {
             const exisintgSourceNode = nodes.find(node => node.id === relationship.sourceNodeId);
             const exisintgDestinationNode = nodes.find(node => node.id === relationship.destinationNodeId);
             if (!exisintgSourceNode) {
-                nodes.push({ id: relationship.sourceNodeId, name: relationship.sourceNodeName });
+                nodes.push({ id: relationship.sourceNodeId, name: relationship.sourceNodeName, technology: relationship.sourceNodeTechnology });
             }
             if (!exisintgDestinationNode) {
-                nodes.push({ id: relationship.destinationNodeId, name: relationship.destinationNodeName });
+                nodes.push({ id: relationship.destinationNodeId, name: relationship.destinationNodeName, technology: relationship.destinationTechnology });
             }
         });
         nodes.sort((a, b) => {
@@ -105,7 +105,7 @@ export const DeploymentNodesMatrix = () => {
                                         background: "white",
                                     }}>Deployment Nodes</TableCell>
                                     {nodes.map((node) => (
-                                        <TableCell sx={{ minWidth: 100 }} key={node.id}><strong>{node.name}</strong></TableCell>
+                                        <TableCell sx={{ minWidth: 100 }} key={node.id}><strong>{node.name}</strong><br />[{node.technology}]</TableCell>
                                     ))}
 
                                 </TableRow>
@@ -118,7 +118,7 @@ export const DeploymentNodesMatrix = () => {
                                             left: 0,
                                             zIndex: 2,
                                             background: "white"
-                                        }}><strong>{sourceNode.name}</strong></TableCell>
+                                        }}><strong>{sourceNode.name}</strong><br />[{sourceNode.technology}]</TableCell>
                                         {nodes.map((destNode) => {
                                             const dataR = getNodesRelation(sourceNode.id, destNode.id);
                                             return (<TableCell key={destNode.id}>
