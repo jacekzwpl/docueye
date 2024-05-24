@@ -8,7 +8,12 @@ Accepted
 
 ## Context
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at dui tristique, auctor felis a, lacinia risus. Etiam elit quam, vestibulum a aliquet et, pretium nec erat. Suspendisse potenti. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at dui tristique, auctor felis a, lacinia risus. Etiam elit quam, vestibulum a aliquet et, pretium nec erat. Suspendisse potenti.
+
+| Lorem ipsum | Dolor sit amet | consectetur adipiscing elit |
+| -- | -- | ---- |
+| Lorem ipsum | Dolor sit amet | consectetur adipiscing elit |
+| Lorem ipsum | Dolor sit amet | consectetur adipiscing elit |
 
 ## Decision
 
