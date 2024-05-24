@@ -43,7 +43,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionContent
                     !string.IsNullOrEmpty(link.Url) && !link.Url.StartsWith("http") ?
                     request.BaseUrl.Replace("{documentationId}", decisionData.DocumentationId) + link.Url
                     : link.Url)
-                .Build();
+                .UseAdvancedExtensions().Build();
 
             var html = Markdown.ToHtml(decisionData.Content, pipeline);
             return new DecisionContent()
