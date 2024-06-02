@@ -26,11 +26,11 @@ export const RelationshipDescriptionDialog = (props: IRelationshipDescriptionDia
                                 <Typography fontWeight={'bold'}>{item.technology ?? "Undefined"}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>
+                           
                                     {item.descriptions?.map((desc, index) => (
-                                        <>{desc && <p key={index}>{desc}</p>}</>
+                                        <Typography key={index}>{desc}</Typography>
                                     ))}
-                                </Typography>
+                                
                             </AccordionDetails>
                         </Accordion>
                     ))}
