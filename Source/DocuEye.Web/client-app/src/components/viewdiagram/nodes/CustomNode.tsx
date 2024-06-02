@@ -52,6 +52,7 @@ const CustomNode = (nodeData: any) => {
     return 0;
   }
  
+  
 
   return (
     <>
@@ -97,7 +98,7 @@ const CustomNode = (nodeData: any) => {
           display: 'block', 
           margin: '0 auto', 
           padding: 1 }}>
-          <IconButton aria-label="go to element" size="small" onClick={() => onGoToElementClick(nodeData.id)}>
+          <IconButton aria-label="go to element" size="small" onClick={() => onGoToElementClick(nodeData.data.instanceOfId ? nodeData.data.instanceOfId : nodeData.id)}>
             <TopicIcon sx={{color: nodeData.data.style?.color ?? '#FFFFFF'}} fontSize="small" />
           </IconButton>
           { nodeData.data.diagramId && <IconButton aria-label="go to diagram" size="small" onClick={() => onGoToDiagramClick(nodeData.data.diagramId)}>

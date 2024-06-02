@@ -30,6 +30,7 @@ export const prepareDeploymentDiagramElements = (elements: ElementView[], relati
             position: { x: 0, y: 0 },
             data: {
                 name: element.name,
+                instanceOfId: element.instanceOfId,
                 typeName: getTerminologyTerm(element.type, viewConfiguration?.terminology),
                 description: element.description,
                 diagramId: element.diagramId,
