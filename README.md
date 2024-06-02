@@ -23,6 +23,7 @@ Currently there is no demo but you can see [DocuEye product page](https://docuey
 - Decisions viewer - You can view all decisions defined at workspace or element level
 - Documentation viewer - You can view documentation defined at workspace or element level
 - Change Tracker - DocuEye tracks changes in the model on every import. You can view history of changes in Your model. [See what to do to change tracker works as expected](Documentation/docs/0002-change-tracker.md)  
+- Deployment Nodes Matrix - You can view relationships between deployment nodes that implies from relationships between deployed model elements.
 
 See [features roadmap](Documentation/docs/0003-features-roadmap.md) if You want to know what features will be implemented in nearest feature.
 

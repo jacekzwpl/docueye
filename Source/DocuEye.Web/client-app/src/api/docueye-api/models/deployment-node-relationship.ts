@@ -40,6 +40,12 @@ export interface DeploymentNodeRelationship {
      * @type {string}
      * @memberof DeploymentNodeRelationship
      */
+    'sourceNodeTechnology'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeploymentNodeRelationship
+     */
     'destinationNodeId'?: string | null;
     /**
      * 
@@ -47,6 +53,12 @@ export interface DeploymentNodeRelationship {
      * @memberof DeploymentNodeRelationship
      */
     'destinationNodeName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeploymentNodeRelationship
+     */
+    'destinationTechnology'?: string | null;
     /**
      * 
      * @type {Array<DeploymentNodeRelationshipItem>}

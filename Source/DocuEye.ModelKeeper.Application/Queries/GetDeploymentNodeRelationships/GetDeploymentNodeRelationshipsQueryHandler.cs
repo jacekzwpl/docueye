@@ -52,6 +52,8 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
                                     SourceNodeName = source.NodeName,
                                     DestinationNodeId = dest.NodeId,
                                     DestinationNodeName = dest.NodeName,
+                                    SourceNodeTechnology = source.Technology,
+                                    DestinationTechnology = dest.Technology,
                                     Items = new List<DeploymentNodeRelationshipItem>() { 
                                         new DeploymentNodeRelationshipItem() { 
                                             Technology = relationship.Technology,
@@ -128,7 +130,8 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
                     {
                         ElementId = element.InstanceOfId,
                         NodeId = node.Id,
-                        NodeName = node.Name
+                        NodeName = node.Name,
+                        Technology = node.Technology
                     });
                 }
                 

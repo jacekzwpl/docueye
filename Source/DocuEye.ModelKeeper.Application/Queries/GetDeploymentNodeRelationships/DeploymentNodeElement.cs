@@ -9,5 +9,6 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
         public string NodeId { get; set; } = null!;
         public string ElementId { get; set; } = null!;
         public string NodeName { get; set; } = null!;
+        public string? Technology { get; set; } = null!;
     }
 }

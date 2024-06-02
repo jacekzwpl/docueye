@@ -1683,11 +1683,19 @@
             "type": "string",
             "nullable": true
           },
+          "sourceNodeTechnology": {
+            "type": "string",
+            "nullable": true
+          },
           "destinationNodeId": {
             "type": "string",
             "nullable": true
           },
           "destinationNodeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinationTechnology": {
             "type": "string",
             "nullable": true
           },
