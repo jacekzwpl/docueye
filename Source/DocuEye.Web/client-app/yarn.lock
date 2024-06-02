@@ -1643,6 +1643,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.24.6":
+  version: 7.24.6
+  resolution: "@babel/runtime@npm:7.24.6"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 44d95ca743898fed31b4cefef31de6fd3cf7906e94493368e9d6538289cc52c6c46185205d9c01d38466a5b3f673550f80892d30b1ed02a2c13e704863a8cc48
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.3.3":
   version: 7.22.15
   resolution: "@babel/template@npm:7.22.15"
@@ -4336,10 +4345,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.7.13":
-  version: 16.18.68
-  resolution: "@types/node@npm:16.18.68"
-  checksum: 094ae9ed80eed2af4bd34d551467e307f2ecb6efb0f8b872feebfb9da5ea4b446c5883c9abe2349f8ea2b78bdacd8726a946c27c2a246676c4c330e41ccb9284
+"@types/node@npm:^16.18.97":
+  version: 16.18.97
+  resolution: "@types/node@npm:16.18.97"
+  checksum: 54f44aaeaa523d4c728177d070aeb20b8011e12ac45aff0d992e350e10cac4d899ac6429cd0f06a6c3a001c8a6cd204429b1a16628d82f1b1e4cc1cbdeca780f
   languageName: node
   linkType: hard
 
@@ -6078,7 +6087,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "client-app@workspace:."
   dependencies:
-    "@babel/runtime": ^7.23.9
+    "@babel/runtime": ^7.24.6
     "@dagrejs/dagre": ^1.1.2
     "@dagrejs/graphlib": ^2.2.2
     "@emotion/react": ^11.11.4
@@ -6091,7 +6100,7 @@ __metadata:
     "@testing-library/react": ^13.0.0
     "@testing-library/user-event": ^13.2.1
     "@types/jest": ^27.0.1
-    "@types/node": ^16.7.13
+    "@types/node": ^16.18.97
     "@types/react": ^18.3.3
     "@types/react-dom": ^18.3.0
     "@types/swagger-ui-react": ^4.18.3
@@ -6109,7 +6118,7 @@ __metadata:
     redux: ^5.0.1
     swagger-ui-react: 5.17.14
     typescript: ^4.4.2
-    web-vitals: ^2.1.0
+    web-vitals: ^2.1.4
   languageName: unknown
   linkType: soft
 
@@ -16005,7 +16014,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^2.1.0":
+"web-vitals@npm:^2.1.4":
   version: 2.1.4
   resolution: "web-vitals@npm:2.1.4"
   checksum: 03d3f47dbf55c3dce07beb0ff5de8ddd52e2d0a53a8df5c84e7a16dda93543341d67231fa79b1d9772b091419af4ec0fd395b8bcf451a0e26846e3f76b3d0efc
