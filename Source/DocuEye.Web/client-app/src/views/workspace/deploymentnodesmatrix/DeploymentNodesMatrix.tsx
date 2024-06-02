@@ -85,7 +85,6 @@ export const DeploymentNodesMatrix = () => {
     }
 
     const openDescriptionDialog = (fromSource?: DeploymentNodeRelationship, fromDestination?: DeploymentNodeRelationship) => {
-        console.log(fromSource, fromDestination);
         setDescriptionData({ fromSource, fromDestination });
         setDescriptionOpened(true);
     }
