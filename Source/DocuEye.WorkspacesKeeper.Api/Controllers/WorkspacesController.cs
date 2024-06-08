@@ -1,4 +1,5 @@
 ﻿using DocuEye.Infrastructure.HttpProblemDetails;
+using DocuEye.WorkspacesKeeper.Application.Commands.DeleteWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetViewConfiguration;
@@ -109,6 +110,15 @@ namespace DocuEye.Workspaces.Api.Controllers
             }
 
             return this.Ok(result);
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<ActionResult> Delete([FromRoute] string id)
+        {
+            var command = new DeleteWorkspaceCommand(id);
+            await this.mediator.Send(command);
+            return this.NoContent();
         }
 
     }
