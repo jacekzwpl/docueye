@@ -127,7 +127,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.WorkspaceImporter.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.ViewsKeeper.Application.Queries", "Source\DocuEye.ViewsKeeper.Application.Queries\DocuEye.ViewsKeeper.Application.Queries.csproj", "{37A9F14F-D9DA-4594-9187-89C65360A34C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.DocsKeeper.Application.Queries", "Source\DocuEye.DocsKeeper.Application.Queries\DocuEye.DocsKeeper.Application.Queries.csproj", "{1AEFE888-729A-446A-8751-DCA1C3CCAA92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.DocsKeeper.Application.Queries", "Source\DocuEye.DocsKeeper.Application.Queries\DocuEye.DocsKeeper.Application.Queries.csproj", "{1AEFE888-729A-446A-8751-DCA1C3CCAA92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.ChangeTracker.Application.Commands", "Source\DocuEye.ChangeTracker.Application.Commands\DocuEye.ChangeTracker.Application.Commands.csproj", "{5F03E58B-A120-46B1-AD3D-18B66174ECF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -351,6 +353,10 @@ Global
 		{1AEFE888-729A-446A-8751-DCA1C3CCAA92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AEFE888-729A-446A-8751-DCA1C3CCAA92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AEFE888-729A-446A-8751-DCA1C3CCAA92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F03E58B-A120-46B1-AD3D-18B66174ECF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F03E58B-A120-46B1-AD3D-18B66174ECF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F03E58B-A120-46B1-AD3D-18B66174ECF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F03E58B-A120-46B1-AD3D-18B66174ECF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -408,6 +414,7 @@ Global
 		{A31157DC-69B9-46E1-B196-19B531791420} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
 		{37A9F14F-D9DA-4594-9187-89C65360A34C} = {8D1B1D91-B4DE-4DF9-A253-14777B4B4E40}
 		{1AEFE888-729A-446A-8751-DCA1C3CCAA92} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
+		{5F03E58B-A120-46B1-AD3D-18B66174ECF4} = {F30410F2-2AE9-40E2-B6B3-3ADDCB070032}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}

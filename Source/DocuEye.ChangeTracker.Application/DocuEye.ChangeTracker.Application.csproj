@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocuEye.ChangeTracker.Application.Commands\DocuEye.ChangeTracker.Application.Commands.csproj" />
     <ProjectReference Include="..\DocuEye.ChangeTracker.Persistence\DocuEye.ChangeTracker.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Application.Events\DocuEye.WorkspaceImporter.Application.Events.csproj" />
   </ItemGroup>

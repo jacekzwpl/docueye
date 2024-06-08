@@ -1,8 +1,7 @@
-﻿using DocuEye.DocsKeeper.Application.Commads.ClearWorkspaceDocs;
+﻿using DocuEye.ChangeTracker.Application.Commands.ClearWorkspaceEvents;
+using DocuEye.DocsKeeper.Application.Commads.ClearWorkspaceDocs;
 using DocuEye.ModelKeeper.Application.Commands.ClearWorkspaceModel;
 using DocuEye.ViewsKeeper.Application.Commands.ClearWorkspaceViews;
-using DocuEye.WorkspacesKeeper.Application.Commands.SaveViewConfiguration;
-using DocuEye.WorkspacesKeeper.Model;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,7 +31,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.DeleteWorkspace
             await this.mediator.Send(new ClearWorkspaceViewsCommand(request.WorkspaceId));
 
             //ModleChanges
-
+            await this.mediator.Send(new ClearWorkspaceEventsCommand(request.WorkspaceId));
 
             //WorkspaceImports
 
