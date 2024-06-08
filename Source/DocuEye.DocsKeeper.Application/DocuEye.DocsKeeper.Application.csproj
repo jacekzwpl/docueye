@@ -18,6 +18,7 @@
     <ProjectReference Include="..\DocuEye.DocsKeeper.Model\DocuEye.DocsKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Persistence\DocuEye.DocsKeeper.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Application.Events\DocuEye.WorkspaceImporter.Application.Events.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Events\DocuEye.WorkspacesKeeper.Application.Events.csproj" />
   </ItemGroup>
   
   

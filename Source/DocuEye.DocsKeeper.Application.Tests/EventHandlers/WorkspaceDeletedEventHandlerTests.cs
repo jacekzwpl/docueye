@@ -1,19 +1,24 @@
-﻿using DocuEye.DocsKeeper.Application.Commads.ClearWorkspaceDocs;
-using DocuEye.DocsKeeper.Application.Commands.ClearWorkspaceDocs;
+﻿using DocuEye.DocsKeeper.Application.EventHandlers;
+using DocuEye.WorkspacesKeeper.Application.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DocuEye.DocsKeeper.Application.Tests.Commands
+namespace DocuEye.DocsKeeper.Application.Tests.EventHandlers
 {
-    public class ClearWorkspaceDocsCommandHandlerTests : BaseDocsKeeperTests
+    public class WorkspaceDeletedEventHandlerTests : BaseDocsKeeperTests
     {
         [Test]
-        public async Task WhenClearWorkspaceDocsThenNoDocumentationElementsArePresent()
+        public async Task WhenWorkspaceDeletedThenNoDataForWorkspaceIsPresent()
         {
             // Arrange
-            var command = new ClearWorkspaceDocsCommand("workspacetest1");
+            var notification = new WorkspaceDeletedEvent("workspacetest1");
 
             // Act
-            var handler = new ClearWorkspaceDocsCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            var handler = new WorkspaceDeletedEventHandler(this.dbContext);
+            await handler.Handle(notification, default);
 
             // Assert
             var decisions = await this.dbContext.Decisions.Find(o => o.WorkspaceId == "workspacetest1");
@@ -24,6 +29,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.Commands
             Assert.That(images.Count, Is.EqualTo(0), "There should be no images in workspace.");
             var documentations = await this.dbContext.Documentations.Find(o => o.WorkspaceId == "workspacetest1");
             Assert.That(documentations.Count, Is.EqualTo(0), "There should be no documentations in workspace.");
+
         }
     }
 }

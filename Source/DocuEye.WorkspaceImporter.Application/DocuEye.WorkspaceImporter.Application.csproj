@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DocuEye.ChangeTracker.Application.Commands\DocuEye.ChangeTracker.Application.Commands.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Application.Commads\DocuEye.DocsKeeper.Application.Commads.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Application.Queries\DocuEye.DocsKeeper.Application.Queries.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Model\DocuEye.DocsKeeper.Model.csproj" />
@@ -27,6 +26,7 @@
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Model\DocuEye.WorkspaceImporter.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Persistence\DocuEye.WorkspaceImporter.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Commands\DocuEye.WorkspacesKeeper.Application.Commands.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Events\DocuEye.WorkspacesKeeper.Application.Events.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model\DocuEye.WorkspacesKeeper.Model.csproj" />
   </ItemGroup>
 

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Commands\DocuEye.WorkspacesKeeper.Application.Commands.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Events\DocuEye.WorkspacesKeeper.Application.Events.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Queries\DocuEye.WorkspacesKeeper.Application.Queries.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model\DocuEye.WorkspacesKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Persistence\DocuEye.WorkspacesKeeper.Persistence.csproj" />
