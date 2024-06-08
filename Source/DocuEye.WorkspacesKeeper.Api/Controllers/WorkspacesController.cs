@@ -113,9 +113,15 @@ namespace DocuEye.Workspaces.Api.Controllers
             return this.Ok(result);
         }
 
+        /// <summary>
+        /// Removes all workspace data
+        /// </summary>
+        /// <param name="id">Workspace ID</param>
+        /// <returns></returns>
         [Route("{id}")]
         [HttpDelete]
         [Authorize]
+        [IgnoreAntiforgeryToken]
         public async Task<ActionResult> Delete([FromRoute] string id)
         {
             var command = new DeleteWorkspaceCommand(id);
