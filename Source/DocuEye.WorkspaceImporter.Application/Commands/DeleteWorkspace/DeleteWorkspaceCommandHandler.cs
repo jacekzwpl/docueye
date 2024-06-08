@@ -1,5 +1,6 @@
 ﻿using DocuEye.DocsKeeper.Application.Commads.ClearWorkspaceDocs;
 using DocuEye.ModelKeeper.Application.Commands.ClearWorkspaceModel;
+using DocuEye.ViewsKeeper.Application.Commands.ClearWorkspaceViews;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveViewConfiguration;
 using DocuEye.WorkspacesKeeper.Model;
 using MediatR;
@@ -27,13 +28,19 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.DeleteWorkspace
             //Images
             await this.mediator.Send(new ClearWorkspaceDocsCommand(request.WorkspaceId));
 
+            //Views
+            await this.mediator.Send(new ClearWorkspaceViewsCommand(request.WorkspaceId));
 
             //ModleChanges
-            
+
+
+            //WorkspaceImports
+
             //ViewConfigurations
-            //Views
-            //WorkspaceImoorts
             //Workspaces
+
+
+
 
 
             throw new System.NotImplementedException();
