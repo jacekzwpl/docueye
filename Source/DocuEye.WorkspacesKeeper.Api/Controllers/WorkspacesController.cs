@@ -6,6 +6,7 @@ using DocuEye.WorkspacesKeeper.Application.Queries.GetViewConfiguration;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,6 +115,7 @@ namespace DocuEye.Workspaces.Api.Controllers
 
         [Route("{id}")]
         [HttpDelete]
+        [Authorize]
         public async Task<ActionResult> Delete([FromRoute] string id)
         {
             var command = new DeleteWorkspaceCommand(id);

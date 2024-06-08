@@ -131,6 +131,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.DocsKeeper.Applicat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspacesKeeper.Application.Events", "Source\DocuEye.WorkspacesKeeper.Application.Events\DocuEye.WorkspacesKeeper.Application.Events.csproj", "{C599136A-3095-4322-AB44-7770265CEE1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Infrastructure.Authentication", "Source\DocuEye.Infrastructure.Authentication\DocuEye.Infrastructure.Authentication.csproj", "{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -357,6 +359,10 @@ Global
 		{C599136A-3095-4322-AB44-7770265CEE1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C599136A-3095-4322-AB44-7770265CEE1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C599136A-3095-4322-AB44-7770265CEE1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -415,6 +421,7 @@ Global
 		{37A9F14F-D9DA-4594-9187-89C65360A34C} = {8D1B1D91-B4DE-4DF9-A253-14777B4B4E40}
 		{1AEFE888-729A-446A-8751-DCA1C3CCAA92} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
 		{C599136A-3095-4322-AB44-7770265CEE1D} = {CCD1348E-6ACE-4A93-8FD4-7E990BEBF02E}
+		{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
