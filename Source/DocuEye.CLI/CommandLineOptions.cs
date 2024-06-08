@@ -9,7 +9,7 @@ namespace DocuEye.CLI
 {
     public class CommandLineOptions
     {
-        [Option("import", Required = true, HelpText = "Import mode. 'workspace' for workspace import. 'openapi' for import openapi specification for element.")]
+        [Option("import", Required = true, HelpText = "Import mode. 'workspace' for workspace import. 'openapi' for import openapi specification for element. 'delete' for remove all workspace data.")]
         public string Import { get; set; } = null!;
         
         [Option("docueyeAddress", Required = true, HelpText = "DocuEye address ex. http://localhost:8080.")]

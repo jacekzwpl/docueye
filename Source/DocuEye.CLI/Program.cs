@@ -86,6 +86,21 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
         {
             Environment.ExitCode = -1;
         }
+    }else if(options.Import == "delete")
+    {
+        if (string.IsNullOrEmpty(options.WorkspaceId))
+        {
+            logger.LogError("workspaceId is required for openapi import");
+            Environment.ExitCode = -1;
+            return;
+        }
+
+        //var client = host.Services.GetRequiredService<IDocuEyeApiClient>();
+        //var result = await client.DeleteWorkspace(options.WorkspaceId);
+        //if (!result)
+        //{
+        //    Environment.ExitCode = -1;
+        //}
     }
     else
     {
