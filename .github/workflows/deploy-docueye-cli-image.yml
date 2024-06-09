@@ -19,7 +19,7 @@ jobs:
     - name: Build docueye cli image
       run: docker build -t jacekzwpl/docueye-cli:${{ github.event.inputs.docueye_cli_version }} -f ./Source/DocuEye.CLI/Dockerfile .
     - name: Tag with latest
-      run: docker tag jacekzwpl/docueye-cli:${{ github.event.inputs.docueye_cli_version }} jacekzwpl/docueye:latest
+      run: docker tag jacekzwpl/docueye-cli:${{ github.event.inputs.docueye_cli_version }} jacekzwpl/docueye-cli:latest
     - name: Push Docker image ${{ github.event.inputs.docueye_cli_version }}
       run: docker push jacekzwpl/docueye-cli:${{ github.event.inputs.docueye_cli_version }}
     - name: Push Docker image latest
