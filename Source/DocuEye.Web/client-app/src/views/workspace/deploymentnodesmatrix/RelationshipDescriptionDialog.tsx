@@ -26,11 +26,9 @@ export const RelationshipDescriptionDialog = (props: IRelationshipDescriptionDia
                                 <Typography fontWeight={'bold'}>{item.technology ?? "Undefined"}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                           
                                     {item.descriptions?.map((desc, index) => (
                                         <Typography key={index}>{desc}</Typography>
                                     ))}
-                                
                             </AccordionDetails>
                         </Accordion>
                     ))}
@@ -48,11 +46,9 @@ export const RelationshipDescriptionDialog = (props: IRelationshipDescriptionDia
                                 <Typography fontWeight={'bold'}>{item.technology}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>
                                     {item.descriptions?.map((desc, index) => (
-                                        <p key={index}>{desc}</p>
+                                        <Typography key={index}>{desc}</Typography>
                                     ))}
-                                </Typography>
                             </AccordionDetails>
                         </Accordion>
                     ))}
