@@ -16,8 +16,8 @@ jobs:
       with:
         dotnet-version: '8.0.x'
     - name: Build Cli package
-      run: dotnet pack ./Source/DocuEye.Cli/DocuEye.Cli.csproj -c Release -o ./Source/DocuEye.Cli/bin/Release
+      run: dotnet pack ./Source/DocuEye.CLI/DocuEye.CLI.csproj -c Release -o ./Source/DocuEye.CLI/bin/Release
     - name: Publish Cli package
-      run: dotnet nuget push ./Source/DocuEye.Cli/bin/Release/DocuEye.Cli.${{ github.event.inputs.docueye_cli_version }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_APIKEY }} --skip-duplicate
+      run: dotnet nuget push ./Source/DocuEye.CLI/bin/Release/DocuEye.CLI.${{ github.event.inputs.docueye_cli_version }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_APIKEY }} --skip-duplicate
     
     
