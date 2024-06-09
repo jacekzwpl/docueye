@@ -30,6 +30,32 @@ namespace DocuEye.CLI.ApiClient
             };
         }
 
+        public async Task<string?> DeleteWorkspace(string workspaceId)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Delete, string.Format("api/workspaces/{0}", workspaceId));
+            using (var response = await this.httpClient.SendAsync(message))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                else if (response.Content.Headers.ContentType?.MediaType == "application/problem+json")
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
+                    if (problemData == null)
+                    {
+                        return "Delete workspace failed. Reason of failure is unkonown";
+                    }
+                    return problemData.Detail ?? problemData.Title;
+                }
+                else
+                {
+                    return "Delete workspace failed. Reason of failure is unkonown";
+                }
+            }
+        }
+
         public async Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request)
         {
             var message = new HttpRequestMessage(HttpMethod.Put, string.Format("api/workspaces/{0}/docfile/openapi", workspaceId));
@@ -47,7 +73,6 @@ namespace DocuEye.CLI.ApiClient
                     {
                         return "Import failed. Reason of failure is unkonown";
                     }
-                    Console.WriteLine(responseBody);
                     return problemData.Detail ?? problemData.Title;
                 }else
                 {

@@ -26,6 +26,7 @@
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Model\DocuEye.WorkspaceImporter.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Persistence\DocuEye.WorkspaceImporter.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Commands\DocuEye.WorkspacesKeeper.Application.Commands.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Events\DocuEye.WorkspacesKeeper.Application.Events.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model\DocuEye.WorkspacesKeeper.Model.csproj" />
   </ItemGroup>
 

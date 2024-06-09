@@ -15,6 +15,7 @@
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Application.Queries\DocuEye.ViewsKeeper.Application.Queries.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Model\DocuEye.ViewsKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Persistence\DocuEye.ViewsKeeper.Persistence.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Events\DocuEye.WorkspacesKeeper.Application.Events.csproj" />
   </ItemGroup>
 
 </Project>

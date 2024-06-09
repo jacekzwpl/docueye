@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using DocuEye.CLI;
 using DocuEye.CLI.ApiClient;
+using DocuEye.CLI.Application.Services.DeleteWorkspace;
 using DocuEye.CLI.Application.Services.ImportOpenApiFile;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,7 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
 
     builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
     builder.Services.AddTransient<IImportOpenApiFileService, ImportOpenApiFileService>();
+    builder.Services.AddTransient<IDeleteWorkspaceService, DeleteWorkspaceService>();
     using IHost host = builder.Build();
 
     if (options.Import == "workspace")
@@ -82,6 +84,21 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
            OpenApiFile = options.OpenApiFile
         };
         var result = await importService.Import(parameters);
+        if (!result)
+        {
+            Environment.ExitCode = -1;
+        }
+    }else if(options.Import == "delete")
+    {
+        if (string.IsNullOrEmpty(options.WorkspaceId))
+        {
+            logger.LogError("workspaceId is required for delete workspace operation");
+            Environment.ExitCode = -1;
+            return;
+        }
+
+        var importService = host.Services.GetRequiredService<IDeleteWorkspaceService>();
+        var result = await importService.DeleteWorkspace(options.WorkspaceId);
         if (!result)
         {
             Environment.ExitCode = -1;
