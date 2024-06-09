@@ -1,5 +1,5 @@
-name: Deploy docueye cli image
-run-name: 'Deploy docueye cli image ${{ github.event.inputs.docueye_cli_version }}' 
+name: Deploy docueye cli nuget 
+run-name: 'Deploy docueye cli nuget ${{ github.event.inputs.docueye_cli_version }}' 
 on: 
   workflow_dispatch:
     inputs:
@@ -18,6 +18,6 @@ jobs:
     - name: Build Cli package
       run: dotnet pack ./Source/DocuEye.Cli/DocuEye.Cli.csproj -c Release -o ./Source/DocuEye.Cli/bin/Release
     - name: Publish Cli package
-      run: dotnet nuget push ./Source/DocuEye.Cli/bin/Release/DocuEye.Cli.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_APIKEY }} --skip-duplicate
+      run: dotnet nuget push ./Source/DocuEye.Cli/bin/Release/DocuEye.Cli.${{ github.event.inputs.docueye_cli_version }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_APIKEY }} --skip-duplicate
     
     
