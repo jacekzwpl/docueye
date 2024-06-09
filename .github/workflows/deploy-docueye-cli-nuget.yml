@@ -16,7 +16,7 @@ jobs:
       with:
         dotnet-version: '8.0.x'
     - name: Build
-      run: dotnet build ./Source/DocuEye.sln -c Release
+      run: dotnet build ./DocuEye.sln -c Release
     - name: Build Cli package
       run: dotnet pack ./Source/DocuEye.CLI/DocuEye.CLI.csproj -c Release -o ./Source/DocuEye.CLI/bin/Release
     - name: Publish Cli package
