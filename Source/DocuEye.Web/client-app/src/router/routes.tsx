@@ -57,5 +57,9 @@ export const routes:IRoute[] = [
   {
     path: '/workspace/:workspaceId/deploymentnodesmatrix',
     component: lazy(() => import('../views/workspace/deploymentnodesmatrix'))
+  },
+  {
+    path: '/workspace/:workspaceId/depsgraph',
+    component: lazy(() => import('../views/workspace/dependecies-graph'))
   }
 ]
