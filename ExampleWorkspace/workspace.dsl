@@ -139,7 +139,8 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             autoLayout tb
         }
 
-        container onlineshop "Diagram2" {
+        container onlineshop "onlineshopwebRelations" {
+            title "Online shop Web Application Relationships"
             include "->onlineshop.web->"
             autolayout lr
         }
