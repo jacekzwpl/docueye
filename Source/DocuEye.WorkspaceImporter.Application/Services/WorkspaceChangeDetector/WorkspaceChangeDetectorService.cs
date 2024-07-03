@@ -161,7 +161,10 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 if (contextElement != null)
                 {
                     explodedView.View.ContainerId = contextElement.Id;
-                    componentsElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+
+                    if(!componentsElementDiagrams.ContainsKey(contextElement.Id)) {
+                        componentsElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                    }
                 }
 
                 var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, new Dictionary<string, string>());
@@ -182,7 +185,11 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 if (contextElement != null)
                 {
                     explodedView.View.SoftwareSystemId = contextElement.Id;
-                    containerElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                    if(!containerElementDiagrams.ContainsKey(contextElement.Id))
+                    {
+                        containerElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                    }
+                    
                 }
 
                 var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, componentsElementDiagrams);
@@ -203,7 +210,11 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 if (contextElement != null)
                 {
                     explodedView.View.SoftwareSystemId = contextElement.Id;
-                    systemContextElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                    if(!systemContextElementDiagrams.ContainsKey(contextElement.Id))
+                    {
+                        systemContextElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                    }
+                    
                 }
                 var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, containerElementDiagrams);
                 var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
