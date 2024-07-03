@@ -139,6 +139,11 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             autoLayout tb
         }
 
+        container onlineshop "Diagram2" {
+            include "->onlineshop.web->"
+            autolayout lr
+        }
+
         theme default
     }
     
