@@ -139,7 +139,7 @@ namespace DocuEye.Infrastructure.MongoDB
         /// <returns>List of founded items</returns>
         public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> sortValueSelector, bool ascendingSort = true, int? limit = null, int? skip = null)
         {
-            var query = this.collection.Find<T>(filter, new FindOptions() { });
+            var query = this.collection.Find<T>(filter);
             if(ascendingSort)
             {
                 query.SortBy(sortValueSelector);
