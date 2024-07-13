@@ -117,7 +117,6 @@ export const ElementsListView = () => {
     }
 
     const onTypeFilterChanged = (event: any, newValue: any | null) => {
-        console.log(newValue);
         setTypeFilter(newValue);
     }
 

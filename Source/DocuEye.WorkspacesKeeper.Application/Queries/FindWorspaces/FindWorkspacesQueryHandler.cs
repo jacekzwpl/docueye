@@ -35,7 +35,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces
             if(!string.IsNullOrEmpty(request.Name))
             {
                 var worskpaces = await this.dbContext.Workspaces
-                .Find(o => o.Name.Contains(request.Name), o => o.Name, true, request.Limit, request.Skip);
+                .Find(o => o.Name.ToLower().Contains(request.Name.ToLower()), o => o.Name, true, request.Limit, request.Skip);
                 return this.mapper.Map<IEnumerable<FoundedWorkspace>>(worskpaces);
             }else
             {
