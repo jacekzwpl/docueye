@@ -8,7 +8,9 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     model {
         client = person "Client" "Online shop client"
 
-        emailsystem = softwareSystem "Email System"
+        emailsystem = softwareSystem "Email System" {
+            test = container "Test" "Test" "Test"
+        }
 
         onlineshop = softwareSystem "Online Shop" "Online shop system" {
             web = container "Web Application" {
@@ -129,6 +131,12 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
 
         container onlineshop "onlineshopContainers" { 
             title "Online shop containers"
+            include * 
+            autoLayout tb
+        }
+
+        container emailsystem "emailsystemContainers" { 
+            title "EmailSystem containers"
             include * 
             autoLayout tb
         }
