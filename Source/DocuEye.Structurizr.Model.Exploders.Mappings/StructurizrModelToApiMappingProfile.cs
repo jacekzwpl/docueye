@@ -29,6 +29,28 @@ namespace DocuEye.Structurizr.Model.Exploders.Mappings
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.SoftwareSystem))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
+            
+            CreateMap<StructurizrDeploymentNode, ElementToImport>()
+                .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.DeploymentNode))
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
+
+            CreateMap<StructurizrSoftwareSystemInstance, ElementToImport>()
+                .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.SoftwareSystemInstance))
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")))
+                .ForMember(dest => dest.StructurizrInstanceOfId, opt => opt.MapFrom(src => src.SoftwareSystemId));
+
+            CreateMap<StructurizrContainerInstance, ElementToImport>()
+                .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.ContainerInstance))
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")))
+                .ForMember(dest => dest.StructurizrInstanceOfId, opt => opt.MapFrom(src => src.ContainerId));
+
+            CreateMap<StructurizrInfrastructureNode, ElementToImport>()
+                .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.InfrastructureNode))
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
         }
 
         private static List<string>? SplitStringToList(string? str, string separator)

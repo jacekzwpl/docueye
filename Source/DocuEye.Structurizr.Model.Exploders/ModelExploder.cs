@@ -119,22 +119,21 @@ namespace DocuEye.Structurizr.Model.Exploders
 
             if (node.SoftwareSystemInstances != null)
             {
-                foreach (var instance in node.SoftwareSystemInstances)
-                {
-                    var instanceElement = mapper.Map<ElementToImport>(instance);
-                    instanceElement.StructurizrParentId = node.Id;
-                    result.Add(instanceElement);
-                }
+                var softwareSystemInstances = this.ExplodeSoftwareSystemInstances(node.SoftwareSystemInstances, node.Id);
+                result.AddRange(softwareSystemInstances);
             }
+
+            if(node.ContainerInstances != null)
+            {
+                var containerInstances = this.ExplodeContainerInstances(node.ContainerInstances, node.Id);
+                result.AddRange(containerInstances);
+            }
+
 
             if (node.InfrastructureNodes != null)
             {
-                foreach (var infrastructureNode in node.InfrastructureNodes)
-                {
-                    var infrastructureElement = mapper.Map<ElementToImport>(infrastructureNode);
-                    infrastructureElement.StructurizrParentId = node.Id;
-                    result.Add(infrastructureElement);
-                }
+                var infrastructureNodes = this.ExplodeInfrastructureNodes(node.InfrastructureNodes, node.Id);
+                result.AddRange(infrastructureNodes);
             }
 
             if (node.Children != null)
@@ -147,6 +146,33 @@ namespace DocuEye.Structurizr.Model.Exploders
             }
 
             return result;
+        }
+
+        public IEnumerable<ElementToImport> ExplodeInfrastructureNodes(IEnumerable<StructurizrInfrastructureNode> infrastructureNodes, string parentId)
+        {
+            return infrastructureNodes.Select(i => { 
+                var element = this.mapper.Map<ElementToImport>(i);
+                element.StructurizrParentId = parentId;
+                return element;
+            });
+        }
+
+        public IEnumerable<ElementToImport> ExplodeSoftwareSystemInstances(IEnumerable<StructurizrSoftwareSystemInstance> instances, string parentId)
+        {
+            return instances.Select(i => { 
+                var element = this.mapper.Map<ElementToImport>(i);
+                element.StructurizrParentId = parentId;
+                return element;
+            });
+        }
+
+        public IEnumerable<ElementToImport> ExplodeContainerInstances(IEnumerable<StructurizrContainerInstance> instances, string parentId)
+        {
+            return instances.Select(i => { 
+                var element = this.mapper.Map<ElementToImport>(i);
+                element.StructurizrParentId = parentId;
+                return element;
+            });
         }
     }
 }
