@@ -147,13 +147,12 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
         {
             var result = new ViewsChangesResult(this.mapper);
 
-            var componentsElementDiagrams = new Dictionary<string, string>();
-            var containerElementDiagrams = new Dictionary<string, string>();
-            var systemContextElementDiagrams = new Dictionary<string, string>();
+            var elementsDiagrams = new Dictionary<string, string>();
 
+            //Detect identifiers for views
             foreach (var explodedView in explodeViewsResult.ComponentViews)
             {
-                var existingView = existingViews.SingleOrDefault(o=> o.Key == explodedView.View.Key);
+                var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
                 explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
                 explodedView.View.WorkspaceId = workspaceId;
                 var contextElement = newElements
@@ -162,17 +161,11 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 {
                     explodedView.View.ContainerId = contextElement.Id;
 
-                    if(!componentsElementDiagrams.ContainsKey(contextElement.Id)) {
-                        componentsElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                    if (!elementsDiagrams.ContainsKey(contextElement.Id))
+                    {
+                        elementsDiagrams.Add(contextElement.Id, explodedView.View.Id);
                     }
                 }
-
-                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, new Dictionary<string, string>());
-                var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
-                explodedView.View.Elements = viewElements;
-                explodedView.View.Relationships = viewRelationships;
-
-                result.ComponentViewsToAdd.Add(explodedView.View);
             }
 
             foreach (var explodedView in explodeViewsResult.ContainerViews)
@@ -185,19 +178,12 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 if (contextElement != null)
                 {
                     explodedView.View.SoftwareSystemId = contextElement.Id;
-                    if(!containerElementDiagrams.ContainsKey(contextElement.Id))
+                    if (!elementsDiagrams.ContainsKey(contextElement.Id))
                     {
-                        containerElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                        elementsDiagrams.Add(contextElement.Id, explodedView.View.Id);
                     }
-                    
+
                 }
-
-                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, componentsElementDiagrams);
-                var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
-                explodedView.View.Elements = viewElements;
-                explodedView.View.Relationships = viewRelationships;
-
-                result.ContainerViewsToAdd.Add(explodedView.View);
             }
 
             foreach (var explodedView in explodeViewsResult.SystemContextViews)
@@ -210,13 +196,39 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                 if (contextElement != null)
                 {
                     explodedView.View.SoftwareSystemId = contextElement.Id;
-                    if(!systemContextElementDiagrams.ContainsKey(contextElement.Id))
+                    if (!elementsDiagrams.ContainsKey(contextElement.Id))
                     {
-                        systemContextElementDiagrams.Add(contextElement.Id, explodedView.View.Id);
+                        elementsDiagrams.Add(contextElement.Id, explodedView.View.Id);
                     }
-                    
+
                 }
-                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, containerElementDiagrams);
+
+            }
+
+            //Detect in views elements
+            foreach (var explodedView in explodeViewsResult.ComponentViews)
+            {
+                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, elementsDiagrams);
+                var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
+                explodedView.View.Elements = viewElements;
+                explodedView.View.Relationships = viewRelationships;
+
+                result.ComponentViewsToAdd.Add(explodedView.View);
+            }
+
+            foreach (var explodedView in explodeViewsResult.ContainerViews)
+            {
+                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, elementsDiagrams);
+                var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
+                explodedView.View.Elements = viewElements;
+                explodedView.View.Relationships = viewRelationships;
+
+                result.ContainerViewsToAdd.Add(explodedView.View);
+            }
+
+            foreach (var explodedView in explodeViewsResult.SystemContextViews)
+            {
+                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, elementsDiagrams);
                 var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
 
                 explodedView.View.Elements = viewElements;
@@ -227,7 +239,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
 
             foreach (var explodedView in explodeViewsResult.LandscapeViews)
             {
-                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, systemContextElementDiagrams);
+                var viewElements = this.DetectElementsInView(explodedView.Elements, newElements, elementsDiagrams);
                 var viewRelationships = this.DetectRelationshipsView(explodedView.Relationships, newRelationships);
                 var existingView = existingViews.SingleOrDefault(o => o.Key == explodedView.View.Key);
                 explodedView.View.Id = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
@@ -375,6 +387,7 @@ namespace DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector
                     explodedViewElement.Id = newElement.Id;
                     var elementView = this.mapper.Map<ElementView>(explodedViewElement);
                     elementView = this.mapper.Map<ExplodedElement, ElementView>(newElement,elementView);
+      
                     if(elementDiagrams.ContainsKey(newElement.Id))
                     {
                         elementView.DiagramId = elementDiagrams[newElement.Id];
