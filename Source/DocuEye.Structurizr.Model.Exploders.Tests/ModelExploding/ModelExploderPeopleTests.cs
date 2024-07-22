@@ -1,6 +1,6 @@
 using DocuEye.ModelKeeper.Model;
 
-namespace DocuEye.Structurizr.Model.Exploders.Tests
+namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
     public class ModelExploderPeopleTests : BaseExploderTests
     {
