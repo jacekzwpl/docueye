@@ -27,22 +27,22 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeSoftwareSystems(softwareSystems);
+            var (elements, relationships) = exloder.ExplodeSoftwareSystems(softwareSystems);
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(1));
-            Assert.That(result.First().StructurizrId, Is.EqualTo("1"));
-            Assert.That(result.First().Name, Is.EqualTo("SoftwareSystem"));
-            Assert.That(result.First().Description, Is.EqualTo("SoftwareSystem description"));
-            Assert.That(result.First().Technology, Is.Null);
-            Assert.That(result.First().Url, Is.EqualTo("SoftwareSystem url"));
-            Assert.That(result.First().Properties.Count, Is.EqualTo(2));
-            Assert.That(result.First().Properties["Property1"], Is.EqualTo("Value1"));
-            Assert.That(result.First().Properties["Property2"], Is.EqualTo("Value2"));
-            Assert.That(result.First().Type, Is.EqualTo(ElementType.SoftwareSystem));
-            Assert.That(result.First().Tags?.Count(), Is.EqualTo(2));
-            Assert.That(result.First().Tags?.First(), Is.EqualTo("tag1"));
-            Assert.That(result.First().Tags?.Last(), Is.EqualTo("tag2"));
+            Assert.That(elements.Count(), Is.EqualTo(1));
+            Assert.That(elements.First().StructurizrId, Is.EqualTo("1"));
+            Assert.That(elements.First().Name, Is.EqualTo("SoftwareSystem"));
+            Assert.That(elements.First().Description, Is.EqualTo("SoftwareSystem description"));
+            Assert.That(elements.First().Technology, Is.Null);
+            Assert.That(elements.First().Url, Is.EqualTo("SoftwareSystem url"));
+            Assert.That(elements.First().Properties.Count, Is.EqualTo(2));
+            Assert.That(elements.First().Properties["Property1"], Is.EqualTo("Value1"));
+            Assert.That(elements.First().Properties["Property2"], Is.EqualTo("Value2"));
+            Assert.That(elements.First().Type, Is.EqualTo(ElementType.SoftwareSystem));
+            Assert.That(elements.First().Tags?.Count(), Is.EqualTo(2));
+            Assert.That(elements.First().Tags?.First(), Is.EqualTo("tag1"));
+            Assert.That(elements.First().Tags?.Last(), Is.EqualTo("tag2"));
         }
 
         [Test]
@@ -81,10 +81,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeSoftwareSystems(softwareSystems);
+            var (elements, relationships) = exloder.ExplodeSoftwareSystems(softwareSystems);
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(2));
+            Assert.That(elements.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -131,10 +131,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeSoftwareSystems(softwareSystems);
+            var (elements, relationships) = exloder.ExplodeSoftwareSystems(softwareSystems);
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(5));
+            Assert.That(elements.Count(), Is.EqualTo(5));
         }
     }
 }

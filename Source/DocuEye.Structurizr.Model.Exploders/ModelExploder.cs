@@ -21,158 +21,172 @@ namespace DocuEye.Structurizr.Model.Exploders
                 return Enumerable.Empty<ElementToImport>();
             }
 
-            var result = new List<ElementToImport>();
+            var elements = new List<ElementToImport>();
 
             if (model.SoftwareSystems != null)
             {
-                var modelElements = this.ExplodeSoftwareSystems(model.SoftwareSystems);
-                result.AddRange(modelElements);
+                var (modelElements,modelElementsRelationships) = this.ExplodeSoftwareSystems(model.SoftwareSystems);
+                elements.AddRange(modelElements);
             }
 
             if (model.People != null)
             {
-                var people = this.ExplodePeople(model.People);
-                result.AddRange(people);
+                var (people, peopleRelationships) = this.ExplodePeople(model.People);
+                elements.AddRange(people);
             }
 
             if (model.DeploymentNodes != null)
             {
-                var nodes = this.ExplodeDeploymentNodes(model.DeploymentNodes);
-                result.AddRange(nodes);
+                var (nodes, nodesRelationships) = this.ExplodeDeploymentNodes(model.DeploymentNodes);
+                elements.AddRange(nodes);
             }
 
-            return result;
+            return elements;
         }
 
-        public IEnumerable<ElementToImport> ExplodeSoftwareSystems(IEnumerable<StructurizrSoftwareSystem> softwareSystems)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeSoftwareSystems(IEnumerable<StructurizrSoftwareSystem> softwareSystems)
         {
-            var result = new List<ElementToImport>();
+            var elements = new List<ElementToImport>();
+            var relationships = new List<RelationshipToImport>();
             foreach (var softwareSystem in softwareSystems)
             {
                 var softwareSystemElement = this.mapper.Map<ElementToImport>(softwareSystem);
-                result.Add(softwareSystemElement);
+                elements.Add(softwareSystemElement);
 
                 if (softwareSystem.Containers == null)
                 {
                     continue;
                 }
-
-                var containersAndComponents = this.ExplodeContainers(softwareSystem.Containers, softwareSystemElement.StructurizrId);
-                result.AddRange(containersAndComponents);
+                
+                var (children, childrenRelationships) = this.ExplodeContainers(softwareSystem.Containers, softwareSystemElement.StructurizrId);
+                elements.AddRange(children);
             }
-            return result;
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodeContainers(IEnumerable<StructurizrContainer> containers, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeContainers(IEnumerable<StructurizrContainer> containers, string parentId)
         {
-            var result = new List<ElementToImport>();
+            var elements = new List<ElementToImport>();
+            var relationships = new List<RelationshipToImport>();
             foreach (var container in containers)
             {
                 var containerElement = this.mapper.Map<ElementToImport>(container);
                 containerElement.StructurizrParentId = parentId;
-                result.Add(containerElement);
+                elements.Add(containerElement);
 
                 if (container.Components == null)
                 {
                     continue;
                 }
 
-                var components = this.ExplodeComponents(container.Components, containerElement.StructurizrId);
-                result.AddRange(components);
+                var (components, componentsRelationships) = this.ExplodeComponents(container.Components, containerElement.StructurizrId);
+                elements.AddRange(components);
             }
-            return result;
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodeComponents(IEnumerable<StructurizrComponent> components, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeComponents(IEnumerable<StructurizrComponent> components, string parentId)
         {
-            return components.Select(c =>
+            var elements = components.Select(c =>
             {
                 var element = this.mapper.Map<ElementToImport>(c);
                 element.StructurizrParentId = parentId;
                 return element;
             });
+            var relationships = components.SelectMany(c => this.ExplodeRelationships(c.Relationships));
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodePeople(IEnumerable<StructurizrPerson> people)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodePeople(IEnumerable<StructurizrPerson> people)
         {
-            return people.Select(p => this.mapper.Map<ElementToImport>(p));
+            var elements = people.Select(p => this.mapper.Map<ElementToImport>(p));
+            var relationships = people.SelectMany(p => this.ExplodeRelationships(p.Relationships));
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodeDeploymentNodes(IEnumerable<StructurizrDeploymentNode> deploymentNodes)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeDeploymentNodes(IEnumerable<StructurizrDeploymentNode> deploymentNodes)
         {
-            var result = new List<ElementToImport>();
+            var elements = new List<ElementToImport>();
+            var relationships = new List<RelationshipToImport>();
             foreach (var deploymentNode in deploymentNodes)
             {
-                var nodes = this.ExplodeDeploymentNode(deploymentNode);
-                result.AddRange(nodes);
+                var (nodes, nodesRelationships) = this.ExplodeDeploymentNode(deploymentNode);
+                elements.AddRange(nodes);
             }
 
-            return result;
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodeDeploymentNode(StructurizrDeploymentNode node, string? parentStructurizrId = null)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeDeploymentNode(StructurizrDeploymentNode node, string? parentStructurizrId = null)
         {
-            var result = new List<ElementToImport>();
+            var elements = new List<ElementToImport>();
+            var relationships = new List<RelationshipToImport>();
             var nodeElement = mapper.Map<ElementToImport>(node);
             nodeElement.StructurizrParentId = parentStructurizrId;
-            result.Add(nodeElement);
+            elements.Add(nodeElement);
 
             if (node.SoftwareSystemInstances != null)
             {
-                var softwareSystemInstances = this.ExplodeSoftwareSystemInstances(node.SoftwareSystemInstances, node.Id);
-                result.AddRange(softwareSystemInstances);
+                var (softwareSystemInstances, softwareSystemInstancesRelationships) = this.ExplodeSoftwareSystemInstances(node.SoftwareSystemInstances, node.Id);
+                elements.AddRange(softwareSystemInstances);
             }
 
             if(node.ContainerInstances != null)
             {
-                var containerInstances = this.ExplodeContainerInstances(node.ContainerInstances, node.Id);
-                result.AddRange(containerInstances);
+                var (containerInstances, containerInstancesRelationships) = this.ExplodeContainerInstances(node.ContainerInstances, node.Id);
+                elements.AddRange(containerInstances);
             }
 
 
             if (node.InfrastructureNodes != null)
             {
-                var infrastructureNodes = this.ExplodeInfrastructureNodes(node.InfrastructureNodes, node.Id);
-                result.AddRange(infrastructureNodes);
+                var (infrastructureNodes, infrastructureNodesRelationships) = this.ExplodeInfrastructureNodes(node.InfrastructureNodes, node.Id);
+                elements.AddRange(infrastructureNodes);
             }
 
             if (node.Children != null)
             {
                 foreach (var child in node.Children)
                 {
-                    var children = this.ExplodeDeploymentNode(child, node.Id);
-                    result.AddRange(children);
+                    var (children, childrenRelationships) = this.ExplodeDeploymentNode(child, node.Id);
+                    elements.AddRange(children);
                 }
             }
 
-            return result;
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodeInfrastructureNodes(IEnumerable<StructurizrInfrastructureNode> infrastructureNodes, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeInfrastructureNodes(IEnumerable<StructurizrInfrastructureNode> infrastructureNodes, string parentId)
         {
-            return infrastructureNodes.Select(i => { 
+            var elements = infrastructureNodes.Select(i => { 
                 var element = this.mapper.Map<ElementToImport>(i);
                 element.StructurizrParentId = parentId;
                 return element;
             });
+            var relationships = infrastructureNodes.SelectMany(i => this.ExplodeRelationships(i.Relationships));
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodeSoftwareSystemInstances(IEnumerable<StructurizrSoftwareSystemInstance> instances, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeSoftwareSystemInstances(IEnumerable<StructurizrSoftwareSystemInstance> instances, string parentId)
         {
-            return instances.Select(i => { 
+            var elements = instances.Select(i => { 
                 var element = this.mapper.Map<ElementToImport>(i);
                 element.StructurizrParentId = parentId;
                 return element;
             });
+            var relationships = instances.SelectMany(i => this.ExplodeRelationships(i.Relationships));
+            return (elements, relationships);
         }
 
-        public IEnumerable<ElementToImport> ExplodeContainerInstances(IEnumerable<StructurizrContainerInstance> instances, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeContainerInstances(IEnumerable<StructurizrContainerInstance> instances, string parentId)
         {
-            return instances.Select(i => { 
+            var elements = instances.Select(i => { 
                 var element = this.mapper.Map<ElementToImport>(i);
                 element.StructurizrParentId = parentId;
                 return element;
             });
+            var relationships = instances.SelectMany(i => this.ExplodeRelationships(i.Relationships));
+            return (elements, relationships);
         }
 
         public IEnumerable<RelationshipToImport> ExplodeRelationships(IEnumerable<StructurizrRelationship>? structurizrRelations)
