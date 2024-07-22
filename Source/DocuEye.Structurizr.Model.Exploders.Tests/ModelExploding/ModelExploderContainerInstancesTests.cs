@@ -21,20 +21,20 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeContainerInstances(containerInstances, "parentId");
+            var (elements,relationships) = exloder.ExplodeContainerInstances(containerInstances, "parentId");
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(1));
-            Assert.That(result.First().StructurizrId, Is.EqualTo("1"));
-            Assert.That(result.First().StructurizrParentId, Is.EqualTo("parentId"));
-            Assert.That(result.First().StructurizrInstanceOfId, Is.EqualTo("Container1"));
-            Assert.That(result.First().Tags?.Count(), Is.EqualTo(2));
-            Assert.That(result.First().Tags?.First(), Is.EqualTo("tag1"));
-            Assert.That(result.First().Tags?.Last(), Is.EqualTo("tag2"));
-            Assert.That(result.First().Properties.Count, Is.EqualTo(2));
-            Assert.That(result.First().Properties["key1"], Is.EqualTo("value1"));
-            Assert.That(result.First().Properties["key2"], Is.EqualTo("value2"));
-            Assert.That(result.First().Type, Is.EqualTo(ElementType.ContainerInstance));
+            Assert.That(elements.Count(), Is.EqualTo(1));
+            Assert.That(elements.First().StructurizrId, Is.EqualTo("1"));
+            Assert.That(elements.First().StructurizrParentId, Is.EqualTo("parentId"));
+            Assert.That(elements.First().StructurizrInstanceOfId, Is.EqualTo("Container1"));
+            Assert.That(elements.First().Tags?.Count(), Is.EqualTo(2));
+            Assert.That(elements.First().Tags?.First(), Is.EqualTo("tag1"));
+            Assert.That(elements.First().Tags?.Last(), Is.EqualTo("tag2"));
+            Assert.That(elements.First().Properties.Count, Is.EqualTo(2));
+            Assert.That(elements.First().Properties["key1"], Is.EqualTo("value1"));
+            Assert.That(elements.First().Properties["key2"], Is.EqualTo("value2"));
+            Assert.That(elements.First().Type, Is.EqualTo(ElementType.ContainerInstance));
         }
 
         [Test]
@@ -65,10 +65,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeContainerInstances(containerInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeContainerInstances(containerInstances, "parentId");
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(2));
+            Assert.That(elements.Count(), Is.EqualTo(2));
 
         }
     }

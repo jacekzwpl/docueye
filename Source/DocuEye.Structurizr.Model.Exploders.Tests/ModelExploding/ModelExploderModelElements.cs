@@ -12,10 +12,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeModelElements(model);
+            var elements = exloder.ExplodeModelElements(model);
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(0));
+            Assert.That(elements.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -26,10 +26,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeModelElements(model);
+            var elements = exloder.ExplodeModelElements(model);
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(0));
+            Assert.That(elements.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -82,25 +82,25 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeModelElements(model);
+            var elements = exloder.ExplodeModelElements(model);
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(5));
-            Assert.That(result.First().StructurizrId, Is.EqualTo("1"));
-            Assert.That(result.First().Name, Is.EqualTo("SoftwareSystem"));
-            Assert.That(result.First().Type, Is.EqualTo(ElementType.SoftwareSystem));
-            Assert.That(result.ElementAt(1).StructurizrId, Is.EqualTo("4"));
-            Assert.That(result.ElementAt(1).Name, Is.EqualTo("Container"));
-            Assert.That(result.ElementAt(1).Type, Is.EqualTo(ElementType.Container));
-            Assert.That(result.ElementAt(2).StructurizrId, Is.EqualTo("5"));
-            Assert.That(result.ElementAt(2).Name, Is.EqualTo("Component"));
-            Assert.That(result.ElementAt(2).Type, Is.EqualTo(ElementType.Component));
-            Assert.That(result.ElementAt(3).StructurizrId, Is.EqualTo("2"));
-            Assert.That(result.ElementAt(3).Name, Is.EqualTo("Person"));
-            Assert.That(result.ElementAt(3).Type, Is.EqualTo(ElementType.Person));
-            Assert.That(result.ElementAt(4).StructurizrId, Is.EqualTo("3"));
-            Assert.That(result.ElementAt(4).Name, Is.EqualTo("DeploymentNode"));
-            Assert.That(result.ElementAt(4).Type, Is.EqualTo(ElementType.DeploymentNode));
+            Assert.That(elements.Count(), Is.EqualTo(5));
+            Assert.That(elements.First().StructurizrId, Is.EqualTo("1"));
+            Assert.That(elements.First().Name, Is.EqualTo("SoftwareSystem"));
+            Assert.That(elements.First().Type, Is.EqualTo(ElementType.SoftwareSystem));
+            Assert.That(elements.ElementAt(1).StructurizrId, Is.EqualTo("4"));
+            Assert.That(elements.ElementAt(1).Name, Is.EqualTo("Container"));
+            Assert.That(elements.ElementAt(1).Type, Is.EqualTo(ElementType.Container));
+            Assert.That(elements.ElementAt(2).StructurizrId, Is.EqualTo("5"));
+            Assert.That(elements.ElementAt(2).Name, Is.EqualTo("Component"));
+            Assert.That(elements.ElementAt(2).Type, Is.EqualTo(ElementType.Component));
+            Assert.That(elements.ElementAt(3).StructurizrId, Is.EqualTo("2"));
+            Assert.That(elements.ElementAt(3).Name, Is.EqualTo("Person"));
+            Assert.That(elements.ElementAt(3).Type, Is.EqualTo(ElementType.Person));
+            Assert.That(elements.ElementAt(4).StructurizrId, Is.EqualTo("3"));
+            Assert.That(elements.ElementAt(4).Name, Is.EqualTo("DeploymentNode"));
+            Assert.That(elements.ElementAt(4).Type, Is.EqualTo(ElementType.DeploymentNode));
         }
     }
 }

@@ -28,23 +28,23 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeContainers(containers, "parentId");
+            var (elements, relationships) = exloder.ExplodeContainers(containers, "parentId");
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(1));
-            Assert.That(result.First().StructurizrId, Is.EqualTo("1"));
-            Assert.That(result.First().Name, Is.EqualTo("Container"));
-            Assert.That(result.First().Description, Is.EqualTo("Container description"));
-            Assert.That(result.First().Technology, Is.EqualTo("Container technology"));
-            Assert.That(result.First().Url, Is.EqualTo("Container url"));
-            Assert.That(result.First().Properties.Count, Is.EqualTo(2));
-            Assert.That(result.First().Properties["Property1"], Is.EqualTo("Value1"));
-            Assert.That(result.First().Properties["Property2"], Is.EqualTo("Value2"));
-            Assert.That(result.First().StructurizrParentId, Is.EqualTo("parentId"));
-            Assert.That(result.First().Type, Is.EqualTo(ElementType.Container));
-            Assert.That(result.First().Tags?.Count(), Is.EqualTo(2));
-            Assert.That(result.First().Tags?.First(), Is.EqualTo("tag1"));
-            Assert.That(result.First().Tags?.Last(), Is.EqualTo("tag2"));
+            Assert.That(elements.Count(), Is.EqualTo(1));
+            Assert.That(elements.First().StructurizrId, Is.EqualTo("1"));
+            Assert.That(elements.First().Name, Is.EqualTo("Container"));
+            Assert.That(elements.First().Description, Is.EqualTo("Container description"));
+            Assert.That(elements.First().Technology, Is.EqualTo("Container technology"));
+            Assert.That(elements.First().Url, Is.EqualTo("Container url"));
+            Assert.That(elements.First().Properties.Count, Is.EqualTo(2));
+            Assert.That(elements.First().Properties["Property1"], Is.EqualTo("Value1"));
+            Assert.That(elements.First().Properties["Property2"], Is.EqualTo("Value2"));
+            Assert.That(elements.First().StructurizrParentId, Is.EqualTo("parentId"));
+            Assert.That(elements.First().Type, Is.EqualTo(ElementType.Container));
+            Assert.That(elements.First().Tags?.Count(), Is.EqualTo(2));
+            Assert.That(elements.First().Tags?.First(), Is.EqualTo("tag1"));
+            Assert.That(elements.First().Tags?.Last(), Is.EqualTo("tag2"));
         }
 
         [Test]
@@ -85,10 +85,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeContainers(containers, "parentId");
+            var (elements, relationships) = exloder.ExplodeContainers(containers, "parentId");
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(2));
+            Assert.That(elements.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -137,10 +137,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var result = exloder.ExplodeContainers(containers, "parentId");
+            var (elements, relationships) = exloder.ExplodeContainers(containers, "parentId");
 
             // Assert
-            Assert.That(result.Count(), Is.EqualTo(6));
+            Assert.That(elements.Count(), Is.EqualTo(6));
         }
     }
 }
