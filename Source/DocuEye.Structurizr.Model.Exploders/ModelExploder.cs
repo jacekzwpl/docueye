@@ -174,5 +174,15 @@ namespace DocuEye.Structurizr.Model.Exploders
                 return element;
             });
         }
+
+        public IEnumerable<RelationshipToImport> ExplodeRelationships(IEnumerable<StructurizrRelationship>? structurizrRelations)
+        {
+            if (structurizrRelations == null)
+            {
+                return Enumerable.Empty<RelationshipToImport>();
+            }
+
+            return this.mapper.Map<IEnumerable<RelationshipToImport>>(structurizrRelations);
+        }
     }
 }

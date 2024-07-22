@@ -51,6 +51,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Mappings
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.InfrastructureNode))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
+
+            CreateMap<StructurizrRelationship, RelationshipToImport>()
+                .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.StructurizrSourceId, opt => opt.MapFrom(src => src.SourceId))
+                .ForMember(dest => dest.StructurizrDestinationId, opt => opt.MapFrom(src => src.DestinationId))
+                .ForMember(dest => dest.StructurizrLinkedRelationshipId, opt => opt.MapFrom(src => src.LinkedRelationshipId))
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
         }
 
         private static List<string>? SplitStringToList(string? str, string separator)
