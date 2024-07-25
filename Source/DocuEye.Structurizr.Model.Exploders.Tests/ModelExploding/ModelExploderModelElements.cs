@@ -12,10 +12,11 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var elements = exloder.ExplodeModelElements(model);
+            var (elements,relationships) = exloder.ExplodeModelElements(model);
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(0));
+            Assert.That(relationships.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -26,10 +27,11 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var elements = exloder.ExplodeModelElements(model);
+            var (elements, relationships) = exloder.ExplodeModelElements(model);
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(0));
+            Assert.That(relationships.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -44,12 +46,30 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     {
                         Id = "1",
                         Name = "SoftwareSystem",
+                        Relationships = new List<StructurizrRelationship>
+                        {
+                            new StructurizrRelationship
+                            {
+                                Id = "1",
+                                SourceId = "1",
+                                DestinationId = "2"
+                            }
+                        },
                         Containers = new List<StructurizrContainer>
                         {
                             new StructurizrContainer
                             {
                                 Id = "4",
                                 Name = "Container",
+                                Relationships = new List<StructurizrRelationship>
+                                {
+                                    new StructurizrRelationship
+                                    {
+                                        Id = "2",
+                                        SourceId = "4",
+                                        DestinationId = "5"
+                                    }
+                                },
                                 Components = new List<StructurizrComponent>
                                 {
                                     new StructurizrComponent
@@ -67,7 +87,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     new StructurizrPerson
                     {
                         Id = "2",
-                        Name = "Person"
+                        Name = "Person",
+                        Relationships = new List<StructurizrRelationship>
+                        {
+                            new StructurizrRelationship
+                            {
+                                Id = "3",
+                                SourceId = "2",
+                                DestinationId = "3"
+                            }
+                        }
                     }
                 },
                 DeploymentNodes = new List<StructurizrDeploymentNode>
@@ -75,14 +104,24 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     new StructurizrDeploymentNode
                     {
                         Id = "3",
-                        Name = "DeploymentNode"
+                        Name = "DeploymentNode",
+                        Relationships = new List<StructurizrRelationship>
+                        {
+                            new StructurizrRelationship
+                            {
+                                Id = "1",
+                                SourceId = "1",
+                                DestinationId = "2"
+                            }
+                        }
+                        
                     }
                 }
             };
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var elements = exloder.ExplodeModelElements(model);
+            var (elements, relationships) = exloder.ExplodeModelElements(model);
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(5));
@@ -101,6 +140,8 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             Assert.That(elements.ElementAt(4).StructurizrId, Is.EqualTo("3"));
             Assert.That(elements.ElementAt(4).Name, Is.EqualTo("DeploymentNode"));
             Assert.That(elements.ElementAt(4).Type, Is.EqualTo(ElementType.DeploymentNode));
+
+            Assert.That(relationships.Count(), Is.EqualTo(4));
         }
     }
 }
