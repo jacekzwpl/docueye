@@ -136,5 +136,114 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(5));
         }
+
+        [Test]
+        public void WhenSoftwareSystemHasRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var softwareSystems = new List<StructurizrSoftwareSystem>()
+            {
+                new StructurizrSoftwareSystem
+                {
+                    Id = "1",
+                    Name = "SoftwareSystem1",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Relationship1 description",
+                            Technology = "Technology1",
+                            Tags = "tag1,tag2",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeSoftwareSystems(softwareSystems);
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(1));
+            Assert.That(relationships.First().StructurizrId, Is.EqualTo("1"));
+            Assert.That(relationships.First().StructurizrSourceId, Is.EqualTo("1"));
+            Assert.That(relationships.First().StructurizrDestinationId, Is.EqualTo("2"));
+            Assert.That(relationships.First().Description, Is.EqualTo("Relationship1 description"));
+            Assert.That(relationships.First().Technology, Is.EqualTo("Technology1"));
+            Assert.That(relationships.First().Tags?.Count(), Is.EqualTo(2));
+            Assert.That(relationships.First().Tags?.First(), Is.EqualTo("tag1"));
+            Assert.That(relationships.First().Tags?.Last(), Is.EqualTo("tag2"));
+            Assert.That(relationships.First().Properties.Count, Is.EqualTo(2));
+            Assert.That(relationships.First().Properties["Property1"], Is.EqualTo("Value1"));
+            Assert.That(relationships.First().Properties["Property2"], Is.EqualTo("Value2"));
+        }
+
+        [Test]
+        public void WhenMultipleSoftwareSystemsHaveRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var softwareSystems = new List<StructurizrSoftwareSystem>()
+            {
+                new StructurizrSoftwareSystem
+                {
+                    Id = "1",
+                    Name = "SoftwareSystem1",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Relationship1 description",
+                            Technology = "Technology1",
+                            Tags = "tag1,tag2",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                },
+                new StructurizrSoftwareSystem
+                {
+                    Id = "2",
+                    Name = "SoftwareSystem2",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "2",
+                            SourceId = "2",
+                            DestinationId = "3",
+                            Description = "Relationship2 description",
+                            Technology = "Technology2",
+                            Tags = "tag3,tag4",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property3", "Value3" },
+                                { "Property4", "Value4" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeSoftwareSystems(softwareSystems);
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(2));
+        }
     }
 }
