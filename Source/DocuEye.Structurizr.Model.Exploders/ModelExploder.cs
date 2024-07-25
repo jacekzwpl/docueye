@@ -53,6 +53,9 @@ namespace DocuEye.Structurizr.Model.Exploders
                 var softwareSystemElement = this.mapper.Map<ElementToImport>(softwareSystem);
                 elements.Add(softwareSystemElement);
 
+                var systemRelationships = this.ExplodeRelationships(softwareSystem.Relationships);
+                relationships.AddRange(systemRelationships);
+
                 if (softwareSystem.Containers == null)
                 {
                     continue;
@@ -60,6 +63,7 @@ namespace DocuEye.Structurizr.Model.Exploders
                 
                 var (children, childrenRelationships) = this.ExplodeContainers(softwareSystem.Containers, softwareSystemElement.StructurizrId);
                 elements.AddRange(children);
+                relationships.AddRange(childrenRelationships);
             }
             return (elements, relationships);
         }
@@ -74,6 +78,9 @@ namespace DocuEye.Structurizr.Model.Exploders
                 containerElement.StructurizrParentId = parentId;
                 elements.Add(containerElement);
 
+                var containerRelationships = this.ExplodeRelationships(container.Relationships);
+                relationships.AddRange(containerRelationships);
+
                 if (container.Components == null)
                 {
                     continue;
@@ -81,6 +88,7 @@ namespace DocuEye.Structurizr.Model.Exploders
 
                 var (components, componentsRelationships) = this.ExplodeComponents(container.Components, containerElement.StructurizrId);
                 elements.AddRange(components);
+                relationships.AddRange(componentsRelationships);
             }
             return (elements, relationships);
         }

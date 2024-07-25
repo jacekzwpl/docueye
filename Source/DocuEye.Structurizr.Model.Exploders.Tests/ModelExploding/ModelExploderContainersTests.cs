@@ -142,5 +142,106 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(6));
         }
+
+        [Test]
+        public void WhenMultipleContainersHaveRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var containers = new List<StructurizrContainer>()
+            {
+                new StructurizrContainer
+                {
+                    Id = "1",
+                    Name = "Container1",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Description",
+                            Technology = "Technology",
+                            Tags = "tag1,tag2",
+                            Url = "https://www.docueye.com",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                },
+                new StructurizrContainer
+                {
+                    Id = "2",
+                    Name = "Container2",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "2",
+                            SourceId = "2",
+                            DestinationId = "3",
+                            Description = "Description",
+                            Technology = "Technology",
+                            Tags = "tag1,tag2",
+                            Url = "https://www.docueye.com",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeContainers(containers, "parentId");
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void WhenContainerHasRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var containers = new List<StructurizrContainer>()
+            {
+                new StructurizrContainer
+                {
+                    Id = "1",
+                    Name = "Container1",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Description",
+                            Technology = "Technology",
+                            Tags = "tag1,tag2",
+                            Url = "https://www.docueye.com",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeContainers(containers, "parentId");
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(1));
+        }
     }
 }
