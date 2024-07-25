@@ -14,34 +14,38 @@ namespace DocuEye.Structurizr.Model.Exploders
             this.mapper = mapper;
         }
 
-        public IEnumerable<ElementToImport> ExplodeModelElements(StructurizrModel? model)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeModelElements(StructurizrModel? model)
         {
             if (model == null)
             {
-                return Enumerable.Empty<ElementToImport>();
+                return (Enumerable.Empty<ElementToImport>(), Enumerable.Empty<RelationshipToImport>());
             }
 
             var elements = new List<ElementToImport>();
+            var relationships = new List<RelationshipToImport>();
 
             if (model.SoftwareSystems != null)
             {
                 var (modelElements,modelElementsRelationships) = this.ExplodeSoftwareSystems(model.SoftwareSystems);
                 elements.AddRange(modelElements);
+                relationships.AddRange(modelElementsRelationships);
             }
 
             if (model.People != null)
             {
                 var (people, peopleRelationships) = this.ExplodePeople(model.People);
                 elements.AddRange(people);
+                relationships.AddRange(peopleRelationships);
             }
 
             if (model.DeploymentNodes != null)
             {
                 var (nodes, nodesRelationships) = this.ExplodeDeploymentNodes(model.DeploymentNodes);
                 elements.AddRange(nodes);
+                relationships.AddRange(nodesRelationships);
             }
 
-            return elements;
+            return (elements, relationships);
         }
 
         public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeSoftwareSystems(IEnumerable<StructurizrSoftwareSystem> softwareSystems)
