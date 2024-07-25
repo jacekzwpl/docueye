@@ -89,8 +89,136 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(2));
-        } 
+        }
 
-       
+        [Test]
+        public void WhenComponentHasRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var components = new List<StructurizrComponent>()
+            {
+                new StructurizrComponent
+                {
+                    Id = "1",
+                    Name = "Component1",
+                    Description = "Component1 description",
+                    Technology = "Component1 technology",
+                    Url = "Component1 url",
+                    Tags = "tag1,tag2",
+                    Properties = new Dictionary<string, string>
+                    {
+                        { "Property1", "Value1" },
+                        { "Property2", "Value2" }
+                    },
+                    Relationships = new List<StructurizrRelationship>()
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Relationship description",
+                            Technology = "Relationship technology",
+                            Url = "Relationship url",
+                            Tags = "tag1,tag2",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeComponents(components, "parentId");
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void WhenMultipleComponentsHaveRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var components = new List<StructurizrComponent>()
+            {
+                new StructurizrComponent
+                {
+                    Id = "1",
+                    Name = "Component1",
+                    Description = "Component1 description",
+                    Technology = "Component1 technology",
+                    Url = "Component1 url",
+                    Tags = "tag1,tag2",
+                    Properties = new Dictionary<string, string>
+                    {
+                        { "Property1", "Value1" },
+                        { "Property2", "Value2" }
+                    },
+                    Relationships = new List<StructurizrRelationship>()
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Relationship description",
+                            Technology = "Relationship technology",
+                            Url = "Relationship url",
+                            Tags = "tag1,tag2",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                },
+                new StructurizrComponent
+                {
+                    Id = "2",
+                    Name = "Component2",
+                    Description = "Component2 description",
+                    Technology = "Component2 technology",
+                    Url = "Component2 url",
+                    Tags = "tag3,tag4",
+                    Properties = new Dictionary<string, string>
+                    {
+                        { "Property3", "Value3" },
+                        { "Property4", "Value4" }
+                    },
+                    Relationships = new List<StructurizrRelationship>()
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "2",
+                            SourceId = "2",
+                            DestinationId = "3",
+                            Description = "Relationship description",
+                            Technology = "Relationship technology",
+                            Url = "Relationship url",
+                            Tags = "tag1,tag2",
+                            Properties = new Dictionary<string, string>
+                            {
+                                { "Property1", "Value1" },
+                                { "Property2", "Value2" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeComponents(components, "parentId");
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(2));
+        }
+
+
     }
 }
