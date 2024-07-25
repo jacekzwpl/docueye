@@ -93,5 +93,121 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             Assert.That(elements.Last().StructurizrId, Is.EqualTo("2"));
             Assert.That(elements.Last().Name, Is.EqualTo("InfrastructureNode2"));
         }
+
+        [Test]
+        public void WhenInfrastructureNodeHasRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var infrastructureNodes = new List<StructurizrInfrastructureNode>
+            {
+                new StructurizrInfrastructureNode
+                {
+                    Id = "1",
+                    Description = "Description",
+                    Environment = "Development",
+                    Technology = "Technology",
+                    Tags = "tag1,tag2",
+                    Name = "InfrastructureNode1",
+                    Url = "https://www.docueye.com",
+                    Group = "Group1",
+                    Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
+                    },
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Description",
+                            Technology = "Technology",
+                            Tags = "tag1,tag2",
+                            Url = "https://www.docueye.com",
+                            Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeInfrastructureNodes(infrastructureNodes, "parentId");
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void WhenMultipleInfrastructureNodesHaveRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var infrastructureNodes = new List<StructurizrInfrastructureNode>
+            {
+                new StructurizrInfrastructureNode
+                {
+                    Id = "1",
+                    Description = "Description",
+                    Environment = "Development",
+                    Technology = "Technology",
+                    Tags = "tag1,tag2",
+                    Name = "InfrastructureNode1",
+                    Url = "https://www.docueye.com",
+                    Group = "Group1",
+                    Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
+                    },
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Description",
+                            Technology = "Technology",
+                            Tags = "tag1,tag2",
+                            Url = "https://www.docueye.com",
+                            Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
+                            }
+                        }
+                    }
+                },
+                new StructurizrInfrastructureNode
+                {
+                    Id = "2",
+                    Description = "Description",
+                    Environment = "Development",
+                    Technology = "Technology",
+                    Tags = "tag1,tag2",
+                    Name = "InfrastructureNode1",
+                    Url = "https://www.docueye.com",
+                    Group = "Group1",
+                    Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
+                    },
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "2",
+                            SourceId = "1",
+                            DestinationId = "2",
+                            Description = "Description",
+                            Technology = "Technology",
+                            Tags = "tag1,tag2",
+                            Url = "https://www.docueye.com",
+                            Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeInfrastructureNodes(infrastructureNodes, "parentId");
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(2));
+        }
     }
 }
