@@ -240,5 +240,99 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             Assert.That(elements.ElementAt(2).StructurizrParentId, Is.EqualTo("2"));
             Assert.That(elements.ElementAt(2).Type, Is.EqualTo(ElementType.DeploymentNode));
         }
+
+        [Test]
+        public void WhenDeploymentNodeHasRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var deploymentNode = new StructurizrDeploymentNode
+            {
+                Id = "1",
+                Name = "DeploymentNode1",
+                Relationships = new List<StructurizrRelationship>
+                {
+                    new StructurizrRelationship
+                    {
+                        Id = "2",
+                        SourceId = "1",
+                        DestinationId = "3",
+                        Description = "Description",
+                        Technology = "Technology",
+                        Tags = "tag1,tag2",
+                        Url = "https://www.docueye.com",
+                        Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
+                            }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, "parentId");
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void WhenMultipleDeploymentNodesHaveRelationshipsThenAllRelationshipsAreExloded()
+        {
+            // Arrange
+            var deploymentNodes = new List<StructurizrDeploymentNode>
+            {
+                new StructurizrDeploymentNode
+                {
+                    Id = "1",
+                    Name = "DeploymentNode1",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2"
+                        }
+                    }
+                },
+                new StructurizrDeploymentNode
+                {
+                    Id = "2",
+                    Name = "DeploymentNode2",
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "2",
+                            SourceId = "2",
+                            DestinationId = "3"
+                        }
+                    },
+                    Children = new List<StructurizrDeploymentNode>
+                    {
+                        new StructurizrDeploymentNode
+                        {
+                            Id = "3",
+                            Name = "DeploymentNode3",
+                            Relationships = new List<StructurizrRelationship>
+                            {
+                                new StructurizrRelationship
+                                {
+                                    Id = "3",
+                                    SourceId = "1",
+                                    DestinationId = "3"
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodeDeploymentNodes(deploymentNodes);
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(3));
+        }
     }
 }

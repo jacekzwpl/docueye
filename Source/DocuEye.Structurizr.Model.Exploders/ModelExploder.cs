@@ -120,6 +120,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             {
                 var (nodes, nodesRelationships) = this.ExplodeDeploymentNode(deploymentNode);
                 elements.AddRange(nodes);
+                relationships.AddRange(nodesRelationships);
             }
 
             return (elements, relationships);
@@ -133,16 +134,21 @@ namespace DocuEye.Structurizr.Model.Exploders
             nodeElement.StructurizrParentId = parentStructurizrId;
             elements.Add(nodeElement);
 
+            var nodeRelationships = this.ExplodeRelationships(node.Relationships);
+            relationships.AddRange(nodeRelationships);
+
             if (node.SoftwareSystemInstances != null)
             {
                 var (softwareSystemInstances, softwareSystemInstancesRelationships) = this.ExplodeSoftwareSystemInstances(node.SoftwareSystemInstances, node.Id);
                 elements.AddRange(softwareSystemInstances);
+                relationships.AddRange(softwareSystemInstancesRelationships);
             }
 
             if(node.ContainerInstances != null)
             {
                 var (containerInstances, containerInstancesRelationships) = this.ExplodeContainerInstances(node.ContainerInstances, node.Id);
                 elements.AddRange(containerInstances);
+                relationships.AddRange(containerInstancesRelationships);
             }
 
 
@@ -150,6 +156,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             {
                 var (infrastructureNodes, infrastructureNodesRelationships) = this.ExplodeInfrastructureNodes(node.InfrastructureNodes, node.Id);
                 elements.AddRange(infrastructureNodes);
+                relationships.AddRange(infrastructureNodesRelationships);
             }
 
             if (node.Children != null)
@@ -158,6 +165,7 @@ namespace DocuEye.Structurizr.Model.Exploders
                 {
                     var (children, childrenRelationships) = this.ExplodeDeploymentNode(child, node.Id);
                     elements.AddRange(children);
+                    relationships.AddRange(childrenRelationships);
                 }
             }
 

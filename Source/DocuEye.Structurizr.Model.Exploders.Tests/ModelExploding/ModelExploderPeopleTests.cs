@@ -78,5 +78,95 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(2));
         }
+
+        [Test]
+        public void WhenPersonHasRelationshipsThenAllRelationshipsAreEXploded()
+        {
+            // Arrange
+            var people = new List<StructurizrPerson>
+            {
+                new StructurizrPerson
+                {
+                    Id = "1",
+                    Name = "John Doe",
+                    Description = "A person",
+                    Location = "London",
+                    Url = "http://example.com",
+                    Tags = "tag1,tag2",
+                    Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" } },
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2"
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodePeople(people);
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void WhenPeopleHaveRelationshipsThenAllRelationshipsAreExploded()
+        {
+            // Arrange
+            var people = new List<StructurizrPerson>
+            {
+                new StructurizrPerson
+                {
+                    Id = "1",
+                    Name = "John Doe",
+                    Description = "A person",
+                    Location = "London",
+                    Url = "http://example.com",
+                    Tags = "tag1,tag2",
+                    Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" } },
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "1",
+                            SourceId = "1",
+                            DestinationId = "2"
+                        }
+                    }
+
+                },
+                new StructurizrPerson
+                {
+                    Id = "2",
+                    Name = "Jane Doe",
+                    Description = "A person",
+                    Location = "London",
+                    Url = "http://example.com",
+                    Tags = "tag1,tag2",
+                    Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" } },
+                    Relationships = new List<StructurizrRelationship>
+                    {
+                        new StructurizrRelationship
+                        {
+                            Id = "2",
+                            SourceId = "2",
+                            DestinationId = "3"
+                        }
+                    }
+                }
+            };
+            var exloder = new ModelExploder(this.mapper);
+
+            // Act
+            var (elements, relationships) = exloder.ExplodePeople(people);
+
+            // Assert
+            Assert.That(relationships.Count(), Is.EqualTo(2));
+        }
     }
 }
