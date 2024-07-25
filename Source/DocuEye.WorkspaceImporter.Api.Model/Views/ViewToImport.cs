@@ -47,6 +47,10 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Views
         /// Specifies software system/container boundaries should be visible for \"external\" containers/components (those outside the element in scope)
         /// </summary>
         public bool? ExternalBoundariesVisible { get; set; }
+        /// <summary>
+        /// Automatic layout configuration
+        /// </summary>
+        public ViewAutomaticLayout? AutomaticLayout { get; set; }
 
         #region ImageView
 
