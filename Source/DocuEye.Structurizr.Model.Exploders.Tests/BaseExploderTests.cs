@@ -10,8 +10,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests
         [SetUp]
         public void Setup()
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
-            cfg.AddProfile<StructurizrModelToApiMappingProfile>());
+            MapperConfiguration config = new MapperConfiguration(cfg => {
+                cfg.AddProfile<StructurizrModelToApiMappingProfile>();
+                cfg.AddProfile<StructurizrViewsToApiMappingProfile>();
+            });
             mapper = config.CreateMapper();
         }
     }

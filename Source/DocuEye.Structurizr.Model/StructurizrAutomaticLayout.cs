@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DocuEye.Structurizr.Model
+﻿namespace DocuEye.Structurizr.Model
 {
     public class StructurizrAutomaticLayout
     {
