@@ -105,6 +105,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Mappings
 
             CreateMap<StructurizrImageView, ViewToImport>()
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.ImageView))
+                .ForMember(dest => dest.StructurizrElementId, opt => opt.MapFrom(src => src.ElementId))
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Content))
                 .ForMember(dest => dest.ContentType, opt => opt.MapFrom(src => src.ContentType))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
