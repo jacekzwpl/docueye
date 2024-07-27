@@ -15,7 +15,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             this.mapper = mapper;
         }
 
-        public (DocumentationToImport,IEnumerable<DecisionToImport>,IEnumerable<ImageToImport>) ExplodeDocumentation(StructurizrDocumentation documentation, string? elementId)
+        public (DocumentationToImport,IEnumerable<DecisionToImport>,IEnumerable<ImageToImport>) ExplodeDocumentation(StructurizrDocumentation documentation, string? elementId = null)
         {
             var documentationToImport = new DocumentationToImport()
             {
