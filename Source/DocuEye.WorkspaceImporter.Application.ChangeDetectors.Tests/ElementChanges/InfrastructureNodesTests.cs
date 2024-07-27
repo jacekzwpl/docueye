@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementChanges
+﻿namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementChanges
 {
     public class InfrastructureNodesTests : BaseDetectorsTests
     {
