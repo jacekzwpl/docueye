@@ -133,11 +133,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.WorkspacesKeeper.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Infrastructure.Authentication", "Source\DocuEye.Infrastructure.Authentication\DocuEye.Infrastructure.Authentication.csproj", "{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.Model.Exploders", "Source\DocuEye.Structurizr.Model.Exploders\DocuEye.Structurizr.Model.Exploders.csproj", "{F6C26AEE-0233-41AC-BDE6-C4150B1AF279}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Structurizr.Model.Exploders", "Source\DocuEye.Structurizr.Model.Exploders\DocuEye.Structurizr.Model.Exploders.csproj", "{F6C26AEE-0233-41AC-BDE6-C4150B1AF279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.Model.Exploders.Mappings", "Source\DocuEye.Structurizr.Model.Exploders.Mappings\DocuEye.Structurizr.Model.Exploders.Mappings.csproj", "{6D437010-56CC-47FD-A601-61DE9AD9090D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Structurizr.Model.Exploders.Mappings", "Source\DocuEye.Structurizr.Model.Exploders.Mappings\DocuEye.Structurizr.Model.Exploders.Mappings.csproj", "{6D437010-56CC-47FD-A601-61DE9AD9090D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.Model.Exploders.Tests", "Source\DocuEye.Structurizr.Model.Exploders.Tests\DocuEye.Structurizr.Model.Exploders.Tests.csproj", "{8B281CF3-3F41-4FC0-97C7-ED2124678A55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Structurizr.Model.Exploders.Tests", "Source\DocuEye.Structurizr.Model.Exploders.Tests\DocuEye.Structurizr.Model.Exploders.Tests.csproj", "{8B281CF3-3F41-4FC0-97C7-ED2124678A55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspaceImporter.Application.ChangeDetectors", "Source\DocuEye.WorkspaceImporter.Application.ChangeDetectors\DocuEye.WorkspaceImporter.Application.ChangeDetectors.csproj", "{790858F4-A8A5-48A5-925C-D358740938A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspaceImporter.Application.Mappings", "Source\DocuEye.WorkspaceImporter.Application.Mappings\DocuEye.WorkspaceImporter.Application.Mappings.csproj", "{6F884D90-E190-4ED2-B1CF-663C3E84DBA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests", "Source\DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests\DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.csproj", "{AB0D72A6-0103-44E7-9D77-48B88456E22E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -381,6 +387,18 @@ Global
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{790858F4-A8A5-48A5-925C-D358740938A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790858F4-A8A5-48A5-925C-D358740938A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790858F4-A8A5-48A5-925C-D358740938A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790858F4-A8A5-48A5-925C-D358740938A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F884D90-E190-4ED2-B1CF-663C3E84DBA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F884D90-E190-4ED2-B1CF-663C3E84DBA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F884D90-E190-4ED2-B1CF-663C3E84DBA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F884D90-E190-4ED2-B1CF-663C3E84DBA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB0D72A6-0103-44E7-9D77-48B88456E22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0D72A6-0103-44E7-9D77-48B88456E22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0D72A6-0103-44E7-9D77-48B88456E22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0D72A6-0103-44E7-9D77-48B88456E22E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -443,6 +461,9 @@ Global
 		{F6C26AEE-0233-41AC-BDE6-C4150B1AF279} = {122A1052-BB53-4E28-8691-423992E6E43A}
 		{6D437010-56CC-47FD-A601-61DE9AD9090D} = {122A1052-BB53-4E28-8691-423992E6E43A}
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55} = {122A1052-BB53-4E28-8691-423992E6E43A}
+		{790858F4-A8A5-48A5-925C-D358740938A1} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
+		{6F884D90-E190-4ED2-B1CF-663C3E84DBA6} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
+		{AB0D72A6-0103-44E7-9D77-48B88456E22E} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
