@@ -6,8 +6,8 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 {
     public class ElementsChangeDetectorResult
     {
-        public List<Element> ElementsToAdd { get; set; } = new List<Element>();
-        public List<Element> ElementsToChange { get; set; } = new List<Element>();
-        public List<Element> ElementsToDelete { get; set; } = new List<Element>();
+        public List<string> ElementsToAdd { get; set; } = new List<string>();
+        public List<string> ElementsToChange { get; set; } = new List<string>();
+        public List<string> ElementsToDelete { get; set; } = new List<string>();
     }
 }

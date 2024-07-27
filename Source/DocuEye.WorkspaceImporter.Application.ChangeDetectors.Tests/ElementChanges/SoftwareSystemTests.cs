@@ -35,6 +35,8 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
             Assert.That(existingElements.First().DslId, Is.EqualTo("softwaresystem1"));
             Assert.That(existingElements.First().Name, Is.EqualTo("Software System 1"));
             Assert.That(existingElements.First().Type, Is.EqualTo(ElementType.SoftwareSystem));
+
+            Assert.That(result.ElementsToAdd.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -55,7 +57,8 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
             {
                 new Element
                 {
-                    Id = "old1",
+                    Id = "systemID1",
+                    StructurizrId = "old1",
                     DslId = "softwaresystem1",
                     Type = ElementType.SoftwareSystem,
                     Name = "Software System 1"
@@ -88,6 +91,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                 new Element
                 {
                     Id = "old1",
+                    StructurizrId = "old1",
                     DslId = "softwaresystem1",
                     Type = ElementType.SoftwareSystem,
                     Name = "Software System 1"
@@ -100,6 +104,9 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
 
             // Assert
             Assert.That(existingElements.Count(), Is.EqualTo(0));
+
+            Assert.That(result.ElementsToDelete.Count(), Is.EqualTo(1));
+            Assert.That(result.ElementsToDelete.First(), Is.EqualTo("old1"));
         }
 
 
