@@ -86,7 +86,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 
                     existingElements.Add(newElement);
 
-                    result.ElementsToAdd.Add(newElement);
+                    result.ElementsToAdd.Add(newElement.Id);
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 
                     //TODO : Check if element has changed
 
-                    result.ElementsToChange.Add(existingElement);
+                    result.ElementsToChange.Add(existingElement.Id);
                 }
             }
             //Mark elements to delete
@@ -113,7 +113,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     !elementsToImport.Any(newElements => newElements.DslId == oldElements.DslId))
                 .ToList();
             
-            result.ElementsToDelete.AddRange(elementsToDelete);
+            result.ElementsToDelete.AddRange(elementsToDelete.Select(o => o.Id));
 
             //send delete events
             foreach (var elementToDelete in elementsToDelete)
