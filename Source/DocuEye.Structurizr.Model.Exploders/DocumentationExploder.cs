@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using System;
 using System.Collections.Generic;
@@ -21,6 +20,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             var documentationToImport = new DocumentationToImport()
             {
                 Id = Guid.NewGuid().ToString(),
+                StructurizrElementId = elementId,
                 Sections = this.ExplodeDocumentationSections(documentation.Sections)
             };
 

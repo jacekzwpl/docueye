@@ -38,5 +38,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Docs
         /// The ID of the element (in the model) that this decision applies to (optional).
         /// </summary>
         public string? StrucuturizrElementId { get; set; }
+
+        public IEnumerable<DecisionLinkToImport>? Links { get; set; }
     }
 }
