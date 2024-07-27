@@ -13,6 +13,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests
             MapperConfiguration config = new MapperConfiguration(cfg => {
                 cfg.AddProfile<StructurizrModelToApiMappingProfile>();
                 cfg.AddProfile<StructurizrViewsToApiMappingProfile>();
+                cfg.AddProfile<StructurizrDocumentationToApiModelMappingProfile>();
             });
             mapper = config.CreateMapper();
         }
