@@ -58,5 +58,7 @@ namespace DocuEye.ModelKeeper.Model
         /// The workspace id of this element 
         /// </summary>
         public string WorkspaceId { get; set; } = null!;
+
+        public string StructurizrId { get; set; } = null!;
     }
 }
