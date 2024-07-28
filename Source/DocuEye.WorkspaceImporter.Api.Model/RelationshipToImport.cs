@@ -46,5 +46,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model
         /// The interaction style (synchronous or asynchronous).
         /// </summary>
         public string? InteractionStyle { get; set; }
+        /// <summary>
+        /// Structurizr DSL Identifier
+        /// </summary>
+        public string DslId { get; set; } = null!;
     }
 }
