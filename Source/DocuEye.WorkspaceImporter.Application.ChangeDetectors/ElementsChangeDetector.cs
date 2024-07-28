@@ -90,6 +90,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 }
                 else
                 {
+                    var oldElement = existingElement.Clone();
                     this.mapper.Map<ElementToImport, Element>(elementToImport, existingElement);
                     existingElement.ParentId = this.DiscoverParentId(existingElements, elementToImport, parentElementType);
                     var baseElement = this.DiscoverBaseElementForInstance(elementToImport, existingElements);
@@ -100,9 +101,20 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                         existingElement.Description = baseElement.Description;
                         existingElement.Technology = baseElement.Technology;
                     }
-
-                    //TODO : Check if element has changed
-
+                    // Check if data changed
+                    if (!existingElement.IsDataEqual(oldElement) || oldElement.ParentId != existingElement.ParentId)
+                    {
+                        await this.mediator.Publish(new ElementChangedEvent(
+                            existingElement.WorkspaceId,
+                            existingElement.Id,
+                            import.Id,
+                            import.Key,
+                            import.SourceLink,
+                            existingElement.Name,
+                            existingElement.GetDataChanges(oldElement)));
+                        
+                    }
+                    //Allways add to elements to change because of structurizr id
                     result.ElementsToChange.Add(existingElement.Id);
                 }
             }
@@ -115,7 +127,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             
             result.ElementsToDelete.AddRange(elementsToDelete.Select(o => o.Id));
 
-            //send delete events
+            
             foreach (var elementToDelete in elementsToDelete)
             {
                 //Remove from existing elements

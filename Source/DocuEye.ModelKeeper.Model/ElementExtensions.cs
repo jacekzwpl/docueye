@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace DocuEye.ModelKeeper.Model
 {
@@ -23,7 +24,7 @@ namespace DocuEye.ModelKeeper.Model
             // If one of them is null, return false
             if ((obj == null) || (compareTo == null)) return false;
 
-            if(obj.Tags != null && !obj.Tags.SequenceEqual(compareTo.Tags)) return false;
+            if(obj.Tags != null && compareTo.Tags != null && !obj.Tags.SequenceEqual(compareTo.Tags)) return false;
 
             if(!ArePropertiesEqual(obj.Properties, compareTo.Properties)) {
                 return false;
@@ -57,6 +58,30 @@ namespace DocuEye.ModelKeeper.Model
             }
 
             return changes;
+        }
+
+        public static Element Clone(this Element obj)
+        {
+            return new Element()
+            {
+                Description = obj.Description,
+                Group = obj.Group,
+                Id = obj.Id,
+                InstanceOfId = obj.InstanceOfId,
+                Location = obj.Location,
+                Name = obj.Name,
+                ParentId = obj.ParentId,
+                Properties = obj.Properties,
+                Tags = obj.Tags,
+                Technology = obj.Technology,
+                Type = obj.Type,
+                Url = obj.Url,
+                WorkspaceId = obj.WorkspaceId,
+                StructurizrId = obj.StructurizrId,
+                DslId = obj.DslId,
+                SourceCodeUrl = obj.SourceCodeUrl,
+                OwnerTeam = obj.OwnerTeam
+            };
         }
 
         private static bool ArePropertiesEqual(IDictionary<string, string>? objProps, IDictionary<string, string>? compareToProps)
