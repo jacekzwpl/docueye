@@ -64,11 +64,25 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 }
                 else
                 {
+                    var oldRelationship = existingRelationship.Clone();
                     this.mapper.Map<RelationshipToImport, Relationship>(relationshipToImport, existingRelationship);
                     existingRelationship.SourceId = sourceElement.Id;
                     existingRelationship.DestinationId = destinationElement.Id;
                     existingRelationship.SourceName = sourceElement.Name;
                     existingRelationship.DestinationName = destinationElement.Name;
+                    if(!existingRelationship.IsDataEqual(oldRelationship))
+                    {
+                        await this.mediator.Publish(new RelationshipChangedEvent(
+                            workspaceId,
+                            existingRelationship.Id,
+                            import.Id,
+                            import.Key,
+                            import.SourceLink,
+                            sourceElement.Name,
+                            destinationElement.Name,
+                            existingRelationship.GetDataChanges(oldRelationship)
+                            ));
+                    }
                     result.RelationshipsToChange.Add(existingRelationship.Id);
                 }
             }
