@@ -7,7 +7,6 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
@@ -47,6 +46,8 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     newRelationship.WorkspaceId = workspaceId;
                     newRelationship.SourceId = sourceElement.Id;
                     newRelationship.DestinationId = destinationElement.Id;
+                    newRelationship.SourceName = sourceElement.Name;
+                    newRelationship.DestinationName = destinationElement.Name;
                     existingRelationships.Add(newRelationship);
 
                     await this.mediator.Publish(new RelationshipCreatedEvent(
@@ -58,27 +59,34 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                         sourceElement.Name,
                         destinationElement.Name
                         ));
+
+                    result.RelationshipsToAdd.Add(newRelationship.Id);
                 }
                 else
                 {
                     this.mapper.Map<RelationshipToImport, Relationship>(relationshipToImport, existingRelationship);
                     existingRelationship.SourceId = sourceElement.Id;
                     existingRelationship.DestinationId = destinationElement.Id;
+                    existingRelationship.SourceName = sourceElement.Name;
+                    existingRelationship.DestinationName = destinationElement.Name;
+                    result.RelationshipsToChange.Add(existingRelationship.Id);
                 }
             }
 
             //Then process relationships with link
             foreach (var relationshipToImport in relationshipsToImport.Where(o => !string.IsNullOrEmpty(o.StructurizrLinkedRelationshipId)))
             {
-                var linkedRelationShip = existingRelationships
-                        .FirstOrDefault(o => o.StructurizrId == relationshipToImport.StructurizrLinkedRelationshipId);
-
+                
                 // Find elements for relationship
                 var (sourceElement, destinationElement) = this.FindElementsForRelationship(existingElements, relationshipToImport);
                 if (sourceElement == null || destinationElement == null)
                 {
                     continue;
                 }
+
+                // Find source relationship
+                var linkedRelationShip = existingRelationships
+                       .FirstOrDefault(o => o.StructurizrId == relationshipToImport.StructurizrLinkedRelationshipId);
 
                 if (linkedRelationShip != null)
                 {
@@ -88,10 +96,40 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     newRelationship.DestinationId = destinationElement.Id;
                     newRelationship.WorkspaceId = workspaceId;
                     newRelationship.LinkedRelationshipId = linkedRelationShip.Id;
-                    newRelationship.DslId = Guid.NewGuid().ToString();
-                }
+                    newRelationship.SourceName = sourceElement.Name;
+                    newRelationship.DestinationName = destinationElement.Name;
 
-                
+                    existingRelationships.Add(newRelationship);
+                    result.RelationshipsToAdd.Add(newRelationship.Id);
+                }
+            }
+
+            var relationshipsToDelete = existingRelationships
+                .Where(oldRelationships =>
+                    !relationshipsToImport.Any(newRelationships => newRelationships.DslId == oldRelationships.DslId))
+                .ToList();
+            result.RelationshipsToDelete.AddRange(relationshipsToDelete.Select(o => o.Id));
+
+            foreach (var relationshipToDelete in relationshipsToDelete)
+            {
+                var exitstingRelationshipToDelete = existingRelationships
+                    .FirstOrDefault(o => o.Id == relationshipToDelete.Id);
+                if(exitstingRelationshipToDelete == null)
+                {
+                    continue;
+                }
+                //Send delete event
+                await this.mediator.Publish(new RelationshipDeletedEvent(
+                    relationshipToDelete.WorkspaceId,
+                    relationshipToDelete.Id,
+                    import.Id,
+                    import.Key,
+                    import.SourceLink,
+                    exitstingRelationshipToDelete.SourceName,
+                    exitstingRelationshipToDelete.DestinationName
+                    ));
+                //Remove from existing relationships
+                existingRelationships.Remove(exitstingRelationshipToDelete);
             }
 
             return result;
