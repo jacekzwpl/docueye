@@ -52,5 +52,24 @@ namespace DocuEye.ModelKeeper.Model
 
             return changes;
         }
+
+        public static Relationship Clone(this Relationship obj)
+        {
+            return new Relationship
+            {
+                Id = obj.Id,
+                DslId = obj.DslId,
+                WorkspaceId = obj.WorkspaceId,
+                SourceId = obj.SourceId,
+                DestinationId = obj.DestinationId,
+                SourceName = obj.SourceName,
+                DestinationName = obj.DestinationName,
+                InteractionStyle = obj.InteractionStyle,
+                Url = obj.Url,
+                Technology = obj.Technology,
+                Description = obj.Description,
+                Tags = obj.Tags
+            };
+        }
     }
 }
