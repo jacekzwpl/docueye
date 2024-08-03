@@ -1,0 +1,24 @@
+﻿using AutoMapper;
+using DocuEye.ModelKeeper.Model;
+using DocuEye.ViewsKeeper.Model;
+using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Views;
+
+namespace DocuEye.WorkspaceImporter.Application.Mappings
+{
+    public class ApiToModelMapingProfile : Profile
+    {
+        public ApiToModelMapingProfile()
+        {
+            CreateMap<ElementToImport, Element>();
+            CreateMap<RelationshipToImport, Relationship>();
+
+            CreateMap<ViewAutomaticLayout, AutomaticLayout>();
+            CreateMap<ViewToImport, SystemLandscapeView>()
+                .ForMember(dest => dest.Elements, opt => opt.Ignore())
+                .ForMember(dest => dest.Relationships, opt => opt.Ignore())
+                .ForMember(dest => dest.EnterpriseBoundaryVisible, opt => opt.MapFrom(src => src.ExternalBoundariesVisible))
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.SystemLandscapeView));
+        }
+    }
+}
