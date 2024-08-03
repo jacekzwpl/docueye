@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DocuEye.WorkspaceImporter.Api.Model.Views
 {
-    public class ElementInView
+    public class ElementInViewToImport
     {
         /// <summary>
         /// The ID of element in structurizr json

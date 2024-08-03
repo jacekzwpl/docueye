@@ -18,7 +18,8 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<ApiToModelPammingProfile>();
+                cfg.AddProfile<ApiToModelMapingProfile>();
+                cfg.AddProfile<ModelToModelMappingProfile>();
             });
             this.mapper = config.CreateMapper();
 

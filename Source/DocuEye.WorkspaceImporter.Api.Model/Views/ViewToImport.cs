@@ -22,7 +22,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Views
         /// <summary>
         /// A unique identifier for this view.
         /// </summary>
-        public string? Key { get; set; }
+        public string Key { get; set; } = null!;
         /// <summary>
         /// The paper size that should be used to render this view.
         /// </summary>
@@ -30,11 +30,11 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Views
         /// <summary>
         /// The set of elements in this views.
         /// </summary>
-        public IEnumerable<ElementInView> Elements { get; set; } = Enumerable.Empty<ElementInView>();
+        public IEnumerable<ElementInViewToImport> Elements { get; set; } = Enumerable.Empty<ElementInViewToImport>();
         /// <summary>
         /// The set of relationships in this views.
         /// </summary>
-        public IEnumerable<RelationshipInView> Relationships { get; set; } = Enumerable.Empty<RelationshipInView>();
+        public IEnumerable<RelationshipInViewToImport> Relationships { get; set; } = Enumerable.Empty<RelationshipInViewToImport>();
         /// <summary>
         /// Automatic layout configuration
         /// </summary>

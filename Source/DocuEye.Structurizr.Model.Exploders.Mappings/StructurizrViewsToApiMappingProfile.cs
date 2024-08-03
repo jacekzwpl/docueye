@@ -8,10 +8,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Mappings
     {
         public StructurizrViewsToApiMappingProfile()
         {
-            CreateMap<StructurizrRelationshipView, RelationshipInView>()
+            CreateMap<StructurizrRelationshipView, RelationshipInViewToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id));
 
-            CreateMap<StructurizrElementView, ElementInView>()
+            CreateMap<StructurizrElementView, ElementInViewToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.X, opt => opt.MapFrom(src => src.X))
                 .ForMember(dest => dest.Y, opt => opt.MapFrom(src => src.Y));
