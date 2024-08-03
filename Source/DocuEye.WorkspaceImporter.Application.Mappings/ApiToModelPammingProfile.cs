@@ -10,6 +10,7 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
         public ApiToModelPammingProfile()
         {
             CreateMap<ElementToImport, Element>();
+            CreateMap<RelationshipToImport, Relationship>();
         }
     }
 }
