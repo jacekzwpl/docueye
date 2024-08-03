@@ -1,10 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
-using DocuEye.WorkspaceImporter.Api.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DocuEye.WorkspaceImporter.Api.Model.Views;
 
 namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChanges
 {
@@ -15,49 +10,44 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
         {
             // Arrange
             var workspaceId = Guid.NewGuid().ToString();
-            var relationshipsToImport = new List<RelationshipToImport>()
+            var relationshipsToImport = new List<RelationshipInViewToImport>()
             {
-                new RelationshipToImport()
+                new RelationshipInViewToImport()
                 {
-                    DslId = "1",
-                    InteractionStyle = "Synchronous",
-                    Url = "http://www.google.com",
-                    Technology = "REST",
-                    Description = "Description",
-                    Tags = new List<string>() { "Tag1", "Tag2" }
+                    StructurizrId = "1"
                 }
             };
             var existingRelationships = new List<Relationship>()
             {
                 new Relationship()
                 {
-                    DslId = "1",
+                    Id = "relation1",
+                    StructurizrId = "1",
+                    DslId = "dsl1",
                     InteractionStyle = "Synchronous",
-                    Url = "http://www.google.com",
+                    Url = "https://www.docueye.com",
                     Technology = "REST",
                     Description = "Description",
                     Tags = new List<string>() { "Tag1", "Tag2" }
-                }
-            };
-            var existingElements = new List<Element>()
-            {
-                new Element()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Element1",
-                    StructurizrId = "1"
-                },
-                new Element()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Element2",
-                    StructurizrId = "2"
                 }
             };
             var detector = new ViewsChangeDetector(this.mapper, this.mediator);
 
             // Act
             var result = detector.DetectRelationshipsInView(relationshipsToImport, existingRelationships);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result.First().Id, Is.EqualTo("relation1"));
+            Assert.That(result.First().DslId, Is.EqualTo("dsl1"));
+            Assert.That(result.First().InteractionStyle, Is.EqualTo("Synchronous"));
+            Assert.That(result.First().Url, Is.EqualTo("https://www.docueye.com"));
+            Assert.That(result.First().Technology, Is.EqualTo("REST"));
+            Assert.That(result.First().Description, Is.EqualTo("Description"));
+            Assert.That(result.First().Tags?.Count(), Is.EqualTo(2));
+            Assert.That(result.First().Tags?.First(), Is.EqualTo("Tag1"));
+            Assert.That(result.First().Tags?.Last(), Is.EqualTo("Tag2"));
+
         }
 
     }
