@@ -19,6 +19,21 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.Relationships, opt => opt.Ignore())
                 .ForMember(dest => dest.EnterpriseBoundaryVisible, opt => opt.MapFrom(src => src.ExternalBoundariesVisible))
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.SystemLandscapeView));
+            CreateMap<ViewToImport, SystemContextView>()
+                .ForMember(dest => dest.Elements, opt => opt.Ignore())
+                .ForMember(dest => dest.Relationships, opt => opt.Ignore())
+                .ForMember(dest => dest.EnterpriseBoundaryVisible, opt => opt.MapFrom(src => src.ExternalBoundariesVisible))
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.SystemContextView));
+            CreateMap<ViewToImport, ContainerView>()
+                .ForMember(dest => dest.Elements, opt => opt.Ignore())
+                .ForMember(dest => dest.Relationships, opt => opt.Ignore())
+                .ForMember(dest => dest.ExternalSoftwareSystemBoundariesVisible, opt => opt.MapFrom(src => src.ExternalBoundariesVisible))
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.ContainerView));
+            CreateMap<ViewToImport, ComponentView>()
+                .ForMember(dest => dest.Elements, opt => opt.Ignore())
+                .ForMember(dest => dest.Relationships, opt => opt.Ignore())
+                .ForMember(dest => dest.ExternalContainerBoundariesVisible, opt => opt.MapFrom(src => src.ExternalBoundariesVisible))
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.ComponentView));
         }
     }
 }
