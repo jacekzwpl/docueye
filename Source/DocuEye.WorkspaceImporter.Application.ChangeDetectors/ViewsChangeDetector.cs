@@ -56,7 +56,6 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             return result;
         }
             
-
         public IEnumerable<SystemContextView> DetectSystemContextViews(string workspaceId, IEnumerable<ViewToImport> viewsToImport, Dictionary<string, string> viewsIdsMap, IEnumerable<Element> existingElements, IEnumerable<Relationship> existingRelationship, Dictionary<string, string> elementsDiagrams)
         {
             var result = new List<SystemContextView>();
@@ -120,6 +119,30 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     if (contextElement != null)
                     {
                         view.ContainerId = contextElement.Id;
+                    }
+                }
+                view.Elements = this.DetectElementsInView(viewToImport.Elements, existingElements, elementsDiagrams);
+                view.Relationships = this.DetectRelationshipsInView(viewToImport.Relationships, existingRelationship);
+                result.Add(view);
+
+            }
+            return result;
+        }
+
+        public IEnumerable<DeploymentView> DetectDeploymentViews(string workspaceId, IEnumerable<ViewToImport> viewsToImport, Dictionary<string, string> viewsIdsMap, IEnumerable<Element> existingElements, IEnumerable<Relationship> existingRelationship, Dictionary<string, string> elementsDiagrams)
+        {
+            var result = new List<DeploymentView>();
+            foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.DeploymentView))
+            {
+                var view = this.mapper.Map<DeploymentView>(viewToImport);
+                view.Id = viewsIdsMap[viewToImport.Key];
+                view.WorkspaceId = workspaceId;
+                if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
+                {
+                    var contextElement = existingElements.FirstOrDefault(o => o.StructurizrId == viewToImport.StructurizrElementId);
+                    if (contextElement != null)
+                    {
+                        view.SoftwareSystemId = contextElement.Id;
                     }
                 }
                 view.Elements = this.DetectElementsInView(viewToImport.Elements, existingElements, elementsDiagrams);

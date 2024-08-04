@@ -1,13 +1,18 @@
 ﻿using DocuEye.ModelKeeper.Model;
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChanges
 {
-    public class DetectComponentViewsTests : BaseDetectorsTests
+    public class DetectDeploymentViewsTests : BaseDetectorsTests
     {
         [Test]
-        public void WhenComponentViewIsDefindedThenAllPropertiesAreMatched()
+        public void WhenDeploymentViewIsDefindedThenAllPropertiesAreMatched()
         {
             // Arrange
             var viewsToImport = new List<ViewToImport>()
@@ -15,7 +20,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                 new ViewToImport()
                 {
                     Key = "view1",
-                    ViewType = ViewType.ComponentView,
+                    ViewType = ViewType.DeploymentView,
                     Elements = new List<ElementInViewToImport>()
                     {
                         new ElementInViewToImport()
@@ -82,7 +87,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
             var detector = new ViewsChangeDetector(this.mapper, this.mediator);
 
             // Act
-            var result = detector.DetectComponentViews(
+            var result = detector.DetectDeploymentViews(
                 "workspaceId",
                 viewsToImport,
                 viewsIdsMap,
@@ -97,8 +102,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
             Assert.That(result.First().Elements.Count, Is.EqualTo(2));
             Assert.That(result.First().Relationships.Count, Is.EqualTo(1));
             Assert.That(result.First().PaperSize, Is.EqualTo("A4"));
-            Assert.That(result.First().ExternalContainerBoundariesVisible, Is.True);
-            Assert.That(result.First().ContainerId, Is.EqualTo("element1"));
+            Assert.That(result.First().SoftwareSystemId, Is.EqualTo("element1"));
             Assert.That(result.First().Title, Is.EqualTo("Title"));
             Assert.That(result.First().Description, Is.EqualTo("Description"));
             Assert.That(result.First().AutomaticLayout?.RankDirection, Is.EqualTo("TopBottom"));

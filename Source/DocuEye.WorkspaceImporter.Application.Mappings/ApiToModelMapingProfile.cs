@@ -34,6 +34,10 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.Relationships, opt => opt.Ignore())
                 .ForMember(dest => dest.ExternalContainerBoundariesVisible, opt => opt.MapFrom(src => src.ExternalBoundariesVisible))
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.ComponentView));
+            CreateMap<ViewToImport, DeploymentView>()
+                .ForMember(dest => dest.Elements, opt => opt.Ignore())
+                .ForMember(dest => dest.Relationships, opt => opt.Ignore())
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.DeploymentView));
         }
     }
 }
