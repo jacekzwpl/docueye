@@ -38,6 +38,8 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.Elements, opt => opt.Ignore())
                 .ForMember(dest => dest.Relationships, opt => opt.Ignore())
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.DeploymentView));
+            CreateMap<ViewToImport, ImageView>()
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.ImageView));
         }
     }
 }
