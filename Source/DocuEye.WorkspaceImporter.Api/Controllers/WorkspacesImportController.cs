@@ -3,7 +3,6 @@ using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Api.Controllers
@@ -51,8 +50,72 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
             });
         }
 
+        [Route("import/start")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportStart(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Route("import/elements")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportElements(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Route("import/relationships")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportRelationships(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Route("import/views")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportViews(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Route("import/documentation")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportDocumentation(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Route("import/decision")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportDecision(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Route("import/image")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportImage(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Route("import/finish")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportFinish(ImportWorkspaceStartRequest data)
+        {
+            throw new System.NotImplementedException();
+        }
 
 
-        
+
+
     }
 }
