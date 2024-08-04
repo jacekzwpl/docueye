@@ -198,6 +198,95 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 
         }
 
+        public IEnumerable<FilteredView> DetectFilteredViews(
+            string workspaceId, 
+            IEnumerable<ViewToImport> viewsToImport, 
+            Dictionary<string, string> viewsIdsMap,
+            IEnumerable<SystemLandscapeView> systemLandscapeViews,
+            IEnumerable<SystemContextView> systemContextViews,
+            IEnumerable<ContainerView> containerViews,
+            IEnumerable<ComponentView> componentViews)
+        {
+            var result = new List<FilteredView>();
+            foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.FilteredView))
+            {
+                var view = this.mapper.Map<FilteredView>(viewToImport);
+                view.Id = viewsIdsMap[viewToImport.Key];
+                view.WorkspaceId = workspaceId;
+                var baseView = this.GetBaseForFilteredView(view.BaseViewKey, systemLandscapeViews, systemContextViews, containerViews, componentViews);
+                if(baseView == null)
+                {
+                   continue;
+                }
+                if (view.Mode?.ToLower() == "exclude")
+                {
+                    if (!view.Tags.Contains("*"))
+                    {
+                        view.Elements = baseView.Elements
+                            .Where(o => !o.Tags.Any(tag => view.Tags.Contains(tag))).ToArray();
+                        view.Relationships = baseView.Relationships
+                            .Where(o => !o.Tags.Any(tag => view.Tags.Contains(tag))).ToArray();
+                    }else
+                    {
+                        view.Elements = Enumerable.Empty<ElementView>();
+                        view.Relationships = Enumerable.Empty<RelationshipView>();
+                    }
+                }
+                else
+                {
+                    if (!view.Tags.Contains("*"))
+                    {
+                        view.Elements = baseView.Elements
+                            .Where(o => o.Tags.Any(tag => view.Tags.Contains(tag))).ToArray();
+                        view.Relationships = baseView.Relationships
+                            .Where(o => o.Tags.Any(tag => view.Tags.Contains(tag))).ToArray();
+                    }
+                    else
+                    {
+                        view.Elements = baseView.Elements.ToArray();
+                        view.Relationships = baseView.Relationships.ToArray();
+                    }
+                }
+                result.Add(view);
+            }
+            return result;
+        }
+
+        private StaticDiagramView? GetBaseForFilteredView(
+            string baseViewKey, 
+            IEnumerable<SystemLandscapeView> systemLandscapeViews,
+            IEnumerable<SystemContextView> systemContextViews,
+            IEnumerable<ContainerView> containerViews,
+            IEnumerable<ComponentView> componentViews)
+        {
+            StaticDiagramView? view = systemLandscapeViews.FirstOrDefault(o => o.Key == baseViewKey);
+            if (view != null)
+            {
+                return view;
+            }
+
+            view = systemContextViews.FirstOrDefault(o => o.Key == baseViewKey);
+            if (view != null)
+            {
+                return view;
+            }
+
+            view = containerViews.FirstOrDefault(o => o.Key == baseViewKey);
+            if (view != null)
+            {
+                return view;
+            }
+
+            view = componentViews.FirstOrDefault(o => o.Key == baseViewKey);
+            if (view != null)
+            {
+                return view;
+            }
+
+            return null;
+        }
+
+
         public IEnumerable<ElementView> DetectElementsInView(IEnumerable<ElementInViewToImport> elementsInView, IEnumerable<Element> existingElements, Dictionary<string, string> elementsDiagrams)
         {
             var result = new List<ElementView>();

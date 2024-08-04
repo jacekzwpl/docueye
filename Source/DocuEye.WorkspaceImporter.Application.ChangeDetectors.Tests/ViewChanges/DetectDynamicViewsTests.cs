@@ -1,11 +1,6 @@
 ﻿using DocuEye.ModelKeeper.Model;
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChanges
 {
