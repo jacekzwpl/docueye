@@ -20,7 +20,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             this.mediator = mediator;
         }
 
-        public void DetectViewsIds(string workspaceId, IEnumerable<ViewToImport> viewsToImport, IEnumerable<BaseView> existingViews, IEnumerable<Element> existingElements, IEnumerable<Relationship> existingRelationship)
+        public (Dictionary<string, string>, Dictionary<string, string>) DetectViewsIds(IEnumerable<ViewToImport> viewsToImport, IEnumerable<BaseView> existingViews, IEnumerable<Element> existingElements)
         {
             //Detect Views Ids
             var viewsIdsMap = new Dictionary<string, string>();
@@ -37,6 +37,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     elementsDiagrams.Add(contextElement.Id, viewId);
                 }
             }
+            return (viewsIdsMap, elementsDiagrams);
         }
 
         public IEnumerable<SystemLandscapeView> DetectSystemLandscapeViews(string workspaceId, IEnumerable<ViewToImport> viewsToImport, Dictionary<string, string> viewsIdsMap, IEnumerable<Element> existingElements, IEnumerable<Relationship> existingRelationship, Dictionary<string, string> elementsDiagrams)
