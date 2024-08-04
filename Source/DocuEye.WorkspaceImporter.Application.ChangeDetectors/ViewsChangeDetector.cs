@@ -153,6 +153,28 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             return result;
         }
 
+        public IEnumerable<ImageView> DetectImageViews(string workspaceId, IEnumerable<ViewToImport> viewsToImport, Dictionary<string, string> viewsIdsMap, IEnumerable<Element> existingElements)
+        {
+            var result = new List<ImageView>();
+            foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.ImageView))
+            {
+                var view = this.mapper.Map<ImageView>(viewToImport);
+                view.Id = viewsIdsMap[viewToImport.Key];
+                view.WorkspaceId = workspaceId;
+                if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
+                {
+                    var contextElement = existingElements.FirstOrDefault(o => o.StructurizrId == viewToImport.StructurizrElementId);
+                    if (contextElement != null)
+                    {
+                        view.ElementId = contextElement.Id;
+                    }
+                }
+                result.Add(view);
+
+            }
+            return result;
+        }
+
         public IEnumerable<ElementView> DetectElementsInView(IEnumerable<ElementInViewToImport> elementsInView, IEnumerable<Element> existingElements, Dictionary<string, string> elementsDiagrams)
         {
             var result = new List<ElementView>();
