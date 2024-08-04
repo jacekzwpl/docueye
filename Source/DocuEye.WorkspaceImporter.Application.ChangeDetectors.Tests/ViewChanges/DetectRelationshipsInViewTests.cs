@@ -6,10 +6,9 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
     public class DetectRelationshipsInViewTests : BaseDetectorsTests
     {
         [Test]
-        public void WhenRelationshipIsDefindedThenAllProperitesAreMached()
+        public void WhenRelationshipInViewIsDefindedThenAllProperitesAreMached()
         {
             // Arrange
-            var workspaceId = Guid.NewGuid().ToString();
             var relationshipsToImport = new List<RelationshipInViewToImport>()
             {
                 new RelationshipInViewToImport()
