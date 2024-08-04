@@ -10,6 +10,7 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
         {
             CreateMap<Element, ElementView>();
             CreateMap<Relationship, RelationshipView>();
+
         }
     }
 }

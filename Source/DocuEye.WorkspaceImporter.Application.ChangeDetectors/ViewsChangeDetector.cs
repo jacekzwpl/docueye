@@ -175,6 +175,29 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             return result;
         }
 
+        public IEnumerable<DynamicView> DetectDynamicViews(string workspaceId, IEnumerable<ViewToImport> viewsToImport, Dictionary<string, string> viewsIdsMap, IEnumerable<Element> existingElements, IEnumerable<Relationship> existingRelationships, Dictionary<string, string> elementsDiagrams) {
+            var result = new List<DynamicView>();
+            foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.DynamicView))
+            {
+                var view = this.mapper.Map<DynamicView>(viewToImport);
+                view.Id = viewsIdsMap[viewToImport.Key];
+                view.WorkspaceId = workspaceId;
+                if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
+                {
+                    var contextElement = existingElements.FirstOrDefault(o => o.StructurizrId == viewToImport.StructurizrElementId);
+                    if (contextElement != null)
+                    {
+                        view.ElementId = contextElement.Id;
+                    }
+                }
+                view.Elements = this.DetectElementsInView(viewToImport.Elements, existingElements, elementsDiagrams);
+                view.Relationships = this.DetectDynamicRelationshipsView(viewToImport.Relationships, existingRelationships);
+                result.Add(view);
+            }
+            return result;
+
+        }
+
         public IEnumerable<ElementView> DetectElementsInView(IEnumerable<ElementInViewToImport> elementsInView, IEnumerable<Element> existingElements, Dictionary<string, string> elementsDiagrams)
         {
             var result = new List<ElementView>();
@@ -212,6 +235,29 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 }
                 var relationshipView = this.mapper.Map<RelationshipView>(existingRelationship);
                 result.Add(relationshipView);
+            }
+            return result;
+        }
+
+        public IEnumerable<DynamicRelationshipView> DetectDynamicRelationshipsView(IEnumerable<RelationshipInViewToImport> relationshipsInView, IEnumerable<Relationship> existingRelationships)
+        {
+            var result = new List<DynamicRelationshipView>();
+            foreach(var relationshipToImport in relationshipsInView)
+            {
+                var existingRelationship = existingRelationships
+                    .FirstOrDefault(o => o.StructurizrId == relationshipToImport.StructurizrId);
+                if(existingRelationship != null)
+                {
+                    var relationshipView = new DynamicRelationshipView();
+                    relationshipView.Id = Guid.NewGuid().ToString();
+                    relationshipView.Description = relationshipToImport.Description;
+                    relationshipView.Response = relationshipToImport.Response;
+                    relationshipView.Order = relationshipToImport.Order;
+                    relationshipView.SourceId = relationshipView.Response.HasValue && relationshipView.Response.Value ? existingRelationship.DestinationId : existingRelationship.SourceId;
+                    relationshipView.DestinationId = relationshipView.Response.HasValue && relationshipView.Response.Value ? existingRelationship.SourceId : existingRelationship.DestinationId;
+                    relationshipView.BaseRelationshipId = existingRelationship.Id;
+                    result.Add(relationshipView);
+                }
             }
             return result;
         }

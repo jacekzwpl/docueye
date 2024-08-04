@@ -12,6 +12,7 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
         {
             CreateMap<ElementToImport, Element>();
             CreateMap<RelationshipToImport, Relationship>();
+            
 
             CreateMap<ViewAutomaticLayout, AutomaticLayout>();
             CreateMap<ViewToImport, SystemLandscapeView>()
@@ -40,6 +41,10 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.DeploymentView));
             CreateMap<ViewToImport, ImageView>()
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.ImageView));
+            CreateMap<ViewToImport, DynamicView>()
+                .ForMember(dest => dest.Elements, opt => opt.Ignore())
+                .ForMember(dest => dest.Relationships, opt => opt.Ignore())
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.DynamicView));
         }
     }
 }

@@ -149,7 +149,17 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             autoLayout tb
         }
 
-        theme default
+        dynamic onlineshop "BuyProduct" "Summarises how the sign in feature works in the single-page application." {
+            onlineshop.web -> onlineshop.catalog "Serarch product"
+            onlineshop.catalog -> onlineshop.web "Return product"
+            onlineshop.web -> onlineshop.basket "Add product to basket"
+            onlineshop.web -> onlineshop.orders "Create order"
+            onlineshop.web -> onlineshop.payment "Create payment"
+            autoLayout
+            description "Summarises how the sign in feature works in the single-page application."
+        }
+
+        themes default
     }
     
 }
