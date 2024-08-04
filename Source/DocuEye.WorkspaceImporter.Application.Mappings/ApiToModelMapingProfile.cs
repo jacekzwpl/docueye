@@ -45,6 +45,10 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.Elements, opt => opt.Ignore())
                 .ForMember(dest => dest.Relationships, opt => opt.Ignore())
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.DynamicView));
+            CreateMap<ViewToImport, FilteredView>()
+                .ForMember(dest => dest.Elements, opt => opt.Ignore())
+                .ForMember(dest => dest.Relationships, opt => opt.Ignore())
+                .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.FilteredView));
         }
     }
 }
