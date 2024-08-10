@@ -27,6 +27,6 @@ namespace DocuEye.WorkspaceImporter.Model
         /// <summary>
         /// Import end time
         /// </summary>
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
     }
 }
