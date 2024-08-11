@@ -58,7 +58,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
                 .Send<IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId))).ToList();
 
             // Detect Changes
-            var result = await this.DetectChanges(request.WorkspaceId, import, request.ElementsToImport, existingElements);
+            var result = await this.DetectChanges(request.WorkspaceId, import, request.Elements, existingElements);
 
             //Save Elements
             await this.mediator.Send(new SaveElementsCommand()

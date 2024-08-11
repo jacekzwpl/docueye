@@ -69,7 +69,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             {
                 ImportKey = "importkey1",
                 WorkspaceId = "workspace1",
-                ElementsToImport = new List<ElementToImport>()
+                Elements = new List<ElementToImport>()
                 {
                     new ElementToImport
                     {
