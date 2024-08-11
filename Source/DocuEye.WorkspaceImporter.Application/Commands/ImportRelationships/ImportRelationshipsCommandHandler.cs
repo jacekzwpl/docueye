@@ -4,14 +4,10 @@ using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Application.ChangeDetectors;
-using DocuEye.WorkspaceImporter.Application.Commands.ImportElements;
-using DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

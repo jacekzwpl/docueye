@@ -2,11 +2,6 @@
 using DocuEye.WorkspaceImporter.Application.Mappings;
 using MediatR;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 {
