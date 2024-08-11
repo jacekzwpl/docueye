@@ -1,6 +1,7 @@
 ﻿using DocuEye.ViewsKeeper.Model;
 using MediatR;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
 {
@@ -16,35 +17,35 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
         /// <summary>
         /// System Landscape Views that should exists in workspace after save
         /// </summary>
-        public List<SystemLandscapeView> SystemLandscapeViews { get; set; } = new List<SystemLandscapeView>();
+        public IEnumerable<SystemLandscapeView> SystemLandscapeViews { get; set; } = Enumerable.Empty<SystemLandscapeView>();
         /// <summary>
         /// System Context Views that should exists in workspace after save
         /// </summary>
-        public List<SystemContextView> SystemContextViews { get; set; } = new List<SystemContextView>();
+        public IEnumerable<SystemContextView> SystemContextViews { get; set; } = Enumerable.Empty<SystemContextView>();
         /// <summary>
         /// Container Views that should exists in workspace after save
         /// </summary>
-        public List<ContainerView> ContainerViews { get; set; } = new List<ContainerView>();
+        public IEnumerable<ContainerView> ContainerViews { get; set; } = Enumerable.Empty<ContainerView>();
         /// <summary>
         /// Component Views that should exists in workspace after save
         /// </summary>
-        public List<ComponentView> ComponentViews { get; set; } = new List<ComponentView>();
+        public IEnumerable<ComponentView> ComponentViews { get; set; } = Enumerable.Empty<ComponentView>();
         /// <summary>
         /// Dynamic Views that should exists in workspace after save
         /// </summary>
-        public List<DynamicView> DynamicViews { get; set; } = new List<DynamicView>();
+        public IEnumerable<DynamicView> DynamicViews { get; set; } = Enumerable.Empty<DynamicView>();
         /// <summary>
         /// Deployment Views that should exists in workspace after save
         /// </summary>
-        public List<DeploymentView> DeploymentViews { get; set; } = new List<DeploymentView>();
+        public IEnumerable<DeploymentView> DeploymentViews { get; set; } = Enumerable.Empty<DeploymentView>();
         /// <summary>
         /// Filtered Views that should exists in workspace after save
         /// </summary>
-        public List<FilteredView> FilteredViews { get; set; } = new List<FilteredView>();
+        public IEnumerable<FilteredView> FilteredViews { get; set; } = Enumerable.Empty<FilteredView>();
         /// <summary>
         /// Image Views that should exists in workspace after save
         /// </summary>
-        public List<ImageView> ImagesViews { get; set; } = new List<ImageView>();
+        public IEnumerable<ImageView> ImagesViews { get; set; } = Enumerable.Empty<ImageView>();
         /// <summary>
         /// Creates instance
         /// </summary>

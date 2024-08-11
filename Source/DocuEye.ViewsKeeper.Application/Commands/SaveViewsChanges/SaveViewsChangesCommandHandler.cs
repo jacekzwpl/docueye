@@ -1,5 +1,4 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using DocuEye.ViewsKeeper.Persistence;
+﻿using DocuEye.ViewsKeeper.Persistence;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +45,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
 
 
             // Create new views
-            if (request.SystemLandscapeViews.Count > 0)
+            if (request.SystemLandscapeViews.Count() > 0)
             {
                 foreach (var view in request.SystemLandscapeViews)
                 {
@@ -54,7 +53,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.SystemContextViews.Count > 0)
+            if (request.SystemContextViews.Count() > 0)
             {
                 foreach (var view in request.SystemContextViews)
                 {
@@ -62,7 +61,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.ContainerViews.Count > 0)
+            if (request.ContainerViews.Count() > 0)
             {
                 foreach (var view in request.ContainerViews)
                 {
@@ -70,7 +69,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.ComponentViews.Count > 0)
+            if (request.ComponentViews.Count() > 0)
             {
                 foreach (var view in request.ComponentViews)
                 {
@@ -78,7 +77,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.DeploymentViews.Count > 0)
+            if (request.DeploymentViews.Count() > 0)
             {
                 foreach (var view in request.DeploymentViews)
                 {
@@ -86,7 +85,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.DynamicViews.Count > 0)
+            if (request.DynamicViews.Count() > 0)
             {
                 foreach (var view in request.DynamicViews)
                 {
@@ -94,7 +93,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.FilteredViews.Count > 0)
+            if (request.FilteredViews.Count() > 0)
             {
                 foreach (var view in request.FilteredViews)
                 {
@@ -102,7 +101,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.ImagesViews.Count > 0)
+            if (request.ImagesViews.Count() > 0)
             {
                 foreach (var view in request.ImagesViews)
                 {
