@@ -54,6 +54,7 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
 
             CreateMap<DocumentationSectionToImport, DocumentationSection>();
             CreateMap<DocumentationToImport, Documentation>();
+            CreateMap<ImageToImport, Image>();
         }
     }
 }
