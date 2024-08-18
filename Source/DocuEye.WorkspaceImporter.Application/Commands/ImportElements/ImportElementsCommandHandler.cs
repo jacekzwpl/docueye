@@ -4,6 +4,7 @@ using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Application.ChangeDetectors;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation;
 using DocuEye.WorkspaceImporter.Model;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
@@ -14,43 +15,29 @@ using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
 {
-    public class ImportElementsCommandHandler : IRequestHandler<ImportElementsCommand, ImportElementsResult>
+    public class ImportElementsCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportElementsCommand, ImportElementsResult>
     {
         private readonly IMediator mediator;
         private readonly IMapper mapper;
-        private readonly IWorkspaceImporterDBContext dbContext;
 
-        public ImportElementsCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext)
+        public ImportElementsCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
             this.mediator = mediator;
             this.mapper = mapper;
-            this.dbContext = dbContext;
         }
 
         public async Task<ImportElementsResult> Handle(ImportElementsCommand request, CancellationToken cancellationToken)
         {
 
-            // Get import data
-            var import = await this.dbContext.WorkspaceImports
-                .FindOne(o => o.WorkspaceId == request.WorkspaceId && o.Key == request.ImportKey);
-
-            // If no import found then stop
-            if (import == null)
+            // Check import data
+            var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
+            var checkImport = this.CheckImport(import, request.WorkspaceId, request.ImportKey);
+            if (!checkImport.IsSuccess)
             {
                 return new ImportElementsResult(
                         request.WorkspaceId,
                         false,
-                        string.Format("No import found with key = '{0}'. Start import before continue.",
-                            request.ImportKey));
-            }
-            // if import is already finished then stop
-            if(import.EndTime != null)
-            {
-                return new ImportElementsResult(
-                        request.WorkspaceId,
-                        false,
-                        string.Format("Import with key = '{0}' is already finished.",
-                            request.ImportKey));
+                        checkImport.Message);
             }
 
             //Get existing elements for comparison

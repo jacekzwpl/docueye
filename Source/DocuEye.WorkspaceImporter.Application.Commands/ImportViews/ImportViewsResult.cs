@@ -6,7 +6,7 @@
         {
         }
 
-        public ImportViewsResult(string workspaceId, bool isSuccess, string message) : base(workspaceId, isSuccess, message)
+        public ImportViewsResult(string workspaceId, bool isSuccess, string? message) : base(workspaceId, isSuccess, message)
         {
         }
     }

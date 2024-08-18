@@ -21,7 +21,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
 
         public async Task<ImportDocumentationResult> Handle(ImportDocumentationCommand request, CancellationToken cancellationToken)
         {
-            // Chekc import data
+            // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
             var checkImport = this.CheckImport(import, request.WorkspaceId, request.ImportKey);
             if(!checkImport.IsSuccess)

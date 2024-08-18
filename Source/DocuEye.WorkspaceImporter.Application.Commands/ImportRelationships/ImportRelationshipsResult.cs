@@ -6,7 +6,7 @@
         {
         }
 
-        public ImportRelationshipsResult(string workspaceId, bool isSuccess, string message) : base(workspaceId, isSuccess, message)
+        public ImportRelationshipsResult(string workspaceId, bool isSuccess, string? message) : base(workspaceId, isSuccess, message)
         {
         }
     }

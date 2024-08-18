@@ -10,7 +10,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
         {
         }
 
-        public ImportElementsResult(string workspaceId, bool isSuccess, string message) : base(workspaceId, isSuccess, message)
+        public ImportElementsResult(string workspaceId, bool isSuccess, string? message) : base(workspaceId, isSuccess, message)
         {
         }
     }
