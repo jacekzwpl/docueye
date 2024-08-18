@@ -15,6 +15,10 @@
         /// </summary>
         public string WorkspaceId { get; set; } = null!;
         /// <summary>
+        /// Documentation ID
+        /// </summary>
+        public string DocumentationId { get; set; } = null!;
+        /// <summary>
         /// Element ID
         /// </summary>
         public string? ElementId { get; set; }
