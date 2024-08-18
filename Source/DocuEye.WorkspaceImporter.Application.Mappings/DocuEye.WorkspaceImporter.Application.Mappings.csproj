@@ -13,6 +13,7 @@
     <ProjectReference Include="..\DocuEye.ModelKeeper.Model\DocuEye.ModelKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Model\DocuEye.ViewsKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model\DocuEye.WorkspacesKeeper.Model.csproj" />
   </ItemGroup>
 
 </Project>
