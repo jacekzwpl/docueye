@@ -34,7 +34,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands
         /// <param name="workspaceId">Workspace ID</param>
         /// <param name="isSuccess">Indicates if import was finished with success</param>
         /// <param name="message">Import result message</param>
-        public ImportResult(string workspaceId, bool isSuccess, string message)
+        public ImportResult(string workspaceId, bool isSuccess, string? message)
         {
             this.WorkspaceId = workspaceId;
             this.IsSuccess = isSuccess;

@@ -23,7 +23,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands
                 .FindOne(o => o.WorkspaceId == workspaceId && o.Key == importKey);
         }
 
-        protected ImportResult CheckImport(WorkspaceImport import, string workspaceId, string importKey)
+        protected ImportResult CheckImport(WorkspaceImport? import, string workspaceId, string importKey)
         {
             // If no import found then stop
             if (import == null)

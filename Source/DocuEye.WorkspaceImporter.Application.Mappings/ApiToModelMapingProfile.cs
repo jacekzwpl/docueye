@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 
 namespace DocuEye.WorkspaceImporter.Application.Mappings
@@ -49,6 +51,9 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.Elements, opt => opt.Ignore())
                 .ForMember(dest => dest.Relationships, opt => opt.Ignore())
                 .ForMember(dest => dest.ViewType, opt => opt.MapFrom(src => ViewType.FilteredView));
+
+            CreateMap<DocumentationSectionToImport, DocumentationSection>();
+            CreateMap<DocumentationToImport, Documentation>();
         }
     }
 }
