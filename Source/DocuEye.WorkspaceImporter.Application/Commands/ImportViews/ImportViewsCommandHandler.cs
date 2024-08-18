@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
@@ -6,15 +7,13 @@ using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
 using DocuEye.ViewsKeeper.Application.Queries.GetAllViews;
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Application.ChangeDetectors;
-using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
-using DocuEye.WorkspaceImporter.Application.Services.WorkspaceChangeDetector;
 using DocuEye.WorkspaceImporter.Model;
 using DocuEye.WorkspaceImporter.Persistence;
+using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
+using DocuEye.WorkspacesKeeper.Application.Queries.GetWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -58,6 +57,19 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
                             request.ImportKey));
             }
 
+            //Get workspace for saving views information
+            var workspace = await this.mediator.Send(
+                new GetWorkspaceQuery(request.WorkspaceId));
+
+            if(workspace == null)
+            {
+                return new ImportViewsResult(
+                        request.WorkspaceId,
+                        false,
+                string.Format("Workspace with ID = '{0}' not exists.",
+                            request.WorkspaceId));
+            }
+
             var (
                 systemLandscapeViews,
                 systemContextViews,
@@ -66,7 +78,10 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
                 dynamicViews,
                 deploymentViews,
                 imagesViews,
-                filteredViews) = await this.DetectChanges(request, import);
+                filteredViews,
+                worskspaceViews) = await this.DetectChanges(request, import);
+
+            workspace.Views = worskspaceViews;
 
             //Save views
             await this.mediator.Send(new SaveViewsChangesCommand(request.WorkspaceId)
@@ -79,6 +94,12 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
                 ImagesViews = imagesViews,
                 SystemContextViews = systemContextViews,
                 SystemLandscapeViews = systemLandscapeViews
+            });
+
+            //Save Workspace
+            await this.mediator.Send(new SaveWorkspaceCommand()
+            {
+                Workspace = workspace
             });
 
             return new ImportViewsResult(request.WorkspaceId, true);
@@ -95,7 +116,8 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
             IEnumerable<DynamicView>,
             IEnumerable<DeploymentView>,
             IEnumerable<ImageView>,
-            IEnumerable<FilteredView>
+            IEnumerable<FilteredView>,
+            IEnumerable<WorkspaceView>
             )> DetectChanges(ImportViewsCommand request, WorkspaceImport import)
         {
             //Get existing elements for comparison
@@ -175,6 +197,16 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
                 containerViews, 
                 componentViews);
 
+            var workspaceViews = new List<WorkspaceView>();
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(systemLandscapeViews));
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(systemContextViews));
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(containerViews));
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(componentViews));
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(dynamicViews));
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(deploymentViews));
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(imagesViews));
+            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(filteredViews));
+
             
             return (
                 systemLandscapeViews, 
@@ -184,9 +216,12 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
                 dynamicViews, 
                 deploymentViews, 
                 imagesViews, 
-                filteredViews);
+                filteredViews,
+                workspaceViews);
 
         } 
+
+       
 
     }
 }
