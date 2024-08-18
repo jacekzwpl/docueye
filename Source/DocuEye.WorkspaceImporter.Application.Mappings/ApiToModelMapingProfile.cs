@@ -55,6 +55,11 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
             CreateMap<DocumentationSectionToImport, DocumentationSection>();
             CreateMap<DocumentationToImport, Documentation>();
             CreateMap<ImageToImport, Image>();
+
+            CreateMap<DecisionToImport, Decision>()
+                .ForMember(dest => dest.DslId, opt => opt.MapFrom(src => src.StrucuturizrId))
+                .ForMember(dest => dest.Links, opt => opt.Ignore());
+            CreateMap<DecisionLinkToImport, DecisionLink>();
         }
     }
 }
