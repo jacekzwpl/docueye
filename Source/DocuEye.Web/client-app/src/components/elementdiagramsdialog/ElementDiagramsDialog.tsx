@@ -29,6 +29,7 @@ export const ElementDiagramsDialog = (props: IElementDiagramsDialogProps) => {
 
   return (<Dialog open={props.open}>
     <DialogContent>
+      {views.length === 0 && <p>No diagrams found</p>}
       <List sx={{ pt: 0 }}>
         {views.map((view) => (
           <ListItem disableGutters key={view.id}>
@@ -37,7 +38,8 @@ export const ElementDiagramsDialog = (props: IElementDiagramsDialogProps) => {
             </ListItemButton>
           </ListItem>
         ))}
-      </List></DialogContent>
+      </List>
+    </DialogContent>
     <DialogActions>
       <Button onClick={() => handleListItemClick()}>Close</Button>
     </DialogActions>
