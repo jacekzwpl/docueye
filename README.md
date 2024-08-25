@@ -56,7 +56,7 @@ docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-
 # In this example $PWD is current directory path. 
 ```
 
-DocueEye CLI is also distributed as dotnet tool via [nuget package](https://www.nuget.org/packages/DocuEye.CLI/)  
+DocueEye CLI is also distributed as dotnet tool via [nuget package](https://www.nuget.org/packages/DocuEye.CLI/) - current version requires .net 8 to be preinstalled.
 Installing DocuEye CLI 
 ```Powershell
 dotnet tool install --global DocuEye.CLI
@@ -65,7 +65,13 @@ Import workspace using command line
 ```Powershell
 docueye --import=workspace --docueyeAddress=http://localhost:8080 --adminToken=docueyedmintoken --importKey="$((New-Guid).Guid)" --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=workspace.json
 ```
+Example script to import workspace can be found [here](ExampleWorkspace/import.ps1).  
 
+Once we imported our workspace we can also import openapi specification for model elements.  
+Example script can be found  [here](ExampleWorkspace/import-openapi.ps1).
+  
+
+  
 You can read about all options for DocuEye CLI [here](Documentation/docs/0006-docueye-cli.md).  
 You can also use --help switch to see available options.  
 For docker image  
@@ -77,7 +83,8 @@ For command line
 docueye --help
 ```
 
-Example script to import workspace can be found [here](ExampleWorkspace/import.ps1)  
+
+
 
 
 ## Contributing
