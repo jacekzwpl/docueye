@@ -36,10 +36,10 @@ export const Workspaces = () => {
         navigate('/workspace/' + id + '/elements');
     }
 
-    const loadElements = (page: number) => {
+    const loadElements = (page: number, clearFilter: boolean = false) => {
         setIsLoading(true);
         DocuEyeApi.WorkspacesApi.apiWorkspacesGet(
-            nameFilter === "" ? undefined : nameFilter,
+            nameFilter === "" || clearFilter ? undefined : nameFilter,
             pageSize,
             (page - 1) * pageSize
         )
@@ -62,6 +62,7 @@ export const Workspaces = () => {
 
     const clearFilter = () => {
         setNameFilter("");
+        loadElements(1, true);
     }
 
     return (
