@@ -56,7 +56,7 @@ docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-
 # In this example $PWD is current directory path. 
 ```
 
-DocueEye CLI is also distributed as dotnet tool via [nuget package](https://www.nuget.org/packages/DocuEye.CLI/)  
+DocueEye CLI is also distributed as dotnet tool via [nuget package](https://www.nuget.org/packages/DocuEye.CLI/) - current version requires .net 8 to be preinstalled.
 Installing DocuEye CLI 
 ```Powershell
 dotnet tool install --global DocuEye.CLI
