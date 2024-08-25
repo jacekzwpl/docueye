@@ -96,15 +96,15 @@ export const ElementsListView = () => {
         loadElements(page);
     }
 
-    const loadElements = (page: number) => {
+    const loadElements = (page: number, clearFilter: boolean = false) => {
         if (!workspaceId) {
             return;
         }
         setIsLoading(true);
         DocuEyeApi.ElementsApi
             .apiWorkspacesWorkspaceIdElementsGet(workspaceId,
-                nameFilter === "" ? undefined : nameFilter,
-                typeFilter === null ? undefined : typeFilter.id,
+                nameFilter === "" || clearFilter ? undefined : nameFilter,
+                typeFilter === null || clearFilter ? undefined : typeFilter.id,
                 pageSize, (page - 1) * pageSize)
             .then((response: AxiosResponse<WorkspaceCatalogElement[]>) => {
                 if (response.data) {
@@ -128,6 +128,7 @@ export const ElementsListView = () => {
     const clearFilter = () => {
         setTypeFilter(null);
         setNameFilter("");
+        loadElements(1, true);
     }
 
     return (
