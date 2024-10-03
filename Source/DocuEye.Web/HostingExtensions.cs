@@ -13,6 +13,7 @@ using DocuEye.Persistence;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
 using DocuEye.ViewsKeeper.Application.Mappings;
 using DocuEye.ViewsKeeper.Persistence;
+using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
 using DocuEye.WorkspaceImporter.Application;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
@@ -25,7 +26,9 @@ using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace DocuEye.Web
 {
@@ -101,7 +104,11 @@ namespace DocuEye.Web
             ViewsKeeperBsonClassMapping.Register();
             WorkspacesKeeperBsonClassMapping.Register();
 
-            
+
+            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.TryAddSingleton<IUserAccessProvider, UserAccessProvider>();
+
+
             var oidcSettings = builder.Configuration.GetSection("DocuEye:OIDC").Get<OidcSettings?>();
 
             if(oidcSettings != null)
@@ -127,6 +134,7 @@ namespace DocuEye.Web
                     }
 
                     options.MapInboundClaims = false;
+                    options.GetClaimsFromUserInfoEndpoint = true;
 
                     options.SaveTokens = true;
                 })
@@ -140,8 +148,15 @@ namespace DocuEye.Web
 
             }
 
+            builder.Services.AddSingleton<IAuthorizationHandler, WorkspaceAccessRequirementHandler>();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Workspace", policy => {
 
-            builder.Services.AddAuthorization();
+                    //policy.RequireAuthenticatedUser();
+                    policy.AddRequirements(new WorkspaceAccessRequirement(oidcSettings == null ? false : true, oidcSettings?.ClaimType));
+                });
+            });
 
             startupLogger.LogInformation("Register MediatR services");
             builder.Services.AddMediatR(cfg => {

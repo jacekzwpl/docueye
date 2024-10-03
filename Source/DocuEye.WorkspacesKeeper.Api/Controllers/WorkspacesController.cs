@@ -61,6 +61,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// <returns>Workspace data</returns>
         [Route("{id}")]
         [HttpGet]
+        [Authorize( Policy = "Workspace" )]
         public async Task<ActionResult<Workspace>> Get([FromRoute]string id)
         {
             var query = new GetWorkspaceQuery(id);
