@@ -104,6 +104,7 @@ namespace DocuEye.Web
             ViewsKeeperBsonClassMapping.Register();
             WorkspacesKeeperBsonClassMapping.Register();
 
+            builder.Services.AddMemoryCache();
 
             builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.TryAddSingleton<IUserAccessProvider, UserAccessProvider>();

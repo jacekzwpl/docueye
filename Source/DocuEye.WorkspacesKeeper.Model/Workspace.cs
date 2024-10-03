@@ -22,5 +22,14 @@ namespace DocuEye.WorkspacesKeeper.Model
         /// </summary>
 
         public IEnumerable<WorkspaceView> Views { get; set; } = Enumerable.Empty<WorkspaceView>();
+
+        /// <summary>
+        /// Workspace access rules
+        /// </summary>
+        public IEnumerable<WorkspaceAccessRule> AccessRules { get; set; } = Enumerable.Empty<WorkspaceAccessRule>();
+        /// <summary>
+        /// Defines visibility of workspace public/private
+        /// </summary>
+        public bool IsPrivate { get; set; } = false;
     }
 }

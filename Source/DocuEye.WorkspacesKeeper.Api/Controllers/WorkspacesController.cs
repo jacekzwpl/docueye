@@ -79,6 +79,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// <returns>Workspace view configuration</returns>
         [Route("{id}/viewconfiguration")]
         [HttpGet]
+        [Authorize(Policy = "Workspace")]
         public async Task<ActionResult<ViewConfiguration>> GetViewConfiguration([FromRoute] string id)
         {
             var query = new GetViewConfigurationQuery(id);
@@ -121,7 +122,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// <returns></returns>
         [Route("{id}")]
         [HttpDelete]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "BasicTokenAuthentication")]
         [IgnoreAntiforgeryToken]
         public async Task<ActionResult> Delete([FromRoute] string id)
         {

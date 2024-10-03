@@ -5,6 +5,13 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     !docs docs/main 
     !adrs adr/main 
 
+    configuration {
+        visibility private
+        users {
+            test.user@docueye.com read
+        }
+    }
+
     model {
         client = person "Client" "Online shop client"
 

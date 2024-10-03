@@ -41,8 +41,6 @@ namespace DocuEye.Infrastructure.Authentication.OIDC
                 return;
             }
 
-
-
             var result = await this.userAccessProvider.HasAccess(claim.Value, workspaceId.ToString());
 
 
