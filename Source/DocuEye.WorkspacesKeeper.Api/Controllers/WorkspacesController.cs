@@ -1,4 +1,5 @@
-﻿using DocuEye.Infrastructure.HttpProblemDetails;
+﻿using DocuEye.Infrastructure.Authentication.OIDC;
+using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.WorkspacesKeeper.Application.Commands.DeleteWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles;
@@ -8,6 +9,7 @@ using DocuEye.WorkspacesKeeper.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +24,7 @@ namespace DocuEye.Workspaces.Api.Controllers
     public class WorkspacesController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly IConfiguration configuration;
         private const string WorkspaceNotFound = "Workspace data not found.";
         private const string WorkspacNotFoundDetails = "Workspace data was not found in DocuEye database. Refresh page to try again.";
         private const string WorkspaceViewConfigurationNotFound = "Workspace view configuration not found.";
@@ -30,9 +33,10 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// Creates instance
         /// </summary>
         /// <param name="mediator">Mediator service</param>
-        public WorkspacesController(IMediator mediator)
+        public WorkspacesController(IMediator mediator, IConfiguration configuration)
         {
             this.mediator = mediator;
+            this.configuration = configuration;
         }
         /// <summary>
         /// Gets workspace list
@@ -44,11 +48,19 @@ namespace DocuEye.Workspaces.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FoundedWorkspace>>> Get([FromQuery] string? name = null, [FromQuery]int? limit = null, [FromQuery] int? skip = null)
         {
+            var oidcConfiguration = this.configuration.GetSection("DocuEye:OIDC").Get<OidcSettings>();
+            string? userName = null;
+            if(oidcConfiguration != null)
+            {
+                userName = this.User.Claims
+                    .FirstOrDefault(c => c.Type == oidcConfiguration.ClaimType)?.Value;
+            }
             var query = new FindWorkspacesQuery()
             {
                 Name = name,
                 Limit = limit,
-                Skip = skip
+                Skip = skip,
+                UserName = userName
             };
             var result = await this.mediator.Send<IEnumerable<FoundedWorkspace>>(query);
 
