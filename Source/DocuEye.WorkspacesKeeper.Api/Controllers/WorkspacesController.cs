@@ -46,6 +46,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         /// <param name="skip">Number of items to skip</param>
         /// <returns>List of workspaces matching criteria</returns>
         [HttpGet]
+        [Authorize(Policy = "General")]
         public async Task<ActionResult<IEnumerable<FoundedWorkspace>>> Get([FromQuery] string? name = null, [FromQuery]int? limit = null, [FromQuery] int? skip = null)
         {
             var oidcConfiguration = this.configuration.GetSection("DocuEye:OIDC").Get<OidcSettings>();

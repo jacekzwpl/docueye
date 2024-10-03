@@ -150,12 +150,19 @@ namespace DocuEye.Web
             }
 
             builder.Services.AddSingleton<IAuthorizationHandler, WorkspaceAccessRequirementHandler>();
+            builder.Services.AddSingleton<IAuthorizationHandler, GeneralAccessRequirementHandler>();
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("Workspace", policy => {
 
                     //policy.RequireAuthenticatedUser();
                     policy.AddRequirements(new WorkspaceAccessRequirement(oidcSettings == null ? false : true, oidcSettings?.ClaimType));
+                });
+
+                options.AddPolicy("General", policy => {
+
+                    //policy.RequireAuthenticatedUser();
+                    policy.AddRequirements(new GeneralAccessRequirement(oidcSettings == null ? false : true));
                 });
             });
 
