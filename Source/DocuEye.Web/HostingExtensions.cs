@@ -146,6 +146,11 @@ namespace DocuEye.Web
                     options.MapInboundClaims = false;
                     options.GetClaimsFromUserInfoEndpoint = true;
 
+                    if(oidcSettings.UsePKCE == 1)
+                    {
+                        options.UsePkce = true;
+                    }
+
                     options.SaveTokens = true;
 
                     options.Events.OnRedirectToIdentityProvider = context =>

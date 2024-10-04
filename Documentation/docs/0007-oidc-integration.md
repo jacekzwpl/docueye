@@ -22,8 +22,8 @@ Docueye uses [authorization code flow](https://auth0.com/docs/get-started/authen
 Additional redirect endpoints for oidc provider are:  
 | Endpoint | Description |
 | -- | ----|
-| /signin-oidc | Where to redirect after login |
-| /signout-callback-oidc | Where to redirect after logout |
+| `/signin-oidc` | Where to redirect after login |
+| `/signout-callback-oidc` | Where to redirect after logout |
 
 
 
