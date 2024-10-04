@@ -1,6 +1,7 @@
 ﻿using DocuEye.ChangeTracker.Application.Queries.FindModelChanges;
 using DocuEye.ChangeTracker.Model;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DocuEye.ChangeTracker.Api.Controllers
@@ -8,8 +9,9 @@ namespace DocuEye.ChangeTracker.Api.Controllers
     /// <summary>
     /// Controller for model changes
     /// </summary>
-    [Route("api/modelchanges")]
+    [Route("api/{workspaceId}/modelchanges")]
     [ApiController]
+    [Authorize(Policy = "Workspace")]
     public class ModelChangesController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -29,7 +31,7 @@ namespace DocuEye.ChangeTracker.Api.Controllers
         /// <param name="skip">Number of items to skip</param>
         /// <returns>Lists of items matching criteria</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ModelChange>>> Get([FromQuery] string workspaceId, [FromQuery] int? limit = null, [FromQuery] int? skip = null)
+        public async Task<ActionResult<IEnumerable<ModelChange>>> Get([FromRoute] string workspaceId, [FromQuery] int? limit = null, [FromQuery] int? skip = null)
         {
             var query = new FindModelChangesQuery()
             {

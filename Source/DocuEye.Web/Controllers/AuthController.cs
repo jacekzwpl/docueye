@@ -10,6 +10,7 @@ namespace DocuEye.Web.Controllers
     {
        
         [Route("login")]
+        [HttpGet]
         public IActionResult Login(string? returnUrl)
         {
             returnUrl ??= "/";
@@ -22,6 +23,7 @@ namespace DocuEye.Web.Controllers
         }
 
         [Route("logout")]
+        [HttpGet]
         public IActionResult Logout()
         {
             return SignOut(

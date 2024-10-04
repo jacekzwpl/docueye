@@ -3,6 +3,7 @@ using DocuEye.DocsKeeper.Application.Queries.GetWorkspaceDocumentation;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -15,6 +16,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
     /// </summary>
     [Route("api/workspaces/{workspaceId}/documentations")]
     [ApiController]
+    [Authorize(Policy = "Workspace")]
     public class DocumentationsController : ControllerBase
     {
         private readonly IMediator mediator;

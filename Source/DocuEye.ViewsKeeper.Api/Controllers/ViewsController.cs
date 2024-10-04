@@ -10,6 +10,7 @@ using DocuEye.ViewsKeeper.Application.Queries.GetSystemContextView;
 using DocuEye.ViewsKeeper.Application.Queries.GetSystemLandscapeView;
 using DocuEye.ViewsKeeper.Model;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DocuEye.ViewsKeeper.Api.Controllers
@@ -19,6 +20,7 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
     /// </summary>
     [Route("api/workspaces/{workspaceId}/views")]
     [ApiController]
+    [Authorize(Policy = "Workspace")]
     public class ViewsController : ControllerBase
     {
 
