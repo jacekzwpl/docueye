@@ -2,7 +2,8 @@
 //import { AccountCircle, Logout, Settings } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { Box, Button, Divider, IconButton, Link, Toolbar, Typography } from '@mui/material';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import { Box,  Divider, IconButton, Toolbar, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import './App.css';
 import MainAppBar from './components/main/mainappbar';
@@ -71,7 +72,7 @@ const App = () => {
             DocuEYE {currentWorkspace.value && ` (${currentWorkspace.value.name})`}
           </Typography>
           <div>
-            <Button onClick={() => logout()} color="inherit">Logout</Button>
+            <IconButton onClick={() => logout()} aria-label="sign out"><PowerSettingsNewIcon/></IconButton>
           </div>
           {/*<div>
             <IconButton
