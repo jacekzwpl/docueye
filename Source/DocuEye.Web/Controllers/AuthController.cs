@@ -13,22 +13,39 @@ namespace DocuEye.Web.Controllers
         [HttpGet]
         public IActionResult Login(string? returnUrl)
         {
-            returnUrl ??= "/";
-            return new ChallengeResult(
-                OpenIdConnectDefaults.AuthenticationScheme,
-                new AuthenticationProperties()
-                {
-                    RedirectUri = returnUrl
-                });
+            var devEnvironmentVariable = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
+                                devEnvironmentVariable.ToLower() == "development";
+            if (isDevelopment)
+            {
+                returnUrl ??= "/";
+                return new ChallengeResult(
+                    OpenIdConnectDefaults.AuthenticationScheme,
+                    new AuthenticationProperties()
+                    {
+                        RedirectUri = returnUrl
+                    });
+            }else
+            {
+                return Redirect("/");
+            }
+                
         }
 
         [Route("logout")]
         [HttpGet]
         public IActionResult Logout()
         {
-            return SignOut(
+            if(this.User.Identity?.IsAuthenticated == true)
+            {
+                return SignOut(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 OpenIdConnectDefaults.AuthenticationScheme);
+            }else
+            {
+                return Redirect("/");
+            }
+            
         }
     }
 }

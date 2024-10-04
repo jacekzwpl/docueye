@@ -2,7 +2,7 @@
 //import { AccountCircle, Logout, Settings } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { Box, Divider, IconButton, Toolbar, Typography } from '@mui/material';
+import { Box, Button, Divider, IconButton, Link, Toolbar, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import './App.css';
 import MainAppBar from './components/main/mainappbar';
@@ -41,6 +41,15 @@ const App = () => {
 */
   const drawerWidth: number = 240;
 
+  const logout = (): void => {
+    
+    if (process.env.REACT_APP_SERVER_URL) {
+      window.location.href = process.env.REACT_APP_SERVER_URL + "/auth/logout";
+    } else {
+      window.location.href = "/auth/logout";
+    }
+  }
+
   useEffect(() => {
     initResponseInterceptors();
   }, [])
@@ -61,6 +70,9 @@ const App = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             DocuEYE {currentWorkspace.value && ` (${currentWorkspace.value.name})`}
           </Typography>
+          <div>
+            <Button onClick={() => logout()} color="inherit">Logout</Button>
+          </div>
           {/*<div>
             <IconButton
               size="large"
