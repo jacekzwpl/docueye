@@ -12,6 +12,9 @@ import Router from './router';
 import { initResponseInterceptors } from './api/interceptors';
 import { IWorkspaceState } from './store/slices/workspace/IWorkspaceState';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import globalRouter from './router/globalRouter';
+
 
 
 
@@ -25,6 +28,8 @@ const App = () => {
   const toogleOpen = (): void => {
     setMenuOpened(!menuOpened);
   };
+  const navigate = useNavigate();
+  globalRouter.navigate = navigate;
   /*
   const handleMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget);

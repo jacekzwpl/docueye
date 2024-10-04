@@ -29,6 +29,8 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Net;
 
 namespace DocuEye.Web
 {
@@ -119,14 +121,21 @@ namespace DocuEye.Web
                 {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.Events.OnRedirectToAccessDenied = context =>
+                    {
+                        context.Response.StatusCode = 403;
+                        return Task.CompletedTask;
+                    };
+                })
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
                 {
                     options.Authority = oidcSettings.Authority;
 
                     options.ClientId = oidcSettings.ClientId;
                     options.ClientSecret = oidcSettings.ClientSecret;
-                    options.ResponseType = "code";
+                    options.ResponseType = OpenIdConnectResponseType.Code;
 
                     options.Scope.Clear();
                     foreach (var scope in oidcSettings.GetScopes())
@@ -138,6 +147,23 @@ namespace DocuEye.Web
                     options.GetClaimsFromUserInfoEndpoint = true;
 
                     options.SaveTokens = true;
+
+                    options.Events.OnRedirectToIdentityProvider = context =>
+                    {
+
+                        if (context.Request.Path.StartsWithSegments("/api"))
+                        {
+                            if (context.Response.StatusCode == (int)HttpStatusCode.OK)
+                            {
+                                context.Response.StatusCode = 401;
+                            }
+
+                            context.HandleResponse();
+                        }
+
+                        return Task.CompletedTask;
+                    };
+
                 })
                 .AddScheme<AuthenticationSchemeOptions, BasicTokenAuthenticationHandler>("BasicTokenAuthentication", null);
             }
