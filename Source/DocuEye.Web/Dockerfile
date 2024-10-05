@@ -1,7 +1,7 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0.7 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0.8 AS base
 WORKDIR /app
 EXPOSE 8080
 
@@ -11,7 +11,7 @@ COPY ./Source/DocuEye.Web/client-app /node
 RUN yarn install
 RUN yarn build
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0.303 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.402 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Source/DocuEye.Web/DocuEye.Web.csproj", "Source/DocuEye.Web/"]
