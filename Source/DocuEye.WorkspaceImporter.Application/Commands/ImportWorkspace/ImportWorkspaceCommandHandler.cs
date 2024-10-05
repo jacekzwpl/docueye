@@ -88,8 +88,8 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace
                 Id = string.IsNullOrEmpty(request.WorkspaceId) ? Guid.NewGuid().ToString() : request.WorkspaceId,
                 Name = request.WorkspaceData.Name ?? string.Empty,
                 Description = request.WorkspaceData.Description,
-                IsPrivate = request.WorkspaceData.Configuration?.Visibility.ToLower() == "public"
-                    ? false : true,
+                IsPrivate = request.WorkspaceData.Configuration?.Visibility.ToLower() == "private"
+                    ? true : false,
                 AccessRules = request.WorkspaceData.Configuration?.Users != null
                     ? this.mapper.Map<IEnumerable<WorkspaceAccessRule>>(request.WorkspaceData.Configuration?.Users)
                     : Enumerable.Empty<WorkspaceAccessRule>()
