@@ -268,7 +268,7 @@ namespace DocuEye.Web
                 name: "default",
                 pattern: "{controller}/{action=Index}/{id?}");
 
-            if(oidcSettings != null)
+            if(!string.IsNullOrEmpty(oidcSettings.Authority))
             {
                 app.MapFallbackToFile("index.html").RequireAuthorization();
             }else
