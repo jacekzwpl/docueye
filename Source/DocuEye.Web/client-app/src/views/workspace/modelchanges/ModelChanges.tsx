@@ -29,7 +29,7 @@ export const ModelChanges = () => {
         const getWorkspace = !workspaceState.value || (workspaceState.value && workspaceState.value.id !== workspaceId) ?
             DocuEyeApi.WorkspacesApi.apiWorkspacesIdGet(workspaceId)
             : Promise.resolve({ data: null })
-        const getModelChanges = DocuEyeApi.ModelChangesApi.apiModelchangesGet(workspaceId, 50, 0);
+        const getModelChanges = DocuEyeApi.ModelChangesApi.apiWorkspaceIdModelchangesGet(workspaceId, 50, 0);
         Promise.all([getWorkspace, getModelChanges])
             .then((responses) => {
                 const getWorkspaceResponse = responses[0];
@@ -66,7 +66,7 @@ export const ModelChanges = () => {
         }
         setIsLoading(true);
         DocuEyeApi.ModelChangesApi
-            .apiModelchangesGet(workspaceId, pageSize, (page - 1) * pageSize)
+            .apiWorkspaceIdModelchangesGet(workspaceId, pageSize, (page - 1) * pageSize)
             .then((response: AxiosResponse<ModelChange[]>) => {
                 if (response.data) {
                     setModelChanges(response.data);

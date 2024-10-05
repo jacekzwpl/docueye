@@ -13,7 +13,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
     /// </summary>
     [Route("api/workspaces")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "BasicTokenAuthentication")]
     public class WorkspacesImportController : ControllerBase
     {
         private readonly IMediator mediator;

@@ -2,6 +2,7 @@
 .npmignore
 api.ts
 api/app-api.ts
+api/auth-api.ts
 api/decisions-api.ts
 api/documentation-files-api.ts
 api/documentation-files-import-api.ts
@@ -79,12 +80,15 @@ models/structurizr-system-landscape-view.ts
 models/structurizr-terminology.ts
 models/structurizr-vertex.ts
 models/structurizr-views.ts
+models/structurizr-workspace-configuration-user.ts
+models/structurizr-workspace-configuration.ts
 models/structurizr-workspace.ts
 models/system-context-view.ts
 models/system-landscape-view.ts
 models/terminology.ts
 models/view-configuration.ts
 models/view-with-element.ts
+models/workspace-access-rule.ts
 models/workspace-catalog-element.ts
 models/workspace-view.ts
 models/workspace.ts

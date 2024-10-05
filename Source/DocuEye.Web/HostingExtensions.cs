@@ -4,6 +4,7 @@ using DocuEye.ChangeTracker.Persistence;
 using DocuEye.DocsKeeper.Application.Commands.SaveImages;
 using DocuEye.DocsKeeper.Application.Mappings;
 using DocuEye.DocsKeeper.Persistence;
+using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.DataProtection;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Application.Mappings;
@@ -12,6 +13,7 @@ using DocuEye.Persistence;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
 using DocuEye.ViewsKeeper.Application.Mappings;
 using DocuEye.ViewsKeeper.Persistence;
+using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
 using DocuEye.WorkspaceImporter.Application;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
@@ -22,7 +24,13 @@ using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Mappings;
 using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Net;
 
 namespace DocuEye.Web
 {
@@ -98,9 +106,96 @@ namespace DocuEye.Web
             ViewsKeeperBsonClassMapping.Register();
             WorkspacesKeeperBsonClassMapping.Register();
 
-            builder.Services.AddAuthentication("BasicTokenAuthentication")
+            builder.Services.AddMemoryCache();
+
+            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.TryAddSingleton<IUserAccessProvider, UserAccessProvider>();
+
+
+            var oidcSettings = builder.Configuration.GetSection("DocuEye:OIDC").Get<OidcSettings?>();
+
+            if(oidcSettings != null)
+            {
+                startupLogger.LogInformation("Add OIDC authentication");
+                builder.Services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.Events.OnRedirectToAccessDenied = context =>
+                    {
+                        context.Response.StatusCode = 403;
+                        return Task.CompletedTask;
+                    };
+                })
+                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+                {
+                    options.Authority = oidcSettings.Authority;
+
+                    options.ClientId = oidcSettings.ClientId;
+                    options.ClientSecret = oidcSettings.ClientSecret;
+                    options.ResponseType = OpenIdConnectResponseType.Code;
+
+                    options.Scope.Clear();
+                    foreach (var scope in oidcSettings.GetScopes())
+                    {
+                        options.Scope.Add(scope);
+                    }
+
+                    options.MapInboundClaims = false;
+                    options.GetClaimsFromUserInfoEndpoint = true;
+
+                    if(oidcSettings.UsePKCE == 1)
+                    {
+                        options.UsePkce = true;
+                    }
+
+                    options.SaveTokens = true;
+
+                    options.Events.OnRedirectToIdentityProvider = context =>
+                    {
+
+                        if (context.Request.Path.StartsWithSegments("/api"))
+                        {
+                            if (context.Response.StatusCode == (int)HttpStatusCode.OK)
+                            {
+                                context.Response.StatusCode = 401;
+                            }
+
+                            context.HandleResponse();
+                        }
+
+                        return Task.CompletedTask;
+                    };
+
+                })
                 .AddScheme<AuthenticationSchemeOptions, BasicTokenAuthenticationHandler>("BasicTokenAuthentication", null);
-            builder.Services.AddAuthorization();
+            }
+            else
+            {
+                startupLogger.LogInformation("OIDC settings are empty. No OIDC auth is added.");
+                builder.Services.AddAuthentication("BasicTokenAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicTokenAuthenticationHandler>("BasicTokenAuthentication", null);
+
+            }
+
+            builder.Services.AddSingleton<IAuthorizationHandler, WorkspaceAccessRequirementHandler>();
+            builder.Services.AddSingleton<IAuthorizationHandler, GeneralAccessRequirementHandler>();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Workspace", policy => {
+
+                    //policy.RequireAuthenticatedUser();
+                    policy.AddRequirements(new WorkspaceAccessRequirement(oidcSettings == null ? false : true, oidcSettings?.ClaimType));
+                });
+
+                options.AddPolicy("General", policy => {
+
+                    //policy.RequireAuthenticatedUser();
+                    policy.AddRequirements(new GeneralAccessRequirement(oidcSettings == null ? false : true));
+                });
+            });
 
             startupLogger.LogInformation("Register MediatR services");
             builder.Services.AddMediatR(cfg => {
@@ -150,6 +245,8 @@ namespace DocuEye.Web
 
         public static WebApplication ConfigurePipeline(this WebApplication app)
         {
+            var oidcSettings = new OidcSettings();
+            app.Configuration.GetSection("DocuEye:OIDC").Bind(oidcSettings);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -171,7 +268,14 @@ namespace DocuEye.Web
                 name: "default",
                 pattern: "{controller}/{action=Index}/{id?}");
 
-            app.MapFallbackToFile("index.html");
+            if(oidcSettings != null)
+            {
+                app.MapFallbackToFile("index.html").RequireAuthorization();
+            }else
+            {
+                app.MapFallbackToFile("index.html");
+            }
+            
 
             return app;
         }

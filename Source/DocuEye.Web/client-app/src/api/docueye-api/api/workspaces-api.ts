@@ -83,6 +83,39 @@ export const WorkspacesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        apiWorkspacesIdDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiWorkspacesIdDelete', 'id', id)
+            const localVarPath = `/api/workspaces/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         apiWorkspacesIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('apiWorkspacesIdGet', 'id', id)
@@ -173,6 +206,18 @@ export const WorkspacesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async apiWorkspacesIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesIdDelete(id, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['WorkspacesApi.apiWorkspacesIdDelete']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async apiWorkspacesIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesIdGet(id, options);
             const index = configuration?.serverIndex ?? 0;
@@ -218,6 +263,15 @@ export const WorkspacesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        apiWorkspacesIdDelete(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.apiWorkspacesIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         apiWorkspacesIdGet(id: string, options?: any): AxiosPromise<Workspace> {
             return localVarFp.apiWorkspacesIdGet(id, options).then((request) => request(axios, basePath));
         },
@@ -251,6 +305,17 @@ export class WorkspacesApi extends BaseAPI {
      */
     public apiWorkspacesGet(name?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
         return WorkspacesApiFp(this.configuration).apiWorkspacesGet(name, limit, skip, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    public apiWorkspacesIdDelete(id: string, options?: RawAxiosRequestConfig) {
+        return WorkspacesApiFp(this.configuration).apiWorkspacesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -31,14 +31,17 @@ export const ModelChangesApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * 
-         * @param {string} [workspaceId] 
+         * @param {string} workspaceId 
          * @param {number} [limit] 
          * @param {number} [skip] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiModelchangesGet: async (workspaceId?: string, limit?: number, skip?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/modelchanges`;
+        apiWorkspaceIdModelchangesGet: async (workspaceId: string, limit?: number, skip?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('apiWorkspaceIdModelchangesGet', 'workspaceId', workspaceId)
+            const localVarPath = `/api/{workspaceId}/modelchanges`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -49,10 +52,6 @@ export const ModelChangesApiAxiosParamCreator = function (configuration?: Config
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            if (workspaceId !== undefined) {
-                localVarQueryParameter['workspaceId'] = workspaceId;
-            }
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
@@ -85,16 +84,16 @@ export const ModelChangesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} [workspaceId] 
+         * @param {string} workspaceId 
          * @param {number} [limit] 
          * @param {number} [skip] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiModelchangesGet(workspaceId?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelChange>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiModelchangesGet(workspaceId, limit, skip, options);
+        async apiWorkspaceIdModelchangesGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelChange>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspaceIdModelchangesGet(workspaceId, limit, skip, options);
             const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ModelChangesApi.apiModelchangesGet']?.[index]?.url;
+            const operationBasePath = operationServerMap['ModelChangesApi.apiWorkspaceIdModelchangesGet']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
@@ -109,14 +108,14 @@ export const ModelChangesApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * 
-         * @param {string} [workspaceId] 
+         * @param {string} workspaceId 
          * @param {number} [limit] 
          * @param {number} [skip] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiModelchangesGet(workspaceId?: string, limit?: number, skip?: number, options?: any): AxiosPromise<Array<ModelChange>> {
-            return localVarFp.apiModelchangesGet(workspaceId, limit, skip, options).then((request) => request(axios, basePath));
+        apiWorkspaceIdModelchangesGet(workspaceId: string, limit?: number, skip?: number, options?: any): AxiosPromise<Array<ModelChange>> {
+            return localVarFp.apiWorkspaceIdModelchangesGet(workspaceId, limit, skip, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -130,15 +129,15 @@ export const ModelChangesApiFactory = function (configuration?: Configuration, b
 export class ModelChangesApi extends BaseAPI {
     /**
      * 
-     * @param {string} [workspaceId] 
+     * @param {string} workspaceId 
      * @param {number} [limit] 
      * @param {number} [skip] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ModelChangesApi
      */
-    public apiModelchangesGet(workspaceId?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
-        return ModelChangesApiFp(this.configuration).apiModelchangesGet(workspaceId, limit, skip, options).then((request) => request(this.axios, this.basePath));
+    public apiWorkspaceIdModelchangesGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
+        return ModelChangesApiFp(this.configuration).apiWorkspaceIdModelchangesGet(workspaceId, limit, skip, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

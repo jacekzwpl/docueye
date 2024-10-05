@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { WorkspaceAccessRule } from './workspace-access-rule';
+// May contain unused imports in some cases
+// @ts-ignore
 import { WorkspaceView } from './workspace-view';
 
 /**
@@ -47,5 +50,17 @@ export interface Workspace {
      * @memberof Workspace
      */
     'views'?: Array<WorkspaceView> | null;
+    /**
+     * 
+     * @type {Array<WorkspaceAccessRule>}
+     * @memberof Workspace
+     */
+    'accessRules'?: Array<WorkspaceAccessRule> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Workspace
+     */
+    'isPrivate'?: boolean;
 }
 

@@ -57,5 +57,9 @@ export const routes:IRoute[] = [
   {
     path: '/workspace/:workspaceId/deploymentnodesmatrix',
     component: lazy(() => import('../views/workspace/deploymentnodesmatrix'))
+  },
+  {
+    path: '/errors/forbidden',
+    component: lazy(() => import('../views/errors/forbidden'))
   }
 ]

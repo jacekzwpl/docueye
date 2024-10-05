@@ -15,7 +15,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
 {
     [Route("api/workspaces/{workspaceId}/docfile")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "BasicTokenAuthentication")]
     public class DocumentationFilesImportController : ControllerBase
     {
         private readonly IMediator mediator;

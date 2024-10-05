@@ -9,7 +9,7 @@
     <ToolCommandName>docueye</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.11.0</Version>
+    <Version>0.12.0</Version>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <Title>DocuEye CLI</Title>

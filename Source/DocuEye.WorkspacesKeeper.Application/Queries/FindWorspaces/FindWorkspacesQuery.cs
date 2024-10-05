@@ -20,5 +20,6 @@ namespace DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces
         /// Number of items to skip<
         /// </summary>
         public int? Skip { get; set; }
+        public string? UserName { get; set; }
     }
 }

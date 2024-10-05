@@ -22,6 +22,9 @@ import { StructurizrModel } from './structurizr-model';
 // May contain unused imports in some cases
 // @ts-ignore
 import { StructurizrViews } from './structurizr-views';
+// May contain unused imports in some cases
+// @ts-ignore
+import { StructurizrWorkspaceConfiguration } from './structurizr-workspace-configuration';
 
 /**
  * 
@@ -65,5 +68,11 @@ export interface StructurizrWorkspace {
      * @memberof StructurizrWorkspace
      */
     'documentation'?: StructurizrDocumentation;
+    /**
+     * 
+     * @type {StructurizrWorkspaceConfiguration}
+     * @memberof StructurizrWorkspace
+     */
+    'configuration'?: StructurizrWorkspaceConfiguration;
 }
 

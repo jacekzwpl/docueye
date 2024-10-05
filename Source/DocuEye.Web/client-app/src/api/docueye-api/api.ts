@@ -15,6 +15,7 @@
 
 
 export * from './api/app-api';
+export * from './api/auth-api';
 export * from './api/decisions-api';
 export * from './api/documentation-files-api';
 export * from './api/documentation-files-import-api';

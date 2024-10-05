@@ -5,6 +5,8 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     !docs docs/main 
     !adrs adr/main 
 
+    
+
     model {
         client = person "Client" "Online shop client"
 

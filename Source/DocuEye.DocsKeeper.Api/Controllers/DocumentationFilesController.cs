@@ -14,6 +14,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
 {
     [Route("api/workspaces/{workspaceId}/documentationfiles")]
     [ApiController]
+    [Authorize(Policy = "Workspace")]
     public class DocumentationFilesController : ControllerBase
     {
         private readonly IMediator mediator;

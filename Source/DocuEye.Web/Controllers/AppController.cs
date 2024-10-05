@@ -11,7 +11,6 @@ namespace DocuEye.Web.Controllers
         [HttpGet]
         public IActionResult Context()
         {
-            //var surveysTestHost = this.configuration["SurveysSettings:TestHost"];
             return this.Ok(new
             {
                 displayName ="",

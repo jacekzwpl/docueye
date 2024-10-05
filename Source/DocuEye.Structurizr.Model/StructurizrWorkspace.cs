@@ -11,5 +11,6 @@ namespace DocuEye.Structurizr.Model
         public StructurizrModel? Model { get; set; }
         public StructurizrViews? Views { get; set; }
         public StructurizrDocumentation? Documentation { get; set; }
+        public StructurizrWorkspaceConfiguration? Configuration { get; set; }
     }
 }
