@@ -21,6 +21,13 @@ namespace DocuEye.Infrastructure.Authentication.OIDC
                 context.Succeed(requirement);
                 return;
             }
+
+            if (context.User.Identity?.IsAuthenticated != true)
+            {
+                context.Fail();
+                return;
+            }
+
             var claim = context.User.FindFirst(c => c.Type == requirement.ClaimType);
             if(claim == null)
             {
