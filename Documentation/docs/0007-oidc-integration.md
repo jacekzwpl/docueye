@@ -15,7 +15,7 @@ configuration {
 ```
 This configuration makes workspace private and gives access only to one user. You can read more about this configuration in structurizr dsl documentation [here](https://docs.structurizr.com/dsl/language#configuration).  
 
-> Note that this DocuEye use memory cache for keeping this information. Interval for refreshing data is 5 minutes, so any changes in this won't take effect imidiately after importing new configuration.
+> Note that this DocuEye use memory cache for keeping this information. Interval for refreshing data is 5 minutes, so any changes in this won't take effect immediately after importing new configuration.
 
 During authorization flow DocuEye compares user_name value from workspace configuration with specified claim which type can be configured. This can be done using `DocuEye__OIDC__ClaimType` environment variable. Default value is `email`. 
 
