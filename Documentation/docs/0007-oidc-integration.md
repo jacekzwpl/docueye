@@ -15,9 +15,11 @@ configuration {
 ```
 This configuration makes workspace private and gives access only to one user. You can read more about this configuration in structurizr dsl documentation [here](https://docs.structurizr.com/dsl/language#configuration).  
 
-During authorization flow Docueye compares user_name value from workspace configuration with specified claim which type can be configured. This can be done using `DocuEye__OIDC__ClaimType` environment variable. Default value is `email`. 
+> Note that this DocuEye use memory cache for keeping this information. Interval for refreshing data is 5 minutes, so any changes in this won't take effect immediately after importing new configuration.
 
-Docueye uses [authorization code flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow) for default. Also [authorization code flow with pkce](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce) can be used. To use PKCE set `DocuEye__OIDC__UsePKCE` environment variable to `1`.
+During authorization flow DocuEye compares user_name value from workspace configuration with specified claim which type can be configured. This can be done using `DocuEye__OIDC__ClaimType` environment variable. Default value is `email`. 
+
+DocuEye uses [authorization code flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow) for default. Also [authorization code flow with pkce](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce) can be used. To use PKCE set `DocuEye__OIDC__UsePKCE` environment variable to `1`.
 
 Additional redirect endpoints for oidc provider are:  
 | Endpoint | Description |

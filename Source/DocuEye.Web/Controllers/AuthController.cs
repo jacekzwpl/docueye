@@ -13,6 +13,15 @@ namespace DocuEye.Web.Controllers
         [HttpGet]
         public IActionResult Login(string? returnUrl)
         {
+
+            returnUrl ??= "/";
+            return new ChallengeResult(
+                OpenIdConnectDefaults.AuthenticationScheme,
+                new AuthenticationProperties()
+                {
+                    RedirectUri = returnUrl
+                });
+            /*
             var devEnvironmentVariable = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
                                 devEnvironmentVariable.ToLower() == "development";
@@ -29,7 +38,7 @@ namespace DocuEye.Web.Controllers
             {
                 return Redirect("/");
             }
-                
+                */
         }
 
         [Route("logout")]
