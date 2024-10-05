@@ -38,7 +38,7 @@ export const initResponseInterceptors = () => {
             if (process.env.REACT_APP_SERVER_URL) {
                 window.location.href = process.env.REACT_APP_SERVER_URL + "/auth/login";
             } else {
-                window.location.href = "/";
+                window.location.href = "/auth/login";
             }
         }
 
