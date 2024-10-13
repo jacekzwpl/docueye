@@ -1,5 +1,6 @@
 ﻿using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
+using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,7 +56,32 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         [IgnoreAntiforgeryToken]
         public async Task<ActionResult<ImportWorkspaceResponse>> ImportStart(ImportWorkspaceStartRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new StartImportCommand()
+            {
+                ImportKey = data.ImportKey,
+                WorkspaceId = data.WorkspaceId,
+                SourceLink = data.SourceLink,
+                WorkspaceName = data.WorkspaceName,
+                WorkspaceDescription = data.WorkspaceDescription
+            };
+            var result = await this.mediator.Send<StartImportResult>(command);
+            if(result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
 
         [Route("import/elements")]
