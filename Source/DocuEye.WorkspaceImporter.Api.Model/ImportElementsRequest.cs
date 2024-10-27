@@ -1,10 +1,11 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model.Elements;
-using MediatR;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
 
-namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
+namespace DocuEye.WorkspaceImporter.Api.Model
 {
-    public class ImportElementsCommand : IRequest<ImportElementsResult>
+    public class ImportElementsRequest
     {
         public IEnumerable<ElementToImport> Elements { get; set; } = null!;
         public string ImportKey { get; set; } = null!;

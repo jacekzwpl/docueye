@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DocuEye.ModelKeeper.Model;
-using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
+using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using System.Collections.Generic;
 using System.Linq;
 

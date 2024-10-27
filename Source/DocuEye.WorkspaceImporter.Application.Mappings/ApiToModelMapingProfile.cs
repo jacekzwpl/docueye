@@ -2,8 +2,9 @@
 using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ViewsKeeper.Model;
-using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
+using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 
 namespace DocuEye.WorkspaceImporter.Application.Mappings

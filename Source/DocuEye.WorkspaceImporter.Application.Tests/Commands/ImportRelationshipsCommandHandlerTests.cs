@@ -1,7 +1,7 @@
 ﻿using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
-using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportElements;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
 using DocuEye.WorkspaceImporter.Model;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.ModelKeeper.Model;
-using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Application.Events;
 using DocuEye.WorkspaceImporter.Model;
 using MediatR;

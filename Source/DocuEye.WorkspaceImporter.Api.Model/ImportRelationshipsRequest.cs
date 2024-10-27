@@ -1,10 +1,11 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model.Relationships;
-using MediatR;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 
-namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
+namespace DocuEye.WorkspaceImporter.Api.Model
 {
-    public class ImportRelationshipsCommand : IRequest<ImportRelationshipsResult>
+    public class ImportRelationshipsRequest
     {
         public IEnumerable<RelationshipToImport> Relationships { get; set; } = null!;
         public string ImportKey { get; set; } = null!;

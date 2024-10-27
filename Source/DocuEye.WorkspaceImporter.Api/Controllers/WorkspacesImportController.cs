@@ -1,9 +1,20 @@
 ﻿using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Application.Commands.ClearDocsItems;
+using DocuEye.WorkspaceImporter.Application.Commands.FinalizeImport;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportDecision;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportElements;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportImage;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportViews;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
 using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Api.Controllers
@@ -87,61 +98,264 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         [Route("import/elements")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> ImportElements(ImportWorkspaceStartRequest data)
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportElements(ImportElementsRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new ImportElementsCommand()
+            {
+                ImportKey = data.ImportKey,
+                WorkspaceId = data.WorkspaceId,
+                Elements = data.Elements
+            };
+            var result = await this.mediator.Send<ImportElementsResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
 
         [Route("import/relationships")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> ImportRelationships(ImportWorkspaceStartRequest data)
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportRelationships(ImportRelationshipsRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new ImportRelationshipsCommand()
+            {
+                Relationships = data.Relationships,
+                ImportKey = data.ImportKey,
+                WorkspaceId = data.WorkspaceId
+            };
+            var result = await this.mediator.Send<ImportRelationshipsResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
 
         [Route("import/views")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> ImportViews(ImportWorkspaceStartRequest data)
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportViews(ImportViewsRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new ImportViewsCommand()
+            {
+                Views = data.Views,
+                ImportKey = data.ImportKey,
+                WorkspaceId = data.WorkspaceId
+            };
+            var result = await this.mediator.Send<ImportViewsResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+        }
+
+        [Route("import/cleardocitems")]
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportClearDocItems(ImportClearDocItemsRequest data)
+        {
+            var command = new ClearDocsItemsCommand(data.WorkspaceId, data.ImportKey);
+            var result = await this.mediator.Send<ClearDocsItemsResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
 
         [Route("import/documentation")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> ImportDocumentation(ImportWorkspaceStartRequest data)
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportDocumentation(ImportDocumentationRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new ImportDocumentationCommand(data.WorkspaceId, data.ImportKey, data.Documentation);
+            var result = await this.mediator.Send<ImportDocumentationResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
 
         [Route("import/decision")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> ImportDecision(ImportWorkspaceStartRequest data)
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportDecision(ImportDecisionRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new ImportDecisionCommand(data.WorkspaceId, data.ImportKey, data.Decision);
+            var result = await this.mediator.Send<ImportDecisionResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
 
         [Route("import/image")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> ImportImage(ImportWorkspaceStartRequest data)
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportImage(ImportImageRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new ImportImageCommand(data.WorkspaceId, data.ImportKey, data.Image);
+            var result = await this.mediator.Send<ImportImageResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+        }
+
+        [Route("import/decisionlinks")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportDecisionLinks(ImportDecisionsLinksRequest data)
+        {
+            var command = new ImportDecisionsLinksCommand(data.WorkspaceId, data.ImportKey, data.DocumentationId, data.DecisionDslId, data.DecisionsLinks);
+            var result = await this.mediator.Send<ImportDecisionsLinksResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
 
         [Route("import/finish")]
         [HttpPut]
         [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> ImportFinish(ImportWorkspaceStartRequest data)
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportFinish(ImportFinalizeRequest data)
         {
-            throw new System.NotImplementedException();
+            var command = new FinalizeImportCommand()
+            {
+                ImportKey = data.ImportKey,
+                WorkspaceId = data.WorkspaceId,
+            };
+
+            var result = await this.mediator.Send<FinalizeImportResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
         }
-
-
-
-
     }
 }

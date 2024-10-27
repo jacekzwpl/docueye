@@ -1,5 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
-using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportElements;
 using DocuEye.WorkspaceImporter.Model;
 

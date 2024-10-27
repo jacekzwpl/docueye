@@ -233,6 +233,9 @@ namespace DocuEye.Web
                 mc.AddProfile(new WorkspaceImporterFromExplodedMappingProfile());
                 mc.AddProfile(new WorkspaceImporterFromStructurizrMappingProfile());
                 mc.AddProfile(new WorkspaceImporterMappingProfile());
+
+                mc.AddProfile(new ApiToModelMapingProfile());
+                mc.AddProfile(new ModelToModelMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

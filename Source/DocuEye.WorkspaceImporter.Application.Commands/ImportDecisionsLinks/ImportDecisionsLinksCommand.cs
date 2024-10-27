@@ -16,9 +16,9 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
         public string DecisionDslId { get; set; } = null!;
 
 
-        public List<DecisionLinkToImport> DecisionLinks { get; set; } = null!;
+        public IEnumerable<DecisionLinkToImport> DecisionLinks { get; set; } = null!;
 
-        public ImportDecisionsLinksCommand(string workspaceId, string importKey, string documnetationId, string decisiondslId,  List<DecisionLinkToImport> decisionLinks)
+        public ImportDecisionsLinksCommand(string workspaceId, string importKey, string documnetationId, string decisiondslId,  IEnumerable<DecisionLinkToImport> decisionLinks)
         {
             WorkspaceId = workspaceId;
             ImportKey = importKey;

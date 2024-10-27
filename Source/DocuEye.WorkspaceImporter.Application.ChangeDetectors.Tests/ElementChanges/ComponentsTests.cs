@@ -1,5 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
-using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
 
 namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementChanges
 {
