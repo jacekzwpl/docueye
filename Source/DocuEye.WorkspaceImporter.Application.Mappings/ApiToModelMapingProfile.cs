@@ -5,7 +5,9 @@ using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
+using DocuEye.WorkspaceImporter.Api.Model.ViewConfiguration;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
+using DocuEye.WorkspacesKeeper.Model;
 
 namespace DocuEye.WorkspaceImporter.Application.Mappings
 {
@@ -61,6 +63,11 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
                 .ForMember(dest => dest.DslId, opt => opt.MapFrom(src => src.StrucuturizrId))
                 .ForMember(dest => dest.Links, opt => opt.Ignore());
             CreateMap<DecisionLinkToImport, DecisionLink>();
+
+            CreateMap<ViewConfigurationToImport, ViewConfiguration>();
+            CreateMap<ElementStyleToImport, ElementStyle>();
+            CreateMap<RelationshipStyleToImport, RelationshipStyle>();
+            CreateMap<TerminologyToImport, Terminology>();
         }
     }
 }

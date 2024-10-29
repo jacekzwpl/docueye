@@ -7,6 +7,7 @@ using DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportElements;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportImage;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportViewConfiguration;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportViews;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
 using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
@@ -85,6 +86,38 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                     Message = result.Message
                 });
             }else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+        }
+
+        [Route("import/viewconfiguration")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportViewConfiguration(ImportViewConfigurationRequest data)
+        {
+            var command = new ImportViewConfigurationCommand()
+            {
+                ImportKey = data.ImportKey,
+                WorkspaceId = data.WorkspaceId,
+                ViewConfiguration = data.ViewConfiguration
+            };
+            var result = await this.mediator.Send<ImportViewConfigurationResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
             {
                 return this.BadRequest(new ImportWorkspaceResponse()
                 {
