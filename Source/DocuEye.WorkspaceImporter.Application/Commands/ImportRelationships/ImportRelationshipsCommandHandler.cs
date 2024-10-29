@@ -60,7 +60,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
             {
                 RelationshipsToAdd = existingRelationships.Where(o => result.RelationshipsToAdd.Contains(o.Id)).ToArray(),
                 RelationshipsToChange = existingRelationships.Where(o => result.RelationshipsToChange.Contains(o.Id)).ToArray(),
-                RelationshipsToDelete = existingRelationships.Where(o => result.RelationshipsToAdd.Contains(o.Id)).ToArray()
+                RelationshipsToDelete = existingRelationships.Where(o => result.RelationshipsToDelete.Contains(o.Id)).ToArray()
             });
 
             return new ImportRelationshipsResult(request.WorkspaceId, true);

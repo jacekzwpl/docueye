@@ -3,6 +3,7 @@ using DocuEye.DocsKeeper.Application.Commads.SaveSingleImage;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,6 +34,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportImage
 
             var image = this.mapper.Map<Image>(request.Image);
             image.WorkspaceId = request.WorkspaceId;
+            image.Id = Guid.NewGuid().ToString();
 
             // save image
             await this.mediator.Send(new SaveSingleImageCommand(image));

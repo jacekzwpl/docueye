@@ -5,6 +5,7 @@ using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -48,6 +49,9 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecision
             if(existingDecision != null)
             {
                 decision.Id = existingDecision.Id;
+            }else
+            {
+                decision.Id = Guid.NewGuid().ToString();
             }
 
 
