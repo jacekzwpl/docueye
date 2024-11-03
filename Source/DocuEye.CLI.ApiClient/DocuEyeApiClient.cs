@@ -56,6 +56,62 @@ namespace DocuEye.CLI.ApiClient
             }
         }
 
+        public async Task<ImportWorkspaceResponse> ImportClearDecisions(ImportClearDecisionsRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/cleardecisions");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportClearDocItems(ImportClearDocItemsRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/cleardocitems");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportDecision(ImportDecisionRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/decision");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportDecisionLinks(ImportDecisionsLinksRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/decisionlinks");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportDocumentation(ImportDocumentationRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/documentation");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportElements(ImportElementsRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/elements");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportFinish(ImportFinalizeRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/finish");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportImage(ImportImageRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/image");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
         public async Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request)
         {
             var message = new HttpRequestMessage(HttpMethod.Put, string.Format("api/workspaces/{0}/docfile/openapi", workspaceId));
@@ -77,6 +133,82 @@ namespace DocuEye.CLI.ApiClient
                 }else
                 {
                     return "Import failed. Reason of failure is unkonown";
+                }
+            }
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportRelationships(ImportRelationshipsRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/relationships");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportStart(ImportWorkspaceStartRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/start");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportViewConfiguration(ImportViewConfigurationRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/viewconfiguration");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        public async Task<ImportWorkspaceResponse> ImportViews(ImportViewsRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/views");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
+        private async Task<ImportWorkspaceResponse> ImportAction(HttpRequestMessage message)
+        {
+            using (var response = await this.httpClient.SendAsync(message))
+            {
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var data = JsonSerializer.Deserialize<ImportWorkspaceResponse>(responseBody, this.serializerOptions);
+                    if (data == null)
+                    {
+                        return new ImportWorkspaceResponse()
+                        {
+                            IsSuccess = false,
+                            Message = "There was no conntent in response. Import staus is unknown."
+                        };
+                    }
+                    return data;
+                }
+                else if (response.Content.Headers.ContentType?.MediaType == "application/problem+json")
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
+                    if (problemData == null)
+                    {
+                        return new ImportWorkspaceResponse()
+                        {
+                            IsSuccess = false,
+                            Message = "There was no conntent in response. Import staus is unknown"
+                        };
+                    }
+                    return new ImportWorkspaceResponse()
+                    {
+                        IsSuccess = false,
+                        Message = problemData.Detail ?? problemData.Title
+                    };
+                }
+                else
+                {
+                    return new ImportWorkspaceResponse()
+                    {
+                        IsSuccess = false,
+                        Message = "There was no conntent in response. Import staus is unknown"
+                    };
                 }
             }
         }
