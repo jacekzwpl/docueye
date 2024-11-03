@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.ViewsKeeper.Model;
+using DocuEye.WorkspaceImporter.Api.Model.ViewConfiguration;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 
 namespace DocuEye.Structurizr.Model.Exploders.Mappings
@@ -111,6 +112,11 @@ namespace DocuEye.Structurizr.Model.Exploders.Mappings
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Key));
+
+            CreateMap<StructurizrTerminology, TerminologyToImport>();
+
+            CreateMap<StructurizrElementStyle, ElementStyleToImport>();
+            CreateMap<StructurizrRelationshipStyle, RelationshipStyleToImport>();
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocuEye.WorkspaceImporter.Api.Model.ViewConfiguration;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 using System.Collections.Generic;
 
@@ -43,6 +44,17 @@ namespace DocuEye.Structurizr.Model.Exploders
 
         public IEnumerable<ViewToImport> ExplodeImageViews(IEnumerable<StructurizrImageView> views) { 
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
+        }
+
+        public ViewConfigurationToImport ExplodeViewConfiguration(StructurizrConfiguration viewConfiguration)
+        {
+            return new ViewConfigurationToImport()
+            {
+                ElementStyles = this.mapper.Map<IEnumerable<ElementStyleToImport>>(viewConfiguration.Styles?.Elements),
+                RelationshipStyles = this.mapper.Map<IEnumerable<RelationshipStyleToImport>>(viewConfiguration.Styles?.Relationships),
+                Terminology = this.mapper.Map<TerminologyToImport>(viewConfiguration.Terminology),
+                Themes = viewConfiguration.Themes,
+            };
         }
     }
 }

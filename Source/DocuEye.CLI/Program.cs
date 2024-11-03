@@ -1,9 +1,11 @@
-﻿using CommandLine;
+﻿using AutoMapper;
+using CommandLine;
 using DocuEye.CLI;
 using DocuEye.CLI.ApiClient;
 using DocuEye.CLI.Application.Services.DeleteWorkspace;
 using DocuEye.CLI.Application.Services.ImportOpenApiFile;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
+using DocuEye.Structurizr.Model.Exploders.Mappings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -27,6 +29,17 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
     );
 
     builder.Services.AddLogging(builder => builder.AddConsole());
+
+    var mappingConfig = new MapperConfiguration(mc =>
+    {
+
+        mc.AddProfile(new StructurizrDocumentationToApiModelMappingProfile());
+        mc.AddProfile(new StructurizrModelToApiMappingProfile());
+        mc.AddProfile(new StructurizrViewsToApiMappingProfile());
+    });
+
+    IMapper mapper = mappingConfig.CreateMapper();
+    builder.Services.AddSingleton(mapper);
 
     builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
     builder.Services.AddTransient<IImportOpenApiFileService, ImportOpenApiFileService>();

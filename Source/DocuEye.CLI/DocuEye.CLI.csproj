@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj" />
     <ProjectReference Include="..\DocuEye.CLI.Application\DocuEye.CLI.Application.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Model.Exploders.Mappings\DocuEye.Structurizr.Model.Exploders.Mappings.csproj" />
   </ItemGroup>
 
 </Project>

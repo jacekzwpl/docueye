@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Model.Exploders\DocuEye.Structurizr.Model.Exploders.csproj" />
   </ItemGroup>
 
 </Project>
