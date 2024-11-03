@@ -1,6 +1,5 @@
-﻿using System;
+﻿using DocuEye.WorkspaceImporter.Api.Model.Workspace;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DocuEye.WorkspaceImporter.Api.Model
 {
@@ -26,5 +25,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model
         /// Workspace description
         /// </summary>
         public string? WorkspaceDescription { get; set; }
+
+        public string? Visibility { get; set; }
+
+        public IEnumerable<WorkspaceAccessRuleToImport>? AccessRules { get; set; }
     }
 }

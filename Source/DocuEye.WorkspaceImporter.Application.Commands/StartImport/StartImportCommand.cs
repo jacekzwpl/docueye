@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using DocuEye.WorkspaceImporter.Api.Model.Workspace;
+using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
@@ -27,5 +29,9 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
         /// Workspace description
         /// </summary>
         public string? WorkspaceDescription { get; set; }
+
+        public string Visibility { get; set; } = "public";
+
+        public IEnumerable<WorkspaceAccessRuleToImport> AccessRules { get; set; } = Enumerable.Empty<WorkspaceAccessRuleToImport>();
     }
 }

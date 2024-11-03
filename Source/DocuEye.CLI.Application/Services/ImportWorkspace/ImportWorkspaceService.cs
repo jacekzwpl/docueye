@@ -5,6 +5,7 @@ using DocuEye.Structurizr.Model.Exploders;
 using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
+using DocuEye.WorkspaceImporter.Api.Model.Workspace;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.IO;
@@ -76,7 +77,9 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
             {
                 ImportKey = parameters.ImportKey,
                 SourceLink = parameters.SourceLink,
-                WorkspaceId = parameters.WorkspaceId
+                WorkspaceId = parameters.WorkspaceId,
+                Visibility = workspaceData.Configuration?.Visibility,
+                AccessRules = this.mapper.Map<IEnumerable<WorkspaceAccessRuleToImport>>(workspaceData.Configuration?.Users)
             });
 
             /*

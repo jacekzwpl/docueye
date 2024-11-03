@@ -7,6 +7,7 @@ using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Api.Model.ViewConfiguration;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
+using DocuEye.WorkspaceImporter.Api.Model.Workspace;
 using DocuEye.WorkspacesKeeper.Model;
 
 namespace DocuEye.WorkspaceImporter.Application.Mappings
@@ -68,6 +69,8 @@ namespace DocuEye.WorkspaceImporter.Application.Mappings
             CreateMap<ElementStyleToImport, ElementStyle>();
             CreateMap<RelationshipStyleToImport, RelationshipStyle>();
             CreateMap<TerminologyToImport, Terminology>();
+
+            CreateMap<WorkspaceAccessRuleToImport, WorkspaceAccessRule>();
         }
     }
 }
