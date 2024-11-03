@@ -54,6 +54,8 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecision
                 decision.Id = Guid.NewGuid().ToString();
             }
 
+            decision.ImportKey = request.ImportKey;
+
 
             if (!string.IsNullOrEmpty(request.Decision.StrucuturizrElementId))
             {

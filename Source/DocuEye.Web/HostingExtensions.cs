@@ -105,6 +105,7 @@ namespace DocuEye.Web
             ChangeTrackerBsonClassMapping.Register();
             ViewsKeeperBsonClassMapping.Register();
             WorkspacesKeeperBsonClassMapping.Register();
+            DocsKeeperBsonClassMapping.Register();
 
             builder.Services.AddMemoryCache();
 

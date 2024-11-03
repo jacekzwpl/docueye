@@ -1,4 +1,5 @@
 ﻿using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Application.Commands.ClearDecisions;
 using DocuEye.WorkspaceImporter.Application.Commands.ClearDocsItems;
 using DocuEye.WorkspaceImporter.Application.Commands.FinalizeImport;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportDecision;
@@ -339,6 +340,33 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         {
             var command = new ImportDecisionsLinksCommand(data.WorkspaceId, data.ImportKey, data.DocumentationId, data.DecisionDslId, data.DecisionsLinks);
             var result = await this.mediator.Send<ImportDecisionsLinksResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+        }
+
+        [Route("import/cleardecisions")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportClearDecisions(ImportClearDecisionsRequest data)
+        {
+            var command = new ClearDecisionsCommand(data.WorkspaceId, data.ImportKey);
+            var result = await this.mediator.Send<ClearDecisionsResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
