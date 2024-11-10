@@ -17,6 +17,7 @@ namespace DocuEye.Structurizr.Model.Exploders
 
         public (DocumentationToImport,IEnumerable<DecisionToImport>,IEnumerable<ImageToImport>) ExplodeDocumentation(StructurizrDocumentation documentation, string? elementId = null)
         {
+
             var documentationToImport = new DocumentationToImport()
             {
                 Id = Guid.NewGuid().ToString(),

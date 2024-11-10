@@ -32,7 +32,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
 
             // Act
-            var handler = new StartImportCommandHandler(this.mediator, dbContext);
+            var handler = new StartImportCommandHandler(this.mediator, this.mapper, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -66,7 +66,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new StartImportCommandHandler(this.mediator, dbContext);
+            var handler = new StartImportCommandHandler(this.mediator, this.mapper, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -101,7 +101,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
 
             // Act
-            var handler = new StartImportCommandHandler(this.mediator, dbContext);
+            var handler = new StartImportCommandHandler(this.mediator, this.mapper, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -127,7 +127,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
 
             // Act
-            var handler = new StartImportCommandHandler(this.mediator, dbContext);
+            var handler = new StartImportCommandHandler(this.mediator, this.mapper, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
