@@ -19,6 +19,8 @@ namespace DocuEye.CLI.ApiClient.Tests
         public async Task WhenImportWorkspaceThenResultHasSuccessStatus()
         {
 
+            Assert.Fail();
+            /*
             // Arrange
             var fakeHttpMessageHandler = new FakeHttpMessageHandler(new HttpResponseMessage()
             {
@@ -46,12 +48,15 @@ namespace DocuEye.CLI.ApiClient.Tests
             // Assert
             Assert.That(result, !Is.Null, "Request should return object");
             Assert.That(result.IsSuccess, Is.EqualTo(true), "Request should return success status");
+            */
         }
 
 
         [Test]
         public async Task WhenImportWorkspaceEndpointNotReturnsSuccessStatusCodeThenResultHasErrorMessageAndFailureStatus()
         {
+            Assert.Fail();
+            /*
             // Arrange
             var fakeHttpMessageHandler = new FakeHttpMessageHandler(new HttpResponseMessage()
             {
@@ -81,6 +86,7 @@ namespace DocuEye.CLI.ApiClient.Tests
             Assert.That(result, !Is.Null, "Request should return object");
             Assert.That(result.IsSuccess, Is.EqualTo(false), "Request should return success status");
             Assert.That(result.Message?.Length, Is.GreaterThan(0), "Request should return message with content");
+            */
         }
 
 

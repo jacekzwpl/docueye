@@ -10,13 +10,10 @@ using DocuEye.WorkspaceImporter.Application.Commands.ImportImage;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportViewConfiguration;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportViews;
-using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
 using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Api.Controllers
@@ -38,31 +35,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         {
             this.mediator = mediator;
         }
-        /// <summary>
-        /// Imports workspace
-        /// </summary>
-        /// <param name="command">Import workspace command</param>
-        /// <returns>Returns import result</returns>
-        [Route("import")]
-        [HttpPut]
-        [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<ImportWorkspaceResponse>> Import(ImportWorkspaceRequest data)
-        {
-            var command = new ImportWorkspaceCommand()
-            {
-                ImportKey = data.ImportKey,
-                WorkspaceId = data.WorkspaceId,
-                SourceLink = data.SourceLink,
-                WorkspaceData = data.WorkspaceData
-            };
-            var result = await this.mediator.Send<ImportWorkspaceResult>(command);
-            return this.Ok(new ImportWorkspaceResponse()
-            {
-                IsSuccess = result.IsSuccess,
-                WorkspaceId = result.WorkspaceId,
-                Message = result.Message
-            });
-        }
+        
 
         [Route("import/start")]
         [HttpPut]

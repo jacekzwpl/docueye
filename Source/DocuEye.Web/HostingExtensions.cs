@@ -16,7 +16,7 @@ using DocuEye.ViewsKeeper.Persistence;
 using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
 using DocuEye.WorkspaceImporter.Application;
-using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
+using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 using DocuEye.WorkspaceImporter.Application.Mappings;
 using DocuEye.WorkspaceImporter.Persistence;
 using DocuEye.WorkspacesKeeper.Application;
@@ -200,7 +200,7 @@ namespace DocuEye.Web
 
             startupLogger.LogInformation("Register MediatR services");
             builder.Services.AddMediatR(cfg => {
-                cfg.RegisterServicesFromAssembly(typeof(ImportWorkspaceCommandHandler).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(StartImportCommandHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(ElementChangedEventHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(SaveViewsChangesCommandHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(SaveImagesCommandHandler).Assembly);
@@ -219,7 +219,7 @@ namespace DocuEye.Web
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 });//.AddApplicationPart(Assembly.GetAssembly(typeof(WorkspacesImportController))).AddControllersAsServices();
 
-            builder.Services.ConfigureWorkspaceImporterApplicationServices();
+            
             builder.Services.ConfigureWorkspacesKeeperApplicationServices();
 
             startupLogger.LogInformation("Register Automapper configurations");
@@ -231,9 +231,6 @@ namespace DocuEye.Web
                 mc.AddProfile(new DocsKeeperMappingProfile());
                 mc.AddProfile(new ModelKeeperMappingProfile());
                 mc.AddProfile(new WorkspacesKeeperMappingProfile());
-                mc.AddProfile(new WorkspaceImporterFromExplodedMappingProfile());
-                mc.AddProfile(new WorkspaceImporterFromStructurizrMappingProfile());
-                mc.AddProfile(new WorkspaceImporterMappingProfile());
 
                 mc.AddProfile(new ApiToModelMapingProfile());
                 mc.AddProfile(new ModelToModelMappingProfile());
