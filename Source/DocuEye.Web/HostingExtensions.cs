@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DocuEye.ChangeTracker.Application.EventHandlers;
 using DocuEye.ChangeTracker.Persistence;
-using DocuEye.DocsKeeper.Application.Commands.SaveImages;
+using DocuEye.DocsKeeper.Application.Commands.SaveSingleDecision;
 using DocuEye.DocsKeeper.Application.Mappings;
 using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.Authentication.OIDC;
@@ -15,7 +15,6 @@ using DocuEye.ViewsKeeper.Application.Mappings;
 using DocuEye.ViewsKeeper.Persistence;
 using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
-using DocuEye.WorkspaceImporter.Application;
 using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 using DocuEye.WorkspaceImporter.Application.Mappings;
 using DocuEye.WorkspaceImporter.Persistence;
@@ -203,7 +202,7 @@ namespace DocuEye.Web
                 cfg.RegisterServicesFromAssembly(typeof(StartImportCommandHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(ElementChangedEventHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(SaveViewsChangesCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveImagesCommandHandler).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(SaveSingleDecisionCommandHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(SaveElementsCommandHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
             });
