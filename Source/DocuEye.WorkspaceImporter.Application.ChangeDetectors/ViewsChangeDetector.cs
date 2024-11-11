@@ -29,14 +29,40 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             {
                 var existingView = existingViews.SingleOrDefault(o => o.Key == viewToImport.Key);
                 var viewId = existingView == null ? Guid.NewGuid().ToString() : existingView.Id;
+                viewsIdsMap.Add(viewToImport.Key, viewId);
+            }
+
+            //Detect Elements Diagrams
+            foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.ComponentView))
+            {
                 var contextElement = existingElements
                     .FirstOrDefault(o => o.StructurizrId == viewToImport.StructurizrElementId);
-                viewsIdsMap.Add(viewToImport.Key, viewId);
                 if (contextElement != null && !elementsDiagrams.ContainsKey(contextElement.Id))
                 {
-                    elementsDiagrams.Add(contextElement.Id, viewId);
+                    elementsDiagrams.Add(contextElement.Id, viewsIdsMap[viewToImport.Key]);
                 }
             }
+
+            foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.ContainerView))
+            {
+                var contextElement = existingElements
+                    .FirstOrDefault(o => o.StructurizrId == viewToImport.StructurizrElementId);
+                if (contextElement != null && !elementsDiagrams.ContainsKey(contextElement.Id))
+                {
+                    elementsDiagrams.Add(contextElement.Id, viewsIdsMap[viewToImport.Key]);
+                }
+            }
+
+            foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.SystemContextView))
+            {
+                var contextElement = existingElements
+                    .FirstOrDefault(o => o.StructurizrId == viewToImport.StructurizrElementId);
+                if (contextElement != null && !elementsDiagrams.ContainsKey(contextElement.Id))
+                {
+                    elementsDiagrams.Add(contextElement.Id, viewsIdsMap[viewToImport.Key]);
+                }
+            }
+
             return (viewsIdsMap, elementsDiagrams);
         }
 
