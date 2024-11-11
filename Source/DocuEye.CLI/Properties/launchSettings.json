@@ -1,12 +1,16 @@
 {
   "profiles": {
-    "DocuEye.CLI": {
+    "DocuEye.OPENAPI": {
       "commandName": "Project",
       "commandLineArgs": "--import=openapi --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --openApiFile=\"C:\\nCode\\docueye\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\" --elementDslId=onlineshop.basket"
     },
     "CLI.Delete": {
       "commandName": "Project",
       "commandLineArgs": "--import=delete --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989"
+    },
+    "DocuEye.WORKSPACE": {
+      "commandName": "Project",
+      "commandLineArgs": "--import=workspace --importKey test2 --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=debugtest --workspaceFile=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.json\""
     },
     "Docker": {
       "commandName": "Docker"

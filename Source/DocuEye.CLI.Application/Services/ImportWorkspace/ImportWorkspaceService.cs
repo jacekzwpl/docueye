@@ -48,6 +48,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
         /// <inheritdoc />
         public async Task<bool> Import(ImportWorkspaceParameters parameters)
         {
+            //parameters.ImportKey = "test1";
+            //parameters.WorkspaceId = "debugtest";
+            //parameters.WorkspaceFilePath = "C:\\nCode\\docueye\\ExampleWorkspace\\workspace.json";
+           
+
+
             this.logger.LogInformation("Reading workspace data file");
             if (!File.Exists(parameters.WorkspaceFilePath))
             {
@@ -94,23 +100,22 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 imageToImport.AddRange(images);
             }
 
-            workspaceData.Model?.SoftwareSystems.Where(system => system.Documentation != null).ToList().ForEach(system =>
+            workspaceData.Model?.SoftwareSystems?.Where(system => system.Documentation != null).ToList().ForEach(system =>
             {
                 var (documentation, decisions, images) = documentationExploder.ExplodeDocumentation(system.Documentation, system.Id);
                 documentationsToImport.Add(documentation);
                 decisionToImport.AddRange(decisions);
                 imageToImport.AddRange(images);
 
-                system.Containers.Where(container => container.Documentation != null).ToList().ForEach(container => {
+                system.Containers?.Where(container => container.Documentation != null).ToList().ForEach(container => {
 
                     var (documentation, decisions, images) = documentationExploder.ExplodeDocumentation(container.Documentation, container.Id);
                     documentationsToImport.Add(documentation);
                     decisionToImport.AddRange(decisions);
                     imageToImport.AddRange(images);
 
-                    container.Components.Where(component => component.Documentation != null).ToList().ForEach(component =>
+                    container.Components?.Where(component => component.Documentation != null).ToList().ForEach(component =>
                     {
-
                         var (documentation, decisions, images) = documentationExploder.ExplodeDocumentation(component.Documentation, component.Id);
                         documentationsToImport.Add(documentation);
                         decisionToImport.AddRange(decisions);
@@ -133,8 +138,16 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 SourceLink = parameters.SourceLink,
                 WorkspaceId = parameters.WorkspaceId,
                 Visibility = workspaceData.Configuration?.Visibility,
+                WorkspaceDescription = workspaceData.Description,
+                WorkspaceName = workspaceData.Name,
                 AccessRules = this.mapper.Map<IEnumerable<WorkspaceAccessRuleToImport>>(workspaceData.Configuration?.Users)
             });
+
+            this.LogImportStepResult(result, "Import start");
+            if(!result.IsSuccess)
+            {
+                return false;
+            }
 
             //set workspaceId
             var workspaceId = result.WorkspaceId;
@@ -147,6 +160,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 ViewConfiguration = viewConfiguration
             });
 
+            this.LogImportStepResult(result2, "Import view configuration");
+            if (!result2.IsSuccess)
+            {
+                return false;
+            }
+
             //Import elements
             var resutlt3 = await this.apiClient.ImportElements(new ImportElementsRequest()
             {
@@ -154,6 +173,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 WorkspaceId = workspaceId,
                 Elements = elements
             });
+
+            this.LogImportStepResult(resutlt3, "Import elements");
+            if (!resutlt3.IsSuccess)
+            {
+                return false;
+            }
 
             //Import relationships
             var result4 = await this.apiClient.ImportRelationships(new ImportRelationshipsRequest()
@@ -163,6 +188,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 Relationships = relationships
             });
 
+            this.LogImportStepResult(result4, "Import relationships");
+            if (!result4.IsSuccess)
+            {
+                return false;
+            }
+
             //Import views
             var result5 = await this.apiClient.ImportViews(new ImportViewsRequest()
             {
@@ -171,12 +202,24 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 Views = viewsToImport
             });
 
+            this.LogImportStepResult(result5, "Import views");
+            if (!result5.IsSuccess)
+            {
+                return false;
+            }
+
             // Clear doc items
             var result6 = await this.apiClient.ImportClearDocItems(new ImportClearDocItemsRequest()
             {
                 ImportKey = parameters.ImportKey,
                 WorkspaceId = workspaceId
             });
+
+            this.LogImportStepResult(result6, "Clear doc items");
+            if (!result6.IsSuccess)
+            {
+                return false;
+            }
 
             // Import documentation
             foreach (var documentation in documentationsToImport)
@@ -187,7 +230,15 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                     WorkspaceId = workspaceId,
                     Documentation = documentation
                 });
+
+                this.LogImportStepResult(result7, "Import documentation");
+                if (!result7.IsSuccess)
+                {
+                    return false;
+                }
             }
+
+
 
             // Import images 
             foreach (var image in imageToImport)
@@ -198,6 +249,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                     WorkspaceId = workspaceId,
                     Image = image
                 });
+
+                this.LogImportStepResult(result8, "Import image");
+                if (!result8.IsSuccess)
+                {
+                    return false;
+                }
             }
 
             // Import decisions
@@ -209,6 +266,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                     WorkspaceId = workspaceId,
                     Decision = decision
                 });
+
+                this.LogImportStepResult(result9, "Import decision");
+                if (!result9.IsSuccess)
+                {
+                    return false;
+                }
             }
 
             // Import decision links
@@ -222,6 +285,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                     DocumentationId = decision.DocumentationId,
                     DecisionsLinks = decision.Links ?? Enumerable.Empty<DecisionLinkToImport>()
                 });
+
+                this.LogImportStepResult(result10, "Import decision links");
+                if (!result10.IsSuccess)
+                {
+                    return false;
+                }
             }
 
             // Clear decisions
@@ -231,6 +300,12 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 WorkspaceId = workspaceId
             });
 
+            this.LogImportStepResult(result11, "Clear decisions");
+            if (!result11.IsSuccess)
+            {
+                return false;
+            }
+
             // Finish import
             var result12 = await this.apiClient.ImportFinish(new ImportFinalizeRequest()
             {
@@ -238,38 +313,28 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 WorkspaceId = workspaceId
             });
 
+            this.LogImportStepResult(result12, "Import finish");
+            this.logger.LogInformation("Workspace ID = {0}", result.WorkspaceId);
+            return result12.IsSuccess;            
 
-            /*
-
-
-
-            var result2 = await this.apiClient.ImportViewConfiguration(new ImportViewConfigurationRequest()
-            {
-                ImportKey = parameters.ImportKey,
-                WorkspaceId = workspaceId,
-                ViewConfiguration = workspaceData.ViewConfiguration
-            });
-
-            */
+            
+        }
 
 
+        private void LogImportStepResult(ImportWorkspaceResponse result, string stepName)
+        {
             if (result.IsSuccess)
             {
-                this.logger.LogInformation("Import finished with success");
-                this.logger.LogInformation("Workspace ID = {0}", result.WorkspaceId);
-
+                this.logger.LogInformation("{0} finished", stepName);
             }
             else
             {
-                this.logger.LogInformation("Import finished with failure.");
+                this.logger.LogInformation("{0} finished with failure.", stepName);
                 this.logger.LogInformation("Import result message = {0}", result.Message);
             }
-
-
-            return result.IsSuccess;
         }
 
-        
+
 
 
         /// <inheritdoc />

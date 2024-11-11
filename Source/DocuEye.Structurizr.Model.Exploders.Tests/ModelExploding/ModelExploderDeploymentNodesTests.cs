@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -8,6 +9,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeIsDefinedThenAllPropertiesAreMatched()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -24,7 +26,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, "parentId");
+            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(1));
@@ -48,6 +50,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeHasChildrenThenAllElementsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -72,7 +75,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, "parentId");
+            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(3));
@@ -94,6 +97,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeHasSoftwareSystemInstancesThenAllElementsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -110,7 +114,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, "parentId");
+            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(2));
@@ -128,6 +132,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeHasContainerInstancesThenAllElementsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -144,7 +149,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, "parentId");
+            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(2));
@@ -162,6 +167,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeHasInfrastructureNodesThenAllElementsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -178,7 +184,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, "parentId");
+            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(2));
@@ -196,6 +202,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleDeploymentNodesAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNodes = new List<StructurizrDeploymentNode>
             {
                 new StructurizrDeploymentNode
@@ -223,7 +230,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNodes(deploymentNodes);
+            var (elements, relationships) = exloder.ExplodeDeploymentNodes(deploymentNodes, sourceElements);
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(3));
@@ -245,6 +252,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeHasRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -268,7 +276,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, "parentId");
+            var (elements, relationships) = exloder.ExplodeDeploymentNode(deploymentNode, sourceElements, "parentId");
 
             // Assert
             Assert.That(relationships.Count(), Is.EqualTo(1));
@@ -278,6 +286,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleDeploymentNodesHaveRelationshipsThenAllRelationshipsAreExloded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var deploymentNodes = new List<StructurizrDeploymentNode>
             {
                 new StructurizrDeploymentNode
@@ -329,7 +338,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeDeploymentNodes(deploymentNodes);
+            var (elements, relationships) = exloder.ExplodeDeploymentNodes(deploymentNodes, sourceElements);
 
             // Assert
             Assert.That(relationships.Count(), Is.EqualTo(3));

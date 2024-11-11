@@ -61,8 +61,8 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecision
             {
                 var element = await this.mediator.Send(
                     new GetElementByStructurizrIdQuery(
-                        request.WorkspaceId,
-                        request.Decision.StrucuturizrElementId));
+                        request.Decision.StrucuturizrElementId,
+                        request.WorkspaceId));
                 if (element != null)
                 {
                     decision.ElementId = element.Id;

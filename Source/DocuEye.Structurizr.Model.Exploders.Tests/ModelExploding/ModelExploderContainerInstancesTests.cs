@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -7,6 +8,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         [Test]
         public void WhenContainerInstanceIsDefinedThenAllPropertiesAreMatched() {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var containerInstances = new List<StructurizrContainerInstance>
             {
                 new StructurizrContainerInstance
@@ -21,7 +23,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements,relationships) = exloder.ExplodeContainerInstances(containerInstances, "parentId");
+            var (elements,relationships) = exloder.ExplodeContainerInstances(containerInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(1));
@@ -41,6 +43,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleContainerInstancesAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var containerInstances = new List<StructurizrContainerInstance>()
             {
                 new StructurizrContainerInstance
@@ -65,7 +68,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeContainerInstances(containerInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeContainerInstances(containerInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(2));
@@ -76,6 +79,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenContainerInstanceHasRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var containerInstances = new List<StructurizrContainerInstance>()
             {
                 new StructurizrContainerInstance
@@ -106,7 +110,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeContainerInstances(containerInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeContainerInstances(containerInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(relationships.Count(), Is.EqualTo(1));
@@ -128,6 +132,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleContainerInstancesHaveRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var containerInstances = new List<StructurizrContainerInstance>()
             {
                 new StructurizrContainerInstance
@@ -182,7 +187,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeContainerInstances(containerInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeContainerInstances(containerInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(relationships.Count(), Is.EqualTo(2));

@@ -39,8 +39,8 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
                 
                 var element = await this.mediator.Send(
                     new GetElementByStructurizrIdQuery(
-                        request.WorkspaceId, 
-                        request.Documentation.StructurizrElementId));
+                        request.Documentation.StructurizrElementId,
+                        request.WorkspaceId));
                 if (element != null)
                 {
                     documentation.ElementId = element.Id;

@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Elements;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -8,6 +9,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenSoftwareSystemInstanceIsDefinedThenAllPropertiesAreMached()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>
             {
                 new StructurizrSoftwareSystemInstance {
@@ -21,7 +23,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(1));
@@ -41,6 +43,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleSoftwareSystemInstancesAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>()
             {
                 new StructurizrSoftwareSystemInstance {
@@ -61,7 +64,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(elements.Count(), Is.EqualTo(2));
@@ -72,6 +75,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenSoftwareSystemInstanceHasRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>()
             {
                 new StructurizrSoftwareSystemInstance {
@@ -100,7 +104,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(relationships.Count(), Is.EqualTo(1));
@@ -122,6 +126,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleSoftwareSystemInstancesHaveRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
+            var sourceElements = new List<ElementToImport>();
             var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>()
             {
                 new StructurizrSoftwareSystemInstance {
@@ -172,7 +177,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             var exloder = new ModelExploder(this.mapper);
 
             // Act
-            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, "parentId");
+            var (elements, relationships) = exloder.ExplodeSoftwareSystemInstances(softwareSystemInstances, sourceElements, "parentId");
 
             // Assert
             Assert.That(relationships.Count(), Is.EqualTo(2));

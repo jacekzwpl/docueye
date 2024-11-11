@@ -65,7 +65,7 @@ namespace DocuEye.CLI.ApiClient
 
         public async Task<ImportWorkspaceResponse> ImportClearDocItems(ImportClearDocItemsRequest data)
         {
-            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/cleardocitems");
+            var message = new HttpRequestMessage(HttpMethod.Post, "/api/workspaces/import/cleardocitems");
             message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
             return await this.ImportAction(message);
         }
@@ -94,6 +94,7 @@ namespace DocuEye.CLI.ApiClient
         public async Task<ImportWorkspaceResponse> ImportElements(ImportElementsRequest data)
         {
             var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/elements");
+            var str = JsonSerializer.Serialize(data, this.serializerOptions);
             message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
             return await this.ImportAction(message);
         }
@@ -202,8 +203,23 @@ namespace DocuEye.CLI.ApiClient
                         Message = problemData.Detail ?? problemData.Title
                     };
                 }
+                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var responseData = JsonSerializer.Deserialize<ImportWorkspaceResponse>(responseBody, this.serializerOptions);
+                    if (responseData == null)
+                    {
+                        return new ImportWorkspaceResponse()
+                        {
+                            IsSuccess = false,
+                            Message = "There was no conntent in response. Import staus is unknown"
+                        };
+                    }
+                    return responseData;
+                }
                 else
                 {
+                    
                     return new ImportWorkspaceResponse()
                     {
                         IsSuccess = false,

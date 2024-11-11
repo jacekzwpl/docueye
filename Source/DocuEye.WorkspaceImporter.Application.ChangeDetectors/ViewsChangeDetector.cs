@@ -32,7 +32,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 var contextElement = existingElements
                     .FirstOrDefault(o => o.StructurizrId == viewToImport.StructurizrElementId);
                 viewsIdsMap.Add(viewToImport.Key, viewId);
-                if (contextElement != null)
+                if (contextElement != null && !elementsDiagrams.ContainsKey(contextElement.Id))
                 {
                     elementsDiagrams.Add(contextElement.Id, viewId);
                 }

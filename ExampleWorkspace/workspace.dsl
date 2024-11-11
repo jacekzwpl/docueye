@@ -1,4 +1,4 @@
-workspace "Example Online Shop" "Example DocuEye workspace" {
+workspace "Example Online Shop" "DEBUTEST Example DocuEye workspace" {
     
     !identifiers hierarchical
 
@@ -20,7 +20,7 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
                 !adrs adr/onlineshop/web
                 description "Online web application for clients"
                 technology "ASP.NET MVC"
-                url "https://docueue.com"
+                url "https://docueye.com"
                 properties {
                     "docueye.ownerteam" "Web App Team"
                     "docueye.sourcecodeurl" "https://github.com/jacekzwpl/docueye"

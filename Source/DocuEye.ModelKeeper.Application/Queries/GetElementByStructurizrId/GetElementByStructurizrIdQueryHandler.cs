@@ -18,7 +18,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId
         public async Task<Element?> Handle(GetElementByStructurizrIdQuery request, CancellationToken cancellationToken)
         {
             return await this.dbContext.Elements
-                .FindOne(o => o.DslId == request.StructurizrId && o.WorkspaceId == request.WorkspaceId);
+                .FindOne(o => o.StructurizrId == request.StructurizrId && o.WorkspaceId == request.WorkspaceId);
         }
     }
 }
