@@ -27,7 +27,7 @@ namespace DocuEye.Structurizr.Model.Exploders
 
             return (
                 documentationToImport, 
-                this.ExplodeDecisions(documentation.Decisions, documentationToImport.Id), 
+                this.ExplodeDecisions(documentation.Decisions, documentationToImport.Id, elementId), 
                 this.ExplodeImages(documentation.Images, documentationToImport.Id)
             );
         }
@@ -41,7 +41,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<DocumentationSectionToImport>>(sections);
         }
 
-        public IEnumerable<DecisionToImport> ExplodeDecisions(IEnumerable<StructurizrDecision>? decisions, string documentationId)
+        public IEnumerable<DecisionToImport> ExplodeDecisions(IEnumerable<StructurizrDecision>? decisions, string documentationId, string? elementId = null)
         {
             if(decisions == null)
             {
@@ -51,6 +51,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             {
                 var element = this.mapper.Map<DecisionToImport>(c);
                 element.DocumentationId = documentationId;
+                element.StrucuturizrElementId = elementId;
                 return element;
             });
             return elements;
