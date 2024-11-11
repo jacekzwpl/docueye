@@ -8,7 +8,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         [Test]
         public void WhenContainerInstanceIsDefinedThenAllPropertiesAreMatched() {
             // Arrange
-            var sourceElements = new List<ElementToImport>();
+            var sourceElements = new List<ElementToImport>()
+            {
+                new ElementToImport
+                {
+                    StructurizrId = "Container1",
+                    StructurizrParentId = "parentId",
+                    Type = ElementType.Container,
+                    Name = "Container1Name",
+                    Description = "Description",
+                    Technology = "Technology"
+                }
+            };
             var containerInstances = new List<StructurizrContainerInstance>
             {
                 new StructurizrContainerInstance
@@ -30,6 +41,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             Assert.That(elements.First().StructurizrId, Is.EqualTo("1"));
             Assert.That(elements.First().StructurizrParentId, Is.EqualTo("parentId"));
             Assert.That(elements.First().StructurizrInstanceOfId, Is.EqualTo("Container1"));
+            Assert.That(elements.First().Name, Is.EqualTo("Container1Name"));
+            Assert.That(elements.First().Description, Is.EqualTo("Description"));
+            Assert.That(elements.First().Technology, Is.EqualTo("Technology"));
             Assert.That(elements.First().Tags?.Count(), Is.EqualTo(2));
             Assert.That(elements.First().Tags?.First(), Is.EqualTo("tag1"));
             Assert.That(elements.First().Tags?.Last(), Is.EqualTo("tag2"));
@@ -43,7 +57,27 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleContainerInstancesAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var sourceElements = new List<ElementToImport>();
+            var sourceElements = new List<ElementToImport>()
+            {
+                new ElementToImport
+                {
+                    StructurizrId = "Container1",
+                    StructurizrParentId = "parentId",
+                    Type = ElementType.Container,
+                    Name = "Container1Name",
+                    Description = "Description",
+                    Technology = "Technology"
+                },
+                new ElementToImport
+                {
+                    StructurizrId = "Container2",
+                    StructurizrParentId = "parentId",
+                    Type = ElementType.Container,
+                    Name = "Container2Name",
+                    Description = "Description",
+                    Technology = "Technology"
+                }
+            };
             var containerInstances = new List<StructurizrContainerInstance>()
             {
                 new StructurizrContainerInstance

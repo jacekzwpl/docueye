@@ -97,7 +97,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeHasSoftwareSystemInstancesThenAllElementsAreExploded()
         {
             // Arrange
-            var sourceElements = new List<ElementToImport>();
+            var sourceElements = new List<ElementToImport>() { 
+                new ElementToImport
+                {
+                    StructurizrId = "SoftwareSystem1",
+                    Type = ElementType.SoftwareSystem
+                }
+            };
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -107,7 +113,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     new StructurizrSoftwareSystemInstance
                     {
                         Id = "2",
-                        SoftwareSystemId = "SoftwareSystemInstance1"
+                        SoftwareSystemId = "SoftwareSystem1"
                     }
                 }
             };
@@ -124,7 +130,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             Assert.That(elements.First().Type, Is.EqualTo(ElementType.DeploymentNode));
             Assert.That(elements.ElementAt(1).StructurizrId, Is.EqualTo("2"));
             Assert.That(elements.ElementAt(1).StructurizrParentId, Is.EqualTo("1"));
-            Assert.That(elements.ElementAt(1).StructurizrInstanceOfId, Is.EqualTo("SoftwareSystemInstance1"));
+            Assert.That(elements.ElementAt(1).StructurizrInstanceOfId, Is.EqualTo("SoftwareSystem1"));
             Assert.That(elements.ElementAt(1).Type, Is.EqualTo(ElementType.SoftwareSystemInstance));
         }
 
@@ -132,7 +138,14 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenDeploymentNodeHasContainerInstancesThenAllElementsAreExploded()
         {
             // Arrange
-            var sourceElements = new List<ElementToImport>();
+            var sourceElements = new List<ElementToImport>()
+            {
+                new ElementToImport
+                {
+                    StructurizrId = "Container1",
+                    Type = ElementType.Container
+                }
+            };
             var deploymentNode = new StructurizrDeploymentNode
             {
                 Id = "1",
@@ -142,7 +155,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     new StructurizrContainerInstance
                     {
                         Id = "2",
-                        ContainerId = "ContainerInstance1"
+                        ContainerId = "Container1"
                     }
                 }
             };
@@ -159,7 +172,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             Assert.That(elements.First().Type, Is.EqualTo(ElementType.DeploymentNode));
             Assert.That(elements.ElementAt(1).StructurizrId, Is.EqualTo("2"));
             Assert.That(elements.ElementAt(1).StructurizrParentId, Is.EqualTo("1"));
-            Assert.That(elements.ElementAt(1).StructurizrInstanceOfId, Is.EqualTo("ContainerInstance1"));
+            Assert.That(elements.ElementAt(1).StructurizrInstanceOfId, Is.EqualTo("Container1"));
             Assert.That(elements.ElementAt(1).Type, Is.EqualTo(ElementType.ContainerInstance));
         }
 

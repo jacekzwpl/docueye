@@ -9,7 +9,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenSoftwareSystemInstanceIsDefinedThenAllPropertiesAreMached()
         {
             // Arrange
-            var sourceElements = new List<ElementToImport>();
+            var sourceElements = new List<ElementToImport>() { 
+                new ElementToImport { 
+                    StructurizrId = "System1", 
+                    Type = ElementType.SoftwareSystem,
+                    Name = "System1Name",
+                    Description = "System1Description",
+                    Technology = "System1Technology",
+                }
+            };
             var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>
             {
                 new StructurizrSoftwareSystemInstance {
@@ -30,6 +38,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
             Assert.That(elements.First().StructurizrId, Is.EqualTo("1"));
             Assert.That(elements.First().StructurizrParentId, Is.EqualTo("parentId"));
             Assert.That(elements.First().StructurizrInstanceOfId, Is.EqualTo("System1"));
+            Assert.That(elements.First().Name, Is.EqualTo("System1Name"));
+            Assert.That(elements.First().Description, Is.EqualTo("System1Description"));
+            Assert.That(elements.First().Technology, Is.EqualTo("System1Technology"));
             Assert.That(elements.First().Tags?.Count(), Is.EqualTo(2));
             Assert.That(elements.First().Tags?.First(), Is.EqualTo("tag1"));
             Assert.That(elements.First().Tags?.Last(), Is.EqualTo("tag2"));
@@ -43,7 +54,10 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleSoftwareSystemInstancesAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var sourceElements = new List<ElementToImport>();
+            var sourceElements = new List<ElementToImport>() { 
+                new ElementToImport { StructurizrId = "System1", Type = ElementType.SoftwareSystem },
+                new ElementToImport { StructurizrId = "System2", Type = ElementType.SoftwareSystem }
+            };
             var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>()
             {
                 new StructurizrSoftwareSystemInstance {

@@ -8,16 +8,25 @@ using System.Text.Json;
 
 namespace DocuEye.CLI.ApiClient.Tests
 {
-    public class Tests
+    public class DocuEyeApiClientTests
     {
+
+
         [SetUp]
         public void Setup()
         {
         }
 
+       
+
+
+
         [Test]
         public async Task WhenImportWorkspaceThenResultHasSuccessStatus()
         {
+            // Arrange
+
+
 
             Assert.Fail();
             /*

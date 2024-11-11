@@ -70,7 +70,8 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                 new ViewToImport()
                 {
                     Key = "view1",
-                    StructurizrElementId = "element1"
+                    StructurizrElementId = "element1",
+                    ViewType = ViewType.ContainerView
                 }
             };
             var existingViews = new List<BaseView>();
@@ -79,7 +80,8 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                 new Element()
                 {
                     Id = "element1",
-                    StructurizrId = "element1"
+                    StructurizrId = "element1",
+                    Type = ElementType.SoftwareSystem
                 }
             };
             var detector = new ViewsChangeDetector(this.mapper, this.mediator);
@@ -102,22 +104,25 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                 new ViewToImport()
                 {
                     Key = "view1",
-                    StructurizrElementId = "element1"
+                    StructurizrElementId = "element1",
+                    ViewType = ViewType.ContainerView
                 }
             };
             var existingViews = new List<BaseView>() {
                 new BaseView()
                 {
                     Id = "viewid1",
-                    Key = "view1"
+                    Key = "view1",
+                    ViewType = ViewType.ContainerView
                 }
             };
             var existingElements = new List<Element>()
             {
                 new Element()
                 {
-                    Id = "element1",
-                    StructurizrId = "element1"
+                    Id = "ID",
+                    StructurizrId = "element1",
+                    Type = ElementType.SoftwareSystem
                 }
             };
             var detector = new ViewsChangeDetector(this.mapper, this.mediator);
@@ -127,7 +132,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
 
             // Assert
             Assert.That(elementsDiagrams.Count, Is.EqualTo(1));
-            Assert.That(elementsDiagrams.First().Key, Is.EqualTo("element1"));
+            Assert.That(elementsDiagrams.First().Key, Is.EqualTo("ID"));
             Assert.That(elementsDiagrams.First().Value, Is.EqualTo("viewid1"));
         }
     }

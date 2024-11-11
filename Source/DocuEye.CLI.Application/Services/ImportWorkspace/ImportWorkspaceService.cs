@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DocuEye.CLI.ApiClient;
-using DocuEye.ModelKeeper.Model;
 using DocuEye.Structurizr.Model;
 using DocuEye.Structurizr.Model.Exploders;
 using DocuEye.WorkspaceImporter.Api.Model;
@@ -15,7 +14,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
