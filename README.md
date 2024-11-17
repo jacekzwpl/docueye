@@ -13,7 +13,7 @@ Currently there is no demo but you can see [DocuEye product page](https://docuey
 - Graph viewer - You can view diagrams as graphs
     - Focusing on selected node
 - Elements catalog - You can search, navigate through your model elements 
-    - View element properties. [See extra DocueEye properties](Documentation/docs/0004-element-extra-properties.md)
+    - View element properties. [See extra DocueEye properties](Documentation/docs/0003-element-extra-properties.md)
     - View element dependencies
     - View element consumers
     - View element children
@@ -22,16 +22,16 @@ Currently there is no demo but you can see [DocuEye product page](https://docuey
     - Import and view element openapi specification
 - Decisions viewer - You can view all decisions defined at workspace or element level
 - Documentation viewer - You can view documentation defined at workspace or element level
-- Change Tracker - DocuEye tracks changes in the model on every import. You can view history of changes in Your model. [See what to do to change tracker works as expected](Documentation/docs/0002-change-tracker.md)  
+- Change Tracker - DocuEye tracks changes in the model on every import. You can view history of changes in Your model. [See what to do to change tracker works as expected](Documentation/docs/0001-change-tracker.md)  
 - Deployment Nodes Matrix - You can view relationships between deployment nodes that implies from relationships between deployed model elements.
-- OIDC Integration. [See how to integrate with OIDC provider](Documentation/docs/0007-oidc-integration.md).
+- OIDC Integration. [See how to integrate with OIDC provider](Documentation/docs/0006-oidc-integration.md).
 
-See [features roadmap](Documentation/docs/0003-features-roadmap.md) if You want to know what features will be implemented in nearest feature.
+See [features roadmap](Documentation/docs/0002-features-roadmap.md) if You want to know what features will be implemented in nearest feature.
 
 ## Getting started
 
 The best way to get start is to use docker image.  
-To run DocuEye You can use docker compose. File used in this example can be found [here](docker-compose.yml). Description of configuration options can be found [here](Documentation/docs/0005-configuration.md)  
+To run DocuEye You can use docker compose. File used in this example can be found [here](docker-compose.yml). Description of configuration options can be found [here](Documentation/docs/0004-configuration.md)  
 DocuEye use Mongo DB as persistence so You need two containers running at one time.  
 
 ```Powershell
@@ -73,7 +73,7 @@ Example script can be found  [here](ExampleWorkspace/import-openapi.ps1).
   
 
   
-You can read about all options for DocuEye CLI [here](Documentation/docs/0006-docueye-cli.md).  
+You can read about all options for DocuEye CLI [here](Documentation/docs/0005-docueye-cli.md).  
 You can also use --help switch to see available options.  
 For docker image  
 ```

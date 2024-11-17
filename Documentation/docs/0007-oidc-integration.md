@@ -2,7 +2,7 @@
 
 DocuEye can be integrated with identity providers that are compatible with OIDC such as Keycloack.  
 If OIDC configuration is present then access to the application will be restricted only to authenticated users and access to workspaces can be restricted to specific users.  
-All configuration options can be found [here](0005-configuration.md).  
+All configuration options can be found [here](0004-configuration.md).  
 
 The default configuration for each workspace is public. This means every authenticated user has full access. To restrict access to workspace some additional configuration in dsl file have to be done. For example:  
 ```
