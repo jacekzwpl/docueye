@@ -12,6 +12,26 @@
       "commandName": "Project",
       "commandLineArgs": "--import=workspace --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=debugtest --workspaceFile=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.json\""
     },
+    "DocuEye.HELP": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    },
+    "DocuEye.workspace-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace --help"
+    },
+    "DocuEye.workspace-import-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --help"
+    },
+    "DocuEye.workspace-delete-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace delete --help"
+    },
+    "DocuEye.openapi-import-help": {
+      "commandName": "Project",
+      "commandLineArgs": "openapi import --help"
+    },
     "Docker": {
       "commandName": "Docker"
     }

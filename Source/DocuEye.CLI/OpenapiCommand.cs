@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.CommandLine;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DocuEye.CLI
+{
+    public class OpenapiCommand : Command
+    {
+        public OpenapiCommand() : base("openapi", "Commands for working with OpenAPI specifications.")
+        {
+
+        }
+    }
+}

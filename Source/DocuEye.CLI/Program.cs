@@ -1,17 +1,32 @@
-﻿using AutoMapper;
-using CommandLine;
-using DocuEye.CLI;
-using DocuEye.CLI.ApiClient;
-using DocuEye.CLI.Application.Services.DeleteWorkspace;
-using DocuEye.CLI.Application.Services.ImportOpenApiFile;
-using DocuEye.CLI.Application.Services.ImportWorkspace;
-using DocuEye.Structurizr.Model.Exploders.Mappings;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using DocuEye.CLI;
 using Microsoft.Extensions.Logging;
-using System.Net.Http.Headers;
+using System.CommandLine;
 
 
+var logger = LoggerFactory.Create(config =>
+{
+    config.AddConsole();
+}).CreateLogger("StartupLogger");
+
+var commonOptions = new CommandLineCommonOptions();
+
+// Create root command
+RootCommand rootCommand = new("Test opis");
+// Create workspace command
+var workspaceCommand = new WorkspaceCommand();
+workspaceCommand.Subcommands.Add(new WorkspaceImportCommand(commonOptions));
+workspaceCommand.Subcommands.Add(new WorkspaceDeleteCommand(commonOptions));
+// Create openapi command
+var openapiCommand = new OpenapiCommand();
+openapiCommand.Subcommands.Add(new OpenapiImportCommand(commonOptions));
+// Add subcommands to root command
+rootCommand.Subcommands.Add(workspaceCommand);
+rootCommand.Subcommands.Add(openapiCommand);
+
+return await rootCommand.Parse(args).InvokeAsync();
+
+
+/*
 var logger = LoggerFactory.Create(config =>
 {
     config.AddConsole();
@@ -125,7 +140,7 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
 
 }, errors => Task.FromResult(-1));
 
-
+*/
 
 
 
