@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.ViewsKeeper.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
 {
@@ -8,16 +9,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenSystemContextViewExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var views = new List<StructurizrSystemContextView>
+            var views = new List<StructurizrJsonSystemContextView>
             {
-                new StructurizrSystemContextView
+                new StructurizrJsonSystemContextView
                 {
                     Title = "System Context View",
                     Description = "This is a System Context View",
                     Key = "SystemContextView",
                     PaperSize = "A4",
                     EnterpriseBoundaryVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -26,18 +27,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
@@ -70,16 +71,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenMultipleSystemContextViewsExistsThenAllViewsAreExploded()
         {
             // Arrange
-            var views = new List<StructurizrSystemContextView>
+            var views = new List<StructurizrJsonSystemContextView>
             {
-                new StructurizrSystemContextView
+                new StructurizrJsonSystemContextView
                 {
                     Title = "System Context View",
                     Description = "This is a System Context View",
                     Key = "SystemContextView",
                     PaperSize = "A4",
                     EnterpriseBoundaryVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -88,31 +89,31 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
                     }
                 },
-                new StructurizrSystemContextView
+                new StructurizrJsonSystemContextView
                 {
                     Title = "System Context View 2",
                     Description = "This is a System Context View 2",
                     Key = "SystemContextView2",
                     PaperSize = "A4",
                     EnterpriseBoundaryVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -121,18 +122,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "2",
                             X = 200,
                             Y = 200
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "2"
                         }

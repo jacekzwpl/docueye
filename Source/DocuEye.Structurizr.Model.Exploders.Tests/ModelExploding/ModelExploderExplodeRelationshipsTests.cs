@@ -1,4 +1,6 @@
-﻿namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
+﻿using DocuEye.Structurizr.Json.Model;
+
+namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
     public class ModelExploderExplodeRelationshipsTests : BaseExploderTests
     {
@@ -6,9 +8,9 @@
         public void WhenRelationshipIsDefinedThenAllPropertiesAreMatched()
         {
             // Arrange
-            var relationships = new List<StructurizrRelationship>
+            var relationships = new List<StructurizrJsonRelationship>
                         {
-                            new StructurizrRelationship
+                            new StructurizrJsonRelationship
                             {
                                 Id = "1",
                                 SourceId = "1",
@@ -44,15 +46,15 @@
         public void WhenMultipleRelationshipsAreDEfinedThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var relationships = new List<StructurizrRelationship>
+            var relationships = new List<StructurizrJsonRelationship>
             {
-                new StructurizrRelationship
+                new StructurizrJsonRelationship
                 {
                     Id = "1",
                     SourceId = "1",
                     DestinationId = "2"
                 },
-                new StructurizrRelationship
+                new StructurizrJsonRelationship
                 {
                     Id = "2",
                     SourceId = "2",

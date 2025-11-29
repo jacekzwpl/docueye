@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -8,9 +9,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenContainerIsDefinedThenAllPropertiesAreMached()
         {
             // Arrange
-            var containers = new List<StructurizrContainer>()
+            var containers = new List<StructurizrJsonContainer>()
             {
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "1",
                     Name = "Container",
@@ -51,9 +52,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleContainersAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var containers = new List<StructurizrContainer>()
+            var containers = new List<StructurizrJsonContainer>()
             {
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "1",
                     Name = "Container1",
@@ -67,7 +68,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         { "Property2", "Value2" }
                     }
                 },
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "2",
                     Name = "Container2",
@@ -95,38 +96,38 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenChildElementsAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var containers = new List<StructurizrContainer>()
+            var containers = new List<StructurizrJsonContainer>()
             {
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "1",
                     Name = "Container1",
-                    Components = new List<StructurizrComponent>
+                    Components = new List<StructurizrJsonComponent>
                     {
-                        new StructurizrComponent
+                        new StructurizrJsonComponent
                         {
                             Id = "3",
                             Name = "Component1"
                         },
-                        new StructurizrComponent
+                        new StructurizrJsonComponent
                         {
                             Id = "4",
                             Name = "Component2"
                         }
                     }
                 },
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "2",
                     Name = "Container2",
-                    Components = new List<StructurizrComponent>
+                    Components = new List<StructurizrJsonComponent>
                     {
-                        new StructurizrComponent
+                        new StructurizrJsonComponent
                         {
                             Id = "5",
                             Name = "Component5"
                         },
-                        new StructurizrComponent
+                        new StructurizrJsonComponent
                         {
                             Id = "6",
                             Name = "Component5"
@@ -147,15 +148,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleContainersHaveRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var containers = new List<StructurizrContainer>()
+            var containers = new List<StructurizrJsonContainer>()
             {
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "1",
                     Name = "Container1",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -172,13 +173,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         }
                     }
                 },
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "2",
                     Name = "Container2",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "2",
                             SourceId = "2",
@@ -209,15 +210,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenContainerHasRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var containers = new List<StructurizrContainer>()
+            var containers = new List<StructurizrJsonContainer>()
             {
-                new StructurizrContainer
+                new StructurizrJsonContainer
                 {
                     Id = "1",
                     Name = "Container1",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",

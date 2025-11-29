@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocuEye.Structurizr.Json.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
         public void WhenDocumentationSectionExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var documentationSections = new List<StructurizrDocumentationSection>
+            var documentationSections = new List<StructurizrJsonDocumentationSection>
             {
-                new StructurizrDocumentationSection
+                new StructurizrJsonDocumentationSection
                 {
                     Content = "content",
                     Format = "markdown",
@@ -37,15 +38,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
         public void WhenMultipleDocumentationSectionsExistsThenAllElementsAreExploded()
         {
             // Arrange
-            var documentationSections = new List<StructurizrDocumentationSection>
+            var documentationSections = new List<StructurizrJsonDocumentationSection>
             {
-                new StructurizrDocumentationSection
+                new StructurizrJsonDocumentationSection
                 {
                     Content = "content",
                     Format = "markdown",
                     Order = 1,
                 },
-                new StructurizrDocumentationSection
+                new StructurizrJsonDocumentationSection
                 {
                     Content = "content",
                     Format = "markdown",

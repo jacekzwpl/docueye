@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DocuEye.Structurizr.Model\DocuEye.Structurizr.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Json.Model\DocuEye.Structurizr.Json.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             this.mapper = mapper;
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeModelElements(StructurizrModel? model)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeModelElements(StructurizrJsonModel? model)
         {
             if (model == null)
             {
@@ -50,7 +51,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeSoftwareSystems(IEnumerable<StructurizrSoftwareSystem> softwareSystems)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeSoftwareSystems(IEnumerable<StructurizrJsonSoftwareSystem> softwareSystems)
         {
             var elements = new List<ElementToImport>();
             var relationships = new List<RelationshipToImport>();
@@ -74,7 +75,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeContainers(IEnumerable<StructurizrContainer> containers, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeContainers(IEnumerable<StructurizrJsonContainer> containers, string parentId)
         {
             var elements = new List<ElementToImport>();
             var relationships = new List<RelationshipToImport>();
@@ -99,7 +100,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeComponents(IEnumerable<StructurizrComponent> components, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeComponents(IEnumerable<StructurizrJsonComponent> components, string parentId)
         {
             var elements = components.Select(c =>
             {
@@ -111,14 +112,14 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodePeople(IEnumerable<StructurizrPerson> people)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodePeople(IEnumerable<StructurizrJsonPerson> people)
         {
             var elements = people.Select(p => this.mapper.Map<ElementToImport>(p));
             var relationships = people.SelectMany(p => this.ExplodeRelationships(p.Relationships));
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeDeploymentNodes(IEnumerable<StructurizrDeploymentNode> deploymentNodes, IEnumerable<ElementToImport> sourceElements)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeDeploymentNodes(IEnumerable<StructurizrJsonDeploymentNode> deploymentNodes, IEnumerable<ElementToImport> sourceElements)
         {
             var elements = new List<ElementToImport>();
             var relationships = new List<RelationshipToImport>();
@@ -132,7 +133,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeDeploymentNode(StructurizrDeploymentNode node, IEnumerable<ElementToImport> sourceElements, string? parentStructurizrId = null)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeDeploymentNode(StructurizrJsonDeploymentNode node, IEnumerable<ElementToImport> sourceElements, string? parentStructurizrId = null)
         {
             var elements = new List<ElementToImport>();
             var relationships = new List<RelationshipToImport>();
@@ -178,7 +179,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeInfrastructureNodes(IEnumerable<StructurizrInfrastructureNode> infrastructureNodes, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeInfrastructureNodes(IEnumerable<StructurizrJsonInfrastructureNode> infrastructureNodes, string parentId)
         {
             var elements = infrastructureNodes.Select(i => { 
                 var element = this.mapper.Map<ElementToImport>(i);
@@ -189,7 +190,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeSoftwareSystemInstances(IEnumerable<StructurizrSoftwareSystemInstance> instances,IEnumerable<ElementToImport> sourceElements, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeSoftwareSystemInstances(IEnumerable<StructurizrJsonSoftwareSystemInstance> instances,IEnumerable<ElementToImport> sourceElements, string parentId)
         {
             var elements = new List<ElementToImport>();
             foreach(var instance in instances)
@@ -213,7 +214,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeContainerInstances(IEnumerable<StructurizrContainerInstance> instances, IEnumerable<ElementToImport> sourceElements, string parentId)
+        public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeContainerInstances(IEnumerable<StructurizrJsonContainerInstance> instances, IEnumerable<ElementToImport> sourceElements, string parentId)
         {
             var elements = new List<ElementToImport>();
             foreach (var instance in instances)
@@ -236,7 +237,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return (elements, relationships);
         }
 
-        public IEnumerable<RelationshipToImport> ExplodeRelationships(IEnumerable<StructurizrRelationship>? structurizrRelations)
+        public IEnumerable<RelationshipToImport> ExplodeRelationships(IEnumerable<StructurizrJsonRelationship>? structurizrRelations)
         {
             if (structurizrRelations == null)
             {

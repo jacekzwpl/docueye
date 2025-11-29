@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11218.70 d18.3
+VisualStudioVersion = 18.3.11218.70
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Web", "Source\DocuEye.Web\DocuEye.Web.csproj", "{47412A7F-925C-4B2E-850D-773219EE0DD6}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Infrastructure.MongoDB", "Source\DocuEye.Infrastructure.MongoDB\DocuEye.Infrastructure.MongoDB.csproj", "{7B1E829E-A91E-4C59-8A1C-B80275A41F36}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Persistence", "Source\DocuEye.Persistence\DocuEye.Persistence.csproj", "{BCFE39F7-14A5-44E2-BB21-3EF709985105}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Structurizr.Model", "Source\DocuEye.Structurizr.Model\DocuEye.Structurizr.Model.csproj", "{E4471B05-54D3-424D-8E40-CDDF5132AE98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Structurizr-old", "Structurizr-old", "{122A1052-BB53-4E28-8691-423992E6E43A}"
 EndProject
@@ -185,10 +183,6 @@ Global
 		{BCFE39F7-14A5-44E2-BB21-3EF709985105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCFE39F7-14A5-44E2-BB21-3EF709985105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCFE39F7-14A5-44E2-BB21-3EF709985105}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4471B05-54D3-424D-8E40-CDDF5132AE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4471B05-54D3-424D-8E40-CDDF5132AE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4471B05-54D3-424D-8E40-CDDF5132AE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4471B05-54D3-424D-8E40-CDDF5132AE98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9109289-2A00-4A92-9786-9F20E56F7ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9109289-2A00-4A92-9786-9F20E56F7ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9109289-2A00-4A92-9786-9F20E56F7ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -467,7 +461,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B1E829E-A91E-4C59-8A1C-B80275A41F36} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
-		{E4471B05-54D3-424D-8E40-CDDF5132AE98} = {122A1052-BB53-4E28-8691-423992E6E43A}
 		{B9109289-2A00-4A92-9786-9F20E56F7ECB} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
 		{C6252428-E9AE-4498-A00A-DBCF89792576} = {F30410F2-2AE9-40E2-B6B3-3ADDCB070032}
 		{03FDD1B7-119B-473F-B700-38B1CF29A2A5} = {F30410F2-2AE9-40E2-B6B3-3ADDCB070032}

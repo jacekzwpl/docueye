@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using System.Collections.Generic;
@@ -11,49 +12,49 @@ namespace DocuEye.Structurizr.Model.Exploders.Mappings
     {
         public StructurizrModelToApiMappingProfile()
         {
-            CreateMap<StructurizrPerson, ElementToImport>()
+            CreateMap<StructurizrJsonPerson, ElementToImport>()
                .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.Person))
                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
 
-            CreateMap<StructurizrComponent, ElementToImport>()
+            CreateMap<StructurizrJsonComponent, ElementToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.Component))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
 
-            CreateMap<StructurizrContainer, ElementToImport>()
+            CreateMap<StructurizrJsonContainer, ElementToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.Container))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
 
-            CreateMap<StructurizrSoftwareSystem, ElementToImport>()
+            CreateMap<StructurizrJsonSoftwareSystem, ElementToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.SoftwareSystem))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
             
-            CreateMap<StructurizrDeploymentNode, ElementToImport>()
+            CreateMap<StructurizrJsonDeploymentNode, ElementToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.DeploymentNode))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
 
-            CreateMap<StructurizrSoftwareSystemInstance, ElementToImport>()
+            CreateMap<StructurizrJsonSoftwareSystemInstance, ElementToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.SoftwareSystemInstance))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")))
                 .ForMember(dest => dest.StructurizrInstanceOfId, opt => opt.MapFrom(src => src.SoftwareSystemId));
 
-            CreateMap<StructurizrContainerInstance, ElementToImport>()
+            CreateMap<StructurizrJsonContainerInstance, ElementToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.ContainerInstance))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")))
                 .ForMember(dest => dest.StructurizrInstanceOfId, opt => opt.MapFrom(src => src.ContainerId));
 
-            CreateMap<StructurizrInfrastructureNode, ElementToImport>()
+            CreateMap<StructurizrJsonInfrastructureNode, ElementToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => ElementType.InfrastructureNode))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => SplitStringToList(src.Tags, ",")));
 
-            CreateMap<StructurizrRelationship, RelationshipToImport>()
+            CreateMap<StructurizrJsonRelationship, RelationshipToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.StructurizrSourceId, opt => opt.MapFrom(src => src.SourceId))
                 .ForMember(dest => dest.StructurizrDestinationId, opt => opt.MapFrom(src => src.DestinationId))

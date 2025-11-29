@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
@@ -10,7 +11,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var deploymentNode = new StructurizrDeploymentNode
+            var deploymentNode = new StructurizrJsonDeploymentNode
             {
                 Id = "1",
                 Description = "Description",
@@ -51,19 +52,19 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var deploymentNode = new StructurizrDeploymentNode
+            var deploymentNode = new StructurizrJsonDeploymentNode
             {
                 Id = "1",
                 Name = "DeploymentNode1",
-                Children = new List<StructurizrDeploymentNode>
+                Children = new List<StructurizrJsonDeploymentNode>
                 {
-                    new StructurizrDeploymentNode
+                    new StructurizrJsonDeploymentNode
                     {
                         Id = "2",
                         Name = "DeploymentNode2",
-                        Children = new List<StructurizrDeploymentNode>
+                        Children = new List<StructurizrJsonDeploymentNode>
                         {
-                            new StructurizrDeploymentNode
+                            new StructurizrJsonDeploymentNode
                             {
                                 Id = "3",
                                 Name = "DeploymentNode3"
@@ -104,13 +105,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Type = ElementType.SoftwareSystem
                 }
             };
-            var deploymentNode = new StructurizrDeploymentNode
+            var deploymentNode = new StructurizrJsonDeploymentNode
             {
                 Id = "1",
                 Name = "DeploymentNode1",
-                SoftwareSystemInstances = new List<StructurizrSoftwareSystemInstance>
+                SoftwareSystemInstances = new List<StructurizrJsonSoftwareSystemInstance>
                 {
-                    new StructurizrSoftwareSystemInstance
+                    new StructurizrJsonSoftwareSystemInstance
                     {
                         Id = "2",
                         SoftwareSystemId = "SoftwareSystem1"
@@ -146,13 +147,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Type = ElementType.Container
                 }
             };
-            var deploymentNode = new StructurizrDeploymentNode
+            var deploymentNode = new StructurizrJsonDeploymentNode
             {
                 Id = "1",
                 Name = "DeploymentNode1",
-                ContainerInstances = new List<StructurizrContainerInstance>
+                ContainerInstances = new List<StructurizrJsonContainerInstance>
                 {
-                    new StructurizrContainerInstance
+                    new StructurizrJsonContainerInstance
                     {
                         Id = "2",
                         ContainerId = "Container1"
@@ -181,13 +182,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var deploymentNode = new StructurizrDeploymentNode
+            var deploymentNode = new StructurizrJsonDeploymentNode
             {
                 Id = "1",
                 Name = "DeploymentNode1",
-                InfrastructureNodes = new List<StructurizrInfrastructureNode>
+                InfrastructureNodes = new List<StructurizrJsonInfrastructureNode>
                 {
-                    new StructurizrInfrastructureNode
+                    new StructurizrJsonInfrastructureNode
                     {
                         Id = "2",
                         Name = "InfrastructureNode1"
@@ -216,21 +217,21 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var deploymentNodes = new List<StructurizrDeploymentNode>
+            var deploymentNodes = new List<StructurizrJsonDeploymentNode>
             {
-                new StructurizrDeploymentNode
+                new StructurizrJsonDeploymentNode
                 {
                     Id = "1",
                     Name = "DeploymentNode1",
-                    Children = new List<StructurizrDeploymentNode>
+                    Children = new List<StructurizrJsonDeploymentNode>
                     {
-                        new StructurizrDeploymentNode
+                        new StructurizrJsonDeploymentNode
                         {
                             Id = "2",
                             Name = "DeploymentNode2",
-                            Children = new List<StructurizrDeploymentNode>
+                            Children = new List<StructurizrJsonDeploymentNode>
                             {
-                                new StructurizrDeploymentNode
+                                new StructurizrJsonDeploymentNode
                                 {
                                     Id = "3",
                                     Name = "DeploymentNode3"
@@ -266,13 +267,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var deploymentNode = new StructurizrDeploymentNode
+            var deploymentNode = new StructurizrJsonDeploymentNode
             {
                 Id = "1",
                 Name = "DeploymentNode1",
-                Relationships = new List<StructurizrRelationship>
+                Relationships = new List<StructurizrJsonRelationship>
                 {
-                    new StructurizrRelationship
+                    new StructurizrJsonRelationship
                     {
                         Id = "2",
                         SourceId = "1",
@@ -300,15 +301,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var deploymentNodes = new List<StructurizrDeploymentNode>
+            var deploymentNodes = new List<StructurizrJsonDeploymentNode>
             {
-                new StructurizrDeploymentNode
+                new StructurizrJsonDeploymentNode
                 {
                     Id = "1",
                     Name = "DeploymentNode1",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -316,28 +317,28 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         }
                     }
                 },
-                new StructurizrDeploymentNode
+                new StructurizrJsonDeploymentNode
                 {
                     Id = "2",
                     Name = "DeploymentNode2",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "2",
                             SourceId = "2",
                             DestinationId = "3"
                         }
                     },
-                    Children = new List<StructurizrDeploymentNode>
+                    Children = new List<StructurizrJsonDeploymentNode>
                     {
-                        new StructurizrDeploymentNode
+                        new StructurizrJsonDeploymentNode
                         {
                             Id = "3",
                             Name = "DeploymentNode3",
-                            Relationships = new List<StructurizrRelationship>
+                            Relationships = new List<StructurizrJsonRelationship>
                             {
-                                new StructurizrRelationship
+                                new StructurizrJsonRelationship
                                 {
                                     Id = "3",
                                     SourceId = "1",

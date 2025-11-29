@@ -1,4 +1,5 @@
 using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -9,9 +10,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenPersonIsDefindedThenAllPropertiesAreMached()
         {
             // Arrange
-            var people = new List<StructurizrPerson>
+            var people = new List<StructurizrJsonPerson>
             {
-                new StructurizrPerson
+                new StructurizrJsonPerson
                 {
                     Id = "1",
                     Name = "John Doe",
@@ -47,9 +48,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenPeopleAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var people = new List<StructurizrPerson>
+            var people = new List<StructurizrJsonPerson>
             {
-                new StructurizrPerson
+                new StructurizrJsonPerson
                 {
                     Id = "1",
                     Name = "John Doe",
@@ -59,7 +60,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Tags = "tag1,tag2",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" } }
                 },
-                new StructurizrPerson
+                new StructurizrJsonPerson
                 {
                     Id = "2",
                     Name = "Jane Doe",
@@ -83,9 +84,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenPersonHasRelationshipsThenAllRelationshipsAreEXploded()
         {
             // Arrange
-            var people = new List<StructurizrPerson>
+            var people = new List<StructurizrJsonPerson>
             {
-                new StructurizrPerson
+                new StructurizrJsonPerson
                 {
                     Id = "1",
                     Name = "John Doe",
@@ -94,9 +95,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Url = "http://example.com",
                     Tags = "tag1,tag2",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" } },
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -118,9 +119,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenPeopleHaveRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var people = new List<StructurizrPerson>
+            var people = new List<StructurizrJsonPerson>
             {
-                new StructurizrPerson
+                new StructurizrJsonPerson
                 {
                     Id = "1",
                     Name = "John Doe",
@@ -129,9 +130,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Url = "http://example.com",
                     Tags = "tag1,tag2",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" } },
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -140,7 +141,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     }
 
                 },
-                new StructurizrPerson
+                new StructurizrJsonPerson
                 {
                     Id = "2",
                     Name = "Jane Doe",
@@ -149,9 +150,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Url = "http://example.com",
                     Tags = "tag1,tag2",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" } },
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "2",
                             SourceId = "2",

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.CLI.ApiClient;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.Structurizr.Model;
 using DocuEye.Structurizr.Model.Exploders;
 using DocuEye.WorkspaceImporter.Api.Model;
@@ -61,7 +62,7 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
 
             this.logger.LogInformation("Parsing workspace data file");
 
-            var workspaceData = JsonSerializer.Deserialize<StructurizrWorkspace>(content, this.serializerOptions);
+            var workspaceData = JsonSerializer.Deserialize<StructurizrJsonWorkspace>(content, this.serializerOptions);
 
             if (workspaceData == null)
             {
@@ -202,7 +203,7 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
             return true;        
         }
 
-        private async Task<bool> RunImportStart(ImportWorkspaceParameters parameters, StructurizrWorkspace workspaceData)
+        private async Task<bool> RunImportStart(ImportWorkspaceParameters parameters, StructurizrJsonWorkspace workspaceData)
         {
             string stepName = "Import start";
             this.logger.LogInformation("Running Step: {0}", stepName);

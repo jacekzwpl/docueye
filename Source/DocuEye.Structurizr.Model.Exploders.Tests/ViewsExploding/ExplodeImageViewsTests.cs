@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.ViewsKeeper.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
 {
@@ -8,9 +9,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenImageViewExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var views = new List<StructurizrImageView>
+            var views = new List<StructurizrJsonImageView>
             {
-                new StructurizrImageView
+                new StructurizrJsonImageView
                 {
                     Title = "Image View",
                     Description = "This is an Image View",
@@ -40,9 +41,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenMultipleImageViewsExistsThenAllViewsAreExploded()
         {
             // Arrange
-            var views = new List<StructurizrImageView>
+            var views = new List<StructurizrJsonImageView>
             {
-                new StructurizrImageView
+                new StructurizrJsonImageView
                 {
                     Title = "Image View 1",
                     Description = "This is an Image View 1",
@@ -51,7 +52,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     ContentType = "image/png",
                     Content = "base64",
                 },
-                new StructurizrImageView
+                new StructurizrJsonImageView
                 {
                     Title = "Image View 2",
                     Description = "This is an Image View 2",

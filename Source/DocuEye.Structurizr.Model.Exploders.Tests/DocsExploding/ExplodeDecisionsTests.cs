@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocuEye.Structurizr.Json.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
         public void WhenDecisionForElementExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var decisions = new List<StructurizrDecision>
+            var decisions = new List<StructurizrJsonDecision>
             {
-                new StructurizrDecision
+                new StructurizrJsonDecision
                 {
                     Content = "content",
                     Date = "2021-01-01",
@@ -23,9 +24,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     Id = "id",
                     Format = "markdown",
                     ElementId = "elementId",
-                    Links = new List<StructurizrDecisionLink>
+                    Links = new List<StructurizrJsonDecisionLink>
                     {
-                        new StructurizrDecisionLink
+                        new StructurizrJsonDecisionLink
                         {
                             Id = "linkId",
                             Description = "description"
@@ -59,9 +60,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
         public void WhenDecisionForWorkspaceExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var decisions = new List<StructurizrDecision>
+            var decisions = new List<StructurizrJsonDecision>
             {
-                new StructurizrDecision
+                new StructurizrJsonDecision
                 {
                     Content = "content",
                     Date = "2021-01-01",
@@ -70,9 +71,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     Id = "id",
                     Format = "markdown",
                     ElementId = "elementId",
-                    Links = new List<StructurizrDecisionLink>
+                    Links = new List<StructurizrJsonDecisionLink>
                     {
-                        new StructurizrDecisionLink
+                        new StructurizrJsonDecisionLink
                         {
                             Id = "linkId",
                             Description = "description"
@@ -106,9 +107,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
         public void WhenMultipleDecisionsExistsThenAllElementsAreExploded()
         {
             // Arrange
-            var decisions = new List<StructurizrDecision>
+            var decisions = new List<StructurizrJsonDecision>
             {
-                new StructurizrDecision
+                new StructurizrJsonDecision
                 {
                     Content = "content",
                     Date = "2021-01-01",
@@ -117,16 +118,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     Id = "id",
                     Format = "markdown",
                     ElementId = "elementId",
-                    Links = new List<StructurizrDecisionLink>
+                    Links = new List<StructurizrJsonDecisionLink>
                     {
-                        new StructurizrDecisionLink
+                        new StructurizrJsonDecisionLink
                         {
                             Id = "linkId",
                             Description = "description"
                         }
                     }
                 },
-                new StructurizrDecision
+                new StructurizrJsonDecision
                 {
                     Content = "content",
                     Date = "2021-01-01",
@@ -135,9 +136,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     Id = "id",
                     Format = "markdown",
                     ElementId = "elementId",
-                    Links = new List<StructurizrDecisionLink>
+                    Links = new List<StructurizrJsonDecisionLink>
                     {
-                        new StructurizrDecisionLink
+                        new StructurizrJsonDecisionLink
                         {
                             Id = "linkId",
                             Description = "description"

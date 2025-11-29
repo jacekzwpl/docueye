@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Mappings
     {
         public StructurizrDocumentationToApiModelMappingProfile() {
 
-            CreateMap<StructurizrDocumentationSection, DocumentationSectionToImport>();
+            CreateMap<StructurizrJsonDocumentationSection, DocumentationSectionToImport>();
 
-            CreateMap<StructurizrImage, ImageToImport>()
+            CreateMap<StructurizrJsonImage, ImageToImport>()
                 .ForMember(dest => dest.DocumentationId, opt => opt.Ignore());
 
-            CreateMap<StructurizrDecisionLink, DecisionLinkToImport>()
+            CreateMap<StructurizrJsonDecisionLink, DecisionLinkToImport>()
                 .ForMember(dest => dest.StructurizrId, opt => opt.MapFrom(src => src.Id));
 
-            CreateMap<StructurizrDecision, DecisionToImport>()
+            CreateMap<StructurizrJsonDecision, DecisionToImport>()
                 .ForMember(dest => dest.DocumentationId, opt => opt.Ignore())
                 .ForMember(dest => dest.StrucuturizrId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.StrucuturizrElementId, opt => opt.MapFrom(src => src.ElementId));

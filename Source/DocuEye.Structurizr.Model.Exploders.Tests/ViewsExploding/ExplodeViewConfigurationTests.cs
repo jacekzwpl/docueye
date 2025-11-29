@@ -1,17 +1,19 @@
-﻿namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
+﻿using DocuEye.Structurizr.Json.Model;
+
+namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
 {
     public class ExplodeViewConfigurationTests : BaseExploderTests
     {
         [Test]
         public void WhenElementStylesExistsThenAllPropertiesAreMatched()
         {
-            var configuration = new StructurizrConfiguration
+            var configuration = new StructurizrJsonConfiguration
             {
-                Styles = new StructurizrConfigurationStyles
+                Styles = new StructurizrJsonConfigurationStyles
                 {
-                    Elements = new List<StructurizrElementStyle>
+                    Elements = new List<StructurizrJsonElementStyle>
                     {
-                        new StructurizrElementStyle
+                        new StructurizrJsonElementStyle
                         {
                             Tag = "Tag",
                             Background = "#FFFFFF",
@@ -55,13 +57,13 @@
         [Test]
         public void WhenRelationshipStylesExistsThenAllProperitesAreMatched()
         {
-            var configuration = new StructurizrConfiguration
+            var configuration = new StructurizrJsonConfiguration
             {
-                Styles = new StructurizrConfigurationStyles
+                Styles = new StructurizrJsonConfigurationStyles
                 {
-                    Relationships = new List<StructurizrRelationshipStyle>
+                    Relationships = new List<StructurizrJsonRelationshipStyle>
                     {
-                        new StructurizrRelationshipStyle
+                        new StructurizrJsonRelationshipStyle
                         {
                             Tag = "Tag",
                             Color = "#000000",
@@ -96,9 +98,9 @@
         [Test]
         public void WhenTerminologyExistsThenAllProperitesAreMatched()
         {
-            var configuration = new StructurizrConfiguration()
+            var configuration = new StructurizrJsonConfiguration()
             {
-                Terminology = new StructurizrTerminology()
+                Terminology = new StructurizrJsonTerminology()
                 {
                     Code = "Code",
                     Enterprise = "Enterprise",
@@ -130,7 +132,7 @@
         [Test]
         public void WhenThemesExistsThenAllProperitesAreMatched()
         {
-            var configuration = new StructurizrConfiguration()
+            var configuration = new StructurizrJsonConfiguration()
             {
                 Themes = new List<string>
                 {

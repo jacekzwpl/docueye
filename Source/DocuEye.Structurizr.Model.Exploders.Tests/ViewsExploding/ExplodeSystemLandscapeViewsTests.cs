@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.ViewsKeeper.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
 {
@@ -8,16 +9,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenSystemLandscapeViewExiststThenAllProperitesAreMatched()
         {
             // Arrange
-            var views = new List<StructurizrSystemLandscapeView>
+            var views = new List<StructurizrJsonSystemLandscapeView>
             {
-                new StructurizrSystemLandscapeView
+                new StructurizrJsonSystemLandscapeView
                 {
                     Title = "System Landscape View",
                     Description = "This is a System Landscape View",
                     Key = "SystemLandscapeView",
                     PaperSize = "A4",
                     EnterpriseBoundaryVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -26,18 +27,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
@@ -76,16 +77,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenMultipleLandscapeViewsExistsThenAllViewsAreExploded()
         {             
             // Arrange
-            var views = new List<StructurizrSystemLandscapeView>
+            var views = new List<StructurizrJsonSystemLandscapeView>
             {
-                new StructurizrSystemLandscapeView
+                new StructurizrJsonSystemLandscapeView
                 {
                     Title = "System Landscape View 1",
                     Description = "This is a System Landscape View 1",
                     Key = "SystemLandscapeView1",
                     PaperSize = "A4",
                     EnterpriseBoundaryVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -94,31 +95,31 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
                     }
                 },
-                new StructurizrSystemLandscapeView
+                new StructurizrJsonSystemLandscapeView
                 {
                     Title = "System Landscape View 2",
                     Description = "This is a System Landscape View 2",
                     Key = "SystemLandscapeView2",
                     PaperSize = "A4",
                     EnterpriseBoundaryVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -127,18 +128,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }

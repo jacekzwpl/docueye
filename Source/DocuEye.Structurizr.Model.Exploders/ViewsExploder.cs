@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.WorkspaceImporter.Api.Model.ViewConfiguration;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace DocuEye.Structurizr.Model.Exploders
         }
 
 
-        public IEnumerable<ViewToImport> ExplodeSystemLandscapeViews(IEnumerable<StructurizrSystemLandscapeView>? views) { 
+        public IEnumerable<ViewToImport> ExplodeSystemLandscapeViews(IEnumerable<StructurizrJsonSystemLandscapeView>? views) { 
             if(views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -24,7 +25,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public IEnumerable<ViewToImport> ExplodeSystemContextViews(IEnumerable<StructurizrSystemContextView>? views) {
+        public IEnumerable<ViewToImport> ExplodeSystemContextViews(IEnumerable<StructurizrJsonSystemContextView>? views) {
             if (views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -32,7 +33,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public IEnumerable<ViewToImport> ExplodeContainerViews(IEnumerable<StructurizrContainerView>? views) {
+        public IEnumerable<ViewToImport> ExplodeContainerViews(IEnumerable<StructurizrJsonContainerView>? views) {
             if (views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -40,7 +41,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public IEnumerable<ViewToImport> ExplodeComponentViews(IEnumerable<StructurizrComponentView>? views) {
+        public IEnumerable<ViewToImport> ExplodeComponentViews(IEnumerable<StructurizrJsonComponentView>? views) {
             if (views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -48,7 +49,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public IEnumerable<ViewToImport> ExplodeDynamicViews(IEnumerable<StructurizrDynamicView>? views) {
+        public IEnumerable<ViewToImport> ExplodeDynamicViews(IEnumerable<StructurizrJsonDynamicView>? views) {
             if (views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -56,7 +57,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public IEnumerable<ViewToImport> ExplodeDeploymentViews(IEnumerable<StructurizrDeploymentView>? views) {
+        public IEnumerable<ViewToImport> ExplodeDeploymentViews(IEnumerable<StructurizrJsonDeploymentView>? views) {
             if (views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -64,7 +65,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public IEnumerable<ViewToImport> ExplodeFilteredViews(IEnumerable<StructurizrFilteredView>? views) {
+        public IEnumerable<ViewToImport> ExplodeFilteredViews(IEnumerable<StructurizrJsonFilteredView>? views) {
             if (views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -72,7 +73,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public IEnumerable<ViewToImport> ExplodeImageViews(IEnumerable<StructurizrImageView>? views) {
+        public IEnumerable<ViewToImport> ExplodeImageViews(IEnumerable<StructurizrJsonImageView>? views) {
             if (views == null)
             {
                 return Enumerable.Empty<ViewToImport>();
@@ -80,7 +81,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<ViewToImport>>(views);
         }
 
-        public ViewConfigurationToImport ExplodeViewConfiguration(StructurizrConfiguration? viewConfiguration)
+        public ViewConfigurationToImport ExplodeViewConfiguration(StructurizrJsonConfiguration? viewConfiguration)
         {
             return new ViewConfigurationToImport()
             {

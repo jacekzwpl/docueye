@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
@@ -18,9 +19,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Technology = "System1Technology",
                 }
             };
-            var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>
+            var softwareSystemInstances = new List<StructurizrJsonSoftwareSystemInstance>
             {
-                new StructurizrSoftwareSystemInstance {
+                new StructurizrJsonSoftwareSystemInstance {
                     Id = "1",
                     Tags = "tag1,tag2",
                     SoftwareSystemId = "System1",
@@ -58,16 +59,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                 new ElementToImport { StructurizrId = "System1", Type = ElementType.SoftwareSystem },
                 new ElementToImport { StructurizrId = "System2", Type = ElementType.SoftwareSystem }
             };
-            var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>()
+            var softwareSystemInstances = new List<StructurizrJsonSoftwareSystemInstance>()
             {
-                new StructurizrSoftwareSystemInstance {
+                new StructurizrJsonSoftwareSystemInstance {
                     Id = "1",
                     Tags = "tag1,tag2",
                     SoftwareSystemId = "System1",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
                     }
                 },
-                new StructurizrSoftwareSystemInstance {
+                new StructurizrJsonSoftwareSystemInstance {
                     Id = "2",
                     Tags = "tag1,tag2",
                     SoftwareSystemId = "System2",
@@ -90,17 +91,17 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>()
+            var softwareSystemInstances = new List<StructurizrJsonSoftwareSystemInstance>()
             {
-                new StructurizrSoftwareSystemInstance {
+                new StructurizrJsonSoftwareSystemInstance {
                     Id = "1",
                     Tags = "tag1,tag2",
                     SoftwareSystemId = "System1",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
                     },
-                    Relationships = new List<StructurizrRelationship>()
+                    Relationships = new List<StructurizrJsonRelationship>()
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -141,17 +142,17 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var sourceElements = new List<ElementToImport>();
-            var softwareSystemInstances = new List<StructurizrSoftwareSystemInstance>()
+            var softwareSystemInstances = new List<StructurizrJsonSoftwareSystemInstance>()
             {
-                new StructurizrSoftwareSystemInstance {
+                new StructurizrJsonSoftwareSystemInstance {
                     Id = "1",
                     Tags = "tag1,tag2",
                     SoftwareSystemId = "System1",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
                     },
-                    Relationships = new List<StructurizrRelationship>()
+                    Relationships = new List<StructurizrJsonRelationship>()
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -165,15 +166,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         }
                     }
                 },
-                new StructurizrSoftwareSystemInstance {
+                new StructurizrJsonSoftwareSystemInstance {
                     Id = "2",
                     Tags = "tag1,tag2",
                     SoftwareSystemId = "System2",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
                     },
-                    Relationships = new List<StructurizrRelationship>()
+                    Relationships = new List<StructurizrJsonRelationship>()
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "2",
                             SourceId = "2",

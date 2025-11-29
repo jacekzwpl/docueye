@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocuEye.Structurizr.Json.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             this.mapper = mapper;
         }
 
-        public (DocumentationToImport,IEnumerable<DecisionToImport>,IEnumerable<ImageToImport>) ExplodeDocumentation(StructurizrDocumentation documentation, string? elementId = null)
+        public (DocumentationToImport,IEnumerable<DecisionToImport>,IEnumerable<ImageToImport>) ExplodeDocumentation(StructurizrJsonDocumentation documentation, string? elementId = null)
         {
 
             var documentationToImport = new DocumentationToImport()
@@ -32,7 +33,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             );
         }
 
-        public IEnumerable<DocumentationSectionToImport> ExplodeDocumentationSections(IEnumerable<StructurizrDocumentationSection>? sections)
+        public IEnumerable<DocumentationSectionToImport> ExplodeDocumentationSections(IEnumerable<StructurizrJsonDocumentationSection>? sections)
         {
             if(sections == null)
             {
@@ -41,7 +42,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return this.mapper.Map<IEnumerable<DocumentationSectionToImport>>(sections);
         }
 
-        public IEnumerable<DecisionToImport> ExplodeDecisions(IEnumerable<StructurizrDecision>? decisions, string documentationId, string? elementId = null)
+        public IEnumerable<DecisionToImport> ExplodeDecisions(IEnumerable<StructurizrJsonDecision>? decisions, string documentationId, string? elementId = null)
         {
             if(decisions == null)
             {
@@ -57,7 +58,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             return elements;
         }
 
-        public IEnumerable<ImageToImport> ExplodeImages(IEnumerable<StructurizrImage>? images, string documentationId)
+        public IEnumerable<ImageToImport> ExplodeImages(IEnumerable<StructurizrJsonImage>? images, string documentationId)
         {
             if(images == null)
             {

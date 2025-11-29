@@ -1,4 +1,6 @@
-﻿namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
+﻿using DocuEye.Structurizr.Json.Model;
+
+namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
 {
     public class ExplodeDocumentationTests : BaseExploderTests
     {
@@ -6,7 +8,7 @@
         public void WhenDocumentationForWorkspaceExistsThenIdIsSetEndElementIdIsNull()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
                 
             };
@@ -24,7 +26,7 @@
         public void WhenDocumentationForElementExistsThenIdIsSetEndElementIdIsSet()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
                 
             };
@@ -42,17 +44,17 @@
         public void WhenDocumentationHasSectionsThenSectionsAreExploded()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
-                Sections = new List<StructurizrDocumentationSection>
+                Sections = new List<StructurizrJsonDocumentationSection>
                 {
-                    new StructurizrDocumentationSection
+                    new StructurizrJsonDocumentationSection
                     {
                         Content = "Content 1",
                         Format = "Markdown",
                         Order = 1,
                     },
-                    new StructurizrDocumentationSection
+                    new StructurizrJsonDocumentationSection
                     {
                         Content = "Content 2",
                         Format = "Markdown",
@@ -73,7 +75,7 @@
         public void WhenDocumentationHasNoSectionsThenSectionsAreEmpty()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
 
             };
@@ -91,11 +93,11 @@
         public void WhenDocumentationHasDecisionsThenDecisionsAreExploded()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
-                Decisions = new List<StructurizrDecision>
+                Decisions = new List<StructurizrJsonDecision>
                 {
-                    new StructurizrDecision
+                    new StructurizrJsonDecision
                     {
                         Content = "Content 1",
                         Date = "2021-01-01",
@@ -103,7 +105,7 @@
                         ElementId = "elementId",
                         Format = "Markdown"
                     },
-                    new StructurizrDecision
+                    new StructurizrJsonDecision
                     {
                         Content = "Content 2",
                         Date = "2021-01-02",
@@ -126,7 +128,7 @@
         public void WhenDocumentationHasNoDecisionsThenDecisionsAreEmpty()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
 
             };
@@ -144,17 +146,17 @@
         public void WhenDocumentationHasImagesThenImagesAreExploded()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
-                Images = new List<StructurizrImage>
+                Images = new List<StructurizrJsonImage>
                 {
-                    new StructurizrImage
+                    new StructurizrJsonImage
                     {
                         Content = "Content 1",
                         Name = "Name 1",
                         Type = "Type 1",
                     },
-                    new StructurizrImage
+                    new StructurizrJsonImage
                     {
                         Content = "Content 2",
                         Name = "Name 2",
@@ -175,7 +177,7 @@
         public void WhenDocumentationHasNoImagesThenImagesAreEmpty()
         {
             // Arrange
-            var structurizrDocumentation = new StructurizrDocumentation
+            var structurizrDocumentation = new StructurizrJsonDocumentation
             {
 
             };

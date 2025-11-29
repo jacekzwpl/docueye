@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -8,9 +9,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenInfrastructureNodeIsDefinedThenAllPropertiesAreMatched()
         {
             // Arrange
-            var infrastructureNodes = new List<StructurizrInfrastructureNode>
+            var infrastructureNodes = new List<StructurizrJsonInfrastructureNode>
             {
-                new StructurizrInfrastructureNode
+                new StructurizrJsonInfrastructureNode
                 {
                     Id = "1",
                     Description = "Description",
@@ -50,9 +51,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         [Test]
         public void WhenMultipleInfrastructureNodesAreDefinedThenAllElementsAreExploded()         {
             // Arrange
-            var infrastructureNodes = new List<StructurizrInfrastructureNode>()
+            var infrastructureNodes = new List<StructurizrJsonInfrastructureNode>()
             {
-                new StructurizrInfrastructureNode
+                new StructurizrJsonInfrastructureNode
                 {
                     Id = "1",
                     Description = "Description",
@@ -66,7 +67,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     { { "key1", "value1" }, { "key2", "value2" }
                     }
                 },
-                new StructurizrInfrastructureNode
+                new StructurizrJsonInfrastructureNode
                 {
                     Id = "2",
                     Description = "Description",
@@ -98,9 +99,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenInfrastructureNodeHasRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var infrastructureNodes = new List<StructurizrInfrastructureNode>
+            var infrastructureNodes = new List<StructurizrJsonInfrastructureNode>
             {
-                new StructurizrInfrastructureNode
+                new StructurizrJsonInfrastructureNode
                 {
                     Id = "1",
                     Description = "Description",
@@ -112,9 +113,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Group = "Group1",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
                     },
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -142,9 +143,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleInfrastructureNodesHaveRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var infrastructureNodes = new List<StructurizrInfrastructureNode>
+            var infrastructureNodes = new List<StructurizrJsonInfrastructureNode>
             {
-                new StructurizrInfrastructureNode
+                new StructurizrJsonInfrastructureNode
                 {
                     Id = "1",
                     Description = "Description",
@@ -156,9 +157,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Group = "Group1",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
                     },
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -172,7 +173,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         }
                     }
                 },
-                new StructurizrInfrastructureNode
+                new StructurizrJsonInfrastructureNode
                 {
                     Id = "2",
                     Description = "Description",
@@ -184,9 +185,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     Group = "Group1",
                     Properties = new Dictionary<string, string>() { { "key1", "value1" }, { "key2", "value2" }
                     },
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "2",
                             SourceId = "1",

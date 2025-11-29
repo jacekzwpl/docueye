@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -8,7 +9,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenModelIsEmptyThenNoElementsAreExploded()
         {
             // Arrange
-            var model = new StructurizrModel();
+            var model = new StructurizrJsonModel();
             var exloder = new ModelExploder(this.mapper);
 
             // Act
@@ -23,7 +24,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenModelIsNullThenNoElementsAreExploded()
         {
             // Arrange
-            StructurizrModel? model = null;
+            StructurizrJsonModel? model = null;
             var exloder = new ModelExploder(this.mapper);
 
             // Act
@@ -38,41 +39,41 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenModelElementsAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var model = new StructurizrModel
+            var model = new StructurizrJsonModel
             {
-                SoftwareSystems = new List<StructurizrSoftwareSystem>
+                SoftwareSystems = new List<StructurizrJsonSoftwareSystem>
                 {
-                    new StructurizrSoftwareSystem
+                    new StructurizrJsonSoftwareSystem
                     {
                         Id = "1",
                         Name = "SoftwareSystem",
-                        Relationships = new List<StructurizrRelationship>
+                        Relationships = new List<StructurizrJsonRelationship>
                         {
-                            new StructurizrRelationship
+                            new StructurizrJsonRelationship
                             {
                                 Id = "1",
                                 SourceId = "1",
                                 DestinationId = "2"
                             }
                         },
-                        Containers = new List<StructurizrContainer>
+                        Containers = new List<StructurizrJsonContainer>
                         {
-                            new StructurizrContainer
+                            new StructurizrJsonContainer
                             {
                                 Id = "4",
                                 Name = "Container",
-                                Relationships = new List<StructurizrRelationship>
+                                Relationships = new List<StructurizrJsonRelationship>
                                 {
-                                    new StructurizrRelationship
+                                    new StructurizrJsonRelationship
                                     {
                                         Id = "2",
                                         SourceId = "4",
                                         DestinationId = "5"
                                     }
                                 },
-                                Components = new List<StructurizrComponent>
+                                Components = new List<StructurizrJsonComponent>
                                 {
-                                    new StructurizrComponent
+                                    new StructurizrJsonComponent
                                     {
                                         Id = "5",
                                         Name = "Component"
@@ -82,15 +83,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         }
                     }
                 },
-                People = new List<StructurizrPerson>
+                People = new List<StructurizrJsonPerson>
                 {
-                    new StructurizrPerson
+                    new StructurizrJsonPerson
                     {
                         Id = "2",
                         Name = "Person",
-                        Relationships = new List<StructurizrRelationship>
+                        Relationships = new List<StructurizrJsonRelationship>
                         {
-                            new StructurizrRelationship
+                            new StructurizrJsonRelationship
                             {
                                 Id = "3",
                                 SourceId = "2",
@@ -99,15 +100,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         }
                     }
                 },
-                DeploymentNodes = new List<StructurizrDeploymentNode>
+                DeploymentNodes = new List<StructurizrJsonDeploymentNode>
                 {
-                    new StructurizrDeploymentNode
+                    new StructurizrJsonDeploymentNode
                     {
                         Id = "3",
                         Name = "DeploymentNode",
-                        Relationships = new List<StructurizrRelationship>
+                        Relationships = new List<StructurizrJsonRelationship>
                         {
-                            new StructurizrRelationship
+                            new StructurizrJsonRelationship
                             {
                                 Id = "1",
                                 SourceId = "1",

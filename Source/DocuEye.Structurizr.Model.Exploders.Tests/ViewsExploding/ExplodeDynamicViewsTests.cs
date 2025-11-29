@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.ViewsKeeper.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
 {
@@ -8,9 +9,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenDynamicViewExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var views = new List<StructurizrDynamicView>
+            var views = new List<StructurizrJsonDynamicView>
             {
-                new StructurizrDynamicView
+                new StructurizrJsonDynamicView
                 {
                     Title = "Dynamic View",
                     Description = "This is a Dynamic View",
@@ -18,7 +19,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     PaperSize = "A4",
                     ElementId = "1",
                     ExternalBoundariesVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -27,18 +28,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
@@ -79,9 +80,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenMultipleDynamicViewsExistsThenAllViewsAreExploded() 
         {
             // Arrange
-            var views = new List<StructurizrDynamicView>
+            var views = new List<StructurizrJsonDynamicView>
             {
-                new StructurizrDynamicView
+                new StructurizrJsonDynamicView
                 {
                     Title = "Dynamic View 1",
                     Description = "This is a Dynamic View 1",
@@ -89,7 +90,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     PaperSize = "A4",
                     ElementId = "1",
                     ExternalBoundariesVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -98,24 +99,24 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
                     }
                 },
-                new StructurizrDynamicView
+                new StructurizrJsonDynamicView
                 {
                     Title = "Dynamic View 2",
                     Description = "This is a Dynamic View 2",
@@ -123,7 +124,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     PaperSize = "A4",
                     ElementId = "2",
                     ExternalBoundariesVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -132,18 +133,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "2",
                             X = 200,
                             Y = 200
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "2"
                         }

@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.ViewsKeeper.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
 {
@@ -8,16 +9,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenComponentViewExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var views = new List<StructurizrComponentView>
+            var views = new List<StructurizrJsonComponentView>
             {
-                new StructurizrComponentView
+                new StructurizrJsonComponentView
                 {
                     Title = "Component View",
                     Description = "This is a Component View",
                     Key = "ComponentView",
                     PaperSize = "A4",
                     ExternalContainerBoundariesVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -26,18 +27,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
@@ -72,16 +73,16 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenMultipleComponentViewsExistsThenAllViewsAreExploded()
         {
             // Arrange
-            var views = new List<StructurizrComponentView>
+            var views = new List<StructurizrJsonComponentView>
             {
-                new StructurizrComponentView
+                new StructurizrJsonComponentView
                 {
                     Title = "Component View 1",
                     Description = "This is a Component View 1",
                     Key = "ComponentView1",
                     PaperSize = "A4",
                     ExternalContainerBoundariesVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -90,31 +91,31 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "1",
                             X = 100,
                             Y = 100
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "1"
                         }
                     }
                 },
-                new StructurizrComponentView
+                new StructurizrJsonComponentView
                 {
                     Title = "Component View 2",
                     Description = "This is a Component View 2",
                     Key = "ComponentView2",
                     PaperSize = "A4",
                     ExternalContainerBoundariesVisible = true,
-                    AutomaticLayout = new StructurizrAutomaticLayout
+                    AutomaticLayout = new StructurizrJsonAutomaticLayout
                     {
                         Implementation = "Hierarchical",
                         RankDirection = "TopBottom",
@@ -123,18 +124,18 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                         EdgeSeparation = 300,
                         Vertices = true
                     },
-                    Elements = new List<StructurizrElementView>
+                    Elements = new List<StructurizrJsonElementView>
                     {
-                        new StructurizrElementView
+                        new StructurizrJsonElementView
                         {
                             Id = "2",
                             X = 200,
                             Y = 200
                         }
                     },
-                    Relationships = new List<StructurizrRelationshipView>
+                    Relationships = new List<StructurizrJsonRelationshipView>
                     {
-                        new StructurizrRelationshipView
+                        new StructurizrJsonRelationshipView
                         {
                             Id = "2"
                         }

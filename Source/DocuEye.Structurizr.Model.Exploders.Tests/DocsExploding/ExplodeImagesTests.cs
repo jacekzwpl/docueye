@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocuEye.Structurizr.Json.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
         public void WhenImageExsistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var images = new List<StructurizrImage>
+            var images = new List<StructurizrJsonImage>
             {
-                new StructurizrImage
+                new StructurizrJsonImage
                 {
                     Content = "base64",
                     Name = "image",
@@ -39,15 +40,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
         public void WhenMultipleImagesExistsThenAllElementsAreExploded()
         {
             // Arrange
-            var images = new List<StructurizrImage>
+            var images = new List<StructurizrJsonImage>
             {
-                new StructurizrImage
+                new StructurizrJsonImage
                 {
                     Content = "base64",
                     Name = "image",
                     Type = "png",
                 },
-                new StructurizrImage
+                new StructurizrJsonImage
                 {
                     Content = "base64",
                     Name = "image",

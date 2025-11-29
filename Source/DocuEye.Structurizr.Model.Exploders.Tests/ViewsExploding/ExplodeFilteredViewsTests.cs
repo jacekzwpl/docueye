@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.ViewsKeeper.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
 {
@@ -8,9 +9,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenFilteredViewExistsThenAllPropertiesAreMatched()
         {
             // Arrange
-            var views = new List<StructurizrFilteredView>
+            var views = new List<StructurizrJsonFilteredView>
             {
-                new StructurizrFilteredView
+                new StructurizrJsonFilteredView
                 {
                     Title = "Filtered View",
                     Description = "This is a Filtered View",
@@ -42,9 +43,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
         public void WhenMultipleFilteredViewsExistsThenAllViewsAreExploded()
         {
             // Arrange
-            var views = new List<StructurizrFilteredView>
+            var views = new List<StructurizrJsonFilteredView>
             {
-                new StructurizrFilteredView
+                new StructurizrJsonFilteredView
                 {
                     Title = "Filtered View 1",
                     Description = "This is a Filtered View 1",
@@ -53,7 +54,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     BaseViewKey = "BaseView1",
                     Tags = new List<string> { "Tag1", "Tag2" }
                 },
-                new StructurizrFilteredView
+                new StructurizrJsonFilteredView
                 {
                     Title = "Filtered View 2",
                     Description = "This is a Filtered View 2",

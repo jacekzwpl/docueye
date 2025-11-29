@@ -1,4 +1,5 @@
 ﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.Structurizr.Json.Model;
 
 namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
 {
@@ -8,9 +9,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenSoftwareSystemIsDefinedThenAllPropertiesAreMatched()
         {
             // Arrange
-            var softwareSystems = new List<StructurizrSoftwareSystem>()
+            var softwareSystems = new List<StructurizrJsonSoftwareSystem>()
             {
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "1",
                     Name = "SoftwareSystem",
@@ -49,9 +50,9 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleSoftwareSystemsAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var softwareSystems = new List<StructurizrSoftwareSystem>()
+            var softwareSystems = new List<StructurizrJsonSoftwareSystem>()
             {
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "1",
                     Name = "SoftwareSystem1",
@@ -64,7 +65,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         { "Property2", "Value2" }
                     }
                 },
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "2",
                     Name = "SoftwareSystem2",
@@ -91,34 +92,34 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenChildElementsAreDefinedThenAllElementsAreExploded()
         {
             // Arrange
-            var softwareSystems = new List<StructurizrSoftwareSystem>()
+            var softwareSystems = new List<StructurizrJsonSoftwareSystem>()
             {
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "1",
                     Name = "SoftwareSystem1",
-                    Containers = new List<StructurizrContainer>
+                    Containers = new List<StructurizrJsonContainer>
                     {
-                        new StructurizrContainer
+                        new StructurizrJsonContainer
                         {
                             Id = "1",
                             Name = "Container1"
                         }
                     }
                 },
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "2",
                     Name = "SoftwareSystem2",
-                    Containers = new List<StructurizrContainer>
+                    Containers = new List<StructurizrJsonContainer>
                     {
-                        new StructurizrContainer
+                        new StructurizrJsonContainer
                         {
                             Id = "2",
                             Name = "Container2",
-                            Components = new List<StructurizrComponent>
+                            Components = new List<StructurizrJsonComponent>
                             {
-                                new StructurizrComponent
+                                new StructurizrJsonComponent
                                 {
                                     Id = "1",
                                     Name = "Component1"
@@ -141,15 +142,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenSoftwareSystemHasRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var softwareSystems = new List<StructurizrSoftwareSystem>()
+            var softwareSystems = new List<StructurizrJsonSoftwareSystem>()
             {
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "1",
                     Name = "SoftwareSystem1",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -190,15 +191,15 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         public void WhenMultipleSoftwareSystemsHaveRelationshipsThenAllRelationshipsAreExploded()
         {
             // Arrange
-            var softwareSystems = new List<StructurizrSoftwareSystem>()
+            var softwareSystems = new List<StructurizrJsonSoftwareSystem>()
             {
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "1",
                     Name = "SoftwareSystem1",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "1",
                             SourceId = "1",
@@ -214,13 +215,13 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                         }
                     }
                 },
-                new StructurizrSoftwareSystem
+                new StructurizrJsonSoftwareSystem
                 {
                     Id = "2",
                     Name = "SoftwareSystem2",
-                    Relationships = new List<StructurizrRelationship>
+                    Relationships = new List<StructurizrJsonRelationship>
                     {
-                        new StructurizrRelationship
+                        new StructurizrJsonRelationship
                         {
                             Id = "2",
                             SourceId = "2",
