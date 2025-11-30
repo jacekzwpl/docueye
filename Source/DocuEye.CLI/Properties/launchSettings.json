@@ -32,6 +32,10 @@
       "commandName": "Project",
       "commandLineArgs": "workspace delete --help"
     },
+    "DocuEye.workspace-delete": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=6456287d-d273-4b3f-824c-ea8af381785f"
+    },
     "DocuEye.openapi-import-help": {
       "commandName": "Project",
       "commandLineArgs": "openapi import --help"

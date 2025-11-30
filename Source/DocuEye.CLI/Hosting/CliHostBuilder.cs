@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.CLI.ApiClient;
+using DocuEye.CLI.Application.Services.DeleteWorkspace;
 using DocuEye.CLI.Application.Services.DSL;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using DocuEye.Structurizr.Model.Exploders.Mappings;
@@ -47,6 +48,7 @@ namespace DocuEye.CLI.Hosting
 
             builder.Services.AddTransient<IWorkspaceParserService, WorkspaceParserService>();
             builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
+            builder.Services.AddTransient<IDeleteWorkspaceService, DeleteWorkspaceService>();
             return builder.Build();
         }
     }

@@ -78,6 +78,12 @@ namespace DocuEye.CLI
             string adminToken = parseResult.GetValue(CommandLineCommonOptions.AdminTokenOption)!;
             FileInfo worspaceFile = parseResult.GetValue(this.workspaceImportFileOption)!;
             string importMode = parseResult.GetValue<string>(this.workspaceImportModeOption)!;
+            string workspaceId = parseResult.GetValue<string>(this.workspaceImportIdOption)!;
+            string importKey = parseResult.GetValue<string>(this.workspaceImportKeyOption)!;
+            string sourceLink = parseResult.GetValue<string>(this.workspaceImportSourceLinkOption)!;
+
+            importKey ??= Guid.NewGuid().ToString();
+
 
             var host = new CliHostBuilder().Build(new CliHostOptions(docueyeAddress, adminToken));
             var importWorkspaceService = host.Services.GetRequiredService<IImportWorkspaceService>();
@@ -92,7 +98,9 @@ namespace DocuEye.CLI
 
                 var converter = new WorkspaceConverter(workspace, worspaceFile.DirectoryName);
                 var jsonWorkspace = converter.Convert();
-                await importWorkspaceService.Import(new ImportWorkspaceParameters("", jsonWorkspace, "", ""));
+                await importWorkspaceService.Import(
+                    new ImportWorkspaceParameters(
+                        importKey, jsonWorkspace, workspaceId, sourceLink));
             }
 
             return 0;
