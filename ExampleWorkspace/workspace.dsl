@@ -1,4 +1,4 @@
-workspace "Example Online Shop" "DEBUGTEST Example DocuEye workspace" {
+workspace "Example Online Shop 1" "DEBUGTEST Example DocuEye workspace" {
     
     !identifiers hierarchical
 
@@ -160,7 +160,7 @@ workspace "Example Online Shop" "DEBUGTEST Example DocuEye workspace" {
             description "Summarises how the sign in feature works in the single-page application."
         }
 
-        themes default
+        # themes default
     }
     
 }
