@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from c:/nCode/Parser/DocuEye.Structurizr.DSL/StructurizrDSL.g4 by ANTLR 4.13.1
+// Generated from c:/nCode/docueye/Source/DocuEye.Structurizr.DSL/StructurizrDSL.g4 by ANTLR 4.13.1
 
 // Unreachable code detected
 #pragma warning disable 0162

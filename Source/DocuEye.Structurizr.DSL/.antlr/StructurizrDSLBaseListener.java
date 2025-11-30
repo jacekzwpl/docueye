@@ -1,4 +1,4 @@
-// Generated from c:/nCode/Parser/DocuEye.Structurizr.DSL/StructurizrDSL.g4 by ANTLR 4.13.1
+// Generated from c:/nCode/docueye/Source/DocuEye.Structurizr.DSL/StructurizrDSL.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -172,18 +172,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPersonBody(StructurizrDSLParser.PersonBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPersonBody(StructurizrDSLParser.PersonBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterElement(StructurizrDSLParser.ElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -191,18 +179,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitElement(StructurizrDSLParser.ElementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterElementBody(StructurizrDSLParser.ElementBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitElementBody(StructurizrDSLParser.ElementBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -220,42 +196,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSoftwareSystemBody(StructurizrDSLParser.SoftwareSystemBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSoftwareSystemBody(StructurizrDSLParser.SoftwareSystemBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSoftwareSystemGroup(StructurizrDSLParser.SoftwareSystemGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSoftwareSystemGroup(StructurizrDSLParser.SoftwareSystemGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSoftwareSystemGroupBody(StructurizrDSLParser.SoftwareSystemGroupBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSoftwareSystemGroupBody(StructurizrDSLParser.SoftwareSystemGroupBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterContainer(StructurizrDSLParser.ContainerContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -263,42 +203,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitContainer(StructurizrDSLParser.ContainerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterContainerBody(StructurizrDSLParser.ContainerBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitContainerBody(StructurizrDSLParser.ContainerBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterContainerGroup(StructurizrDSLParser.ContainerGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitContainerGroup(StructurizrDSLParser.ContainerGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterContainerGroupBody(StructurizrDSLParser.ContainerGroupBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitContainerGroupBody(StructurizrDSLParser.ContainerGroupBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -316,18 +220,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComponentBody(StructurizrDSLParser.ComponentBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComponentBody(StructurizrDSLParser.ComponentBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDeploymentEnvironment(StructurizrDSLParser.DeploymentEnvironmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -335,42 +227,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeploymentEnvironment(StructurizrDSLParser.DeploymentEnvironmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeploymentEnvironmentBody(StructurizrDSLParser.DeploymentEnvironmentBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeploymentEnvironmentBody(StructurizrDSLParser.DeploymentEnvironmentBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeploymentEnvironmentGroup(StructurizrDSLParser.DeploymentEnvironmentGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeploymentEnvironmentGroup(StructurizrDSLParser.DeploymentEnvironmentGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeploymentEnvironmentGroupBody(StructurizrDSLParser.DeploymentEnvironmentGroupBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeploymentEnvironmentGroupBody(StructurizrDSLParser.DeploymentEnvironmentGroupBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -388,42 +244,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeploymentNodeBody(StructurizrDSLParser.DeploymentNodeBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeploymentNodeBody(StructurizrDSLParser.DeploymentNodeBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeploymentNodeGroup(StructurizrDSLParser.DeploymentNodeGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeploymentNodeGroup(StructurizrDSLParser.DeploymentNodeGroupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeploymentNodeGroupBody(StructurizrDSLParser.DeploymentNodeGroupBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeploymentNodeGroupBody(StructurizrDSLParser.DeploymentNodeGroupBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterInfrastructureNode(StructurizrDSLParser.InfrastructureNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -431,18 +251,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInfrastructureNode(StructurizrDSLParser.InfrastructureNodeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInfrastructureNodeBody(StructurizrDSLParser.InfrastructureNodeBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInfrastructureNodeBody(StructurizrDSLParser.InfrastructureNodeBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -460,18 +268,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSoftwareSystemInstanceBody(StructurizrDSLParser.SoftwareSystemInstanceBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSoftwareSystemInstanceBody(StructurizrDSLParser.SoftwareSystemInstanceBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterContainerInstance(StructurizrDSLParser.ContainerInstanceContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -484,18 +280,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterContainerInstanceBody(StructurizrDSLParser.ContainerInstanceBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitContainerInstanceBody(StructurizrDSLParser.ContainerInstanceBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDeploymentGroup(StructurizrDSLParser.DeploymentGroupContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -503,6 +287,66 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeploymentGroup(StructurizrDSLParser.DeploymentGroupContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBulkModelElements(StructurizrDSLParser.BulkModelElementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBulkModelElements(StructurizrDSLParser.BulkModelElementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBulkModelRelationships(StructurizrDSLParser.BulkModelRelationshipsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBulkModelRelationships(StructurizrDSLParser.BulkModelRelationshipsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterModelElementBody(StructurizrDSLParser.ModelElementBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModelElementBody(StructurizrDSLParser.ModelElementBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterModelElementGroup(StructurizrDSLParser.ModelElementGroupContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModelElementGroup(StructurizrDSLParser.ModelElementGroupContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterModelElementGroupBody(StructurizrDSLParser.ModelElementGroupBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModelElementGroupBody(StructurizrDSLParser.ModelElementGroupBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1600,6 +1444,18 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpressionValue(StructurizrDSLParser.ExpressionValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressionValue(StructurizrDSLParser.ExpressionValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterName(StructurizrDSLParser.NameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1828,18 +1684,6 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRelationshipBody(StructurizrDSLParser.RelationshipBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRelationshipBody(StructurizrDSLParser.RelationshipBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRelationshipSource(StructurizrDSLParser.RelationshipSourceContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -2027,6 +1871,18 @@ public class StructurizrDSLBaseListener implements StructurizrDSLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIncludeFileValue(StructurizrDSLParser.IncludeFileValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterModelElementReference(StructurizrDSLParser.ModelElementReferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModelElementReference(StructurizrDSLParser.ModelElementReferenceContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

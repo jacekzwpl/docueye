@@ -1,12 +1,7 @@
 ﻿using DocuEye.CLI;
-using Microsoft.Extensions.Logging;
 using System.CommandLine;
 
 
-var logger = LoggerFactory.Create(config =>
-{
-    config.AddConsole();
-}).CreateLogger("StartupLogger");
 
 var commonOptions = new CommandLineCommonOptions();
 
@@ -22,6 +17,8 @@ openapiCommand.Subcommands.Add(new OpenapiImportCommand(commonOptions));
 // Add subcommands to root command
 rootCommand.Subcommands.Add(workspaceCommand);
 rootCommand.Subcommands.Add(openapiCommand);
+
+
 
 return await rootCommand.Parse(args).InvokeAsync();
 

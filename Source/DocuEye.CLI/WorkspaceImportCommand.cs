@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DocuEye.CLI.Application.Services.DSL;
+using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.CommandLine.Parsing;
 
 namespace DocuEye.CLI
 {
     public class WorkspaceImportCommand : Command
     {
+        Option<FileInfo> workspaceImportFileOption;
+        CommandLineCommonOptions commonOptions;
+
         public WorkspaceImportCommand(CommandLineCommonOptions commonOptions) : base("import", "TODO:OPIS") {
 
+            this.commonOptions = commonOptions;
             Option<string> workspaceImportModeOption = new("--mode", "-m")
             {
                 Description = "Specifies import mode 'dsl' for import from dsl file, 'json; for import from json file.",
@@ -19,7 +21,7 @@ namespace DocuEye.CLI
             };
             workspaceImportModeOption.AcceptOnlyFromAmong("dsl", "json");
 
-            Option<string> workspaceImportFileOption = new("--file", "-f")
+            this.workspaceImportFileOption = new("--file", "-f")
             {
                 Description = "Path to workspace file. Depending on mode option should be path to dsl file or json file.",
                 Required = true
@@ -45,7 +47,7 @@ namespace DocuEye.CLI
             this.Options.Add(commonOptions.DocueyeAddressOption);
             this.Options.Add(commonOptions.AdminTokenOption);
             this.Options.Add(workspaceImportModeOption);
-            this.Options.Add(workspaceImportFileOption);
+            this.Options.Add(this.workspaceImportFileOption);
             this.Options.Add(workspaceImportIdOption);
             this.Options.Add(workspaceImportKeyOption);
             this.Options.Add(workspaceImportSourceLinkOption);
@@ -53,9 +55,31 @@ namespace DocuEye.CLI
             this.SetAction(parseResult => this.Run(parseResult));
         }
 
-        public void Run(ParseResult parseResult)
+        public Task<int> Run(ParseResult parseResult, CancellationToken cancellationToken = default)
         {
+            //if (parseResult.Errors.Count == 0 && parseResult.GetValue(this.commonOptions.DocueyeAddressOption) is string docueyeAddress)
+            //{
+            //    //ReadFile(parsedFile);
+            //    return Task.FromResult(0);
+            //}
 
+            var host = new CliHostBuilder().Build(new CliHostOptions("https://docueye.com", "token"));
+            var workspaceParser = host.Services.GetRequiredService<IWorkspaceParserService>();
+
+            if (parseResult.Errors.Count == 0 && parseResult.GetValue(this.workspaceImportFileOption) is FileInfo parsedFile)
+            {
+                var workspace = workspaceParser.Parse(parsedFile);
+                if (workspace != null) {
+                    return Task.FromResult(0);
+                }
+                return Task.FromResult(1);
+            }
+        
+            foreach (ParseError parseError in parseResult.Errors)
+            {
+                Console.Error.WriteLine(parseError.Message);
+            }
+            return Task.FromResult(1);
         } 
     }
 }

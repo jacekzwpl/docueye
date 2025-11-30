@@ -1,4 +1,4 @@
-// Generated from c:/nCode/Parser/DocuEye.Structurizr.DSL/StructurizrDSL.g4 by ANTLR 4.13.1
+// Generated from c:/nCode/docueye/Source/DocuEye.Structurizr.DSL/StructurizrDSL.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -137,16 +137,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitPerson(StructurizrDSLParser.PersonContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#personBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterPersonBody(StructurizrDSLParser.PersonBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#personBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitPersonBody(StructurizrDSLParser.PersonBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#element}.
 	 * @param ctx the parse tree
 	 */
@@ -156,16 +146,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitElement(StructurizrDSLParser.ElementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#elementBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterElementBody(StructurizrDSLParser.ElementBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#elementBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitElementBody(StructurizrDSLParser.ElementBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#softwareSystem}.
 	 * @param ctx the parse tree
@@ -177,36 +157,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitSoftwareSystem(StructurizrDSLParser.SoftwareSystemContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#softwareSystemBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterSoftwareSystemBody(StructurizrDSLParser.SoftwareSystemBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#softwareSystemBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitSoftwareSystemBody(StructurizrDSLParser.SoftwareSystemBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#softwareSystemGroup}.
-	 * @param ctx the parse tree
-	 */
-	void enterSoftwareSystemGroup(StructurizrDSLParser.SoftwareSystemGroupContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#softwareSystemGroup}.
-	 * @param ctx the parse tree
-	 */
-	void exitSoftwareSystemGroup(StructurizrDSLParser.SoftwareSystemGroupContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#softwareSystemGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterSoftwareSystemGroupBody(StructurizrDSLParser.SoftwareSystemGroupBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#softwareSystemGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitSoftwareSystemGroupBody(StructurizrDSLParser.SoftwareSystemGroupBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#container}.
 	 * @param ctx the parse tree
 	 */
@@ -216,36 +166,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitContainer(StructurizrDSLParser.ContainerContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#containerBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterContainerBody(StructurizrDSLParser.ContainerBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#containerBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitContainerBody(StructurizrDSLParser.ContainerBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#containerGroup}.
-	 * @param ctx the parse tree
-	 */
-	void enterContainerGroup(StructurizrDSLParser.ContainerGroupContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#containerGroup}.
-	 * @param ctx the parse tree
-	 */
-	void exitContainerGroup(StructurizrDSLParser.ContainerGroupContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#containerGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterContainerGroupBody(StructurizrDSLParser.ContainerGroupBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#containerGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitContainerGroupBody(StructurizrDSLParser.ContainerGroupBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#component}.
 	 * @param ctx the parse tree
@@ -257,16 +177,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitComponent(StructurizrDSLParser.ComponentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#componentBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterComponentBody(StructurizrDSLParser.ComponentBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#componentBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitComponentBody(StructurizrDSLParser.ComponentBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentEnvironment}.
 	 * @param ctx the parse tree
 	 */
@@ -276,36 +186,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeploymentEnvironment(StructurizrDSLParser.DeploymentEnvironmentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentEnvironmentBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeploymentEnvironmentBody(StructurizrDSLParser.DeploymentEnvironmentBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#deploymentEnvironmentBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeploymentEnvironmentBody(StructurizrDSLParser.DeploymentEnvironmentBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentEnvironmentGroup}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeploymentEnvironmentGroup(StructurizrDSLParser.DeploymentEnvironmentGroupContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#deploymentEnvironmentGroup}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeploymentEnvironmentGroup(StructurizrDSLParser.DeploymentEnvironmentGroupContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentEnvironmentGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeploymentEnvironmentGroupBody(StructurizrDSLParser.DeploymentEnvironmentGroupBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#deploymentEnvironmentGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeploymentEnvironmentGroupBody(StructurizrDSLParser.DeploymentEnvironmentGroupBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentNode}.
 	 * @param ctx the parse tree
@@ -317,36 +197,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitDeploymentNode(StructurizrDSLParser.DeploymentNodeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentNodeBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeploymentNodeBody(StructurizrDSLParser.DeploymentNodeBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#deploymentNodeBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeploymentNodeBody(StructurizrDSLParser.DeploymentNodeBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentNodeGroup}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeploymentNodeGroup(StructurizrDSLParser.DeploymentNodeGroupContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#deploymentNodeGroup}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeploymentNodeGroup(StructurizrDSLParser.DeploymentNodeGroupContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentNodeGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeploymentNodeGroupBody(StructurizrDSLParser.DeploymentNodeGroupBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#deploymentNodeGroupBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeploymentNodeGroupBody(StructurizrDSLParser.DeploymentNodeGroupBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#infrastructureNode}.
 	 * @param ctx the parse tree
 	 */
@@ -356,16 +206,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInfrastructureNode(StructurizrDSLParser.InfrastructureNodeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#infrastructureNodeBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterInfrastructureNodeBody(StructurizrDSLParser.InfrastructureNodeBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#infrastructureNodeBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitInfrastructureNodeBody(StructurizrDSLParser.InfrastructureNodeBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#softwareSystemInstance}.
 	 * @param ctx the parse tree
@@ -377,16 +217,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitSoftwareSystemInstance(StructurizrDSLParser.SoftwareSystemInstanceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#softwareSystemInstanceBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterSoftwareSystemInstanceBody(StructurizrDSLParser.SoftwareSystemInstanceBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#softwareSystemInstanceBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitSoftwareSystemInstanceBody(StructurizrDSLParser.SoftwareSystemInstanceBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#containerInstance}.
 	 * @param ctx the parse tree
 	 */
@@ -397,16 +227,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitContainerInstance(StructurizrDSLParser.ContainerInstanceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#containerInstanceBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterContainerInstanceBody(StructurizrDSLParser.ContainerInstanceBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#containerInstanceBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitContainerInstanceBody(StructurizrDSLParser.ContainerInstanceBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#deploymentGroup}.
 	 * @param ctx the parse tree
 	 */
@@ -416,6 +236,56 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeploymentGroup(StructurizrDSLParser.DeploymentGroupContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link StructurizrDSLParser#bulkModelElements}.
+	 * @param ctx the parse tree
+	 */
+	void enterBulkModelElements(StructurizrDSLParser.BulkModelElementsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link StructurizrDSLParser#bulkModelElements}.
+	 * @param ctx the parse tree
+	 */
+	void exitBulkModelElements(StructurizrDSLParser.BulkModelElementsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link StructurizrDSLParser#bulkModelRelationships}.
+	 * @param ctx the parse tree
+	 */
+	void enterBulkModelRelationships(StructurizrDSLParser.BulkModelRelationshipsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link StructurizrDSLParser#bulkModelRelationships}.
+	 * @param ctx the parse tree
+	 */
+	void exitBulkModelRelationships(StructurizrDSLParser.BulkModelRelationshipsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link StructurizrDSLParser#modelElementBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterModelElementBody(StructurizrDSLParser.ModelElementBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link StructurizrDSLParser#modelElementBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitModelElementBody(StructurizrDSLParser.ModelElementBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link StructurizrDSLParser#modelElementGroup}.
+	 * @param ctx the parse tree
+	 */
+	void enterModelElementGroup(StructurizrDSLParser.ModelElementGroupContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link StructurizrDSLParser#modelElementGroup}.
+	 * @param ctx the parse tree
+	 */
+	void exitModelElementGroup(StructurizrDSLParser.ModelElementGroupContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link StructurizrDSLParser#modelElementGroupBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterModelElementGroupBody(StructurizrDSLParser.ModelElementGroupBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link StructurizrDSLParser#modelElementGroupBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitModelElementGroupBody(StructurizrDSLParser.ModelElementGroupBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#views}.
 	 * @param ctx the parse tree
@@ -1327,6 +1197,16 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitEnvironmentReference(StructurizrDSLParser.EnvironmentReferenceContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link StructurizrDSLParser#expressionValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionValue(StructurizrDSLParser.ExpressionValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link StructurizrDSLParser#expressionValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionValue(StructurizrDSLParser.ExpressionValueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#name}.
 	 * @param ctx the parse tree
 	 */
@@ -1517,16 +1397,6 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 */
 	void exitRelationship(StructurizrDSLParser.RelationshipContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link StructurizrDSLParser#relationshipBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterRelationshipBody(StructurizrDSLParser.RelationshipBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link StructurizrDSLParser#relationshipBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitRelationshipBody(StructurizrDSLParser.RelationshipBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link StructurizrDSLParser#relationshipSource}.
 	 * @param ctx the parse tree
 	 */
@@ -1686,4 +1556,14 @@ public interface StructurizrDSLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIncludeFileValue(StructurizrDSLParser.IncludeFileValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link StructurizrDSLParser#modelElementReference}.
+	 * @param ctx the parse tree
+	 */
+	void enterModelElementReference(StructurizrDSLParser.ModelElementReferenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link StructurizrDSLParser#modelElementReference}.
+	 * @param ctx the parse tree
+	 */
+	void exitModelElementReference(StructurizrDSLParser.ModelElementReferenceContext ctx);
 }
