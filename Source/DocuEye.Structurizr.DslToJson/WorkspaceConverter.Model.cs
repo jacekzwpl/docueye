@@ -352,6 +352,8 @@ namespace DocuEye.Structurizr.DslToJson
                     Technology = dslRelationship.Technology,
                     LinkedRelationshipId = dslRelationship.LinkedRelationshipModelId
                 };
+                if(!jsonRelationship.Properties.ContainsKey(DslPropertyNames.DslIdProperty))
+                    jsonRelationship.Properties.Add(DslPropertyNames.DslIdProperty, dslRelationship.Identifier);
                 relationships.Add(jsonRelationship);
             }
 

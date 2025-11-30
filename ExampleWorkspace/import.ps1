@@ -23,20 +23,20 @@ Param(
 #export workspace to json format
 docker run -it --rm -v "$($PWD):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
 #import workspace to DocuEye
-if(!$useDotNetTool) {
-docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
---import=workspace  `
---docueyeAddress="$docueyeAddress"  `
---adminToken="$adminToken"  `
---importKey="$importKey"  `
---workspaceId="$workspaceId"  `
---workspaceFile=./import/workspace.json
-}else {
-docueye --import=workspace  `
---docueyeAddress="$docueyeAddress"  `
---adminToken="$adminToken"  `
---importKey="$importKey"  `
---workspaceId="$workspaceId"  `
---workspaceFile=workspace.json
-}
+# if(!$useDotNetTool) {
+# docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
+# --import=workspace  `
+# --docueyeAddress="$docueyeAddress"  `
+# --adminToken="$adminToken"  `
+# --importKey="$importKey"  `
+# --workspaceId="$workspaceId"  `
+# --workspaceFile=./import/workspace.json
+# }else {
+# docueye --import=workspace  `
+# --docueyeAddress="$docueyeAddress"  `
+# --adminToken="$adminToken"  `
+# --importKey="$importKey"  `
+# --workspaceId="$workspaceId"  `
+# --workspaceFile=workspace.json
+# }
 

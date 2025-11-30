@@ -6,6 +6,7 @@ using DocuEye.Structurizr.DslToJson;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
 using System.CommandLine.Parsing;
+using System.Text.Json;
 
 namespace DocuEye.CLI
 {
@@ -98,6 +99,10 @@ namespace DocuEye.CLI
 
                 var converter = new WorkspaceConverter(workspace, worspaceFile.DirectoryName);
                 var jsonWorkspace = converter.Convert();
+                
+                var jsonText = JsonSerializer.Serialize(jsonWorkspace);
+                File.WriteAllText("C:\\nCode\\docueye\\temp\\out1\\test1.json", jsonText);
+
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
                         importKey, jsonWorkspace, workspaceId, sourceLink));

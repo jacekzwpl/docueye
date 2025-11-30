@@ -436,12 +436,15 @@ namespace DocuEye.Structurizr.DslToJson
                     || o.Type == StructurizrModelElementType.Container)
                     ) && elementIds.Contains(o.Identifier));
 
+            var contextElement = this.dslWorkspace.Model.Elements
+                .Where(o => o.Identifier == dslView.ElementIdentifier)
+                .FirstOrDefault();
             return new StructurizrJsonContainerView()
             {
                 Key = dslView.Identifier,
                 Title = dslView.Title,
                 Description = dslView.Description,
-                SoftwareSystemId = dslView.ElementIdentifier,
+                SoftwareSystemId = contextElement?.ModelId,
                 AutomaticLayout = this.ConvertAutomaticLayout(dslView.AutomaticLayout),
                 Elements = elements.Select(o => new StructurizrJsonElementView()
                 {
