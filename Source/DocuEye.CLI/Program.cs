@@ -1,26 +1,14 @@
 ﻿using DocuEye.CLI;
+using DocuEye.CLI.Commands;
 using System.CommandLine;
 
 
 
-var commonOptions = new CommandLineCommonOptions();
+
 
 // Create root command
-RootCommand rootCommand = new("Test opis");
-// Create workspace command
-var workspaceCommand = new WorkspaceCommand();
-workspaceCommand.Subcommands.Add(new WorkspaceImportCommand(commonOptions));
-workspaceCommand.Subcommands.Add(new WorkspaceDeleteCommand(commonOptions));
-// Create openapi command
-var openapiCommand = new OpenapiCommand();
-openapiCommand.Subcommands.Add(new OpenapiImportCommand(commonOptions));
-// Add subcommands to root command
-rootCommand.Subcommands.Add(workspaceCommand);
-rootCommand.Subcommands.Add(openapiCommand);
-
-
-
-return await rootCommand.Parse(args).InvokeAsync();
+var command = new MainCommand();
+return await command.Parse(args).InvokeAsync();
 
 
 /*

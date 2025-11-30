@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocuEye.CLI
+namespace DocuEye.CLI.Commands
 {
     public class OpenapiImportCommand : Command
     {
-        public OpenapiImportCommand(CommandLineCommonOptions commonOptions) : base("import", "Imports or updates element based on OpenAPI specification file.")
+        public OpenapiImportCommand() : base("import", "Imports or updates element based on OpenAPI specification file.")
         {
 
             Option<string> openApiImportFileOption = new("--file", "-f")
@@ -34,8 +34,8 @@ namespace DocuEye.CLI
                 Required = true
             };
 
-            this.Options.Add(commonOptions.DocueyeAddressOption);
-            this.Options.Add(commonOptions.AdminTokenOption);
+            this.Options.Add(CommandLineCommonOptions.DocueyeAddressOption);
+            this.Options.Add(CommandLineCommonOptions.AdminTokenOption);
             this.Options.Add(openApiImportFileOption);
             this.Options.Add(openApiImportWorkspaceIdOption);
             this.Options.Add(openApiImportElementIdOption);

@@ -1,12 +1,15 @@
-﻿using DocuEye.CLI.ApiClient;
+﻿using AutoMapper;
+using DocuEye.CLI.ApiClient;
 using DocuEye.CLI.Application.Services.DSL;
+using DocuEye.CLI.Application.Services.ImportWorkspace;
+using DocuEye.Structurizr.Model.Exploders.Mappings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 
-namespace DocuEye.CLI
+namespace DocuEye.CLI.Hosting
 {
     public class CliHostBuilder
     {
@@ -29,7 +32,21 @@ namespace DocuEye.CLI
                     o.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", options.AdminToken);
                 }
             );
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+
+                mc.AddProfile(new StructurizrDocumentationToApiModelMappingProfile());
+                mc.AddProfile(new StructurizrModelToApiMappingProfile());
+                mc.AddProfile(new StructurizrViewsToApiMappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+
+
             builder.Services.AddTransient<IWorkspaceParserService, WorkspaceParserService>();
+            builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
             return builder.Build();
         }
     }

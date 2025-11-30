@@ -50,7 +50,9 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
 
         /// <inheritdoc />
         public async Task<bool> Import(ImportWorkspaceParameters parameters)
-        {        
+        {
+            var workspaceData = parameters.WorkspaceData;
+            /*
             this.logger.LogInformation("Reading workspace data file");
             if (!File.Exists(parameters.WorkspaceFilePath))
             {
@@ -68,7 +70,7 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
             {
                 this.logger.LogError(string.Format("Workspace data parsing failed"));
                 return false;
-            }
+            }*/
             this.logger.LogInformation("Detecting workspace contents");
             var modelExploder = new ModelExploder(this.mapper);
             var viewsExploder = new ViewsExploder(this.mapper);

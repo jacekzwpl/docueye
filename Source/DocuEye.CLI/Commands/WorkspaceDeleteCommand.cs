@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocuEye.CLI.Commands;
+using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace DocuEye.CLI
 {
     public class WorkspaceDeleteCommand : Command
     {
-        public WorkspaceDeleteCommand(CommandLineCommonOptions commonOptions) : base("delete", "TODO opis")
+        public WorkspaceDeleteCommand() : base("delete", "TODO opis")
         {
 
             Option<string> workspaceDeleteWorkspaceIdOption = new("--id", "-i")
@@ -19,8 +20,8 @@ namespace DocuEye.CLI
             };
 
 
-            this.Options.Add(commonOptions.DocueyeAddressOption);
-            this.Options.Add(commonOptions.AdminTokenOption);
+            this.Options.Add(CommandLineCommonOptions.DocueyeAddressOption);
+            this.Options.Add(CommandLineCommonOptions.AdminTokenOption);
             this.Options.Add(workspaceDeleteWorkspaceIdOption);
             this.SetAction(parseResult => this.Run(parseResult));
         }

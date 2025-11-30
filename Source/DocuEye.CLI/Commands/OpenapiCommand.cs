@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocuEye.CLI
+namespace DocuEye.CLI.Commands
 {
-    public class WorkspaceCommand : Command
+    public class OpenapiCommand : Command
     {
-        public WorkspaceCommand() : base("workspace", "TODO opis")
+        public OpenapiCommand() : base("openapi", "Commands for working with OpenAPI specifications.")
         {
+
         }
     }
 }

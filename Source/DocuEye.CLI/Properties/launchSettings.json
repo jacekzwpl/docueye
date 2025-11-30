@@ -22,7 +22,7 @@
     },
     "DocuEye.workspace-import-dsl": {
       "commandName": "Project",
-      "commandLineArgs": "workspace import --docueye-address=https://localhost:7041 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
     },
     "DocuEye.workspace-import-help": {
       "commandName": "Project",
