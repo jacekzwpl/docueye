@@ -24,6 +24,10 @@
       "commandName": "Project",
       "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
     },
+    "DocuEye.workspace-import-json": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest1 --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.json\" --mode=json"
+    },
     "DocuEye.workspace-import-help": {
       "commandName": "Project",
       "commandLineArgs": "workspace import --help"

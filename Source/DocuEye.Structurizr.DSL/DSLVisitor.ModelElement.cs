@@ -442,6 +442,7 @@ namespace DocuEye.Structurizr.DSL
                                 infrastructureNodeContext.Start.Line,
                                 infrastructureNodeContext.Start.Column));
                     }
+
                     this.workspace.Model.AddModelElement(infrastructureNode);
                 }
 
@@ -481,6 +482,7 @@ namespace DocuEye.Structurizr.DSL
                                 containerInstanceContext.Start.Line,
                                 containerInstanceContext.Start.Column));
                     }
+                    containerInstance.DeploymentEnvironmentIdentifier = element.DeploymentEnvironmentIdentifier;
                     this.workspace.Model.AddModelElement(containerInstance);
                 }
 

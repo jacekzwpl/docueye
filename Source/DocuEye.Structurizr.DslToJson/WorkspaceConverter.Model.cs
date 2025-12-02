@@ -158,6 +158,7 @@ namespace DocuEye.Structurizr.DslToJson
         public StructurizrJsonSoftwareSystemInstance ConvertSoftwareSystemInstance(StructurizrModelElement element)
         {
             var groups = this.ResolveElementGroups(element.GroupId);
+            
             var environmentName = this.dslWorkspace.Model.DeploymentEnvironments.Where(o => o.Identifier == element.DeploymentEnvironmentIdentifier).FirstOrDefault()?.Name;
             var jsonSoftwareSystemInstance = new StructurizrJsonSoftwareSystemInstance()
             {
@@ -175,12 +176,15 @@ namespace DocuEye.Structurizr.DslToJson
         public StructurizrJsonInfrastructureNode ConvertInfrastructureNode(StructurizrModelElement element)
         {
             var groups = this.ResolveElementGroups(element.GroupId);
+            
+            var environmentName = this.dslWorkspace.Model.DeploymentEnvironments.Where(o => o.Identifier == element.DeploymentEnvironmentIdentifier).FirstOrDefault()?.Name;
             var jsonInfrastructureNode = new StructurizrJsonInfrastructureNode()
             {
                 Id = element.ModelId,
                 Name = element.Name,
                 Description = element.Description,
                 Technology = element.Technology,
+                Environment = environmentName,
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),

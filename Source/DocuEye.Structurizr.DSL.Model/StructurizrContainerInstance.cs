@@ -10,6 +10,7 @@ namespace DocuEye.Structurizr.DSL.Model
         public string Identifier { get; }
         public string ContainerIdentifier { get; set; }
         public string DeploymentNodeIdentifier { get; set; }
+        public string DeploymentEnvironmentIdentifier { get; set; }
         public string? Description { get; set; }
         public string? Url { get; set; }
         public string? GroupId { get; set; }

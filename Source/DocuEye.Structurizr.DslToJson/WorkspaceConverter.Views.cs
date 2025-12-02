@@ -373,13 +373,15 @@ namespace DocuEye.Structurizr.DslToJson
                     || o.Type == StructurizrModelElementType.CustomElement)
                     ) && elementIds.Contains(o.Identifier));
 
-
+            var contextElement = this.dslWorkspace.Model.Elements
+                .Where(o => o.Identifier == dslView.ElementIdentifier)
+                .FirstOrDefault();
             var view = new StructurizrJsonSystemContextView()
             {
                 Key = dslView.Identifier,
                 Title = dslView.Title,
                 Description = dslView.Description,
-                SoftwareSystemId = dslView.ElementIdentifier,
+                SoftwareSystemId = contextElement?.ModelId,
                 EnterpriseBoundaryVisible = true,
                 AutomaticLayout = this.ConvertAutomaticLayout(dslView.AutomaticLayout),
                 Elements = elements.Select(o => new StructurizrJsonElementView()
@@ -426,6 +428,8 @@ namespace DocuEye.Structurizr.DslToJson
 
             elementIds.AddRange(sourcesIds);
             elementIds.AddRange(destinationsIds);
+            //remove context element from the list
+            elementIds = elementIds.Where(o => o != dslView.ElementIdentifier).Distinct().ToList();
 
             var (elements, relationships) = this.DiscoverElementsAndRelationships(
                 dslView.Include,
@@ -495,6 +499,12 @@ namespace DocuEye.Structurizr.DslToJson
             elementIds.AddRange(sourcesIds);
             elementIds.AddRange(destinationsIds);
 
+            //remove context element from the list
+            elementIds = elementIds.Where(o => o != dslView.ElementIdentifier).Distinct().ToList();
+
+            var contextElement = this.dslWorkspace.Model.Elements
+                .Where(o => o.Identifier == dslView.ElementIdentifier)
+                .FirstOrDefault();
             var (elements, relationships) = this.DiscoverElementsAndRelationships(
                 dslView.Include,
                 dslView.Exclude,
@@ -510,7 +520,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Key = dslView.Identifier,
                 Title = dslView.Title,
                 Description = dslView.Description,
-                ContainerId = dslView.ElementIdentifier,
+                ContainerId = contextElement?.ModelId,
                 AutomaticLayout = this.ConvertAutomaticLayout(dslView.AutomaticLayout),
                 Elements = elements.Select(o => new StructurizrJsonElementView()
                 {
@@ -586,13 +596,15 @@ namespace DocuEye.Structurizr.DslToJson
                 }).ToArray();
 
 
-
+            var contextElement = this.dslWorkspace.Model.Elements
+                .Where(o => o.Identifier == dslView.ElementIdentifier)
+                .FirstOrDefault();
             return new StructurizrJsonDynamicView()
             {
                 Key = dslView.Identifier,
                 Title = dslView.Title,
                 Description = dslView.Description,
-                ElementId = dslView.ElementIdentifier,
+                ElementId = contextElement?.ModelId,
                 Relationships = relationships.ToArray(),
                 Elements = elements,
                 ExternalBoundariesVisible = true,
@@ -602,6 +614,8 @@ namespace DocuEye.Structurizr.DslToJson
 
         public StructurizrJsonDeploymentView ConvertDeploymentView(StructurizrDeploymentView dslView)
         {
+
+            //var environment = this.dslWorkspace.Model.DeploymentEnvironments.FirstOrDefault(o => o.Name == dslView.Environment);
 
             var deploymentNodesIds = this.dslWorkspace.Model.Elements
                     .Where(o =>

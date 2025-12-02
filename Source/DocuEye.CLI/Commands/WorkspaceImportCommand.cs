@@ -3,10 +3,12 @@ using DocuEye.CLI.Application.Services.ImportWorkspace;
 using DocuEye.CLI.Commands;
 using DocuEye.CLI.Hosting;
 using DocuEye.Structurizr.DslToJson;
+using DocuEye.Structurizr.Json.Model;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
 using System.CommandLine.Parsing;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DocuEye.CLI
 {
@@ -18,7 +20,11 @@ namespace DocuEye.CLI
         Option<string> workspaceImportKeyOption;
         Option<string> workspaceImportSourceLinkOption;
 
-
+        private JsonSerializerOptions serializerOptions = new JsonSerializerOptions()
+        {
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
         public WorkspaceImportCommand() : base("import", "TODO:OPIS") {
 
 
@@ -100,15 +106,22 @@ namespace DocuEye.CLI
                 var converter = new WorkspaceConverter(workspace, worspaceFile.DirectoryName);
                 var jsonWorkspace = converter.Convert();
                 
-                var jsonText = JsonSerializer.Serialize(jsonWorkspace);
+                var jsonText = JsonSerializer.Serialize(jsonWorkspace, serializerOptions);
                 File.WriteAllText("C:\\nCode\\docueye\\temp\\out1\\test1.json", jsonText);
 
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
                         importKey, jsonWorkspace, workspaceId, sourceLink));
+            }else if(importMode == "json")
+            {
+                var jsonText = File.ReadAllText(worspaceFile.FullName);
+                var jsonWorkspace = JsonSerializer.Deserialize<StructurizrJsonWorkspace>(jsonText, this.serializerOptions);
+                await importWorkspaceService.Import(
+                    new ImportWorkspaceParameters(
+                        importKey, jsonWorkspace, workspaceId, sourceLink));
             }
 
-            return 0;
+                return 0;
 
 
         } 

@@ -13,6 +13,17 @@ namespace DocuEye.Structurizr.DSL
 
         public StructurizrContainerInstance VisitContainerInstance([NotNull] StructurizrDSLParser.ContainerInstanceContext context, string deploymentNodeIdentifier)
         {
+            //var deploymentNode = this.Workspace.Model.GetModelElement(deploymentNodeIdentifier);
+
+            //if (deploymentNode == null)
+            //{
+            //    throw new Exception(
+            //        string.Format(
+            //            "Deployment Node with identifier {0} does not exist for containerInstance at {1}:{2}",
+            //            deploymentNodeIdentifier,
+            //            context.Start.Line,
+            //            context.Start.Column));
+            //}
             string identifier;
             var identifierContext = context.identifier();
             if (identifierContext == null)
@@ -56,7 +67,8 @@ namespace DocuEye.Structurizr.DSL
             {
                 "Element", "Container Instance"
             });
-
+            
+            //instance.DeploymentEnvironmentIdentifier = deploymentNode.DeploymentEnvironmentIdentifier;
             var deploymentGroupContext = context.deploymentGroupsRef();
             if (deploymentGroupContext != null)
             {
