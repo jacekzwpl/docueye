@@ -463,6 +463,7 @@ namespace DocuEye.Structurizr.DSL
                                 softwareSystemInstanceContext.Start.Line,
                                 softwareSystemInstanceContext.Start.Column));
                     }
+                    //softwareSystemInstance.DeploymentEnvironmentIdentifier = element.DeploymentEnvironmentIdentifier;
                     this.workspace.Model.AddModelElement(softwareSystemInstance);
                 }
 

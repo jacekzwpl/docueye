@@ -664,6 +664,9 @@ namespace DocuEye.Structurizr.DslToJson
                 .Distinct()
                 .ToArray();
 
+            var contextElement = this.dslWorkspace.Model.Elements
+                .Where(o => o.Identifier == dslView.ElementIdentifier)
+                .FirstOrDefault();
             var (elements, relationships) = this.DiscoverElementsAndRelationships(
                 dslView.Include,
                 dslView.Exclude,
@@ -680,7 +683,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Key = dslView.Identifier,
                 Title = dslView.Title,
                 Description = dslView.Description,
-                SoftwareSystemId = dslView.ElementIdentifier == "*" ? null : dslView.ElementIdentifier,
+                SoftwareSystemId = contextElement?.ModelId,//dslView.ElementIdentifier == "*" ? null : dslView.ElementIdentifier,
                 Elements = elements.Select(o => new StructurizrJsonElementView()
                 {
                     Id = o.ModelId,
