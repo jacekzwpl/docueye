@@ -352,13 +352,13 @@ namespace DocuEye.Structurizr.DslToJson
                     Url = dslRelationship.Url,
                     Tags = string.Join(",", dslRelationship.Tags ?? new List<string>()),
                     DestinationId = destinationElement.ModelId,
-                    Properties = dslRelationship.Properties,
+                    Properties = new Dictionary<string, string>(dslRelationship.Properties),
                     SourceId = elementModelId,
                     Technology = dslRelationship.Technology,
                     LinkedRelationshipId = dslRelationship.LinkedRelationshipModelId
                 };
-                if(!jsonRelationship.Properties.ContainsKey(DslPropertyNames.DslIdProperty))
-                    jsonRelationship.Properties.Add(DslPropertyNames.DslIdProperty, dslRelationship.Identifier);
+                jsonRelationship.Properties.Add(DslPropertyNames.DslIdProperty, dslRelationship.Identifier);
+                
                 relationships.Add(jsonRelationship);
             }
 

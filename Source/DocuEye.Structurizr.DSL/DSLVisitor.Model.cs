@@ -273,8 +273,11 @@ namespace DocuEye.Structurizr.DSL
 
         private void AddImpliedRelationship(StructurizrRelationship linkedRelationship, string sourceIdentifier, string destinationIdentifier)
         {
-
-            if(this.workspace.Model.Relationships.Where(
+            if (sourceIdentifier == destinationIdentifier)
+            {
+                return;
+            }
+            if (this.workspace.Model.Relationships.Where(
                 o => o.SourceIdentifier == sourceIdentifier 
                 && o.DestinationIdentifier == destinationIdentifier).Any())
             {
