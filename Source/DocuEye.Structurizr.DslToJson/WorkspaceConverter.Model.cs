@@ -141,11 +141,12 @@ namespace DocuEye.Structurizr.DslToJson
         public StructurizrJsonContainerInstance ConvertContainerInstance(StructurizrModelElement element)
         {
             var groups = this.ResolveElementGroups(element.GroupId);
+            var instanceOfElement = this.dslWorkspace.Model.Elements.Where(o => o.Identifier == element.InstanceOfIdentifier).FirstOrDefault();
             var environmentName = this.dslWorkspace.Model.DeploymentEnvironments.Where(o => o.Identifier == element.DeploymentEnvironmentIdentifier).FirstOrDefault()?.Name;
             var jsonContainerInstance = new StructurizrJsonContainerInstance()
             {
                 Id = element.ModelId,
-                ContainerId = element.InstanceOfIdentifier ?? "",
+                ContainerId = instanceOfElement?.ModelId ?? "",
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Properties = element.Properties,
@@ -158,12 +159,12 @@ namespace DocuEye.Structurizr.DslToJson
         public StructurizrJsonSoftwareSystemInstance ConvertSoftwareSystemInstance(StructurizrModelElement element)
         {
             var groups = this.ResolveElementGroups(element.GroupId);
-            
+            var instanceOfElement = this.dslWorkspace.Model.Elements.Where(o => o.Identifier == element.InstanceOfIdentifier).FirstOrDefault();
             var environmentName = this.dslWorkspace.Model.DeploymentEnvironments.Where(o => o.Identifier == element.DeploymentEnvironmentIdentifier).FirstOrDefault()?.Name;
             var jsonSoftwareSystemInstance = new StructurizrJsonSoftwareSystemInstance()
             {
                 Id = element.ModelId,
-                SoftwareSystemId = element.InstanceOfIdentifier ?? "",
+                SoftwareSystemId = instanceOfElement?.ModelId ?? "",
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Properties = element.Properties,

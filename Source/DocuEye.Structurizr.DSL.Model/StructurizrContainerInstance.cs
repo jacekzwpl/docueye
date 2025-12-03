@@ -50,6 +50,7 @@ namespace DocuEye.Structurizr.DSL.Model
                 ParentIdentifier = this.DeploymentNodeIdentifier,
                 InstanceOfIdentifier = this.ContainerIdentifier,
                 DeploymentGroupsIdentiifiers = this.DeploymentGroupsIdentiifiers,
+                DeploymentEnvironmentIdentifier = this.DeploymentEnvironmentIdentifier,
                 HealthCheck = this.HealthCheck
             };
         }

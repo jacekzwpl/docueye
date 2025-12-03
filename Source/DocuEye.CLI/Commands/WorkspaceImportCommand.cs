@@ -9,6 +9,7 @@ using System.CommandLine;
 using System.CommandLine.Parsing;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 
 namespace DocuEye.CLI
 {
@@ -23,7 +24,25 @@ namespace DocuEye.CLI
         private JsonSerializerOptions serializerOptions = new JsonSerializerOptions()
         {
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            IgnoreReadOnlyFields = true,
+            TypeInfoResolver = new DefaultJsonTypeInfoResolver
+            {
+                Modifiers = { ti =>
+                {
+                    if (ti.Kind == JsonTypeInfoKind.Object)
+                    {
+                        for (int i = ti.Properties.Count - 1; i >= 0; i--)
+                        {
+                            var p = ti.Properties[i];
+                            if (p.Set != null) continue; // ma set – zostaw
+                            if (p.Get != null) ti.Properties.RemoveAt(i); // tylko get – usuń z serializacji
+                        }
+                    }
+                }}
+            }
+
         };
         public WorkspaceImportCommand() : base("import", "TODO:OPIS") {
 
