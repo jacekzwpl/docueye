@@ -149,7 +149,7 @@ namespace DocuEye.Structurizr.DSL
 
         private void ResolveInstancesRelationships()
         {
-            foreach (var instanceElement in this.workspace.Model.Elements.Where(o => o.Type == StructurizrModelElementType.SoftwareSystemInstance))
+            foreach (var instanceElement in this.workspace.Model.Elements.Where(o => o.Type == StructurizrModelElementType.SoftwareSystemInstance || o.Type == StructurizrModelElementType.ContainerInstance))
             {
                 var relationships = this.workspace.Model.Relationships
                     .Where(o =>o.SourceIdentifier == instanceElement.InstanceOfIdentifier)

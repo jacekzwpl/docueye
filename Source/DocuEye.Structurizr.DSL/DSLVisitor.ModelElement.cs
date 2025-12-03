@@ -442,7 +442,7 @@ namespace DocuEye.Structurizr.DSL
                                 infrastructureNodeContext.Start.Line,
                                 infrastructureNodeContext.Start.Column));
                     }
-
+                    infrastructureNode.DeploymentEnvironmentIdentifier = element.DeploymentEnvironmentIdentifier;
                     this.workspace.Model.AddModelElement(infrastructureNode);
                 }
 
@@ -463,7 +463,7 @@ namespace DocuEye.Structurizr.DSL
                                 softwareSystemInstanceContext.Start.Line,
                                 softwareSystemInstanceContext.Start.Column));
                     }
-                    //softwareSystemInstance.DeploymentEnvironmentIdentifier = element.DeploymentEnvironmentIdentifier;
+                    softwareSystemInstance.DeploymentEnvironmentIdentifier = element.DeploymentEnvironmentIdentifier;
                     this.workspace.Model.AddModelElement(softwareSystemInstance);
                 }
 

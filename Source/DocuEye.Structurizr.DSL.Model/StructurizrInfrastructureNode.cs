@@ -9,6 +9,7 @@ namespace DocuEye.Structurizr.DSL.Model
     {
         public string Identifier { get; }
         public string DeploymentNodeIdentifier { get; set; } = null!;
+        public string? DeploymentEnvironmentIdentifier { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string? Technology { get; set; }
@@ -45,6 +46,7 @@ namespace DocuEye.Structurizr.DSL.Model
                 Perspectives = this.Perspectives,
                 GroupId = this.GroupId,
                 Technology = this.Technology,
+                DeploymentEnvironmentIdentifier = this.DeploymentEnvironmentIdentifier,
                 ParentIdentifier = this.DeploymentNodeIdentifier
             };
         }
@@ -59,6 +61,7 @@ namespace DocuEye.Structurizr.DSL.Model
             this.Perspectives = element.Perspectives;
             this.GroupId = element.GroupId;
             this.Technology = element.Technology;
+            this.DeploymentEnvironmentIdentifier = element.DeploymentEnvironmentIdentifier;
             this.DeploymentNodeIdentifier = element.ParentIdentifier ?? throw new InvalidOperationException("ParentIdentifier is required for InfrastructureNode");
         }
     }
