@@ -1,14 +1,8 @@
-﻿using AutoMapper.Execution;
-using DocuEye.CLI.ApiClient;
-using DocuEye.CLI.Application.Services.ImportWorkspace;
+﻿using DocuEye.CLI.ApiClient;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
 using NuGet.Versioning;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocuEye.CLI.Application.Services.Compatibility

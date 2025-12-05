@@ -96,12 +96,11 @@ namespace DocuEye.CLI
 
 
             var host = new CliHostBuilder().Build(new CliHostOptions(docueyeAddress, adminToken));
-            var compatibilityCheckService = host.Services.GetRequiredService<ICompatibilityCheckService>();
 
+            var compatibilityCheckService = host.Services.GetRequiredService<ICompatibilityCheckService>();
             var isCompatible = await compatibilityCheckService.CheckCompatibility();
             if (!isCompatible)
             {
-                Console.Error.WriteLine("Incompatible CLI version. Please update to the latest version.");
                 return 1;
             }
 

@@ -1,4 +1,5 @@
-﻿using DocuEye.CLI.Application.Services.DeleteWorkspace;
+﻿using DocuEye.CLI.Application.Services.Compatibility;
+using DocuEye.CLI.Application.Services.DeleteWorkspace;
 using DocuEye.CLI.Application.Services.DSL;
 using DocuEye.CLI.Commands;
 using DocuEye.CLI.Hosting;
@@ -46,6 +47,14 @@ namespace DocuEye.CLI
             string adminToken = parseResult.GetValue(CommandLineCommonOptions.AdminTokenOption)!;
             string workspaceId = parseResult.GetValue(workspaceDeleteWorkspaceIdOption)!;
             var host = new CliHostBuilder().Build(new CliHostOptions(docueyeAddress, adminToken));
+
+            var compatibilityCheckService = host.Services.GetRequiredService<ICompatibilityCheckService>();
+            var isCompatible = await compatibilityCheckService.CheckCompatibility();
+            if (!isCompatible)
+            {
+                return 1;
+            }
+
             var deleteWorkspaceService = host.Services.GetRequiredService<IDeleteWorkspaceService>();
             await deleteWorkspaceService.DeleteWorkspace(workspaceId);
             return 0;

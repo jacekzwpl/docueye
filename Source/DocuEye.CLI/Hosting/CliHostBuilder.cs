@@ -26,7 +26,15 @@ namespace DocuEye.CLI.Hosting
             })
             .AddConsoleFormatter<CliLogFormatter, CliLogFormatterOptions>());
 
-            builder.Logging.SetMinimumLevel(LogLevel.Information);
+            builder.Logging.SetMinimumLevel(LogLevel.Error);
+            builder.Logging.AddFilter((provider, category, level) =>
+            {
+                if (category != null && category.StartsWith("DocuEye"))
+                    return level >= LogLevel.Information;
+                // default
+                return level >= LogLevel.Error;
+            });
+
             builder.Services.AddHttpClient<IDocuEyeApiClient, DocuEyeApiClient>(
                 o =>
                 {
