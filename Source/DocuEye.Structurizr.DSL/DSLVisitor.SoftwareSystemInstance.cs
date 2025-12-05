@@ -54,7 +54,7 @@ namespace DocuEye.Structurizr.DSL
 
             var instance = new StructurizrSoftwareSystemInstance(identifier, systemIdentifier, deploymentNodeIdentifier, new string[]
             {
-                "Element", "Software System Instance"
+                "Software System Instance"
             });
 
             var deploymentGroupContext = context.deploymentGroupsRef();

@@ -24,7 +24,7 @@ namespace DocuEye.Structurizr.DSL
                 identifier = identifierContext.GetText().Trim('"');
             }
 
-            var person = new StructurizrPerson(identifier, new string[] { "Person" });
+            var person = new StructurizrPerson(identifier, new string[] { "Element", "Person" });
 
             var nameContext = context.name();
             if (nameContext == null)

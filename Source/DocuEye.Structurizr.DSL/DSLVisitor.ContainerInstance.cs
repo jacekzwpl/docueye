@@ -65,7 +65,7 @@ namespace DocuEye.Structurizr.DSL
 
             var instance = new StructurizrContainerInstance(identifier, containerIdentifier, deploymentNodeIdentifier, new string[]
             {
-                "Element", "Container Instance"
+                "Container Instance"
             });
             
             //instance.DeploymentEnvironmentIdentifier = deploymentNode.DeploymentEnvironmentIdentifier;
