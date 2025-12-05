@@ -149,7 +149,7 @@ namespace DocuEye.Structurizr.DSL
 
         private void ResolveInstancesRelationships()
         {
-            foreach (var instanceElement in this.workspace.Model.Elements.Where(o => o.Type == StructurizrModelElementType.SoftwareSystemInstance))
+            foreach (var instanceElement in this.workspace.Model.Elements.Where(o => o.Type == StructurizrModelElementType.SoftwareSystemInstance || o.Type == StructurizrModelElementType.ContainerInstance))
             {
                 var relationships = this.workspace.Model.Relationships
                     .Where(o =>o.SourceIdentifier == instanceElement.InstanceOfIdentifier)
@@ -273,8 +273,11 @@ namespace DocuEye.Structurizr.DSL
 
         private void AddImpliedRelationship(StructurizrRelationship linkedRelationship, string sourceIdentifier, string destinationIdentifier)
         {
-
-            if(this.workspace.Model.Relationships.Where(
+            if (sourceIdentifier == destinationIdentifier)
+            {
+                return;
+            }
+            if (this.workspace.Model.Relationships.Where(
                 o => o.SourceIdentifier == sourceIdentifier 
                 && o.DestinationIdentifier == destinationIdentifier).Any())
             {

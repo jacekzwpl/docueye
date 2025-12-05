@@ -141,11 +141,12 @@ namespace DocuEye.Structurizr.DslToJson
         public StructurizrJsonContainerInstance ConvertContainerInstance(StructurizrModelElement element)
         {
             var groups = this.ResolveElementGroups(element.GroupId);
+            var instanceOfElement = this.dslWorkspace.Model.Elements.Where(o => o.Identifier == element.InstanceOfIdentifier).FirstOrDefault();
             var environmentName = this.dslWorkspace.Model.DeploymentEnvironments.Where(o => o.Identifier == element.DeploymentEnvironmentIdentifier).FirstOrDefault()?.Name;
             var jsonContainerInstance = new StructurizrJsonContainerInstance()
             {
                 Id = element.ModelId,
-                ContainerId = element.InstanceOfIdentifier ?? "",
+                ContainerId = instanceOfElement?.ModelId ?? "",
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Properties = element.Properties,
@@ -158,11 +159,12 @@ namespace DocuEye.Structurizr.DslToJson
         public StructurizrJsonSoftwareSystemInstance ConvertSoftwareSystemInstance(StructurizrModelElement element)
         {
             var groups = this.ResolveElementGroups(element.GroupId);
+            var instanceOfElement = this.dslWorkspace.Model.Elements.Where(o => o.Identifier == element.InstanceOfIdentifier).FirstOrDefault();
             var environmentName = this.dslWorkspace.Model.DeploymentEnvironments.Where(o => o.Identifier == element.DeploymentEnvironmentIdentifier).FirstOrDefault()?.Name;
             var jsonSoftwareSystemInstance = new StructurizrJsonSoftwareSystemInstance()
             {
                 Id = element.ModelId,
-                SoftwareSystemId = element.InstanceOfIdentifier ?? "",
+                SoftwareSystemId = instanceOfElement?.ModelId ?? "",
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Properties = element.Properties,
@@ -175,12 +177,15 @@ namespace DocuEye.Structurizr.DslToJson
         public StructurizrJsonInfrastructureNode ConvertInfrastructureNode(StructurizrModelElement element)
         {
             var groups = this.ResolveElementGroups(element.GroupId);
+            
+            var environmentName = this.dslWorkspace.Model.DeploymentEnvironments.Where(o => o.Identifier == element.DeploymentEnvironmentIdentifier).FirstOrDefault()?.Name;
             var jsonInfrastructureNode = new StructurizrJsonInfrastructureNode()
             {
                 Id = element.ModelId,
                 Name = element.Name,
                 Description = element.Description,
                 Technology = element.Technology,
+                Environment = environmentName,
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
@@ -347,11 +352,13 @@ namespace DocuEye.Structurizr.DslToJson
                     Url = dslRelationship.Url,
                     Tags = string.Join(",", dslRelationship.Tags ?? new List<string>()),
                     DestinationId = destinationElement.ModelId,
-                    Properties = dslRelationship.Properties,
+                    Properties = new Dictionary<string, string>(dslRelationship.Properties),
                     SourceId = elementModelId,
                     Technology = dslRelationship.Technology,
                     LinkedRelationshipId = dslRelationship.LinkedRelationshipModelId
                 };
+                jsonRelationship.Properties.Add(DslPropertyNames.DslIdProperty, dslRelationship.Identifier);
+                
                 relationships.Add(jsonRelationship);
             }
 

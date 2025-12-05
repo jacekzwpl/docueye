@@ -1,0 +1,125 @@
+﻿using DocuEye.CLI.Application.Services.DSL;
+using DocuEye.CLI.Application.Services.ImportWorkspace;
+using DocuEye.CLI.Commands;
+using DocuEye.CLI.Hosting;
+using DocuEye.Structurizr.DslToJson;
+using DocuEye.Structurizr.Json.Model;
+using Microsoft.Extensions.DependencyInjection;
+using System.CommandLine;
+using System.CommandLine.Parsing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+
+namespace DocuEye.CLI
+{
+    public class WorkspaceImportCommand : Command
+    {
+        Option<FileInfo> workspaceImportFileOption;
+        Option<string> workspaceImportModeOption;
+        Option<string> workspaceImportIdOption;
+        Option<string> workspaceImportKeyOption;
+        Option<string> workspaceImportSourceLinkOption;
+
+
+        public WorkspaceImportCommand() : base("import", "Imports workspace to DocuEye.") {
+
+
+            this.workspaceImportModeOption = new("--mode", "-m")
+            {
+                Description = "Specifies import mode 'dsl' for import from dsl file, 'json; for import from json file.",
+                Required = true,
+                DefaultValueFactory = parseResult => "dsl",
+            };
+            this.workspaceImportModeOption.AcceptOnlyFromAmong("dsl", "json");
+
+            this.workspaceImportFileOption = new("--file", "-f")
+            {
+                Description = "Path to workspace file. Depending on mode option should be path to dsl file or json file.",
+                Required = true
+            };
+
+            this.workspaceImportIdOption = new("--id", "-i")
+            {
+                Description = "The ID of the Workspace. If not provided the new workspace will be created. Also if workspace with given id does not exists new workspace will be created."
+            };
+
+            this.workspaceImportKeyOption = new("--key", "-k")
+            {
+                Description = "Unique import key. If not provided, one will be generated."
+            };
+
+            this.workspaceImportSourceLinkOption = new("--source-link", "-s")
+            {
+                Description = "Link to source version from which workspace is imported ex. link to PR or commit on github."
+            };
+
+
+
+            this.Options.Add(CommandLineCommonOptions.DocueyeAddressOption);
+            this.Options.Add(CommandLineCommonOptions.AdminTokenOption);
+            this.Options.Add(workspaceImportModeOption);
+            this.Options.Add(workspaceImportFileOption);
+            this.Options.Add(workspaceImportIdOption);
+            this.Options.Add(workspaceImportKeyOption);
+            this.Options.Add(workspaceImportSourceLinkOption);
+
+            this.SetAction(async parseResult => await this.Run(parseResult));
+        }
+
+        public async Task<int> Run(ParseResult parseResult, CancellationToken cancellationToken = default)
+        {
+            if (parseResult.Errors.Count > 0)
+            {
+                foreach (ParseError parseError in parseResult.Errors)
+                {
+                    Console.Error.WriteLine(parseError.Message);
+                }
+                return 1;
+            }
+
+            string docueyeAddress = parseResult.GetValue(CommandLineCommonOptions.DocueyeAddressOption)!;
+            string adminToken = parseResult.GetValue(CommandLineCommonOptions.AdminTokenOption)!;
+            FileInfo worspaceFile = parseResult.GetValue(this.workspaceImportFileOption)!;
+            string importMode = parseResult.GetValue<string>(this.workspaceImportModeOption)!;
+            string workspaceId = parseResult.GetValue<string>(this.workspaceImportIdOption)!;
+            string importKey = parseResult.GetValue<string>(this.workspaceImportKeyOption)!;
+            string sourceLink = parseResult.GetValue<string>(this.workspaceImportSourceLinkOption)!;
+
+            importKey ??= Guid.NewGuid().ToString();
+
+
+            var host = new CliHostBuilder().Build(new CliHostOptions(docueyeAddress, adminToken));
+            var importWorkspaceService = host.Services.GetRequiredService<IImportWorkspaceService>();
+            if (importMode == "dsl")
+            {
+                var workspaceParser = host.Services.GetRequiredService<IWorkspaceParserService>();
+                var workspace = workspaceParser.Parse(worspaceFile);
+                if (workspace == null)
+                {
+                    return 1;
+                }
+
+                var converter = new WorkspaceConverter(workspace, worspaceFile.DirectoryName);
+                var jsonWorkspace = converter.Convert();
+                
+
+
+                await importWorkspaceService.Import(
+                    new ImportWorkspaceParameters(
+                        importKey, jsonWorkspace, workspaceId, sourceLink));
+            }else if(importMode == "json")
+            {
+                var jsonText = File.ReadAllText(worspaceFile.FullName);
+                var jsonWorkspace = new WorkspaceSerializer().Deserialize(jsonText); //JsonSerializer.Deserialize<StructurizrJsonWorkspace>(jsonText, this.serializerOptions);
+                await importWorkspaceService.Import(
+                    new ImportWorkspaceParameters(
+                        importKey, jsonWorkspace, workspaceId, sourceLink));
+            }
+
+                return 0;
+
+
+        } 
+    }
+}

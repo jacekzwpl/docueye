@@ -419,7 +419,7 @@ identifierReference : WORD ;
 identifier          : WORD ;
 key                 : TEXT | WORD ;
 tags                : TEXT ;    
-url                 : URLVALUE ;
+url                 : TEXT | URLVALUE ;
 technology          : TEXT | WORD;
 instances           : TEXT | WORD;
 interval            : TEXT | WORD ;
@@ -444,7 +444,7 @@ perspective         : name description value? NEWLINE ;
 
 themeBlock          : THEME value NEWLINE ;
 themesBlock         : THEMES (themesValue)* NEWLINE ;
-themesValue         : WORD | PATH | URLVALUE | TEXT;
+themesValue         : WORD | PATH | URLVALUE | TEXT | DEFAULT;
 
 configuration       : CONFIGURATION BEGIN (
                     configurationScopeBlock 

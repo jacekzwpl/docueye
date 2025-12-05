@@ -1,9 +1,4 @@
 ﻿using DocuEye.Structurizr.DSL.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocuEye.Structurizr.DslToJson.Tests
 {
@@ -136,7 +131,7 @@ namespace DocuEye.Structurizr.DslToJson.Tests
             var result = workspaceConverter.ConvertComponentView(view);
             // Assert
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.ContainerId, Is.EqualTo("container1"));
+            Assert.That(result.ContainerId, Is.EqualTo("c1"));
             Assert.That(result.Key, Is.EqualTo("Components0"));
             Assert.That(result.Title, Is.EqualTo("Test Title"));
             Assert.That(result.Description, Is.EqualTo("Test Description"));

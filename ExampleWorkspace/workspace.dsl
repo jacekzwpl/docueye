@@ -1,4 +1,4 @@
-workspace "Example Online Shop" "DEBUTEST Example DocuEye workspace" {
+workspace "Example Online Shop 1" "DEBUGTEST Example DocuEye workspace" {
     
     !identifiers hierarchical
 
@@ -8,6 +8,7 @@ workspace "Example Online Shop" "DEBUTEST Example DocuEye workspace" {
     
 
     model {
+        !identifiers hierarchical
         client = person "Client" "Online shop client"
 
         emailsystem = softwareSystem "Email System" {
@@ -159,7 +160,7 @@ workspace "Example Online Shop" "DEBUTEST Example DocuEye workspace" {
             description "Summarises how the sign in feature works in the single-page application."
         }
 
-        themes default
+        # themes default
     }
     
 }

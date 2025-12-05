@@ -117,7 +117,7 @@ namespace DocuEye.Structurizr.DslToJson.Tests
             var result = workspaceConverter.ConvertContainerView(view);
             // Assert
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.SoftwareSystemId, Is.EqualTo("identifier0"));
+            Assert.That(result.SoftwareSystemId, Is.EqualTo("id0"));
             Assert.That(result.Key, Is.EqualTo("Containers0"));
             Assert.That(result.Title, Is.EqualTo("Test Title"));
             Assert.That(result.Description, Is.EqualTo("Test Description"));

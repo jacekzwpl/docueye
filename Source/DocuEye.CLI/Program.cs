@@ -1,17 +1,12 @@
-﻿using AutoMapper;
-using CommandLine;
-using DocuEye.CLI;
-using DocuEye.CLI.ApiClient;
-using DocuEye.CLI.Application.Services.DeleteWorkspace;
-using DocuEye.CLI.Application.Services.ImportOpenApiFile;
-using DocuEye.CLI.Application.Services.ImportWorkspace;
-using DocuEye.Structurizr.Model.Exploders.Mappings;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.Net.Http.Headers;
+﻿using DocuEye.CLI.Commands;
 
 
+
+var command = new MainCommand();
+return await command.Parse(args).InvokeAsync();
+
+
+/*
 var logger = LoggerFactory.Create(config =>
 {
     config.AddConsole();
@@ -125,7 +120,7 @@ await Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(async (o
 
 }, errors => Task.FromResult(-1));
 
-
+*/
 
 
 
