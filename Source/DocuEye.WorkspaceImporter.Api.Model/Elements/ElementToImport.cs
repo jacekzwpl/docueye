@@ -53,6 +53,14 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Elements
         /// </summary>
         public string? Description { get; set; }
         /// <summary>
+        /// The source code of the element
+        /// </summary>
+        public string? SourceCodeUrl { get; set; }
+        /// <summary>
+        /// The name of owner team of this element
+        /// </summary>
+        public string? OwnerTeam { get; set; }
+        /// <summary>
         /// A set of arbitrary name-value properties.
         /// </summary>
         public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
