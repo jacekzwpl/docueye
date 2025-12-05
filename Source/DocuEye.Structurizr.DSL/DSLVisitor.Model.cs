@@ -8,7 +8,10 @@ namespace DocuEye.Structurizr.DSL
     {
         public override object VisitModel([NotNull] ModelContext context)
         {
-            this.workspace.Model = new StructurizrModel();
+            if(this.workspace.Model == null)
+            {
+                this.workspace.Model = new StructurizrModel();
+            }
             var modelBodyContext = context.modelBody();
             return this.VisitModelBody(modelBodyContext);
         }

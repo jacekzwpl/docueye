@@ -8,7 +8,7 @@ workspace "Example Online Shop 1" "DEBUGTEST Example DocuEye workspace" {
     
 
     model {
-        !identifiers hierarchical
+        # !identifiers hierarchical
         client = person "Client" "Online shop client"
 
         emailsystem = softwareSystem "Email System" {

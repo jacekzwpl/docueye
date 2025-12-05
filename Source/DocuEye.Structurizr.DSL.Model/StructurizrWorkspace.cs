@@ -7,7 +7,14 @@ namespace DocuEye.Structurizr.DSL.Model
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
-        public string Identifiers { get; set; } = "flat";
+        public string Identifiers { 
+            get {
+                return this.Model.Identifiers;
+            } 
+            set { 
+                this.Model.Identifiers = value;
+            } 
+        }
         public string? Docs { get; set; }
         public string? Adrs { get; set; }
         public StructurizrModel Model { get; set; }
