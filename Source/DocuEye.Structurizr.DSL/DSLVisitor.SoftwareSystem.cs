@@ -1,10 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
 using DocuEye.Structurizr.DSL.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static StructurizrDSLParser;
 
 namespace DocuEye.Structurizr.DSL
@@ -33,7 +28,7 @@ namespace DocuEye.Structurizr.DSL
             {
                 throw new Exception(
                     string.Format(
-                        "Name is required for person at {0}:{1}",
+                        "Name is required for software system at {0}:{1}",
                         context.Start.Line,
                         context.Start.Column));
             }
@@ -42,7 +37,7 @@ namespace DocuEye.Structurizr.DSL
             {
                 throw new Exception(
                     string.Format(
-                        "Name is required for person at {0}:{1}",
+                        "Name is required for software system at {0}:{1}",
                         context.Start.Line,
                         context.Start.Column));
             }
@@ -67,18 +62,6 @@ namespace DocuEye.Structurizr.DSL
             {
                 var modelElement = this.VisitModelElementBody(bodyContext, element.ToModelElement());
                 element.FromModelElement(modelElement);
-                /*
-                var systemBody = this.VisitSoftwareSystemBody(bodyContext, element.Identifier);
-                element.Tags.AddRange(systemBody.Tags);
-                if (element.Description == null)
-                {
-                    element.Description = systemBody.Description;
-                }
-                element.Properties = systemBody.Properties;
-                element.Url = systemBody.Url;
-                element.Perspectives = systemBody.Perspectives;
-                element.Adrs = systemBody.Adrs;
-                element.Docs = systemBody.Docs;*/
             }
 
             return element;

@@ -3,6 +3,7 @@ using HeyRed.Mime;
 using Markdig;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
+using System.IO;
 using System.Xml.Linq;
 
 namespace DocuEye.Structurizr.DslToJson
@@ -26,6 +27,12 @@ namespace DocuEye.Structurizr.DslToJson
             if (documentation.Sections != null)
             {
                 var basePath = File.Exists(docsPath) ? Path.GetDirectoryName(docsPath) : docsPath;
+
+                if (!string.IsNullOrWhiteSpace(basePath) && !Path.IsPathFullyQualified(basePath))
+                {
+                    basePath = Path.Combine(this.workspaceDirectory, basePath);
+                }
+
                 foreach (var section in documentation.Sections)
                 { 
                     var image = this.DiscoverImage(basePath ?? this.workspaceDirectory, section.Content ?? "");
@@ -41,6 +48,10 @@ namespace DocuEye.Structurizr.DslToJson
                 var basePath = File.Exists(adrPath) ? Path.GetDirectoryName(adrPath) : adrPath;
                 foreach (var decision in documentation.Decisions)
                 {
+                    if (!string.IsNullOrWhiteSpace(basePath) && !Path.IsPathFullyQualified(basePath))
+                    {
+                        basePath = Path.Combine(this.workspaceDirectory, basePath);
+                    }
                     var image = this.DiscoverImage(basePath ?? this.workspaceDirectory, decision.Content ?? "");
                     if (image != null && image.Count() > 0)
                     {
@@ -51,10 +62,6 @@ namespace DocuEye.Structurizr.DslToJson
 
             documentation.Images = images.Count() > 0 ? images : null;
 
-            if (documentation.Sections == null && documentation.Decisions == null && documentation.Images == null)
-            {
-                return null;
-            }
             return documentation;
         }
 
@@ -74,9 +81,10 @@ namespace DocuEye.Structurizr.DslToJson
                         {
                             path = Path.Combine(basePath, link.Url);
                         }
+                        var bytes = File.ReadAllBytes(path);
                         var image = new StructurizrJsonImage()
                         {
-                            Content = File.ReadAllText(path),
+                            Content = Convert.ToBase64String(bytes),
                             Name = link.Url,
                             Type = MimeTypesMap.GetMimeType(path)
                         };
@@ -114,6 +122,7 @@ namespace DocuEye.Structurizr.DslToJson
                     .ForEach(file =>
                     {
                         var section = this.ReadSection(file);
+                        
                         section.Order = sections.Count() + 1;
                         sections.Add(section);
                     });
@@ -134,7 +143,8 @@ namespace DocuEye.Structurizr.DslToJson
             {
                 Content = File.ReadAllText(path),
                 Format = "Markdown",
-                Order = 0
+                Order = 0,
+                FileName = Path.GetFileName(path)
             };
             return section;
         }

@@ -18,6 +18,8 @@ namespace DocuEye.Structurizr.Json.Model
         /// The order (index) of the section in the document.
         /// </summary>
         public int? Order { get; set; }
+
+        public string FileName { get; set; }
      
     }
 }

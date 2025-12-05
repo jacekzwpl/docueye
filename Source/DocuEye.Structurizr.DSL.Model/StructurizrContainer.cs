@@ -47,7 +47,9 @@ namespace DocuEye.Structurizr.DSL.Model
                 Perspectives = this.Perspectives,
                 GroupId = this.GroupId,
                 Technology = this.Technology,
-                ParentIdentifier = this.SystemIdentifier
+                ParentIdentifier = this.SystemIdentifier,
+                Docs = this.Docs,
+                Adrs = this.Adrs
             };
         }
 
@@ -62,6 +64,8 @@ namespace DocuEye.Structurizr.DSL.Model
             this.GroupId = element.GroupId;
             this.Technology = element.Technology;
             this.SystemIdentifier = element.ParentIdentifier ?? "";
+            this.Docs = element.Docs;
+            this.Adrs = element.Adrs;
         }
     }
 }

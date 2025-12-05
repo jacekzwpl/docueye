@@ -115,6 +115,8 @@ namespace DocuEye.Structurizr.DSL.Tests
                     ""key2"" ""value2""
                 }
                 url https://docueye.com
+                !docs path/to/docs
+                !adrs path/to/adrs
             }
             ");
             var context = parser.softwareSystem();
@@ -130,6 +132,8 @@ namespace DocuEye.Structurizr.DSL.Tests
             Assert.That(result.Properties["key1"], Is.EqualTo("value1"));
             Assert.That(result.Properties["key2"], Is.EqualTo("value2"));
             Assert.That(result.Url, Is.EqualTo("https://docueye.com"));
+            Assert.That(result.Docs, Is.EqualTo("path/to/docs"));
+            Assert.That(result.Adrs, Is.EqualTo("path/to/adrs"));
         }
 
         [Test]
