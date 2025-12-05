@@ -9,7 +9,7 @@ namespace DocuEye.CLI.Commands
 {
     public class OpenapiImportCommand : Command
     {
-        public OpenapiImportCommand() : base("import", "Imports or updates element based on OpenAPI specification file.")
+        public OpenapiImportCommand() : base("import", "Imports or updates OpenAPI specification for given element.")
         {
 
             Option<string> openApiImportFileOption = new("--file", "-f")

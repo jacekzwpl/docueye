@@ -21,7 +21,7 @@ namespace DocuEye.CLI.Commands
         Option<string> exportFormatOption;
 
 
-        public WorkspaceExportCommand() : base("export", "Exports a workspace")
+        public WorkspaceExportCommand() : base("export", "Exports a workspace to given format.")
         {
             this.workspaceExportFileOption = new("--file", "-f")
             {

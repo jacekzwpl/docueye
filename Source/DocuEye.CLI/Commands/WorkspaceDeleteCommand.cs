@@ -16,7 +16,7 @@ namespace DocuEye.CLI
     public class WorkspaceDeleteCommand : Command
     {
         Option<string> workspaceDeleteWorkspaceIdOption;
-        public WorkspaceDeleteCommand() : base("delete", "TODO opis")
+        public WorkspaceDeleteCommand() : base("delete", "Deletes a workspace from DocuEye.")
         {
 
             workspaceDeleteWorkspaceIdOption = new("--id", "-i")

@@ -21,8 +21,8 @@ namespace DocuEye.CLI
         Option<string> workspaceImportKeyOption;
         Option<string> workspaceImportSourceLinkOption;
 
-        
-        public WorkspaceImportCommand() : base("import", "TODO:OPIS") {
+
+        public WorkspaceImportCommand() : base("import", "Imports workspace to DocuEye.") {
 
 
             this.workspaceImportModeOption = new("--mode", "-m")

@@ -9,8 +9,11 @@ namespace DocuEye.CLI.Commands
 {
     public class WorkspaceCommand : Command
     {
-        public WorkspaceCommand() : base("workspace", "TODO opis")
+        public WorkspaceCommand() : base("workspace", "Commands for managing workspaces")
         {
+            this.Subcommands.Add(new WorkspaceImportCommand());
+            this.Subcommands.Add(new WorkspaceDeleteCommand());
+            this.Subcommands.Add(new WorkspaceExportCommand());
         }
     }
 }
