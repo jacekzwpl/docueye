@@ -1,12 +1,7 @@
-﻿using DocuEye.CLI;
-using DocuEye.CLI.Commands;
-using System.CommandLine;
+﻿using DocuEye.CLI.Commands;
 
 
 
-
-
-// Create root command
 var command = new MainCommand();
 return await command.Parse(args).InvokeAsync();
 

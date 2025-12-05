@@ -21,29 +21,7 @@ namespace DocuEye.CLI
         Option<string> workspaceImportKeyOption;
         Option<string> workspaceImportSourceLinkOption;
 
-        private JsonSerializerOptions serializerOptions = new JsonSerializerOptions()
-        {
-            NumberHandling = JsonNumberHandling.AllowReadingFromString,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            IgnoreReadOnlyFields = true,
-            TypeInfoResolver = new DefaultJsonTypeInfoResolver
-            {
-                Modifiers = { ti =>
-                {
-                    if (ti.Kind == JsonTypeInfoKind.Object)
-                    {
-                        for (int i = ti.Properties.Count - 1; i >= 0; i--)
-                        {
-                            var p = ti.Properties[i];
-                            if (p.Set != null) continue; // ma set – zostaw
-                            if (p.Get != null) ti.Properties.RemoveAt(i); // tylko get – usuń z serializacji
-                        }
-                    }
-                }}
-            }
-
-        };
+        
         public WorkspaceImportCommand() : base("import", "TODO:OPIS") {
 
 
@@ -125,8 +103,7 @@ namespace DocuEye.CLI
                 var converter = new WorkspaceConverter(workspace, worspaceFile.DirectoryName);
                 var jsonWorkspace = converter.Convert();
                 
-                var jsonText = JsonSerializer.Serialize(jsonWorkspace, serializerOptions);
-                File.WriteAllText("C:\\nCode\\docueye\\temp\\out1\\test1.json", jsonText);
+
 
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
@@ -134,7 +111,7 @@ namespace DocuEye.CLI
             }else if(importMode == "json")
             {
                 var jsonText = File.ReadAllText(worspaceFile.FullName);
-                var jsonWorkspace = JsonSerializer.Deserialize<StructurizrJsonWorkspace>(jsonText, this.serializerOptions);
+                var jsonWorkspace = new WorkspaceSerializer().Deserialize(jsonText); //JsonSerializer.Deserialize<StructurizrJsonWorkspace>(jsonText, this.serializerOptions);
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
                         importKey, jsonWorkspace, workspaceId, sourceLink));

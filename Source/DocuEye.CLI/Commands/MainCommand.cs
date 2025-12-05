@@ -10,6 +10,7 @@ namespace DocuEye.CLI.Commands
             var workspaceCommand = new WorkspaceCommand();
             workspaceCommand.Subcommands.Add(new WorkspaceImportCommand());
             workspaceCommand.Subcommands.Add(new WorkspaceDeleteCommand());
+            workspaceCommand.Subcommands.Add(new WorkspaceExportCommand());
             // Create openapi command
             var openapiCommand = new OpenapiCommand();
             openapiCommand.Subcommands.Add(new OpenapiImportCommand());

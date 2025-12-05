@@ -2,7 +2,8 @@
 using DocuEye.Structurizr.DSL.Model;
 using DocuEye.Structurizr.Json.Model;
 using System.Text.Json;
-using System.Xml.Linq;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 
 namespace DocuEye.Structurizr.DslToJson
 {
@@ -12,19 +13,21 @@ namespace DocuEye.Structurizr.DslToJson
 
         private string modelGroupSeparator = "|";
         private DocumentationReader documentationReader;
-
+        private WorkspaceSerializer workspaceSerializer;
         private string workspaceDirectory;
+
         public WorkspaceConverter(StructurizrWorkspace dslWorkspace, string workspaceDirectory) { 
             
             this.dslWorkspace = dslWorkspace;
             this.workspaceDirectory = workspaceDirectory;
             this.documentationReader = new DocumentationReader(workspaceDirectory);
+            this.workspaceSerializer = new WorkspaceSerializer();
         }
 
         public void Convert(string resultFilePath)
         {
             var jsonWorkspace = this.Convert();
-            var jsonText = JsonSerializer.Serialize(jsonWorkspace);
+            var jsonText = this.workspaceSerializer.Serialize(jsonWorkspace);
             File.WriteAllText(resultFilePath, jsonText);
         }
 

@@ -32,6 +32,14 @@
       "commandName": "Project",
       "commandLineArgs": "workspace import --help"
     },
+    "DocuEye.workspace-export-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace export --help"
+    },
+    "DocuEye.workspace-export-json": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace export --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+    },
     "DocuEye.workspace-delete-help": {
       "commandName": "Project",
       "commandLineArgs": "workspace delete --help"
