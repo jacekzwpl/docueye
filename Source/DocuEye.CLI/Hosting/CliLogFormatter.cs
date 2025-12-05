@@ -2,11 +2,6 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocuEye.CLI.Hosting
 {
@@ -42,13 +37,20 @@ namespace DocuEye.CLI.Hosting
 
             if(logEntry.LogLevel == LogLevel.Error || logEntry.LogLevel == LogLevel.Critical)
             {
-                var originalColor = Console.BackgroundColor;
-                Console.BackgroundColor = ConsoleColor.Red;
                 textWriter.Write("fail:");
-                Console.BackgroundColor = originalColor;
+            }
+            else if(logEntry.LogLevel == LogLevel.Warning)
+            {
+                textWriter.Write("warn:");
+            }
+            else if(logEntry.LogLevel == LogLevel.Information)
+            {
+                textWriter.Write("info:");
+            } else if(logEntry.LogLevel == LogLevel.Debug || logEntry.LogLevel == LogLevel.Trace)
+            {
+                textWriter.Write("debug:");
             }
 
-            //CustomLogicGoesHere(textWriter);
             textWriter.WriteLine(message);
         }
     }
