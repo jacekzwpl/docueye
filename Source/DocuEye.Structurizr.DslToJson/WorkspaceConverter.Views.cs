@@ -249,11 +249,17 @@ namespace DocuEye.Structurizr.DslToJson
 
         public StructurizrJsonConfiguration ConvertViewsConfiguration(StructurizrViews dslViews)
         {
+
+            var themes = dslViews.Themes?
+                .Select(o => o.Replace("default", "https://static.structurizr.com/themes/default/theme.json"))
+                .ToArray()
+                ?? Array.Empty<string>();
+
             return new StructurizrJsonConfiguration()
             {
                 Styles = this.ConvertViewsConfigurationStyles(dslViews.Styles),
                 Terminology = this.ConvertViewsConfigurationTerminology(dslViews.Terminology),
-                Themes = dslViews.Themes?.ToArray() ?? Array.Empty<string>()
+                Themes = themes
             };
         }
 
