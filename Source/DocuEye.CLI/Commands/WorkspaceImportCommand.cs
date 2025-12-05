@@ -1,4 +1,5 @@
-﻿using DocuEye.CLI.Application.Services.DSL;
+﻿using DocuEye.CLI.Application.Services.Compatibility;
+using DocuEye.CLI.Application.Services.DSL;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using DocuEye.CLI.Commands;
 using DocuEye.CLI.Hosting;
@@ -7,6 +8,7 @@ using DocuEye.Structurizr.Json.Model;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
 using System.CommandLine.Parsing;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
@@ -67,6 +69,8 @@ namespace DocuEye.CLI
             this.SetAction(async parseResult => await this.Run(parseResult));
         }
 
+        
+
         public async Task<int> Run(ParseResult parseResult, CancellationToken cancellationToken = default)
         {
             if (parseResult.Errors.Count > 0)
@@ -77,6 +81,8 @@ namespace DocuEye.CLI
                 }
                 return 1;
             }
+
+            
 
             string docueyeAddress = parseResult.GetValue(CommandLineCommonOptions.DocueyeAddressOption)!;
             string adminToken = parseResult.GetValue(CommandLineCommonOptions.AdminTokenOption)!;
@@ -90,6 +96,15 @@ namespace DocuEye.CLI
 
 
             var host = new CliHostBuilder().Build(new CliHostOptions(docueyeAddress, adminToken));
+            var compatibilityCheckService = host.Services.GetRequiredService<ICompatibilityCheckService>();
+
+            var isCompatible = await compatibilityCheckService.CheckCompatibility();
+            if (!isCompatible)
+            {
+                Console.Error.WriteLine("Incompatible CLI version. Please update to the latest version.");
+                return 1;
+            }
+
             var importWorkspaceService = host.Services.GetRequiredService<IImportWorkspaceService>();
             if (importMode == "dsl")
             {

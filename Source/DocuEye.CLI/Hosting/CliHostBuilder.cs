@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocuEye.CLI.ApiClient;
+using DocuEye.CLI.Application.Services.Compatibility;
 using DocuEye.CLI.Application.Services.DeleteWorkspace;
 using DocuEye.CLI.Application.Services.DSL;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
@@ -45,7 +46,7 @@ namespace DocuEye.CLI.Hosting
             IMapper mapper = mappingConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
 
-
+            builder.Services.AddTransient<ICompatibilityCheckService, CompatibilityCheckService>();
             builder.Services.AddTransient<IWorkspaceParserService, WorkspaceParserService>();
             builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
             builder.Services.AddTransient<IDeleteWorkspaceService, DeleteWorkspaceService>();

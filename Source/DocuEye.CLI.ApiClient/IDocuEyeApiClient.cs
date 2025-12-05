@@ -27,5 +27,8 @@ namespace DocuEye.CLI.ApiClient
 
         Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request);
         Task<string?> DeleteWorkspace(string workspaceId);
+
+        Task<string?> CompatibilityInfo();
+
     }
 }

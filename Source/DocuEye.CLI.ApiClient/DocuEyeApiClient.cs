@@ -1,6 +1,5 @@
 ﻿using DocuEye.CLI.ApiClient.Model;
 using DocuEye.WorkspaceImporter.Api.Model;
-using System;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -28,6 +27,28 @@ namespace DocuEye.CLI.ApiClient
                 NumberHandling = JsonNumberHandling.AllowReadingFromString,
                 PropertyNameCaseInsensitive = true
             };
+        }
+
+        public async Task<string?> CompatibilityInfo()
+        {
+            var message = new HttpRequestMessage(HttpMethod.Get, "api/app/compatibility/info");
+            using (var response = await this.httpClient.SendAsync(message))
+            {
+                if (response.IsSuccessStatusCode && response.Content.Headers.ContentType?.MediaType == "application/json")
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var data = JsonSerializer.Deserialize<CompatibilityInfoResponse>(responseBody, this.serializerOptions);
+                    if (data == null)
+                    {
+                        return null;
+                    }
+                    return data.AcceptedVersions;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         public async Task<string?> DeleteWorkspace(string workspaceId)
