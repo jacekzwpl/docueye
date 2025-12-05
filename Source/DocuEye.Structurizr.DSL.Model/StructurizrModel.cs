@@ -71,9 +71,12 @@ namespace DocuEye.Structurizr.DSL.Model
                 throw new ArgumentException($"Software System with identifier {element.SoftwareSystemIdentifier} not found.");
             }
             
+            var count = this.Elements.Count(o => o.InstanceOfIdentifier == element.SoftwareSystemIdentifier);
+
             var modelElement = element.ToModelElement(modelId);
             modelElement.Name = systemElement.Name;
             modelElement.Technology = systemElement.Technology;
+            modelElement.InstanceIndex = count + 1;
 
             this.Elements.Add(modelElement);
         }
@@ -86,10 +89,12 @@ namespace DocuEye.Structurizr.DSL.Model
             {
                 throw new ArgumentException($"Container with identifier {element.ContainerIdentifier} not found.");
             }
+
+            var count = this.Elements.Count(o => o.InstanceOfIdentifier == element.ContainerIdentifier);
             var modelElement = element.ToModelElement(modelId);
             modelElement.Name = systemElement.Name;
             modelElement.Technology = systemElement.Technology;
-
+            modelElement.InstanceIndex = count + 1;
             this.Elements.Add(modelElement);
         }
 

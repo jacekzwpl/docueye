@@ -26,6 +26,7 @@ namespace DocuEye.Structurizr.DSL.Model
         public IEnumerable<StructurizrPerspective>? Perspectives { get; set; }
         public StructurizrHealthCheck? HealthCheck { get; set; }
         public IEnumerable<string>? DeploymentGroupsIdentiifiers { get; set; }
+        public int? InstanceIndex { get; set; }
         public StructurizrModelElement(string modelId, string identifier)
         {
             ModelId = modelId;

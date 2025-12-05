@@ -19,6 +19,7 @@ namespace DocuEye.Structurizr.DSL.Model
         public IEnumerable<StructurizrPerspective>? Perspectives { get; set; }
         public StructurizrHealthCheck? HealthCheck { get; set; }
         public IEnumerable<string>? DeploymentGroupsIdentiifiers { get; set; }
+        public int InstanceIndex { get; set; } = 0;
 
         public StructurizrContainerInstance(string identifier, string containerIdentifier, string deploymentNodeIdentifier)
         {
@@ -51,7 +52,8 @@ namespace DocuEye.Structurizr.DSL.Model
                 InstanceOfIdentifier = this.ContainerIdentifier,
                 DeploymentGroupsIdentiifiers = this.DeploymentGroupsIdentiifiers,
                 DeploymentEnvironmentIdentifier = this.DeploymentEnvironmentIdentifier,
-                HealthCheck = this.HealthCheck
+                HealthCheck = this.HealthCheck,
+                InstanceIndex = this.InstanceIndex
             };
         }
 
@@ -68,6 +70,7 @@ namespace DocuEye.Structurizr.DSL.Model
             this.DeploymentGroupsIdentiifiers = element.DeploymentGroupsIdentiifiers;
             this.DeploymentEnvironmentIdentifier = element.DeploymentEnvironmentIdentifier;
             this.HealthCheck = element.HealthCheck;
+            this.InstanceIndex = element.InstanceIndex ?? 0;
         }
     }
 }

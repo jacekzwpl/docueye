@@ -150,7 +150,8 @@ namespace DocuEye.Structurizr.DslToJson
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Properties = element.Properties,
-                Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier)
+                Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier),
+                InstanceId = element.InstanceIndex ?? 1
             };
             jsonContainerInstance.Properties.Add(DslPropertyNames.DslIdProperty, element.Identifier);
             return jsonContainerInstance;
@@ -168,7 +169,8 @@ namespace DocuEye.Structurizr.DslToJson
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Properties = element.Properties,
-                Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier)
+                Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier),
+                InstanceId = element.InstanceIndex ?? 1
             };
             jsonSoftwareSystemInstance.Properties.Add(DslPropertyNames.DslIdProperty, element.Identifier);
             return jsonSoftwareSystemInstance;
