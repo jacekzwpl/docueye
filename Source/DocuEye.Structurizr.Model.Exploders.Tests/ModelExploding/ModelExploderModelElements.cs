@@ -10,7 +10,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             var model = new StructurizrJsonModel();
-            var exloder = new ModelExploder(this.mapper);
+            var exloder = new ModelExploder();
 
             // Act
             var (elements,relationships) = exloder.ExplodeModelElements(model);
@@ -25,7 +25,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
         {
             // Arrange
             StructurizrJsonModel? model = null;
-            var exloder = new ModelExploder(this.mapper);
+            var exloder = new ModelExploder();
 
             // Act
             var (elements, relationships) = exloder.ExplodeModelElements(model);
@@ -119,7 +119,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     }
                 }
             };
-            var exloder = new ModelExploder(this.mapper);
+            var exloder = new ModelExploder();
 
             // Act
             var (elements, relationships) = exloder.ExplodeModelElements(model);

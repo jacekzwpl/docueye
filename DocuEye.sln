@@ -129,8 +129,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Infrastructure.Auth
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Structurizr.Model.Exploders", "Source\DocuEye.Structurizr.Model.Exploders\DocuEye.Structurizr.Model.Exploders.csproj", "{F6C26AEE-0233-41AC-BDE6-C4150B1AF279}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Structurizr.Model.Exploders.Mappings", "Source\DocuEye.Structurizr.Model.Exploders.Mappings\DocuEye.Structurizr.Model.Exploders.Mappings.csproj", "{6D437010-56CC-47FD-A601-61DE9AD9090D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.Structurizr.Model.Exploders.Tests", "Source\DocuEye.Structurizr.Model.Exploders.Tests\DocuEye.Structurizr.Model.Exploders.Tests.csproj", "{8B281CF3-3F41-4FC0-97C7-ED2124678A55}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocuEye.WorkspaceImporter.Application.ChangeDetectors", "Source\DocuEye.WorkspaceImporter.Application.ChangeDetectors\DocuEye.WorkspaceImporter.Application.ChangeDetectors.csproj", "{790858F4-A8A5-48A5-925C-D358740938A1}"
@@ -393,10 +391,6 @@ Global
 		{F6C26AEE-0233-41AC-BDE6-C4150B1AF279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6C26AEE-0233-41AC-BDE6-C4150B1AF279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6C26AEE-0233-41AC-BDE6-C4150B1AF279}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D437010-56CC-47FD-A601-61DE9AD9090D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D437010-56CC-47FD-A601-61DE9AD9090D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D437010-56CC-47FD-A601-61DE9AD9090D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D437010-56CC-47FD-A601-61DE9AD9090D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -523,7 +517,6 @@ Global
 		{C599136A-3095-4322-AB44-7770265CEE1D} = {CCD1348E-6ACE-4A93-8FD4-7E990BEBF02E}
 		{A1D44DC2-AAFC-42DF-8E66-1E529BF2E76F} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
 		{F6C26AEE-0233-41AC-BDE6-C4150B1AF279} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
-		{6D437010-56CC-47FD-A601-61DE9AD9090D} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
 		{8B281CF3-3F41-4FC0-97C7-ED2124678A55} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
 		{790858F4-A8A5-48A5-925C-D358740938A1} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}
 		{6F884D90-E190-4ED2-B1CF-663C3E84DBA6} = {E08C60FB-C9C0-436E-8189-435A9D9DF335}

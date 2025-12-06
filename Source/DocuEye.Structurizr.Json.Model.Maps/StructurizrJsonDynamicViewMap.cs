@@ -21,6 +21,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 StructurizrElementId = source.ElementId,
                 ExternalBoundariesVisible = source.ExternalBoundariesVisible,
                 PaperSize = source.PaperSize,
+                AutomaticLayout = source.AutomaticLayout?.ToViewAutomaticLayoutToImport(),
                 Elements = source.Elements?.ToElementInViewToImport() ?? Array.Empty<ElementInViewToImport>(),
                 Relationships = source.Relationships?.ToRelationshipInViewToImport() ?? Array.Empty<RelationshipInViewToImport>()
             };

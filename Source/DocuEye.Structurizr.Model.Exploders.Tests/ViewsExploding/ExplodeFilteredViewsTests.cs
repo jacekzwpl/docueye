@@ -21,7 +21,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     Tags = new List<string> { "Tag1", "Tag2" }
                 }
             };
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
 
             // Act
             var result = exploder.ExplodeFilteredViews(views);
@@ -64,7 +64,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     Tags = new List<string> { "Tag3", "Tag4" }
                 }
             };
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
 
             // Act
             var result = exploder.ExplodeFilteredViews(views);

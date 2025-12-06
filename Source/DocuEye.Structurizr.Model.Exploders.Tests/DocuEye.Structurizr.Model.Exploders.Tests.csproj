@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DocuEye.Structurizr.Model.Exploders.Mappings\DocuEye.Structurizr.Model.Exploders.Mappings.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.Model.Exploders\DocuEye.Structurizr.Model.Exploders.csproj" />
   </ItemGroup>
 

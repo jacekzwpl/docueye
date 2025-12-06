@@ -19,8 +19,9 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Title = source.Title,
                 Description = source.Description,
                 Content = source.Content,
-                ContentType = source.ContentType
-                
+                ContentType = source.ContentType,
+                StructurizrElementId = source.ElementId
+
             };
             return view;
         }

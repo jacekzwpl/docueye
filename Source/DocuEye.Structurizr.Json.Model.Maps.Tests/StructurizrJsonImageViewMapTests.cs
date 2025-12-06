@@ -19,8 +19,9 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 Title = "Image View 1",
                 Description = "A description of the image view.",
                 Content = "base64encodedcontent",
-                ContentType = "image/png"
-                
+                ContentType = "image/png",
+                ElementId = "element-123"
+
             };
             // Act
             var result = source.ToViewToImport();
@@ -33,12 +34,15 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                     nameof(ViewToImport.Relationships),
                     nameof(ViewToImport.AutomaticLayout),
                     nameof(ViewToImport.ViewType),
-                    nameof(ViewToImport.StructurizrElementId),
                     nameof(ViewToImport.PaperSize),
                     nameof(ViewToImport.ExternalBoundariesVisible),
                     nameof(ViewToImport.BaseViewKey),
                     nameof(ViewToImport.Mode),
                     nameof(ViewToImport.Tags)
+                },
+                customSourceResolvers: new Dictionary<string, Func<StructurizrJsonImageView, object?>>
+                {
+                    { nameof(ViewToImport.StructurizrElementId), src => src.ElementId }
                 }
             );
         }

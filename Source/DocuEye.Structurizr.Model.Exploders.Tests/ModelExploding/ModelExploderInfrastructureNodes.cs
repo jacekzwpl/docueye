@@ -25,7 +25,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     }
                 }
             };
-            var exloder = new ModelExploder(this.mapper);
+            var exloder = new ModelExploder();
 
             // Act
             var (elements, relationships) = exloder.ExplodeInfrastructureNodes(infrastructureNodes, "parentId");
@@ -82,7 +82,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     }
                 }
             };
-            var exloder = new ModelExploder(this.mapper);
+            var exloder = new ModelExploder();
 
             // Act
             var (elements, relationships) = exloder.ExplodeInfrastructureNodes(infrastructureNodes, "parentId");
@@ -130,7 +130,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     }
                 }
             };
-            var exloder = new ModelExploder(this.mapper);
+            var exloder = new ModelExploder();
 
             // Act
             var (elements, relationships) = exloder.ExplodeInfrastructureNodes(infrastructureNodes, "parentId");
@@ -202,7 +202,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     }
                 }
             };
-            var exloder = new ModelExploder(this.mapper);
+            var exloder = new ModelExploder();
 
             // Act
             var (elements, relationships) = exloder.ExplodeInfrastructureNodes(infrastructureNodes, "parentId");

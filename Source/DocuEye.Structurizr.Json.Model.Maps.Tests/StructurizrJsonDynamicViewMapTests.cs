@@ -42,8 +42,8 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                     nameof(ViewToImport.Content),
                     nameof(ViewToImport.Relationships),
                     nameof(ViewToImport.Elements),
-                    nameof(ViewToImport.AutomaticLayout),
                     nameof(ViewToImport.ContentType),
+                    nameof(ViewToImport.AutomaticLayout),
                     nameof(ViewToImport.BaseViewKey),
                     nameof(ViewToImport.Mode),
                     nameof(ViewToImport.Tags)

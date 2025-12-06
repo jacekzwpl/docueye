@@ -21,7 +21,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     Content = "base64",
                 }
             };
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
 
             // Act
             var result = exploder.ExplodeImageViews(views);
@@ -62,7 +62,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     Content = "base64",
                 }
             };
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
 
             // Act
             var result = exploder.ExplodeImageViews(views);
