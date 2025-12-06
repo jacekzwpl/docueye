@@ -30,5 +30,16 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             };
             
         }
+
+        public static IEnumerable<RelationshipToImport> ConvertToApiModel(this IEnumerable<StructurizrJsonRelationship> source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var result = new List<RelationshipToImport>();
+            foreach (var item in source)
+            {
+                result.Add(item.ConvertToApiModel());
+            }
+            return result.AsEnumerable();
+        }
     }
 }

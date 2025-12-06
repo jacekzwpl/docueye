@@ -2,6 +2,7 @@
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DocuEye.Structurizr.Json.Model.Maps
@@ -24,6 +25,17 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Relationships = source.Relationships?.ToRelationshipInViewToImport() ?? Array.Empty<RelationshipInViewToImport>()
             };
             return view;
+        }
+
+        public static IEnumerable<ViewToImport> ToViewToImport(this IEnumerable<StructurizrJsonDynamicView> source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var result = new List<ViewToImport>();
+            foreach (var item in source)
+            {
+                result.Add(item.ToViewToImport());
+            }
+            return result.AsEnumerable();
         }
     }
 }

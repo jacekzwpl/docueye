@@ -1,6 +1,7 @@
 ﻿using DocuEye.WorkspaceImporter.Api.Model.ViewConfiguration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DocuEye.Structurizr.Json.Model.Maps
@@ -27,6 +28,17 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Tag = source.Tag,
                 Width = source.Width
             };
+        }
+
+        public static IEnumerable<ElementStyleToImport> ToElementStyleToImport(this IEnumerable<StructurizrJsonElementStyle> source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var result = new List<ElementStyleToImport>();
+            foreach (var item in source)
+            {
+                result.Add(item.ToElementStyleToImport());
+            }
+            return result.AsEnumerable();
         }
     }
 }
