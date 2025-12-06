@@ -25,7 +25,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             // Assert
             Assert.That(person.Name, Is.EqualTo("Alice"));
             Assert.That(person.Description, Is.EqualTo("Alice is a person"));
-            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Person", "tag1", "tag2" }));
+            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Element", "Person", "tag1", "tag2" }));
             Assert.That(person.Identifier, Is.Not.Null);
         }
 
@@ -45,7 +45,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             // Assert
             Assert.That(person.Name, Is.EqualTo("Alice"));
             Assert.That(person.Description, Is.EqualTo("Alice is a person"));
-            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Person", "tag1", "tag2" }));
+            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Element", "Person", "tag1", "tag2" }));
             Assert.That(person.Identifier, Is.Not.Null);
         }
 
@@ -65,7 +65,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             // Assert
             Assert.That(person.Name, Is.EqualTo("Alice"));
             Assert.That(person.Description, Is.EqualTo("Alice is a person"));
-            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Person", "tag1", "tag2" }));
+            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Element", "Person", "tag1", "tag2" }));
             Assert.That(person.Identifier, Is.EqualTo("alice"));
         }
 
@@ -85,7 +85,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             // Assert
             Assert.That(person.Name, Is.EqualTo("Alice"));
             Assert.That(person.Description, Is.EqualTo("Alice is a person"));
-            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Person", "tag1", "tag2" }));
+            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Element", "Person", "tag1", "tag2" }));
             Assert.That(person.Identifier, Is.EqualTo("alice"));
         }
 
@@ -124,7 +124,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             // Assert
             Assert.That(person.Name, Is.EqualTo("Alice"));
             Assert.That(person.Description, Is.EqualTo("Alice is a person"));
-            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Person", "tag1" }));
+            Assert.That(person.Tags, Is.EquivalentTo(new[] { "Element", "Person", "tag1" }));
             Assert.That(person.Identifier, Is.Not.Null);
             Assert.That(person.Properties.Count, Is.EqualTo(2));
             Assert.That(person.Properties["key1"], Is.EqualTo("value1"));

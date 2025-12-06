@@ -35,7 +35,7 @@ namespace DocuEye.Structurizr.DSL.Tests
 
             // Assert
             Assert.That(result.ContainerIdentifier, Is.EqualTo("mysystem"));
-            Assert.That(result.Tags, Is.EquivalentTo(new[] { "Element", "Container Instance", "tag1", "tag2" }));
+            Assert.That(result.Tags, Is.EquivalentTo(new[] { "Container Instance", "tag1", "tag2" }));
             Assert.That(result.Identifier, Is.Not.Null);
             Assert.That(result.DeploymentNodeIdentifier, Is.EqualTo("parentId"));
             Assert.That(result.DeploymentGroupsIdentiifiers, Is.EquivalentTo(new[] { "deploymentGroup1", "deploymentGroup2" }));
@@ -68,7 +68,7 @@ namespace DocuEye.Structurizr.DSL.Tests
 
             // Assert
             Assert.That(result.ContainerIdentifier, Is.EqualTo("mysystem.test"));
-            Assert.That(result.Tags, Is.EquivalentTo(new[] { "Element", "Container Instance", "tag1", "tag2" }));
+            Assert.That(result.Tags, Is.EquivalentTo(new[] { "Container Instance", "tag1", "tag2" }));
             Assert.That(result.Identifier, Is.EqualTo("myinstance"));
             Assert.That(result.DeploymentNodeIdentifier, Is.EqualTo("parentId"));
             Assert.That(result.DeploymentGroupsIdentiifiers, Is.EquivalentTo(new[] { "deploymentGroup1", "deploymentGroup2" }));
@@ -104,7 +104,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             // Assert
             Assert.That(result.ContainerIdentifier, Is.EqualTo("mysystem"));
             Assert.That(result.Description, Is.EqualTo("Great Infrastructure Node"));
-            Assert.That(result.Tags, Is.EquivalentTo(new[] { "Element", "Container Instance", "tag1" }));
+            Assert.That(result.Tags, Is.EquivalentTo(new[] { "Container Instance", "tag1" }));
             Assert.That(result.Identifier, Is.Not.Null);
             Assert.That(result.Properties.Count, Is.EqualTo(2));
             Assert.That(result.Properties["key1"], Is.EqualTo("value1"));

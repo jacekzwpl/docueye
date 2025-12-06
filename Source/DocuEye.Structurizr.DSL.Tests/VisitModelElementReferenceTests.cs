@@ -52,7 +52,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             var result = visitor.VisitModelElementReference(context);
             // Assert
             var relationship = visitor.Workspace.Model.Relationships.SingleOrDefault(o => o.Identifier == "relationshipId");
-            Assert.IsNotNull(relationship);
+            Assert.That(relationship, Is.Not.Null);
             Assert.That(relationship.Identifier, Is.EqualTo("relationshipId"));
             Assert.That(relationship.SourceIdentifier, Is.EqualTo("sourceId"));
             Assert.That(relationship.DestinationIdentifier, Is.EqualTo("destinationId"));
@@ -89,7 +89,7 @@ namespace DocuEye.Structurizr.DSL.Tests
             var result = visitor.VisitModelElementReference(context);
             // Assert
             var relationship = visitor.Workspace.Model.Relationships.SingleOrDefault(o => o.Identifier == "relationshipId");
-            Assert.IsNotNull(relationship);
+            Assert.That(relationship, Is.Not.Null);
             Assert.That(relationship.Identifier, Is.EqualTo("relationshipId"));
             Assert.That(relationship.SourceIdentifier, Is.EqualTo("sourceId"));
             Assert.That(relationship.DestinationIdentifier, Is.EqualTo("destinationId"));
