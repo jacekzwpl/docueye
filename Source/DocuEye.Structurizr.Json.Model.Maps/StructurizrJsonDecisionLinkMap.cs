@@ -1,6 +1,7 @@
 ﻿using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DocuEye.Structurizr.Json.Model.Maps
 {
@@ -25,7 +26,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             {
                 result.Add(item.ConvertToApiModel());
             }
-            return result;
+            return result.AsEnumerable();
         }
     }
 }
