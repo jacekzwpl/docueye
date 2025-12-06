@@ -163,6 +163,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.DslToJs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.DslToJson.Tests", "Source\DocuEye.Structurizr.DslToJson.Tests\DocuEye.Structurizr.DslToJson.Tests.csproj", "{33CB437D-B9C6-5787-4B38-3CD380C4C3D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.Json.Model.Maps", "Source\DocuEye.Structurizr.Json.Model.Maps\DocuEye.Structurizr.Json.Model.Maps.csproj", "{EF021AAD-C8A4-4708-8D34-260B86F5EA64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.Json.Model.Maps.Tests", "Source\DocuEye.Structurizr.Json.Model.Maps.Tests\DocuEye.Structurizr.Json.Model.Maps.Tests.csproj", "{BF804804-7C5E-4639-B86F-296CB643177A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -453,6 +457,14 @@ Global
 		{33CB437D-B9C6-5787-4B38-3CD380C4C3D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33CB437D-B9C6-5787-4B38-3CD380C4C3D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33CB437D-B9C6-5787-4B38-3CD380C4C3D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF021AAD-C8A4-4708-8D34-260B86F5EA64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF021AAD-C8A4-4708-8D34-260B86F5EA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF021AAD-C8A4-4708-8D34-260B86F5EA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF021AAD-C8A4-4708-8D34-260B86F5EA64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF804804-7C5E-4639-B86F-296CB643177A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF804804-7C5E-4639-B86F-296CB643177A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF804804-7C5E-4639-B86F-296CB643177A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF804804-7C5E-4639-B86F-296CB643177A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -527,6 +539,8 @@ Global
 		{EAAD710C-74A9-161F-BDD9-689E8A793B91} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
 		{2D4CFE45-74FC-3EC4-4E42-09121C2441DF} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
 		{33CB437D-B9C6-5787-4B38-3CD380C4C3D8} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
+		{EF021AAD-C8A4-4708-8D34-260B86F5EA64} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
+		{BF804804-7C5E-4639-B86F-296CB643177A} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
