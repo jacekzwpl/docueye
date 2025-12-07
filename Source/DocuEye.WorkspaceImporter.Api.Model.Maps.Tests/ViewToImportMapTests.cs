@@ -41,7 +41,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         public void Mapping_ViewToImport_To_SystemLandscapeView_Works()
         {
 
-            var result = source.ToSystemLandscapeView();
+            var result = source.MapToSystemLandscapeView();
 
             MappingAssert.AssertMapped(
                 source, result,
@@ -63,7 +63,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         [Test]
         public void Mapping_ViewToImport_To_SystemContextView_Works()
         {
-            var result = source.ToSystemContextView();
+            var result = source.MapToSystemContextView();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 
@@ -86,7 +86,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         public void Mapping_ViewToImport_To_ContainerView_Works()
         {
 
-            var result = source.ToContainerView();
+            var result = source.MapToContainerView();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 
@@ -109,7 +109,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         public void Mapping_ViewToImport_To_ComponentView_Works()
         {
 
-            var result = source.ToComponentView();
+            var result = source.MapToComponentView();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 
@@ -132,7 +132,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         public void Mapping_ViewToImport_To_DeploymentView_Works()
         {
 
-            var result = source.ToDeploymentView();
+            var result = source.MapToDeploymentView();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 
@@ -154,7 +154,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         public void Mapping_ViewToImport_To_ImageView_Works()
         {
 
-            var result = source.ToImageView();
+            var result = source.MapToImageView();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 
@@ -173,7 +173,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         public void Mapping_ViewToImport_To_DynamicView_Works()
         {
 
-            var result = source.ToDynamicView();
+            var result = source.MapToDynamicView();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 
@@ -195,7 +195,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         public void Mapping_ViewToImport_To_FilteredView_Works()
         {
      
-            var result = source.ToFilteredView();
+            var result = source.MapToFilteredView();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 

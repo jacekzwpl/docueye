@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Application.Events;
 using DocuEye.WorkspaceImporter.Model;
@@ -13,12 +13,10 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 {
     public class RelationshipsChangeDetector
     {
-        private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public RelationshipsChangeDetector(IMapper mapper, IMediator mediator)
+        public RelationshipsChangeDetector(IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -41,7 +39,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 
                 if (existingRelationship == null)
                 {
-                    var newRelationship = this.mapper.Map<Relationship>(relationshipToImport);
+                    var newRelationship = relationshipToImport.MapToRelationship();
                     newRelationship.Id = Guid.NewGuid().ToString();
                     newRelationship.WorkspaceId = workspaceId;
                     newRelationship.SourceId = sourceElement.Id;
@@ -65,7 +63,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 else
                 {
                     var oldRelationship = existingRelationship.Clone();
-                    this.mapper.Map<RelationshipToImport, Relationship>(relationshipToImport, existingRelationship);
+                    relationshipToImport.MapToRelationship(existingRelationship);
                     existingRelationship.SourceId = sourceElement.Id;
                     existingRelationship.DestinationId = destinationElement.Id;
                     existingRelationship.SourceName = sourceElement.Name;
@@ -104,7 +102,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 
                 if (linkedRelationShip != null)
                 {
-                    var newRelationship = this.mapper.Map<Relationship>(relationshipToImport);
+                    var newRelationship = relationshipToImport.MapToRelationship();
                     newRelationship.Id = Guid.NewGuid().ToString();
                     newRelationship.SourceId = sourceElement.Id;
                     newRelationship.DestinationId = destinationElement.Id;

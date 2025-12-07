@@ -7,28 +7,25 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class RelationshipToImportMap
     {
-        public static Relationship ToRelationship(this RelationshipToImport source)
+        public static Relationship MapToRelationship(this RelationshipToImport source, Relationship? existing = null)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
-            return new Relationship
-            {
-
-                Description = source.Description,
-                Technology = source.Technology,
-                Tags = source.Tags ?? Array.Empty<string>(),
-                Url = source.Url,
-                Properties = source.Properties ?? new Dictionary<string, string>(),
-                DslId = source.DslId,
-                StructurizrId = source.StructurizrId,
-                InteractionStyle = source.InteractionStyle,
-
-            };
+            existing ??= new Relationship();
+            existing.Description = source.Description;
+            existing.Technology = source.Technology;
+            existing.Tags = source.Tags ?? Array.Empty<string>();
+            existing.Url = source.Url;
+            existing.Properties = source.Properties ?? new Dictionary<string, string>();
+            existing.DslId = source.DslId;
+            existing.StructurizrId = source.StructurizrId;
+            existing.InteractionStyle = source.InteractionStyle;
+            return existing;
         }
 
-        public static IEnumerable<Relationship> ToRelationships(this IEnumerable<RelationshipToImport> sources)
+        public static IEnumerable<Relationship> MapToRelationships(this IEnumerable<RelationshipToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.ToRelationship();
+            foreach (var s in sources) yield return s.MapToRelationship();
         }
     }
 }

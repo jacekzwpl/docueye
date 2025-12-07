@@ -1,6 +1,7 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.ModelKeeper.Model;
+using DocuEye.ModelKeeper.Model.Maps;
 using DocuEye.ViewsKeeper.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 using MediatR;
 using System;
@@ -11,12 +12,10 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 {
     public class ViewsChangeDetector
     {
-        private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public ViewsChangeDetector(IMapper mapper, IMediator mediator)
+        public ViewsChangeDetector(IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -71,7 +70,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<SystemLandscapeView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.SystemLandscapeView))
             {
-                var view = this.mapper.Map<SystemLandscapeView>(viewToImport);
+                var view = viewToImport.MapToSystemLandscapeView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 view.Elements = this.DetectElementsInView(viewToImport.Elements, existingElements, elementsDiagrams);
@@ -87,7 +86,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<SystemContextView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.SystemContextView))
             {
-                var view = this.mapper.Map<SystemContextView>(viewToImport);
+                var view = viewToImport.MapToSystemContextView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 if(!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
@@ -112,7 +111,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<ContainerView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.ContainerView))
             {
-                var view = this.mapper.Map<ContainerView>(viewToImport);
+                var view = viewToImport.MapToContainerView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
@@ -136,7 +135,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<ComponentView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.ComponentView))
             {
-                var view = this.mapper.Map<ComponentView>(viewToImport);
+                var view = viewToImport.MapToComponentView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
@@ -160,7 +159,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<DeploymentView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.DeploymentView))
             {
-                var view = this.mapper.Map<DeploymentView>(viewToImport);
+                var view = viewToImport.MapToDeploymentView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
@@ -184,7 +183,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<ImageView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.ImageView))
             {
-                var view = this.mapper.Map<ImageView>(viewToImport);
+                var view = viewToImport.MapToImageView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
@@ -205,7 +204,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<DynamicView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.DynamicView))
             {
-                var view = this.mapper.Map<DynamicView>(viewToImport);
+                var view = viewToImport.MapToDynamicView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 if (!string.IsNullOrEmpty(viewToImport.StructurizrElementId))
@@ -236,7 +235,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
             var result = new List<FilteredView>();
             foreach (var viewToImport in viewsToImport.Where(o => o.ViewType == ViewType.FilteredView))
             {
-                var view = this.mapper.Map<FilteredView>(viewToImport);
+                var view = viewToImport.MapToFilteredView();
                 view.Id = viewsIdsMap[viewToImport.Key];
                 view.WorkspaceId = workspaceId;
                 var baseView = this.GetBaseForFilteredView(view.BaseViewKey, systemLandscapeViews, systemContextViews, containerViews, componentViews);
@@ -323,7 +322,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 {
                     continue;
                 }
-                var elementView = this.mapper.Map<ElementView>(existingElement);
+                var elementView = existingElement.MapToElementView();
                 elementView.X = elementToImport.X;
                 elementView.Y = elementToImport.Y;
                 if(elementsDiagrams.ContainsKey(existingElement.Id))
@@ -348,7 +347,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 {
                     continue;
                 }
-                var relationshipView = this.mapper.Map<RelationshipView>(existingRelationship);
+                var relationshipView = existingRelationship.MapToRelationshipView();
                 result.Add(relationshipView);
             }
             return result;

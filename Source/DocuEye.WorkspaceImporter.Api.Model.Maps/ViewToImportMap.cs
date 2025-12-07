@@ -6,7 +6,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class ViewToImportMap
     {
-        public static SystemLandscapeView ToSystemLandscapeView(this ViewToImport source)
+        public static SystemLandscapeView MapToSystemLandscapeView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new SystemLandscapeView
@@ -21,7 +21,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static SystemContextView ToSystemContextView(this ViewToImport source)
+        public static SystemContextView MapToSystemContextView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new SystemContextView
@@ -36,7 +36,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static ContainerView ToContainerView(this ViewToImport source)
+        public static ContainerView MapToContainerView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new ContainerView
@@ -51,7 +51,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static ComponentView ToComponentView(this ViewToImport source)
+        public static ComponentView MapToComponentView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new ComponentView
@@ -66,7 +66,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static DeploymentView ToDeploymentView(this ViewToImport source)
+        public static DeploymentView MapToDeploymentView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new DeploymentView
@@ -80,7 +80,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static ImageView ToImageView(this ViewToImport source)
+        public static ImageView MapToImageView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new ImageView
@@ -94,7 +94,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static DynamicView ToDynamicView(this ViewToImport source)
+        public static DynamicView MapToDynamicView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new DynamicView
@@ -109,7 +109,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static FilteredView ToFilteredView(this ViewToImport source)
+        public static FilteredView MapToFilteredView(this ViewToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new FilteredView

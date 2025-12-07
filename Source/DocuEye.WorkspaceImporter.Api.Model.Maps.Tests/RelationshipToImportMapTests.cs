@@ -29,7 +29,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
                 DslId = "dsl-131415"
             };
 
-            var result = source.ToRelationship();
+            var result = source.MapToRelationship();
 
             MappingAssert.AssertMapped(
                 source, result, 

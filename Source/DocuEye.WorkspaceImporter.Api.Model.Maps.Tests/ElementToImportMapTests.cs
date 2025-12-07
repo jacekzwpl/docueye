@@ -33,7 +33,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
                 OwnerTeam = "Team A"
             };
 
-            var result = source.ToElement();
+            var result = source.MapToElement();
 
             MappingAssert.AssertMapped(
                 source, result, 
