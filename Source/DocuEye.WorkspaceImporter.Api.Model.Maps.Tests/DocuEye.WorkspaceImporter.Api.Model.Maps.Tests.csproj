@@ -24,6 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocuEye.Infrastructure.Tests.Common\DocuEye.Infrastructure.Tests.Common.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspaceImporter.Api.Model.Maps\DocuEye.WorkspaceImporter.Api.Model.Maps.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
