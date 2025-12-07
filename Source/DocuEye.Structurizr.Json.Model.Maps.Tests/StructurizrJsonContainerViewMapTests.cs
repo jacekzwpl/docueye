@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 
 namespace DocuEye.Structurizr.Json.Model.Maps.Tests

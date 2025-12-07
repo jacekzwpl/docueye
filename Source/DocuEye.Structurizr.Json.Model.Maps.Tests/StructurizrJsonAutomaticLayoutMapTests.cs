@@ -1,4 +1,6 @@
-﻿namespace DocuEye.Structurizr.Json.Model.Maps.Tests
+﻿using DocuEye.Infrastructure.Tests.Common;
+
+namespace DocuEye.Structurizr.Json.Model.Maps.Tests
 {
     public class StructurizrJsonAutomaticLayoutMapTests
     {

@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocuEye.Infrastructure.Tests.Common\DocuEye.Infrastructure.Tests.Common.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.Json.Model.Maps\DocuEye.Structurizr.Json.Model.Maps.csproj" />
   </ItemGroup>
 

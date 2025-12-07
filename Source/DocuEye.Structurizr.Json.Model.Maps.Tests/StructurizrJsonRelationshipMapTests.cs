@@ -1,4 +1,5 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model.Relationships;
+﻿using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 
 namespace DocuEye.Structurizr.Json.Model.Maps.Tests
 {
