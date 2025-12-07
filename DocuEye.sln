@@ -189,6 +189,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.DocsKeeper.Model.Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.DocsKeeper.Model.Maps.Tests", "Source\DocuEye.DocsKeeper.Model.Maps.Tests\DocuEye.DocsKeeper.Model.Maps.Tests.csproj", "{234E2E55-99BB-49BD-A860-0B50D4C79F79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspacesKeeper.Application.Model", "Source\DocuEye.WorkspacesKeeper.Application.Model\DocuEye.WorkspacesKeeper.Application.Model.csproj", "{7F774218-0BCA-461A-810C-C3D70FD9BC13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspacesKeeper.Model.Maps", "Source\DocuEye.WorkspacesKeeper.Model.Maps\DocuEye.WorkspacesKeeper.Model.Maps.csproj", "{81EBCE0B-A7AD-41AB-B8CB-E92F544E941E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.WorkspacesKeeper.Model.Maps.Tests", "Source\DocuEye.WorkspacesKeeper.Model.Maps.Tests\DocuEye.WorkspacesKeeper.Model.Maps.Tests.csproj", "{C33547E6-B842-4370-BE67-A5AE7F0E9970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -531,6 +537,18 @@ Global
 		{234E2E55-99BB-49BD-A860-0B50D4C79F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{234E2E55-99BB-49BD-A860-0B50D4C79F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{234E2E55-99BB-49BD-A860-0B50D4C79F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F774218-0BCA-461A-810C-C3D70FD9BC13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F774218-0BCA-461A-810C-C3D70FD9BC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F774218-0BCA-461A-810C-C3D70FD9BC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F774218-0BCA-461A-810C-C3D70FD9BC13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81EBCE0B-A7AD-41AB-B8CB-E92F544E941E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81EBCE0B-A7AD-41AB-B8CB-E92F544E941E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81EBCE0B-A7AD-41AB-B8CB-E92F544E941E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81EBCE0B-A7AD-41AB-B8CB-E92F544E941E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C33547E6-B842-4370-BE67-A5AE7F0E9970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C33547E6-B842-4370-BE67-A5AE7F0E9970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C33547E6-B842-4370-BE67-A5AE7F0E9970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C33547E6-B842-4370-BE67-A5AE7F0E9970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -618,6 +636,9 @@ Global
 		{F9498ABC-D4B5-4214-9449-3C8AE4DD2EFF} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
 		{5A1B0924-C542-4859-B2E1-4AB7C6F8598D} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
 		{234E2E55-99BB-49BD-A860-0B50D4C79F79} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
+		{7F774218-0BCA-461A-810C-C3D70FD9BC13} = {CCD1348E-6ACE-4A93-8FD4-7E990BEBF02E}
+		{81EBCE0B-A7AD-41AB-B8CB-E92F544E941E} = {CCD1348E-6ACE-4A93-8FD4-7E990BEBF02E}
+		{C33547E6-B842-4370-BE67-A5AE7F0E9970} = {CCD1348E-6ACE-4A93-8FD4-7E990BEBF02E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
