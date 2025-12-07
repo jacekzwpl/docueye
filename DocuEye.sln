@@ -183,6 +183,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.ViewsKeeper.Model.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.ViewsKeeper.Application.Model", "Source\DocuEye.ViewsKeeper.Application.Model\DocuEye.ViewsKeeper.Application.Model.csproj", "{D4DA8D80-AB2F-44C5-98C8-C16AD118520B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.DocsKeeper.Application.Model", "Source\DocuEye.DocsKeeper.Application.Model\DocuEye.DocsKeeper.Application.Model.csproj", "{F9498ABC-D4B5-4214-9449-3C8AE4DD2EFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.DocsKeeper.Model.Maps", "Source\DocuEye.DocsKeeper.Model.Maps\DocuEye.DocsKeeper.Model.Maps.csproj", "{5A1B0924-C542-4859-B2E1-4AB7C6F8598D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.DocsKeeper.Model.Maps.Tests", "Source\DocuEye.DocsKeeper.Model.Maps.Tests\DocuEye.DocsKeeper.Model.Maps.Tests.csproj", "{234E2E55-99BB-49BD-A860-0B50D4C79F79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -513,6 +519,18 @@ Global
 		{D4DA8D80-AB2F-44C5-98C8-C16AD118520B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4DA8D80-AB2F-44C5-98C8-C16AD118520B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4DA8D80-AB2F-44C5-98C8-C16AD118520B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9498ABC-D4B5-4214-9449-3C8AE4DD2EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9498ABC-D4B5-4214-9449-3C8AE4DD2EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9498ABC-D4B5-4214-9449-3C8AE4DD2EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9498ABC-D4B5-4214-9449-3C8AE4DD2EFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A1B0924-C542-4859-B2E1-4AB7C6F8598D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1B0924-C542-4859-B2E1-4AB7C6F8598D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1B0924-C542-4859-B2E1-4AB7C6F8598D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1B0924-C542-4859-B2E1-4AB7C6F8598D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{234E2E55-99BB-49BD-A860-0B50D4C79F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234E2E55-99BB-49BD-A860-0B50D4C79F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234E2E55-99BB-49BD-A860-0B50D4C79F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234E2E55-99BB-49BD-A860-0B50D4C79F79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -597,6 +615,9 @@ Global
 		{C068423A-1320-48EA-B81B-C5D450433C45} = {8D1B1D91-B4DE-4DF9-A253-14777B4B4E40}
 		{56F08A43-5BEF-49AB-9AFF-DE419C269193} = {8D1B1D91-B4DE-4DF9-A253-14777B4B4E40}
 		{D4DA8D80-AB2F-44C5-98C8-C16AD118520B} = {8D1B1D91-B4DE-4DF9-A253-14777B4B4E40}
+		{F9498ABC-D4B5-4214-9449-3C8AE4DD2EFF} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
+		{5A1B0924-C542-4859-B2E1-4AB7C6F8598D} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
+		{234E2E55-99BB-49BD-A860-0B50D4C79F79} = {1B4018CC-86F3-480B-83A0-5A67D0D397E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}

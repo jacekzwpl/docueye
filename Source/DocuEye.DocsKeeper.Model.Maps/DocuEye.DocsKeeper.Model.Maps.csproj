@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocuEye.DocsKeeper.Application.Model\DocuEye.DocsKeeper.Application.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.DocsKeeper.Model\DocuEye.DocsKeeper.Model.csproj" />
+  </ItemGroup>
+
+</Project>
