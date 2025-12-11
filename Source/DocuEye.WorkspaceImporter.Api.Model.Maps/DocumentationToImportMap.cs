@@ -8,13 +8,13 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class DocumentationToImportMap
     {
-        public static Documentation ToDocumentation(this DocumentationToImport source)
+        public static Documentation MapToDocumentation(this DocumentationToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new Documentation
             {
                 Id = source.Id,
-                Sections = source.Sections?.ToDocumentationSections() ?? Array.Empty<DocumentationSection>()
+                Sections = source.Sections?.MapToDocumentationSections() ?? Array.Empty<DocumentationSection>()
             };
         }
     }

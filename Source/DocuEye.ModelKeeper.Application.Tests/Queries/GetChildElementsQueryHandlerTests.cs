@@ -13,7 +13,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetChildElementsQuery("workspacetest1", "SoftwareSystemId1");
 
             // Act
-            var handler = new GetChildElementsQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetChildElementsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -27,7 +27,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetChildElementsQuery("workspacetest1", "DeploymentNodeId1", ElementType.DeploymentNode);
 
             // Act
-            var handler = new GetChildElementsQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetChildElementsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert

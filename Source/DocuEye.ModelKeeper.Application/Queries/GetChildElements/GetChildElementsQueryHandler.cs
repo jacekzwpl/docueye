@@ -1,9 +1,10 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Persistence;
+﻿using DocuEye.ModelKeeper.Persistence;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DocuEye.ModelKeeper.Model.Maps;
+using DocuEye.ModelKeeper.Application.Model;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetChildElements
 {
@@ -13,16 +14,13 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetChildElements
     public class GetChildElementsQueryHandler : IRequestHandler<GetChildElementsQuery, IEnumerable<ChildElement>>
     {
         private readonly IModelKeeperDBContext dbContext;
-        private readonly IMapper mapper;
         /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="dbContext">MongoDB context</param>
-        /// <param name="mapper">Automapper service</param>
-        public GetChildElementsQueryHandler(IModelKeeperDBContext dbContext, IMapper mapper)
+        public GetChildElementsQueryHandler(IModelKeeperDBContext dbContext)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
         }
         /// <summary>
         /// Handles query
@@ -41,13 +39,13 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetChildElements
                         && o.WorkspaceId == request.WorkspaceId
                         && o.ParentId == request.ParentId,
                         o => o.Name, true);
-                return this.mapper.Map<IEnumerable<ChildElement>>(elements);
+                return elements.MapToChildElements();
             }
             else
             {
                 var elements = await this.dbContext.Elements
                     .Find(o => o.WorkspaceId == request.WorkspaceId && o.ParentId == request.ParentId, o => o.Name, true);
-                return this.mapper.Map<IEnumerable<ChildElement>>(elements);
+                return elements.MapToChildElements();
             }
         }
     }

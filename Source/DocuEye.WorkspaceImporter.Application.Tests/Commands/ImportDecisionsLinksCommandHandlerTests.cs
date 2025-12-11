@@ -1,7 +1,7 @@
-﻿using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
+﻿using DocuEye.DocsKeeper.Application.Model;
+using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId;
 using DocuEye.DocsKeeper.Model;
-using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks;
 using DocuEye.WorkspaceImporter.Model;
@@ -25,7 +25,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDecisionsLinksCommandHandler(this.mediator, dbContext, this.mapper);
+            var handler = new ImportDecisionsLinksCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -54,7 +54,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDecisionsLinksCommandHandler(this.mediator, dbContext, this.mapper);
+            var handler = new ImportDecisionsLinksCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -105,7 +105,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 );
 
             // Act
-            var handler = new ImportDecisionsLinksCommandHandler(mediatorMock.Object, dbContext, this.mapper);
+            var handler = new ImportDecisionsLinksCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert

@@ -13,7 +13,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
                 Description = "Description",
                 StructurizrId = "StructurizrId"
             };
-            var result = source.ToDecisionLink();
+            var result = source.MapToDecisionLink();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 

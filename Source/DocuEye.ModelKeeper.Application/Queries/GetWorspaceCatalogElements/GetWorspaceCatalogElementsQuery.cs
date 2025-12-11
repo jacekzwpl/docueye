@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DocuEye.ModelKeeper.Application.Model;
+using MediatR;
 using System.Collections.Generic;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements

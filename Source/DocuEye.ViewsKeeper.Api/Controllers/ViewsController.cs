@@ -1,4 +1,5 @@
 ﻿using DocuEye.Infrastructure.HttpProblemDetails;
+using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement;
 using DocuEye.ViewsKeeper.Application.Queries.GetComponentView;
 using DocuEye.ViewsKeeper.Application.Queries.GetContainerView;

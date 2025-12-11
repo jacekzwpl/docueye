@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using DocuEye.DocsKeeper.Application.Commads.SaveSingleImage;
-using DocuEye.DocsKeeper.Model;
+﻿using DocuEye.DocsKeeper.Application.Commads.SaveSingleImage;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
 using System;
@@ -12,12 +11,10 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportImage
     public class ImportImageCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportImageCommand, ImportImageResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
 
-        public ImportImageCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext) : base(dbContext)
+        public ImportImageCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
         }
         public async Task<ImportImageResult> Handle(ImportImageCommand request, CancellationToken cancellationToken)
         {
@@ -32,7 +29,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportImage
                         checkImport.Message);
             }
 
-            var image = this.mapper.Map<Image>(request.Image);
+            var image = request.Image.MapToImage();
             image.WorkspaceId = request.WorkspaceId;
             image.Id = Guid.NewGuid().ToString();
 

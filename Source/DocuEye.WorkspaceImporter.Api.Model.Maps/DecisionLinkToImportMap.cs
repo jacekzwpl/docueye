@@ -8,7 +8,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class DecisionLinkToImportMap
     {
-        public static DecisionLink ToDecisionLink(this DecisionLinkToImport source)
+        public static DecisionLink MapToDecisionLink(this DecisionLinkToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new DecisionLink

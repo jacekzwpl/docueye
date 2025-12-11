@@ -1,5 +1,6 @@
 ﻿using DocuEye.DocsKeeper.Application.Model;
 using System;
+using System.Collections.Generic;
 
 namespace DocuEye.DocsKeeper.Model.Maps
 {
@@ -19,6 +20,12 @@ namespace DocuEye.DocsKeeper.Model.Maps
             return dest;
         }
 
+        public static IEnumerable<FoundedDecision> MapToFoundedDecisions(this IEnumerable<Decision> sources)
+        {
+            if (sources == null) throw new ArgumentNullException(nameof(sources));
+            foreach (var s in sources) yield return s.MapToFoundedDecision();
+        }
+
         public static DecisionsListItem MapToDecisionsListItem(this Decision source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
@@ -31,6 +38,12 @@ namespace DocuEye.DocsKeeper.Model.Maps
                 ElementId = source.ElementId
             };
             return dest;
+        }
+
+        public static IEnumerable<DecisionsListItem> MapToDecisionsListItems(this IEnumerable<Decision> sources)
+        {
+            if (sources == null) throw new ArgumentNullException(nameof(sources));
+            foreach (var s in sources) yield return s.MapToDecisionsListItem();
         }
     }
 }

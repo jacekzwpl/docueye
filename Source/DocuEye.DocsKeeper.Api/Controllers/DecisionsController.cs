@@ -1,4 +1,5 @@
-﻿using DocuEye.DocsKeeper.Application.Queries.FindDecisions;
+﻿using DocuEye.DocsKeeper.Application.Model;
+using DocuEye.DocsKeeper.Application.Queries.FindDecisions;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisionContent;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using MediatR;

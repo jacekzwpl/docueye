@@ -20,7 +20,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
                 Type = "png",
                 DocumentationId = "docId"
             };
-            var result = source.ToImage();
+            var result = source.MapToImage();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 

@@ -1,5 +1,7 @@
 ﻿using DocuEye.WorkspacesKeeper.Application.Model;
 using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace DocuEye.WorkspacesKeeper.Model.Maps
 {
@@ -15,6 +17,12 @@ namespace DocuEye.WorkspacesKeeper.Model.Maps
                 Description = source.Description
             };
             return dest;
+        }
+
+        public static IEnumerable<FoundedWorkspace> MapToFoundedWorkspaces(this IEnumerable<Workspace> sources)
+        {
+            if (sources == null) throw new ArgumentNullException(nameof(sources));
+            foreach (var s in sources) yield return s.MapToFoundedWorkspace();
         }
     }
 }

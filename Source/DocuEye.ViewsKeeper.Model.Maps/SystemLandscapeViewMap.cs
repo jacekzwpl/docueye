@@ -1,6 +1,7 @@
 ﻿using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Model;
 using System;
+using System.Collections.Generic;
 
 namespace DocuEye.ViewsKeeper.Model.Maps
 {
@@ -18,6 +19,12 @@ namespace DocuEye.ViewsKeeper.Model.Maps
             return dest;
         }
 
+        public static IEnumerable<WorkspaceView> MapToWorkspaceViews(this IEnumerable<SystemLandscapeView> sources)
+        {
+            if (sources == null) throw new ArgumentNullException(nameof(sources));
+            foreach (var s in sources) yield return s.MapToWorkspaceView();
+        }
+
         public static ViewWithElement MapToViewWithElement(this SystemLandscapeView source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
@@ -28,6 +35,12 @@ namespace DocuEye.ViewsKeeper.Model.Maps
                 Name = string.Format("[{0}]{1}", source.ViewType, source.Title ?? source.Description ?? source.Key)
             };
             return dest;
+        }
+
+        public static IEnumerable<ViewWithElement> MapToViewWithElements(this IEnumerable<SystemLandscapeView> sources)
+        {
+            if (sources == null) throw new ArgumentNullException(nameof(sources));
+            foreach (var s in sources) yield return s.MapToViewWithElement();
         }
     }
 }

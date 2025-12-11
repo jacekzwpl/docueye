@@ -32,7 +32,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
                     }
                 }
             };
-            var result = source.ToDecision();
+            var result = source.MapToDecision();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 

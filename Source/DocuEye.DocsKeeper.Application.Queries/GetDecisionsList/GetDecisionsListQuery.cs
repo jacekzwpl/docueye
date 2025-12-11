@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DocuEye.DocsKeeper.Application.Model;
+using MediatR;
 using System.Collections.Generic;
 
 namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionsList

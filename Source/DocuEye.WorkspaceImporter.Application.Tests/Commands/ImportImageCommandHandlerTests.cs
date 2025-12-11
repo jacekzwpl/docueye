@@ -20,7 +20,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportImageCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportImageCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -51,7 +51,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportImageCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportImageCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -87,7 +87,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportImageCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportImageCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert

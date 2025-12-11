@@ -13,7 +13,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1");
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -30,7 +30,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1", "My System");
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -46,7 +46,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1", null, null, 2, 0);
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -61,7 +61,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1", null, ElementType.Container);
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert

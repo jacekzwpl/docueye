@@ -30,7 +30,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                     Tags = new List<string>() { "Tag1", "Tag2" }
                 }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var result = detector.DetectRelationshipsInView(relationshipsToImport, existingRelationships);

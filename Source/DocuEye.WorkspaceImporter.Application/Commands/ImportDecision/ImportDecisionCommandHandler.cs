@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DocuEye.DocsKeeper.Application.Commads.SaveSingleDecision;
+﻿using DocuEye.DocsKeeper.Application.Commads.SaveSingleDecision;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId;
@@ -8,18 +7,17 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecision
 {
     public class ImportDecisionCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportDecisionCommand, ImportDecisionResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
 
-        public ImportDecisionCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext) : base(dbContext)
+        public ImportDecisionCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
         }
 
         public async Task<ImportDecisionResult> Handle(ImportDecisionCommand request, CancellationToken cancellationToken)
@@ -35,10 +33,10 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecision
                         checkImport.Message);
             }
 
-            
 
 
-            var decision = this.mapper.Map<Decision>(request.Decision);
+
+            var decision = request.Decision.MapToDecision();
             decision.WorkspaceId = request.WorkspaceId;
 
             var existingDecision = await this.mediator.Send(

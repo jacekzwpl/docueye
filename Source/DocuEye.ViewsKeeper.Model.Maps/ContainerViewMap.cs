@@ -20,6 +20,12 @@ namespace DocuEye.ViewsKeeper.Model.Maps
             return dest;
         }
 
+        public static IEnumerable<WorkspaceView> MapToWorkspaceViews(this IEnumerable<ContainerView> sources)
+        {
+            if (sources == null) throw new ArgumentNullException(nameof(sources));
+            foreach (var s in sources) yield return s.MapToWorkspaceView();
+        }
+
         public static ViewWithElement MapToViewWithElement(this ContainerView source) { 
             if (source == null) throw new ArgumentNullException( nameof(source));
             return new ViewWithElement
@@ -28,6 +34,12 @@ namespace DocuEye.ViewsKeeper.Model.Maps
                 ViewType = source.ViewType,
                 Name = string.Format("[{0}]{1}", source.ViewType, source.Title ?? source.Description ?? source.Key)
             };
+        }
+
+        public static IEnumerable<ViewWithElement> MapToViewWithElements(this IEnumerable<ContainerView> sources)
+        {
+            if (sources == null) throw new ArgumentNullException(nameof(sources));
+            foreach (var s in sources) yield return s.MapToViewWithElement();
         }
     }
 }

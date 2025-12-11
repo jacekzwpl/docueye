@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DocuEye.WorkspacesKeeper.Application.Model;
+using MediatR;
 using System.Collections.Generic;
 
 namespace DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces

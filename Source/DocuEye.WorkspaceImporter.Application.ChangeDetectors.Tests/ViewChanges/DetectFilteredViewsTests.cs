@@ -62,7 +62,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                     }
                 }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var result = detector.DetectFilteredViews(
@@ -166,7 +166,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                     }
                 }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var result = detector.DetectFilteredViews(
@@ -270,7 +270,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                     }
                 }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var result = detector.DetectFilteredViews(
@@ -374,7 +374,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                     }
                 }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var result = detector.DetectFilteredViews(

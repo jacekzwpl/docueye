@@ -24,7 +24,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
                 Id = "doc-123",
                 StructurizrElementId = "element-456"
             };
-            var result = source.ToDocumentation();
+            var result = source.MapToDocumentation();
             MappingAssert.AssertMapped(
                 source, result,
                 ignoreDestProps: new[] { 

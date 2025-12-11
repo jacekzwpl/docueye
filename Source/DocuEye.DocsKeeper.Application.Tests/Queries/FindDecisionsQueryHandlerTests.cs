@@ -11,7 +11,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.Queries
             var query = new FindDecisionsQuery("workspacetest1");
 
             // Act
-            var handler = new FindDecisionsQueryHandler(this.dbContext, this.mapper);
+            var handler = new FindDecisionsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -25,7 +25,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.Queries
             var query = new FindDecisionsQuery("workspacetest1", "elementId1");
 
             // Act
-            var handler = new FindDecisionsQueryHandler(this.dbContext, this.mapper);
+            var handler = new FindDecisionsQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert

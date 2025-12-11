@@ -5,7 +5,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class ViewConfigurationToImportMap
     {
-        public static DocuEye.WorkspacesKeeper.Model.ViewConfiguration ToViewConfiguration(this ViewConfigurationToImport source)
+        public static DocuEye.WorkspacesKeeper.Model.ViewConfiguration MapToViewConfiguration(this ViewConfigurationToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new DocuEye.WorkspacesKeeper.Model.ViewConfiguration

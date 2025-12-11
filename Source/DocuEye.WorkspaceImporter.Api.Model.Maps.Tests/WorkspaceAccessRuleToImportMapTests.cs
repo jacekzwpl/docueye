@@ -11,7 +11,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         {
             var source = new WorkspaceAccessRuleToImport { 
                 Role = "reader" };
-            var result = source.ToWorkspaceAccessRule();
+            var result = source.MapToWorkspaceAccessRule();
             MappingAssert.AssertMapped(
                 source, result, ignoreDestProps: new[]
                 {

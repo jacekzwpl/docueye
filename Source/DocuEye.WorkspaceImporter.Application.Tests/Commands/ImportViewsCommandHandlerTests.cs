@@ -35,7 +35,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportViewsCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportViewsCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -65,7 +65,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportViewsCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportViewsCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -98,7 +98,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 i => i.Send(It.IsAny<GetWorkspaceQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<Workspace?>(null));
             // Act
-            var handler = new ImportViewsCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportViewsCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -204,7 +204,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 .Returns(Task.FromResult<IEnumerable<BaseView>>(new List<BaseView>()));
 
             // Act
-            var handler = new ImportViewsCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportViewsCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -318,7 +318,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             // Act
-            var handler = new ImportViewsCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportViewsCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert

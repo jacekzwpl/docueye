@@ -12,7 +12,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetElementConsumersQuery("ContainerId1", "workspacetest1");
 
             // Act
-            var handler = new GetElementConsumersQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetElementConsumersQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -26,7 +26,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetElementConsumersQuery("ContainerId1", "workspacetest1", true);
 
             // Act
-            var handler = new GetElementConsumersQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetElementConsumersQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -40,7 +40,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetElementConsumersQuery("ContainerId2", "workspacetest1");
 
             // Act
-            var handler = new GetElementConsumersQueryHandler(this.dbContext, this.mapper);
+            var handler = new GetElementConsumersQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert

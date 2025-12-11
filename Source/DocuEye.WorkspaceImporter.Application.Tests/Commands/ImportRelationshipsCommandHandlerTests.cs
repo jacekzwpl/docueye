@@ -33,7 +33,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportRelationshipsCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportRelationshipsCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -64,7 +64,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportRelationshipsCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportRelationshipsCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -121,7 +121,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             // Act
-            var handler = new ImportRelationshipsCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportRelationshipsCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert
@@ -192,7 +192,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             // Act
-            var handler = new ImportRelationshipsCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportRelationshipsCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, default);
 
             // Assert

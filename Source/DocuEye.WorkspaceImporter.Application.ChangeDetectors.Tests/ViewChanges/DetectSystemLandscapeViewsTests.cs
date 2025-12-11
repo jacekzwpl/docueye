@@ -75,7 +75,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                 }
             };
             var elementDiagrams = new Dictionary<string, string>();
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var result = detector.DetectSystemLandscapeViews(

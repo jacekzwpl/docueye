@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DocuEye.DocsKeeper.Application.Commads.SaveSingleDecision;
+﻿using DocuEye.DocsKeeper.Application.Commads.SaveSingleDecision;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId;
 using DocuEye.DocsKeeper.Model;
@@ -9,18 +8,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
 {
     public class ImportDecisionsLinksCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportDecisionsLinksCommand, ImportDecisionsLinksResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
 
-        public ImportDecisionsLinksCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext, IMapper mapper) : base(dbContext)
+        public ImportDecisionsLinksCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
         }
 
         public async Task<ImportDecisionsLinksResult> Handle(ImportDecisionsLinksCommand request, CancellationToken cancellationToken)
@@ -62,7 +60,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
                 
                 if (linkedDecision != null)
                 {
-                    var decisionLink = this.mapper.Map<DecisionLink>(link);
+                    var decisionLink = link.MapToDecisionLink();
                     decisionLink.Id = linkedDecision.Id;
                     decisionLinks.Add(decisionLink);
                 }

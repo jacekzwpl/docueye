@@ -8,7 +8,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class ImageToImportMap
     {
-        public static Image ToImage(this ImageToImport source)
+        public static Image MapToImage(this ImageToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new Image
@@ -20,10 +20,10 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             };
         }
 
-        public static IEnumerable<Image> ToImages(this IEnumerable<ImageToImport> sources)
+        public static IEnumerable<Image> MapToImages(this IEnumerable<ImageToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.ToImage();
+            foreach (var s in sources) yield return s.MapToImage();
         }
     }
 }

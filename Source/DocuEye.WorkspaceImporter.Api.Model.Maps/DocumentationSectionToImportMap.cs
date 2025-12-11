@@ -7,7 +7,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class DocumentationSectionToImportMap
     {
-        public static DocumentationSection ToDocumentationSection(this DocumentationSectionToImport source)
+        public static DocumentationSection MapToDocumentationSection(this DocumentationSectionToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new DocumentationSection
@@ -19,10 +19,10 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         }
 
 
-        public static IEnumerable<DocumentationSection> ToDocumentationSections(this IEnumerable<DocumentationSectionToImport> sources)
+        public static IEnumerable<DocumentationSection> MapToDocumentationSections(this IEnumerable<DocumentationSectionToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.ToDocumentationSection();
+            foreach (var s in sources) yield return s.MapToDocumentationSection();
         }
 
 

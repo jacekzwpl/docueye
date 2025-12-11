@@ -25,7 +25,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDocumentationCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportDocumentationCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -56,7 +56,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDocumentationCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportDocumentationCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -95,7 +95,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDocumentationCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportDocumentationCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -142,7 +142,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             // Act
-            var handler = new ImportDocumentationCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportDocumentationCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -186,7 +186,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 .Returns(Task.FromResult<Element?>(null));
 
             // Act
-            var handler = new ImportDocumentationCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportDocumentationCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert

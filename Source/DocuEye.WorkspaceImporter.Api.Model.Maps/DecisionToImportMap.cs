@@ -8,7 +8,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
 {
     public static class DecisionToImportMap
     {
-        public static Decision ToDecision(this DecisionToImport source)
+        public static Decision MapToDecision(this DecisionToImport source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new Decision

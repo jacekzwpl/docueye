@@ -41,7 +41,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.Relationsh
                 }
             };
             var existingRelationships = new List<Relationship>();
-            var detector = new RelationshipsChangeDetector(this.mapper, this.mediator);
+            var detector = new RelationshipsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectChanges("workspaceId", this.import, relationshipsToImport, existingRelationships, existingElements);
@@ -105,7 +105,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.Relationsh
                 }
             };
             var existingRelationships = new List<Relationship>();
-            var detector = new RelationshipsChangeDetector(this.mapper, this.mediator);
+            var detector = new RelationshipsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectChanges("workspaceId", this.import, relationshipsToImport, existingRelationships, existingElements);
@@ -180,7 +180,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.Relationsh
                     DestinationName = "Old Element 2"
                 }
             };
-            var detector = new RelationshipsChangeDetector(this.mapper, this.mediator);
+            var detector = new RelationshipsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectChanges("workspaceId", this.import, relationshipsToImport, existingRelationships, existingElements);
@@ -268,7 +268,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.Relationsh
                     LinkedRelationshipId = "testid1"
                 }
             };
-            var detector = new RelationshipsChangeDetector(this.mapper, this.mediator);
+            var detector = new RelationshipsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectChanges("workspaceId", this.import, relationshipsToImport, existingRelationships, existingElements);
@@ -338,7 +338,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.Relationsh
                     DestinationName = "Element 2"
                 }
             };
-            var detector = new RelationshipsChangeDetector(this.mapper, this.mediator);
+            var detector = new RelationshipsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectChanges("workspaceId", this.import, relationshipsToImport, existingRelationships, existingElements);
@@ -403,7 +403,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.Relationsh
                     LinkedRelationshipId = "testid1"
                 }
             };
-            var detector = new RelationshipsChangeDetector(this.mapper, this.mediator);
+            var detector = new RelationshipsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectChanges("workspaceId", this.import, relationshipsToImport, existingRelationships, existingElements);

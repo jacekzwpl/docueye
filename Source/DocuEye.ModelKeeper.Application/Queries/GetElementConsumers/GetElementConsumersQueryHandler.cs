@@ -1,5 +1,6 @@
-﻿using AutoMapper;
+﻿using DocuEye.ModelKeeper.Application.Model;
 using DocuEye.ModelKeeper.Model;
+using DocuEye.ModelKeeper.Model.Maps;
 using DocuEye.ModelKeeper.Persistence;
 using MediatR;
 using System;
@@ -16,16 +17,13 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementConsumers
     public class GetElementConsumersQueryHandler : IRequestHandler<GetElementConsumersQuery, IEnumerable<ElementConsumer>>
     {
         private readonly IModelKeeperDBContext dbContext;
-        private readonly IMapper mapper;
         /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="dbContext">MongoDB context</param>
-        /// <param name="mapper">Automapper service</param>
-        public GetElementConsumersQueryHandler(IModelKeeperDBContext dbContext, IMapper mapper)
+        public GetElementConsumersQueryHandler(IModelKeeperDBContext dbContext)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
         }
         /// <summary>
         /// Handles query
@@ -53,7 +51,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementConsumers
             var elements = await this.dbContext.Elements
                 .Find(o => relationshipsId.Contains(o.Id));
 
-            var consumers = this.mapper.Map<IEnumerable<ElementConsumer>>(elements);
+            var consumers = elements.MapToElementConsumers();
             //Fill relationships data for elements
             var usedRelationships = new List<string>();
             foreach (var consumer in consumers)

@@ -41,7 +41,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
 
             };
 
-            var result = source.ToViewConfiguration();
+            var result = source.MapToViewConfiguration();
 
             MappingAssert.AssertMapped(
                 source, result,

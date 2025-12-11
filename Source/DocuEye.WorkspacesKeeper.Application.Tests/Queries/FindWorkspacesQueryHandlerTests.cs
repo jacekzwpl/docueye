@@ -11,7 +11,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
             var query = new FindWorkspacesQuery();
 
             // Act
-            var handler = new FindWorkspacesQueryHandler(this.dbContext, this.mapper);
+            var handler = new FindWorkspacesQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -28,7 +28,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
             };
 
             // Act
-            var handler = new FindWorkspacesQueryHandler(this.dbContext, this.mapper);
+            var handler = new FindWorkspacesQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert
@@ -46,7 +46,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
             };
 
             // Act
-            var handler = new FindWorkspacesQueryHandler(this.dbContext, this.mapper);
+            var handler = new FindWorkspacesQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert

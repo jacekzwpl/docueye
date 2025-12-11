@@ -18,7 +18,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
                 Format = "markdown",
                 Order = 1
             };
-            var result = source.ToDocumentationSection();
+            var result = source.MapToDocumentationSection();
             MappingAssert.AssertMapped(source, result);
         }
     }

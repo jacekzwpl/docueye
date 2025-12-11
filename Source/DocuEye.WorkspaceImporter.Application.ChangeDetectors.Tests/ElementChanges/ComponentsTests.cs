@@ -55,7 +55,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Container 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectComponentsChanges("workspace1", this.import, elementsToImport, existingElements);
@@ -130,7 +130,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Component 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectComponentsChanges("workspace1", this.import, elementsToImport, existingElements);
@@ -198,7 +198,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Component 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectComponentsChanges("workspace1", this.import, elementsToImport, existingElements);
