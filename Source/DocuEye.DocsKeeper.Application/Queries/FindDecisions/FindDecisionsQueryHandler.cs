@@ -1,9 +1,10 @@
-﻿using AutoMapper;
-using DocuEye.DocsKeeper.Persistence;
+﻿using DocuEye.DocsKeeper.Persistence;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DocuEye.DocsKeeper.Model.Maps;
+using DocuEye.DocsKeeper.Application.Model;
 
 namespace DocuEye.DocsKeeper.Application.Queries.FindDecisions
 {
@@ -13,16 +14,14 @@ namespace DocuEye.DocsKeeper.Application.Queries.FindDecisions
     public class FindDecisionsQueryHandler : IRequestHandler<FindDecisionsQuery, IEnumerable<FoundedDecision>>
     {
         private readonly IDocsKeeperDBContext dbContext;
-        private readonly IMapper mapper;
         /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="dbContext">MongoDB context</param>
         /// <param name="mapper">IMapper service</param>
-        public FindDecisionsQueryHandler(IDocsKeeperDBContext dbContext, IMapper mapper)
+        public FindDecisionsQueryHandler(IDocsKeeperDBContext dbContext)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
         }
         /// <summary>
         /// Handles query
@@ -37,8 +36,9 @@ namespace DocuEye.DocsKeeper.Application.Queries.FindDecisions
                 .Find(
                     o => o.WorkspaceId == request.WorkspaceId && o.ElementId == request.ElementId, 
                     o => o.Date, false, request.Limit, request.Skip);
-            return this.mapper.Map<IEnumerable<FoundedDecision>>(decisions);
-            
+            return decisions.MapToFoundedDecisions();//this.mapper.Map<IEnumerable<FoundedDecision>>(decisions);
+
+
         }
     }
 }

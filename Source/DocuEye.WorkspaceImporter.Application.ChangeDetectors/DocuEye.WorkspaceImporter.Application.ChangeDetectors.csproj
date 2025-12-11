@@ -6,11 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocuEye.ModelKeeper.Model.Maps\DocuEye.ModelKeeper.Model.Maps.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Model\DocuEye.ModelKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Model\DocuEye.ViewsKeeper.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspaceImporter.Api.Model.Maps\DocuEye.WorkspaceImporter.Api.Model.Maps.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Application.Events\DocuEye.WorkspaceImporter.Application.Events.csproj" />
-    <ProjectReference Include="..\DocuEye.WorkspaceImporter.Application.Mappings\DocuEye.WorkspaceImporter.Application.Mappings.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Model\DocuEye.WorkspaceImporter.Model.csproj" />
   </ItemGroup>
 

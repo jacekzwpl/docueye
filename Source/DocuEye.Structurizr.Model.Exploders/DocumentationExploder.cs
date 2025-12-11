@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using DocuEye.Structurizr.Json.Model;
+﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.Structurizr.Json.Model.Maps;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,10 @@ namespace DocuEye.Structurizr.Model.Exploders
 {
     public class DocumentationExploder
     {
-        private readonly IMapper mapper;
 
-        public DocumentationExploder(IMapper mapper)
+
+        public DocumentationExploder()
         {
-            this.mapper = mapper;
         }
 
         public (DocumentationToImport,IEnumerable<DecisionToImport>,IEnumerable<ImageToImport>) ExplodeDocumentation(StructurizrJsonDocumentation documentation, string? elementId = null)
@@ -39,7 +38,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             {
                 return Enumerable.Empty<DocumentationSectionToImport>();
             }
-            return this.mapper.Map<IEnumerable<DocumentationSectionToImport>>(sections);
+            return sections.ConvertToApiModel();
         }
 
         public IEnumerable<DecisionToImport> ExplodeDecisions(IEnumerable<StructurizrJsonDecision>? decisions, string documentationId, string? elementId = null)
@@ -50,7 +49,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             }
             var elements = decisions.Select(c =>
             {
-                var element = this.mapper.Map<DecisionToImport>(c);
+                var element = c.ConvertToApiModel();
                 element.DocumentationId = documentationId;
                 element.StrucuturizrElementId = elementId;
                 return element;
@@ -66,7 +65,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             }
             var elements = images.Select(c =>
             {
-                var element = this.mapper.Map<ImageToImport>(c);
+                var element = c.ConvertToApiModel();
                 element.DocumentationId = documentationId;
                 return element;
             });

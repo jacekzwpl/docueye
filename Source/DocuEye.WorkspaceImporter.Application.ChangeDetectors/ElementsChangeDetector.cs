@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Application.Events;
 using DocuEye.WorkspaceImporter.Model;
 using MediatR;
@@ -13,12 +13,10 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
 {
     public class ElementsChangeDetector
     {
-        private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public ElementsChangeDetector(IMapper mapper, IMediator mediator)
+        public ElementsChangeDetector(IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -61,7 +59,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 //Apply changes
                 if (existingElement == null)
                 {
-                    var newElement = this.mapper.Map<Element>(elementToImport);
+                    var newElement = elementToImport.MapToElement();
                     newElement.Id = Guid.NewGuid().ToString();
                     newElement.WorkspaceId = worspaceId;
                     newElement.ParentId = this.DiscoverParentId(existingElements, elementToImport, parentElementType);
@@ -91,7 +89,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 else
                 {
                     var oldElement = existingElement.Clone();
-                    this.mapper.Map<ElementToImport, Element>(elementToImport, existingElement);
+                    elementToImport.MapToElement(existingElement);
                     existingElement.ParentId = this.DiscoverParentId(existingElements, elementToImport, parentElementType);
                     var baseElement = this.DiscoverBaseElementForInstance(elementToImport, existingElements);
                     if (baseElement != null)

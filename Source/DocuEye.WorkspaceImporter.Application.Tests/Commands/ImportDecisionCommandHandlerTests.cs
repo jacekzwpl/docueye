@@ -22,7 +22,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDecisionCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportDecisionCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -50,7 +50,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDecisionCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportDecisionCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -87,7 +87,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
             });
 
             // Act
-            var handler = new ImportDecisionCommandHandler(this.mediator, this.mapper, dbContext);
+            var handler = new ImportDecisionCommandHandler(this.mediator, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
@@ -133,7 +133,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             // Act
-            var handler = new ImportDecisionCommandHandler(mediatorMock.Object, this.mapper, dbContext);
+            var handler = new ImportDecisionCommandHandler(mediatorMock.Object, dbContext);
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert

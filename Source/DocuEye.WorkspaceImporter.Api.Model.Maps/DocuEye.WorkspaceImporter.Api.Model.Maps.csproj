@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocuEye.DocsKeeper.Model\DocuEye.DocsKeeper.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.ModelKeeper.Model\DocuEye.ModelKeeper.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.ViewsKeeper.Model\DocuEye.ViewsKeeper.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model\DocuEye.WorkspacesKeeper.Model.csproj" />
+  </ItemGroup>
+
+</Project>

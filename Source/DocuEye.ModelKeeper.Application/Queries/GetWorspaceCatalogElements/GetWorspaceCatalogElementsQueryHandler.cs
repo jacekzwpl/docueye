@@ -1,10 +1,12 @@
-﻿using AutoMapper;
+﻿using DocuEye.ModelKeeper.Application.Model;
 using DocuEye.ModelKeeper.Model;
+using DocuEye.ModelKeeper.Model.Maps;
 using DocuEye.ModelKeeper.Persistence;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
 {
@@ -14,16 +16,13 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
     public class GetWorspaceCatalogElementsQueryHandler : IRequestHandler<GetWorspaceCatalogElementsQuery, IEnumerable<WorkspaceCatalogElement>>
     {
         private readonly IModelKeeperDBContext dbContext;
-        private readonly IMapper mapper;
         /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="dbContext">MongoDB context</param>
-        /// <param name="mapper">Automapper service</param>
-        public GetWorspaceCatalogElementsQueryHandler(IModelKeeperDBContext dbContext, IMapper mapper)
+        public GetWorspaceCatalogElementsQueryHandler(IModelKeeperDBContext dbContext)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
         }
         /// <summary>
         /// Handles query
@@ -49,7 +48,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
                         && o.WorkspaceId == request.WorkspaceId
                         && !excludedTypes.Contains(o.Type),
                         o => o.Name, true, request.Limit, request.Skip);
-                return this.mapper.Map<IEnumerable<WorkspaceCatalogElement>>(elements);
+                return elements.MapToWorkspaceCatalogElements();
             }
             else if (!string.IsNullOrEmpty(request.Name) && string.IsNullOrEmpty(request.Type))
             {
@@ -59,7 +58,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
                         && o.WorkspaceId == request.WorkspaceId
                         && !excludedTypes.Contains(o.Type),
                         o => o.Name, true, request.Limit, request.Skip);
-                return this.mapper.Map<IEnumerable<WorkspaceCatalogElement>>(elements);
+                return elements.MapToWorkspaceCatalogElements();
             }
             else if (string.IsNullOrEmpty(request.Name) && !string.IsNullOrEmpty(request.Type))
             {
@@ -69,7 +68,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
                         && o.WorkspaceId == request.WorkspaceId
                         && !excludedTypes.Contains(o.Type),
                         o => o.Name, true, request.Limit, request.Skip);
-                return this.mapper.Map<IEnumerable<WorkspaceCatalogElement>>(elements);
+                return elements.MapToWorkspaceCatalogElements();
             }
             else
             {
@@ -78,7 +77,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
                         o => o.WorkspaceId == request.WorkspaceId 
                         && !excludedTypes.Contains(o.Type), 
                         o => o.Name, true, request.Limit, request.Skip);
-                return this.mapper.Map<IEnumerable<WorkspaceCatalogElement>>(elements);
+                return elements.MapToWorkspaceCatalogElements();
             }
         }
     }

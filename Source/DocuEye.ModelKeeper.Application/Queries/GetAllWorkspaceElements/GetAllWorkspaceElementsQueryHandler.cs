@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Persistence;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

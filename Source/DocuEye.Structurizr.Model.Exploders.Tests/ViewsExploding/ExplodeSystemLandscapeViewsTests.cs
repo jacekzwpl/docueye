@@ -45,7 +45,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     }
                 }
             };
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
 
             // Act
             var result = exploder.ExplodeSystemLandscapeViews(views);
@@ -146,7 +146,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     }
                 }
             };
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
 
             // Act
             var result = exploder.ExplodeSystemLandscapeViews(views);

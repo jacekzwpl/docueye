@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Application.Commands.SaveRelationships;
+﻿using DocuEye.ModelKeeper.Application.Commands.SaveRelationships;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Application.ChangeDetectors;
-using DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
 using System.Collections.Generic;
@@ -17,12 +15,10 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
     public class ImportRelationshipsCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportRelationshipsCommand, ImportRelationshipsResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
 
-        public ImportRelationshipsCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext) : base(dbContext)
+        public ImportRelationshipsCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
         }
 
         public async Task<ImportRelationshipsResult> Handle(ImportRelationshipsCommand request, CancellationToken cancellationToken)
@@ -47,7 +43,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
                 .Send<IEnumerable<Relationship>>(new GetAllWorkspaceRelationshipsQuery(request.WorkspaceId))).ToList();
 
             // Detect Changes
-            var detector = new RelationshipsChangeDetector(this.mapper, this.mediator);
+            var detector = new RelationshipsChangeDetector(this.mediator);
             var result = await detector.DetectChanges(
                 request.WorkspaceId, 
                 import, 

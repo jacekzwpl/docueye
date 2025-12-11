@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DocuEye.ViewsKeeper.Application.Model;
+using MediatR;
 using System.Collections.Generic;
 
 namespace DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement

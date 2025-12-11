@@ -84,7 +84,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
             {
                 { "element1", "viewid1" }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var result = detector.DetectContainerViews(

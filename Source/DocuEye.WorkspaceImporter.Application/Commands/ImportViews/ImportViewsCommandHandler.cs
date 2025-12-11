@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
+﻿using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
@@ -15,19 +14,18 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DocuEye.ViewsKeeper.Model.Maps;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
 {
     public class ImportViewsCommandHandler : IRequestHandler<ImportViewsCommand, ImportViewsResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
         private readonly IWorkspaceImporterDBContext dbContext;
 
-        public ImportViewsCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext)
+        public ImportViewsCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
             this.dbContext = dbContext;
         }
 
@@ -129,7 +127,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
             var existingViews = await this.mediator
                 .Send<IEnumerable<BaseView>>(new GetAllViewsQuery(request.WorkspaceId));
 
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
             var(viewsIdsMap, elementsDiagrams) = detector.DetectViewsIds(
                 request.Views, existingViews, existingElements);
 
@@ -197,14 +195,14 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
                 componentViews);
 
             var workspaceViews = new List<WorkspaceView>();
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(systemLandscapeViews));
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(systemContextViews));
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(containerViews));
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(componentViews));
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(dynamicViews));
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(deploymentViews));
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(imagesViews));
-            workspaceViews.AddRange(this.mapper.Map<IEnumerable<WorkspaceView>>(filteredViews));
+            workspaceViews.AddRange(systemLandscapeViews.MapToWorkspaceViews());
+            workspaceViews.AddRange(systemContextViews.MapToWorkspaceViews());
+            workspaceViews.AddRange(containerViews.MapToWorkspaceViews());
+            workspaceViews.AddRange(componentViews.MapToWorkspaceViews());
+            workspaceViews.AddRange(dynamicViews.MapToWorkspaceViews());
+            workspaceViews.AddRange(deploymentViews.MapToWorkspaceViews());
+            workspaceViews.AddRange(imagesViews.MapToWorkspaceViews());
+            workspaceViews.AddRange(filteredViews.MapToWorkspaceViews());
 
             
             return (

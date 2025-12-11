@@ -32,7 +32,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                     }
                 }
             };
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
 
             var result = exploder.ExplodeViewConfiguration(configuration);
 
@@ -79,7 +79,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                 }
             };
 
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
             var result = exploder.ExplodeViewConfiguration(configuration);
 
             Assert.That(result.RelationshipStyles.Count(), Is.EqualTo(1));
@@ -114,7 +114,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                 }
             };
 
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
             var result = exploder.ExplodeViewConfiguration(configuration);
 
             Assert.That(result.Terminology?.Code, Is.EqualTo("Code"));
@@ -141,7 +141,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ViewsExploding
                 }
             };
 
-            var exploder = new ViewsExploder(this.mapper);
+            var exploder = new ViewsExploder();
             var result = exploder.ExplodeViewConfiguration(configuration);
 
             Assert.That(result.Themes.Count(), Is.EqualTo(2));

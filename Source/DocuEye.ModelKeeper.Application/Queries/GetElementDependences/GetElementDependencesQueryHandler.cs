@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Persistence;
 using MediatR;
 using System;
@@ -7,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DocuEye.ModelKeeper.Model.Maps;
+using DocuEye.ModelKeeper.Application.Model;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
 {
@@ -16,16 +17,13 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
     public class GetElementDependencesQueryHandler : IRequestHandler<GetElementDependencesQuery, IEnumerable<ElementDependence>>
     {
         private readonly IModelKeeperDBContext dbContext;
-        private readonly IMapper mapper;
         /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="dbContext">MongoDB context</param>
-        /// <param name="mapper">Automapper service</param>
-        public GetElementDependencesQueryHandler(IModelKeeperDBContext dbContext, IMapper mapper)
+        public GetElementDependencesQueryHandler(IModelKeeperDBContext dbContext)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
         }
         /// <summary>
         /// Handles query
@@ -51,8 +49,8 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
 
             var elements = await this.dbContext.Elements
                 .Find(o => relationshipsId.Contains(o.Id));
-            
-            var dependences = this.mapper.Map<IEnumerable<ElementDependence>>(elements);
+
+            var dependences = elements.MapToElementDependences();
             var usedRelationships = new List<string>();
             foreach ( var dependence in dependences )
             {

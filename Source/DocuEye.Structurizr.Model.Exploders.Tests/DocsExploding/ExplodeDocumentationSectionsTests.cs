@@ -22,7 +22,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     Order = 1,
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var result = exploder.ExplodeDocumentationSections(documentationSections);
@@ -53,7 +53,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     Order = 1,
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var result = exploder.ExplodeDocumentationSections(documentationSections);

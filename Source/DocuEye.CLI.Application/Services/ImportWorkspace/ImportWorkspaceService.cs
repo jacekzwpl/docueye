@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using DocuEye.CLI.ApiClient;
+﻿using DocuEye.CLI.ApiClient;
 using DocuEye.Structurizr.Json.Model;
-using DocuEye.Structurizr.Model;
 using DocuEye.Structurizr.Model.Exploders;
 using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
@@ -9,15 +7,14 @@ using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Api.Model.ViewConfiguration;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
-using DocuEye.WorkspaceImporter.Api.Model.Workspace;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using DocuEye.Structurizr.Json.Model.Maps;
 
 namespace DocuEye.CLI.Application.Services.ImportWorkspace
 {
@@ -30,16 +27,14 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
         private readonly IDocuEyeApiClient apiClient;
         private readonly ILogger<ImportWorkspaceService> logger;
         private JsonSerializerOptions serializerOptions;
-        private readonly IMapper mapper;
         /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="apiClient">DocuEye api client instance</param>
         /// <param name="logger">ILogger instance</param>
-        public ImportWorkspaceService(IDocuEyeApiClient apiClient, IMapper mapper, ILogger<ImportWorkspaceService> logger)
+        public ImportWorkspaceService(IDocuEyeApiClient apiClient, ILogger<ImportWorkspaceService> logger)
         {
             this.apiClient = apiClient;
-            this.mapper = mapper;
             this.logger = logger;
             this.serializerOptions = new JsonSerializerOptions()
             {
@@ -52,29 +47,10 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
         public async Task<bool> Import(ImportWorkspaceParameters parameters)
         {
             var workspaceData = parameters.WorkspaceData;
-            /*
-            this.logger.LogInformation("Reading workspace data file");
-            if (!File.Exists(parameters.WorkspaceFilePath))
-            {
-                this.logger.LogError(string.Format("File {0} does not exists.", parameters.WorkspaceFilePath));
-                return false;
-            }
-
-            var content = File.ReadAllText(parameters.WorkspaceFilePath);
-
-            this.logger.LogInformation("Parsing workspace data file");
-
-            var workspaceData = JsonSerializer.Deserialize<StructurizrJsonWorkspace>(content, this.serializerOptions);
-
-            if (workspaceData == null)
-            {
-                this.logger.LogError(string.Format("Workspace data parsing failed"));
-                return false;
-            }*/
             this.logger.LogInformation("Detecting workspace contents");
-            var modelExploder = new ModelExploder(this.mapper);
-            var viewsExploder = new ViewsExploder(this.mapper);
-            var documentationExploder = new DocumentationExploder(this.mapper);
+            var modelExploder = new ModelExploder();
+            var viewsExploder = new ViewsExploder();
+            var documentationExploder = new DocumentationExploder();
             var (elements, relationships) = modelExploder.ExplodeModelElements(workspaceData.Model);
             var viewConfiguration = viewsExploder.ExplodeViewConfiguration(workspaceData.Views?.Configuration);
             var viewsToImport = new List<ViewToImport>();
@@ -217,7 +193,7 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 Visibility = workspaceData.Configuration?.Visibility,
                 WorkspaceDescription = workspaceData.Description,
                 WorkspaceName = workspaceData.Name,
-                AccessRules = this.mapper.Map<IEnumerable<WorkspaceAccessRuleToImport>>(workspaceData.Configuration?.Users)
+                AccessRules = workspaceData.Configuration?.Users?.ToWorkspaceAccessRuleToImport()
             });
 
             this.LogImportStepResult(result, stepName);

@@ -35,7 +35,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var result = exploder.ExplodeDecisions(decisions, "documentationId", "elementId");
@@ -82,7 +82,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
 
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var result = exploder.ExplodeDecisions(decisions, "documentationId");
@@ -146,7 +146,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     }
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var result = exploder.ExplodeDecisions(decisions, "documentationId");

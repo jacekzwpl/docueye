@@ -6,11 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DocuEye.ModelKeeper.Model\DocuEye.ModelKeeper.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Json.Model.Maps\DocuEye.Structurizr.Json.Model.Maps.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.Json.Model\DocuEye.Structurizr.Json.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj" />
   </ItemGroup>

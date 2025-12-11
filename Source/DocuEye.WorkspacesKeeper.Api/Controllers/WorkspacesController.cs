@@ -1,6 +1,7 @@
 ﻿using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.WorkspacesKeeper.Application.Commands.DeleteWorkspace;
+using DocuEye.WorkspacesKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetViewConfiguration;

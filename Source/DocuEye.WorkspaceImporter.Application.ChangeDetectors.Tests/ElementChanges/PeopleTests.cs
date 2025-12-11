@@ -20,7 +20,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                 }
             };
             var existingElements = new List<Element>();
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectPeopleChanges("workspace1", import, elementsToImport, existingElements);
@@ -60,7 +60,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Person 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectPeopleChanges("workspace1", import, elementsToImport, existingElements);
@@ -90,7 +90,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Person 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectPeopleChanges("workspace1", import, elementsToImport, existingElements);

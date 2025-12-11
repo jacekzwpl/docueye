@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.DSL\DocuEye.Structurizr.DSL.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Json.Model.Maps\DocuEye.Structurizr.Json.Model.Maps.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.Model.Exploders\DocuEye.Structurizr.Model.Exploders.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.ModelKeeper.Model;
 using DocuEye.Structurizr.Json.Model;
+using DocuEye.Structurizr.Json.Model.Maps;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using System.Collections.Generic;
@@ -10,11 +10,9 @@ namespace DocuEye.Structurizr.Model.Exploders
 {
     public class ModelExploder
     {
-        private readonly IMapper mapper;
 
-        public ModelExploder(IMapper mapper)
+        public ModelExploder()
         {
-            this.mapper = mapper;
         }
 
         public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeModelElements(StructurizrJsonModel? model)
@@ -57,7 +55,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             var relationships = new List<RelationshipToImport>();
             foreach (var softwareSystem in softwareSystems)
             {
-                var softwareSystemElement = this.mapper.Map<ElementToImport>(softwareSystem);
+                var softwareSystemElement = softwareSystem.ConvertToApModel();
                 elements.Add(softwareSystemElement);
 
                 var systemRelationships = this.ExplodeRelationships(softwareSystem.Relationships);
@@ -81,7 +79,7 @@ namespace DocuEye.Structurizr.Model.Exploders
             var relationships = new List<RelationshipToImport>();
             foreach (var container in containers)
             {
-                var containerElement = this.mapper.Map<ElementToImport>(container);
+                var containerElement = container.ConvertToApModel();
                 containerElement.StructurizrParentId = parentId;
                 elements.Add(containerElement);
 
@@ -104,7 +102,7 @@ namespace DocuEye.Structurizr.Model.Exploders
         {
             var elements = components.Select(c =>
             {
-                var element = this.mapper.Map<ElementToImport>(c);
+                var element = c.ConvertToApModel();
                 element.StructurizrParentId = parentId;
                 return element;
             });
@@ -114,7 +112,7 @@ namespace DocuEye.Structurizr.Model.Exploders
 
         public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodePeople(IEnumerable<StructurizrJsonPerson> people)
         {
-            var elements = people.Select(p => this.mapper.Map<ElementToImport>(p));
+            var elements = people.Select(p => p.ConvertToApModel());
             var relationships = people.SelectMany(p => this.ExplodeRelationships(p.Relationships));
             return (elements, relationships);
         }
@@ -137,7 +135,7 @@ namespace DocuEye.Structurizr.Model.Exploders
         {
             var elements = new List<ElementToImport>();
             var relationships = new List<RelationshipToImport>();
-            var nodeElement = mapper.Map<ElementToImport>(node);
+            var nodeElement = node.ConvertToApModel();
             nodeElement.StructurizrParentId = parentStructurizrId;
             elements.Add(nodeElement);
 
@@ -182,7 +180,7 @@ namespace DocuEye.Structurizr.Model.Exploders
         public (IEnumerable<ElementToImport>, IEnumerable<RelationshipToImport>) ExplodeInfrastructureNodes(IEnumerable<StructurizrJsonInfrastructureNode> infrastructureNodes, string parentId)
         {
             var elements = infrastructureNodes.Select(i => { 
-                var element = this.mapper.Map<ElementToImport>(i);
+                var element = i.ConvertToApModel();
                 element.StructurizrParentId = parentId;
                 return element;
             });
@@ -198,7 +196,7 @@ namespace DocuEye.Structurizr.Model.Exploders
                 var sourceElement = sourceElements.FirstOrDefault(o => o.StructurizrId == instance.SoftwareSystemId && o.Type == ElementType.SoftwareSystem);
                 if(sourceElement != null)
                 {
-                    var element = this.mapper.Map<ElementToImport>(instance);
+                    var element = instance.ConvertToApModel();
                     element.StructurizrParentId = parentId;
                     element.Name = sourceElement.Name;
                     element.Description = sourceElement.Description;
@@ -222,7 +220,7 @@ namespace DocuEye.Structurizr.Model.Exploders
                 var sourceElement = sourceElements.FirstOrDefault(o => o.StructurizrId == instance.ContainerId && o.Type == ElementType.Container);
                 if (sourceElement != null)
                 {
-                    var element = this.mapper.Map<ElementToImport>(instance);
+                    var element = instance.ConvertToApModel();
                     element.StructurizrParentId = parentId;
                     element.Name = sourceElement.Name;
                     element.Description = sourceElement.Description;
@@ -244,7 +242,7 @@ namespace DocuEye.Structurizr.Model.Exploders
                 return Enumerable.Empty<RelationshipToImport>();
             }
 
-            return this.mapper.Map<IEnumerable<RelationshipToImport>>(structurizrRelations);
+            return structurizrRelations.ConvertToApiModel();
         }
     }
 }

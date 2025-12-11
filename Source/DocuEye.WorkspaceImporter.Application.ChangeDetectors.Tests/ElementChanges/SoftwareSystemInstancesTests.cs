@@ -53,7 +53,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Deployment Node 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectSoftwareSystemInstancesChanges("workspace1", this.import, elementsToImport, existingElements);
@@ -128,7 +128,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Software System 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectSoftwareSystemInstancesChanges("workspace1", this.import, elementsToImport, existingElements);
@@ -194,7 +194,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ElementCha
                     Name = "Software System 1"
                 }
             };
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
 
             // Act
             var result = await detector.DetectSoftwareSystemInstancesChanges("workspace1", this.import, elementsToImport, existingElements);

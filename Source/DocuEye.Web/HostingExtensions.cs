@@ -1,26 +1,20 @@
-﻿using AutoMapper;
-using DocuEye.ChangeTracker.Application.EventHandlers;
+﻿using DocuEye.ChangeTracker.Application.EventHandlers;
 using DocuEye.ChangeTracker.Persistence;
 using DocuEye.DocsKeeper.Application.Commands.SaveSingleDecision;
-using DocuEye.DocsKeeper.Application.Mappings;
 using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.DataProtection;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
-using DocuEye.ModelKeeper.Application.Mappings;
 using DocuEye.ModelKeeper.Persistence;
 using DocuEye.Persistence;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
-using DocuEye.ViewsKeeper.Application.Mappings;
 using DocuEye.ViewsKeeper.Persistence;
 using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
 using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
-using DocuEye.WorkspaceImporter.Application.Mappings;
 using DocuEye.WorkspaceImporter.Persistence;
 using DocuEye.WorkspacesKeeper.Application;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
-using DocuEye.WorkspacesKeeper.Application.Mappings;
 using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -222,21 +216,6 @@ namespace DocuEye.Web
             builder.Services.ConfigureWorkspacesKeeperApplicationServices();
 
             startupLogger.LogInformation("Register Automapper configurations");
-            //Automapper
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                
-                mc.AddProfile(new ViewsKeeperMappingProfile());
-                mc.AddProfile(new DocsKeeperMappingProfile());
-                mc.AddProfile(new ModelKeeperMappingProfile());
-                mc.AddProfile(new WorkspacesKeeperMappingProfile());
-
-                mc.AddProfile(new ApiToModelMapingProfile());
-                mc.AddProfile(new ModelToModelMappingProfile());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            builder.Services.AddSingleton(mapper);
 
             builder.Services.AddSwaggerGen();
 

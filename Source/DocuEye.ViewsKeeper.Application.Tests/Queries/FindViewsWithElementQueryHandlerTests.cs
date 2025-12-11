@@ -16,7 +16,7 @@ namespace DocuEye.ViewsKeeper.Application.Tests.Queries
             var query = new FindViewsWithElementQuery("elementId1", "workspacetest1");
 
             // Act
-            var handler = new FindViewsWithElementQueryHandler(this.dbContext, this.mapper);
+            var handler = new FindViewsWithElementQueryHandler(this.dbContext);
             var items = await handler.Handle(query, default);
 
             // Assert

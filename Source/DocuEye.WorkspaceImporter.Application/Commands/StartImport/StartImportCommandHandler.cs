@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DocuEye.WorkspaceImporter.Model;
+﻿using DocuEye.WorkspaceImporter.Model;
 using DocuEye.WorkspaceImporter.Persistence;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
@@ -8,19 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
 {
     public class StartImportCommandHandler : IRequestHandler<StartImportCommand, StartImportResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
         private readonly IWorkspaceImporterDBContext dbContext;
 
-        public StartImportCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext)
+        public StartImportCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
             this.dbContext = dbContext;
         }
 
@@ -80,7 +78,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
                 Description = request.WorkspaceDescription,
                 IsPrivate = request.Visibility.ToLower() == "private"
                     ? true : false,
-                AccessRules = this.mapper.Map<IEnumerable<WorkspaceAccessRule>>(request.AccessRules)
+                AccessRules = request.AccessRules.MapToWorkspaceAccessRules()
             };
 
             //Save Workspace

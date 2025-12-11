@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Markdig" Version="0.44.0" />
     <PackageReference Include="MarkdigExtensions.UrlRewriter" Version="1.0.0" />
   </ItemGroup>
@@ -15,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.DocsKeeper.Application.Commads\DocuEye.DocsKeeper.Application.Commads.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Application.Queries\DocuEye.DocsKeeper.Application.Queries.csproj" />
+    <ProjectReference Include="..\DocuEye.DocsKeeper.Model.Maps\DocuEye.DocsKeeper.Model.Maps.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Model\DocuEye.DocsKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Persistence\DocuEye.DocsKeeper.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Application.Events\DocuEye.WorkspaceImporter.Application.Events.csproj" />

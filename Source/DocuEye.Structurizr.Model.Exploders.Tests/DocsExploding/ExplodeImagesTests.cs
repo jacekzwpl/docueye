@@ -23,7 +23,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                 }
             };
 
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
             // Act
             var result = exploder.ExplodeImages(images, "documentationId");
 
@@ -56,7 +56,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                 }
             };
 
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
             // Act
             var result = exploder.ExplodeImages(images, "documentationId");
 

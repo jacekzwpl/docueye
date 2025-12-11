@@ -12,7 +12,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
             {
                 
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation);
@@ -30,7 +30,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
             {
                 
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation, "elementId");
@@ -62,7 +62,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     }
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation);
@@ -80,7 +80,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
 
             };
 
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation);
@@ -115,7 +115,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     }
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation);
@@ -133,7 +133,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
 
             };
 
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation);
@@ -164,7 +164,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
                     }
                 }
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation);
@@ -181,7 +181,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.DocsExploding
             {
 
             };
-            var exploder = new DocumentationExploder(this.mapper);
+            var exploder = new DocumentationExploder();
 
             // Act
             var (documentation,decisions,images) = exploder.ExplodeDocumentation(structurizrDocumentation);

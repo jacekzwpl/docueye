@@ -19,7 +19,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
             };
             var existingViews = new List<BaseView>();
             var existingElements = new List<Element>();
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var (viewsIdsMap, elementsDiagrams) = detector.DetectViewsIds(viewsToImport, existingViews, existingElements);
@@ -50,7 +50,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                 }
             };
             var existingElements = new List<Element>();
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var (viewsIdsMap, elementsDiagrams) = detector.DetectViewsIds(viewsToImport, existingViews, existingElements);
@@ -84,7 +84,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                     Type = ElementType.SoftwareSystem
                 }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var (viewsIdsMap, elementsDiagrams) = detector.DetectViewsIds(viewsToImport, existingViews, existingElements);
@@ -125,7 +125,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors.Tests.ViewChange
                     Type = ElementType.SoftwareSystem
                 }
             };
-            var detector = new ViewsChangeDetector(this.mapper, this.mediator);
+            var detector = new ViewsChangeDetector(this.mediator);
 
             // Act
             var (viewsIdsMap, elementsDiagrams) = detector.DetectViewsIds(viewsToImport, existingViews, existingElements);

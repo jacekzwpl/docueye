@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using DocuEye.DocsKeeper.Application.Commads.SaveSingleDocumentation;
-using DocuEye.DocsKeeper.Model;
+﻿using DocuEye.DocsKeeper.Application.Commads.SaveSingleDocumentation;
 using DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
 using System.Threading;
@@ -12,11 +11,9 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
     public class ImportDocumentationCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportDocumentationCommand, ImportDocumentationResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
-        public ImportDocumentationCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext) : base(dbContext)
+        public ImportDocumentationCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
         }
 
         public async Task<ImportDocumentationResult> Handle(ImportDocumentationCommand request, CancellationToken cancellationToken)
@@ -32,7 +29,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
                         checkImport.Message);
             }
 
-            var documentation = this.mapper.Map<Documentation>(request.Documentation);
+            var documentation = request.Documentation.MapToDocumentation();
             documentation.WorkspaceId = request.WorkspaceId;
 
             if (!string.IsNullOrEmpty(request.Documentation.StructurizrElementId)) { 

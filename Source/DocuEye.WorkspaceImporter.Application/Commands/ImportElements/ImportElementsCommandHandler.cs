@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using DocuEye.ModelKeeper.Application.Commands.SaveElements;
+﻿using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Application.ChangeDetectors;
-using DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation;
 using DocuEye.WorkspaceImporter.Model;
 using DocuEye.WorkspaceImporter.Persistence;
 using MediatR;
@@ -18,12 +16,10 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
     public class ImportElementsCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportElementsCommand, ImportElementsResult>
     {
         private readonly IMediator mediator;
-        private readonly IMapper mapper;
 
-        public ImportElementsCommandHandler(IMediator mediator, IMapper mapper, IWorkspaceImporterDBContext dbContext) : base(dbContext)
+        public ImportElementsCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
         }
 
         public async Task<ImportElementsResult> Handle(ImportElementsCommand request, CancellationToken cancellationToken)
@@ -61,7 +57,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
         private async Task<ElementsChangeDetectorResult> DetectChanges(string workspaceId, WorkspaceImport import, IEnumerable<ElementToImport> elementsToImport, ICollection<Element> existingElements)
         {
             var result = new ElementsChangeDetectorResult();
-            var detector = new ElementsChangeDetector(this.mapper, this.mediator);
+            var detector = new ElementsChangeDetector(this.mediator);
             var softwareSystemsResult = await detector.DetectSoftwareSystemsChanges(workspaceId, import, elementsToImport, existingElements);
             result.AddResult(softwareSystemsResult);
 

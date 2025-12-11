@@ -22,7 +22,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                                 Tags = "tag1,tag2"
                             }
                         };
-            var exploder = new ModelExploder(this.mapper);
+            var exploder = new ModelExploder();
 
             // Act
             var result = exploder.ExplodeRelationships(relationships);
@@ -61,7 +61,7 @@ namespace DocuEye.Structurizr.Model.Exploders.Tests.ModelExploding
                     DestinationId = "3"
                 }
             };
-            var exploder = new ModelExploder(this.mapper);
+            var exploder = new ModelExploder();
 
             // Act
             var result = exploder.ExplodeRelationships(relationships);
