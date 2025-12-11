@@ -1,12 +1,13 @@
-﻿using DocuEye.ModelKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Model;
+
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetElement
 {
     /// <summary>
     /// Gets element data
     /// </summary>
-    public class GetElementQuery : IRequest<Element?>
+    public class GetElementQuery : IQuery<Element?>
     {
         /// <summary>
         /// The ID of Element

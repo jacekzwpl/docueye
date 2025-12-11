@@ -1,11 +1,14 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.Infrastructure.Mediator.Queries;
 
 namespace DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles
 {
     /// <summary>
     /// Gets the theme style from given url
     /// </summary>
-    public class GetThemeStylesQuery : IRequest<ThemeStylesResult?>
+    public class GetThemeStylesQuery : IQuery<ThemeStylesResult?>
     {
         /// <summary>
         /// The theme url

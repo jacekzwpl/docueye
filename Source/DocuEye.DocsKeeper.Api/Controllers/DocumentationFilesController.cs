@@ -2,7 +2,7 @@
 using DocuEye.DocsKeeper.Application.Queries.GetOpenApiFile;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.Infrastructure.HttpProblemDetails;
-using MediatR;
+using DocuEye.Infrastructure.Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,7 +31,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
         {
 
             var query = new GetOpenApiFileQuery(workspaceId, elementId);
-            var result = await this.mediator.Send<DocumentationFile?>(query);
+            var result = await this.mediator.SendQueryAsync<GetOpenApiFileQuery,DocumentationFile?>(query);
             if (result == null || result.Content == null)
             {
                 return this.NotFound(new NotFoundProblemDetails("Open API documentation not found."));

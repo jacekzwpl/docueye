@@ -2,16 +2,18 @@
 using DocuEye.WorkspaceImporter.Persistence;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
+
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using DocuEye.WorkspaceImporter.Api.Model.Maps;
+using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.Infrastructure.Mediator;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
 {
-    public class StartImportCommandHandler : IRequestHandler<StartImportCommand, StartImportResult>
+    public class StartImportCommandHandler : ICommandHandler<StartImportCommand, StartImportResult>
     {
         private readonly IMediator mediator;
         private readonly IWorkspaceImporterDBContext dbContext;
@@ -22,7 +24,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
             this.dbContext = dbContext;
         }
 
-        public async Task<StartImportResult> Handle(StartImportCommand request, CancellationToken cancellationToken)
+        public async Task<StartImportResult> HandleAsync(StartImportCommand request, CancellationToken cancellationToken)
         {
 
             var workspaceId = string.IsNullOrEmpty(request.WorkspaceId) ? Guid.NewGuid().ToString() : request.WorkspaceId;
@@ -82,7 +84,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
             };
 
             //Save Workspace
-            await this.mediator.Send(new SaveWorkspaceCommand()
+            await this.mediator.SendCommandAsync(new SaveWorkspaceCommand()
             {
                 Workspace = workspace
             });

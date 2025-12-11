@@ -1,18 +1,19 @@
-﻿using DocuEye.WorkspaceImporter.Persistence;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.WorkspaceImporter.Persistence;
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.FinalizeImport
 {
-    public class FinalizeImportCommandHandler : BaseImportDataCommandHandler, IRequestHandler<FinalizeImportCommand, FinalizeImportResult>
+    public class FinalizeImportCommandHandler : BaseImportDataCommandHandler, ICommandHandler<FinalizeImportCommand, FinalizeImportResult>
     {
         public FinalizeImportCommandHandler(IWorkspaceImporterDBContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<FinalizeImportResult> Handle(FinalizeImportCommand request, CancellationToken cancellationToken)
+        public async Task<FinalizeImportResult> HandleAsync(FinalizeImportCommand request, CancellationToken cancellationToken)
         {
             // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);

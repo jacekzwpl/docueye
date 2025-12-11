@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Queries;
 
 namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionContent
 {
     /// <summary>
     /// Gets content for decision
     /// </summary>
-    public class GetDecisionQuery : IRequest<DecisionContent?>
+    public class GetDecisionQuery : IQuery<DecisionContent?>
     {
         /// <summary>
         /// Workspace Id

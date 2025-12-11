@@ -1,11 +1,12 @@
-﻿using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportElements;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
 using DocuEye.WorkspaceImporter.Model;
-using MediatR;
+
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportRelationshipsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -65,7 +66,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportRelationshipsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -105,7 +106,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetAllWorkspaceElementsQuery, IEnumerable<Element>>(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IEnumerable<Element>>(new List<Element>()
                 {
                     new Element()
@@ -122,7 +123,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportRelationshipsCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");
@@ -162,7 +163,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetAllWorkspaceElementsQuery, IEnumerable<Element>>(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IEnumerable<Element>>(new List<Element>()
                 {
                     new Element()
@@ -178,7 +179,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetAllWorkspaceRelationshipsQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetAllWorkspaceRelationshipsQuery, IEnumerable<Relationship>>(It.IsAny<GetAllWorkspaceRelationshipsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IEnumerable<Relationship>>(new List<Relationship>()
                 {
                     new Relationship()
@@ -193,7 +194,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportRelationshipsCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");

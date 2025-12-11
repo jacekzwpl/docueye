@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.DocsKeeper.Application.Commads.ClearOldDecisions
 {
-    public class ClearOldDecisionsCommand : IRequest
+    public class ClearOldDecisionsCommand : ICommand
     {
         public string WorkspaceId { get; set; } = null!;
         public string ImportKey { get; set; } = null!;

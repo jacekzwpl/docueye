@@ -14,7 +14,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(9), "Hanlder should return 9 items.");
@@ -31,7 +31,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
@@ -47,7 +47,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
@@ -62,7 +62,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Where(o => o.Type != ElementType.Container).Count, Is.EqualTo(0), "Hanlder should return only items with type Container.");

@@ -1,11 +1,9 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.DocsKeeper.Application.Commads.ClearDocumentations
 {
-    public class ClearDocumentationsCommand : IRequest
+    public class ClearDocumentationsCommand : ICommand
     {
         public string WorkspaceId { get; set; } = null!;
 

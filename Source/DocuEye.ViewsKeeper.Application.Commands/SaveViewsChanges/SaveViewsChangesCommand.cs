@@ -1,14 +1,16 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.ViewsKeeper.Model;
+
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
 {
     /// <summary>
     /// Save view changes command
     /// </summary>
-    public class SaveViewsChangesCommand : IRequest
+    public class SaveViewsChangesCommand : ICommand
     {
         /// <summary>
         /// The ID of workspace

@@ -13,7 +13,7 @@ namespace DocuEye.ViewsKeeper.Application.Tests.EventHandlers
 
             // Act
             var handler = new WorkspaceDeletedEventHandler(this.dbContext);
-            await handler.Handle(notification, default);
+            await handler.HandleAsync(notification, default);
 
             // Assert
             var items = await this.dbContext.AllViews.Find(o => o.WorkspaceId == "workspacetest1");

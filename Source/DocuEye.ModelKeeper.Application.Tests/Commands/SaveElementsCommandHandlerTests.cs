@@ -28,7 +28,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveElementsCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.Elements.Find(o => o.Id == "SoftwareSystemId2");
@@ -55,7 +55,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveElementsCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.Elements.Find(o => o.Id == "SoftwareSystemId3");
@@ -83,7 +83,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveElementsCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var item = await this.dbContext.Elements.FindOne(o => o.Id == "SoftwareSystemId2");

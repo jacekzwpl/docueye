@@ -1,12 +1,13 @@
 ﻿using DocuEye.DocsKeeper.Model;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Queries;
+
 
 namespace DocuEye.DocsKeeper.Application.Queries.GetImage
 {
     /// <summary>
     /// Gets the image for display
     /// </summary>
-    public class GetImageQuery : IRequest<Image?>
+    public class GetImageQuery : IQuery<Image?>
     {
         /// <summary>
         /// Documentation Id

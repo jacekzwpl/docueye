@@ -1,9 +1,10 @@
 ﻿using DocuEye.DocsKeeper.Model;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Commands;
+
 
 namespace DocuEye.DocsKeeper.Application.Commads.SaveSingleDocumentation
 {
-    public class SaveSingleDocumentationCommand : IRequest
+    public class SaveSingleDocumentationCommand : ICommand
     {
         public Documentation Documentation { get; set; } = null!;
 

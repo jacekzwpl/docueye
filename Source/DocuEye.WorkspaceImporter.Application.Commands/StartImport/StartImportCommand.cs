@@ -1,5 +1,6 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model.Workspace;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.WorkspaceImporter.Api.Model.Workspace;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.StartImport
 {
-    public class StartImportCommand : IRequest<StartImportResult>
+    public class StartImportCommand : ICommand<StartImportResult>
     {
         /// <summary>
         /// Workspace Identifier

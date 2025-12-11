@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿
+using DocuEye.Infrastructure.Mediator.Queries;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -12,7 +13,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles
     /// <summary>
     /// Handler for GetThemeStylesQuery
     /// </summary>
-    public class GetThemeStylesQueryHandler : IRequestHandler<GetThemeStylesQuery, ThemeStylesResult?>
+    public class GetThemeStylesQueryHandler : IQueryHandler<GetThemeStylesQuery, ThemeStylesResult?>
     {
         private readonly IHttpClientFactory httpClientFactory;
         /// <summary>
@@ -29,7 +30,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>Theme styles or null if there was an error getting styles</returns>
-        public async Task<ThemeStylesResult?> Handle(GetThemeStylesQuery request, CancellationToken cancellationToken)
+        public async Task<ThemeStylesResult?> HandleAsync(GetThemeStylesQuery request, CancellationToken cancellationToken)
         {
             var serializerOptions = new JsonSerializerOptions()
             {

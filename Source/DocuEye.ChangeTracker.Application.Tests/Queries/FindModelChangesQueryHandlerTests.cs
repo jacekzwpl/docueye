@@ -15,7 +15,7 @@ namespace DocuEye.ChangeTracker.Application.Tests.Queries
 
             // Act
             var handler = new FindModelChangesQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.GreaterThan(0), "Hanlder should return one or more items.");

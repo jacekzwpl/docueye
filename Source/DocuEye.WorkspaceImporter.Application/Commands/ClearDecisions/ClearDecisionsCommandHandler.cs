@@ -1,12 +1,14 @@
 ﻿using DocuEye.DocsKeeper.Application.Commads.ClearOldDecisions;
+using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Commands;
 using DocuEye.WorkspaceImporter.Persistence;
-using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ClearDecisions
 {
-    public class ClearDecisionsCommandHandler: BaseImportDataCommandHandler, IRequestHandler<ClearDecisionsCommand, ClearDecisionsResult>
+    public class ClearDecisionsCommandHandler: BaseImportDataCommandHandler, ICommandHandler<ClearDecisionsCommand, ClearDecisionsResult>
     {
         private readonly IMediator mediator;
 
@@ -15,7 +17,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ClearDecisions
             this.mediator = mediator;
         }
 
-        public async Task<ClearDecisionsResult> Handle(ClearDecisionsCommand request, CancellationToken cancellationToken)
+        public async Task<ClearDecisionsResult> HandleAsync(ClearDecisionsCommand request, CancellationToken cancellationToken)
         {
             // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
@@ -29,7 +31,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ClearDecisions
             }
 
             await this.mediator
-                .Send(new ClearOldDecisionsCommand(request.WorkspaceId, request.ImportKey));
+                .SendCommandAsync(new ClearOldDecisionsCommand(request.WorkspaceId, request.ImportKey));
 
 
             return new ClearDecisionsResult(request.WorkspaceId, true);

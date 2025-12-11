@@ -1,18 +1,19 @@
 ﻿using DocuEye.ModelKeeper.Persistence;
-using MediatR;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.ModelKeeper.Application.Commands.SaveRelationships
 {
     /// <summary>
     /// Handler for SaveRelationshipsCommand
     /// </summary>
-    public class SaveRelationshipsCommandHandler : IRequestHandler<SaveRelationshipsCommand>
+    public class SaveRelationshipsCommandHandler : ICommandHandler<SaveRelationshipsCommand>
     {
         private readonly IModelKeeperDBContext dbContext;
         /// <summary>
@@ -29,7 +30,7 @@ namespace DocuEye.ModelKeeper.Application.Commands.SaveRelationships
         /// <param name="request">command request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns></returns>
-        public async Task Handle(SaveRelationshipsCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(SaveRelationshipsCommand request, CancellationToken cancellationToken)
         {
 
             if (request.RelationshipsToAdd.Count() > 0)

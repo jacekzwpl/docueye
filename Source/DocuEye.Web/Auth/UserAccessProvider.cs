@@ -1,7 +1,8 @@
 ﻿using DocuEye.Infrastructure.Authentication.OIDC;
+using DocuEye.Infrastructure.Mediator;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
+
 using Microsoft.Extensions.Caching.Memory;
 
 namespace DocuEye.Web.Auth
@@ -29,7 +30,7 @@ namespace DocuEye.Web.Auth
             else
             {
                 var query = new GetWorkspaceQuery(workspaceId);
-                var workspace = await this.mediator.Send<Workspace?>(query);
+                var workspace = await this.mediator.SendQueryAsync<GetWorkspaceQuery,Workspace?>(query);
                 if (workspace == null)
                 {
                     return false;

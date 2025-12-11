@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ClearDocsItems
 {
-    public class ClearDocsItemsCommand : IRequest<ClearDocsItemsResult>
+    public class ClearDocsItemsCommand : ICommand<ClearDocsItemsResult>
     {
         public string WorkspaceId { get; set; } = null!;
 

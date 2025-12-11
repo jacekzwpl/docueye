@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿
+using DocuEye.Infrastructure.Mediator.Events;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace DocuEye.WorkspaceImporter.Application.Events
     /// <summary>
     /// Event that is fired when relationship changes was detected during import
     /// </summary>
-    public class RelationshipChangedEvent : INotification
+    public class RelationshipChangedEvent : IEvent
     {
         /// <summary>
         /// The ID of workspace in whitch relationship exists

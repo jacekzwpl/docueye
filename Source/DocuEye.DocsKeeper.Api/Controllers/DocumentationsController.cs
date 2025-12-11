@@ -2,7 +2,7 @@
 using DocuEye.DocsKeeper.Application.Queries.GetWorkspaceDocumentation;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.Infrastructure.HttpProblemDetails;
-using MediatR;
+using DocuEye.Infrastructure.Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -42,7 +42,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
         public async Task<ActionResult<DocumentationContent>> GetDocumentation([FromRoute] string workspaceId, [FromQuery] string baseUrl)
         {
             var query = new GetDocumentationContentQuery(workspaceId, baseUrl);
-            var result = await this.mediator.Send<DocumentationContent?>(query);
+            var result = await this.mediator.SendQueryAsync<GetDocumentationContentQuery,DocumentationContent?>(query);
             if (result == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DocumentationContentNotFound, DocumentationContentNotFoundDetails));
@@ -61,7 +61,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
         public async Task<ActionResult<DocumentationContent>> GetDocumentation([FromRoute] string workspaceId, [FromRoute] string elementId, [FromQuery] string baseUrl)
         {
             var query = new GetDocumentationContentQuery(workspaceId, baseUrl, elementId);
-            var result = await this.mediator.Send<DocumentationContent?>(query);
+            var result = await this.mediator.SendQueryAsync<GetDocumentationContentQuery,DocumentationContent?>(query);
             if (result == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DocumentationContentNotFound, DocumentationContentNotFoundDetails));
@@ -80,7 +80,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
         public async Task<IActionResult> GetDocumentationImageFile([FromRoute] string workspaceId, [FromRoute] string documentationId, [FromRoute] string name)
         {
             var query = new GetImageQuery(documentationId, workspaceId, name);
-            var result = await this.mediator.Send<Image?>(query);
+            var result = await this.mediator.SendQueryAsync<GetImageQuery,Image?>(query);
             if (result == null || result.Content == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(ImageNotFound));

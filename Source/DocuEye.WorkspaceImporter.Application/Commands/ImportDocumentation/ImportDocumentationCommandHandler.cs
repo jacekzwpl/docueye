@@ -1,14 +1,17 @@
 ﻿using DocuEye.DocsKeeper.Application.Commads.SaveSingleDocumentation;
+using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Commands;
 using DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Persistence;
-using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
 {
-    public class ImportDocumentationCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportDocumentationCommand, ImportDocumentationResult>
+    public class ImportDocumentationCommandHandler : BaseImportDataCommandHandler, ICommandHandler<ImportDocumentationCommand, ImportDocumentationResult>
     {
         private readonly IMediator mediator;
         public ImportDocumentationCommandHandler(IMediator mediator, IWorkspaceImporterDBContext dbContext) : base(dbContext)
@@ -16,7 +19,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
             this.mediator = mediator;
         }
 
-        public async Task<ImportDocumentationResult> Handle(ImportDocumentationCommand request, CancellationToken cancellationToken)
+        public async Task<ImportDocumentationResult> HandleAsync(ImportDocumentationCommand request, CancellationToken cancellationToken)
         {
             // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
@@ -34,7 +37,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
 
             if (!string.IsNullOrEmpty(request.Documentation.StructurizrElementId)) { 
                 
-                var element = await this.mediator.Send(
+                var element = await this.mediator.SendQueryAsync<GetElementByStructurizrIdQuery, Element?>(
                     new GetElementByStructurizrIdQuery(
                         request.Documentation.StructurizrElementId,
                         request.WorkspaceId));
@@ -51,7 +54,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation
             }
 
             // save docs
-            await this.mediator.Send(new SaveSingleDocumentationCommand(documentation));
+            await this.mediator.SendCommandAsync(new SaveSingleDocumentationCommand(documentation));
 
             return new ImportDocumentationResult(request.WorkspaceId, true);
         }

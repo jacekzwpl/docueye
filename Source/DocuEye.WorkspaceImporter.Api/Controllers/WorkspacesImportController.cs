@@ -1,4 +1,5 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.WorkspaceImporter.Api.Model;
 using DocuEye.WorkspaceImporter.Application.Commands.ClearDecisions;
 using DocuEye.WorkspaceImporter.Application.Commands.ClearDocsItems;
 using DocuEye.WorkspaceImporter.Application.Commands.FinalizeImport;
@@ -11,7 +12,7 @@ using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportViewConfiguration;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportViews;
 using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
-using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 WorkspaceName = data.WorkspaceName,
                 WorkspaceDescription = data.WorkspaceDescription
             };
-            var result = await this.mediator.Send<StartImportResult>(command);
+            var result = await this.mediator.SendCommandAsync<StartImportCommand,StartImportResult>(command);
             if(result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -81,7 +82,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 WorkspaceId = data.WorkspaceId,
                 ViewConfiguration = data.ViewConfiguration
             };
-            var result = await this.mediator.Send<ImportViewConfigurationResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportViewConfigurationCommand,ImportViewConfigurationResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -113,7 +114,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 WorkspaceId = data.WorkspaceId,
                 Elements = data.Elements
             };
-            var result = await this.mediator.Send<ImportElementsResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportElementsCommand,ImportElementsResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -145,7 +146,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 ImportKey = data.ImportKey,
                 WorkspaceId = data.WorkspaceId
             };
-            var result = await this.mediator.Send<ImportRelationshipsResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportRelationshipsCommand,ImportRelationshipsResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -177,7 +178,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 ImportKey = data.ImportKey,
                 WorkspaceId = data.WorkspaceId
             };
-            var result = await this.mediator.Send<ImportViewsResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportViewsCommand,ImportViewsResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -204,7 +205,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         public async Task<ActionResult<ImportWorkspaceResponse>> ImportClearDocItems(ImportClearDocItemsRequest data)
         {
             var command = new ClearDocsItemsCommand(data.WorkspaceId, data.ImportKey);
-            var result = await this.mediator.Send<ClearDocsItemsResult>(command);
+            var result = await this.mediator.SendCommandAsync<ClearDocsItemsCommand, ClearDocsItemsResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -231,7 +232,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         public async Task<ActionResult<ImportWorkspaceResponse>> ImportDocumentation(ImportDocumentationRequest data)
         {
             var command = new ImportDocumentationCommand(data.WorkspaceId, data.ImportKey, data.Documentation);
-            var result = await this.mediator.Send<ImportDocumentationResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportDocumentationCommand,ImportDocumentationResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -258,7 +259,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         public async Task<ActionResult<ImportWorkspaceResponse>> ImportDecision(ImportDecisionRequest data)
         {
             var command = new ImportDecisionCommand(data.WorkspaceId, data.ImportKey, data.Decision);
-            var result = await this.mediator.Send<ImportDecisionResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportDecisionCommand, ImportDecisionResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -285,7 +286,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         public async Task<ActionResult<ImportWorkspaceResponse>> ImportImage(ImportImageRequest data)
         {
             var command = new ImportImageCommand(data.WorkspaceId, data.ImportKey, data.Image);
-            var result = await this.mediator.Send<ImportImageResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportImageCommand,ImportImageResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -312,7 +313,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         public async Task<ActionResult<ImportWorkspaceResponse>> ImportDecisionLinks(ImportDecisionsLinksRequest data)
         {
             var command = new ImportDecisionsLinksCommand(data.WorkspaceId, data.ImportKey, data.DocumentationId, data.DecisionDslId, data.DecisionsLinks);
-            var result = await this.mediator.Send<ImportDecisionsLinksResult>(command);
+            var result = await this.mediator.SendCommandAsync<ImportDecisionsLinksCommand, ImportDecisionsLinksResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -339,7 +340,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         public async Task<ActionResult<ImportWorkspaceResponse>> ImportClearDecisions(ImportClearDecisionsRequest data)
         {
             var command = new ClearDecisionsCommand(data.WorkspaceId, data.ImportKey);
-            var result = await this.mediator.Send<ClearDecisionsResult>(command);
+            var result = await this.mediator.SendCommandAsync<ClearDecisionsCommand,ClearDecisionsResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()
@@ -371,7 +372,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 WorkspaceId = data.WorkspaceId,
             };
 
-            var result = await this.mediator.Send<FinalizeImportResult>(command);
+            var result = await this.mediator.SendCommandAsync<FinalizeImportCommand, FinalizeImportResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()

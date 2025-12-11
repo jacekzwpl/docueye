@@ -1,6 +1,7 @@
 ﻿using DocuEye.DocsKeeper.Persistence;
+using DocuEye.Infrastructure.Mediator.Queries;
 using Markdig;
-using MediatR;
+
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetWorkspaceDocumentation
     /// <summary>
     /// Handler for GetDocumentationContentQuery
     /// </summary>
-    public class GetDocumentationContentQueryHandler : IRequestHandler<GetDocumentationContentQuery, DocumentationContent?>
+    public class GetDocumentationContentQueryHandler : IQueryHandler<GetDocumentationContentQuery, DocumentationContent?>
     {
         private readonly IDocsKeeperDBContext dbContext;
         /// <summary>
@@ -27,7 +28,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetWorkspaceDocumentation
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>Documentation content or null if no was found</returns>
-        public async Task<DocumentationContent?> Handle(GetDocumentationContentQuery request, CancellationToken cancellationToken)
+        public async Task<DocumentationContent?> HandleAsync(GetDocumentationContentQuery request, CancellationToken cancellationToken)
         {
             var documentationData =  await this.dbContext.Documentations
                 .FindOne(o => o.WorkspaceId == request.WorkspaceId && o.ElementId == request.ElementId);

@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.FinalizeImport
 {
-    public class FinalizeImportCommand : IRequest<FinalizeImportResult>
+    public class FinalizeImportCommand : ICommand<FinalizeImportResult>
     {
         /// <summary>
         /// Workspace Identifier

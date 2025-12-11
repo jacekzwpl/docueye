@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetContainerView
 {
     /// <summary>
     /// Gets container view
     /// </summary>
-    public class GetContainerViewQuery : IRequest<ContainerView?>
+    public class GetContainerViewQuery : IQuery<ContainerView?>
     {
         /// <summary>
         /// The ID of view

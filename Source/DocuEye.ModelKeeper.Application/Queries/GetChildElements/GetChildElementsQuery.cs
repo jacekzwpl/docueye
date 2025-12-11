@@ -1,5 +1,6 @@
-﻿using DocuEye.ModelKeeper.Application.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Application.Model;
+
 using System.Collections.Generic;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetChildElements
@@ -7,7 +8,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetChildElements
     /// <summary>
     /// Gets elements children 
     /// </summary>
-    public class GetChildElementsQuery : IRequest<IEnumerable<ChildElement>>
+    public class GetChildElementsQuery : IQuery<IEnumerable<ChildElement>>
     {
         /// <summary>
         /// Workspace Id

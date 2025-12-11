@@ -1,5 +1,6 @@
-﻿using DocuEye.ModelKeeper.Application.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Application.Model;
+
 using System.Collections.Generic;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetElementConsumers
@@ -7,7 +8,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementConsumers
     /// <summary>
     /// Gets element consumers
     /// </summary>
-    public class GetElementConsumersQuery : IRequest<IEnumerable<ElementConsumer>>
+    public class GetElementConsumersQuery : IQuery<IEnumerable<ElementConsumer>>
     {
         /// <summary>
         /// The ID of the element

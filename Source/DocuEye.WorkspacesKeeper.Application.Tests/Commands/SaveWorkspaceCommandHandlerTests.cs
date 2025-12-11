@@ -20,7 +20,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveWorkspaceCommandHandler(this.dbContext);
-            await handler.Handle(query, default);
+            await handler.HandleAsync(query, default);
 
             // Assert
             var item = await this.dbContext.Workspaces.FindOne(o => o.Id == "workspacetest1");
@@ -43,7 +43,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveWorkspaceCommandHandler(this.dbContext);
-            await handler.Handle(query, default);
+            await handler.HandleAsync(query, default);
 
             // Assert
             var item = await this.dbContext.Workspaces.FindOne(o => o.Id == "workspacetest2");

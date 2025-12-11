@@ -1,20 +1,20 @@
-﻿using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Application.Model;
+using DocuEye.ModelKeeper.Model;
+using DocuEye.ModelKeeper.Model.Maps;
 using DocuEye.ModelKeeper.Persistence;
-using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DocuEye.ModelKeeper.Model.Maps;
-using DocuEye.ModelKeeper.Application.Model;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
 {
     /// <summary>
     /// Handler for GetElementDependencesQuery
     /// </summary>
-    public class GetElementDependencesQueryHandler : IRequestHandler<GetElementDependencesQuery, IEnumerable<ElementDependence>>
+    public class GetElementDependencesQueryHandler : IQueryHandler<GetElementDependencesQuery, IEnumerable<ElementDependence>>
     {
         private readonly IModelKeeperDBContext dbContext;
         /// <summary>
@@ -31,7 +31,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>List of element dependences</returns>
-        public async Task<IEnumerable<ElementDependence>> Handle(GetElementDependencesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ElementDependence>> HandleAsync(GetElementDependencesQuery request, CancellationToken cancellationToken)
         {
             IEnumerable<Relationship> relationships = Enumerable.Empty<Relationship>();
             if(!request.GetLinked)

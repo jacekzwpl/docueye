@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Events;
 
 namespace DocuEye.WorkspacesKeeper.Application.Events
 {
-    public class WorkspaceDeletedEvent : INotification
+    public class WorkspaceDeletedEvent : IEvent
     {
         public string WorkspaceId { get; set; }
 

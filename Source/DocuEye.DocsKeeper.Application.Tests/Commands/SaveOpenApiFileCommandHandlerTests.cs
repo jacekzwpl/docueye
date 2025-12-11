@@ -12,7 +12,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.Commands
             var oldItems = await this.dbContext.DocumentationFiles.Find(o => true);
             // Act
             var handler = new SaveOpenApiFileCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.DocumentationFiles.Find(o => true);
@@ -27,7 +27,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.Commands
             var oldItems = await this.dbContext.DocumentationFiles.Find(o => true);
             // Act
             var handler = new SaveOpenApiFileCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.DocumentationFiles.Find(o => true);
@@ -41,7 +41,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.Commands
             var command = new SaveOpenApiFileCommand("workspacetest1", "elementtestId1", "test", "swagger.json");
             // Act
             var handler = new SaveOpenApiFileCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var item = await this.dbContext.DocumentationFiles.FindOne(o => o.ElementId == "elementtestId1");
@@ -55,7 +55,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.Commands
             var command = new SaveOpenApiFileCommand("workspacetest1", "elementtestId1", "test", "swagger.yaml");
             // Act
             var handler = new SaveOpenApiFileCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var item = await this.dbContext.DocumentationFiles.FindOne(o => o.ElementId == "elementtestId1");

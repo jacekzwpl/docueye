@@ -1,13 +1,15 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model.Maps;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Persistence;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveViewConfiguration;
-using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViewConfiguration
 {
-    public class ImportViewConfigurationCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportViewConfigurationCommand, ImportViewConfigurationResult>
+    public class ImportViewConfigurationCommandHandler : BaseImportDataCommandHandler, ICommandHandler<ImportViewConfigurationCommand, ImportViewConfigurationResult>
     {
         private readonly IMediator mediator;
 
@@ -15,7 +17,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViewConfiguration
         {
             this.mediator = mediator;
         }
-        public async Task<ImportViewConfigurationResult> Handle(ImportViewConfigurationCommand request, CancellationToken cancellationToken)
+        public async Task<ImportViewConfigurationResult> HandleAsync(ImportViewConfigurationCommand request, CancellationToken cancellationToken)
         {
             // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
@@ -31,7 +33,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViewConfiguration
             var viewConfiguration = request.ViewConfiguration.MapToViewConfiguration();
             viewConfiguration.Id = request.WorkspaceId;
 
-            await this.mediator.Send(new SaveViewConfigurationCommand()
+            await this.mediator.SendCommandAsync(new SaveViewConfigurationCommand()
             {
                 ViewConfiguration = viewConfiguration
             });

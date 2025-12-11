@@ -1,4 +1,5 @@
-﻿using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ViewsKeeper.Application.Queries.GetAllViews;
@@ -8,7 +9,7 @@ using DocuEye.WorkspaceImporter.Application.Commands.ImportViews;
 using DocuEye.WorkspaceImporter.Model;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
+
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportViewsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -66,7 +67,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportViewsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -95,11 +96,11 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetWorkspaceQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetWorkspaceQuery, Workspace?>(It.IsAny<GetWorkspaceQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<Workspace?>(null));
             // Act
             var handler = new ImportViewsCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -161,7 +162,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetWorkspaceQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetWorkspaceQuery, Workspace?>(It.IsAny<GetWorkspaceQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<Workspace?>(new Workspace()
                 {
                     Id = "workspace1",
@@ -170,7 +171,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             mediatorMock.Setup(
-               i => i.Send(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
+               i => i.SendQueryAsync<GetAllWorkspaceElementsQuery, IEnumerable<Element>>(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
                .Returns(Task.FromResult<IEnumerable<Element>>(new List<Element>()
                {
                    new Element()
@@ -186,7 +187,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                }));
 
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetAllWorkspaceRelationshipsQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetAllWorkspaceRelationshipsQuery, IEnumerable<Relationship>>(It.IsAny<GetAllWorkspaceRelationshipsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IEnumerable<Relationship>>(new List<Relationship>()
                 {
                     new Relationship()
@@ -200,12 +201,12 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetAllViewsQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetAllViewsQuery, IEnumerable<BaseView>>(It.IsAny<GetAllViewsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IEnumerable<BaseView>>(new List<BaseView>()));
 
             // Act
             var handler = new ImportViewsCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");
@@ -268,7 +269,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetWorkspaceQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetWorkspaceQuery, Workspace?>(It.IsAny<GetWorkspaceQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<Workspace?>(new Workspace()
                 {
                     Id = "workspace1",
@@ -277,7 +278,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             mediatorMock.Setup(
-               i => i.Send(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
+               i => i.SendQueryAsync<GetAllWorkspaceElementsQuery, IEnumerable<Element>>(It.IsAny<GetAllWorkspaceElementsQuery>(), It.IsAny<CancellationToken>()))
                .Returns(Task.FromResult<IEnumerable<Element>>(new List<Element>()
                {
                    new Element()
@@ -293,7 +294,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                }));
 
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetAllWorkspaceRelationshipsQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetAllWorkspaceRelationshipsQuery, IEnumerable<Relationship>>(It.IsAny<GetAllWorkspaceRelationshipsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IEnumerable<Relationship>>(new List<Relationship>()
                 {
                     new Relationship()
@@ -307,7 +308,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
                 }));
 
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetAllViewsQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetAllViewsQuery, IEnumerable<BaseView>>(It.IsAny<GetAllViewsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IEnumerable<BaseView>>(new List<BaseView>()
                 {
                     new BaseView()
@@ -319,7 +320,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportViewsCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");

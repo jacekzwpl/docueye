@@ -1,9 +1,10 @@
-﻿using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using DocuEye.WorkspaceImporter.Application.Events;
 using DocuEye.WorkspaceImporter.Model;
-using MediatR;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     newRelationship.DestinationName = destinationElement.Name;
                     existingRelationships.Add(newRelationship);
 
-                    await this.mediator.Publish(new RelationshipCreatedEvent(
+                    await this.mediator.SendEventAsync(new RelationshipCreatedEvent(
                         workspaceId,
                         newRelationship.Id,
                         import.Id,
@@ -70,7 +71,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     existingRelationship.DestinationName = destinationElement.Name;
                     if(!existingRelationship.IsDataEqual(oldRelationship))
                     {
-                        await this.mediator.Publish(new RelationshipChangedEvent(
+                        await this.mediator.SendEventAsync(new RelationshipChangedEvent(
                             workspaceId,
                             existingRelationship.Id,
                             import.Id,
@@ -131,7 +132,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     continue;
                 }
                 //Send delete event
-                await this.mediator.Publish(new RelationshipDeletedEvent(
+                await this.mediator.SendEventAsync(new RelationshipDeletedEvent(
                     relationshipToDelete.WorkspaceId,
                     relationshipToDelete.Id,
                     import.Id,

@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetDynamicView
 {
     /// <summary>
     /// Gets Dynamic view
     /// </summary>
-    public class GetDynamicViewQuery : IRequest<DynamicView?>
+    public class GetDynamicViewQuery : IQuery<DynamicView?>
     {
         /// <summary>
         /// The ID of view

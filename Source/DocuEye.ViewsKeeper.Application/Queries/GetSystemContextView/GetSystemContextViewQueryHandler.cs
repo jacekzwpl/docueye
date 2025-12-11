@@ -1,6 +1,7 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.ViewsKeeper.Persistence;
-using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.GetSystemContextView
     /// <summary>
     /// Handler for GetSystemContextViewQuery
     /// </summary>
-    public class GetSystemContextViewQueryHandler : IRequestHandler<GetSystemContextViewQuery, SystemContextView?>
+    public class GetSystemContextViewQueryHandler : IQueryHandler<GetSystemContextViewQuery, SystemContextView?>
     {
         private readonly IViewsKeeperDBContext dbContext;
         /// <summary>
@@ -26,7 +27,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.GetSystemContextView
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>System Context View or null if no was found</returns>
-        public async Task<SystemContextView?> Handle(GetSystemContextViewQuery request, CancellationToken cancellationToken)
+        public async Task<SystemContextView?> HandleAsync(GetSystemContextViewQuery request, CancellationToken cancellationToken)
         {
             return await this.dbContext.SystemContextViews
                 .FindOne(o => o.Id == request.Id && o.WorkspaceId == request.WorkspaceId);

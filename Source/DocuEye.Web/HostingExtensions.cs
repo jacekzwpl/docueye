@@ -191,6 +191,7 @@ namespace DocuEye.Web
                 });
             });
 
+            /*
             startupLogger.LogInformation("Register MediatR services");
             builder.Services.AddMediatR(cfg => {
                 cfg.RegisterServicesFromAssembly(typeof(StartImportCommandHandler).Assembly);
@@ -200,6 +201,7 @@ namespace DocuEye.Web
                 cfg.RegisterServicesFromAssembly(typeof(SaveElementsCommandHandler).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
             });
+            */
 
             builder.Services.AddAntiforgery(options =>
             {

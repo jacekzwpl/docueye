@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ClearDecisions
 {
-    public class ClearDecisionsCommand : IRequest<ClearDecisionsResult>
+    public class ClearDecisionsCommand : ICommand<ClearDecisionsResult>
     {
         public string ImportKey { get; set; } = null!;
         public string WorkspaceId { get; set; } = null!;

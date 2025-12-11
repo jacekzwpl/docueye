@@ -1,9 +1,10 @@
-﻿using DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation;
 using DocuEye.WorkspaceImporter.Model;
-using MediatR;
+
 using Moq;
 
 namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
@@ -26,7 +27,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportDocumentationCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -57,7 +58,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportDocumentationCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -96,7 +97,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportDocumentationCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");
@@ -135,7 +136,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetElementByStructurizrIdQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetElementByStructurizrIdQuery, Element?>(It.IsAny<GetElementByStructurizrIdQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<Element?>(new Element()
                 {
                     Id = "element"
@@ -143,7 +144,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportDocumentationCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");
@@ -182,12 +183,12 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetElementByStructurizrIdQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetElementByStructurizrIdQuery, Element?>(It.IsAny<GetElementByStructurizrIdQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<Element?>(null));
 
             // Act
             var handler = new ImportDocumentationCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
