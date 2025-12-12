@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.Net;
+using DocuEye.Infrastructure.Mediator;
 
 namespace DocuEye.Web
 {
@@ -189,6 +190,16 @@ namespace DocuEye.Web
                     //policy.RequireAuthenticatedUser();
                     policy.AddRequirements(new GeneralAccessRequirement(oidcSettings == null ? false : true));
                 });
+            });
+            startupLogger.LogInformation("Register Mediator services");
+            builder.Services.AddMediator(options =>
+            {
+                options.UseAssembly(typeof(StartImportCommandHandler).Assembly);
+                options.UseAssembly(typeof(ElementChangedEventHandler).Assembly);
+                options.UseAssembly(typeof(SaveViewsChangesCommandHandler).Assembly);
+                options.UseAssembly(typeof(SaveSingleDecisionCommandHandler).Assembly);
+                options.UseAssembly(typeof(SaveElementsCommandHandler).Assembly);
+                options.UseAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
             });
 
             /*
