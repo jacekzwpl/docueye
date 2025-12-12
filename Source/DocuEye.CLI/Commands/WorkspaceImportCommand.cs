@@ -131,7 +131,7 @@ namespace DocuEye.CLI
                         importKey, jsonWorkspace, workspaceId, sourceLink));
             }
 
-                return 0;
+            return 0;
 
 
         } 
