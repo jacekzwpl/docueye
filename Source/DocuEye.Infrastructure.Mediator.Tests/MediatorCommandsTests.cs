@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DocuEye.Infrastructure.Mediator.Tests.Handlers;
+using DocuEye.Infrastructure.Mediator.Tests.Model;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DocuEye.Infrastructure.Mediator.Tests
 {
@@ -18,6 +20,24 @@ namespace DocuEye.Infrastructure.Mediator.Tests
             Assert.IsNotNull(result);
             Assert.That(result.Result, Is.EqualTo("Command executed: Test command"));
 
+        }
+
+        [Test]
+        public async Task MediatorSendVoidCommandShouldBeHandled()
+        {
+            // Arrange
+            var mediator = serviceProvider.GetRequiredService<IMediator>();
+            var command = new TestVoidCommand("Test command");
+
+            // Act
+            await mediator.SendCommandAsync(command);
+
+            // Assert
+            var state = serviceProvider.GetRequiredService<EventHandlingState>();
+            Assert.That(state.HandledEvents, Is.EquivalentTo(new[]
+            {
+                $"Void command executed: {command.Name}"
+            }));
         }
 
         [Test]

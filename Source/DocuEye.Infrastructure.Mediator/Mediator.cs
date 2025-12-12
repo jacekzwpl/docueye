@@ -24,9 +24,11 @@ namespace DocuEye.Infrastructure.Mediator
             return await handlerDelegate();
         }
 
-        public Task SendCommandAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default) where TCommand : ICommand
+        public async Task SendCommandAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default) where TCommand : ICommand
         {
-            throw new NotImplementedException();
+            var handler = provider.GetRequiredService<ICommandHandler<TCommand>>();
+            Func<Task> handlerDelegate = () => handler.HandleAsync(command, cancellationToken);
+            await handlerDelegate();
         }
 
         public Task SendEventAsync<TEvent>(TEvent eventData, CancellationToken cancellationToken = default) where TEvent : IEvent
