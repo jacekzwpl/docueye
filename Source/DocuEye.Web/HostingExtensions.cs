@@ -1,18 +1,25 @@
-﻿using DocuEye.ChangeTracker.Application.EventHandlers;
+﻿using DocuEye.ChangeTracker.Api.Controllers;
+using DocuEye.ChangeTracker.Application.EventHandlers;
 using DocuEye.ChangeTracker.Persistence;
+using DocuEye.DocsKeeper.Api.Controllers;
 using DocuEye.DocsKeeper.Application.Commands.SaveSingleDecision;
 using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.DataProtection;
+using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Api.Controllers;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Persistence;
 using DocuEye.Persistence;
+using DocuEye.ViewsKeeper.Api.Controllers;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
 using DocuEye.ViewsKeeper.Persistence;
 using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
+using DocuEye.WorkspaceImporter.Api.Controllers;
 using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 using DocuEye.WorkspaceImporter.Persistence;
+using DocuEye.Workspaces.Api.Controllers;
 using DocuEye.WorkspacesKeeper.Application;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Persistence;
@@ -24,7 +31,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.Net;
-using DocuEye.Infrastructure.Mediator;
 
 namespace DocuEye.Web
 {
@@ -223,7 +229,14 @@ namespace DocuEye.Web
                 options =>
                 {
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                });//.AddApplicationPart(Assembly.GetAssembly(typeof(WorkspacesImportController))).AddControllersAsServices();
+                })
+                .AddApplicationPart(typeof(WorkspacesImportController).Assembly)
+                .AddApplicationPart(typeof(WorkspacesController).Assembly)
+                .AddApplicationPart(typeof(ViewsController).Assembly)
+                .AddApplicationPart(typeof(ElementsController).Assembly)
+                .AddApplicationPart(typeof(DecisionsController).Assembly)
+                .AddApplicationPart(typeof(ModelChangesController).Assembly)
+                .AddControllersAsServices();
 
             
             builder.Services.ConfigureWorkspacesKeeperApplicationServices();
