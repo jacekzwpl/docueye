@@ -1,12 +1,12 @@
 ﻿using DocuEye.DocsKeeper.Application.Commads.ClearImages;
 using DocuEye.DocsKeeper.Persistence;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Commands;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DocuEye.DocsKeeper.Application.Commands.ClearImages
 {
-    public class ClearImagesCommandHander : IRequestHandler<ClearImagesCommand>
+    public class ClearImagesCommandHander : ICommandHandler<ClearImagesCommand>
     {
         private readonly IDocsKeeperDBContext dbContext;
 
@@ -14,7 +14,7 @@ namespace DocuEye.DocsKeeper.Application.Commands.ClearImages
         {
             this.dbContext = dbContext;
         }
-        public async Task Handle(ClearImagesCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(ClearImagesCommand request, CancellationToken cancellationToken)
         {
             await this.dbContext.Images.DeleteManyAsync(o => o.WorkspaceId == request.WorkspaceId);
         }

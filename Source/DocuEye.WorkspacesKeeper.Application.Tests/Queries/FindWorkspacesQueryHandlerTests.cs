@@ -12,7 +12,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
 
             // Act
             var handler = new FindWorkspacesQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(3), "Hanlder should return 3 items.");
@@ -29,7 +29,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
 
             // Act
             var handler = new FindWorkspacesQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(1), "Hanlder should return 1 item.");
@@ -47,7 +47,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
 
             // Act
             var handler = new FindWorkspacesQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");

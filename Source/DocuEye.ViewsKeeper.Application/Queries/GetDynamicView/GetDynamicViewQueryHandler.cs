@@ -1,6 +1,7 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.ViewsKeeper.Persistence;
-using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.GetDynamicView
     /// <summary>
     /// Handler for GetDynamicViewQuery
     /// </summary>
-    public class GetDynamicViewQueryHandler : IRequestHandler<GetDynamicViewQuery, DynamicView?>
+    public class GetDynamicViewQueryHandler : IQueryHandler<GetDynamicViewQuery, DynamicView?>
     {
         private readonly IViewsKeeperDBContext dbContext;
         /// <summary>
@@ -26,7 +27,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.GetDynamicView
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>Dynamic View or null if no was found</returns>
-        public async Task<DynamicView?> Handle(GetDynamicViewQuery request, CancellationToken cancellationToken)
+        public async Task<DynamicView?> HandleAsync(GetDynamicViewQuery request, CancellationToken cancellationToken)
         {
             return await this.dbContext.DynamicViews
                 .FindOne(o => o.Id == request.Id && o.WorkspaceId == request.WorkspaceId);

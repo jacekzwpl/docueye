@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetAllViews
 {
-    public class GetAllViewsQuery : IRequest<IEnumerable<BaseView>>
+    public class GetAllViewsQuery : IQuery<IEnumerable<BaseView>>
     {
         public string WorkspaceId { get; set; }
 

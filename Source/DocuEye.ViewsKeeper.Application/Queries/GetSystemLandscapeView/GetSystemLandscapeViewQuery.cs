@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetSystemLandscapeView
 {
     /// <summary>
     /// Gets System Landscape View
     /// </summary>
-    public class GetSystemLandscapeViewQuery : IRequest<SystemLandscapeView?>
+    public class GetSystemLandscapeViewQuery : IQuery<SystemLandscapeView?>
     {
         /// <summary>
         /// The ID of view

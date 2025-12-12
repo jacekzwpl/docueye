@@ -10,15 +10,17 @@ using DocuEye.WorkspaceImporter.Persistence;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
+
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using DocuEye.ViewsKeeper.Model.Maps;
+using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.Infrastructure.Mediator;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
 {
-    public class ImportViewsCommandHandler : IRequestHandler<ImportViewsCommand, ImportViewsResult>
+    public class ImportViewsCommandHandler : ICommandHandler<ImportViewsCommand, ImportViewsResult>
     {
         private readonly IMediator mediator;
         private readonly IWorkspaceImporterDBContext dbContext;
@@ -29,7 +31,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
             this.dbContext = dbContext;
         }
 
-        public async Task<ImportViewsResult> Handle(ImportViewsCommand request, CancellationToken cancellationToken)
+        public async Task<ImportViewsResult> HandleAsync(ImportViewsCommand request, CancellationToken cancellationToken)
         {
             // Get import data
             var import = await this.dbContext.WorkspaceImports
@@ -55,7 +57,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
             }
 
             //Get workspace for saving views information
-            var workspace = await this.mediator.Send(
+            var workspace = await this.mediator.SendQueryAsync<GetWorkspaceQuery, Workspace?>(
                 new GetWorkspaceQuery(request.WorkspaceId));
 
             if(workspace == null)
@@ -81,7 +83,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
             workspace.Views = worskspaceViews;
 
             //Save views
-            await this.mediator.Send(new SaveViewsChangesCommand(request.WorkspaceId)
+            await this.mediator.SendCommandAsync(new SaveViewsChangesCommand(request.WorkspaceId)
             {
                 ComponentViews = componentViews,
                 ContainerViews = containerViews,
@@ -94,7 +96,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
             });
 
             //Save Workspace
-            await this.mediator.Send(new SaveWorkspaceCommand()
+            await this.mediator.SendCommandAsync(new SaveWorkspaceCommand()
             {
                 Workspace = workspace
             });
@@ -119,13 +121,13 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportViews
         {
             //Get existing elements for comparison
             var existingElements = await this.mediator
-                .Send<IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId));
+                .SendQueryAsync<GetAllWorkspaceElementsQuery,IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId));
             //Get existing relationships for comparison
             var existingRelationships = await this.mediator
-                .Send<IEnumerable<Relationship>>(new GetAllWorkspaceRelationshipsQuery(request.WorkspaceId));
+                .SendQueryAsync<GetAllWorkspaceRelationshipsQuery,IEnumerable<Relationship>>(new GetAllWorkspaceRelationshipsQuery(request.WorkspaceId));
             // Get exiting views for comparision
             var existingViews = await this.mediator
-                .Send<IEnumerable<BaseView>>(new GetAllViewsQuery(request.WorkspaceId));
+                .SendQueryAsync<GetAllViewsQuery,IEnumerable<BaseView>>(new GetAllViewsQuery(request.WorkspaceId));
 
             var detector = new ViewsChangeDetector(this.mediator);
             var(viewsIdsMap, elementsDiagrams) = detector.DetectViewsIds(

@@ -1,12 +1,10 @@
 ﻿using DocuEye.DocsKeeper.Model;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using DocuEye.Infrastructure.Mediator.Commands;
+
 
 namespace DocuEye.DocsKeeper.Application.Commads.SaveSingleDecision
 {
-    public class SaveSingleDecisionCommand : IRequest
+    public class SaveSingleDecisionCommand : ICommand
     {
         public Decision Decision { get; set; }
 

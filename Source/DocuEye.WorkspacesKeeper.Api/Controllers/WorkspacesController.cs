@@ -1,5 +1,6 @@
 ﻿using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.HttpProblemDetails;
+using DocuEye.Infrastructure.Mediator;
 using DocuEye.WorkspacesKeeper.Application.Commands.DeleteWorkspace;
 using DocuEye.WorkspacesKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces;
@@ -7,7 +8,7 @@ using DocuEye.WorkspacesKeeper.Application.Queries.GetThemeStyles;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetViewConfiguration;
 using DocuEye.WorkspacesKeeper.Application.Queries.GetWorkspace;
 using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -64,7 +65,7 @@ namespace DocuEye.Workspaces.Api.Controllers
                 Skip = skip,
                 UserName = userName
             };
-            var result = await this.mediator.Send<IEnumerable<FoundedWorkspace>>(query);
+            var result = await this.mediator.SendQueryAsync<FindWorkspacesQuery,IEnumerable<FoundedWorkspace>>(query);
 
             return this.Ok(result);
         }
@@ -79,7 +80,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         public async Task<ActionResult<Workspace>> Get([FromRoute]string id)
         {
             var query = new GetWorkspaceQuery(id);
-            var result = await this.mediator.Send<Workspace?>(query);
+            var result = await this.mediator.SendQueryAsync<GetWorkspaceQuery,Workspace?>(query);
             if(result == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(WorkspaceNotFound, WorkspacNotFoundDetails));
@@ -97,7 +98,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         public async Task<ActionResult<ViewConfiguration>> GetViewConfiguration([FromRoute] string id)
         {
             var query = new GetViewConfigurationQuery(id);
-            var result = await this.mediator.Send<ViewConfiguration?>(query);
+            var result = await this.mediator.SendQueryAsync<GetViewConfigurationQuery,ViewConfiguration?>(query);
             if (result == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(WorkspaceViewConfigurationNotFound, WorkspaceViewConfigurationNotFoundDetails));
@@ -110,7 +111,7 @@ namespace DocuEye.Workspaces.Api.Controllers
                 foreach (var theme in result.Themes)
                 {
                     var themeQuery = new GetThemeStylesQuery(theme);
-                    var themeStyles = await this.mediator.Send<ThemeStylesResult?>(themeQuery);
+                    var themeStyles = await this.mediator.SendQueryAsync<GetThemeStylesQuery,ThemeStylesResult?>(themeQuery);
                     if(themeStyles != null && themeStyles.Elements != null)
                     {
                         elementStyles.AddRange(themeStyles.Elements);
@@ -141,7 +142,7 @@ namespace DocuEye.Workspaces.Api.Controllers
         public async Task<ActionResult> Delete([FromRoute] string id)
         {
             var command = new DeleteWorkspaceCommand(id);
-            await this.mediator.Send(command);
+            await this.mediator.SendCommandAsync(command);
             return this.NoContent();
         }
 

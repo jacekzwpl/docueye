@@ -1,16 +1,14 @@
-﻿using DocuEye.ModelKeeper.Model;
-using MediatR;
-using System;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.ModelKeeper.Model;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DocuEye.ModelKeeper.Application.Commands.SaveElements
 {
     /// <summary>
     /// Save elements command
     /// </summary>
-    public class SaveElementsCommand : IRequest
+    public class SaveElementsCommand : ICommand
     {
         /// <summary>
         /// Elements that should be updated

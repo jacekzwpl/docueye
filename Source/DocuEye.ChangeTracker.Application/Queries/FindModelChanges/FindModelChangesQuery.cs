@@ -1,5 +1,5 @@
 ﻿using DocuEye.ChangeTracker.Model;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +9,7 @@ namespace DocuEye.ChangeTracker.Application.Queries.FindModelChanges
     /// <summary>
     /// Finds model changes for workspace
     /// </summary>
-    public class FindModelChangesQuery : IRequest<IEnumerable<ModelChange>>
+    public class FindModelChangesQuery : IQuery<IEnumerable<ModelChange>>
     {
         /// <summary>
         /// Workspace ID

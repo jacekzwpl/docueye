@@ -1,14 +1,16 @@
 ﻿using DocuEye.DocsKeeper.Application.Commads.SaveSingleImage;
+using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Commands;
 using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Persistence;
-using MediatR;
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportImage
 {
-    public class ImportImageCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportImageCommand, ImportImageResult>
+    public class ImportImageCommandHandler : BaseImportDataCommandHandler, ICommandHandler<ImportImageCommand, ImportImageResult>
     {
         private readonly IMediator mediator;
 
@@ -16,7 +18,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportImage
         {
             this.mediator = mediator;
         }
-        public async Task<ImportImageResult> Handle(ImportImageCommand request, CancellationToken cancellationToken)
+        public async Task<ImportImageResult> HandleAsync(ImportImageCommand request, CancellationToken cancellationToken)
         {
             // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
@@ -34,7 +36,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportImage
             image.Id = Guid.NewGuid().ToString();
 
             // save image
-            await this.mediator.Send(new SaveSingleImageCommand(image));
+            await this.mediator.SendCommandAsync(new SaveSingleImageCommand(image));
 
             return new ImportImageResult(request.WorkspaceId, true);
         }

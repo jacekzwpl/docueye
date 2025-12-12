@@ -1,11 +1,13 @@
-﻿using DocuEye.ModelKeeper.Application.Commands.SaveElements;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Application.ChangeDetectors;
 using DocuEye.WorkspaceImporter.Model;
 using DocuEye.WorkspaceImporter.Persistence;
-using MediatR;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -13,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
 {
-    public class ImportElementsCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportElementsCommand, ImportElementsResult>
+    public class ImportElementsCommandHandler : BaseImportDataCommandHandler, ICommandHandler<ImportElementsCommand, ImportElementsResult>
     {
         private readonly IMediator mediator;
 
@@ -22,7 +24,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
             this.mediator = mediator;
         }
 
-        public async Task<ImportElementsResult> Handle(ImportElementsCommand request, CancellationToken cancellationToken)
+        public async Task<ImportElementsResult> HandleAsync(ImportElementsCommand request, CancellationToken cancellationToken)
         {
 
             // Check import data
@@ -38,13 +40,13 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
 
             //Get existing elements for comparison
             var existingElements = (await this.mediator
-                .Send<IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId))).ToList();
+                .SendQueryAsync<GetAllWorkspaceElementsQuery,IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId))).ToList();
 
             // Detect Changes
             var result = await this.DetectChanges(request.WorkspaceId, import, request.Elements, existingElements);
 
             //Save Elements
-            await this.mediator.Send(new SaveElementsCommand()
+            await this.mediator.SendCommandAsync(new SaveElementsCommand()
             {
                 ElementsToAdd = existingElements.Where(o => result.ElementsToAdd.Contains(o.Id)).ToArray(),
                 ElementsToChange = existingElements.Where(o => result.ElementsToChange.Contains(o.Id)).ToArray(),

@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Events;
 
 namespace DocuEye.WorkspaceImporter.Application.Events
 {
     /// <summary>
     /// Event that is fired when relationship should be created according to detected changes during import
     /// </summary>
-    public class RelationshipCreatedEvent : INotification
+    public class RelationshipCreatedEvent : IEvent
     {
         /// <summary>
         /// The ID of the workspace

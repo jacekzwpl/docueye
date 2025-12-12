@@ -1,18 +1,20 @@
 ﻿using DocuEye.DocsKeeper.Application.Commads.SaveSingleDecision;
+using DocuEye.DocsKeeper.Application.Model;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId;
 using DocuEye.DocsKeeper.Model;
+using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Persistence;
-using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DocuEye.WorkspaceImporter.Api.Model.Maps;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
 {
-    public class ImportDecisionsLinksCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportDecisionsLinksCommand, ImportDecisionsLinksResult>
+    public class ImportDecisionsLinksCommandHandler : BaseImportDataCommandHandler, ICommandHandler<ImportDecisionsLinksCommand, ImportDecisionsLinksResult>
     {
         private readonly IMediator mediator;
 
@@ -21,7 +23,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
             this.mediator = mediator;
         }
 
-        public async Task<ImportDecisionsLinksResult> Handle(ImportDecisionsLinksCommand request, CancellationToken cancellationToken)
+        public async Task<ImportDecisionsLinksResult> HandleAsync(ImportDecisionsLinksCommand request, CancellationToken cancellationToken)
         {
             // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
@@ -34,7 +36,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
                         checkImport.Message);
             }
 
-            var decision = await this.mediator.Send(
+            var decision = await this.mediator.SendQueryAsync<GetDecisonByDslIdQuery, Decision?>(
                 new GetDecisonByDslIdQuery(
                     request.WorkspaceId, request.DocumentationId, request.DecisionDslId));
             if(decision == null)
@@ -45,7 +47,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
                         string.Format("Decison with dslid = '{0}' not found",request.DecisionDslId));
             }
 
-            var allDecsions = await this.mediator.Send(
+            var allDecsions = await this.mediator.SendQueryAsync<GetDecisionsListQuery, IEnumerable<DecisionsListItem>>(
                 new GetDecisionsListQuery(request.WorkspaceId));
 
             var decisionLinks = new List<DecisionLink>();
@@ -67,7 +69,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks
             }
             decision.Links = decisionLinks;
 
-            await this.mediator.Send(new SaveSingleDecisionCommand(decision));
+            await this.mediator.SendCommandAsync(new SaveSingleDecisionCommand(decision));
 
 
 

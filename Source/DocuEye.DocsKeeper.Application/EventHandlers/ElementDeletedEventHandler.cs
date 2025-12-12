@@ -1,6 +1,7 @@
 ﻿using DocuEye.DocsKeeper.Persistence;
+using DocuEye.Infrastructure.Mediator.Events;
 using DocuEye.WorkspaceImporter.Application.Events;
-using MediatR;
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace DocuEye.DocsKeeper.Application.EventHandlers
     /// <summary>
     /// Handles ElementDeletedEvent
     /// </summary>
-    public class ElementDeletedEventHandler : INotificationHandler<ElementDeletedEvent>
+    public class ElementDeletedEventHandler : IEventHandler<ElementDeletedEvent>
     {
         private readonly IDocsKeeperDBContext dbContext;
         /// <summary>
@@ -27,7 +28,7 @@ namespace DocuEye.DocsKeeper.Application.EventHandlers
         /// <param name="notification">event data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns></returns>
-        public async Task Handle(ElementDeletedEvent notification, CancellationToken cancellationToken)
+        public async Task HandleAsync(ElementDeletedEvent notification, CancellationToken cancellationToken)
         {
 
             //Delete ll documentation files connected to element

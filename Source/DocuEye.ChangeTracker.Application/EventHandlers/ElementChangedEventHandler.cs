@@ -1,7 +1,8 @@
 ﻿using DocuEye.ChangeTracker.Model;
 using DocuEye.ChangeTracker.Persistence;
+using DocuEye.Infrastructure.Mediator.Events;
 using DocuEye.WorkspaceImporter.Application.Events;
-using MediatR;
+
 using System;
 using System.Text;
 using System.Threading;
@@ -12,7 +13,7 @@ namespace DocuEye.ChangeTracker.Application.EventHandlers
     /// <summary>
     /// Handles ElementChangedEvent
     /// </summary>
-    public class ElementChangedEventHandler : INotificationHandler<ElementChangedEvent>
+    public class ElementChangedEventHandler : IEventHandler<ElementChangedEvent>
     {
         private readonly IChangeTrackerDBContext dbContext;
         /// <summary>
@@ -29,7 +30,7 @@ namespace DocuEye.ChangeTracker.Application.EventHandlers
         /// <param name="notification">event data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns></returns>
-        public async Task Handle(ElementChangedEvent notification, CancellationToken cancellationToken)
+        public async Task HandleAsync(ElementChangedEvent notification, CancellationToken cancellationToken)
         {
 
             var existingChange = await this.dbContext.ModelChanges

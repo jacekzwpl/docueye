@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetImageView
 {
     /// <summary>
     /// Gets Image view
     /// </summary>
-    public class GetImageViewQuery : IRequest<ImageView?>
+    public class GetImageViewQuery : IQuery<ImageView?>
     {
         /// <summary>
         /// The ID of view

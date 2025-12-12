@@ -1,9 +1,10 @@
 ﻿using DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile;
 using DocuEye.Infrastructure.HttpProblemDetails;
+using DocuEye.Infrastructure.Mediator;
 using DocuEye.ModelKeeper.Application.Queries.GetElementByDslId;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model;
-using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -60,7 +61,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
             }else
             {
                 var query = new GetElementByDslIdQuery(data.ElementDslId ?? "", workspaceId);
-                var element = await this.mediator.Send<Element?>(query);
+                var element = await this.mediator.SendQueryAsync<GetElementByDslIdQuery,Element?>(query);
                 if(element == null)
                 {
                     return this.NotFound(new NotFoundProblemDetails(
@@ -71,7 +72,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
             }
 
             var command = new SaveOpenApiFileCommand(workspaceId, elementId, data.Content, data.Name);
-            await this.mediator.Send(command);
+            await this.mediator.SendCommandAsync(command);
             return this.NoContent();
         }
     }

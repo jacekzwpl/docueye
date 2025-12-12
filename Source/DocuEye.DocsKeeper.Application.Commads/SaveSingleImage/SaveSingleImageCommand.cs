@@ -1,12 +1,11 @@
 ﻿using DocuEye.DocsKeeper.Model;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using DocuEye.Infrastructure.Mediator.Commands;
+
+
 
 namespace DocuEye.DocsKeeper.Application.Commads.SaveSingleImage
 {
-    public class SaveSingleImageCommand : IRequest
+    public class SaveSingleImageCommand : ICommand
     {
         public Image Image { get; set; } = null!;
 

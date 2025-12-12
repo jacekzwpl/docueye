@@ -1,7 +1,8 @@
 ﻿using DocuEye.ChangeTracker.Model;
 using DocuEye.ChangeTracker.Persistence;
+using DocuEye.Infrastructure.Mediator.Events;
 using DocuEye.WorkspaceImporter.Application.Events;
-using MediatR;
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace DocuEye.ChangeTracker.Application.EventHandlers
     /// <summary>
     /// Handles RelationshipDeletedEvent
     /// </summary>
-    public class RelationshipDeletedEventHandler : INotificationHandler<RelationshipDeletedEvent>
+    public class RelationshipDeletedEventHandler : IEventHandler<RelationshipDeletedEvent>
     {
         private readonly IChangeTrackerDBContext dbContext;
         /// <summary>
@@ -28,7 +29,7 @@ namespace DocuEye.ChangeTracker.Application.EventHandlers
         /// <param name="notification">event data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns></returns>
-        public async Task Handle(RelationshipDeletedEvent notification, CancellationToken cancellationToken)
+        public async Task HandleAsync(RelationshipDeletedEvent notification, CancellationToken cancellationToken)
         {
 
             var existingChange = await this.dbContext.ModelChanges

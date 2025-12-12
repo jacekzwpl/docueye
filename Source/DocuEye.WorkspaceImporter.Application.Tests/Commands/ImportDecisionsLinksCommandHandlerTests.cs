@@ -2,10 +2,11 @@
 using DocuEye.DocsKeeper.Application.Queries.GetDecisionsList;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId;
 using DocuEye.DocsKeeper.Model;
+using DocuEye.Infrastructure.Mediator;
 using DocuEye.WorkspaceImporter.Api.Model.Docs;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks;
 using DocuEye.WorkspaceImporter.Model;
-using MediatR;
+
 using Moq;
 
 namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
@@ -26,7 +27,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportDecisionsLinksCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -55,7 +56,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportDecisionsLinksCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -85,14 +86,14 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             var mediatorMock = new Mock<IMediator>();
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetDecisonByDslIdQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetDecisonByDslIdQuery, Decision?>(It.IsAny<GetDecisonByDslIdQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(
                 Task.FromResult<Decision?>(new Decision()
                 {
                     Id = "decisionId"
                 }));
             mediatorMock.Setup(
-                i => i.Send(It.IsAny<GetDecisionsListQuery>(), It.IsAny<CancellationToken>()))
+                i => i.SendQueryAsync<GetDecisionsListQuery, IEnumerable<DecisionsListItem>>(It.IsAny<GetDecisionsListQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(
                     Task.FromResult<IEnumerable<DecisionsListItem>>(new List<DecisionsListItem>(){ 
                         new DecisionsListItem()
@@ -106,7 +107,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportDecisionsLinksCommandHandler(mediatorMock.Object, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");

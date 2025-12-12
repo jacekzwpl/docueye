@@ -1,9 +1,10 @@
-﻿using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Model.Maps;
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
-using MediatR;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

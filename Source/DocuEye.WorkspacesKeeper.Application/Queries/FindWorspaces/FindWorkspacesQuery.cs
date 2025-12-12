@@ -1,5 +1,6 @@
-﻿using DocuEye.WorkspacesKeeper.Application.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.WorkspacesKeeper.Application.Model;
+
 using System.Collections.Generic;
 
 namespace DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces
@@ -7,7 +8,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces
     /// <summary>
     /// Gets list of workspaces
     /// </summary>
-    public class FindWorkspacesQuery : IRequest<IEnumerable<FoundedWorkspace>>
+    public class FindWorkspacesQuery : IQuery<IEnumerable<FoundedWorkspace>>
     {
         /// <summary>
         /// Workspace name filter

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿
+using DocuEye.Infrastructure.Mediator.Events;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace DocuEye.WorkspaceImporter.Application.Events
     /// <summary>
     /// Event that is fired when element should be updated according to detected changes during import
     /// </summary>
-    public class ElementChangedEvent : INotification
+    public class ElementChangedEvent : IEvent
     {
         /// <summary>
         /// Workspace ID

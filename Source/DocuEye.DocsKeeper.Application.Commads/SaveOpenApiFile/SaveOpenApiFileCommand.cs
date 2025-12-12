@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile
 {
-    public class SaveOpenApiFileCommand : IRequest
+    public class SaveOpenApiFileCommand : ICommand
     {
         public string WorkspaceId { get; set; } = null!;
         public string ElementId { get; set; } = null!;

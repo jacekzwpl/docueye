@@ -1,5 +1,6 @@
-﻿using DocuEye.ViewsKeeper.Persistence;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.ViewsKeeper.Persistence;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -10,7 +11,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
     /// <summary>
     /// Handler for SaveViewsChangesCommand
     /// </summary>
-    public class SaveViewsChangesCommandHandler : IRequestHandler<SaveViewsChangesCommand>
+    public class SaveViewsChangesCommandHandler : ICommandHandler<SaveViewsChangesCommand>
     {
         private readonly IViewsKeeperDBContext dbContext;
         /// <summary>
@@ -27,7 +28,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
         /// <param name="request">command request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns></returns>
-        public async Task Handle(SaveViewsChangesCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(SaveViewsChangesCommand request, CancellationToken cancellationToken)
         {
             //Delete missing 
             List<string> existingIds = new List<string>();

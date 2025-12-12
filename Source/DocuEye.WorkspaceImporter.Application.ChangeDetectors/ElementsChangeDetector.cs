@@ -1,9 +1,10 @@
-﻿using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Maps;
 using DocuEye.WorkspaceImporter.Application.Events;
 using DocuEye.WorkspaceImporter.Model;
-using MediatR;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +73,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                         newElement.Technology = baseElement.Technology;
                     }
 
-                    await this.mediator.Publish(new ElementCreatedEvent(
+                    await this.mediator.SendEventAsync(new ElementCreatedEvent(
                         newElement.WorkspaceId,
                         newElement.Id,
                         import.Id,
@@ -102,7 +103,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                     // Check if data changed
                     if (!existingElement.IsDataEqual(oldElement) || oldElement.ParentId != existingElement.ParentId)
                     {
-                        await this.mediator.Publish(new ElementChangedEvent(
+                        await this.mediator.SendEventAsync(new ElementChangedEvent(
                             existingElement.WorkspaceId,
                             existingElement.Id,
                             import.Id,
@@ -131,7 +132,7 @@ namespace DocuEye.WorkspaceImporter.Application.ChangeDetectors
                 //Remove from existing elements
                 existingElements.Remove(elementToDelete);
                 //Send delete event
-                await this.mediator.Publish(new ElementDeletedEvent(
+                await this.mediator.SendEventAsync(new ElementDeletedEvent(
                     elementToDelete.WorkspaceId,
                     elementToDelete.Id,
                     import.Id,

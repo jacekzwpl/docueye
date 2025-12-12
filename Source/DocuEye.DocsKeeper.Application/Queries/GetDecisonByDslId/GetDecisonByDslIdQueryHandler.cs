@@ -1,6 +1,6 @@
 ﻿using DocuEye.DocsKeeper.Model;
 using DocuEye.DocsKeeper.Persistence;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId
 {
-    public class GetDecisonByDslIdQueryHandler : IRequestHandler<GetDecisonByDslIdQuery, Decision?>
+    public class GetDecisonByDslIdQueryHandler : IQueryHandler<GetDecisonByDslIdQuery, Decision?>
     {
         private readonly IDocsKeeperDBContext dbContext;
 
@@ -17,7 +17,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId
         {
             this.dbContext = dbContext;
         }
-        public async Task<Decision?> Handle(GetDecisonByDslIdQuery request, CancellationToken cancellationToken)
+        public async Task<Decision?> HandleAsync(GetDecisonByDslIdQuery request, CancellationToken cancellationToken)
         {
             return await this.dbContext.Decisions
                 .FindOne(o => o.WorkspaceId == request.WorkspaceId 

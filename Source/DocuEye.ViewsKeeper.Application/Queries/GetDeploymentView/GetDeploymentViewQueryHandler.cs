@@ -1,6 +1,7 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.ViewsKeeper.Persistence;
-using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.GetDeploymentView
     /// <summary>
     /// Handler for GetDeploymentViewQuery
     /// </summary>
-    public class GetDeploymentViewQueryHandler : IRequestHandler<GetDeploymentViewQuery, DeploymentView?>
+    public class GetDeploymentViewQueryHandler : IQueryHandler<GetDeploymentViewQuery, DeploymentView?>
     {
         private readonly IViewsKeeperDBContext dbContext;
         /// <summary>
@@ -26,7 +27,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.GetDeploymentView
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>Deployment View or null if no was found</returns>
-        public async Task<DeploymentView?> Handle(GetDeploymentViewQuery request, CancellationToken cancellationToken)
+        public async Task<DeploymentView?> HandleAsync(GetDeploymentViewQuery request, CancellationToken cancellationToken)
         {
             return await this.dbContext.DeploymentViews
                 .FindOne(o => o.Id == request.Id && o.WorkspaceId == request.WorkspaceId);

@@ -14,7 +14,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetElementQueryHandler(this.dbContext);
-            var item = await handler.Handle(query, default);
+            var item = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(item, !Is.Null, "Hanlder should return item.");

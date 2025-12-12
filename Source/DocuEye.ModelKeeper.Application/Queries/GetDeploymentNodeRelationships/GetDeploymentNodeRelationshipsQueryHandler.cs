@@ -1,6 +1,7 @@
-﻿using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Persistence;
-using MediatR;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
 {
-    public class GetDeploymentNodeRelationshipsQueryHandler : IRequestHandler<GetDeploymentNodeRelationshipsQuery, IEnumerable<DeploymentNodeRelationship>>
+    public class GetDeploymentNodeRelationshipsQueryHandler : IQueryHandler<GetDeploymentNodeRelationshipsQuery, IEnumerable<DeploymentNodeRelationship>>
     {
         private readonly IModelKeeperDBContext dbContext;
 
@@ -17,7 +18,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
             this.dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<DeploymentNodeRelationship>> Handle(GetDeploymentNodeRelationshipsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<DeploymentNodeRelationship>> HandleAsync(GetDeploymentNodeRelationshipsQuery request, CancellationToken cancellationToken)
         {
             var nodes = await this.dbContext.Elements.Find(
                 o => o.ParentId == null 

@@ -1,9 +1,10 @@
 ﻿using DocuEye.DocsKeeper.Model;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Queries;
+
 
 namespace DocuEye.DocsKeeper.Application.Queries.GetDecisonByDslId
 {
-    public class GetDecisonByDslIdQuery : IRequest<Decision?>
+    public class GetDecisonByDslIdQuery : IQuery<Decision?>
     {
         public string WorkspaceId { get; set; }
         public string DocumentationId { get; set; }

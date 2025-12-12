@@ -1,19 +1,20 @@
 ﻿using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.ViewsKeeper.Model;
 using DocuEye.ViewsKeeper.Persistence;
-using MediatR;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using DocuEye.ViewsKeeper.Model.Maps;
+using DocuEye.Infrastructure.Mediator.Queries;
 
 namespace DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement
 {
     /// <summary>
     /// Handler for FindViewsWithElementQuery
     /// </summary>
-    public class FindViewsWithElementQueryHandler : IRequestHandler<FindViewsWithElementQuery, IEnumerable<ViewWithElement>>
+    public class FindViewsWithElementQueryHandler : IQueryHandler<FindViewsWithElementQuery, IEnumerable<ViewWithElement>>
     {
         private readonly IViewsKeeperDBContext dbContext;
         /// <summary>
@@ -30,7 +31,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>List of elements</returns>
-        public async Task<IEnumerable<ViewWithElement>> Handle(FindViewsWithElementQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ViewWithElement>> HandleAsync(FindViewsWithElementQuery request, CancellationToken cancellationToken)
         {
             var result = new List<ViewWithElement>();
             var landScapeViews = await this.dbContext.SystemLandscapeViews

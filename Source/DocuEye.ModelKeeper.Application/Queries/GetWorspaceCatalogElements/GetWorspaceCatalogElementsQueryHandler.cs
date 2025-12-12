@@ -1,8 +1,9 @@
-﻿using DocuEye.ModelKeeper.Application.Model;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Application.Model;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Model.Maps;
 using DocuEye.ModelKeeper.Persistence;
-using MediatR;
+
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
     /// <summary>
     /// Handler for GetWorspaceCatalogElementsQuery
     /// </summary>
-    public class GetWorspaceCatalogElementsQueryHandler : IRequestHandler<GetWorspaceCatalogElementsQuery, IEnumerable<WorkspaceCatalogElement>>
+    public class GetWorspaceCatalogElementsQueryHandler : IQueryHandler<GetWorspaceCatalogElementsQuery, IEnumerable<WorkspaceCatalogElement>>
     {
         private readonly IModelKeeperDBContext dbContext;
         /// <summary>
@@ -30,7 +31,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>List of elements</returns>
-        public async Task<IEnumerable<WorkspaceCatalogElement>> Handle(GetWorspaceCatalogElementsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<WorkspaceCatalogElement>> HandleAsync(GetWorspaceCatalogElementsQuery request, CancellationToken cancellationToken)
         {
             var excludedTypes = new List<string>()
             {

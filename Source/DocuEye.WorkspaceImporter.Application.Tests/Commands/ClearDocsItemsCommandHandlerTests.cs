@@ -17,7 +17,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ClearDocsItemsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -44,7 +44,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ClearDocsItemsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -71,7 +71,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ClearDocsItemsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, CancellationToken.None);
+            var result = await handler.HandleAsync(command, CancellationToken.None);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");

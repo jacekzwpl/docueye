@@ -1,9 +1,10 @@
-﻿using DocuEye.WorkspaceImporter.Api.Model.Docs;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.WorkspaceImporter.Api.Model.Docs;
+
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportImage
 {
-    public class ImportImageCommand : IRequest<ImportImageResult>
+    public class ImportImageCommand : ICommand<ImportImageResult>
     {
         public string WorkspaceId { get; set; } = null!;
         public string ImportKey { get; set; } = null!;

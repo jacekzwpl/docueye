@@ -1,12 +1,13 @@
-﻿using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.WorkspacesKeeper.Model;
+
 
 namespace DocuEye.WorkspacesKeeper.Application.Queries.GetViewConfiguration
 {
     /// <summary>
     /// Gets workspace view configuration
     /// </summary>
-    public class GetViewConfigurationQuery : IRequest<ViewConfiguration?>
+    public class GetViewConfigurationQuery : IQuery<ViewConfiguration?>
     {
         /// <summary>
         /// The ID of workspace

@@ -13,7 +13,7 @@ namespace DocuEye.DocsKeeper.Application.Tests.EventHandlers
 
             // Act
             var handler = new ElementDeletedEventHandler(this.dbContext);
-            await handler.Handle(evt, default);
+            await handler.HandleAsync(evt, default);
             
             // Assert
             var items = await this.dbContext.DocumentationFiles.Find(o => o.WorkspaceId == "workspacetest1" && o.ElementId == "elementtestId1");

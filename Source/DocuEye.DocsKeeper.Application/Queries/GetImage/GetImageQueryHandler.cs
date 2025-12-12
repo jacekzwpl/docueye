@@ -1,6 +1,6 @@
 ﻿using DocuEye.DocsKeeper.Model;
 using DocuEye.DocsKeeper.Persistence;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Queries;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetImage
     /// <summary>
     /// Handler for GetImageQuery
     /// </summary>
-    public class GetImageQueryHandler : IRequestHandler<GetImageQuery, Image?>
+    public class GetImageQueryHandler : IQueryHandler<GetImageQuery, Image?>
     {
         private readonly IDocsKeeperDBContext dbContext;
         /// <summary>
@@ -26,7 +26,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetImage
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>Image data or null if no was found</returns>
-        public async Task<Image?> Handle(GetImageQuery request, CancellationToken cancellationToken)
+        public async Task<Image?> HandleAsync(GetImageQuery request, CancellationToken cancellationToken)
         {
             return await this.dbContext.Images
                 .FindOne(o => o.DocumentationId == request.DocumentationId && o.Name == request.Name);

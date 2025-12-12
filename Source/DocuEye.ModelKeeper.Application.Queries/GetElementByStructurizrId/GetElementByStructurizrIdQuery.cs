@@ -1,9 +1,10 @@
-﻿using DocuEye.ModelKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Model;
+
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetElementByStructurizrId
 {
-    public class GetElementByStructurizrIdQuery : IRequest<Element?>
+    public class GetElementByStructurizrIdQuery : IQuery<Element?>
     {
         public string StructurizrId { get; set; } = null!;
         public string WorkspaceId { get; set; } = null!;

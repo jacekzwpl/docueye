@@ -1,10 +1,12 @@
-﻿using DocuEye.ModelKeeper.Application.Commands.SaveRelationships;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.ModelKeeper.Application.Commands.SaveRelationships;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceElements;
 using DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Application.ChangeDetectors;
 using DocuEye.WorkspaceImporter.Persistence;
-using MediatR;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
 {
-    public class ImportRelationshipsCommandHandler : BaseImportDataCommandHandler, IRequestHandler<ImportRelationshipsCommand, ImportRelationshipsResult>
+    public class ImportRelationshipsCommandHandler : BaseImportDataCommandHandler, ICommandHandler<ImportRelationshipsCommand, ImportRelationshipsResult>
     {
         private readonly IMediator mediator;
 
@@ -21,7 +23,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
             this.mediator = mediator;
         }
 
-        public async Task<ImportRelationshipsResult> Handle(ImportRelationshipsCommand request, CancellationToken cancellationToken)
+        public async Task<ImportRelationshipsResult> HandleAsync(ImportRelationshipsCommand request, CancellationToken cancellationToken)
         {
             // Check import data
             var import = await this.GetImport(request.WorkspaceId, request.ImportKey);
@@ -36,11 +38,11 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
 
             //Get existing elements for comparison
             var existingElements = (await this.mediator
-                .Send<IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId))).ToList();
+                .SendQueryAsync<GetAllWorkspaceElementsQuery,IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId))).ToList();
 
             // Get existing relationships for comparison
             var existingRelationships = (await this.mediator
-                .Send<IEnumerable<Relationship>>(new GetAllWorkspaceRelationshipsQuery(request.WorkspaceId))).ToList();
+                .SendQueryAsync<GetAllWorkspaceRelationshipsQuery,IEnumerable<Relationship>>(new GetAllWorkspaceRelationshipsQuery(request.WorkspaceId))).ToList();
 
             // Detect Changes
             var detector = new RelationshipsChangeDetector(this.mediator);
@@ -52,7 +54,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
                 existingElements);
 
             //Save Relationships
-            await this.mediator.Send(new SaveRelationshipsCommand()
+            await this.mediator.SendCommandAsync(new SaveRelationshipsCommand()
             {
                 RelationshipsToAdd = existingRelationships.Where(o => result.RelationshipsToAdd.Contains(o.Id)).ToArray(),
                 RelationshipsToChange = existingRelationships.Where(o => result.RelationshipsToChange.Contains(o.Id)).ToArray(),

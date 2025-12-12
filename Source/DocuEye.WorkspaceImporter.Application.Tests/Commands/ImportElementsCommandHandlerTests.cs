@@ -23,7 +23,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportElementsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -54,7 +54,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportElementsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.False, "Status should be false.");
@@ -94,7 +94,7 @@ namespace DocuEye.WorkspaceImporter.Application.Tests.Commands
 
             // Act
             var handler = new ImportElementsCommandHandler(this.mediator, dbContext);
-            var result = await handler.Handle(command, default);
+            var result = await handler.HandleAsync(command, default);
 
             // Assert
             Assert.That(result.IsSuccess, Is.True, "Status should be true.");

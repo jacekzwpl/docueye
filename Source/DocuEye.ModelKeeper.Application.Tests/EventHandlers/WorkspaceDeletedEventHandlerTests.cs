@@ -14,7 +14,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.EventHandlers
 
             // Act
             var handler = new WorkspaceDeletedEventHandler(this.dbContext);
-            await handler.Handle(notification, default);
+            await handler.HandleAsync(notification, default);
 
             // Assert
             var elements = await this.dbContext.Elements.Find(o => o.WorkspaceId == "workspacetest1");

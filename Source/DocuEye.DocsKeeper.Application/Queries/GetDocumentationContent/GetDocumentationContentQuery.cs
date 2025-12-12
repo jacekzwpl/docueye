@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Queries;
 
 namespace DocuEye.DocsKeeper.Application.Queries.GetWorkspaceDocumentation
 {
     /// <summary>
     /// Gets documentation content for workspace or element
     /// </summary>
-    public class GetDocumentationContentQuery : IRequest<DocumentationContent?>
+    public class GetDocumentationContentQuery : IQuery<DocumentationContent?>
     {
         /// <summary>
         /// Workspace Id
