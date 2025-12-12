@@ -208,18 +208,6 @@ namespace DocuEye.Web
                 options.UseAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
             });
 
-            /*
-            startupLogger.LogInformation("Register MediatR services");
-            builder.Services.AddMediatR(cfg => {
-                cfg.RegisterServicesFromAssembly(typeof(StartImportCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(ElementChangedEventHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveViewsChangesCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveSingleDecisionCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveElementsCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
-            });
-            */
-
             builder.Services.AddAntiforgery(options =>
             {
                 options.HeaderName = "X-CSRF-TOKEN-ADMIN";

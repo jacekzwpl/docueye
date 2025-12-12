@@ -23,7 +23,6 @@ namespace DocuEye.WorkspacesKeeper.Application.Queries.FindWorspaces
         /// Creates instance
         /// </summary>
         /// <param name="dbContext">Mongo DB context</param>
-        /// <param name="mapper">Automapper service</param>
         public FindWorkspacesQueryHandler(IWorkspacesKeeperDBContext dbContext)
         {
             this.dbContext = dbContext;

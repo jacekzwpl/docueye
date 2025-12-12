@@ -16,7 +16,6 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionsList
         /// Creates instance
         /// </summary>
         /// <param name="dbContext">MongoDB context</param>
-        /// <param name="mapper">IMapper service</param>
         public GetDecisionsListQueryHandler(IDocsKeeperDBContext dbContext)
         {
             this.dbContext = dbContext;
