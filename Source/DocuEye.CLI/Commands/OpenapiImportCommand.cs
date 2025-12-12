@@ -56,7 +56,7 @@ namespace DocuEye.CLI.Commands
                 {
                     Console.Error.WriteLine(parseError.Message);
                 }
-                return -1;
+                return 1;
             }
 
             string docueyeAddress = parseResult.GetValue(CommandLineCommonOptions.DocueyeAddressOption)!;
@@ -72,7 +72,7 @@ namespace DocuEye.CLI.Commands
             var isCompatible = await compatibilityCheckService.CheckCompatibility();
             if (!isCompatible)
             {
-                return -1;
+                return 1;
             }
 
             var importOpenApiFileService = host.Services.GetRequiredService<IImportOpenApiFileService>();
@@ -86,7 +86,7 @@ namespace DocuEye.CLI.Commands
 
             if (!result)
             {
-                -1;
+                return 1;
             }
 
             return 0;
