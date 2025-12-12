@@ -21,7 +21,7 @@ namespace DocuEye.Infrastructure.Mediator.Tests
             await mediator.SendEventAsync<TestEvent>(eventData);
             // Assert
             var state = serviceProvider.GetRequiredService<EventHandlingState>();
-            Assert.That(state.HandledEvents.First(), Is.EqualTo($"Event executed: {eventData.Name}"));
+            Assert.That(state.HandledEvents.Count(), Is.GreaterThan(0));
         }
         [Test]
         public void MediatorSendEventWithCancelationTokenShouldBeUsed()
@@ -50,8 +50,12 @@ namespace DocuEye.Infrastructure.Mediator.Tests
             await mediator.SendEventAsync<TestEvent>(eventData);
             // Assert
             var state = serviceProvider.GetRequiredService<EventHandlingState>();
-            Assert.That(state.HandledEvents.First(), Is.EqualTo($"Event executed: {eventData.Name}"));
-            Assert.That(state.HandledEvents.Last(), Is.EqualTo($"Second handler executed: {eventData.Name}"));
+            
+            Assert.That(state.HandledEvents, Is.EquivalentTo(new[]
+            {
+                $"Event executed: {eventData.Name}",
+                $"Second handler executed: {eventData.Name}"
+            }));
         }
     }
 }

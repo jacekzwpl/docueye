@@ -17,13 +17,17 @@ namespace DocuEye.Infrastructure.Mediator.Tests
             // Register mediator
             services.AddSingleton<IMediator, Mediator>();
 
+            services.AddMediator(options =>
+            {
+                options.UseAssembly(typeof(TestCommandHandler).Assembly);
+            });
             services.AddSingleton(new EventHandlingState());
 
             // Register handlers
-            services.AddTransient<ICommandHandler<TestCommand, TestResult>, TestCommandHandler>();
-            services.AddTransient<IQueryHandler<TestQuery, TestResult>, TestQueryHandler>();
-            services.AddTransient<IEventHandler<TestEvent>, TestEventHandler>();
-            services.AddTransient<IEventHandler<TestEvent>, SecondEventHandler>();
+            //services.AddTransient<ICommandHandler<TestCommand, TestResult>, TestCommandHandler>();
+            //services.AddTransient<IQueryHandler<TestQuery, TestResult>, TestQueryHandler>();
+            //services.AddTransient<IEventHandler<TestEvent>, TestEventHandler>();
+            //services.AddTransient<IEventHandler<TestEvent>, SecondEventHandler>();
 
             serviceProvider = services.BuildServiceProvider();
         }
