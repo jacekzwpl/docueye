@@ -15,7 +15,7 @@ namespace DocuEye.Infrastructure.Mediator.Tests
             var result = await mediator.SendQueryAsync<TestQuery, TestResult>(query);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
             Assert.That(result.Result, Is.EqualTo("Query executed: Test query"));
 
         }
