@@ -17,7 +17,7 @@ namespace DocuEye.Infrastructure.Mediator.Tests
             var result = await mediator.SendCommandAsync<TestCommand, TestResult>(command);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
             Assert.That(result.Result, Is.EqualTo("Command executed: Test command"));
 
         }
