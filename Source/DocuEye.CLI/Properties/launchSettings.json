@@ -48,9 +48,17 @@
       "commandName": "Project",
       "commandLineArgs": "workspace delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest"
     },
+    "DocuEye.workspace-validate": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace validate --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+    },
     "DocuEye.openapi-import-help": {
       "commandName": "Project",
       "commandLineArgs": "openapi import --help"
+    },
+    "DocuEye.openapi-import": {
+      "commandName": "Project",
+      "commandLineArgs": "openapi import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\""
     },
     "Docker": {
       "commandName": "Docker"

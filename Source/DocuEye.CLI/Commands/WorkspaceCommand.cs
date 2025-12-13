@@ -14,6 +14,7 @@ namespace DocuEye.CLI.Commands
             this.Subcommands.Add(new WorkspaceImportCommand());
             this.Subcommands.Add(new WorkspaceDeleteCommand());
             this.Subcommands.Add(new WorkspaceExportCommand());
+            this.Subcommands.Add(new WorkspaceValidateCommand());
         }
     }
 }

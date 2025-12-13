@@ -30,7 +30,6 @@ namespace DocuEye.CLI.Application.Services.DSL
             try
             {
                 return (StructurizrWorkspace)visitor.VisitWorkspace(context);
-
             }
             catch (Exception ex)
             {
