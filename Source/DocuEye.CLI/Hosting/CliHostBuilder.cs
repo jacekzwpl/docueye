@@ -47,7 +47,7 @@ namespace DocuEye.CLI.Hosting
             builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
             builder.Services.AddTransient<IDeleteWorkspaceService, DeleteWorkspaceService>();
             builder.Services.AddTransient<IImportOpenApiFileService, ImportOpenApiFileService>();
-            builder.Services.AddTransient<DeleteOpenApiFileService, DeleteOpenApiFileService>();
+            builder.Services.AddTransient<IDeleteOpenApiFileService, DeleteOpenApiFileService>();
             return builder.Build();
         }
     }

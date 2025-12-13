@@ -25,7 +25,7 @@ namespace DocuEye.CLI.Application.Services.DeleteOpenApiFile
             var result = await this.apiClient.DeleteOpenApiFile(workspaceId, elementId, elementDslId);
             if (string.IsNullOrEmpty(result))
             {
-                this.logger.LogError("Success deleting OpenAPI file.");
+                this.logger.LogInformation("Success deleting OpenAPI file.");
                 return true;
             }
             this.logger.LogError("Failure deleting OpenAPI file. Message: {0}", result);

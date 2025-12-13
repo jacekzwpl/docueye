@@ -55,7 +55,7 @@ namespace DocuEye.CLI.ApiClient
 
         public async Task<string?> DeleteOpenApiFile(string workspaceId, string? elementId = null, string? elementDslId = null)
         {
-            string baseUrl = string.Format("api/workspaces/{0}/openapi", workspaceId);
+            string baseUrl = string.Format("api/workspaces/{0}/docfile/openapi", workspaceId);
             var parts = new List<string>();
 
             if (!string.IsNullOrEmpty(elementId))

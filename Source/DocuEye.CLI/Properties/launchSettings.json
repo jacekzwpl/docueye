@@ -60,6 +60,10 @@
       "commandName": "Project",
       "commandLineArgs": "openapi import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\""
     },
+    "DocuEye.openapi-delete": {
+      "commandName": "Project",
+      "commandLineArgs": "openapi delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket"
+    },
     "Docker": {
       "commandName": "Docker"
     }
