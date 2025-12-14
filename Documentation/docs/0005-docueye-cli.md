@@ -4,10 +4,14 @@
 
 Commands for managing workspaces
 
-[import](Documentation/docs/0006-docueye-cli-workspace-commands.md#workspace-import-command) - Imports workspace to DocuEye.
-[delete](Documentation/docs/0006-docueye-cli-workspace-commands.md#workspace-delete-command) - Deletes a workspace from DocuEye.
-[export](Documentation/docs/0006-docueye-cli-workspace-commands.md#workspace-export-command) - Exports a workspace to given format.
-[validate](Documentation/docs/0006-docueye-cli-workspace-commands.md#workspace-export-command) - Validates dsl workspace.
+[import](0006-docueye-cli-workspace-commands.md#workspace-import-command) - Imports workspace to DocuEye.  
+
+[delete](0006-docueye-cli-workspace-commands.md#workspace-delete-command) - Deletes a workspace from DocuEye.  
+
+[export](0006-docueye-cli-workspace-commands.md#workspace-export-command) - Exports a workspace to given format.  
+
+[validate](0006-docueye-cli-workspace-commands.md#workspace-export-command) - Validates dsl workspace.  
+
 
 
 ### OpenApi commands
