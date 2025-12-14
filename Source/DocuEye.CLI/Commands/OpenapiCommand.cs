@@ -12,6 +12,7 @@ namespace DocuEye.CLI.Commands
         public OpenapiCommand() : base("openapi", "Commands for working with OpenAPI specifications.")
         {
             this.Subcommands.Add(new OpenapiImportCommand());
+            this.Subcommands.Add(new OpenapiDeleteCommand());
         }
     }
 }

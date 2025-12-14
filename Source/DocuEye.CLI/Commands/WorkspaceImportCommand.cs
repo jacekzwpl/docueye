@@ -4,14 +4,9 @@ using DocuEye.CLI.Application.Services.ImportWorkspace;
 using DocuEye.CLI.Commands;
 using DocuEye.CLI.Hosting;
 using DocuEye.Structurizr.DslToJson;
-using DocuEye.Structurizr.Json.Model;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
 using System.CommandLine.Parsing;
-using System.Diagnostics;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
 
 namespace DocuEye.CLI
 {
@@ -131,7 +126,7 @@ namespace DocuEye.CLI
                         importKey, jsonWorkspace, workspaceId, sourceLink));
             }
 
-                return 0;
+            return 0;
 
 
         } 

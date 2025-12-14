@@ -1,5 +1,7 @@
 ﻿using DocuEye.CLI.ApiClient.Model;
 using DocuEye.WorkspaceImporter.Api.Model;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -47,6 +49,41 @@ namespace DocuEye.CLI.ApiClient
                 else
                 {
                     return null;
+                }
+            }
+        }
+
+        public async Task<string?> DeleteOpenApiFile(string workspaceId, string? elementId = null, string? elementDslId = null)
+        {
+            string baseUrl = string.Format("api/workspaces/{0}/docfile/openapi", workspaceId);
+            var parts = new List<string>();
+
+            if (!string.IsNullOrEmpty(elementId))
+                parts.Add($"elementId={Uri.EscapeDataString(elementId)}");
+
+            if (!string.IsNullOrEmpty(elementDslId))
+                parts.Add($"elementDslId={Uri.EscapeDataString(elementDslId)}");
+            string url = parts.Count == 0 ? baseUrl : $"{baseUrl}?{string.Join("&", parts)}";
+            var message = new HttpRequestMessage(HttpMethod.Delete, url);
+            using (var response = await this.httpClient.SendAsync(message))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                else if (response.Content.Headers.ContentType?.MediaType == "application/problem+json")
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
+                    if (problemData == null)
+                    {
+                        return "Delete openapi file failed. Reason of failure is unkonown";
+                    }
+                    return problemData.Detail ?? problemData.Title;
+                }
+                else
+                {
+                    return "Delete openapi file failed. Reason of failure is unkonown";
                 }
             }
         }

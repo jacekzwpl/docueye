@@ -24,7 +24,7 @@ Currently there is no demo but you can see [DocuEye product page](https://docuey
 - Documentation viewer - You can view documentation defined at workspace or element level
 - Change Tracker - DocuEye tracks changes in the model on every import. You can view history of changes in Your model. [See what to do to change tracker works as expected](Documentation/docs/0001-change-tracker.md)  
 - Deployment Nodes Matrix - You can view relationships between deployment nodes that implies from relationships between deployed model elements.
-- OIDC Integration. [See how to integrate with OIDC provider](Documentation/docs/0006-oidc-integration.md).
+- OIDC Integration. [See how to integrate with OIDC provider](Documentation/docs/0008-oidc-integration.md).
 
 See [features roadmap](Documentation/docs/0002-features-roadmap.md) if You want to know what features will be implemented in nearest feature.
 
@@ -39,21 +39,13 @@ docker compose up -d
 ```
 Thats it :). If everything goes es expected You can now access DocuEye at http://localhost:8080  
 If You manage to run application You can see empty workspaces list.  
-  
+
 So it's time to import one.  
-    
-First step is exporting our workspace to json format using [structurizr cli export](https://docs.structurizr.com/cli/export).  
 
 ```Powershell
 cd .\ExampleWorkspace
 
-docker run -it --rm -v "$($PWD):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
-# In this example $PWD is current directory path. 
-```
-Second step is to import workspace to DocuEye  
-
-```Powershell
-docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli --import=workspace --docueyeAddress=http://localhost:8080 --adminToken=docueyedmintoken --importKey="$((New-Guid).Guid)" --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=./import/workspace.json
+docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --import-key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file=./import/workspace.dsl
 # In this example $PWD is current directory path. 
 ```
 
@@ -64,7 +56,9 @@ dotnet tool install --global DocuEye.CLI
 ```
 Import workspace using command line 
 ```Powershell
-docueye --import=workspace --docueyeAddress=http://localhost:8080 --adminToken=docueyedmintoken --importKey="$((New-Guid).Guid)" --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=workspace.json
+cd .\ExampleWorkspace
+
+docueye workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --import-key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=workspace.dsl
 ```
 Example script to import workspace can be found [here](ExampleWorkspace/import.ps1).  
 
