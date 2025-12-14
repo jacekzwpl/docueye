@@ -39,21 +39,13 @@ docker compose up -d
 ```
 Thats it :). If everything goes es expected You can now access DocuEye at http://localhost:8080  
 If You manage to run application You can see empty workspaces list.  
-  
+
 So it's time to import one.  
-    
-First step is exporting our workspace to json format using [structurizr cli export](https://docs.structurizr.com/cli/export).  
 
 ```Powershell
 cd .\ExampleWorkspace
 
-docker run -it --rm -v "$($PWD):/usr/local/structurizr" structurizr/cli export --workspace workspace.dsl -format json
-# In this example $PWD is current directory path. 
-```
-Second step is to import workspace to DocuEye  
-
-```Powershell
-docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli --import=workspace --docueyeAddress=http://localhost:8080 --adminToken=docueyedmintoken --importKey="$((New-Guid).Guid)" --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=./import/workspace.json
+docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --import-key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file=./import/workspace.dsl
 # In this example $PWD is current directory path. 
 ```
 
@@ -64,7 +56,9 @@ dotnet tool install --global DocuEye.CLI
 ```
 Import workspace using command line 
 ```Powershell
-docueye --import=workspace --docueyeAddress=http://localhost:8080 --adminToken=docueyedmintoken --importKey="$((New-Guid).Guid)" --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=workspace.json
+cd .\ExampleWorkspace
+
+docueye workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --import-key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=workspace.dsl
 ```
 Example script to import workspace can be found [here](ExampleWorkspace/import.ps1).  
 

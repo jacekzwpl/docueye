@@ -9,7 +9,7 @@ Imports workspace to DocuEye.
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
 | `--docueye-address` | Yes | DocuEye address. | `--docueyeAddress=http://localhost:8080` |
-| `--admin-token` | Yes | The Admin token from DocuEye configuration. | `--adminToken=docueyedmintoken` |
+| `--admin-token` | Yes | The Admin token from DocuEye configuration. | `--admin-token=docueyedmintoken` |
 | `--mode` | No | Specifies import mode. [default: dsl] <br /> `dsl` for import from dsl file. <br /> `json` for import from json file.  | `--mode=dsl` |
 | `--file` | Yes | Path to workspace file. Depending on mode option should be path to dsl file or json file. | `--file=workspace.dsl` |
 | `--id` | No | The ID of the Workspace. If not provided the new workspace will be created. Also if workspace with given id does not exists new workspace will be created. **It is recommended to allays pass workspace ID.** | `--id=638d0822-12c7-4998-8647-9c7af7ad2989` |
@@ -32,7 +32,7 @@ Deletes a workspace from DocuEye.
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
 | `--docueye-address` | Yes | DocuEye address. | `--docueyeAddress=http://localhost:8080` |
-| `--admin-token` | Yes | The Admin token from DocuEye configuration. | `--adminToken=docueyedmintoken` |
+| `--admin-token` | Yes | The Admin token from DocuEye configuration. | `--admin-token=docueyedmintoken` |
 | `--id` | Yes | The ID of the Workspace to be deleted. | `--id=638d0822-12c7-4998-8647-9c7af7ad2989` |
 
 **Example delete workspace from DocuEye**
