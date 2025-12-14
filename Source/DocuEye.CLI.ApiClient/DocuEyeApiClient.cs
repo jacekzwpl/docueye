@@ -255,10 +255,19 @@ namespace DocuEye.CLI.ApiClient
                             Message = "There was no conntent in response. Import staus is unknown"
                         };
                     }
+                    var responseMessage = problemData.Detail ?? problemData.Title;
+                    if(problemData.Errors != null)
+                    {
+                        foreach(var error in problemData.Errors)
+                        {
+                            responseMessage += Environment.NewLine + $"{error.Key}: {string.Join(", ", error.Value)}";
+                        }
+                    }
+
                     return new ImportWorkspaceResponse()
                     {
                         IsSuccess = false,
-                        Message = problemData.Detail ?? problemData.Title
+                        Message = responseMessage
                     };
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
