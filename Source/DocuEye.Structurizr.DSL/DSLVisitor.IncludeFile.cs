@@ -37,8 +37,6 @@ namespace DocuEye.Structurizr.DSL
             
         }
 
-        
-
         public void VisitIncludeFileModelElementGroupBody([NotNull] StructurizrDSLParser.IncludeFileContext context, StructurizrModelElement parentElement, string groupId)
         {
             var parser = this.CreateIncludeFileParser(context);
@@ -53,14 +51,14 @@ namespace DocuEye.Structurizr.DSL
             this.VisitModelElementBody(modelElementContext, parentElement, groupId);
         }
 
-        protected (DSLVisitor visitor, StructurizrDSLParser parser) CreateIncludeFileParserAndvisitor([NotNull] StructurizrDSLParser.IncludeFileContext context)
-        {
-            var includeFileValueContext = context.includeFileValue();
-            var filePath = includeFileValueContext.GetText().Trim('"');
-            var parser = CreateParserFromFile(filePath);
-            var visitor = new DSLVisitor(this.workspace);
-            return (visitor, parser);
-        }
+        //protected (DSLVisitor visitor, StructurizrDSLParser parser) CreateIncludeFileParserAndvisitor([NotNull] StructurizrDSLParser.IncludeFileContext context)
+        //{
+        //    var includeFileValueContext = context.includeFileValue();
+        //    var filePath = includeFileValueContext.GetText().Trim('"');
+        //    var parser = CreateParserFromFile(filePath);
+        //    var visitor = new DSLVisitor(this.workspace);
+        //    return (visitor, parser);
+        //}
 
         protected StructurizrDSLParser CreateIncludeFileParser([NotNull] StructurizrDSLParser.IncludeFileContext context)
         {
@@ -75,6 +73,16 @@ namespace DocuEye.Structurizr.DSL
             }
             else
             {
+                if (!Path.IsPathFullyQualified(filePath))
+                {
+                    filePath = Path.Combine(this.workspaceDirectory, filePath);
+                }
+
+                if(!File.Exists(filePath))
+                {
+                    throw new FileNotFoundException($"Included file not found: {filePath} at {context.Start.Line}:{context.Start.Column}");
+                }
+
                 return CreateParserFromFile(filePath);
             }
 
@@ -84,12 +92,16 @@ namespace DocuEye.Structurizr.DSL
         protected async Task<StructurizrDSLParser> CreateParserFromUrl(string filePath)
         {
             var content = await this.httpClient.GetStringAsync(filePath);
+            if (!content.EndsWith(Environment.NewLine))
+                content += Environment.NewLine;
             return CreateParserFromText(content);
         }
 
         protected StructurizrDSLParser CreateParserFromFile(string file)
         {
             string text = File.ReadAllText(file);
+            if (!text.EndsWith(Environment.NewLine))
+                text += Environment.NewLine;
             return CreateParserFromText(text);
         }
 

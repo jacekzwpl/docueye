@@ -21,7 +21,7 @@ namespace DocuEye.CLI.Application.Services.DSL
         public StructurizrWorkspace? Parse(FileInfo file)
         {
             StructurizrDSLParser parser = CreateParser(file);
-            var visitor = new DSLVisitor();
+            var visitor = new DSLVisitor(file.DirectoryName ?? "");
             var context = parser.workspace();
             if(parser.NumberOfSyntaxErrors > 0 ) {
                 this.logger.LogError("Failed to parse workspace file {FileName} due to syntax errors.", file.Name);

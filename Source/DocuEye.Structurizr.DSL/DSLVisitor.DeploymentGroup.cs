@@ -1,10 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
 using DocuEye.Structurizr.DSL.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocuEye.Structurizr.DSL
 {
@@ -50,7 +45,7 @@ namespace DocuEye.Structurizr.DSL
             return new StructurizrDeploymentGroup(identifier, name, environmentIdentifier);
         }
 
-        public IEnumerable<string> VisitDeploymentGroupsRef([NotNull] StructurizrDSLParser.DeploymentGroupsRefContext context)
+        public override IEnumerable<string> VisitDeploymentGroupsRef([NotNull] StructurizrDSLParser.DeploymentGroupsRefContext context)
         {
             var identifiersText = context.GetText().Trim('"');
             var identifiers = identifiersText.Split(',');
@@ -61,8 +56,8 @@ namespace DocuEye.Structurizr.DSL
                 {
                     throw new Exception(
                         string.Format(
-                            "Deployment Group with identifier {0} does not exist",
-                            identifier));
+                            "Deployment Group with identifier {0} does not exist at {1}:{2}",
+                            identifier, context.Start.Line, context.Start.Column));
                 }
             }
             return identifiers;

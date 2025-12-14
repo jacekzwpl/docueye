@@ -80,7 +80,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Technology = element.Technology,
                 Environment = environmentName,
                 Instances = element.Instances,
@@ -149,7 +149,7 @@ namespace DocuEye.Structurizr.DslToJson
                 ContainerId = instanceOfElement?.ModelId ?? "",
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier),
                 InstanceId = element.InstanceIndex ?? 1
             };
@@ -168,7 +168,7 @@ namespace DocuEye.Structurizr.DslToJson
                 SoftwareSystemId = instanceOfElement?.ModelId ?? "",
                 Environment = environmentName,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier),
                 InstanceId = element.InstanceIndex ?? 1
             };
@@ -191,7 +191,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier)
             };
             jsonInfrastructureNode.Properties.Add(DslPropertyNames.DslIdProperty, element.Identifier);
@@ -209,7 +209,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Metadata = element.Metadata,
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier)
             };
@@ -228,7 +228,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Location = "Unspecified",
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier)
             };
@@ -255,7 +255,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier),
                 Technology = element.Technology
             };
@@ -282,7 +282,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier),
                 Technology = element.Technology
 
@@ -304,7 +304,7 @@ namespace DocuEye.Structurizr.DslToJson
                 Url = element.Url,
                 Tags = string.Join(",", element.Tags ?? new List<string>()),
                 Group = groups == null ? null : string.Join(this.modelGroupSeparator, groups),
-                Properties = element.Properties,
+                Properties = new Dictionary<string, string>(element.Properties),
                 Location = "Unspecified",
                 Relationships = this.ResolveElementRelationships(element.ModelId, element.Identifier)
             };

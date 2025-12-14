@@ -7,24 +7,28 @@ namespace DocuEye.Structurizr.DSL
     {
         private StructurizrWorkspace workspace;
         private HttpClient httpClient;
+        private string workspaceDirectory;
 
         public StructurizrWorkspace Workspace { get => this.workspace; }
 
-        public DSLVisitor() { 
+        public DSLVisitor(string workspaceDirectory = "") { 
             this.workspace = new StructurizrWorkspace();
             this.httpClient = new HttpClient();
+            this.workspaceDirectory = workspaceDirectory;
         }
 
-        public DSLVisitor(StructurizrWorkspace workspace)
+        public DSLVisitor(StructurizrWorkspace workspace, string workspaceDirectory = "")
         {
             this.workspace = workspace;
             this.httpClient = new HttpClient();
+            this.workspaceDirectory = workspaceDirectory;
         }
 
-        public DSLVisitor(StructurizrWorkspace workspace, HttpClient httpClient)
+        public DSLVisitor(StructurizrWorkspace workspace, HttpClient httpClient, string workspaceDirectory = "")
         {
             this.workspace = workspace;
             this.httpClient = httpClient;
+            this.workspaceDirectory = workspaceDirectory;
         }
 
         protected StructurizrDSLExpressionsParser CreateExpressionsParserFromText(string text)

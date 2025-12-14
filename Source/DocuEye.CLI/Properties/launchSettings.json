@@ -52,6 +52,14 @@
       "commandName": "Project",
       "commandLineArgs": "workspace validate --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
     },
+    "DocuEye.workspace-validate-big": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace validate --file=\"C:\\nCode\\docueye\\temp\\big-bank\\workspace.dsl\""
+    },
+    "DocuEye.workspace-import-big": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=big-bank --file=\"C:\\nCode\\docueye\\temp\\big-bank\\workspace.dsl\""
+    },
     "DocuEye.openapi-import-help": {
       "commandName": "Project",
       "commandLineArgs": "openapi import --help"
