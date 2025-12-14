@@ -17,6 +17,10 @@ Commands for managing workspaces
 ### OpenApi commands
 Commands for working with OpenAPI specifications.
 
+ [import](0007-docueye-cli-openapi-commands.md) - Imports or updates OpenAPI specification for given element.  
+
+ [delete](0007-docueye-cli-openapi-commands.md) - Deletes OpenAPI file for element.  
+ 
 
 
 
