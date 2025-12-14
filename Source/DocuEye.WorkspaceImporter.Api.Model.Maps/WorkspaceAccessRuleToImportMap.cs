@@ -13,7 +13,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new WorkspaceAccessRule
             {
-           
+                Name = source.Name,
                 Role = source.Role
             };
         }
