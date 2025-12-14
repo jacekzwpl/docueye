@@ -1,5 +1,6 @@
 ﻿using DocuEye.Infrastructure.Mediator;
 using DocuEye.WorkspaceImporter.Api.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Workspace;
 using DocuEye.WorkspaceImporter.Application.Commands.ClearDecisions;
 using DocuEye.WorkspaceImporter.Application.Commands.ClearDocsItems;
 using DocuEye.WorkspaceImporter.Application.Commands.FinalizeImport;
@@ -15,6 +16,9 @@ using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DocuEye.WorkspaceImporter.Api.Controllers
@@ -49,7 +53,9 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 WorkspaceId = data.WorkspaceId,
                 SourceLink = data.SourceLink,
                 WorkspaceName = data.WorkspaceName,
-                WorkspaceDescription = data.WorkspaceDescription
+                WorkspaceDescription = data.WorkspaceDescription,
+                Visibility = data.Visibility ?? "public",
+                AccessRules = data.AccessRules ?? Array.Empty<WorkspaceAccessRuleToImport>()
             };
             var result = await this.mediator.SendCommandAsync<StartImportCommand,StartImportResult>(command);
             if(result.IsSuccess)

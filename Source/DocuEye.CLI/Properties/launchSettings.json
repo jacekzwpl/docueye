@@ -28,6 +28,10 @@
       "commandName": "Project",
       "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest1 --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\structurizr-workspace.json\" --mode=json"
     },
+    "DocuEye.workspace-import-oidc": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=odictest1 --file=\"C:\\nCode\\ArchPortal\\test-workspace\\my\\workspace.dsl\""
+    },
     "DocuEye.workspace-import-help": {
       "commandName": "Project",
       "commandLineArgs": "workspace import --help"
