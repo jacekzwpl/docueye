@@ -1,4 +1,19 @@
-## DocueEye CLI options
+## DocueEye CLI
+
+### Workspace commands
+Commands for managing workspaces
+
+### OpenApi commands
+Commands for working with OpenAPI specifications.
+
+
+
+
+
+
+
+
+
 
 | Parameter | Required | Description | Example |
 | --- | --- | ------ | ---- |
