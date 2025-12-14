@@ -56,6 +56,10 @@
       "commandName": "Project",
       "commandLineArgs": "workspace validate --file=\"C:\\nCode\\docueye\\temp\\big-bank\\workspace.dsl\""
     },
+    "DocuEye.workspace-validate-big2": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace validate --file=\"C:\\nCode\\ArchPortal\\test-workspace\\big-bank\\workspace.dsl\""
+    },
     "DocuEye.workspace-import-big": {
       "commandName": "Project",
       "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=big-bank --file=\"C:\\nCode\\docueye\\temp\\big-bank\\workspace.dsl\""

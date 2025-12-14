@@ -151,6 +151,10 @@ modelElementGroupBody : (
                             | deploymentGroup
                             | modelElementGroup
                             | includeFile
+                            | containerInstance
+                            | softwareSystemInstance
+                            | infrastructureNode
+                            | relationship
                             | WHITESPACE | NEWLINE)* ;
 
 views               : VIEWS BEGIN (

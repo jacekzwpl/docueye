@@ -95,24 +95,6 @@ namespace DocuEye.Structurizr.DSL
             {
                 var modelElement = this.VisitModelElementBody(bodyContext, element.ToModelElement());
                 element.FromModelElement(modelElement);
-                /*
-                var containerBody = this.VisitDeploymentNodeBody(bodyContext, environmentIdentifier, element.Identifier);
-                element.Tags.AddRange(containerBody.Tags);
-                if (element.Description == null)
-                {
-                    element.Description = containerBody.Description;
-                }
-                if(element.Technology == null)
-                {
-                    element.Technology = containerBody.Technology;
-                }
-                if(element.Instances == null)
-                {
-                    element.Instances = containerBody.Instances;
-                }
-                element.Properties = containerBody.Properties;
-                element.Url = containerBody.Url;
-                element.Perspectives = containerBody.Perspectives;*/
             }
 
             return element;
