@@ -4,7 +4,6 @@ import { defineConfig, loadEnv } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import fs from "fs";
 
-console.log('mode:', process.env.NODE_ENV);
 
 Object.assign(process.env, loadEnv(process.env.NODE_ENV ?? "development", process.cwd(), ""));
 
@@ -17,6 +16,13 @@ export default defineConfig({
   server: {
     https: options,
     port: 3000,
+    proxy: {
+      "/api": {
+        target: "https://localhost:7041",
+        changeOrigin: true,
+        secure: false,
+      },
+    }
   },
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
 });
