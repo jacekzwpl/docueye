@@ -1,8 +1,6 @@
 import { Box, Divider, IconButton, Toolbar, Typography } from "@mui/material";
-import { SnackbarProvider } from "notistack";
-import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
-import store from "~/store";
 import MainAppBar from "../mainappbar";
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -10,6 +8,8 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useState } from "react";
 import MainDrawer from "../maindrawer";
 import MainMenu from "../mainmenu";
+import type { IWorkspaceState } from "~/store/slices/workspace/IWorkspaceState";
+import globalRouter from "~/router/globalRouter";
 
 export const Main = () => {
 
@@ -22,20 +22,18 @@ export const Main = () => {
       window.location.href = "/auth/logout";
     }
   };
-
+  const currentWorkspace: IWorkspaceState =
+    useSelector((state: any) => state.workspace);
   const [menuOpened, setMenuOpened] = useState(true);
   //const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const toogleOpen = (): void => {
     setMenuOpened(!menuOpened);
   };
   const navigate = useNavigate();
+  globalRouter.navigate = navigate;
 
   return (
-    <Provider store={store}>
-      <SnackbarProvider
-        autoHideDuration={3000}
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-        maxSnack={3}>
+
         <Box sx={{ display: 'flex' }}>
           <MainAppBar position="absolute" sx={{ boxShadow: 0, borderBottom: 1, borderColor: "#e7e7e7" }} color="default" open={menuOpened} drawerWidth={drawerWidth}>
             <Toolbar>
@@ -49,7 +47,7 @@ export const Main = () => {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                DocuEYE {/*currentWorkspace.value && ` (${currentWorkspace.value.name})` */}
+                DocuEYE {currentWorkspace.value && ` (${currentWorkspace.value.name})` }
               </Typography>
               <div>
                 <IconButton onClick={() => logout()} aria-label="sign out"><PowerSettingsNewIcon /></IconButton>
@@ -88,8 +86,6 @@ export const Main = () => {
           ><Toolbar /><Outlet /></Box>
           {/*isLoading && <Loader />*/}
         </Box>
-      </SnackbarProvider>
-    </Provider>
   );
 
 };

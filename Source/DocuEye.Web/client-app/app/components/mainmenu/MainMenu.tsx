@@ -10,17 +10,13 @@ import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import PivotTableChartIcon from '@mui/icons-material/PivotTableChart';
 //import { IWorkspaceState } from "../../../store/slices/workspace/IWorkspaceState";
 import { useSelector } from "react-redux";
+import type { IWorkspaceState } from "~/store/slices/workspace/IWorkspaceState";
 
 export const MainMenu = () => {
 
-  //const currentWorkspace: IWorkspaceState =
-  //      useSelector((state: any) => state.workspace);
+  const currentWorkspace: IWorkspaceState =
+        useSelector((state: any) => state.workspace);
 
-  const currentWorkspace = {
-    value: {
-      id: '123',
-    }
-  };
   const navigate = useNavigate();
 
   const goToPage = (page: string) => {

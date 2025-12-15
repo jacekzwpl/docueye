@@ -2,6 +2,9 @@
 import { Links, Meta, Scripts, ScrollRestoration } from 'react-router';
 import './root.css';
 import Main from './components/main';
+import { Provider } from 'react-redux';
+import { SnackbarProvider } from 'notistack';
+import store from './store';
 
 
 
@@ -24,7 +27,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Main />;
+  return (
+    <Provider store={store}>
+      <SnackbarProvider
+        autoHideDuration={3000}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+        maxSnack={3}><Main /></SnackbarProvider>
+    </Provider>
+  );
 }
 
 //console.log("Rendering App");
