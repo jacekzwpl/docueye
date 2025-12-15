@@ -19,19 +19,23 @@ Param(
 # .\import.ps1 -docueyeAddress http://localhost:8080 -adminToken docueyedmintoken -workspaceId 638d0822-12c7-4998-8647-9c7af7ad2989 
 ####
 
+
+# docker run -it --rm --network="host" -v "$($PWD):/app/import" local-docueye-cli:1.0.0-rc2 workspace import --docueye-address="http://localhost:8080" --admin-token="docueyedmintoken" --key="$((New-Guid).Guid)" --id="638d0822-12c7-4998-8647-9c7af7ad2989" --file=workspace.dsl
+
+
 if(!$useDotNetTool) {
-docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
+docker run -it --rm --network="host" -v "$($PWD):/app/import" local-docueye-cli:1.0.0-rc7  `
 workspace import  `
 --docueye-address="$docueyeAddress"  `
 --admin-token="$adminToken"  `
---import-key="$importKey"  `
+--key="$importKey"  `
 --id="$workspaceId"  `
 --file=./import/workspace.dsl
 }else {
 docueye workspace import  `
 --docueye-address="$docueyeAddress"  `
 --admin-token="$adminToken"  `
---import-key="$importKey"  `
+--key="$importKey"  `
 --id="$workspaceId"  `
 --file=workspace.dsl
 }

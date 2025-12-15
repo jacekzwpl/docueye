@@ -8,9 +8,6 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0.101 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Source/DocuEye.CLI/DocuEye.CLI.csproj", "Source/DocuEye.CLI/"]
-COPY ["Source/DocuEye.CLI.ApiClient/DocuEye.CLI.ApiClient.csproj", "Source/DocuEye.CLI.ApiClient/"]
-COPY ["Source/DocuEye.Structurizr.Model/DocuEye.Structurizr.Model.csproj", "Source/DocuEye.Structurizr.Model/"]
-COPY ["Source/DocuEye.CLI.Application/DocuEye.CLI.Application.csproj", "Source/DocuEye.CLI.Application/"]
 RUN dotnet restore "./Source/DocuEye.CLI/./DocuEye.CLI.csproj"
 COPY . .
 WORKDIR "/src/Source/DocuEye.CLI"

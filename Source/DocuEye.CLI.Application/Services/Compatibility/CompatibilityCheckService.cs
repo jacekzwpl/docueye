@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using NuGet.Versioning;
 using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace DocuEye.CLI.Application.Services.Compatibility
@@ -20,9 +21,11 @@ namespace DocuEye.CLI.Application.Services.Compatibility
 
         string GetProductVersion()
         {
-            var path = Environment.ProcessPath;
-            var fvi = FileVersionInfo.GetVersionInfo(path!);
-            return fvi.ProductVersion ?? "0.0.0";
+            var nameVer = Assembly.GetEntryAssembly()?.GetName().Version?.ToString();
+            return nameVer ?? "0.0.0";
+            //var path = Environment.ProcessPath;
+            //var fvi = FileVersionInfo.GetVersionInfo(path!);
+            //return fvi.ProductVersion ?? "0.0.0";
         }
 
         public async Task<bool> CheckCompatibility()

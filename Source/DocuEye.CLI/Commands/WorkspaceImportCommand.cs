@@ -68,6 +68,7 @@ namespace DocuEye.CLI
 
         public async Task<int> Run(ParseResult parseResult, CancellationToken cancellationToken = default)
         {
+            //Console.Error.WriteLine("test");
             if (parseResult.Errors.Count > 0)
             {
                 foreach (ParseError parseError in parseResult.Errors)
