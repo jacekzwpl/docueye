@@ -24,14 +24,14 @@ docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-
 workspace import  `
 --docueye-address="$docueyeAddress"  `
 --admin-token="$adminToken"  `
---import-key="$importKey"  `
+--key="$importKey"  `
 --id="$workspaceId"  `
 --file=./import/workspace.dsl
 }else {
 docueye workspace import  `
 --docueye-address="$docueyeAddress"  `
 --admin-token="$adminToken"  `
---import-key="$importKey"  `
+--key="$importKey"  `
 --id="$workspaceId"  `
 --file=workspace.dsl
 }
