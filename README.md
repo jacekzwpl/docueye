@@ -45,7 +45,7 @@ So it's time to import one.
 ```Powershell
 cd .\ExampleWorkspace
 
-docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --import-key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file=./import/workspace.dsl
+docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file=./import/workspace.dsl
 # In this example $PWD is current directory path. 
 ```
 
@@ -58,7 +58,7 @@ Import workspace using command line
 ```Powershell
 cd .\ExampleWorkspace
 
-docueye workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --import-key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --workspaceFile=workspace.dsl
+docueye workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --key="$((New-Guid).Guid)" --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file=workspace.dsl
 ```
 Example script to import workspace can be found [here](ExampleWorkspace/import.ps1).  
 
