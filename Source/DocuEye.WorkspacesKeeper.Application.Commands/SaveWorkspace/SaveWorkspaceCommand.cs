@@ -1,15 +1,12 @@
-﻿using DocuEye.WorkspacesKeeper.Model;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.WorkspacesKeeper.Model;
 
 namespace DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace
 {
     /// <summary>
     /// Save workspace
     /// </summary>
-    public class SaveWorkspaceCommand : IRequest
+    public class SaveWorkspaceCommand : ICommand
     {
         /// <summary>
         /// Workspace data

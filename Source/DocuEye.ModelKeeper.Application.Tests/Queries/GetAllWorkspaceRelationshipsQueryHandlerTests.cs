@@ -13,7 +13,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetAllWorkspaceRelationshipsQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(5), "Hanlder should return 5 items.");

@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetFilteredView
 {
     /// <summary>
     /// Gets Filtered view
     /// </summary>
-    public class GetFilteredViewQuery : IRequest<FilteredView?>
+    public class GetFilteredViewQuery : IQuery<FilteredView?>
     {
         /// <summary>
         /// The ID of view

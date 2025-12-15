@@ -28,7 +28,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveRelationshipsCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.Relationships.Find(o => o.Id == "RelationshipId1");
@@ -55,7 +55,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveRelationshipsCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.Relationships.Find(o => o.Id == "RelationshipId23");
@@ -84,7 +84,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveRelationshipsCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var item = await this.dbContext.Relationships.FindOne(o => o.Id == "RelationshipId1");

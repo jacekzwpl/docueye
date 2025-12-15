@@ -11,8 +11,8 @@ namespace DocuEye.DocsKeeper.Application.Tests.Queries
             var query = new FindDecisionsQuery("workspacetest1");
 
             // Act
-            var handler = new FindDecisionsQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new FindDecisionsQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return exact 2 items.");
@@ -25,8 +25,8 @@ namespace DocuEye.DocsKeeper.Application.Tests.Queries
             var query = new FindDecisionsQuery("workspacetest1", "elementId1");
 
             // Act
-            var handler = new FindDecisionsQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new FindDecisionsQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return exact 2 items.");

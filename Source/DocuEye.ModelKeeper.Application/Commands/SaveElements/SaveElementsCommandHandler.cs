@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Threading;
 using DocuEye.ModelKeeper.Persistence;
 using System.Linq;
+using DocuEye.Infrastructure.Mediator.Commands;
 
 namespace DocuEye.ModelKeeper.Application.Commands.SaveElements
 {
     /// <summary>
     /// Handler for SaveElementsCommand
     /// </summary>
-    public class SaveElementsCommandHandler : IRequestHandler<SaveElementsCommand>
+    public class SaveElementsCommandHandler : ICommandHandler<SaveElementsCommand>
     {
         private readonly IModelKeeperDBContext dbContext;
         /// <summary>
@@ -29,7 +30,7 @@ namespace DocuEye.ModelKeeper.Application.Commands.SaveElements
         /// <param name="request">command request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns></returns>
-        public async Task Handle(SaveElementsCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(SaveElementsCommand request, CancellationToken cancellationToken)
         {
 
             if (request.ElementsToAdd.Count() > 0)

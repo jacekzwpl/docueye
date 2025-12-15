@@ -35,11 +35,11 @@ namespace DocuEye.ModelKeeper.Model
         /// <summary>
         /// The Name of the source element.
         /// </summary>
-        //public string SourceName {  get; set; }
+        public string SourceName {  get; set; }
         /// <summary>
         /// The Name of the destination element.
         /// </summary>
-        //public string DestinationName { get; set; }
+        public string DestinationName { get; set; }
         /// <summary>
         /// The technology associated with this relationship (e.g. HTTPS, JDBC, etc).
         /// </summary>
@@ -58,5 +58,7 @@ namespace DocuEye.ModelKeeper.Model
         /// The workspace id of this element 
         /// </summary>
         public string WorkspaceId { get; set; } = null!;
+
+        public string StructurizrId { get; set; } = null!;
     }
 }

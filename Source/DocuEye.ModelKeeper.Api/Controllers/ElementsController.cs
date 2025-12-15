@@ -1,4 +1,6 @@
 ﻿using DocuEye.Infrastructure.HttpProblemDetails;
+using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Application.Model;
 using DocuEye.ModelKeeper.Application.Queries.GetChildElements;
 using DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships;
 using DocuEye.ModelKeeper.Application.Queries.GetElement;
@@ -6,7 +8,7 @@ using DocuEye.ModelKeeper.Application.Queries.GetElementConsumers;
 using DocuEye.ModelKeeper.Application.Queries.GetElementDependences;
 using DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements;
 using DocuEye.ModelKeeper.Model;
-using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -46,7 +48,7 @@ namespace DocuEye.ModelKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<WorkspaceCatalogElement>>> Get([FromRoute] string workspaceId, [FromQuery] string? name = null, [FromQuery] string? type = null, [FromQuery] int? limit = null, [FromQuery] int? skip = null)
         {
             var query = new GetWorspaceCatalogElementsQuery(workspaceId, name, type, limit, skip);
-            var result = await this.mediator.Send<IEnumerable<WorkspaceCatalogElement>>(query);
+            var result = await this.mediator.SendQueryAsync<GetWorspaceCatalogElementsQuery,IEnumerable<WorkspaceCatalogElement>>(query);
             return this.Ok(result);
         }
         /// <summary>
@@ -60,7 +62,7 @@ namespace DocuEye.ModelKeeper.Api.Controllers
         public async Task<ActionResult<Element>> Get([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetElementQuery(id, workspaceId);
-            var result = await this.mediator.Send<Element?>(query);
+            var result = await this.mediator.SendQueryAsync<GetElementQuery,Element?>(query);
             if (result == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(ElementNotFound, ElementNotFoundDetails));
@@ -79,7 +81,7 @@ namespace DocuEye.ModelKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<ChildElement>>> GetChildren([FromRoute] string workspaceId, [FromRoute] string id, [FromQuery] string? type = null)
         {
             var query = new GetChildElementsQuery(workspaceId, id, type);
-            var result = await this.mediator.Send<IEnumerable<ChildElement>>(query);
+            var result = await this.mediator.SendQueryAsync<GetChildElementsQuery,IEnumerable<ChildElement>>(query);
             return this.Ok(result);
         }
         /// <summary>
@@ -94,7 +96,7 @@ namespace DocuEye.ModelKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<ElementDependence>>> GetElementDependences([FromRoute] string workspaceId, [FromRoute] string id, [FromQuery] bool getLinked = false)
         {
             var query = new GetElementDependencesQuery(id, workspaceId, getLinked);
-            var result = await this.mediator.Send<IEnumerable<ElementDependence>>(query);
+            var result = await this.mediator.SendQueryAsync<GetElementDependencesQuery,IEnumerable<ElementDependence>>(query);
             return this.Ok(result);
         }
         /// <summary>
@@ -109,7 +111,7 @@ namespace DocuEye.ModelKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<ElementConsumer>>> GetElementConsumers([FromRoute] string workspaceId, [FromRoute] string id, [FromQuery] bool getLinked = false)
         {
             var query = new GetElementConsumersQuery(id, workspaceId, getLinked);
-            var result = await this.mediator.Send<IEnumerable<ElementConsumer>>(query);
+            var result = await this.mediator.SendQueryAsync<GetElementConsumersQuery,IEnumerable<ElementConsumer>>(query);
             return this.Ok(result);
         }
 
@@ -118,7 +120,7 @@ namespace DocuEye.ModelKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<DeploymentNodeRelationship>>> GetDeploymentNodeRelationship([FromRoute] string workspaceId)
         {
             var query = new GetDeploymentNodeRelationshipsQuery(workspaceId);
-            var result = await this.mediator.Send<IEnumerable<DeploymentNodeRelationship>>(query);
+            var result = await this.mediator.SendQueryAsync<GetDeploymentNodeRelationshipsQuery,IEnumerable<DeploymentNodeRelationship>>(query);
             return this.Ok(result);
         }
 

@@ -12,8 +12,8 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetElementDependencesQuery("ContainerId2", "workspacetest1");
 
             // Act
-            var handler = new GetElementDependencesQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new GetElementDependencesQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
@@ -26,8 +26,8 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetElementDependencesQuery("ContainerId2", "workspacetest1", true);
 
             // Act
-            var handler = new GetElementDependencesQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new GetElementDependencesQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(3), "Hanlder should return 3 items.");
@@ -40,8 +40,8 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetElementDependencesQuery("ContainerId4", "workspacetest1");
 
             // Act
-            var handler = new GetElementDependencesQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new GetElementDependencesQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(0), "Hanlder should return 0 items.");

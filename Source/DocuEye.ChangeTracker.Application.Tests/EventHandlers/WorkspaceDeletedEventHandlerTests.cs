@@ -13,7 +13,7 @@ namespace DocuEye.ChangeTracker.Application.Tests.EventHandlers
 
             // Act
             var handler = new WorkspaceDeletedEventHandler(this.dbContext);
-            await handler.Handle(notification, default);
+            await handler.HandleAsync(notification, default);
 
             // Assert
             var modelChanges = await this.dbContext.ModelChanges.Find(o => o.WorkspaceId == "workspacetest1");

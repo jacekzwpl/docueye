@@ -47,5 +47,9 @@ namespace DocuEye.DocsKeeper.Model
         /// Structurizr dsl ID
         /// </summary>
         public string DslId { get; set; } = null!;
+        /// <summary>
+        /// Import key that last update decision
+        /// </summary>
+        public string ImportKey { get; set; } = null!;
     }
 }

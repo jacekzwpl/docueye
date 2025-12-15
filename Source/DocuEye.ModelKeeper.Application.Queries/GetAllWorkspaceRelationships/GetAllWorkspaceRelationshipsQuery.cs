@@ -1,5 +1,6 @@
-﻿using DocuEye.ModelKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Model;
+
 using System.Collections.Generic;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships
@@ -7,7 +8,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetAllWorkspaceRelationships
     /// <summary>
     /// Gets all relationships in workspace
     /// </summary>
-    public class GetAllWorkspaceRelationshipsQuery : IRequest<IEnumerable<Relationship>>
+    public class GetAllWorkspaceRelationshipsQuery : IQuery<IEnumerable<Relationship>>
     {
         /// <summary>
         /// Workspace ID

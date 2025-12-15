@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DocuEye.DocsKeeper.Application.Model;
+using DocuEye.Infrastructure.Mediator.Queries;
 using System.Collections.Generic;
 
 namespace DocuEye.DocsKeeper.Application.Queries.FindDecisions
@@ -6,7 +7,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.FindDecisions
     /// <summary>
     /// Finds decisions for workspace or element
     /// </summary>
-    public class FindDecisionsQuery : IRequest<IEnumerable<FoundedDecision>>
+    public class FindDecisionsQuery : IQuery<IEnumerable<FoundedDecision>>
     {
         /// <summary>
         /// Workspace id

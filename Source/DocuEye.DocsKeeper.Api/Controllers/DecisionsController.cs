@@ -1,7 +1,8 @@
-﻿using DocuEye.DocsKeeper.Application.Queries.FindDecisions;
+﻿using DocuEye.DocsKeeper.Application.Model;
+using DocuEye.DocsKeeper.Application.Queries.FindDecisions;
 using DocuEye.DocsKeeper.Application.Queries.GetDecisionContent;
 using DocuEye.Infrastructure.HttpProblemDetails;
-using MediatR;
+using DocuEye.Infrastructure.Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -43,7 +44,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<FoundedDecision>>> FindDecisions([FromRoute] string workspaceId, [FromQuery] int? limit = null, [FromQuery] int? skip = null)
         {
             var query = new FindDecisionsQuery(workspaceId, null, limit, skip);
-            var result = await this.mediator.Send<IEnumerable<FoundedDecision>>(query);
+            var result = await this.mediator.SendQueryAsync<FindDecisionsQuery,IEnumerable<FoundedDecision>>(query);
 
             return this.Ok(result);
         }
@@ -60,7 +61,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<FoundedDecision>>> FindDecisions([FromRoute] string workspaceId, [FromRoute] string elementId, [FromQuery] int? limit = null, [FromQuery] int? skip = null)
         {
             var query = new FindDecisionsQuery(workspaceId, elementId, limit, skip);
-            var result = await this.mediator.Send<IEnumerable<FoundedDecision>>(query);
+            var result = await this.mediator.SendQueryAsync<FindDecisionsQuery,IEnumerable<FoundedDecision>>(query);
 
             return this.Ok(result);
         }
@@ -76,7 +77,7 @@ namespace DocuEye.DocsKeeper.Api.Controllers
         public async Task<ActionResult<DecisionContent>> GetWorkspaceDecision([FromRoute] string workspaceId, [FromRoute] string id, [FromQuery] string baseUrl)
         {
             var query = new GetDecisionQuery(workspaceId, id, baseUrl);
-            var result = await this.mediator.Send<DecisionContent?>(query);
+            var result = await this.mediator.SendQueryAsync<GetDecisionQuery,DecisionContent?>(query);
             if (result == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DecisionNotFound, DecisionNotFoundDetails));

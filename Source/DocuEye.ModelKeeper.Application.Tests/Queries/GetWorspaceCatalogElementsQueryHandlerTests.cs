@@ -13,8 +13,8 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1");
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(9), "Hanlder should return 9 items.");
@@ -30,8 +30,8 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1", "My System");
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
@@ -46,8 +46,8 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1", null, null, 2, 0);
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(2), "Hanlder should return 2 items.");
@@ -61,8 +61,8 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
             var query = new GetWorspaceCatalogElementsQuery("workspacetest1", null, ElementType.Container);
 
             // Act
-            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new GetWorspaceCatalogElementsQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Where(o => o.Type != ElementType.Container).Count, Is.EqualTo(0), "Hanlder should return only items with type Container.");

@@ -68,5 +68,9 @@ namespace DocuEye.ModelKeeper.Model
         /// The name of owner team of this element
         /// </summary>
         public string? OwnerTeam { get; set; }
+        /// <summary>
+        /// ID in import workspace JSON for last import
+        /// </summary>
+        public string StructurizrId { get; set; } = null!;
     }
 }

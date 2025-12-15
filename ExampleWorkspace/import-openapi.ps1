@@ -25,19 +25,19 @@ Param(
 # import workspace to DocuEye
 if(!$useDotNetTool) {
 docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
---import=openapi  `
---docueyeAddress="$docueyeAddress"  `
---adminToken="$adminToken"  `
---workspaceId="$workspaceId"  `
---openApiFile="$openApiFile"  `
---elementDslId="$elementDslId"  
+openapi import  `
+--docueye-address="$docueyeAddress"  `
+--admin-token="$adminToken"  `
+--id="$workspaceId"  `
+--file="$openApiFile"  `
+--element-dsl-id="$elementDslId"  
 }else {
-docueye --import=openapi  `
---docueyeAddress="$docueyeAddress"  `
---adminToken="$adminToken"  `
---workspaceId="$workspaceId"  `
---openApiFile="$openApiFile"  `
---elementDslId="$elementDslId"  
+docueye openapi import  `
+--docueye-address="$docueyeAddress"  `
+--admin-token="$adminToken"  `
+--id="$workspaceId"  `
+--file="$openApiFile"  `
+--element-dsl-id="$elementDslId"  
 }
 
 

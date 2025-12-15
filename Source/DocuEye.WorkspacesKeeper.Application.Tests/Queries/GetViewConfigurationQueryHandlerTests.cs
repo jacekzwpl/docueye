@@ -12,7 +12,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetViewConfigurationQueryHandler(this.dbContext);
-            var item = await handler.Handle(query, default);
+            var item = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(item, !Is.Null, "Hanlder should return ViewConfiguration.");
@@ -26,7 +26,7 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetViewConfigurationQueryHandler(this.dbContext);
-            var item = await handler.Handle(query, default);
+            var item = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(item, Is.Null, "Hanlder should return null.");

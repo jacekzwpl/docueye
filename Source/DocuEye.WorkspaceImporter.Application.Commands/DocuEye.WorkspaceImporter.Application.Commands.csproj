@@ -6,11 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.4.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DocuEye.Structurizr.Model\DocuEye.Structurizr.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.Infrastructure.Mediator\DocuEye.Infrastructure.Mediator.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Json.Model\DocuEye.Structurizr.Json.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.ViewsKeeper.Model.Maps\DocuEye.ViewsKeeper.Model.Maps.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspaceImporter.Api.Model\DocuEye.WorkspaceImporter.Api.Model.csproj" />
   </ItemGroup>
 
 </Project>

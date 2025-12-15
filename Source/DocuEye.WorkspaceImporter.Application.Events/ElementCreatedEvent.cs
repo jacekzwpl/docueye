@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Events;
 
 namespace DocuEye.WorkspaceImporter.Application.Events
 {
     /// <summary>
     /// Event that is fired when element should be created according to detected changes during import
     /// </summary>
-    public class ElementCreatedEvent : INotification
+    public class ElementCreatedEvent : IEvent
     {
         /// <summary>
         /// The ID of workspace in whitch element is created

@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Application.Model;
+
 using System.Collections.Generic;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
@@ -6,7 +8,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetElementDependences
     /// <summary>
     /// Gets element dependences
     /// </summary>
-    public class GetElementDependencesQuery : IRequest<IEnumerable<ElementDependence>>
+    public class GetElementDependencesQuery : IQuery<IEnumerable<ElementDependence>>
     {
         /// <summary>
         /// The ID fo the element

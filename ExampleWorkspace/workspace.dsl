@@ -1,4 +1,4 @@
-workspace "Example Online Shop" "Example DocuEye workspace" {
+workspace "Example Online Shop 1" "DEBUGTEST Example DocuEye workspace" {
     
     !identifiers hierarchical
 
@@ -8,6 +8,7 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
     
 
     model {
+        # !identifiers hierarchical
         client = person "Client" "Online shop client"
 
         emailsystem = softwareSystem "Email System" {
@@ -20,7 +21,7 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
                 !adrs adr/onlineshop/web
                 description "Online web application for clients"
                 technology "ASP.NET MVC"
-                url "https://docueue.com"
+                url "https://docueye.com"
                 properties {
                     "docueye.ownerteam" "Web App Team"
                     "docueye.sourcecodeurl" "https://github.com/jacekzwpl/docueye"
@@ -149,7 +150,17 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             autoLayout tb
         }
 
-        theme default
+        dynamic onlineshop "BuyProduct" "Summarises how the sign in feature works in the single-page application." {
+            onlineshop.web -> onlineshop.catalog "Serarch product"
+            onlineshop.catalog -> onlineshop.web "Return product"
+            onlineshop.web -> onlineshop.basket "Add product to basket"
+            onlineshop.web -> onlineshop.orders "Create order"
+            onlineshop.web -> onlineshop.payment "Create payment"
+            autoLayout
+            description "Summarises how the sign in feature works in the single-page application."
+        }
+
+        themes default
     }
     
 }

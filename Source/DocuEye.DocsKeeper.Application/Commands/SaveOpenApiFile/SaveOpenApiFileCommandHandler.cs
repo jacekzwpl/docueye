@@ -1,6 +1,6 @@
 ﻿using DocuEye.DocsKeeper.Model;
 using DocuEye.DocsKeeper.Persistence;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Commands;
 using System;
 using System.IO;
 using System.Threading;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile
 {
-    public class SaveOpenApiFileCommandHandler : IRequestHandler<SaveOpenApiFileCommand>
+    public class SaveOpenApiFileCommandHandler : ICommandHandler<SaveOpenApiFileCommand>
     {
         private readonly IDocsKeeperDBContext dbContext;
         /// <summary>
@@ -19,7 +19,7 @@ namespace DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile
         {
             this.dbContext = dbContext;
         }
-        public async Task Handle(SaveOpenApiFileCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(SaveOpenApiFileCommand request, CancellationToken cancellationToken)
         {
 
             var existingFile = await this.dbContext.DocumentationFiles

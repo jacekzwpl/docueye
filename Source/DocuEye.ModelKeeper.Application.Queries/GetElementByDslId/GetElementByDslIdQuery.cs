@@ -1,12 +1,13 @@
-﻿using DocuEye.ModelKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Model;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetElementByDslId
 {
-    public class GetElementByDslIdQuery : IRequest<Element?>
+    public class GetElementByDslIdQuery : IQuery<Element?>
     {
         /// <summary>
         /// Structurizr dsl identifier of Element

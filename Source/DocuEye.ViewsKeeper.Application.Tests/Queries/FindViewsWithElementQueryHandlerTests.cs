@@ -16,8 +16,8 @@ namespace DocuEye.ViewsKeeper.Application.Tests.Queries
             var query = new FindViewsWithElementQuery("elementId1", "workspacetest1");
 
             // Act
-            var handler = new FindViewsWithElementQueryHandler(this.dbContext, this.mapper);
-            var items = await handler.Handle(query, default);
+            var handler = new FindViewsWithElementQueryHandler(this.dbContext);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.GreaterThan(0), "Hanlder should return more than zero items.");

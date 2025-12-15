@@ -20,7 +20,7 @@ namespace DocuEye.ChangeTracker.Application.Tests.EventHandlers
 
             // Act
             var handler = new ElementDeletedEventHandler(this.dbContext);
-            await handler.Handle(notification, default);
+            await handler.HandleAsync(notification, default);
 
             // Assert
             var modelChange = await this.dbContext.ModelChanges.FindOne(o => o.ElementId == notification.ElementId);
@@ -42,7 +42,7 @@ namespace DocuEye.ChangeTracker.Application.Tests.EventHandlers
 
             // Act
             var handler = new ElementDeletedEventHandler(this.dbContext);
-            await handler.Handle(notification, default);
+            await handler.HandleAsync(notification, default);
 
             // Assert
             var modelChanges = await this.dbContext.ModelChanges.Find(o => o.ElementId == notification.ElementId);

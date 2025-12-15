@@ -1,16 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.1" />
+    <PackageReference Include="NuGet.Versioning" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.DSL\DocuEye.Structurizr.DSL.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Json.Model.Maps\DocuEye.Structurizr.Json.Model.Maps.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Model.Exploders\DocuEye.Structurizr.Model.Exploders.csproj" />
   </ItemGroup>
 
 </Project>

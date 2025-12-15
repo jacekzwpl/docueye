@@ -1,6 +1,7 @@
 ﻿using DocuEye.DocsKeeper.Persistence;
+using DocuEye.Infrastructure.Mediator.Queries;
 using Markdig;
-using MediatR;
+
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionContent
     /// <summary>
     /// Handler for GetDecisionQuery
     /// </summary>
-    public class GetDecisionQueryHandler : IRequestHandler<GetDecisionQuery, DecisionContent?>
+    public class GetDecisionQueryHandler : IQueryHandler<GetDecisionQuery, DecisionContent?>
     {
         private readonly IDocsKeeperDBContext dbContext;
         /// <summary>
@@ -26,7 +27,7 @@ namespace DocuEye.DocsKeeper.Application.Queries.GetDecisionContent
         /// <param name="request">Query request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>Decision content or null if no was founded</returns>
-        public async Task<DecisionContent?> Handle(GetDecisionQuery request, CancellationToken cancellationToken)
+        public async Task<DecisionContent?> HandleAsync(GetDecisionQuery request, CancellationToken cancellationToken)
         {
 
             var decisionData = await this.dbContext.Decisions

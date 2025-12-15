@@ -1,27 +1,27 @@
-﻿using AutoMapper;
+﻿using DocuEye.ChangeTracker.Api.Controllers;
 using DocuEye.ChangeTracker.Application.EventHandlers;
 using DocuEye.ChangeTracker.Persistence;
-using DocuEye.DocsKeeper.Application.Commands.SaveImages;
-using DocuEye.DocsKeeper.Application.Mappings;
+using DocuEye.DocsKeeper.Api.Controllers;
+using DocuEye.DocsKeeper.Application.Commands.SaveSingleDecision;
 using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.DataProtection;
+using DocuEye.Infrastructure.Mediator;
+using DocuEye.ModelKeeper.Api.Controllers;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
-using DocuEye.ModelKeeper.Application.Mappings;
 using DocuEye.ModelKeeper.Persistence;
 using DocuEye.Persistence;
+using DocuEye.ViewsKeeper.Api.Controllers;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges;
-using DocuEye.ViewsKeeper.Application.Mappings;
 using DocuEye.ViewsKeeper.Persistence;
 using DocuEye.Web.Auth;
 using DocuEye.WorkspaceImporter.Api;
-using DocuEye.WorkspaceImporter.Application;
-using DocuEye.WorkspaceImporter.Application.Commands.ImportWorkspace;
-using DocuEye.WorkspaceImporter.Application.Mappings;
+using DocuEye.WorkspaceImporter.Api.Controllers;
+using DocuEye.WorkspaceImporter.Application.Commands.StartImport;
 using DocuEye.WorkspaceImporter.Persistence;
+using DocuEye.Workspaces.Api.Controllers;
 using DocuEye.WorkspacesKeeper.Application;
 using DocuEye.WorkspacesKeeper.Application.Commands.SaveWorkspace;
-using DocuEye.WorkspacesKeeper.Application.Mappings;
 using DocuEye.WorkspacesKeeper.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -105,6 +105,7 @@ namespace DocuEye.Web
             ChangeTrackerBsonClassMapping.Register();
             ViewsKeeperBsonClassMapping.Register();
             WorkspacesKeeperBsonClassMapping.Register();
+            DocsKeeperBsonClassMapping.Register();
 
             builder.Services.AddMemoryCache();
 
@@ -196,15 +197,15 @@ namespace DocuEye.Web
                     policy.AddRequirements(new GeneralAccessRequirement(oidcSettings == null ? false : true));
                 });
             });
-
-            startupLogger.LogInformation("Register MediatR services");
-            builder.Services.AddMediatR(cfg => {
-                cfg.RegisterServicesFromAssembly(typeof(ImportWorkspaceCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(ElementChangedEventHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveViewsChangesCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveImagesCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveElementsCommandHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
+            startupLogger.LogInformation("Register Mediator services");
+            builder.Services.AddMediator(options =>
+            {
+                options.UseAssembly(typeof(StartImportCommandHandler).Assembly);
+                options.UseAssembly(typeof(ElementChangedEventHandler).Assembly);
+                options.UseAssembly(typeof(SaveViewsChangesCommandHandler).Assembly);
+                options.UseAssembly(typeof(SaveSingleDecisionCommandHandler).Assembly);
+                options.UseAssembly(typeof(SaveElementsCommandHandler).Assembly);
+                options.UseAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
             });
 
             builder.Services.AddAntiforgery(options =>
@@ -216,27 +217,19 @@ namespace DocuEye.Web
                 options =>
                 {
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                });//.AddApplicationPart(Assembly.GetAssembly(typeof(WorkspacesImportController))).AddControllersAsServices();
+                })
+                .AddApplicationPart(typeof(WorkspacesImportController).Assembly)
+                .AddApplicationPart(typeof(WorkspacesController).Assembly)
+                .AddApplicationPart(typeof(ViewsController).Assembly)
+                .AddApplicationPart(typeof(ElementsController).Assembly)
+                .AddApplicationPart(typeof(DecisionsController).Assembly)
+                .AddApplicationPart(typeof(ModelChangesController).Assembly)
+                .AddControllersAsServices();
 
-            builder.Services.ConfigureWorkspaceImporterApplicationServices();
+            
             builder.Services.ConfigureWorkspacesKeeperApplicationServices();
 
             startupLogger.LogInformation("Register Automapper configurations");
-            //Automapper
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                
-                mc.AddProfile(new ViewsKeeperMappingProfile());
-                mc.AddProfile(new DocsKeeperMappingProfile());
-                mc.AddProfile(new ModelKeeperMappingProfile());
-                mc.AddProfile(new WorkspacesKeeperMappingProfile());
-                mc.AddProfile(new WorkspaceImporterFromExplodedMappingProfile());
-                mc.AddProfile(new WorkspaceImporterFromStructurizrMappingProfile());
-                mc.AddProfile(new WorkspaceImporterMappingProfile());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            builder.Services.AddSingleton(mapper);
 
             builder.Services.AddSwaggerGen();
 

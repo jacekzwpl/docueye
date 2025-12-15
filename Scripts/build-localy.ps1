@@ -3,7 +3,7 @@ Param(
     [string]$version
 )
 ####
-#   .\Scripts\build-localy.ps1 -version 0.10.1-rc1
+#   .\Scripts\build-localy.ps1 -version 1.0.0-rc11
 ####
 
 docker build -t local-docueye:$version -f ./Source/DocuEye.Web/Dockerfile .

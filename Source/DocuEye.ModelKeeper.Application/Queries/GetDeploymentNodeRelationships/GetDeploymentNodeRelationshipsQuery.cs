@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿
+using DocuEye.Infrastructure.Mediator.Queries;
 using System.Collections.Generic;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetDeploymentNodeRelationships
 {
-    public class GetDeploymentNodeRelationshipsQuery : IRequest<IEnumerable<DeploymentNodeRelationship>>
+    public class GetDeploymentNodeRelationshipsQuery : IQuery<IEnumerable<DeploymentNodeRelationship>>
     {
         public string WorkspaceId { get; set; }
 

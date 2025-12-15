@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Events;
 
 namespace DocuEye.WorkspaceImporter.Application.Events
 {
     /// <summary>
     /// Event that is fired when relationship should be removed according to detected changes during import
     /// </summary>
-    public class RelationshipDeletedEvent : INotification
+    public class RelationshipDeletedEvent : IEvent
     {
         /// <summary>
         /// The ID of workspace that relationship belongs to

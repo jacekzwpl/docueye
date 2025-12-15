@@ -14,5 +14,6 @@ namespace DocuEye.CLI.ApiClient.Model
         public int? Status { get; set; }
 
         public string? Detail { get; set; }
+        public Dictionary<string, string[]> Errors { get; set; }
     }
 }

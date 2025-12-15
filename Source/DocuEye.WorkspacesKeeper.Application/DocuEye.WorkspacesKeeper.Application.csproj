@@ -6,16 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.4.1" />
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    <PackageReference Include="System.Text.Json" Version="8.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.1" />
+    <PackageReference Include="System.Text.Json" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Commands\DocuEye.WorkspacesKeeper.Application.Commands.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Events\DocuEye.WorkspacesKeeper.Application.Events.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Application.Queries\DocuEye.WorkspacesKeeper.Application.Queries.csproj" />
+    <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model.Maps\DocuEye.WorkspacesKeeper.Model.Maps.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model\DocuEye.WorkspacesKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Persistence\DocuEye.WorkspacesKeeper.Persistence.csproj" />
   </ItemGroup>

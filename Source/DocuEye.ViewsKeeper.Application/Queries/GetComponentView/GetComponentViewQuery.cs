@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetComponentView
 {
     /// <summary>
     /// Gets component view
     /// </summary>
-    public class GetComponentViewQuery : IRequest<ComponentView?>
+    public class GetComponentViewQuery : IQuery<ComponentView?>
     {
         /// <summary>
         /// The view ID

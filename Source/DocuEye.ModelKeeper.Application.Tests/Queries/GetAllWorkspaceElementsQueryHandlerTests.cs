@@ -18,7 +18,7 @@ namespace DocuEye.ModelKeeper.Application.Tests.Queries
 
             // Act
             var handler = new GetAllWorkspaceElementsQueryHandler(this.dbContext);
-            var items = await handler.Handle(query, default);
+            var items = await handler.HandleAsync(query, default);
 
             // Assert
             Assert.That(items.Count, Is.EqualTo(10), "Hanlder should return 10 items.");

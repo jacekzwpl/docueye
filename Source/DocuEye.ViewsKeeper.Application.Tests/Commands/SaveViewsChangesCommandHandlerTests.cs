@@ -19,7 +19,7 @@ namespace DocuEye.ViewsKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveViewsChangesCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.AllViews.Find(o => true);
@@ -45,7 +45,7 @@ namespace DocuEye.ViewsKeeper.Application.Tests.Commands
 
             // Act
             var handler = new SaveViewsChangesCommandHandler(this.dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var items = await this.dbContext.AllViews.Find(o => true);

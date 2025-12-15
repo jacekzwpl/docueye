@@ -1,6 +1,6 @@
-﻿using DocuEye.ViewsKeeper.Model;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
 using DocuEye.ViewsKeeper.Persistence;
-using MediatR;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,7 +11,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
     /// <summary>
     /// Handler for SaveViewsChangesCommand
     /// </summary>
-    public class SaveViewsChangesCommandHandler : IRequestHandler<SaveViewsChangesCommand>
+    public class SaveViewsChangesCommandHandler : ICommandHandler<SaveViewsChangesCommand>
     {
         private readonly IViewsKeeperDBContext dbContext;
         /// <summary>
@@ -28,7 +28,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
         /// <param name="request">command request data</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns></returns>
-        public async Task Handle(SaveViewsChangesCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(SaveViewsChangesCommand request, CancellationToken cancellationToken)
         {
             //Delete missing 
             List<string> existingIds = new List<string>();
@@ -46,7 +46,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
 
 
             // Create new views
-            if (request.SystemLandscapeViews.Count > 0)
+            if (request.SystemLandscapeViews.Count() > 0)
             {
                 foreach (var view in request.SystemLandscapeViews)
                 {
@@ -54,7 +54,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.SystemContextViews.Count > 0)
+            if (request.SystemContextViews.Count() > 0)
             {
                 foreach (var view in request.SystemContextViews)
                 {
@@ -62,7 +62,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.ContainerViews.Count > 0)
+            if (request.ContainerViews.Count() > 0)
             {
                 foreach (var view in request.ContainerViews)
                 {
@@ -70,7 +70,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.ComponentViews.Count > 0)
+            if (request.ComponentViews.Count() > 0)
             {
                 foreach (var view in request.ComponentViews)
                 {
@@ -78,7 +78,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.DeploymentViews.Count > 0)
+            if (request.DeploymentViews.Count() > 0)
             {
                 foreach (var view in request.DeploymentViews)
                 {
@@ -86,7 +86,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.DynamicViews.Count > 0)
+            if (request.DynamicViews.Count() > 0)
             {
                 foreach (var view in request.DynamicViews)
                 {
@@ -94,7 +94,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.FilteredViews.Count > 0)
+            if (request.FilteredViews.Count() > 0)
             {
                 foreach (var view in request.FilteredViews)
                 {
@@ -102,7 +102,7 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                 }
             }
 
-            if (request.ImagesViews.Count > 0)
+            if (request.ImagesViews.Count() > 0)
             {
                 foreach (var view in request.ImagesViews)
                 {

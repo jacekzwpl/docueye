@@ -1,5 +1,6 @@
-﻿using DocuEye.ModelKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Commands;
+using DocuEye.ModelKeeper.Model;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace DocuEye.ModelKeeper.Application.Commands.SaveRelationships
     /// <summary>
     /// Save relationships command
     /// </summary>
-    public class SaveRelationshipsCommand : IRequest
+    public class SaveRelationshipsCommand : ICommand
     {
         /// <summary>
         /// Relationships that should be updated

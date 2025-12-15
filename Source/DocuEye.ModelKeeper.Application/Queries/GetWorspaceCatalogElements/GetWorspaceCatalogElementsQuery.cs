@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ModelKeeper.Application.Model;
+
 using System.Collections.Generic;
 
 namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
@@ -6,7 +8,7 @@ namespace DocuEye.ModelKeeper.Application.Queries.GetWorspaceCatalogElements
     /// <summary>
     /// Gets elements for workspace
     /// </summary>
-    public class GetWorspaceCatalogElementsQuery : IRequest<IEnumerable<WorkspaceCatalogElement>>
+    public class GetWorspaceCatalogElementsQuery : IQuery<IEnumerable<WorkspaceCatalogElement>>
     {
         /// <summary>
         /// The ID fo the workspace

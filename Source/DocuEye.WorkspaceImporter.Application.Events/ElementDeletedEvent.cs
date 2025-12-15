@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿
+
+using DocuEye.Infrastructure.Mediator.Events;
 
 namespace DocuEye.WorkspaceImporter.Application.Events
 {
     /// <summary>
     /// Event that is fired when element should be removed according to detected changes during import
     /// </summary>
-    public class ElementDeletedEvent : INotification
+    public class ElementDeletedEvent : IEvent
     {
         /// <summary>
         /// The ID of workspace in whitch element is created

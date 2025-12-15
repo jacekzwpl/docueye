@@ -1,9 +1,10 @@
 ﻿using DocuEye.DocsKeeper.Model;
-using MediatR;
+using DocuEye.Infrastructure.Mediator.Queries;
+
 
 namespace DocuEye.DocsKeeper.Application.Queries.GetOpenApiFile
 {
-    public class GetOpenApiFileQuery : IRequest<DocumentationFile?>
+    public class GetOpenApiFileQuery : IQuery<DocumentationFile?>
     {
         public string WorkspaceId { get; set; }
         public string ElementId { get; set; }

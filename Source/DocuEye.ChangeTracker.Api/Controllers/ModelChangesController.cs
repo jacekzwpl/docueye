@@ -1,6 +1,6 @@
 ﻿using DocuEye.ChangeTracker.Application.Queries.FindModelChanges;
 using DocuEye.ChangeTracker.Model;
-using MediatR;
+using DocuEye.Infrastructure.Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,7 +39,7 @@ namespace DocuEye.ChangeTracker.Api.Controllers
                 Limit = limit,
                 Skip = skip
             };
-            var result = await this.mediator.Send<IEnumerable<ModelChange>>(query);
+            var result = await this.mediator.SendQueryAsync<FindModelChangesQuery,IEnumerable<ModelChange>>(query);
 
             return this.Ok(result);
         }

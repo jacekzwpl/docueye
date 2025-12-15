@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Application.Model;
+
 using System.Collections.Generic;
 
 namespace DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement
@@ -6,7 +8,7 @@ namespace DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement
     /// <summary>
     /// Find all views that contains specyfic element
     /// </summary>
-    public class FindViewsWithElementQuery : IRequest<IEnumerable<ViewWithElement>>
+    public class FindViewsWithElementQuery : IQuery<IEnumerable<ViewWithElement>>
     {
         /// <summary>
         /// The ID of element

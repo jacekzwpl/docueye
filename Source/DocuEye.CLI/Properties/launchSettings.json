@@ -1,12 +1,68 @@
 {
   "profiles": {
-    "DocuEye.CLI": {
+    "DocuEye.OPENAPI": {
       "commandName": "Project",
-      "commandLineArgs": "--import=openapi --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --openApiFile=\"C:\\nCode\\docueye\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\" --elementDslId=onlineshop.basket"
+      "commandLineArgs": "--import=openapi --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989 --openApiFile=\"..\\..\\..\\..\\..\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\" --elementDslId=onlineshop.basket"
     },
     "CLI.Delete": {
       "commandName": "Project",
       "commandLineArgs": "--import=delete --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=638d0822-12c7-4998-8647-9c7af7ad2989"
+    },
+    "DocuEye.WORKSPACE": {
+      "commandName": "Project",
+      "commandLineArgs": "--import=workspace --docueyeAddress=https://localhost:7041 --adminToken=docueyedmintoken --workspaceId=debugtest --workspaceFile=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.json\""
+    },
+    "DocuEye.HELP": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    },
+    "DocuEye.workspace-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace --help"
+    },
+    "DocuEye.workspace-import-dsl": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+    },
+    "DocuEye.workspace-import-json": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest1 --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\structurizr-workspace.json\" --mode=json"
+    },
+    "DocuEye.workspace-import-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --help"
+    },
+    "DocuEye.workspace-export-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace export --help"
+    },
+    "DocuEye.workspace-export-json": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace export --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+    },
+    "DocuEye.workspace-delete-help": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace delete --help"
+    },
+    "DocuEye.workspace-delete": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest"
+    },
+    "DocuEye.workspace-validate": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace validate --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+    },
+    "DocuEye.openapi-import-help": {
+      "commandName": "Project",
+      "commandLineArgs": "openapi import --help"
+    },
+    "DocuEye.openapi-import": {
+      "commandName": "Project",
+      "commandLineArgs": "openapi import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\""
+    },
+    "DocuEye.openapi-delete": {
+      "commandName": "Project",
+      "commandLineArgs": "openapi delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket"
     },
     "Docker": {
       "commandName": "Docker"

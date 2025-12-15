@@ -1,12 +1,13 @@
-﻿using DocuEye.ViewsKeeper.Model;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator.Queries;
+using DocuEye.ViewsKeeper.Model;
+
 
 namespace DocuEye.ViewsKeeper.Application.Queries.GetSystemContextView
 {
     /// <summary>
     /// Gets System context view
     /// </summary>
-    public class GetSystemContextViewQuery : IRequest<SystemContextView?>
+    public class GetSystemContextViewQuery : IQuery<SystemContextView?>
     {
         /// <summary>
         /// The ID of view

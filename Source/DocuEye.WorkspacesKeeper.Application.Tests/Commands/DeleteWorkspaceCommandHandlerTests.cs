@@ -1,5 +1,7 @@
-﻿using DocuEye.WorkspacesKeeper.Application.Commands.DeleteWorkspace;
-using MediatR;
+﻿using DocuEye.Infrastructure.Mediator;
+using DocuEye.Infrastructure.Mediator.Events;
+using DocuEye.WorkspacesKeeper.Application.Commands.DeleteWorkspace;
+
 using Moq;
 
 namespace DocuEye.WorkspacesKeeper.Application.Tests.Commands
@@ -13,12 +15,12 @@ namespace DocuEye.WorkspacesKeeper.Application.Tests.Commands
             var command = new DeleteWorkspaceCommand("workspacetest1");
 
             var mediator = new Mock<IMediator>();
-            mediator.Setup(i => i.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()))
+            mediator.Setup(i => i.SendEventAsync(It.IsAny<IEvent>(), It.IsAny<CancellationToken>()))
             .Returns(Task.CompletedTask);
 
             // Act
             var handler = new DeleteWorkspaceCommandHandler(mediator.Object, dbContext);
-            await handler.Handle(command, default);
+            await handler.HandleAsync(command, default);
 
             // Assert
             var viewConfigurations = await dbContext.ViewConfigurations.Find(o => o.Id == "workspacetest1");
