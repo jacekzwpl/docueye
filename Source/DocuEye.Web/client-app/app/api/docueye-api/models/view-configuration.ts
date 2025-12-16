@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ElementStyle } from './element-style';
+import type { ElementStyle } from './element-style';
 // May contain unused imports in some cases
 // @ts-ignore
-import { RelationshipStyle } from './relationship-style';
+import type { RelationshipStyle } from './relationship-style';
 // May contain unused imports in some cases
 // @ts-ignore
-import { Terminology } from './terminology';
+import type { Terminology } from './terminology';
 
 /**
  * 

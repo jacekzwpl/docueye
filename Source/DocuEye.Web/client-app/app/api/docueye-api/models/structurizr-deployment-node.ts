@@ -15,16 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrContainerInstance } from './structurizr-container-instance';
+import type { StructurizrContainerInstance } from './structurizr-container-instance';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrInfrastructureNode } from './structurizr-infrastructure-node';
+import type { StructurizrInfrastructureNode } from './structurizr-infrastructure-node';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrRelationship } from './structurizr-relationship';
+import type { StructurizrRelationship } from './structurizr-relationship';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrSoftwareSystemInstance } from './structurizr-software-system-instance';
+import type { StructurizrSoftwareSystemInstance } from './structurizr-software-system-instance';
 
 /**
  * 

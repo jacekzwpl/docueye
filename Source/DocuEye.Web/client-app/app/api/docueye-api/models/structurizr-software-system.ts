@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrContainer } from './structurizr-container';
+import type { StructurizrContainer } from './structurizr-container';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDocumentation } from './structurizr-documentation';
+import type { StructurizrDocumentation } from './structurizr-documentation';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrRelationship } from './structurizr-relationship';
+import type { StructurizrRelationship } from './structurizr-relationship';
 
 /**
  * 

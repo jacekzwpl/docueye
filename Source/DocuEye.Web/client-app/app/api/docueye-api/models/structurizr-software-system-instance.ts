@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrRelationship } from './structurizr-relationship';
+import type { StructurizrRelationship } from './structurizr-relationship';
 
 /**
  * 

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrWorkspace } from './structurizr-workspace';
+import type { StructurizrWorkspace } from './structurizr-workspace';
 
 /**
  * 

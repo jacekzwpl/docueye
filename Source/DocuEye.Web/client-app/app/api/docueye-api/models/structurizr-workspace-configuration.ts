@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrWorkspaceConfigurationUser } from './structurizr-workspace-configuration-user';
+import type { StructurizrWorkspaceConfigurationUser } from './structurizr-workspace-configuration-user';
 
 /**
  * 

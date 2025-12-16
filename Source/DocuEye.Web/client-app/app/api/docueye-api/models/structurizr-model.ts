@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDeploymentNode } from './structurizr-deployment-node';
+import type { StructurizrDeploymentNode } from './structurizr-deployment-node';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrPerson } from './structurizr-person';
+import type { StructurizrPerson } from './structurizr-person';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrSoftwareSystem } from './structurizr-software-system';
+import type { StructurizrSoftwareSystem } from './structurizr-software-system';
 
 /**
  * 

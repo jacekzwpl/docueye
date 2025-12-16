@@ -15,16 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrAutomaticLayout } from './structurizr-automatic-layout';
+import type { StructurizrAutomaticLayout } from './structurizr-automatic-layout';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDimensions } from './structurizr-dimensions';
+import type { StructurizrDimensions } from './structurizr-dimensions';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrElementView } from './structurizr-element-view';
+import type { StructurizrElementView } from './structurizr-element-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrRelationshipView } from './structurizr-relationship-view';
+import type { StructurizrRelationshipView } from './structurizr-relationship-view';
 
 /**
  * 

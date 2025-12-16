@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IWorkspaceState } from "./IWorkspaceState";
+import { type IWorkspaceState } from "./IWorkspaceState";
 
 
 const initialState: IWorkspaceState = {

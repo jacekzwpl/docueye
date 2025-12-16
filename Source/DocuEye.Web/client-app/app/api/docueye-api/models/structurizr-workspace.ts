@@ -15,16 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDocumentation } from './structurizr-documentation';
+import type { StructurizrDocumentation } from './structurizr-documentation';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrModel } from './structurizr-model';
+import type { StructurizrModel } from './structurizr-model';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrViews } from './structurizr-views';
+import type { StructurizrViews } from './structurizr-views';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrWorkspaceConfiguration } from './structurizr-workspace-configuration';
+import type { StructurizrWorkspaceConfiguration } from './structurizr-workspace-configuration';
 
 /**
  * 

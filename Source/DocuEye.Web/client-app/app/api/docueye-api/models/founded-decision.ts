@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { DecisionLink } from './decision-link';
+import type { DecisionLink } from './decision-link';
 
 /**
  * 

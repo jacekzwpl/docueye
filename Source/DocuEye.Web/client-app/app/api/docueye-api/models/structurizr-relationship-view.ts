@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrVertex } from './structurizr-vertex';
+import type { StructurizrVertex } from './structurizr-vertex';
 
 /**
  * 

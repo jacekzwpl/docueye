@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrConfigurationStyles } from './structurizr-configuration-styles';
+import type { StructurizrConfigurationStyles } from './structurizr-configuration-styles';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrTerminology } from './structurizr-terminology';
+import type { StructurizrTerminology } from './structurizr-terminology';
 
 /**
  * 

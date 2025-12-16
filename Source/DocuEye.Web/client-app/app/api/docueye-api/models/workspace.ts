@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { WorkspaceAccessRule } from './workspace-access-rule';
+import type { WorkspaceAccessRule } from './workspace-access-rule';
 // May contain unused imports in some cases
 // @ts-ignore
-import { WorkspaceView } from './workspace-view';
+import type { WorkspaceView } from './workspace-view';
 
 /**
  * 

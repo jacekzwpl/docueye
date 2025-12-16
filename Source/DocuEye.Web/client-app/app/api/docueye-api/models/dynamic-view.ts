@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AutomaticLayout } from './automatic-layout';
+import type { AutomaticLayout } from './automatic-layout';
 // May contain unused imports in some cases
 // @ts-ignore
-import { DynamicRelationshipView } from './dynamic-relationship-view';
+import type { DynamicRelationshipView } from './dynamic-relationship-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { ElementView } from './element-view';
+import type { ElementView } from './element-view';
 
 /**
  * 

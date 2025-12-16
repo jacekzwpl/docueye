@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { DeploymentNodeRelationshipItem } from './deployment-node-relationship-item';
+import type { DeploymentNodeRelationshipItem } from './deployment-node-relationship-item';
 
 /**
  * 

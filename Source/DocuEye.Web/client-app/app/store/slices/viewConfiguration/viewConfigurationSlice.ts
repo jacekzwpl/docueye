@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IViewConfigurationState } from "./IViewConfigurationState";
+import { type IViewConfigurationState } from "./IViewConfigurationState";
 
 
 const initialState: IViewConfigurationState = {

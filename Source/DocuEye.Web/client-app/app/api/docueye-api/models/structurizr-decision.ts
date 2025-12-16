@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDecisionLink } from './structurizr-decision-link';
+import type { StructurizrDecisionLink } from './structurizr-decision-link';
 
 /**
  * 

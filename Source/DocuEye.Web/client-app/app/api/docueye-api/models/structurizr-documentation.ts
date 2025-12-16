@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDecision } from './structurizr-decision';
+import type { StructurizrDecision } from './structurizr-decision';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDocumentationSection } from './structurizr-documentation-section';
+import type { StructurizrDocumentationSection } from './structurizr-documentation-section';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrImage } from './structurizr-image';
+import type { StructurizrImage } from './structurizr-image';
 
 /**
  * 

@@ -20,13 +20,13 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { FoundedWorkspace } from '../models';
+import { type FoundedWorkspace } from '../models';
 // @ts-ignore
-import { ViewConfiguration } from '../models';
+import { type ViewConfiguration } from '../models';
 // @ts-ignore
-import { Workspace } from '../models';
+import { type Workspace } from '../models';
 /**
  * WorkspacesApi - axios parameter creator
  * @export

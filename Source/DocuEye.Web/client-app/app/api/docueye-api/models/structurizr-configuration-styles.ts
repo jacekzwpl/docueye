@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrElementStyle } from './structurizr-element-style';
+import type { StructurizrElementStyle } from './structurizr-element-style';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrRelationshipStyle } from './structurizr-relationship-style';
+import type { StructurizrRelationshipStyle } from './structurizr-relationship-style';
 
 /**
  * 

@@ -15,31 +15,31 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrComponentView } from './structurizr-component-view';
+import type { StructurizrComponentView } from './structurizr-component-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrConfiguration } from './structurizr-configuration';
+import type { StructurizrConfiguration } from './structurizr-configuration';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrContainerView } from './structurizr-container-view';
+import type { StructurizrContainerView } from './structurizr-container-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDeploymentView } from './structurizr-deployment-view';
+import type { StructurizrDeploymentView } from './structurizr-deployment-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrDynamicView } from './structurizr-dynamic-view';
+import type { StructurizrDynamicView } from './structurizr-dynamic-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrFilteredView } from './structurizr-filtered-view';
+import type { StructurizrFilteredView } from './structurizr-filtered-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrImageView } from './structurizr-image-view';
+import type { StructurizrImageView } from './structurizr-image-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrSystemContextView } from './structurizr-system-context-view';
+import type { StructurizrSystemContextView } from './structurizr-system-context-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { StructurizrSystemLandscapeView } from './structurizr-system-landscape-view';
+import type { StructurizrSystemLandscapeView } from './structurizr-system-landscape-view';
 
 /**
  * 

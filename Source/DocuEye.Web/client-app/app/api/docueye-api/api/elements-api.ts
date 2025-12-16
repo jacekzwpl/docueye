@@ -20,19 +20,19 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ChildElement } from '../models';
+import { type ChildElement } from '../models';
 // @ts-ignore
-import { DeploymentNodeRelationship } from '../models';
+import { type DeploymentNodeRelationship } from '../models';
 // @ts-ignore
-import { Element } from '../models';
+import { type Element } from '../models';
 // @ts-ignore
-import { ElementConsumer } from '../models';
+import { type ElementConsumer } from '../models';
 // @ts-ignore
-import { ElementDependence } from '../models';
+import { type ElementDependence } from '../models';
 // @ts-ignore
-import { WorkspaceCatalogElement } from '../models';
+import { type WorkspaceCatalogElement } from '../models';
 /**
  * ElementsApi - axios parameter creator
  * @export

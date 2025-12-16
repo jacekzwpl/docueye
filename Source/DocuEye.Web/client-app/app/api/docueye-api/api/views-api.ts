@@ -20,25 +20,25 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ComponentView } from '../models';
+import { type ComponentView } from '../models';
 // @ts-ignore
-import { ContainerView } from '../models';
+import { type ContainerView } from '../models';
 // @ts-ignore
-import { DeploymentView } from '../models';
+import { type DeploymentView } from '../models';
 // @ts-ignore
-import { DynamicView } from '../models';
+import { type DynamicView } from '../models';
 // @ts-ignore
-import { FilteredView } from '../models';
+import { type FilteredView } from '../models';
 // @ts-ignore
-import { ImageView } from '../models';
+import { type ImageView } from '../models';
 // @ts-ignore
-import { SystemContextView } from '../models';
+import { type SystemContextView } from '../models';
 // @ts-ignore
-import { SystemLandscapeView } from '../models';
+import { type SystemLandscapeView } from '../models';
 // @ts-ignore
-import { ViewWithElement } from '../models';
+import { type ViewWithElement } from '../models';
 /**
  * ViewsApi - axios parameter creator
  * @export
