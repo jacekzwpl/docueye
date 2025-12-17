@@ -9,7 +9,7 @@ import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import { Paginator } from "../../components/paginator/Paginator";
 import Loader from "../../components/loader";
 
-export const WorkspacesList = () => {
+export const Workspaces = () => {
 
     const [workspaces, setWorkspaces] = useState<FoundedWorkspace[]>([]);
     const navigate = useNavigate();
@@ -19,12 +19,6 @@ export const WorkspacesList = () => {
     const pageSize = 50;
 
     useEffect(() => {
-        console.log("WorkspacesList mounted");
-        
-    }, []);
-
-    useEffect(() => {
-        console.log("Loading workspaces...");
         setIsLoading(true);
         DocuEyeApi.WorkspacesApi.apiWorkspacesGet(undefined, pageSize, 0)
             .then((response: AxiosResponse<FoundedWorkspace[]>) => {
@@ -55,7 +49,7 @@ export const WorkspacesList = () => {
                 setIsLoading(false);
             });
 
-
+        
     }
     const onPageChange = (page: number) => {
         setCurrentPage(page);
@@ -72,10 +66,10 @@ export const WorkspacesList = () => {
     }
 
     return (
-        <Box padding={2} >
-            <Card variant="outlined">
-                <CardContent>
-                    <Toolbar>
+        <Box padding={2} > 
+        <Card variant="outlined">
+            <CardContent>
+            <Toolbar>
                         <TextField
                             label="Name"
                             size="small"
@@ -93,28 +87,28 @@ export const WorkspacesList = () => {
                             <FilterAltOffIcon />
                         </IconButton>
                     </Toolbar>
-                    <Table sx={{ minWidth: 650 }}>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell sx={{ fontWeight: 'bold' }} align="right">Name</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold' }} align="right">Description</TableCell>
+                <Table sx={{ minWidth: 650 }}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell sx={{ fontWeight: 'bold' }} align="right">Name</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }} align="right">Description</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {workspaces.map((workspace) => (
+                            <TableRow key={workspace.id}>
+                                <TableCell align="right">
+                                    <Link align="right" component="button"
+                                        variant="body2" onClick={() => goToWorkspace(workspace.id, workspace.name)}>
+                                        {workspace.name}
+                                    </Link>
+                                </TableCell>
+                                <TableCell align="right">{workspace.description}</TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {workspaces.map((workspace) => (
-                                <TableRow key={workspace.id}>
-                                    <TableCell align="right">
-                                        <Link align="right" component="button"
-                                            variant="body2" onClick={() => goToWorkspace(workspace.id, workspace.name)}>
-                                            {workspace.name}
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell align="right">{workspace.description}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    <Paginator
+                        ))}
+                    </TableBody>
+                </Table>
+                <Paginator
                         pageSize={pageSize}
                         elementsCount={workspaces.length}
                         currentPage={currentPage}
@@ -122,9 +116,9 @@ export const WorkspacesList = () => {
                         onNextClick={onPageChange}
                     />
                     <br />
-                </CardContent>
-            </Card>
-            {isLoading && <Loader />}
+            </CardContent>
+        </Card>
+        {isLoading && <Loader />}
         </Box>
     );
 };

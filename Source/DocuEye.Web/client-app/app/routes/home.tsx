@@ -1,4 +1,4 @@
-import WorkspacesList from "~/components/workspaceslist";
+import WorkspacesList from "~/views/workspaces";
 import type { Route } from "./+types/home";
 
 
