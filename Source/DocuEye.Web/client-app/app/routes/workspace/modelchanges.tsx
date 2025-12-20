@@ -9,6 +9,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function ModelChangesRoute() {
+export default function WorkspaceModelChangesRoute() {
   return <ModelChanges />;
 }

@@ -9,6 +9,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function DeploymentNodesMatrixRoute() {
+export default function WorkspaceDeploymentNodesMatrixRoute() {
   return <DeploymentNodesMatrix />;
 }

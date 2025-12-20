@@ -9,6 +9,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function DocumentationRoute() {
+export default function WorkspaceDocumentationRoute() {
   return <DocumentationView />;
 }

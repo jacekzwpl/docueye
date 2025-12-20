@@ -10,6 +10,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function ViewRoute() {
+export default function WorkspaceViewRoute() {
   return <WorkspaceView />;
 }

@@ -37,5 +37,9 @@ export default [
     route(
         "workspace/:workspaceId/view/:viewId?", 
         "./routes/workspace/view.tsx"
-    )
+    ),
+    route(
+        "errors/forbidden", 
+        "./routes/errors/forbidden.tsx"
+    ),
 ] satisfies RouteConfig;

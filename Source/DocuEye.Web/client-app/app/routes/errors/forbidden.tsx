@@ -1,6 +1,5 @@
-
-import type { Route } from "./+types/graph";
-import GraphView from "~/views/workspace/graph";
+import Forbidden from "~/views/errors/forbidden";
+import type { Route } from "./+types/forbidden";
 
 
 export function meta({}: Route.MetaArgs) {
@@ -10,6 +9,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function WorkspaceGraphRoute() {
-  return <GraphView />;
+export default function ErrorsForbiddenRoute() {
+  return <Forbidden />;
 }

@@ -9,6 +9,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Decision() {
+export default function WorkspaceDecisionRoute() {
   return <DecisionView />;
 }
