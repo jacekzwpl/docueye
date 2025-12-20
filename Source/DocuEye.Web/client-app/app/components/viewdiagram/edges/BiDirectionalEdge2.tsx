@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useStore, EdgeLabelRenderer } from 'reactflow';
+import { useStore, EdgeLabelRenderer } from '@xyflow/react';
 import { getEdgeParams } from './utils';
 
 
@@ -31,8 +31,8 @@ export const getSpecialPath = (
 };
 
 const BiDirectionalEdge2 = ({ id, source, target, markerEnd, style, label, labelWidth }: any) => {
-  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
-  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+  const sourceNode = useStore(useCallback((store) => store.nodeLookup.get(source), [source]));
+  const targetNode = useStore(useCallback((store) => store.nodeLookup.get(target), [target]));
 
 
 

@@ -1,4 +1,4 @@
-import { MarkerType } from "reactflow";
+import { MarkerType } from "@xyflow/react";
 import type { AutomaticLayout, Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
 import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";

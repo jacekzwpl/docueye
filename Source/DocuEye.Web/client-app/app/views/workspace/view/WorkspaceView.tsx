@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
-import { ReactFlowProvider } from "reactflow";
+import { ReactFlowProvider } from "@xyflow/react";
 import DocuEyeApi from "../../../api";
 import Loader from "../../../components/loader";
 import ViewDiagram from "../../../components/viewdiagram";

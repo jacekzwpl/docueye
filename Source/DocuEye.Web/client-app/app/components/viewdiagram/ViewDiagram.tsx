@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import ReactFlow, { Background, Controls, useEdgesState, useNodesState } from "reactflow";
+import  {ReactFlow, Background, Controls, useEdgesState, useNodesState } from "@xyflow/react";
 import DocuEyeApi from "../../api";
 import type { IViewDiagramProps } from './IViewDiagramProps';
 import { nodeTypes } from "./nodes";
-import 'reactflow/dist/style.css';
+//import 'reactflow/dist/style.css';
+import '@xyflow/react/dist/style.css';
 import './edges/floatingedges.css'
 import { edgeTypes } from "./edges";
 import type { AxiosResponse } from "axios";
@@ -30,8 +31,8 @@ const ViewDiagram = (props: IViewDiagramProps) => {
             .then((response: AxiosResponse<SystemLandscapeView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "", undefined, response.data.automaticLayout);
-                    setNodes(layoutedNodes);
-                    setEdges(layoutedEdges);
+                    setNodes(layoutedNodes as never[]);
+                    setEdges(layoutedEdges as never[]);
                 }
 
             }).finally(() => {
@@ -46,8 +47,8 @@ const ViewDiagram = (props: IViewDiagramProps) => {
             .then((response: AxiosResponse<SystemContextView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "", undefined, response.data.automaticLayout);
-                    setNodes(layoutedNodes);
-                    setEdges(layoutedEdges);
+                    setNodes(layoutedNodes as never[]);
+                    setEdges(layoutedEdges as never[]);
                 }
             }).finally(() => {
                 setIsLoading(false);
@@ -65,16 +66,16 @@ const ViewDiagram = (props: IViewDiagramProps) => {
                         .then((elResponse: AxiosResponse<Element>) => {
                             if (response.data.elements && response.data.relationships) {
                                 const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ContainerView", elResponse.data, response.data.automaticLayout);
-                                setNodes(layoutedNodes);
-                                setEdges(layoutedEdges);
+                                setNodes(layoutedNodes as never[]);
+                                setEdges(layoutedEdges as never[]);
                             }
                         });
 
                 } else {
                     if (response.data.elements && response.data.relationships) {
                         const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ContainerView", undefined, response.data.automaticLayout);
-                        setNodes(layoutedNodes);
-                        setEdges(layoutedEdges);
+                        setNodes(layoutedNodes as never[]);
+                        setEdges(layoutedEdges as never[]);
                     }
                 }
 
@@ -94,15 +95,15 @@ const ViewDiagram = (props: IViewDiagramProps) => {
                         .then((elResponse: AxiosResponse<Element>) => {
                             if (response.data.elements && response.data.relationships) {
                                 const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView", elResponse.data, response.data.automaticLayout);
-                                setNodes(layoutedNodes);
-                                setEdges(layoutedEdges);
+                                setNodes(layoutedNodes as never[]);
+                                setEdges(layoutedEdges as never[]);
                             }
                         });
                 } else {
                     if (response.data.elements && response.data.relationships) {
                         const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView", undefined, response.data.automaticLayout);
-                        setNodes(layoutedNodes);
-                        setEdges(layoutedEdges);
+                        setNodes(layoutedNodes as never[]);
+                        setEdges(layoutedEdges as never[]);
                     }
                 }
 
@@ -118,8 +119,8 @@ const ViewDiagram = (props: IViewDiagramProps) => {
             .then((response: AxiosResponse<FilteredView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView", undefined, response.data.automaticLayout);
-                    setNodes(layoutedNodes);
-                    setEdges(layoutedEdges);
+                    setNodes(layoutedNodes as never[]);
+                    setEdges(layoutedEdges as never[]);
                 }
             }).finally(() => {
                 setIsLoading(false);
@@ -133,8 +134,8 @@ const ViewDiagram = (props: IViewDiagramProps) => {
             .then((response: AxiosResponse<DeploymentView>) => {
                 if (response.data.elements && response.data.relationships) {
                     const {layoutedNodes, layoutedEdges} = prepareDeploymentDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, undefined, response.data.automaticLayout);
-                    setNodes(layoutedNodes);
-                    setEdges(layoutedEdges);
+                    setNodes(layoutedNodes as never[]);
+                    setEdges(layoutedEdges as never[]);
 
                 }
 
@@ -154,15 +155,15 @@ const ViewDiagram = (props: IViewDiagramProps) => {
                         .then((elResponse: AxiosResponse<Element>) => {
                             if (response.data.elements && response.data.relationships) {
                                 const {layoutedNodes, layoutedEdges} = prepareDynamicDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, elResponse.data, response.data.automaticLayout);
-                                setNodes(layoutedNodes);
-                                setEdges(layoutedEdges);
+                                setNodes(layoutedNodes as never[]);
+                                setEdges(layoutedEdges as never[]);
                             }
                         });
                 }else {
                     if (response.data.elements && response.data.relationships) {
                         const {layoutedNodes, layoutedEdges} = prepareDynamicDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, undefined, response.data.automaticLayout);
-                        setNodes(layoutedNodes);
-                        setEdges(layoutedEdges);
+                        setNodes(layoutedNodes as never[]);
+                        setEdges(layoutedEdges as never[]);
                     }
                 }
 

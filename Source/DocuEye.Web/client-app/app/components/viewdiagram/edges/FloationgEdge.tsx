@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
-import { useStore, getBezierPath, EdgeLabelRenderer, Position, type ReactFlowState } from 'reactflow';
+import { useStore, getBezierPath, EdgeLabelRenderer, Position, type ReactFlowState } from '@xyflow/react';
 import { getEdgeParams } from './utils';
 
 
 const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth, data }: any) => {
-  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
-  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+  const sourceNode = useStore(useCallback((store) => store.nodeLookup.get(source), [source]));
+  const targetNode = useStore(useCallback((store) => store.nodeLookup.get(target), [target]));
   const identicalIndex = useStore((s: ReactFlowState) => {
     const edgeExists = s.edges.filter(
       (e) => {
@@ -46,54 +46,54 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth,
     // target position points out of node edge. 
 
     //Handle those situations
-    if (nsx > (sourceNode.positionAbsolute?.x || 0) + (sourceNode.width ?? 0) && sourcePos === Position.Top) {
+    if (nsx > (sourceNode.internals.positionAbsolute?.x || 0) + (sourceNode.width ?? 0) && sourcePos === Position.Top) {
       nsourcePos = Position.Right;
       nsx = sx;
       nsy = sy + indenticalOffset * identicalIndex;
     }
 
-    if (nty > (targetNode.positionAbsolute?.y || 0) + (targetNode.height ?? 0) && targetPos === Position.Left) {
+    if (nty > (targetNode.internals.positionAbsolute?.y || 0) + (targetNode.height ?? 0) && targetPos === Position.Left) {
       //console.log(id);
       ntargetPos = Position.Bottom;
-      nty = (targetNode.positionAbsolute?.y || 0) + (targetNode.height ?? 0);//ty; //targetNode.position.y + (targetNode.height ?? 0)
+      nty = (targetNode.internals.positionAbsolute?.y || 0) + (targetNode.height ?? 0);//ty; //targetNode.position.y + (targetNode.height ?? 0)
       ntx = tx + indenticalOffset * identicalIndex
     }
 
-    if (ntx > (targetNode.positionAbsolute?.x || 0) + (targetNode.width ?? 0) && targetPos === Position.Bottom) {
+    if (ntx > (targetNode.internals.positionAbsolute?.x || 0) + (targetNode.width ?? 0) && targetPos === Position.Bottom) {
       ntargetPos = Position.Right;
-      ntx = (targetNode.positionAbsolute?.x || 0) + (targetNode.width ?? 0)
+      ntx = (targetNode.internals.positionAbsolute?.x || 0) + (targetNode.width ?? 0)
       nty = ty + (indenticalOffset * identicalIndex * (-1))
     }
 
-    if (nsy > (sourceNode.positionAbsolute?.y || 0) + (sourceNode.height ?? 0) && sourcePos === Position.Left) {
+    if (nsy > (sourceNode.internals.positionAbsolute?.y || 0) + (sourceNode.height ?? 0) && sourcePos === Position.Left) {
       //console.log(id);
       ntargetPos = Position.Bottom;
-      nsy = (sourceNode.positionAbsolute?.y || 0) + (sourceNode.height ?? 0);//ty; //targetNode.position.y + (targetNode.height ?? 0)
+      nsy = (sourceNode.internals.positionAbsolute?.y || 0) + (sourceNode.height ?? 0);//ty; //targetNode.position.y + (targetNode.height ?? 0)
       nsx = sx + indenticalOffset * identicalIndex
     }
 
-    if (ntx > (targetNode.positionAbsolute?.x || 0) + (targetNode.width ?? 0) && targetPos === Position.Top) {
+    if (ntx > (targetNode.internals.positionAbsolute?.x || 0) + (targetNode.width ?? 0) && targetPos === Position.Top) {
       ntargetPos = Position.Right;
-      ntx = (targetNode.positionAbsolute?.x || 0) + (targetNode.width ?? 0)
+      ntx = (targetNode.internals.positionAbsolute?.x || 0) + (targetNode.width ?? 0)
       nty = ty + (indenticalOffset * identicalIndex);
     }
 
-    if (nsx > (sourceNode.positionAbsolute?.x || 0) + (sourceNode.width ?? 0) && sourcePos === Position.Bottom) {
+    if (nsx > (sourceNode.internals.positionAbsolute?.x || 0) + (sourceNode.width ?? 0) && sourcePos === Position.Bottom) {
       nsourcePos = Position.Right;
       nsx = sx;
       nsy = sy + indenticalOffset * identicalIndex * (-1);
     }
 
-    if (nsy > (sourceNode.positionAbsolute?.y || 0) + (sourceNode.height ?? 0) && sourcePos === Position.Right) {
+    if (nsy > (sourceNode.internals.positionAbsolute?.y || 0) + (sourceNode.height ?? 0) && sourcePos === Position.Right) {
       //console.log(id);
       ntargetPos = Position.Bottom;
-      nsy = (sourceNode.positionAbsolute?.y || 0) + (sourceNode.height ?? 0);
+      nsy = (sourceNode.internals.positionAbsolute?.y || 0) + (sourceNode.height ?? 0);
       nsx = sx + indenticalOffset * identicalIndex * (-1);
     }
 
-    if (nty < (targetNode.positionAbsolute?.y || 0) && targetPos === Position.Right) {
+    if (nty < (targetNode.internals.positionAbsolute?.y || 0) && targetPos === Position.Right) {
       ntargetPos = Position.Top;
-      nty = targetNode.positionAbsolute?.y;
+      nty = targetNode.internals.positionAbsolute?.y;
       ntx = tx + indenticalOffset * identicalIndex * (-1)
     }
   } else {
@@ -135,7 +135,7 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth,
   
    
 
-
+  console.log(edgePath);
   return (
     <>
       <path

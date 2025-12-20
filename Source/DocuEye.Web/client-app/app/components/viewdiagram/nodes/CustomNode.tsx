@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Handle, Position } from "reactflow";
+import { Handle, Position } from "@xyflow/react";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import LinkIcon from '@mui/icons-material/Link';
 import TopicIcon from '@mui/icons-material/Topic';

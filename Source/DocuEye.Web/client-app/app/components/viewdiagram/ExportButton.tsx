@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import { toPng } from "html-to-image";
-import { getNodesBounds, getViewportForBounds, useReactFlow } from "reactflow";
+import { getNodesBounds, getViewportForBounds, useReactFlow } from "@xyflow/react";
 import ImageIcon from '@mui/icons-material/Image';
 const ExportButton = () => {
 
@@ -11,7 +11,9 @@ const ExportButton = () => {
     const exportToPng = () => {
 
         const nodesBounds = getNodesBounds(getNodes());
-        const transform = getViewportForBounds(nodesBounds, imageWidth, imageHeight, 0.5, 2);
+
+
+        const transform = getViewportForBounds(nodesBounds, imageWidth, imageHeight, 0.5, 2, {});
         
         const element = document.getElementsByClassName('react-flow__viewport')[0];
         console.log(element);
