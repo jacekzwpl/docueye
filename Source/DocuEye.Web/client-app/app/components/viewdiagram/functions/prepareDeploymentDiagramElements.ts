@@ -39,7 +39,7 @@ export const prepareDeploymentDiagramElements = (elements: ElementView[], relati
                 style: getElementStyle(element, viewConfiguration)
             },
             type: 'custom',
-            parentNode: nearest === null ? element.parentId : nearest.id,
+            parentId: nearest === null ? element.parentId : nearest.id,
             extent: nearest !== null || element.parentId ? 'parent' : undefined
         });
         instancesGroups = instancesGroups.concat(groups);

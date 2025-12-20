@@ -66,9 +66,7 @@ const ViewDiagram = (props: IViewDiagramProps) => {
                         .then((elResponse: AxiosResponse<Element>) => {
                             if (response.data.elements && response.data.relationships) {
                                 const {layoutedNodes, layoutedEdges} = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ContainerView", elResponse.data, response.data.automaticLayout);
-                                console.log("layoutedNodes", layoutedNodes);
                                 setNodes(layoutedNodes);
-                                console.log("nodes", nodes);
                                 setEdges(layoutedEdges);
                             }
                         });

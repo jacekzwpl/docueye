@@ -24,7 +24,7 @@ export const prepareDynamicDiagramElements = (elements: ElementView[], relations
                 style: getElementStyle(element, viewConfiguration)
             },
             type: 'custom',
-            parentNode: nearest !== null ? nearest.id : null,
+            parentId: nearest !== null ? nearest.id : null,
             extent: nearest !== null ? 'parent' : undefined
         });
         if (contextGroup) {

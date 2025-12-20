@@ -32,7 +32,7 @@ export const drawDeploymentNode = (
             height: 200,
             opacity: style.opacity / 100
         },
-        parentNode: nearest === null ? element.parentId : nearest.id,
+        parentId: nearest === null ? element.parentId : nearest.id,
         extent: nearest !== null || element.parentId ? 'parent' : undefined
     });
 

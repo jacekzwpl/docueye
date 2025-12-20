@@ -1,6 +1,6 @@
 export const orderDeploymentDiagramNodes = (nodes: any[], parentId: string | null) => {
     let orderedNodes: any[] = [];
-    nodes.filter((obj) => { return obj.parentNode === parentId })
+    nodes.filter((obj) => { return obj.parentId === parentId })
         .forEach((node) => {
             orderedNodes.push(node);
             let childNodes: any[] = orderDeploymentDiagramNodes(
