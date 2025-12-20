@@ -10,4 +10,32 @@ export default [
         "workspace/:workspaceId/element/:elementId", 
         "./routes/workspace/element.tsx"
     ),
+    route(
+        "workspace/:workspaceId/documentation", 
+        "./routes/workspace/documentation.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/decisions", 
+        "./routes/workspace/decisions.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/decision/:decisionId", 
+        "./routes/workspace/decision.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/deploymentnodesmatrix", 
+        "./routes/workspace/deploymentnodesmatrix.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/modelchanges", 
+        "./routes/workspace/modelchanges.tsx"
+    ),
+    // route(
+    //     "workspace/:workspaceId/graph", 
+    //     "./routes/workspace/graph.tsx"
+    // ),
+    // route(
+    //     "workspace/:workspaceId/graph/:viewId", 
+    //     "./routes/workspace/graph.tsx"
+    // ),
 ] satisfies RouteConfig;

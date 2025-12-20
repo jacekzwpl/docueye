@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import DocuEyeApi from "../../../api";
 import Loader from "../../../components/loader";
 import store from "../../../store";
