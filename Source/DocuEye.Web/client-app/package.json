@@ -6,10 +6,7 @@
     "build": "react-router build",
     "dev": "node aspnetcore-https && node aspnetcore-react && react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
-    "spa:dev": "vite -c vite.spa.config.ts",
-    "spa:build": "vite build -c vite.spa.config.ts",
-    "spa:preview": "vite preview -c vite.spa.config.ts"
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.8",
