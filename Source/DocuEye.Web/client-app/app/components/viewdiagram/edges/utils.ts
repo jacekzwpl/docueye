@@ -5,19 +5,22 @@ import { Position, MarkerType } from '@xyflow/react';
 const getNodeIntersection = (intersectionNode:any, targetNode:any) => {
   // https://math.stackexchange.com/questions/1724792/an-algorithm-for-finding-the-intersection-point-between-a-center-of-vision-and-a
   const {
-    width: intersectionNodeWidth,
-    height: intersectionNodeHeight,
+    measured: { width: intersectionNodeWidth },
+    measured: { height: intersectionNodeHeight },
     internals: { positionAbsolute: intersectionNodePosition },
   } = intersectionNode;
+
   const targetPosition = targetNode.internals.positionAbsolute;
 
   const w = intersectionNodeWidth / 2;
   const h = intersectionNodeHeight / 2;
 
+
   const x2 = intersectionNodePosition.x + w;
   const y2 = intersectionNodePosition.y + h;
-  const x1 = targetPosition.x + targetNode.width / 2;
-  const y1 = targetPosition.y + targetNode.height / 2;
+  const x1 = targetPosition.x + targetNode.measured.width / 2;
+  const y1 = targetPosition.y + targetNode.measured.height / 2;
+
 
   const xx1 = (x1 - x2) / (2 * w) - (y1 - y2) / (2 * h);
   const yy1 = (x1 - x2) / (2 * w) + (y1 - y2) / (2 * h);

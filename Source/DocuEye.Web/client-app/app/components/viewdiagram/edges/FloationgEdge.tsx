@@ -105,6 +105,8 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth,
     ntargetPos = targetPos;
   }
 
+  //console.log(nsx, nsy, ntx, nty, nsourcePos, ntargetPos);
+
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX: nsx,
     sourceY: nsy,
@@ -135,7 +137,6 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth,
   
    
 
-  console.log(edgePath);
   return (
     <>
       <path
