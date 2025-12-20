@@ -5,11 +5,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0.1 AS base
 WORKDIR /app
 EXPOSE 8080
 
-FROM node:20.11.0 as client-build
+FROM node:20.19.6 as client-build
 WORKDIR /node
 COPY ./Source/DocuEye.Web/client-app /node
-RUN yarn install
-RUN yarn build
+RUN npm install
+RUN npm run build
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0.101 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -27,5 +27,5 @@ RUN dotnet publish "./DocuEye.Web.csproj" -c $BUILD_CONFIGURATION -o /app/publis
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY --from=client-build /node/build ./wwwroot
+COPY --from=client-build /node/build/client ./wwwroot
 ENTRYPOINT ["dotnet", "DocuEye.Web.dll"]

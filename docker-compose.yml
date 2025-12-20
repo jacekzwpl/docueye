@@ -7,7 +7,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=docueye
       - MONGO_INITDB_ROOT_PASSWORD=docueye
   docueye:
-    image: jacekzwpl/docueye
+    image: local-docueye:1.0.0-rc11
     ports:
       - 8080:8080
     restart: always
