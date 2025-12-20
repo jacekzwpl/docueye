@@ -21,7 +21,8 @@ export const prepareDiagramElements = (
 
     elements.forEach(element => {
         const { groups, contextGroup, nearest } = getParentGroup(element, contextElement, viewType, "", viewConfiguration?.groupSeparator ?? "|");
-        newNodes.push({
+        console.log("nearest", nearest);
+        let temp = {
             id: element.id,
             position: { x: 0, y: 0 },
             data: {
@@ -34,9 +35,15 @@ export const prepareDiagramElements = (
                 style: getElementStyle(element, viewConfiguration)
             },
             type: 'custom',
-            parentNode: nearest !== null ? nearest.id : null,
-            extent: nearest !== null ? 'parent' : undefined
-        });
+            //parentNode: nearest !== null ? nearest.id : null,
+            //extent: nearest !== null ? 'parent' : undefined
+        };
+        if(nearest !== null) {
+            (temp as any).parentNode = nearest.id;
+            (temp as any).extent = 'parent';
+        }
+        console.log("temp", temp);
+        newNodes.push(temp);
         if (contextGroup) {
             const exitingGroup = groupNodes.find((obj) => { return obj.id === contextGroup.id });
             if (!exitingGroup) {
