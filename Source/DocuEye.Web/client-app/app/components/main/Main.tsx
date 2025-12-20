@@ -5,11 +5,12 @@ import MainAppBar from "../mainappbar";
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainDrawer from "../maindrawer";
 import MainMenu from "../mainmenu";
 import type { IWorkspaceState } from "~/store/slices/workspace/IWorkspaceState";
 import globalRouter from "~/router/globalRouter";
+import { initResponseInterceptors } from "~/api/interceptors";
 
 export const Main = () => {
 
@@ -31,6 +32,10 @@ export const Main = () => {
   };
   const navigate = useNavigate();
   globalRouter.navigate = navigate;
+
+  useEffect(() => {
+    initResponseInterceptors();
+  }, [])
 
   return (
 

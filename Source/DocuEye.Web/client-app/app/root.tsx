@@ -36,24 +36,3 @@ export default function App() {
     </Provider>
   );
 }
-
-//console.log("Rendering App");
-/*
-
-console.log(document);
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-console.log(root);
-root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <SnackbarProvider
-        autoHideDuration={3000} 
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-        maxSnack={3}>
-        <div>DocuEye App</div>
-      </SnackbarProvider>
-    </Provider>
-  </BrowserRouter>
-);*/
