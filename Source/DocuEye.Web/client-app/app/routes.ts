@@ -30,12 +30,12 @@ export default [
         "workspace/:workspaceId/modelchanges", 
         "./routes/workspace/modelchanges.tsx"
     ),
-    // route(
-    //     "workspace/:workspaceId/graph", 
-    //     "./routes/workspace/graph.tsx"
-    // ),
-    // route(
-    //     "workspace/:workspaceId/graph/:viewId", 
-    //     "./routes/workspace/graph.tsx"
-    // ),
+    route(
+        "workspace/:workspaceId/graph/:viewId?", 
+        "./routes/workspace/graph.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/view/:viewId?", 
+        "./routes/workspace/view.tsx"
+    )
 ] satisfies RouteConfig;
