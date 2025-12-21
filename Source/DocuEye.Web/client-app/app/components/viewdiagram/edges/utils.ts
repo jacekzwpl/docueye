@@ -1,23 +1,26 @@
-import { Position, MarkerType } from 'reactflow';
+import { Position, MarkerType } from '@xyflow/react';
 
 // this helper function returns the intersection point
 // of the line between the center of the intersectionNode and the target node
 const getNodeIntersection = (intersectionNode:any, targetNode:any) => {
   // https://math.stackexchange.com/questions/1724792/an-algorithm-for-finding-the-intersection-point-between-a-center-of-vision-and-a
   const {
-    width: intersectionNodeWidth,
-    height: intersectionNodeHeight,
-    positionAbsolute: intersectionNodePosition,
+    measured: { width: intersectionNodeWidth },
+    measured: { height: intersectionNodeHeight },
+    internals: { positionAbsolute: intersectionNodePosition },
   } = intersectionNode;
-  const targetPosition = targetNode.positionAbsolute;
+
+  const targetPosition = targetNode.internals.positionAbsolute;
 
   const w = intersectionNodeWidth / 2;
   const h = intersectionNodeHeight / 2;
 
+
   const x2 = intersectionNodePosition.x + w;
   const y2 = intersectionNodePosition.y + h;
-  const x1 = targetPosition.x + targetNode.width / 2;
-  const y1 = targetPosition.y + targetNode.height / 2;
+  const x1 = targetPosition.x + targetNode.measured.width / 2;
+  const y1 = targetPosition.y + targetNode.measured.height / 2;
+
 
   const xx1 = (x1 - x2) / (2 * w) - (y1 - y2) / (2 * h);
   const yy1 = (x1 - x2) / (2 * w) + (y1 - y2) / (2 * h);
@@ -32,7 +35,7 @@ const getNodeIntersection = (intersectionNode:any, targetNode:any) => {
 
 // returns the position (top,right,bottom or right) passed node compared to the intersection point
 const getEdgePosition = (node:any, intersectionPoint:any) => {
-  const n = { ...node.positionAbsolute, ...node };
+  const n = { ...node.internals.positionAbsolute, ...node };
   const nx = Math.round(n.x);
   const ny = Math.round(n.y);
   const px = Math.round(intersectionPoint.x);
@@ -41,13 +44,13 @@ const getEdgePosition = (node:any, intersectionPoint:any) => {
   if (px <= nx + 1) {
     return Position.Left;
   }
-  if (px >= nx + n.width - 1) {
+  if (px >= nx + n.measured.width - 1) {
     return Position.Right;
   }
   if (py <= ny + 1) {
     return Position.Top;
   }
-  if (py >= n.y + n.height - 1) {
+  if (py >= n.y + n.measured.height - 1) {
     return Position.Bottom;
   }
 
@@ -61,7 +64,7 @@ export const getEdgeParams = (source:any, target:any) => {
 
   const sourcePos = getEdgePosition(source, sourceIntersectionPoint);
   const targetPos = getEdgePosition(target, targetIntersectionPoint);
-
+  
   return {
     sx: sourceIntersectionPoint.x,
     sy: sourceIntersectionPoint.y,

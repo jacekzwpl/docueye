@@ -1,4 +1,4 @@
-import { MarkerType } from "reactflow";
+import { MarkerType } from "@xyflow/react";
 import type { DynamicRelationshipView, ElementView, Element, ViewConfiguration, AutomaticLayout } from "../../../api/docueye-api";
 import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
@@ -24,7 +24,7 @@ export const prepareDynamicDiagramElements = (elements: ElementView[], relations
                 style: getElementStyle(element, viewConfiguration)
             },
             type: 'custom',
-            parentNode: nearest !== null ? nearest.id : null,
+            parentId: nearest !== null ? nearest.id : null,
             extent: nearest !== null ? 'parent' : undefined
         });
         if (contextGroup) {

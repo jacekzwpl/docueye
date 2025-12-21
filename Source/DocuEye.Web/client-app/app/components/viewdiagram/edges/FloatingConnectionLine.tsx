@@ -1,5 +1,5 @@
 import React from 'react';
-import { getBezierPath } from 'reactflow';
+import { getBezierPath } from '@xyflow/react';
 
 import { getEdgeParams } from './utils';
 

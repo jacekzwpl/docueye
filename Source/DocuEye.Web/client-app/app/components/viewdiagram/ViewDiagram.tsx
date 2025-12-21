@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import ReactFlow, { Background, Controls, useEdgesState, useNodesState } from "reactflow";
+import  {ReactFlow, Background, Controls, useEdgesState, useNodesState } from "@xyflow/react";
 import DocuEyeApi from "../../api";
 import type { IViewDiagramProps } from './IViewDiagramProps';
 import { nodeTypes } from "./nodes";
-import 'reactflow/dist/style.css';
+//import 'reactflow/dist/style.css';
+import '@xyflow/react/dist/style.css';
 import './edges/floatingedges.css'
 import { edgeTypes } from "./edges";
 import type { AxiosResponse } from "axios";
@@ -18,8 +19,8 @@ const ViewDiagram = (props: IViewDiagramProps) => {
     const [selectedView, setSelectedView] = useState(props.selectedView);
     const [workspaceId, setWorkspaceId] = useState(props.workspaceId);
     const [viewConfiguration, setViewConfiguration] = useState(props.viewConfiguration);
-    const [nodes, setNodes, onNodesChange] = useNodesState([]);
-    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
+    const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
     const [currentImageView, setCurrentImageView] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 

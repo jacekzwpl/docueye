@@ -1,4 +1,4 @@
-import { MarkerType } from "reactflow";
+import { MarkerType } from "@xyflow/react";
 import type { AutomaticLayout, Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
 import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
@@ -39,7 +39,7 @@ export const prepareDeploymentDiagramElements = (elements: ElementView[], relati
                 style: getElementStyle(element, viewConfiguration)
             },
             type: 'custom',
-            parentNode: nearest === null ? element.parentId : nearest.id,
+            parentId: nearest === null ? element.parentId : nearest.id,
             extent: nearest !== null || element.parentId ? 'parent' : undefined
         });
         instancesGroups = instancesGroups.concat(groups);

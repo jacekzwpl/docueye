@@ -1,4 +1,4 @@
-import { MarkerType } from "reactflow";
+import { MarkerType } from "@xyflow/react";
 import type { AutomaticLayout, Element, ElementView, RelationshipView, ViewConfiguration } from "../../../api/docueye-api";
 import { snackbarUtils } from "../../../snackbar/snackbarUtils";
 import { getTerminologyTerm } from "../../../terminology/getTerminologyTerm";
@@ -21,6 +21,7 @@ export const prepareDiagramElements = (
 
     elements.forEach(element => {
         const { groups, contextGroup, nearest } = getParentGroup(element, contextElement, viewType, "", viewConfiguration?.groupSeparator ?? "|");
+        
         newNodes.push({
             id: element.id,
             position: { x: 0, y: 0 },
@@ -34,7 +35,7 @@ export const prepareDiagramElements = (
                 style: getElementStyle(element, viewConfiguration)
             },
             type: 'custom',
-            parentNode: nearest !== null ? nearest.id : null,
+            parentId: nearest !== null ? nearest.id : null,
             extent: nearest !== null ? 'parent' : undefined
         });
         if (contextGroup) {

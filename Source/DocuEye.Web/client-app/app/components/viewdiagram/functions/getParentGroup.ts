@@ -65,7 +65,7 @@ export const getParentGroup = (
                     width: 200,
                     height: 200
                 },
-                parentNode: parentNodeId,
+                parentId: parentNodeId,
                 extent: parentNodeId ? "parent" : undefined
             })
         })

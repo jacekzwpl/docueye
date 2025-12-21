@@ -26,8 +26,8 @@ export const getLayoutedElements = (nodes: any[], edges: any[], direction = 'Top
 
     nodes.forEach((node) => {
         dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
-        if (node.parentNode) {
-            dagreGraph.setParent(node.id, node.parentNode);
+        if (node.parentId) {
+            dagreGraph.setParent(node.id, node.parentId);
         }
     });
 
@@ -46,8 +46,8 @@ export const getLayoutedElements = (nodes: any[], edges: any[], direction = 'Top
 
         // We are shifting the dagre node position (anchor=center center) to the top left
         // so it matches the React Flow node anchor point (top left).
-        if (node.parentNode) {
-            const parentNodeWithPosition = dagreGraph.node(node.parentNode)
+        if (node.parentId) {
+            const parentNodeWithPosition = dagreGraph.node(node.parentId)
             //console.log(parentNodeWithPosition)
             const width = node.type === "customGroup" || node.type === "deploymentNode" ? nodeWithPosition.width : nodeWithPosition.width;
             const height = node.type === "customGroup" || node.type === "deploymentNode" ? nodeWithPosition.height : nodeWithPosition.height;

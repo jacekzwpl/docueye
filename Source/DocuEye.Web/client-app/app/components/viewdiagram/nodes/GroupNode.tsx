@@ -1,11 +1,16 @@
+import { NodeResizer } from "@xyflow/react";
 import { memo } from "react";
 
-const GroupNode = (data: any) => {
+const GroupNode = ({data, selected}: any) => {
 
-
+  console.log(data, selected);
   return (
     <>
-      <div style={{ fontSize: 11 }}>{data.data.label}</div>
+      <NodeResizer
+        color="#ff0071"
+        isVisible={selected}
+      />
+      <div style={{ fontSize: 11 }}>{data.label}</div>
     </>
   )
 };

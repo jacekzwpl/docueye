@@ -13,6 +13,7 @@ export const drawDeploymentNode = (
     const style = getDeploymentNodeStyle(element, viewConfiguration);
     const { groups, nearest } = getParentGroup(element, null, "DeploymentView", parentElement?.id ? parentElement.id : "", viewConfiguration?.groupSeparator ?? "|");
     newGroups = newGroups.concat(groups);
+    
     newNodes.push({
         id: element.id,
         data: {
@@ -31,7 +32,7 @@ export const drawDeploymentNode = (
             height: 200,
             opacity: style.opacity / 100
         },
-        parentNode: nearest === null ? element.parentId : nearest.id,
+        parentId: nearest === null ? element.parentId : nearest.id,
         extent: nearest !== null || element.parentId ? 'parent' : undefined
     });
 
