@@ -23,7 +23,9 @@ namespace DocuEye.DocsKeeper.Model.Maps
         public static IEnumerable<FoundedDecision> MapToFoundedDecisions(this IEnumerable<Decision> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToFoundedDecision();
+            var result = new List<FoundedDecision>();
+            foreach (var s in sources) result.Add(s.MapToFoundedDecision());
+            return result.ToArray();
         }
 
         public static DecisionsListItem MapToDecisionsListItem(this Decision source)
@@ -43,7 +45,9 @@ namespace DocuEye.DocsKeeper.Model.Maps
         public static IEnumerable<DecisionsListItem> MapToDecisionsListItems(this IEnumerable<Decision> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToDecisionsListItem();
+            var result = new List<DecisionsListItem>();
+            foreach (var s in sources) result.Add(s.MapToDecisionsListItem());
+            return result.ToArray();
         }
     }
 }

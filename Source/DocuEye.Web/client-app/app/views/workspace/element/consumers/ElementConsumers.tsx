@@ -40,6 +40,7 @@ export const ElementConsumers = (props: IElementConsumers) => {
             .apiWorkspacesWorkspaceIdElementsIdConsumersGet(props.element.workspaceId, props.element.id, showImplied)
             .then((response: AxiosResponse<ElementConsumer[]>) => {
                 setConsumers(response.data);
+                console.log(response.data);
             }).finally(() => {
                 setIsLoading(false);
             })
@@ -71,6 +72,7 @@ export const ElementConsumers = (props: IElementConsumers) => {
                     </TableHead>
                     <TableBody>
                         {consumers.map((consumer) => (
+                           
                             <TableRow
                                 key={consumer.id}>
                                 <TableCell align="right">

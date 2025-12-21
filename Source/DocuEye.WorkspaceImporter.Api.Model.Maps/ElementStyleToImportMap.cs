@@ -33,7 +33,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         public static IEnumerable<ElementStyle> ToElementStyles(this IEnumerable<ElementStyleToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.ToElementStyle();
+            var result = new List<ElementStyle>();
+            foreach (var s in sources) result.Add(s.ToElementStyle());
+            return result.ToArray();
         }
     }
 }

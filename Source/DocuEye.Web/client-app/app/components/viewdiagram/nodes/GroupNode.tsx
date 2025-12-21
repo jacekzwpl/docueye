@@ -3,7 +3,6 @@ import { memo } from "react";
 
 const GroupNode = ({data, selected}: any) => {
 
-  console.log(data, selected);
   return (
     <>
       <NodeResizer

@@ -23,7 +23,9 @@ namespace DocuEye.ViewsKeeper.Model.Maps
         public static IEnumerable<WorkspaceView> MapToWorkspaceViews(this IEnumerable<DeploymentView> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToWorkspaceView();
+            var result = new List<WorkspaceView>();
+            foreach (var s in sources) result.Add(s.MapToWorkspaceView());
+            return result.ToArray();
         }
 
         public static ViewWithElement MapToViewWithElement(this DeploymentView source)
@@ -41,7 +43,9 @@ namespace DocuEye.ViewsKeeper.Model.Maps
         public static IEnumerable<ViewWithElement> MapToViewWithElements(this IEnumerable<DeploymentView> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToViewWithElement();
+            var result = new List<ViewWithElement>();
+            foreach (var s in sources) result.Add(s.MapToViewWithElement());
+            return result.ToArray();
         }
     }
 }

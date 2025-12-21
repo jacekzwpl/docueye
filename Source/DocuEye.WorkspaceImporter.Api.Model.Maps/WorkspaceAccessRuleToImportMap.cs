@@ -21,7 +21,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         public static IEnumerable<WorkspaceAccessRule> MapToWorkspaceAccessRules(this IEnumerable<WorkspaceAccessRuleToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToWorkspaceAccessRule();
+            var result = new List<WorkspaceAccessRule>();
+            foreach (var s in sources) result.Add(s.MapToWorkspaceAccessRule());
+            return result.ToArray();
         }
     }
 }

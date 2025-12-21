@@ -22,7 +22,9 @@ namespace DocuEye.WorkspacesKeeper.Model.Maps
         public static IEnumerable<FoundedWorkspace> MapToFoundedWorkspaces(this IEnumerable<Workspace> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToFoundedWorkspace();
+            var result = new List<FoundedWorkspace>();
+            foreach (var s in sources) result.Add(s.MapToFoundedWorkspace());
+            return result.ToArray();
         }
     }
 }

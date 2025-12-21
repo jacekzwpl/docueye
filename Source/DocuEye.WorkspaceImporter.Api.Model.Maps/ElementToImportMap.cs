@@ -32,7 +32,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         public static IEnumerable<Element> MapToElements(this IEnumerable<ElementToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToElement();
+            var result = new List<Element>();
+            foreach (var s in sources) result.Add(s.MapToElement());
+            return result.ToArray();
         }
     }
 }

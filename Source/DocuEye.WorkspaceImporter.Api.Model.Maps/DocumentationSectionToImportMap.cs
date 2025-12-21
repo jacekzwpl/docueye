@@ -22,7 +22,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         public static IEnumerable<DocumentationSection> MapToDocumentationSections(this IEnumerable<DocumentationSectionToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToDocumentationSection();
+            var result = new List<DocumentationSection>();
+            foreach (var s in sources) result.Add(s.MapToDocumentationSection());
+            return result.ToArray();
         }
 
 

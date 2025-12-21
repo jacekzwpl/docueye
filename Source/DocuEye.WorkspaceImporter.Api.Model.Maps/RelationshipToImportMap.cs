@@ -25,7 +25,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         public static IEnumerable<Relationship> MapToRelationships(this IEnumerable<RelationshipToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToRelationship();
+            var result = new List<Relationship>();
+            foreach (var s in sources) result.Add(s.MapToRelationship());
+            return result.ToArray();
         }
     }
 }

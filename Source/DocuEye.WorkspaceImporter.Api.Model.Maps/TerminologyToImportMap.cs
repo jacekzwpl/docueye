@@ -28,7 +28,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         public static IEnumerable<Terminology> ToTerminologies(this IEnumerable<TerminologyToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.ToTerminology();
+            var result = new List<Terminology>();
+            foreach (var s in sources) result.Add(s.ToTerminology());
+            return result.ToArray();
         }
     }
 }
