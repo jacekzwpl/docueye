@@ -13,45 +13,36 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type DecisionLink } from './decision-link';
 
 /**
  * 
  * @export
- * @interface FoundedDecision
+ * @interface RelationshipInViewToImport
  */
-export interface FoundedDecision {
+export interface RelationshipInViewToImport {
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof RelationshipInViewToImport
      */
-    'id'?: string | null;
+    'structurizrId'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof RelationshipInViewToImport
      */
-    'date'?: string;
+    'description'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RelationshipInViewToImport
+     */
+    'response'?: boolean | null;
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof RelationshipInViewToImport
      */
-    'status'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedDecision
-     */
-    'title'?: string | null;
-    /**
-     * 
-     * @type {Array<DecisionLink>}
-     * @memberof FoundedDecision
-     */
-    'links'?: Array<DecisionLink> | null;
+    'order'?: string | null;
 }
 

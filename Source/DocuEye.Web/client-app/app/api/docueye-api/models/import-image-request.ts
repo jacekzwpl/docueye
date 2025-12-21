@@ -15,43 +15,31 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DecisionLink } from './decision-link';
+import { type ImageToImport } from './image-to-import';
 
 /**
  * 
  * @export
- * @interface FoundedDecision
+ * @interface ImportImageRequest
  */
-export interface FoundedDecision {
+export interface ImportImageRequest {
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof ImportImageRequest
      */
-    'id'?: string | null;
+    'workspaceId'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof ImportImageRequest
      */
-    'date'?: string;
+    'importKey'?: string | null;
     /**
      * 
-     * @type {string}
-     * @memberof FoundedDecision
+     * @type {ImageToImport}
+     * @memberof ImportImageRequest
      */
-    'status'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedDecision
-     */
-    'title'?: string | null;
-    /**
-     * 
-     * @type {Array<DecisionLink>}
-     * @memberof FoundedDecision
-     */
-    'links'?: Array<DecisionLink> | null;
+    'image'?: ImageToImport;
 }
 

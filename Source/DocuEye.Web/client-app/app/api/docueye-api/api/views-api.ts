@@ -22,21 +22,23 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { type ComponentView } from '../models';
+import { type ComponentViewDiagram } from '../models';
 // @ts-ignore
-import { type ContainerView } from '../models';
+import { type ContainerViewDiagram } from '../models';
 // @ts-ignore
-import { type DeploymentView } from '../models';
+import { type DeploymentViewDiagram } from '../models';
 // @ts-ignore
-import { type DynamicView } from '../models';
+import { type DynamicViewDiagram } from '../models';
 // @ts-ignore
-import { type FilteredView } from '../models';
+import { type FilteredViewDiagram } from '../models';
 // @ts-ignore
 import { type ImageView } from '../models';
 // @ts-ignore
-import { type SystemContextView } from '../models';
+import { type SaveViewLayout } from '../models';
 // @ts-ignore
-import { type SystemLandscapeView } from '../models';
+import { type SystemContextViewDiagram } from '../models';
+// @ts-ignore
+import { type SystemLandscapeViewDiagram } from '../models';
 // @ts-ignore
 import { type ViewWithElement } from '../models';
 /**
@@ -308,6 +310,47 @@ export const ViewsApiAxiosParamCreator = function (configuration?: Configuration
          * 
          * @param {string} workspaceId 
          * @param {string} id 
+         * @param {SaveViewLayout} [saveViewLayout] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesWorkspaceIdViewsLayoutIdPost: async (workspaceId: string, id: string, saveViewLayout?: SaveViewLayout, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('apiWorkspacesWorkspaceIdViewsLayoutIdPost', 'workspaceId', workspaceId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiWorkspacesWorkspaceIdViewsLayoutIdPost', 'id', id)
+            const localVarPath = `/api/workspaces/{workspaceId}/views/layout/{id}`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(saveViewLayout, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -408,7 +451,7 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ComponentView>> {
+        async apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ComponentViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId, id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsComponentIdGet']?.[index]?.url;
@@ -421,7 +464,7 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerView>> {
+        async apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId, id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsContainerIdGet']?.[index]?.url;
@@ -434,7 +477,7 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdViewsDeploymentIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentView>> {
+        async apiWorkspacesWorkspaceIdViewsDeploymentIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsDeploymentIdGet(workspaceId, id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsDeploymentIdGet']?.[index]?.url;
@@ -447,7 +490,7 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DynamicView>> {
+        async apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DynamicViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId, id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsDynamicIdGet']?.[index]?.url;
@@ -460,7 +503,7 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FilteredView>> {
+        async apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FilteredViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsFilteredIdGet']?.[index]?.url;
@@ -483,10 +526,24 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} workspaceId 
          * @param {string} id 
+         * @param {SaveViewLayout} [saveViewLayout] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemContextView>> {
+        async apiWorkspacesWorkspaceIdViewsLayoutIdPost(workspaceId: string, id: string, saveViewLayout?: SaveViewLayout, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsLayoutIdPost(workspaceId, id, saveViewLayout, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsLayoutIdPost']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemContextViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId, id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsSystemcontextIdGet']?.[index]?.url;
@@ -499,7 +556,7 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemLandscapeView>> {
+        async apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemLandscapeViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId, id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet']?.[index]?.url;
@@ -532,7 +589,7 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<ComponentView> {
+        apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<ComponentViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -542,7 +599,7 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<ContainerView> {
+        apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<ContainerViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -552,7 +609,7 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdViewsDeploymentIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<DeploymentView> {
+        apiWorkspacesWorkspaceIdViewsDeploymentIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<DeploymentViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsDeploymentIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -562,7 +619,7 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<DynamicView> {
+        apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<DynamicViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -572,7 +629,7 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<FilteredView> {
+        apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<FilteredViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -589,10 +646,21 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * 
          * @param {string} workspaceId 
          * @param {string} id 
+         * @param {SaveViewLayout} [saveViewLayout] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<SystemContextView> {
+        apiWorkspacesWorkspaceIdViewsLayoutIdPost(workspaceId: string, id: string, saveViewLayout?: SaveViewLayout, options?: any): AxiosPromise<void> {
+            return localVarFp.apiWorkspacesWorkspaceIdViewsLayoutIdPost(workspaceId, id, saveViewLayout, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<SystemContextViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -602,7 +670,7 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<SystemLandscapeView> {
+        apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<SystemLandscapeViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -697,6 +765,19 @@ export class ViewsApi extends BaseAPI {
      */
     public apiWorkspacesWorkspaceIdViewsImageIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig) {
         return ViewsApiFp(this.configuration).apiWorkspacesWorkspaceIdViewsImageIdGet(workspaceId, id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} id 
+     * @param {SaveViewLayout} [saveViewLayout] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ViewsApi
+     */
+    public apiWorkspacesWorkspaceIdViewsLayoutIdPost(workspaceId: string, id: string, saveViewLayout?: SaveViewLayout, options?: RawAxiosRequestConfig) {
+        return ViewsApiFp(this.configuration).apiWorkspacesWorkspaceIdViewsLayoutIdPost(workspaceId, id, saveViewLayout, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

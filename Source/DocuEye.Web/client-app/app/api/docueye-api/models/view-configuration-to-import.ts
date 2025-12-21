@@ -15,54 +15,48 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { type ElementStyle } from './element-style';
+import { type ElementStyleToImport } from './element-style-to-import';
 // May contain unused imports in some cases
 // @ts-ignore
-import { type RelationshipStyle } from './relationship-style';
+import { type RelationshipStyleToImport } from './relationship-style-to-import';
 // May contain unused imports in some cases
 // @ts-ignore
-import { type Terminology } from './terminology';
+import { type TerminologyToImport } from './terminology-to-import';
 
 /**
  * 
  * @export
- * @interface ViewConfiguration
+ * @interface ViewConfigurationToImport
  */
-export interface ViewConfiguration {
+export interface ViewConfigurationToImport {
     /**
      * 
-     * @type {string}
-     * @memberof ViewConfiguration
+     * @type {Array<ElementStyleToImport>}
+     * @memberof ViewConfigurationToImport
      */
-    'id'?: string | null;
+    'elementStyles'?: Array<ElementStyleToImport> | null;
     /**
      * 
-     * @type {Array<ElementStyle>}
-     * @memberof ViewConfiguration
+     * @type {Array<RelationshipStyleToImport>}
+     * @memberof ViewConfigurationToImport
      */
-    'elementStyles'?: Array<ElementStyle> | null;
+    'relationshipStyles'?: Array<RelationshipStyleToImport> | null;
     /**
      * 
-     * @type {Array<RelationshipStyle>}
-     * @memberof ViewConfiguration
+     * @type {TerminologyToImport}
+     * @memberof ViewConfigurationToImport
      */
-    'relationshipStyles'?: Array<RelationshipStyle> | null;
+    'terminology'?: TerminologyToImport;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ViewConfiguration
+     * @memberof ViewConfigurationToImport
      */
     'themes'?: Array<string> | null;
     /**
      * 
-     * @type {Terminology}
-     * @memberof ViewConfiguration
-     */
-    'terminology'?: Terminology;
-    /**
-     * 
      * @type {string}
-     * @memberof ViewConfiguration
+     * @memberof ViewConfigurationToImport
      */
     'groupSeparator'?: string | null;
 }

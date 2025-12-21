@@ -17,110 +17,98 @@
 /**
  * 
  * @export
- * @interface Element
+ * @interface ElementToImport
  */
-export interface Element {
+export interface ElementToImport {
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
-    'id'?: string | null;
+    'structurizrId'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
+     */
+    'structurizrParentId'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ElementToImport
+     */
+    'structurizrInstanceOfId'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ElementToImport
      */
     'dslId'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'name'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'url'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'group'?: string | null;
     /**
      * 
      * @type {Array<string>}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'tags'?: Array<string> | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'type'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'location'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'technology'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'description'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
-     */
-    'parentId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Element
-     */
-    'instanceOfId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Element
-     */
-    'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof Element
-     */
-    'properties'?: { [key: string]: string; } | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'sourceCodeUrl'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Element
+     * @memberof ElementToImport
      */
     'ownerTeam'?: string | null;
     /**
      * 
-     * @type {string}
-     * @memberof Element
+     * @type {{ [key: string]: string; }}
+     * @memberof ElementToImport
      */
-    'structurizrId'?: string | null;
+    'properties'?: { [key: string]: string; } | null;
 }
 

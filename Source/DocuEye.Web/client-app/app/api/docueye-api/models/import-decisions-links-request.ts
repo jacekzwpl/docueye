@@ -15,43 +15,43 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DecisionLink } from './decision-link';
+import { type DecisionLinkToImport } from './decision-link-to-import';
 
 /**
  * 
  * @export
- * @interface FoundedDecision
+ * @interface ImportDecisionsLinksRequest
  */
-export interface FoundedDecision {
+export interface ImportDecisionsLinksRequest {
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof ImportDecisionsLinksRequest
      */
-    'id'?: string | null;
+    'workspaceId'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof ImportDecisionsLinksRequest
      */
-    'date'?: string;
+    'importKey'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof ImportDecisionsLinksRequest
      */
-    'status'?: string | null;
+    'documentationId'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FoundedDecision
+     * @memberof ImportDecisionsLinksRequest
      */
-    'title'?: string | null;
+    'decisionDslId'?: string | null;
     /**
      * 
-     * @type {Array<DecisionLink>}
-     * @memberof FoundedDecision
+     * @type {Array<DecisionLinkToImport>}
+     * @memberof ImportDecisionsLinksRequest
      */
-    'links'?: Array<DecisionLink> | null;
+    'decisionsLinks'?: Array<DecisionLinkToImport> | null;
 }
 
