@@ -1,5 +1,5 @@
-import { Autocomplete, Box, TextField, Toolbar } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Autocomplete, Box, IconButton, TextField, Toolbar } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
@@ -12,7 +12,7 @@ import store from "../../../store";
 import type { IViewConfigurationState } from "../../../store/slices/viewConfiguration/IViewConfigurationState";
 import { setViewConfiguration } from "../../../store/slices/viewConfiguration/viewConfigurationSlice";
 import { setWorkspaceData } from "../../../store/slices/workspace/workspaceSlice";
-
+import ImageIcon from '@mui/icons-material/Image';
 
 
 export const WorkspaceView = () => {
@@ -84,6 +84,23 @@ export const WorkspaceView = () => {
         navigate('/workspace/' + workspaceId + '/view/' + newValue.id);
     }
 
+    const [layout, setLayout] = useState<any>(null);
+    const saveLayout = () => {
+        if (container.current) {
+            const flow = container.current.getLayout();
+            setLayout(flow);
+            console.log(flow);
+        }
+    };
+
+    const loadLayout = () => {
+        if (layout) {
+            container.current.setLayout(layout);
+        }
+    };
+
+    const container = useRef<any>(null);
+
     return (
         <Box padding={2} >
             <ReactFlowProvider>
@@ -100,11 +117,20 @@ export const WorkspaceView = () => {
                             disableClearable={true}
                             renderInput={(params) => <TextField {...params} label="Diagram" />}
                         />
-                        <ExportButton /></Toolbar>
+                        <ExportButton />
+                        <IconButton aria-label="export to png" size="small" onClick={saveLayout}>
+                            <ImageIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton aria-label="export to png" size="small" onClick={loadLayout}>
+                            <ImageIcon fontSize="small" />
+                        </IconButton>
+                        
+                        </Toolbar>
 
                 </Box>
                 <Box paddingBottom={2} height={'calc(100vh - 168px)'} >
                     <ViewDiagram
+                        ref={container}
                         selectedView={selectedView}
                         workspaceId={workspaceId}
                         viewConfiguration={viewConfiguration.value}
