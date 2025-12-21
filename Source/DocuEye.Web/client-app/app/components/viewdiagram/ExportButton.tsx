@@ -11,12 +11,10 @@ const ExportButton = () => {
     const exportToPng = () => {
 
         const nodesBounds = getNodesBounds(getNodes());
-
-
         const transform = getViewportForBounds(nodesBounds, imageWidth, imageHeight, 0.5, 2, {});
-        
+
         const element = document.getElementsByClassName('react-flow__viewport')[0];
-        console.log(element);
+        //console.log(element);
         if (!element) return;
         toPng(element as HTMLElement, {
             backgroundColor: '#FFFFFF',
@@ -31,17 +29,15 @@ const ExportButton = () => {
     }
 
     const downloadImage = (dataUrl: string) => {
-        console.log(dataUrl, "aa");
         const a = document.createElement('a');
-
-        a.setAttribute('download', 'reactflow.png');
+        a.setAttribute('download', 'docueye-diagram.png');
         a.setAttribute('href', dataUrl);
         a.click();
     }
     return (
         <IconButton aria-label="export to png" size="small" onClick={exportToPng}>
             <ImageIcon fontSize="small" />
-          </IconButton>
+        </IconButton>
     );
 };
 
