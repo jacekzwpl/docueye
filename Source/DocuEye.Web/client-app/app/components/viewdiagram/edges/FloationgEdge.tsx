@@ -151,9 +151,6 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth,
           style={{
             position: 'absolute',
             transform: `translate(-50%, -50%) translate(${labelXPos}px,${labelYPos}px)`,
-            //background: '#ffcc00',
-            //padding: 10,
-            //borderRadius: 5,
             maxWidth: labelWidth ?? 100,
             textAlign: 'center',
             fontSize: style.fontSize ?? 10,
@@ -164,25 +161,6 @@ const FloatingEdge = ({ id, source, target, markerEnd, style, label, labelWidth,
           {labelText}
         </div>
       </EdgeLabelRenderer>}
-      {/*
-    <foreignObject
-        width={40}
-        height={40}
-        x={labelX - 40 / 2}
-        y={labelY - 40 / 2}
-        className="edgebutton-foreignobject"
-        requiredExtensions="http://www.w3.org/1999/xhtml"
-      >
-        <body>
-          <button
-            className="edgebutton"
-            //onClick={(event) => onEdgeClick(event, id)}
-          >
-            R {label}
-          </button>
-        </body>
-      </foreignObject>
-        */}
     </>
 
   );

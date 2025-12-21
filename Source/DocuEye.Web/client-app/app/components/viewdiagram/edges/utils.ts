@@ -44,13 +44,13 @@ const getEdgePosition = (node:any, intersectionPoint:any) => {
   if (px <= nx + 1) {
     return Position.Left;
   }
-  if (px >= nx + n.width - 1) {
+  if (px >= nx + n.measured.width - 1) {
     return Position.Right;
   }
   if (py <= ny + 1) {
     return Position.Top;
   }
-  if (py >= n.y + n.height - 1) {
+  if (py >= n.y + n.measured.height - 1) {
     return Position.Bottom;
   }
 
@@ -64,7 +64,7 @@ export const getEdgeParams = (source:any, target:any) => {
 
   const sourcePos = getEdgePosition(source, sourceIntersectionPoint);
   const targetPos = getEdgePosition(target, targetIntersectionPoint);
-
+  
   return {
     sx: sourceIntersectionPoint.x,
     sy: sourceIntersectionPoint.y,
