@@ -12,7 +12,7 @@ import store from "../../../store";
 import type { IViewConfigurationState } from "../../../store/slices/viewConfiguration/IViewConfigurationState";
 import { setViewConfiguration } from "../../../store/slices/viewConfiguration/viewConfigurationSlice";
 import { setWorkspaceData } from "../../../store/slices/workspace/workspaceSlice";
-import ImageIcon from '@mui/icons-material/Image';
+import SaveIcon from '@mui/icons-material/Save';
 
 
 export const WorkspaceView = () => {
@@ -87,17 +87,11 @@ export const WorkspaceView = () => {
     const [layout, setLayout] = useState<any>(null);
     const saveLayout = () => {
         if (container.current) {
-            const flow = container.current.getLayout();
-            setLayout(flow);
-            console.log(flow);
+            container.current.saveLayout();
         }
     };
 
-    const loadLayout = () => {
-        if (layout) {
-            container.current.setLayout(layout);
-        }
-    };
+
 
     const container = useRef<any>(null);
 
@@ -119,10 +113,7 @@ export const WorkspaceView = () => {
                         />
                         <ExportButton />
                         <IconButton aria-label="export to png" size="small" onClick={saveLayout}>
-                            <ImageIcon fontSize="small" />
-                        </IconButton>
-                        <IconButton aria-label="export to png" size="small" onClick={loadLayout}>
-                            <ImageIcon fontSize="small" />
+                            <SaveIcon fontSize="small" />
                         </IconButton>
                         
                         </Toolbar>

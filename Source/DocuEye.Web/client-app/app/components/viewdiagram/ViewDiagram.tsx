@@ -7,12 +7,13 @@ import '@xyflow/react/dist/style.css';
 import './edges/floatingedges.css'
 import { edgeTypes } from "./edges";
 import type { AxiosResponse } from "axios";
-import type { ComponentView, ContainerView, DeploymentView, DynamicView, Element, FilteredView, ImageView, SystemContextView, SystemLandscapeView, ViewConfiguration } from "../../api/docueye-api";
+import type { ComponentViewDiagram, ContainerViewDiagram, DeploymentViewDiagram, DynamicViewDiagram, Element, FilteredViewDiagram, ImageView, SystemContextViewDiagram, SystemLandscapeViewDiagram, ViewConfiguration } from "../../api/docueye-api";
 import Loader from "../loader";
 import { prepareDiagramElements } from "./functions/prepareDiagramElements";
 import { prepareDynamicDiagramElements } from "./functions/prepareDynamicDiagramElements";
 import { prepareDeploymentDiagramElements } from "./functions/prepareDeploymentDiagramElements";
 import ImageViewer from "./ImageViewer";
+import { snackbarUtils } from "~/snackbar/snackbarUtils";
 
 const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
     const [selectedView, setSelectedView] = useState(props.selectedView);
@@ -29,8 +30,10 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsSystemlandscapeIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<SystemLandscapeView>) => {
-                if (response.data.elements && response.data.relationships) {
+            .then((response: AxiosResponse<SystemLandscapeViewDiagram>) => {
+                if (response.data.layoutData) {
+                    loadSavedLayout(response.data.layoutData);
+                } else if (response.data.elements && response.data.relationships) {
                     const { layoutedNodes, layoutedEdges } = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "", undefined, response.data.automaticLayout);
                     setNodes(layoutedNodes);
                     setEdges(layoutedEdges);
@@ -45,8 +48,10 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsSystemcontextIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<SystemContextView>) => {
-                if (response.data.elements && response.data.relationships) {
+            .then((response: AxiosResponse<SystemContextViewDiagram>) => {
+                if (response.data.layoutData) {
+                    loadSavedLayout(response.data.layoutData);
+                } else if (response.data.elements && response.data.relationships) {
                     const { layoutedNodes, layoutedEdges } = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "", undefined, response.data.automaticLayout);
                     setNodes(layoutedNodes);
                     setEdges(layoutedEdges);
@@ -60,12 +65,14 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsContainerIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<ContainerView>) => {
+            .then((response: AxiosResponse<ContainerViewDiagram>) => {
                 if (response.data.softwareSystemId) {
                     DocuEyeApi.ElementsApi
                         .apiWorkspacesWorkspaceIdElementsIdGet(workspaceId, response.data.softwareSystemId)
                         .then((elResponse: AxiosResponse<Element>) => {
-                            if (response.data.elements && response.data.relationships) {
+                            if (response.data.layoutData) {
+                                loadSavedLayout(response.data.layoutData);
+                            } else if (response.data.elements && response.data.relationships) {
                                 const { layoutedNodes, layoutedEdges } = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ContainerView", elResponse.data, response.data.automaticLayout);
                                 setNodes(layoutedNodes);
                                 setEdges(layoutedEdges);
@@ -73,7 +80,9 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
                         });
 
                 } else {
-                    if (response.data.elements && response.data.relationships) {
+                    if (response.data.layoutData) {
+                        loadSavedLayout(response.data.layoutData);
+                    } else if (response.data.elements && response.data.relationships) {
                         const { layoutedNodes, layoutedEdges } = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ContainerView", undefined, response.data.automaticLayout);
                         setNodes(layoutedNodes);
                         setEdges(layoutedEdges);
@@ -89,19 +98,23 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsComponentIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<ComponentView>) => {
+            .then((response: AxiosResponse<ComponentViewDiagram>) => {
                 if (response.data.containerId) {
                     DocuEyeApi.ElementsApi
                         .apiWorkspacesWorkspaceIdElementsIdGet(workspaceId, response.data.containerId)
                         .then((elResponse: AxiosResponse<Element>) => {
-                            if (response.data.elements && response.data.relationships) {
+                            if (response.data.layoutData) {
+                                loadSavedLayout(response.data.layoutData);
+                            } else if (response.data.elements && response.data.relationships) {
                                 const { layoutedNodes, layoutedEdges } = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView", elResponse.data, response.data.automaticLayout);
                                 setNodes(layoutedNodes);
                                 setEdges(layoutedEdges);
                             }
                         });
                 } else {
-                    if (response.data.elements && response.data.relationships) {
+                    if (response.data.layoutData) {
+                        loadSavedLayout(response.data.layoutData);
+                    } else if (response.data.elements && response.data.relationships) {
                         const { layoutedNodes, layoutedEdges } = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView", undefined, response.data.automaticLayout);
                         setNodes(layoutedNodes);
                         setEdges(layoutedEdges);
@@ -117,8 +130,10 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<FilteredView>) => {
-                if (response.data.elements && response.data.relationships) {
+            .then((response: AxiosResponse<FilteredViewDiagram>) => {
+                if (response.data.layoutData) {
+                    loadSavedLayout(response.data.layoutData);
+                } else if (response.data.elements && response.data.relationships) {
                     const { layoutedNodes, layoutedEdges } = prepareDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, "ComponentView", undefined, response.data.automaticLayout);
                     setNodes(layoutedNodes);
                     setEdges(layoutedEdges);
@@ -132,8 +147,10 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsDeploymentIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<DeploymentView>) => {
-                if (response.data.elements && response.data.relationships) {
+            .then((response: AxiosResponse<DeploymentViewDiagram>) => {
+                if (response.data.layoutData) {
+                    loadSavedLayout(response.data.layoutData);
+                } else if (response.data.elements && response.data.relationships) {
                     const { layoutedNodes, layoutedEdges } = prepareDeploymentDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, undefined, response.data.automaticLayout);
                     setNodes(layoutedNodes);
                     setEdges(layoutedEdges);
@@ -149,19 +166,23 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setIsLoading(true);
         DocuEyeApi.ViewsApi
             .apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId, viewId)
-            .then((response: AxiosResponse<DynamicView>) => {
+            .then((response: AxiosResponse<DynamicViewDiagram>) => {
                 if (response.data.elementId) {
                     DocuEyeApi.ElementsApi
                         .apiWorkspacesWorkspaceIdElementsIdGet(workspaceId, response.data.elementId)
                         .then((elResponse: AxiosResponse<Element>) => {
-                            if (response.data.elements && response.data.relationships) {
+                            if (response.data.layoutData) {
+                                loadSavedLayout(response.data.layoutData);
+                            } else if (response.data.elements && response.data.relationships) {
                                 const { layoutedNodes, layoutedEdges } = prepareDynamicDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, elResponse.data, response.data.automaticLayout);
                                 setNodes(layoutedNodes);
                                 setEdges(layoutedEdges);
                             }
                         });
                 } else {
-                    if (response.data.elements && response.data.relationships) {
+                    if (response.data.layoutData) {
+                        loadSavedLayout(response.data.layoutData);
+                    } else if (response.data.elements && response.data.relationships) {
                         const { layoutedNodes, layoutedEdges } = prepareDynamicDiagramElements(response.data.elements, response.data.relationships, viewConfiguration, undefined, response.data.automaticLayout);
                         setNodes(layoutedNodes);
                         setEdges(layoutedEdges);
@@ -258,20 +279,38 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         setCurrentImageView
     ]);
 
+    const loadSavedLayout = (layoutData: string) => {
+        const layout = JSON.parse(layoutData);
+        if (layout) {
+            const { x = 0, y = 0, zoom = 1 } = layout.viewport;
+            setNodes(layout.nodes || []);
+            setEdges(layout.edges || []);
+            setViewport({ x, y, zoom });
+        }
+    };
+
 
     useImperativeHandle(ref, () => ({
-        getLayout: () => {
+
+
+
+        saveLayout: () => {
             const flow = rfInstance.toObject();
-            return flow;
-            
-        },
-        setLayout: (layout: any) => {
-            if (layout) {
-                const { x = 0, y = 0, zoom = 1 } = layout.viewport;
-                setNodes(layout.nodes || []);
-                setEdges(layout.edges || []);
-                setViewport({ x, y, zoom });
-            }
+            const layout = JSON.stringify(flow);
+            setIsLoading(true);
+            DocuEyeApi.ViewsApi.apiWorkspacesWorkspaceIdViewsLayoutIdPost(
+                workspaceId!,
+                selectedView!.id,
+                {
+                    layoutData: layout
+                },
+            ).then(() => {
+                snackbarUtils.success("Layout saved");
+            }).finally(() => {
+                setIsLoading(false);
+            });
+
+
         }
     }));
 

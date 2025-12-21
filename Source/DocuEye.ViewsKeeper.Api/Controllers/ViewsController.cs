@@ -239,6 +239,7 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
 
         [Route("layout/{id}")]
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         public async Task<ActionResult> SaveViewLayout([FromRoute] string workspaceId, [FromRoute] string id, [FromBody] SaveViewLayout data)
         {
             var command = new SaveViewLayoutCommand(workspaceId, id, data.LayoutData);
