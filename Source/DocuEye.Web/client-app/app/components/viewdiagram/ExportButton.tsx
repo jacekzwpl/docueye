@@ -20,6 +20,7 @@ const ExportButton = () => {
             backgroundColor: '#FFFFFF',
             width: imageWidth,
             height: imageHeight,
+            pixelRatio: 2,
             style: {
                 width: `${imageWidth}`,
                 height: `${imageHeight}`,
