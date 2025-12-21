@@ -27,7 +27,7 @@ export const OverView = (props: IOverViewProps) => {
         navigate('/workspace/' + props.element.workspaceId + '/element/' + id);
     }
     const [isDiagramsDialogOpen, setIsDiagramsDialogOpen] = useState<boolean>(false);
-    
+
     const openUrl = (url: string | null | undefined) => {
         if (!url) {
             return;
@@ -78,7 +78,7 @@ export const OverView = (props: IOverViewProps) => {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid container size={6} >
+                <Grid size={6} >
                     <Card variant="outlined">
                         <CardContent>
                             <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
@@ -86,7 +86,7 @@ export const OverView = (props: IOverViewProps) => {
                             </Typography>
                             <Grid container>
                                 {props.element.description && props.element.description !== "" &&
-                                    <Grid container size={12}>
+                                    <Grid size={12}>
                                         <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
                                             Description
                                         </Typography>
@@ -95,7 +95,7 @@ export const OverView = (props: IOverViewProps) => {
                                         </Typography>
                                     </Grid>}
 
-                                <Grid container size={6}>
+                                <Grid size={6}>
                                     {props.element.technology && props.element.technology !== "" &&
                                         <><Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
                                             Technology
@@ -104,7 +104,7 @@ export const OverView = (props: IOverViewProps) => {
                                                 {props.element.technology}
                                             </Typography></>}
                                 </Grid>
-                                <Grid container size={6}>
+                                <Grid size={6}>
                                     {props.element.ownerTeam && props.element.ownerTeam !== "" && <>
                                         <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
                                             Owner Team
@@ -113,7 +113,7 @@ export const OverView = (props: IOverViewProps) => {
                                             {props.element.ownerTeam}
                                         </Typography></>}
                                 </Grid>
-                                <Grid container size={6}>
+                                <Grid size={6}>
                                     <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
                                         DSL Identifier
                                     </Typography>
@@ -123,7 +123,7 @@ export const OverView = (props: IOverViewProps) => {
                                         </IconButton>
                                     </Typography>
                                 </Grid>
-                                <Grid container size={6}>
+                                <Grid size={6}>
                                     {parentElement && <>
                                         <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
                                             Parent
@@ -137,7 +137,7 @@ export const OverView = (props: IOverViewProps) => {
                                             </Link>
                                         </Typography></>}
                                 </Grid>
-                                <Grid container size={12}>
+                                <Grid size={12}>
                                     <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
                                         Tags
                                     </Typography>
@@ -150,7 +150,7 @@ export const OverView = (props: IOverViewProps) => {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid container size={6}>
+                <Grid size={6}>
                     <Card variant="outlined">
                         <CardContent>
                             <Stack direction="row" spacing={2}>
@@ -167,7 +167,7 @@ export const OverView = (props: IOverViewProps) => {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid container size={12}>
+                <Grid size={12}>
                     <Card variant="outlined">
                         <CardContent>
                             <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
