@@ -22,6 +22,7 @@ export const WorkspaceView = () => {
     const [selectedView, setSelectedView] = useState<any | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const [canSaveLayout, setCanSaveLayout] = useState<boolean>(false);
 
     const viewConfiguration: IViewConfigurationState =
         useSelector((state: any) => state.viewConfiguration);
@@ -63,6 +64,11 @@ export const WorkspaceView = () => {
                 }
                 if (viewId) {
                     const view = avViews.find((obj) => { return obj.id === viewId });
+                    if(view && view.viewType === 'ImageView'){
+                        setCanSaveLayout(false);
+                    }else {
+                        setCanSaveLayout(true);
+                    }
                     if (view) {
                         setSelectedView(view);
                     } else {
@@ -77,20 +83,20 @@ export const WorkspaceView = () => {
                 setIsLoading(false);
             });
 
-    }, [setIsLoading, workspaceId,viewId, dispatch, navigate]);
+    }, [setIsLoading, workspaceId,viewId, dispatch, navigate, setCanSaveLayout]);
 
 
     const onSelectedViewChange = (event: any, newValue: any | null) => {
+        
         navigate('/workspace/' + workspaceId + '/view/' + newValue.id);
     }
-
-    const [layout, setLayout] = useState<any>(null);
     const saveLayout = () => {
         if (container.current) {
             container.current.saveLayout();
         }
     };
 
+    
 
 
     const container = useRef<any>(null);
@@ -112,7 +118,7 @@ export const WorkspaceView = () => {
                             renderInput={(params) => <TextField {...params} label="Diagram" />}
                         />
                         <ExportButton />
-                        <IconButton aria-label="export to png" size="small" onClick={saveLayout}>
+                        <IconButton disabled={!canSaveLayout} aria-label="export to png" size="small" onClick={saveLayout}>
                             <SaveIcon fontSize="small" />
                         </IconButton>
                         
