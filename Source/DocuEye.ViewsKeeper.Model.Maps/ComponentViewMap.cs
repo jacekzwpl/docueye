@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Application.Model;
+﻿using DocuEye.ViewsKeeper.Api.Model;
+using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Model;
 using System;
 using System.Collections.Generic;
@@ -48,5 +49,27 @@ namespace DocuEye.ViewsKeeper.Model.Maps
             foreach (var s in sources) result.Add(s.MapToViewWithElement());
             return result.ToArray();
         }
+
+        public static ComponentViewDiagram MapToComponentViewDiagram(this ComponentView source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var dest = new ComponentViewDiagram
+            {
+                Id = source.Id,
+                ViewType = source.ViewType,
+                Title = source.Title,
+                Description = source.Description,
+                Key = source.Key,
+                ContainerId = source.ContainerId,
+                ExternalContainerBoundariesVisible = source.ExternalContainerBoundariesVisible,
+                AutomaticLayout = source.AutomaticLayout,
+                Elements = source.Elements,
+                PaperSize = source.PaperSize,
+                Relationships = source.Relationships,
+                WorkspaceId = source.WorkspaceId
+            };
+            return dest;
+        }
+
     }
 }

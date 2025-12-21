@@ -8,6 +8,7 @@ namespace DocuEye.ViewsKeeper.Application.Tests
     public class FakeDbContext : IViewsKeeperDBContext
     {
         private List<BaseView> allViews { get; }
+        private List<ViewLayout> viewLayouts {  get; }
 
 
         public FakeDbContext() { 
@@ -30,6 +31,8 @@ namespace DocuEye.ViewsKeeper.Application.Tests
                 .. filteredViews,
                 .. imageViews
             ];
+
+            this.viewLayouts = new List<ViewLayout>();
 
         }
 
@@ -102,6 +105,14 @@ namespace DocuEye.ViewsKeeper.Application.Tests
             get
             {
                 return new FakeGenericCollection<BaseView>(this.allViews);
+            }
+        }
+
+        public IGenericCollection<ViewLayout> ViewLayouts
+        {
+            get
+            {
+                return new FakeGenericCollection<ViewLayout>(this.viewLayouts);
             }
         }
 

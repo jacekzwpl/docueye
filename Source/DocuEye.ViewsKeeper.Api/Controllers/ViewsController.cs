@@ -1,5 +1,7 @@
 ﻿using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.Infrastructure.Mediator;
+using DocuEye.ViewsKeeper.Api.Model;
+using DocuEye.ViewsKeeper.Application.Commands.SaveViewLayout;
 using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.ViewsKeeper.Application.Queries.FindViewsWithElement;
 using DocuEye.ViewsKeeper.Application.Queries.GetComponentView;
@@ -10,8 +12,9 @@ using DocuEye.ViewsKeeper.Application.Queries.GetFilteredView;
 using DocuEye.ViewsKeeper.Application.Queries.GetImageView;
 using DocuEye.ViewsKeeper.Application.Queries.GetSystemContextView;
 using DocuEye.ViewsKeeper.Application.Queries.GetSystemLandscapeView;
+using DocuEye.ViewsKeeper.Application.Queries.GetViewLayout;
 using DocuEye.ViewsKeeper.Model;
-
+using DocuEye.ViewsKeeper.Model.Maps;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,7 +52,7 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         public async Task<ActionResult<IEnumerable<ViewWithElement>>> GetViewsByElement([FromRoute] string workspaceId, [FromRoute] string elementId)
         {
             var query = new FindViewsWithElementQuery(elementId, workspaceId);
-            var result = await this.mediator.SendQueryAsync<FindViewsWithElementQuery,IEnumerable<ViewWithElement>>(query);
+            var result = await this.mediator.SendQueryAsync<FindViewsWithElementQuery, IEnumerable<ViewWithElement>>(query);
             return this.Ok(result);
         }
         /// <summary>
@@ -60,14 +63,20 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         /// <returns>System landscape view</returns>
         [Route("systemlandscape/{id}")]
         [HttpGet]
-        public async Task<ActionResult<SystemLandscapeView>> GetSystemLandscapeView([FromRoute] string workspaceId, [FromRoute] string id)
+        public async Task<ActionResult<SystemLandscapeViewDiagram>> GetSystemLandscapeView([FromRoute] string workspaceId, [FromRoute] string id)
         {
-            var query = new GetSystemLandscapeViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetSystemLandscapeViewQuery,SystemLandscapeView?>(query);
-            if (result == null)
+            var viewQuery = new GetSystemLandscapeViewQuery(id, workspaceId);
+            var view = await this.mediator.SendQueryAsync<GetSystemLandscapeViewQuery, SystemLandscapeView?>(viewQuery);
+            if (view == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
+
+            var layoutQuery = new GetViewLayoutQuery(workspaceId, id);
+            var layout = await this.mediator.SendQueryAsync<GetViewLayoutQuery, ViewLayout?>(layoutQuery);
+
+            var result = view.MapToSystemLandscapeViewDiagram();
+            result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
         }
         /// <summary>
@@ -78,14 +87,19 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         /// <returns>System context view</returns>
         [Route("systemcontext/{id}")]
         [HttpGet]
-        public async Task<ActionResult<SystemContextView>> GetSystemContextView([FromRoute] string workspaceId, [FromRoute] string id)
+        public async Task<ActionResult<SystemContextViewDiagram>> GetSystemContextView([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetSystemContextViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetSystemContextViewQuery, SystemContextView?>(query);
-            if (result == null)
+            var view = await this.mediator.SendQueryAsync<GetSystemContextViewQuery, SystemContextView?>(query);
+            if (view == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
+            var layoutQuery = new GetViewLayoutQuery(workspaceId, id);
+            var layout = await this.mediator.SendQueryAsync<GetViewLayoutQuery, ViewLayout?>(layoutQuery);
+
+            var result = view.MapToSystemContextViewDiagram();
+            result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
         }
         /// <summary>
@@ -96,14 +110,19 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         /// <returns>Container view</returns>
         [Route("container/{id}")]
         [HttpGet]
-        public async Task<ActionResult<ContainerView>> GetContainerView([FromRoute] string workspaceId, [FromRoute] string id)
+        public async Task<ActionResult<ContainerViewDiagram>> GetContainerView([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetContainerViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetContainerViewQuery, ContainerView?>(query);
-            if (result == null)
+            var view = await this.mediator.SendQueryAsync<GetContainerViewQuery, ContainerView?>(query);
+            if (view == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
+            var layoutQuery = new GetViewLayoutQuery(workspaceId, id);
+            var layout = await this.mediator.SendQueryAsync<GetViewLayoutQuery, ViewLayout?>(layoutQuery);
+
+            var result = view.MapToContainerViewDiagram();
+            result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
         }
         /// <summary>
@@ -114,14 +133,19 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         /// <returns>Component view</returns>
         [Route("component/{id}")]
         [HttpGet]
-        public async Task<ActionResult<ComponentView>> GetComponentView([FromRoute] string workspaceId, [FromRoute] string id)
+        public async Task<ActionResult<ComponentViewDiagram>> GetComponentView([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetComponentViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetComponentViewQuery,ComponentView?>(query);
-            if (result == null)
+            var view = await this.mediator.SendQueryAsync<GetComponentViewQuery, ComponentView?>(query);
+            if (view == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
+            var layoutQuery = new GetViewLayoutQuery(workspaceId, id);
+            var layout = await this.mediator.SendQueryAsync<GetViewLayoutQuery, ViewLayout?>(layoutQuery);
+
+            var result = view.MapToComponentViewDiagram();
+            result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
         }
         /// <summary>
@@ -132,14 +156,19 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         /// <returns>Dynamic View</returns>
         [Route("dynamic/{id}")]
         [HttpGet]
-        public async Task<ActionResult<DynamicView>> GetDynamicView([FromRoute] string workspaceId, [FromRoute] string id)
+        public async Task<ActionResult<DynamicViewDiagram>> GetDynamicView([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetDynamicViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetDynamicViewQuery,DynamicView?>(query);
-            if (result == null)
+            var view = await this.mediator.SendQueryAsync<GetDynamicViewQuery, DynamicView?>(query);
+            if (view == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
+            var layoutQuery = new GetViewLayoutQuery(workspaceId, id);
+            var layout = await this.mediator.SendQueryAsync<GetViewLayoutQuery, ViewLayout?>(layoutQuery);
+
+            var result = view.MapToDynamicViewDiagram();
+            result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
         }
         /// <summary>
@@ -150,14 +179,19 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         /// <returns>Dynamic view</returns>
         [Route("deployment/{id}")]
         [HttpGet]
-        public async Task<ActionResult<DeploymentView>> GetDeploymentView([FromRoute] string workspaceId, [FromRoute] string id)
+        public async Task<ActionResult<DeploymentViewDiagram>> GetDeploymentView([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetDeploymentViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetDeploymentViewQuery,DeploymentView?>(query);
-            if (result == null)
+            var view = await this.mediator.SendQueryAsync<GetDeploymentViewQuery, DeploymentView?>(query);
+            if (view == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
+            var layoutQuery = new GetViewLayoutQuery(workspaceId, id);
+            var layout = await this.mediator.SendQueryAsync<GetViewLayoutQuery, ViewLayout?>(layoutQuery);
+
+            var result = view.MapToDeploymentViewDiagram();
+            result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
         }
         /// <summary>
@@ -168,14 +202,19 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         /// <returns>Filtered view</returns>
         [Route("filtered/{id}")]
         [HttpGet]
-        public async Task<ActionResult<FilteredView>> GetFilteredView([FromRoute] string workspaceId, [FromRoute] string id)
+        public async Task<ActionResult<FilteredViewDiagram>> GetFilteredView([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetFilteredViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetFilteredViewQuery,FilteredView?>(query);
-            if (result == null)
+            var view = await this.mediator.SendQueryAsync<GetFilteredViewQuery, FilteredView?>(query);
+            if (view == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
+            var layoutQuery = new GetViewLayoutQuery(workspaceId, id);
+            var layout = await this.mediator.SendQueryAsync<GetViewLayoutQuery, ViewLayout?>(layoutQuery);
+
+            var result = view.MapToFilteredViewDiagram();
+            result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
         }
         /// <summary>
@@ -189,12 +228,22 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
         public async Task<ActionResult<ImageView>> GetImageView([FromRoute] string workspaceId, [FromRoute] string id)
         {
             var query = new GetImageViewQuery(id, workspaceId);
-            var result = await this.mediator.SendQueryAsync<GetImageViewQuery,ImageView?>(query);
+            var result = await this.mediator.SendQueryAsync<GetImageViewQuery, ImageView?>(query);
             if (result == null)
             {
                 return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
             }
             return this.Ok(result);
+        }
+
+
+        [Route("layout/{id}")]
+        [HttpPost]
+        public async Task<ActionResult> SaveViewLayout([FromRoute] string workspaceId, [FromRoute] string id, [FromBody] SaveViewLayout data)
+        {
+            var command = new SaveViewLayoutCommand(workspaceId, id, data.LayoutData);
+            await this.mediator.SendCommandAsync(command);
+            return this.NoContent();
         }
     }
 }

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocuEye.ViewsKeeper.Api.Model\DocuEye.ViewsKeeper.Api.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Application.Model\DocuEye.ViewsKeeper.Application.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Model\DocuEye.ViewsKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspacesKeeper.Model\DocuEye.WorkspacesKeeper.Model.csproj" />
