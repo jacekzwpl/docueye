@@ -18,8 +18,8 @@ export const Main = () => {
   const drawerWidth: number = 240;
   const logout = (): void => {
 
-    if (process.env.REACT_APP_SERVER_URL) {
-      window.location.href = process.env.REACT_APP_SERVER_URL + "/auth/logout";
+    if (import.meta.env.VITE_APP_SERVER_URL) {
+      window.location.href = import.meta.env.VITE_APP_SERVER_URL + "/auth/logout";
     } else {
       window.location.href = "/auth/logout";
     }

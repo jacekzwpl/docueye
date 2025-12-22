@@ -42,7 +42,7 @@ namespace DocuEye.Web.Controllers
 
         [Route("antiforgery/token")]
         [HttpGet]
-        [Authorize(Policy = "Workspace")]
+        [Authorize(Policy = "General")]
         public IActionResult AntiForgeryToken()
         {
             var tokens = forgeryService.GetAndStoreTokens(this.HttpContext);

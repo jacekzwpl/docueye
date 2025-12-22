@@ -35,8 +35,8 @@ export const initResponseInterceptors = () => {
         }
 
         if (error.response.status === 401) {
-            if (process.env.REACT_APP_SERVER_URL) {
-                window.location.href = process.env.REACT_APP_SERVER_URL + "/auth/login";
+            if (import.meta.env.VITE_APP_SERVER_URL) {
+                window.location.href = import.meta.env.VITE_APP_SERVER_URL + "/auth/login";
             } else {
                 window.location.href = "/auth/login";
             }
