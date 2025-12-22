@@ -44,12 +44,9 @@ namespace DocuEye.ViewsKeeper.Application.Commands.SaveViewsChanges
                     o => o.WorkspaceId == request.WorkspaceId
                     && !existingIds.Contains(o.Id));
 
-            // Also delete from ViewLayouts collection
-            // TODO: Delete only for missing views
+            // Delete ViewLayouts
             await this.dbContext.ViewLayouts.DeleteManyAsync(
-                    o => o.WorkspaceId == request.WorkspaceId
-                    //&& !existingIds.Contains(o.Id)
-                    );
+                    o => o.WorkspaceId == request.WorkspaceId);
 
             // Create new views
             if (request.SystemLandscapeViews.Count() > 0)
