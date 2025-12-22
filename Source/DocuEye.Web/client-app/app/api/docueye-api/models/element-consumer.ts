@@ -14,47 +14,13 @@
 
 
 
-/**
- * 
- * @export
- * @interface ElementConsumer
- */
+
 export interface ElementConsumer {
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementConsumer
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementConsumer
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementConsumer
-     */
     'type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementConsumer
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementConsumer
-     */
     'relationDescription'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementConsumer
-     */
     'relationTechnology'?: string | null;
 }
 

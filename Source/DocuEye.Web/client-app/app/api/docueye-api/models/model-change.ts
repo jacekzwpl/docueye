@@ -14,71 +14,17 @@
 
 
 
-/**
- * 
- * @export
- * @interface ModelChange
- */
+
 export interface ModelChange {
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'elementId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'relationshipId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'importId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'importLink'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'eventTime'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelChange
-     */
     'description'?: string | null;
 }
 

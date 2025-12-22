@@ -1,11 +1,35 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "DocuEye.Web",
     "version": "1.0"
   },
   "paths": {
     "/api/app/context": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/app/compatibility/info": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/app/antiforgery/token": {
       "get": {
         "tags": [
           "App"
@@ -304,6 +328,40 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DocumentationFilesImport"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "elementId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "elementDslId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -962,17 +1020,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemLandscapeView"
+                  "$ref": "#/components/schemas/SystemLandscapeViewDiagram"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemLandscapeView"
+                  "$ref": "#/components/schemas/SystemLandscapeViewDiagram"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemLandscapeView"
+                  "$ref": "#/components/schemas/SystemLandscapeViewDiagram"
                 }
               }
             }
@@ -1009,17 +1067,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemContextView"
+                  "$ref": "#/components/schemas/SystemContextViewDiagram"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemContextView"
+                  "$ref": "#/components/schemas/SystemContextViewDiagram"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SystemContextView"
+                  "$ref": "#/components/schemas/SystemContextViewDiagram"
                 }
               }
             }
@@ -1056,17 +1114,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ContainerView"
+                  "$ref": "#/components/schemas/ContainerViewDiagram"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ContainerView"
+                  "$ref": "#/components/schemas/ContainerViewDiagram"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ContainerView"
+                  "$ref": "#/components/schemas/ContainerViewDiagram"
                 }
               }
             }
@@ -1103,17 +1161,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentView"
+                  "$ref": "#/components/schemas/ComponentViewDiagram"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentView"
+                  "$ref": "#/components/schemas/ComponentViewDiagram"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentView"
+                  "$ref": "#/components/schemas/ComponentViewDiagram"
                 }
               }
             }
@@ -1150,17 +1208,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DynamicView"
+                  "$ref": "#/components/schemas/DynamicViewDiagram"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DynamicView"
+                  "$ref": "#/components/schemas/DynamicViewDiagram"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DynamicView"
+                  "$ref": "#/components/schemas/DynamicViewDiagram"
                 }
               }
             }
@@ -1197,17 +1255,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeploymentView"
+                  "$ref": "#/components/schemas/DeploymentViewDiagram"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeploymentView"
+                  "$ref": "#/components/schemas/DeploymentViewDiagram"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeploymentView"
+                  "$ref": "#/components/schemas/DeploymentViewDiagram"
                 }
               }
             }
@@ -1244,17 +1302,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/FilteredView"
+                  "$ref": "#/components/schemas/FilteredViewDiagram"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FilteredView"
+                  "$ref": "#/components/schemas/FilteredViewDiagram"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FilteredView"
+                  "$ref": "#/components/schemas/FilteredViewDiagram"
                 }
               }
             }
@@ -1305,6 +1363,55 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/workspaces/{workspaceId}/views/layout/{id}": {
+      "post": {
+        "tags": [
+          "Views"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveViewLayout"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveViewLayout"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveViewLayout"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -1470,7 +1577,7 @@
         }
       }
     },
-    "/api/workspaces/import": {
+    "/api/workspaces/import/start": {
       "put": {
         "tags": [
           "WorkspacesImport"
@@ -1479,17 +1586,545 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ImportWorkspaceRequest"
+                "$ref": "#/components/schemas/ImportWorkspaceStartRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ImportWorkspaceRequest"
+                "$ref": "#/components/schemas/ImportWorkspaceStartRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ImportWorkspaceRequest"
+                "$ref": "#/components/schemas/ImportWorkspaceStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/viewconfiguration": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportViewConfigurationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportViewConfigurationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportViewConfigurationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/elements": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportElementsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportElementsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportElementsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/relationships": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportRelationshipsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportRelationshipsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportRelationshipsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/views": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportViewsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportViewsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportViewsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/cleardocitems": {
+      "post": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportClearDocItemsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportClearDocItemsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportClearDocItemsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/documentation": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDocumentationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDocumentationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDocumentationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/decision": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDecisionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDecisionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDecisionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/image": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportImageRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportImageRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportImageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/decisionlinks": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDecisionsLinksRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDecisionsLinksRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDecisionsLinksRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/cleardecisions": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportClearDecisionsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportClearDecisionsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportClearDecisionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/finish": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportFinalizeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportFinalizeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportFinalizeRequest"
               }
             }
           }
@@ -1580,7 +2215,7 @@
         },
         "additionalProperties": false
       },
-      "ComponentView": {
+      "ComponentViewDiagram": {
         "type": "object",
         "properties": {
           "id": {
@@ -1635,11 +2270,15 @@
           "externalContainerBoundariesVisible": {
             "type": "boolean",
             "nullable": true
+          },
+          "layoutData": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ContainerView": {
+      "ContainerViewDiagram": {
         "type": "object",
         "properties": {
           "id": {
@@ -1694,6 +2333,10 @@
           "externalSoftwareSystemBoundariesVisible": {
             "type": "boolean",
             "nullable": true
+          },
+          "layoutData": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1721,6 +2364,65 @@
           },
           "description": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DecisionLinkToImport": {
+        "type": "object",
+        "properties": {
+          "structurizrId": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DecisionToImport": {
+        "type": "object",
+        "properties": {
+          "documentationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "strucuturizrId": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "format": {
+            "type": "string",
+            "nullable": true
+          },
+          "strucuturizrElementId": {
+            "type": "string",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DecisionLinkToImport"
+            },
             "nullable": true
           }
         },
@@ -1780,7 +2482,7 @@
         },
         "additionalProperties": false
       },
-      "DeploymentView": {
+      "DeploymentViewDiagram": {
         "type": "object",
         "properties": {
           "id": {
@@ -1831,6 +2533,10 @@
           "softwareSystemId": {
             "type": "string",
             "nullable": true
+          },
+          "layoutData": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1840,6 +2546,46 @@
         "properties": {
           "htmlContent": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentationSectionToImport": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "format": {
+            "type": "string",
+            "nullable": true
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentationToImport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "structurizrElementId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentationSectionToImport"
+            },
             "nullable": true
           }
         },
@@ -1888,7 +2634,7 @@
         },
         "additionalProperties": false
       },
-      "DynamicView": {
+      "DynamicViewDiagram": {
         "type": "object",
         "properties": {
           "id": {
@@ -1942,6 +2688,10 @@
           },
           "externalBoundariesVisible": {
             "type": "boolean",
+            "nullable": true
+          },
+          "layoutData": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -2019,6 +2769,10 @@
           "ownerTeam": {
             "type": "string",
             "nullable": true
+          },
+          "structurizrId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2078,6 +2832,26 @@
           },
           "relationTechnology": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ElementInViewToImport": {
+        "type": "object",
+        "properties": {
+          "structurizrId": {
+            "type": "string",
+            "nullable": true
+          },
+          "x": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "y": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -2144,6 +2918,144 @@
           },
           "description": {
             "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ElementStyleToImport": {
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "background": {
+            "type": "string",
+            "nullable": true
+          },
+          "stroke": {
+            "type": "string",
+            "nullable": true
+          },
+          "strokeWidth": {
+            "type": "string",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "fontSize": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "shape": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "border": {
+            "type": "string",
+            "nullable": true
+          },
+          "opacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "description": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ElementToImport": {
+        "type": "object",
+        "properties": {
+          "structurizrId": {
+            "type": "string",
+            "nullable": true
+          },
+          "structurizrParentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "structurizrInstanceOfId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dslId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "group": {
+            "type": "string",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "technology": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceCodeUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "ownerTeam": {
+            "type": "string",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
             "nullable": true
           }
         },
@@ -2239,7 +3151,7 @@
         },
         "additionalProperties": false
       },
-      "FilteredView": {
+      "FilteredViewDiagram": {
         "type": "object",
         "properties": {
           "id": {
@@ -2301,6 +3213,10 @@
               "type": "string"
             },
             "nullable": true
+          },
+          "layoutData": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2352,6 +3268,28 @@
         },
         "additionalProperties": false
       },
+      "ImageToImport": {
+        "type": "object",
+        "properties": {
+          "documentationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ImageView": {
         "type": "object",
         "properties": {
@@ -2394,6 +3332,149 @@
         },
         "additionalProperties": false
       },
+      "ImportClearDecisionsRequest": {
+        "type": "object",
+        "properties": {
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportClearDocItemsRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportDecisionRequest": {
+        "type": "object",
+        "properties": {
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "decision": {
+            "$ref": "#/components/schemas/DecisionToImport"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportDecisionsLinksRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "decisionDslId": {
+            "type": "string",
+            "nullable": true
+          },
+          "decisionsLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DecisionLinkToImport"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportDocumentationRequest": {
+        "type": "object",
+        "properties": {
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentation": {
+            "$ref": "#/components/schemas/DocumentationToImport"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportElementsRequest": {
+        "type": "object",
+        "properties": {
+          "elements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementToImport"
+            },
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportFinalizeRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportImageRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "$ref": "#/components/schemas/ImageToImport"
+          }
+        },
+        "additionalProperties": false
+      },
       "ImportOpenApiFileRequest": {
         "type": "object",
         "properties": {
@@ -2416,23 +3497,61 @@
         },
         "additionalProperties": false
       },
-      "ImportWorkspaceRequest": {
+      "ImportRelationshipsRequest": {
         "type": "object",
         "properties": {
-          "workspaceId": {
-            "type": "string",
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipToImport"
+            },
             "nullable": true
           },
           "importKey": {
             "type": "string",
             "nullable": true
           },
-          "sourceLink": {
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportViewConfigurationRequest": {
+        "type": "object",
+        "properties": {
+          "importKey": {
             "type": "string",
             "nullable": true
           },
-          "workspaceData": {
-            "$ref": "#/components/schemas/StructurizrWorkspace"
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "viewConfiguration": {
+            "$ref": "#/components/schemas/ViewConfigurationToImport"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportViewsRequest": {
+        "type": "object",
+        "properties": {
+          "views": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewToImport"
+            },
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2449,6 +3568,43 @@
           },
           "message": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportWorkspaceStartRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "visibility": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceAccessRuleToImport"
+            },
             "nullable": true
           }
         },
@@ -2500,6 +3656,28 @@
         },
         "additionalProperties": false
       },
+      "RelationshipInViewToImport": {
+        "type": "object",
+        "properties": {
+          "structurizrId": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "response": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "order": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RelationshipStyle": {
         "type": "object",
         "properties": {
@@ -2542,6 +3720,109 @@
           "opacity": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelationshipStyleToImport": {
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "thickness": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "fontSize": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dashed": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "routing": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "opacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelationshipToImport": {
+        "type": "object",
+        "properties": {
+          "structurizrId": {
+            "type": "string",
+            "nullable": true
+          },
+          "structurizrSourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "structurizrDestinationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "structurizrLinkedRelationshipId": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "technology": {
+            "type": "string",
+            "nullable": true
+          },
+          "interactionStyle": {
+            "type": "string",
+            "nullable": true
+          },
+          "dslId": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -2624,1613 +3905,17 @@
         },
         "additionalProperties": false
       },
-      "StructurizrAnimationStep": {
+      "SaveViewLayout": {
         "type": "object",
         "properties": {
-          "order": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrAutomaticLayout": {
-        "type": "object",
-        "properties": {
-          "implementation": {
-            "type": "string",
-            "nullable": true
-          },
-          "rankDirection": {
-            "type": "string",
-            "nullable": true
-          },
-          "rankSeparation": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "nodeSeparation": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "edgeSeparation": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "vertices": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrComponent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "technology": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "group": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "documentation": {
-            "$ref": "#/components/schemas/StructurizrDocumentation"
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "ownerTeam": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "sourceCodeUrl": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrComponentView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "containerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paperSize": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensions": {
-            "$ref": "#/components/schemas/StructurizrDimensions"
-          },
-          "automaticLayout": {
-            "$ref": "#/components/schemas/StructurizrAutomaticLayout"
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrElementView"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationshipView"
-            },
-            "nullable": true
-          },
-          "animations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrAnimationStep"
-            },
-            "nullable": true
-          },
-          "externalContainerBoundariesVisible": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrConfiguration": {
-        "type": "object",
-        "properties": {
-          "styles": {
-            "$ref": "#/components/schemas/StructurizrConfigurationStyles"
-          },
-          "themes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "terminology": {
-            "$ref": "#/components/schemas/StructurizrTerminology"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrConfigurationStyles": {
-        "type": "object",
-        "properties": {
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrElementStyle"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationshipStyle"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrContainer": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "technology": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "components": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrComponent"
-            },
-            "nullable": true
-          },
-          "group": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "documentation": {
-            "$ref": "#/components/schemas/StructurizrDocumentation"
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "ownerTeam": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "sourceCodeUrl": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrContainerInstance": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "containerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "instanceId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "environment": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "group": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrContainerView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "softwareSystemId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paperSize": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensions": {
-            "$ref": "#/components/schemas/StructurizrDimensions"
-          },
-          "automaticLayout": {
-            "$ref": "#/components/schemas/StructurizrAutomaticLayout"
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrElementView"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationshipView"
-            },
-            "nullable": true
-          },
-          "animations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrAnimationStep"
-            },
-            "nullable": true
-          },
-          "externalSoftwareSystemBoundariesVisible": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrDecision": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "format": {
-            "type": "string",
-            "nullable": true
-          },
-          "elementId": {
-            "type": "string",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrDecisionLink"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrDecisionLink": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
+          "layoutData": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "StructurizrDeploymentNode": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "technology": {
-            "type": "string",
-            "nullable": true
-          },
-          "environment": {
-            "type": "string",
-            "nullable": true
-          },
-          "instances": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "group": {
-            "type": "string",
-            "nullable": true
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrDeploymentNode"
-            },
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "containerInstances": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrContainerInstance"
-            },
-            "nullable": true
-          },
-          "softwareSystemInstances": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrSoftwareSystemInstance"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "infrastructureNodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrInfrastructureNode"
-            },
-            "nullable": true
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "ownerTeam": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "sourceCodeUrl": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrDeploymentView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "softwareSystemId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paperSize": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensions": {
-            "$ref": "#/components/schemas/StructurizrDimensions"
-          },
-          "automaticLayout": {
-            "$ref": "#/components/schemas/StructurizrAutomaticLayout"
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrElementView"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationshipView"
-            },
-            "nullable": true
-          },
-          "animations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrAnimationStep"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrDimensions": {
-        "type": "object",
-        "properties": {
-          "width": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "height": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrDocumentation": {
-        "type": "object",
-        "properties": {
-          "sections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrDocumentationSection"
-            },
-            "nullable": true
-          },
-          "decisions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrDecision"
-            },
-            "nullable": true
-          },
-          "images": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrImage"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrDocumentationSection": {
-        "type": "object",
-        "properties": {
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "format": {
-            "type": "string",
-            "nullable": true
-          },
-          "order": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrDynamicView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "elementId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paperSize": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensions": {
-            "$ref": "#/components/schemas/StructurizrDimensions"
-          },
-          "automaticLayout": {
-            "$ref": "#/components/schemas/StructurizrAutomaticLayout"
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrElementView"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationshipView"
-            },
-            "nullable": true
-          },
-          "externalBoundariesVisible": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrElementStyle": {
-        "type": "object",
-        "properties": {
-          "tag": {
-            "type": "string",
-            "nullable": true
-          },
-          "width": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "height": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "background": {
-            "type": "string",
-            "nullable": true
-          },
-          "stroke": {
-            "type": "string",
-            "nullable": true
-          },
-          "strokeWidth": {
-            "type": "string",
-            "nullable": true
-          },
-          "color": {
-            "type": "string",
-            "nullable": true
-          },
-          "fontSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "shape": {
-            "type": "string",
-            "nullable": true
-          },
-          "icon": {
-            "type": "string",
-            "nullable": true
-          },
-          "border": {
-            "type": "string",
-            "nullable": true
-          },
-          "opacity": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "metadata": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "description": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrElementView": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "x": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "y": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrFilteredView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "baseViewKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "mode": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrImage": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrImageView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "elementId": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "contentType": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrInfrastructureNode": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "technology": {
-            "type": "string",
-            "nullable": true
-          },
-          "environment": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "group": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "ownerTeam": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "sourceCodeUrl": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrModel": {
-        "type": "object",
-        "properties": {
-          "softwareSystems": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrSoftwareSystem"
-            },
-            "nullable": true
-          },
-          "people": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrPerson"
-            },
-            "nullable": true
-          },
-          "deploymentNodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrDeploymentNode"
-            },
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "groupSeparator": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrPerson": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "location": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "group": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "ownerTeam": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "sourceCodeUrl": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrRelationship": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "sourceId": {
-            "type": "string",
-            "nullable": true
-          },
-          "destinationId": {
-            "type": "string",
-            "nullable": true
-          },
-          "technology": {
-            "type": "string",
-            "nullable": true
-          },
-          "interactionStyle": {
-            "type": "string",
-            "nullable": true
-          },
-          "linkedRelationshipId": {
-            "type": "string",
-            "nullable": true
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrRelationshipStyle": {
-        "type": "object",
-        "properties": {
-          "tag": {
-            "type": "string",
-            "nullable": true
-          },
-          "thickness": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "color": {
-            "type": "string",
-            "nullable": true
-          },
-          "fontSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "width": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "dashed": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "routing": {
-            "type": "string",
-            "nullable": true
-          },
-          "position": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "opacity": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrRelationshipView": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "response": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "order": {
-            "type": "string",
-            "nullable": true
-          },
-          "vertices": {
-            "$ref": "#/components/schemas/StructurizrVertex"
-          },
-          "routing": {
-            "type": "string",
-            "nullable": true
-          },
-          "position": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrSoftwareSystem": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "location": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "containers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrContainer"
-            },
-            "nullable": true
-          },
-          "group": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "documentation": {
-            "$ref": "#/components/schemas/StructurizrDocumentation"
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "ownerTeam": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "sourceCodeUrl": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrSoftwareSystemInstance": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "softwareSystemId": {
-            "type": "string",
-            "nullable": true
-          },
-          "instanceId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "environment": {
-            "type": "string",
-            "nullable": true
-          },
-          "tags": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationship"
-            },
-            "nullable": true
-          },
-          "dslId": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrSystemContextView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "softwareSystemId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paperSize": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensions": {
-            "$ref": "#/components/schemas/StructurizrDimensions"
-          },
-          "automaticLayout": {
-            "$ref": "#/components/schemas/StructurizrAutomaticLayout"
-          },
-          "enterpriseBoundaryVisible": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrElementView"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationshipView"
-            },
-            "nullable": true
-          },
-          "animations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrAnimationStep"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrSystemLandscapeView": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "paperSize": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensions": {
-            "$ref": "#/components/schemas/StructurizrDimensions"
-          },
-          "automaticLayout": {
-            "$ref": "#/components/schemas/StructurizrAutomaticLayout"
-          },
-          "enterpriseBoundaryVisible": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrElementView"
-            },
-            "nullable": true
-          },
-          "relationships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrRelationshipView"
-            },
-            "nullable": true
-          },
-          "animations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrAnimationStep"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrTerminology": {
-        "type": "object",
-        "properties": {
-          "enterprise": {
-            "type": "string",
-            "nullable": true
-          },
-          "person": {
-            "type": "string",
-            "nullable": true
-          },
-          "softwareSystem": {
-            "type": "string",
-            "nullable": true
-          },
-          "container": {
-            "type": "string",
-            "nullable": true
-          },
-          "component": {
-            "type": "string",
-            "nullable": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "deploymentNode": {
-            "type": "string",
-            "nullable": true
-          },
-          "relationship": {
-            "type": "string",
-            "nullable": true
-          },
-          "infrastructureNode": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrVertex": {
-        "type": "object",
-        "properties": {
-          "x": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "y": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrViews": {
-        "type": "object",
-        "properties": {
-          "systemLandscapeViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrSystemLandscapeView"
-            },
-            "nullable": true
-          },
-          "systemContextViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrSystemContextView"
-            },
-            "nullable": true
-          },
-          "containerViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrContainerView"
-            },
-            "nullable": true
-          },
-          "componentViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrComponentView"
-            },
-            "nullable": true
-          },
-          "dynamicViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrDynamicView"
-            },
-            "nullable": true
-          },
-          "deploymentViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrDeploymentView"
-            },
-            "nullable": true
-          },
-          "filteredViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrFilteredView"
-            },
-            "nullable": true
-          },
-          "imageViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrImageView"
-            },
-            "nullable": true
-          },
-          "configuration": {
-            "$ref": "#/components/schemas/StructurizrConfiguration"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrWorkspace": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "model": {
-            "$ref": "#/components/schemas/StructurizrModel"
-          },
-          "views": {
-            "$ref": "#/components/schemas/StructurizrViews"
-          },
-          "documentation": {
-            "$ref": "#/components/schemas/StructurizrDocumentation"
-          },
-          "configuration": {
-            "$ref": "#/components/schemas/StructurizrWorkspaceConfiguration"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrWorkspaceConfiguration": {
-        "type": "object",
-        "properties": {
-          "visibility": {
-            "type": "string",
-            "nullable": true
-          },
-          "users": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructurizrWorkspaceConfigurationUser"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StructurizrWorkspaceConfigurationUser": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string",
-            "nullable": true
-          },
-          "role": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SystemContextView": {
+      "SystemContextViewDiagram": {
         "type": "object",
         "properties": {
           "id": {
@@ -4285,11 +3970,15 @@
           "enterpriseBoundaryVisible": {
             "type": "boolean",
             "nullable": true
+          },
+          "layoutData": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "SystemLandscapeView": {
+      "SystemLandscapeViewDiagram": {
         "type": "object",
         "properties": {
           "id": {
@@ -4339,6 +4028,10 @@
           },
           "enterpriseBoundaryVisible": {
             "type": "boolean",
+            "nullable": true
+          },
+          "layoutData": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -4386,6 +4079,81 @@
         },
         "additionalProperties": false
       },
+      "TerminologyToImport": {
+        "type": "object",
+        "properties": {
+          "enterprise": {
+            "type": "string",
+            "nullable": true
+          },
+          "person": {
+            "type": "string",
+            "nullable": true
+          },
+          "softwareSystem": {
+            "type": "string",
+            "nullable": true
+          },
+          "container": {
+            "type": "string",
+            "nullable": true
+          },
+          "component": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "deploymentNode": {
+            "type": "string",
+            "nullable": true
+          },
+          "relationship": {
+            "type": "string",
+            "nullable": true
+          },
+          "infrastructureNode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ViewAutomaticLayout": {
+        "type": "object",
+        "properties": {
+          "implementation": {
+            "type": "string",
+            "nullable": true
+          },
+          "rankDirection": {
+            "type": "string",
+            "nullable": true
+          },
+          "rankSeparation": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nodeSeparation": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "edgeSeparation": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vertices": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ViewConfiguration": {
         "type": "object",
         "properties": {
@@ -4419,6 +4187,114 @@
           },
           "groupSeparator": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ViewConfigurationToImport": {
+        "type": "object",
+        "properties": {
+          "elementStyles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementStyleToImport"
+            },
+            "nullable": true
+          },
+          "relationshipStyles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipStyleToImport"
+            },
+            "nullable": true
+          },
+          "terminology": {
+            "$ref": "#/components/schemas/TerminologyToImport"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "groupSeparator": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ViewToImport": {
+        "type": "object",
+        "properties": {
+          "viewType": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "paperSize": {
+            "type": "string",
+            "nullable": true
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementInViewToImport"
+            },
+            "nullable": true
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipInViewToImport"
+            },
+            "nullable": true
+          },
+          "structurizrElementId": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalBoundariesVisible": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "automaticLayout": {
+            "$ref": "#/components/schemas/ViewAutomaticLayout"
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseViewKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "mode": {
+            "type": "string",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },
@@ -4491,6 +4367,20 @@
         },
         "additionalProperties": false
       },
+      "WorkspaceAccessRuleToImport": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "WorkspaceCatalogElement": {
         "type": "object",
         "properties": {
@@ -4532,5 +4422,40 @@
         "additionalProperties": false
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "App"
+    },
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Decisions"
+    },
+    {
+      "name": "DocumentationFiles"
+    },
+    {
+      "name": "DocumentationFilesImport"
+    },
+    {
+      "name": "Documentations"
+    },
+    {
+      "name": "Elements"
+    },
+    {
+      "name": "ModelChanges"
+    },
+    {
+      "name": "Views"
+    },
+    {
+      "name": "Workspaces"
+    },
+    {
+      "name": "WorkspacesImport"
+    }
+  ]
 }

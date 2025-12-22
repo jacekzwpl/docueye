@@ -49,6 +49,10 @@ namespace DocuEye.Persistence
         /// </summary>
         private const string viewsCollectionName = "Views";
         /// <summary>
+        /// Name of collection containing view layouts
+        /// </summary>
+        private const string viewLayoutsCollectionName = "ViewLayouts";
+        /// <summary>
         /// Name of collection containing view configuration for workspaces
         /// </summary>
         private const string viewConfigurationsCollectionName = "ViewConfigurations";
@@ -220,6 +224,18 @@ namespace DocuEye.Persistence
                 return new GenericCollection<ViewConfiguration>(this.database.GetCollection<ViewConfiguration>(viewConfigurationsCollectionName));
             }
         }
+
+        /// <summary>
+        /// Collection of View Layouts
+        /// </summary>
+        public IGenericCollection<ViewLayout> ViewLayouts
+        {
+            get
+            {
+                return new GenericCollection<ViewLayout>(this.database.GetCollection<ViewLayout>(viewLayoutsCollectionName));
+            }
+        }
+
         /// <summary>
         /// Collection of Images
         /// </summary>

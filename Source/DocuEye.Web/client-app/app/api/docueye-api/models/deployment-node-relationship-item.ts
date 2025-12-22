@@ -14,23 +14,9 @@
 
 
 
-/**
- * 
- * @export
- * @interface DeploymentNodeRelationshipItem
- */
+
 export interface DeploymentNodeRelationshipItem {
-    /**
-     * 
-     * @type {string}
-     * @memberof DeploymentNodeRelationshipItem
-     */
     'technology'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof DeploymentNodeRelationshipItem
-     */
     'descriptions'?: Array<string> | null;
 }
 

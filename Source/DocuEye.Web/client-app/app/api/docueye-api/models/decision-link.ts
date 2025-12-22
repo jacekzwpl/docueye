@@ -14,29 +14,10 @@
 
 
 
-/**
- * 
- * @export
- * @interface DecisionLink
- */
+
 export interface DecisionLink {
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionLink
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionLink
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionLink
-     */
     'description'?: string | null;
 }
 

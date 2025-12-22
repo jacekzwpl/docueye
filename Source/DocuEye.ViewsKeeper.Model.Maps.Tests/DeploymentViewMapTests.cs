@@ -1,4 +1,5 @@
 ﻿using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.ViewsKeeper.Api.Model;
 using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Model;
 using System;
@@ -55,6 +56,48 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                         nameof(ViewWithElement.Name), src => string.Format("[{0}]{1}", src.ViewType, src.Title ?? src.Description ?? src.Key)
                     }
                 });
+        }
+
+        [Test]
+        public void Mapping_DeploymentView_To_DeploymentViewDiagram_Works()
+        {
+            var source = new DeploymentView
+            {
+                Id = "deploy-789",
+                ViewType = "Deployment",
+                Title = "Deployment View Diagram Title",
+                Description = "A description of the deployment view diagram",
+                Key = "deploy-view-diagram-key",
+                Elements = new[]
+                {
+                    new ElementView(),
+                    new ElementView()
+                },
+                Relationships = new[]
+                {
+                    new RelationshipView()
+                },
+                AutomaticLayout = new AutomaticLayout()
+                {
+                    Implementation = "dot",
+                    RankDirection = "TB",
+                    RankSeparation = 100,
+                    NodeSeparation = 50,
+                    EdgeSeparation = 10,
+                    Vertices = true
+                },
+                PaperSize = "A4",
+                SoftwareSystemId = "system-456",
+                WorkspaceId = "workspace-123"
+            };
+            var result = source.MapToDeploymentViewDiagram();
+            MappingAssert.AssertMapped(
+                source, result,
+                ignoreDestProps: new[] { nameof(DeploymentViewDiagram.LayoutData) });
+
+            Assert.That(result.AutomaticLayout, Is.Not.Null);
+            Assert.That(result.Relationships.Count(), Is.EqualTo(source.Relationships.Count()));
+            Assert.That(result.Elements.Count(), Is.EqualTo(source.Elements.Count()));
         }
     }
 }

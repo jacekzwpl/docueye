@@ -10,7 +10,8 @@ import MainDrawer from "../maindrawer";
 import MainMenu from "../mainmenu";
 import type { IWorkspaceState } from "~/store/slices/workspace/IWorkspaceState";
 import globalRouter from "~/router/globalRouter";
-import { initResponseInterceptors } from "~/api/interceptors";
+import { initRequestInterceptors, initResponseInterceptors } from "~/api/interceptors";
+import DocuEyeApi from "~/api";
 
 export const Main = () => {
 
@@ -35,6 +36,10 @@ export const Main = () => {
 
   useEffect(() => {
     initResponseInterceptors();
+    DocuEyeApi.AppApi.apiAppAntiforgeryTokenGet()
+      .then(response => {
+        initRequestInterceptors((response.data as any).token);
+      });
   }, [])
 
   return (

@@ -13,6 +13,7 @@
  */
 
 
+
 import type { Configuration } from '../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -22,20 +23,19 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { type ChildElement } from '../models';
+import type { ChildElement } from '../models';
 // @ts-ignore
-import { type DeploymentNodeRelationship } from '../models';
+import type { DeploymentNodeRelationship } from '../models';
 // @ts-ignore
-import { type Element } from '../models';
+import type { Element } from '../models';
 // @ts-ignore
-import { type ElementConsumer } from '../models';
+import type { ElementConsumer } from '../models';
 // @ts-ignore
-import { type ElementDependence } from '../models';
+import type { ElementDependence } from '../models';
 // @ts-ignore
-import { type WorkspaceCatalogElement } from '../models';
+import type { WorkspaceCatalogElement } from '../models';
 /**
  * ElementsApi - axios parameter creator
- * @export
  */
 export const ElementsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -61,8 +61,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -114,8 +114,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['skip'] = skip;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -156,8 +156,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['type'] = type;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -198,8 +198,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['getLinked'] = getLinked;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -240,8 +240,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['getLinked'] = getLinked;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -277,8 +277,8 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -293,7 +293,6 @@ export const ElementsApiAxiosParamCreator = function (configuration?: Configurat
 
 /**
  * ElementsApi - functional programming interface
- * @export
  */
 export const ElementsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ElementsApiAxiosParamCreator(configuration)
@@ -306,9 +305,9 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DeploymentNodeRelationship>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -322,9 +321,9 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdElementsGet(workspaceId: string, name?: string, type?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceCatalogElement>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsGet(workspaceId, name, type, limit, skip, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -336,9 +335,9 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdElementsIdChildrenGet(workspaceId: string, id: string, type?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ChildElement>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdChildrenGet(workspaceId, id, type, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdChildrenGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdChildrenGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -350,9 +349,9 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ElementConsumer>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, getLinked, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdConsumersGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdConsumersGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -364,9 +363,9 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ElementDependence>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, getLinked, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdDependencesGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdDependencesGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -377,16 +376,15 @@ export const ElementsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdElementsIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Element>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdElementsIdGet(workspaceId, id, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ElementsApi.apiWorkspacesWorkspaceIdElementsIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
  * ElementsApi - factory interface
- * @export
  */
 export const ElementsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ElementsApiFp(configuration)
@@ -397,7 +395,7 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId: string, options?: any): AxiosPromise<Array<DeploymentNodeRelationship>> {
+        apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<DeploymentNodeRelationship>> {
             return localVarFp.apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -410,7 +408,7 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsGet(workspaceId: string, name?: string, type?: string, limit?: number, skip?: number, options?: any): AxiosPromise<Array<WorkspaceCatalogElement>> {
+        apiWorkspacesWorkspaceIdElementsGet(workspaceId: string, name?: string, type?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<WorkspaceCatalogElement>> {
             return localVarFp.apiWorkspacesWorkspaceIdElementsGet(workspaceId, name, type, limit, skip, options).then((request) => request(axios, basePath));
         },
         /**
@@ -421,7 +419,7 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdChildrenGet(workspaceId: string, id: string, type?: string, options?: any): AxiosPromise<Array<ChildElement>> {
+        apiWorkspacesWorkspaceIdElementsIdChildrenGet(workspaceId: string, id: string, type?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ChildElement>> {
             return localVarFp.apiWorkspacesWorkspaceIdElementsIdChildrenGet(workspaceId, id, type, options).then((request) => request(axios, basePath));
         },
         /**
@@ -432,7 +430,7 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, getLinked?: boolean, options?: any): AxiosPromise<Array<ElementConsumer>> {
+        apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<Array<ElementConsumer>> {
             return localVarFp.apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, getLinked, options).then((request) => request(axios, basePath));
         },
         /**
@@ -443,7 +441,7 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, getLinked?: boolean, options?: any): AxiosPromise<Array<ElementDependence>> {
+        apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<Array<ElementDependence>> {
             return localVarFp.apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, getLinked, options).then((request) => request(axios, basePath));
         },
         /**
@@ -453,7 +451,7 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdElementsIdGet(workspaceId: string, id: string, options?: any): AxiosPromise<Element> {
+        apiWorkspacesWorkspaceIdElementsIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): AxiosPromise<Element> {
             return localVarFp.apiWorkspacesWorkspaceIdElementsIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -461,9 +459,6 @@ export const ElementsApiFactory = function (configuration?: Configuration, baseP
 
 /**
  * ElementsApi - object-oriented interface
- * @export
- * @class ElementsApi
- * @extends {BaseAPI}
  */
 export class ElementsApi extends BaseAPI {
     /**
@@ -471,7 +466,6 @@ export class ElementsApi extends BaseAPI {
      * @param {string} workspaceId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ElementsApi
      */
     public apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId: string, options?: RawAxiosRequestConfig) {
         return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsDeploymentnodesmatrixGet(workspaceId, options).then((request) => request(this.axios, this.basePath));
@@ -486,7 +480,6 @@ export class ElementsApi extends BaseAPI {
      * @param {number} [skip] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ElementsApi
      */
     public apiWorkspacesWorkspaceIdElementsGet(workspaceId: string, name?: string, type?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
         return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsGet(workspaceId, name, type, limit, skip, options).then((request) => request(this.axios, this.basePath));
@@ -499,7 +492,6 @@ export class ElementsApi extends BaseAPI {
      * @param {string} [type] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ElementsApi
      */
     public apiWorkspacesWorkspaceIdElementsIdChildrenGet(workspaceId: string, id: string, type?: string, options?: RawAxiosRequestConfig) {
         return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdChildrenGet(workspaceId, id, type, options).then((request) => request(this.axios, this.basePath));
@@ -512,7 +504,6 @@ export class ElementsApi extends BaseAPI {
      * @param {boolean} [getLinked] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ElementsApi
      */
     public apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig) {
         return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdConsumersGet(workspaceId, id, getLinked, options).then((request) => request(this.axios, this.basePath));
@@ -525,7 +516,6 @@ export class ElementsApi extends BaseAPI {
      * @param {boolean} [getLinked] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ElementsApi
      */
     public apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId: string, id: string, getLinked?: boolean, options?: RawAxiosRequestConfig) {
         return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdDependencesGet(workspaceId, id, getLinked, options).then((request) => request(this.axios, this.basePath));
@@ -537,7 +527,6 @@ export class ElementsApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ElementsApi
      */
     public apiWorkspacesWorkspaceIdElementsIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig) {
         return ElementsApiFp(this.configuration).apiWorkspacesWorkspaceIdElementsIdGet(workspaceId, id, options).then((request) => request(this.axios, this.basePath));

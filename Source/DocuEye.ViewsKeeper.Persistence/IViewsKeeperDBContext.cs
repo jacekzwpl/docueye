@@ -44,5 +44,10 @@ namespace DocuEye.ViewsKeeper.Persistence
         /// Collection fo image views
         /// </summary>
         IGenericCollection<ImageView> ImageViews { get; }
+
+        /// <summary>
+        /// Collection of view layouts
+        /// </summary>
+        IGenericCollection<ViewLayout> ViewLayouts { get; }
     }
 }

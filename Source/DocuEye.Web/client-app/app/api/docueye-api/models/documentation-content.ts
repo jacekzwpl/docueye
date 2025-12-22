@@ -14,17 +14,8 @@
 
 
 
-/**
- * 
- * @export
- * @interface DocumentationContent
- */
+
 export interface DocumentationContent {
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentationContent
-     */
     'htmlContent'?: string | null;
 }
 

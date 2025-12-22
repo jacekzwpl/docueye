@@ -13,6 +13,7 @@
  */
 
 
+
 import type { Configuration } from '../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -22,13 +23,54 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { type ImportOpenApiFileRequest } from '../models';
+import type { ImportOpenApiFileRequest } from '../models';
 /**
  * DocumentationFilesImportApi - axios parameter creator
- * @export
  */
 export const DocumentationFilesImportApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [elementId] 
+         * @param {string} [elementDslId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesWorkspaceIdDocfileOpenapiDelete: async (workspaceId: string, elementId?: string, elementDslId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('apiWorkspacesWorkspaceIdDocfileOpenapiDelete', 'workspaceId', workspaceId)
+            const localVarPath = `/api/workspaces/{workspaceId}/docfile/openapi`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (elementId !== undefined) {
+                localVarQueryParameter['elementId'] = elementId;
+            }
+
+            if (elementDslId !== undefined) {
+                localVarQueryParameter['elementDslId'] = elementDslId;
+            }
+
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {string} workspaceId 
@@ -52,8 +94,6 @@ export const DocumentationFilesImportApiAxiosParamCreator = function (configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -71,11 +111,24 @@ export const DocumentationFilesImportApiAxiosParamCreator = function (configurat
 
 /**
  * DocumentationFilesImportApi - functional programming interface
- * @export
  */
 export const DocumentationFilesImportApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DocumentationFilesImportApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [elementId] 
+         * @param {string} [elementDslId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiWorkspacesWorkspaceIdDocfileOpenapiDelete(workspaceId: string, elementId?: string, elementDslId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocfileOpenapiDelete(workspaceId, elementId, elementDslId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentationFilesImportApi.apiWorkspacesWorkspaceIdDocfileOpenapiDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * 
          * @param {string} workspaceId 
@@ -85,16 +138,15 @@ export const DocumentationFilesImportApiFp = function(configuration?: Configurat
          */
         async apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId, importOpenApiFileRequest, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DocumentationFilesImportApi.apiWorkspacesWorkspaceIdDocfileOpenapiPut']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentationFilesImportApi.apiWorkspacesWorkspaceIdDocfileOpenapiPut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
  * DocumentationFilesImportApi - factory interface
- * @export
  */
 export const DocumentationFilesImportApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DocumentationFilesImportApiFp(configuration)
@@ -102,11 +154,22 @@ export const DocumentationFilesImportApiFactory = function (configuration?: Conf
         /**
          * 
          * @param {string} workspaceId 
+         * @param {string} [elementId] 
+         * @param {string} [elementDslId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesWorkspaceIdDocfileOpenapiDelete(workspaceId: string, elementId?: string, elementDslId?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.apiWorkspacesWorkspaceIdDocfileOpenapiDelete(workspaceId, elementId, elementDslId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
          * @param {ImportOpenApiFileRequest} [importOpenApiFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: any): AxiosPromise<void> {
+        apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId, importOpenApiFileRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -114,18 +177,26 @@ export const DocumentationFilesImportApiFactory = function (configuration?: Conf
 
 /**
  * DocumentationFilesImportApi - object-oriented interface
- * @export
- * @class DocumentationFilesImportApi
- * @extends {BaseAPI}
  */
 export class DocumentationFilesImportApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} [elementId] 
+     * @param {string} [elementDslId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public apiWorkspacesWorkspaceIdDocfileOpenapiDelete(workspaceId: string, elementId?: string, elementDslId?: string, options?: RawAxiosRequestConfig) {
+        return DocumentationFilesImportApiFp(this.configuration).apiWorkspacesWorkspaceIdDocfileOpenapiDelete(workspaceId, elementId, elementDslId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {string} workspaceId 
      * @param {ImportOpenApiFileRequest} [importOpenApiFileRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DocumentationFilesImportApi
      */
     public apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId: string, importOpenApiFileRequest?: ImportOpenApiFileRequest, options?: RawAxiosRequestConfig) {
         return DocumentationFilesImportApiFp(this.configuration).apiWorkspacesWorkspaceIdDocfileOpenapiPut(workspaceId, importOpenApiFileRequest, options).then((request) => request(this.axios, this.basePath));

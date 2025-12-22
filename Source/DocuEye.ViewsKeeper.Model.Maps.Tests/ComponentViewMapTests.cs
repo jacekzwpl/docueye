@@ -1,6 +1,8 @@
 ﻿using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.ViewsKeeper.Api.Model;
 using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Model;
+using DocuEye.ViewsKeeper.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +57,50 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                         nameof(ViewWithElement.Name), src => string.Format("[{0}]{1}", src.ViewType, src.Title ?? src.Description ?? src.Key)
                     }
                 });
+        }
+
+        [Test]
+        public void Mapping_ComponentView_To_ComponentViewDiagram_Works()
+        {
+            var source = new ComponentView
+            {
+                Id = "comp-789",
+                ViewType = "Component",
+                Title = "Diagram Title",
+                Description = "Diagram Description",
+                Key = "comp-diagram-key",
+                AutomaticLayout = new AutomaticLayout
+                {
+                    Implementation = "dot",
+                    RankDirection = "TB",
+                    RankSeparation = 50,
+                    NodeSeparation = 30,
+                    EdgeSeparation = 10,
+                    Vertices = true
+                },
+                ContainerId = "container-1",
+                ExternalContainerBoundariesVisible = true,
+                Elements = new List<ElementView>
+                {
+                    new ElementView { Id = "elem-1", Type = "Node" },
+                    new ElementView { Id = "elem-2", Type = "Edge" }
+                },
+                Relationships = new List<RelationshipView>
+                {
+                    new RelationshipView { Id = "rel-1" }
+                },
+                PaperSize = "A4",
+                WorkspaceId = "workspace-id"
+            };
+            var result = source.MapToComponentViewDiagram();
+            MappingAssert.AssertMapped(
+                source, result,
+                ignoreDestProps: new [] {nameof(ComponentViewDiagram.LayoutData)});
+
+            Assert.That(result.AutomaticLayout, Is.Not.Null);
+            Assert.That(result.Relationships.Count(), Is.EqualTo(source.Relationships.Count()));
+            Assert.That(result.Elements.Count(), Is.EqualTo(source.Elements.Count()));
+
         }
     }
 }

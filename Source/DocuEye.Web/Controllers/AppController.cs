@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DocuEye.Web.Controllers
 {
@@ -6,6 +8,12 @@ namespace DocuEye.Web.Controllers
     [ApiController]
     public class AppController : ControllerBase
     {
+        private readonly IAntiforgery forgeryService;
+        public AppController(IAntiforgery forgeryService)
+        {
+            this.forgeryService = forgeryService;
+        }
+
         [Route("context")]
         [HttpGet]
         public IActionResult Context()
@@ -30,6 +38,18 @@ namespace DocuEye.Web.Controllers
                 acceptedVersions = "[1.0.0,2.0.0]"
             });
 
+        }
+
+        [Route("antiforgery/token")]
+        [HttpGet]
+        [Authorize(Policy = "Workspace")]
+        public IActionResult AntiForgeryToken()
+        {
+            var tokens = forgeryService.GetAndStoreTokens(this.HttpContext);
+            return this.Ok(new
+            {
+                Token = tokens.RequestToken!
+            });
         }
     }
 }

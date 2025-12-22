@@ -14,35 +14,11 @@
 
 
 
-/**
- * 
- * @export
- * @interface WorkspaceCatalogElement
- */
+
 export interface WorkspaceCatalogElement {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceCatalogElement
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceCatalogElement
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceCatalogElement
-     */
     'type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceCatalogElement
-     */
     'description'?: string | null;
 }
 

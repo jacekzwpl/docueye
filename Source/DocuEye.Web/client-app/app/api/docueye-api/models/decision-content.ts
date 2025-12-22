@@ -14,17 +14,8 @@
 
 
 
-/**
- * 
- * @export
- * @interface DecisionContent
- */
+
 export interface DecisionContent {
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionContent
-     */
     'htmlContent'?: string | null;
 }
 

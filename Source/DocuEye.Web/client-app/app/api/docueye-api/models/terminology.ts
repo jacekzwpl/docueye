@@ -14,65 +14,16 @@
 
 
 
-/**
- * 
- * @export
- * @interface Terminology
- */
+
 export interface Terminology {
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'enterprise'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'person'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'softwareSystem'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'container'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'component'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'code'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'deploymentNode'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'relationship'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Terminology
-     */
     'infrastructureNode'?: string | null;
 }
 

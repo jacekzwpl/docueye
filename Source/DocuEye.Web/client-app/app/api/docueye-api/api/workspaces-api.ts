@@ -13,6 +13,7 @@
  */
 
 
+
 import type { Configuration } from '../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -22,14 +23,13 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { type FoundedWorkspace } from '../models';
+import type { FoundedWorkspace } from '../models';
 // @ts-ignore
-import { type ViewConfiguration } from '../models';
+import type { ViewConfiguration } from '../models';
 // @ts-ignore
-import { type Workspace } from '../models';
+import type { Workspace } from '../models';
 /**
  * WorkspacesApi - axios parameter creator
- * @export
  */
 export const WorkspacesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -66,8 +66,8 @@ export const WorkspacesApiAxiosParamCreator = function (configuration?: Configur
                 localVarQueryParameter['skip'] = skip;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -100,7 +100,6 @@ export const WorkspacesApiAxiosParamCreator = function (configuration?: Configur
             const localVarQueryParameter = {} as any;
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -132,8 +131,8 @@ export const WorkspacesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -165,8 +164,8 @@ export const WorkspacesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -181,7 +180,6 @@ export const WorkspacesApiAxiosParamCreator = function (configuration?: Configur
 
 /**
  * WorkspacesApi - functional programming interface
- * @export
  */
 export const WorkspacesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = WorkspacesApiAxiosParamCreator(configuration)
@@ -196,9 +194,9 @@ export const WorkspacesApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesGet(name?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FoundedWorkspace>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesGet(name, limit, skip, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['WorkspacesApi.apiWorkspacesGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.apiWorkspacesGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -208,9 +206,9 @@ export const WorkspacesApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesIdDelete(id, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['WorkspacesApi.apiWorkspacesIdDelete']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.apiWorkspacesIdDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -220,9 +218,9 @@ export const WorkspacesApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesIdGet(id, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['WorkspacesApi.apiWorkspacesIdGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.apiWorkspacesIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -232,16 +230,15 @@ export const WorkspacesApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesIdViewconfigurationGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ViewConfiguration>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesIdViewconfigurationGet(id, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['WorkspacesApi.apiWorkspacesIdViewconfigurationGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.apiWorkspacesIdViewconfigurationGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
  * WorkspacesApi - factory interface
- * @export
  */
 export const WorkspacesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = WorkspacesApiFp(configuration)
@@ -254,7 +251,7 @@ export const WorkspacesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesGet(name?: string, limit?: number, skip?: number, options?: any): AxiosPromise<Array<FoundedWorkspace>> {
+        apiWorkspacesGet(name?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<FoundedWorkspace>> {
             return localVarFp.apiWorkspacesGet(name, limit, skip, options).then((request) => request(axios, basePath));
         },
         /**
@@ -263,7 +260,7 @@ export const WorkspacesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesIdDelete(id: string, options?: any): AxiosPromise<void> {
+        apiWorkspacesIdDelete(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.apiWorkspacesIdDelete(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -272,7 +269,7 @@ export const WorkspacesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesIdGet(id: string, options?: any): AxiosPromise<Workspace> {
+        apiWorkspacesIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
             return localVarFp.apiWorkspacesIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -281,7 +278,7 @@ export const WorkspacesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesIdViewconfigurationGet(id: string, options?: any): AxiosPromise<ViewConfiguration> {
+        apiWorkspacesIdViewconfigurationGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ViewConfiguration> {
             return localVarFp.apiWorkspacesIdViewconfigurationGet(id, options).then((request) => request(axios, basePath));
         },
     };
@@ -289,9 +286,6 @@ export const WorkspacesApiFactory = function (configuration?: Configuration, bas
 
 /**
  * WorkspacesApi - object-oriented interface
- * @export
- * @class WorkspacesApi
- * @extends {BaseAPI}
  */
 export class WorkspacesApi extends BaseAPI {
     /**
@@ -301,7 +295,6 @@ export class WorkspacesApi extends BaseAPI {
      * @param {number} [skip] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspacesApi
      */
     public apiWorkspacesGet(name?: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
         return WorkspacesApiFp(this.configuration).apiWorkspacesGet(name, limit, skip, options).then((request) => request(this.axios, this.basePath));
@@ -312,7 +305,6 @@ export class WorkspacesApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspacesApi
      */
     public apiWorkspacesIdDelete(id: string, options?: RawAxiosRequestConfig) {
         return WorkspacesApiFp(this.configuration).apiWorkspacesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -323,7 +315,6 @@ export class WorkspacesApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspacesApi
      */
     public apiWorkspacesIdGet(id: string, options?: RawAxiosRequestConfig) {
         return WorkspacesApiFp(this.configuration).apiWorkspacesIdGet(id, options).then((request) => request(this.axios, this.basePath));
@@ -334,7 +325,6 @@ export class WorkspacesApi extends BaseAPI {
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspacesApi
      */
     public apiWorkspacesIdViewconfigurationGet(id: string, options?: RawAxiosRequestConfig) {
         return WorkspacesApiFp(this.configuration).apiWorkspacesIdViewconfigurationGet(id, options).then((request) => request(this.axios, this.basePath));

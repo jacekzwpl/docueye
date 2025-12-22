@@ -13,6 +13,7 @@
  */
 
 
+
 import type { Configuration } from '../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -22,10 +23,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { type ModelChange } from '../models';
+import type { ModelChange } from '../models';
 /**
  * ModelChangesApi - axios parameter creator
- * @export
  */
 export const ModelChangesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -61,8 +61,8 @@ export const ModelChangesApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['skip'] = skip;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -77,7 +77,6 @@ export const ModelChangesApiAxiosParamCreator = function (configuration?: Config
 
 /**
  * ModelChangesApi - functional programming interface
- * @export
  */
 export const ModelChangesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ModelChangesApiAxiosParamCreator(configuration)
@@ -92,16 +91,15 @@ export const ModelChangesApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspaceIdModelchangesGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelChange>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspaceIdModelchangesGet(workspaceId, limit, skip, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['ModelChangesApi.apiWorkspaceIdModelchangesGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ModelChangesApi.apiWorkspaceIdModelchangesGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
  * ModelChangesApi - factory interface
- * @export
  */
 export const ModelChangesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ModelChangesApiFp(configuration)
@@ -114,7 +112,7 @@ export const ModelChangesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspaceIdModelchangesGet(workspaceId: string, limit?: number, skip?: number, options?: any): AxiosPromise<Array<ModelChange>> {
+        apiWorkspaceIdModelchangesGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ModelChange>> {
             return localVarFp.apiWorkspaceIdModelchangesGet(workspaceId, limit, skip, options).then((request) => request(axios, basePath));
         },
     };
@@ -122,9 +120,6 @@ export const ModelChangesApiFactory = function (configuration?: Configuration, b
 
 /**
  * ModelChangesApi - object-oriented interface
- * @export
- * @class ModelChangesApi
- * @extends {BaseAPI}
  */
 export class ModelChangesApi extends BaseAPI {
     /**
@@ -134,7 +129,6 @@ export class ModelChangesApi extends BaseAPI {
      * @param {number} [skip] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ModelChangesApi
      */
     public apiWorkspaceIdModelchangesGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
         return ModelChangesApiFp(this.configuration).apiWorkspaceIdModelchangesGet(workspaceId, limit, skip, options).then((request) => request(this.axios, this.basePath));

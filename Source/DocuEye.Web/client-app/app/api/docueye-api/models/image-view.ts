@@ -14,65 +14,16 @@
 
 
 
-/**
- * 
- * @export
- * @interface ImageView
- */
+
 export interface ImageView {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'viewType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'elementId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'content'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageView
-     */
     'contentType'?: string | null;
 }
 

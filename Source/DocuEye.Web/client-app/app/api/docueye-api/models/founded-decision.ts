@@ -13,45 +13,16 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
 import type { DecisionLink } from './decision-link';
 
-/**
- * 
- * @export
- * @interface FoundedDecision
- */
 export interface FoundedDecision {
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedDecision
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedDecision
-     */
     'date'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedDecision
-     */
     'status'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedDecision
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {Array<DecisionLink>}
-     * @memberof FoundedDecision
-     */
     'links'?: Array<DecisionLink> | null;
 }
 

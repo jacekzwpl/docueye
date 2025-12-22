@@ -13,6 +13,7 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ElementStyle } from './element-style';
@@ -23,47 +24,12 @@ import type { RelationshipStyle } from './relationship-style';
 // @ts-ignore
 import type { Terminology } from './terminology';
 
-/**
- * 
- * @export
- * @interface ViewConfiguration
- */
 export interface ViewConfiguration {
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewConfiguration
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {Array<ElementStyle>}
-     * @memberof ViewConfiguration
-     */
     'elementStyles'?: Array<ElementStyle> | null;
-    /**
-     * 
-     * @type {Array<RelationshipStyle>}
-     * @memberof ViewConfiguration
-     */
     'relationshipStyles'?: Array<RelationshipStyle> | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ViewConfiguration
-     */
     'themes'?: Array<string> | null;
-    /**
-     * 
-     * @type {Terminology}
-     * @memberof ViewConfiguration
-     */
     'terminology'?: Terminology;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewConfiguration
-     */
     'groupSeparator'?: string | null;
 }
 

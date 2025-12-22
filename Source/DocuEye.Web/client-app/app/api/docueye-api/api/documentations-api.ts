@@ -13,6 +13,7 @@
  */
 
 
+
 import type { Configuration } from '../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -22,10 +23,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { type DocumentationContent } from '../models';
+import type { DocumentationContent } from '../models';
 /**
  * DocumentationsApi - axios parameter creator
- * @export
  */
 export const DocumentationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -60,7 +60,6 @@ export const DocumentationsApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -101,8 +100,8 @@ export const DocumentationsApiAxiosParamCreator = function (configuration?: Conf
                 localVarQueryParameter['baseUrl'] = baseUrl;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -139,8 +138,8 @@ export const DocumentationsApiAxiosParamCreator = function (configuration?: Conf
                 localVarQueryParameter['baseUrl'] = baseUrl;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -155,7 +154,6 @@ export const DocumentationsApiAxiosParamCreator = function (configuration?: Conf
 
 /**
  * DocumentationsApi - functional programming interface
- * @export
  */
 export const DocumentationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DocumentationsApiAxiosParamCreator(configuration)
@@ -170,9 +168,9 @@ export const DocumentationsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet(workspaceId: string, documentationId: string, name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet(workspaceId, documentationId, name, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DocumentationsApi.apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentationsApi.apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -184,9 +182,9 @@ export const DocumentationsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet(workspaceId: string, elementId: string, baseUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentationContent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet(workspaceId, elementId, baseUrl, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DocumentationsApi.apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentationsApi.apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -197,16 +195,15 @@ export const DocumentationsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(workspaceId: string, baseUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentationContent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(workspaceId, baseUrl, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DocumentationsApi.apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentationsApi.apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
  * DocumentationsApi - factory interface
- * @export
  */
 export const DocumentationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DocumentationsApiFp(configuration)
@@ -219,7 +216,7 @@ export const DocumentationsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet(workspaceId: string, documentationId: string, name: string, options?: any): AxiosPromise<void> {
+        apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet(workspaceId: string, documentationId: string, name: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet(workspaceId, documentationId, name, options).then((request) => request(axios, basePath));
         },
         /**
@@ -230,7 +227,7 @@ export const DocumentationsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet(workspaceId: string, elementId: string, baseUrl?: string, options?: any): AxiosPromise<DocumentationContent> {
+        apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet(workspaceId: string, elementId: string, baseUrl?: string, options?: RawAxiosRequestConfig): AxiosPromise<DocumentationContent> {
             return localVarFp.apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet(workspaceId, elementId, baseUrl, options).then((request) => request(axios, basePath));
         },
         /**
@@ -240,7 +237,7 @@ export const DocumentationsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(workspaceId: string, baseUrl?: string, options?: any): AxiosPromise<DocumentationContent> {
+        apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(workspaceId: string, baseUrl?: string, options?: RawAxiosRequestConfig): AxiosPromise<DocumentationContent> {
             return localVarFp.apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(workspaceId, baseUrl, options).then((request) => request(axios, basePath));
         },
     };
@@ -248,9 +245,6 @@ export const DocumentationsApiFactory = function (configuration?: Configuration,
 
 /**
  * DocumentationsApi - object-oriented interface
- * @export
- * @class DocumentationsApi
- * @extends {BaseAPI}
  */
 export class DocumentationsApi extends BaseAPI {
     /**
@@ -260,7 +254,6 @@ export class DocumentationsApi extends BaseAPI {
      * @param {string} name 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DocumentationsApi
      */
     public apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet(workspaceId: string, documentationId: string, name: string, options?: RawAxiosRequestConfig) {
         return DocumentationsApiFp(this.configuration).apiWorkspacesWorkspaceIdDocumentationsDocumentationIdImagesNameGet(workspaceId, documentationId, name, options).then((request) => request(this.axios, this.basePath));
@@ -273,7 +266,6 @@ export class DocumentationsApi extends BaseAPI {
      * @param {string} [baseUrl] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DocumentationsApi
      */
     public apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet(workspaceId: string, elementId: string, baseUrl?: string, options?: RawAxiosRequestConfig) {
         return DocumentationsApiFp(this.configuration).apiWorkspacesWorkspaceIdDocumentationsElementElementIdGet(workspaceId, elementId, baseUrl, options).then((request) => request(this.axios, this.basePath));
@@ -285,7 +277,6 @@ export class DocumentationsApi extends BaseAPI {
      * @param {string} [baseUrl] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DocumentationsApi
      */
     public apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(workspaceId: string, baseUrl?: string, options?: RawAxiosRequestConfig) {
         return DocumentationsApiFp(this.configuration).apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(workspaceId, baseUrl, options).then((request) => request(this.axios, this.basePath));

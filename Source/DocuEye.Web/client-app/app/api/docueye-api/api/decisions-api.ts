@@ -13,6 +13,7 @@
  */
 
 
+
 import type { Configuration } from '../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -22,12 +23,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { type DecisionContent } from '../models';
+import type { DecisionContent } from '../models';
 // @ts-ignore
-import { type FoundedDecision } from '../models';
+import type { FoundedDecision } from '../models';
 /**
  * DecisionsApi - axios parameter creator
- * @export
  */
 export const DecisionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -67,8 +67,8 @@ export const DecisionsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['skip'] = skip;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -109,8 +109,8 @@ export const DecisionsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['baseUrl'] = baseUrl;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -152,8 +152,8 @@ export const DecisionsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['skip'] = skip;
             }
 
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -168,7 +168,6 @@ export const DecisionsApiAxiosParamCreator = function (configuration?: Configura
 
 /**
  * DecisionsApi - functional programming interface
- * @export
  */
 export const DecisionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DecisionsApiAxiosParamCreator(configuration)
@@ -184,9 +183,9 @@ export const DecisionsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdDecisionsElementElementIdGet(workspaceId: string, elementId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FoundedDecision>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDecisionsElementElementIdGet(workspaceId, elementId, limit, skip, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DecisionsApi.apiWorkspacesWorkspaceIdDecisionsElementElementIdGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DecisionsApi.apiWorkspacesWorkspaceIdDecisionsElementElementIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -198,9 +197,9 @@ export const DecisionsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdDecisionsIdGet(workspaceId: string, id: string, baseUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DecisionContent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDecisionsIdGet(workspaceId, id, baseUrl, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DecisionsApi.apiWorkspacesWorkspaceIdDecisionsIdGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DecisionsApi.apiWorkspacesWorkspaceIdDecisionsIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -212,16 +211,15 @@ export const DecisionsApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdDecisionsWorkspaceGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FoundedDecision>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDecisionsWorkspaceGet(workspaceId, limit, skip, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DecisionsApi.apiWorkspacesWorkspaceIdDecisionsWorkspaceGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DecisionsApi.apiWorkspacesWorkspaceIdDecisionsWorkspaceGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
  * DecisionsApi - factory interface
- * @export
  */
 export const DecisionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DecisionsApiFp(configuration)
@@ -235,7 +233,7 @@ export const DecisionsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDecisionsElementElementIdGet(workspaceId: string, elementId: string, limit?: number, skip?: number, options?: any): AxiosPromise<Array<FoundedDecision>> {
+        apiWorkspacesWorkspaceIdDecisionsElementElementIdGet(workspaceId: string, elementId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<FoundedDecision>> {
             return localVarFp.apiWorkspacesWorkspaceIdDecisionsElementElementIdGet(workspaceId, elementId, limit, skip, options).then((request) => request(axios, basePath));
         },
         /**
@@ -246,7 +244,7 @@ export const DecisionsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDecisionsIdGet(workspaceId: string, id: string, baseUrl?: string, options?: any): AxiosPromise<DecisionContent> {
+        apiWorkspacesWorkspaceIdDecisionsIdGet(workspaceId: string, id: string, baseUrl?: string, options?: RawAxiosRequestConfig): AxiosPromise<DecisionContent> {
             return localVarFp.apiWorkspacesWorkspaceIdDecisionsIdGet(workspaceId, id, baseUrl, options).then((request) => request(axios, basePath));
         },
         /**
@@ -257,7 +255,7 @@ export const DecisionsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDecisionsWorkspaceGet(workspaceId: string, limit?: number, skip?: number, options?: any): AxiosPromise<Array<FoundedDecision>> {
+        apiWorkspacesWorkspaceIdDecisionsWorkspaceGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<FoundedDecision>> {
             return localVarFp.apiWorkspacesWorkspaceIdDecisionsWorkspaceGet(workspaceId, limit, skip, options).then((request) => request(axios, basePath));
         },
     };
@@ -265,9 +263,6 @@ export const DecisionsApiFactory = function (configuration?: Configuration, base
 
 /**
  * DecisionsApi - object-oriented interface
- * @export
- * @class DecisionsApi
- * @extends {BaseAPI}
  */
 export class DecisionsApi extends BaseAPI {
     /**
@@ -278,7 +273,6 @@ export class DecisionsApi extends BaseAPI {
      * @param {number} [skip] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DecisionsApi
      */
     public apiWorkspacesWorkspaceIdDecisionsElementElementIdGet(workspaceId: string, elementId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
         return DecisionsApiFp(this.configuration).apiWorkspacesWorkspaceIdDecisionsElementElementIdGet(workspaceId, elementId, limit, skip, options).then((request) => request(this.axios, this.basePath));
@@ -291,7 +285,6 @@ export class DecisionsApi extends BaseAPI {
      * @param {string} [baseUrl] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DecisionsApi
      */
     public apiWorkspacesWorkspaceIdDecisionsIdGet(workspaceId: string, id: string, baseUrl?: string, options?: RawAxiosRequestConfig) {
         return DecisionsApiFp(this.configuration).apiWorkspacesWorkspaceIdDecisionsIdGet(workspaceId, id, baseUrl, options).then((request) => request(this.axios, this.basePath));
@@ -304,7 +297,6 @@ export class DecisionsApi extends BaseAPI {
      * @param {number} [skip] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DecisionsApi
      */
     public apiWorkspacesWorkspaceIdDecisionsWorkspaceGet(workspaceId: string, limit?: number, skip?: number, options?: RawAxiosRequestConfig) {
         return DecisionsApiFp(this.configuration).apiWorkspacesWorkspaceIdDecisionsWorkspaceGet(workspaceId, limit, skip, options).then((request) => request(this.axios, this.basePath));

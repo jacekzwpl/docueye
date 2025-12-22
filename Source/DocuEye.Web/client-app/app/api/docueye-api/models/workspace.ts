@@ -13,6 +13,7 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
 import type { WorkspaceAccessRule } from './workspace-access-rule';
@@ -20,47 +21,12 @@ import type { WorkspaceAccessRule } from './workspace-access-rule';
 // @ts-ignore
 import type { WorkspaceView } from './workspace-view';
 
-/**
- * 
- * @export
- * @interface Workspace
- */
 export interface Workspace {
-    /**
-     * 
-     * @type {string}
-     * @memberof Workspace
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Workspace
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Workspace
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {Array<WorkspaceView>}
-     * @memberof Workspace
-     */
     'views'?: Array<WorkspaceView> | null;
-    /**
-     * 
-     * @type {Array<WorkspaceAccessRule>}
-     * @memberof Workspace
-     */
     'accessRules'?: Array<WorkspaceAccessRule> | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Workspace
-     */
     'isPrivate'?: boolean;
 }
 

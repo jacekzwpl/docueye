@@ -14,35 +14,11 @@
 
 
 
-/**
- * 
- * @export
- * @interface ImportOpenApiFileRequest
- */
+
 export interface ImportOpenApiFileRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportOpenApiFileRequest
-     */
     'content'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportOpenApiFileRequest
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportOpenApiFileRequest
-     */
     'elementDslId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportOpenApiFileRequest
-     */
     'elementId'?: string | null;
 }
 

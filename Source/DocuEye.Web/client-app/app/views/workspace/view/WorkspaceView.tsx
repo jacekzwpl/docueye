@@ -1,5 +1,5 @@
-import { Autocomplete, Box, TextField, Toolbar } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Autocomplete, Box, IconButton, TextField, Toolbar } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
@@ -12,7 +12,7 @@ import store from "../../../store";
 import type { IViewConfigurationState } from "../../../store/slices/viewConfiguration/IViewConfigurationState";
 import { setViewConfiguration } from "../../../store/slices/viewConfiguration/viewConfigurationSlice";
 import { setWorkspaceData } from "../../../store/slices/workspace/workspaceSlice";
-
+import SaveIcon from '@mui/icons-material/Save';
 
 
 export const WorkspaceView = () => {
@@ -22,6 +22,7 @@ export const WorkspaceView = () => {
     const [selectedView, setSelectedView] = useState<any | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const [canSaveLayout, setCanSaveLayout] = useState<boolean>(false);
 
     const viewConfiguration: IViewConfigurationState =
         useSelector((state: any) => state.viewConfiguration);
@@ -63,6 +64,11 @@ export const WorkspaceView = () => {
                 }
                 if (viewId) {
                     const view = avViews.find((obj) => { return obj.id === viewId });
+                    if(view && view.viewType === 'ImageView'){
+                        setCanSaveLayout(false);
+                    }else {
+                        setCanSaveLayout(true);
+                    }
                     if (view) {
                         setSelectedView(view);
                     } else {
@@ -77,12 +83,23 @@ export const WorkspaceView = () => {
                 setIsLoading(false);
             });
 
-    }, [setIsLoading, workspaceId,viewId, dispatch, navigate]);
+    }, [setIsLoading, workspaceId,viewId, dispatch, navigate, setCanSaveLayout]);
 
 
     const onSelectedViewChange = (event: any, newValue: any | null) => {
+        
         navigate('/workspace/' + workspaceId + '/view/' + newValue.id);
     }
+    const saveLayout = () => {
+        if (container.current) {
+            container.current.saveLayout();
+        }
+    };
+
+    
+
+
+    const container = useRef<any>(null);
 
     return (
         <Box padding={2} >
@@ -100,11 +117,17 @@ export const WorkspaceView = () => {
                             disableClearable={true}
                             renderInput={(params) => <TextField {...params} label="Diagram" />}
                         />
-                        <ExportButton /></Toolbar>
+                        <ExportButton />
+                        <IconButton disabled={!canSaveLayout} aria-label="export to png" size="small" onClick={saveLayout}>
+                            <SaveIcon fontSize="small" />
+                        </IconButton>
+                        
+                        </Toolbar>
 
                 </Box>
                 <Box paddingBottom={2} height={'calc(100vh - 168px)'} >
                     <ViewDiagram
+                        ref={container}
                         selectedView={selectedView}
                         workspaceId={workspaceId}
                         viewConfiguration={viewConfiguration.value}

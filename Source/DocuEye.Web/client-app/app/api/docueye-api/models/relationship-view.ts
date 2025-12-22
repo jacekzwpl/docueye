@@ -14,107 +14,23 @@
 
 
 
-/**
- * 
- * @export
- * @interface RelationshipView
- */
+
 export interface RelationshipView {
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'routing'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RelationshipView
-     */
     'position'?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof RelationshipView
-     */
     'response'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'order'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof RelationshipView
-     */
     'tags'?: Array<string> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'url'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof RelationshipView
-     */
     'properties'?: { [key: string]: string; } | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'sourceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'destinationId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'technology'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'interactionStyle'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'linkedRelationshipId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'dslId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipView
-     */
     'workspaceId'?: string | null;
 }
 
