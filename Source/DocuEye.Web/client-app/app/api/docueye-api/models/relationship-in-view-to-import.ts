@@ -14,35 +14,11 @@
 
 
 
-/**
- * 
- * @export
- * @interface RelationshipInViewToImport
- */
+
 export interface RelationshipInViewToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipInViewToImport
-     */
     'structurizrId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipInViewToImport
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof RelationshipInViewToImport
-     */
     'response'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipInViewToImport
-     */
     'order'?: string | null;
 }
 

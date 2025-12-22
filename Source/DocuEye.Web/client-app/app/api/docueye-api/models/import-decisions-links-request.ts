@@ -13,45 +13,16 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DecisionLinkToImport } from './decision-link-to-import';
+import type { DecisionLinkToImport } from './decision-link-to-import';
 
-/**
- * 
- * @export
- * @interface ImportDecisionsLinksRequest
- */
 export interface ImportDecisionsLinksRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDecisionsLinksRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDecisionsLinksRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDecisionsLinksRequest
-     */
     'documentationId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDecisionsLinksRequest
-     */
     'decisionDslId'?: string | null;
-    /**
-     * 
-     * @type {Array<DecisionLinkToImport>}
-     * @memberof ImportDecisionsLinksRequest
-     */
     'decisionsLinks'?: Array<DecisionLinkToImport> | null;
 }
 

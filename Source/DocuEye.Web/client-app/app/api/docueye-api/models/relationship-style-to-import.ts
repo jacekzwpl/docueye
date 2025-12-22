@@ -14,65 +14,16 @@
 
 
 
-/**
- * 
- * @export
- * @interface RelationshipStyleToImport
- */
+
 export interface RelationshipStyleToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipStyleToImport
-     */
     'tag'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RelationshipStyleToImport
-     */
     'thickness'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipStyleToImport
-     */
     'color'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RelationshipStyleToImport
-     */
     'fontSize'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RelationshipStyleToImport
-     */
     'width'?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof RelationshipStyleToImport
-     */
     'dashed'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipStyleToImport
-     */
     'routing'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RelationshipStyleToImport
-     */
     'position'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RelationshipStyleToImport
-     */
     'opacity'?: number | null;
 }
 

@@ -13,99 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type AutomaticLayout } from './automatic-layout';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type DynamicRelationshipView } from './dynamic-relationship-view';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ElementView } from './element-view';
 
-/**
- * 
- * @export
- * @interface DynamicViewDiagram
- */
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AutomaticLayout } from './automatic-layout';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DynamicRelationshipView } from './dynamic-relationship-view';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ElementView } from './element-view';
+
 export interface DynamicViewDiagram {
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'viewType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'paperSize'?: string | null;
-    /**
-     * 
-     * @type {Array<ElementView>}
-     * @memberof DynamicViewDiagram
-     */
     'elements'?: Array<ElementView> | null;
-    /**
-     * 
-     * @type {Array<DynamicRelationshipView>}
-     * @memberof DynamicViewDiagram
-     */
     'relationships'?: Array<DynamicRelationshipView> | null;
-    /**
-     * 
-     * @type {AutomaticLayout}
-     * @memberof DynamicViewDiagram
-     */
     'automaticLayout'?: AutomaticLayout;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'elementId'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof DynamicViewDiagram
-     */
     'externalBoundariesVisible'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicViewDiagram
-     */
     'layoutData'?: string | null;
 }
 

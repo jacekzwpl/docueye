@@ -14,65 +14,16 @@
 
 
 
-/**
- * 
- * @export
- * @interface TerminologyToImport
- */
+
 export interface TerminologyToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'enterprise'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'person'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'softwareSystem'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'container'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'component'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'code'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'deploymentNode'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'relationship'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TerminologyToImport
-     */
     'infrastructureNode'?: string | null;
 }
 

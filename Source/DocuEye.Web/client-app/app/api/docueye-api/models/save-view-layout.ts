@@ -14,17 +14,8 @@
 
 
 
-/**
- * 
- * @export
- * @interface SaveViewLayout
- */
+
 export interface SaveViewLayout {
-    /**
-     * 
-     * @type {string}
-     * @memberof SaveViewLayout
-     */
     'layoutData'?: string | null;
 }
 

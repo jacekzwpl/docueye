@@ -14,23 +14,9 @@
 
 
 
-/**
- * 
- * @export
- * @interface WorkspaceAccessRuleToImport
- */
+
 export interface WorkspaceAccessRuleToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceAccessRuleToImport
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceAccessRuleToImport
-     */
     'role'?: string | null;
 }
 

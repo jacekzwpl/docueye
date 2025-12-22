@@ -14,101 +14,22 @@
 
 
 
-/**
- * 
- * @export
- * @interface ElementToImport
- */
+
 export interface ElementToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'structurizrId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'structurizrParentId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'structurizrInstanceOfId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'dslId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'url'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'group'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ElementToImport
-     */
     'tags'?: Array<string> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'location'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'technology'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'sourceCodeUrl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementToImport
-     */
     'ownerTeam'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof ElementToImport
-     */
     'properties'?: { [key: string]: string; } | null;
 }
 

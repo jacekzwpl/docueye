@@ -13,57 +13,18 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type WorkspaceAccessRuleToImport } from './workspace-access-rule-to-import';
+import type { WorkspaceAccessRuleToImport } from './workspace-access-rule-to-import';
 
-/**
- * 
- * @export
- * @interface ImportWorkspaceStartRequest
- */
 export interface ImportWorkspaceStartRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceStartRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceStartRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceStartRequest
-     */
     'sourceLink'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceStartRequest
-     */
     'workspaceName'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceStartRequest
-     */
     'workspaceDescription'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceStartRequest
-     */
     'visibility'?: string | null;
-    /**
-     * 
-     * @type {Array<WorkspaceAccessRuleToImport>}
-     * @memberof ImportWorkspaceStartRequest
-     */
     'accessRules'?: Array<WorkspaceAccessRuleToImport> | null;
 }
 

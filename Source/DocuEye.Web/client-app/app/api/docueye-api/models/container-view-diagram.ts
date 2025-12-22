@@ -13,99 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type AutomaticLayout } from './automatic-layout';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ElementView } from './element-view';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type RelationshipView } from './relationship-view';
 
-/**
- * 
- * @export
- * @interface ContainerViewDiagram
- */
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AutomaticLayout } from './automatic-layout';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ElementView } from './element-view';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RelationshipView } from './relationship-view';
+
 export interface ContainerViewDiagram {
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'viewType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'paperSize'?: string | null;
-    /**
-     * 
-     * @type {Array<ElementView>}
-     * @memberof ContainerViewDiagram
-     */
     'elements'?: Array<ElementView> | null;
-    /**
-     * 
-     * @type {Array<RelationshipView>}
-     * @memberof ContainerViewDiagram
-     */
     'relationships'?: Array<RelationshipView> | null;
-    /**
-     * 
-     * @type {AutomaticLayout}
-     * @memberof ContainerViewDiagram
-     */
     'automaticLayout'?: AutomaticLayout;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'softwareSystemId'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ContainerViewDiagram
-     */
     'externalSoftwareSystemBoundariesVisible'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContainerViewDiagram
-     */
     'layoutData'?: string | null;
 }
 

@@ -14,23 +14,9 @@
 
 
 
-/**
- * 
- * @export
- * @interface ImportClearDecisionsRequest
- */
+
 export interface ImportClearDecisionsRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportClearDecisionsRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportClearDecisionsRequest
-     */
     'workspaceId'?: string | null;
 }
 

@@ -14,65 +14,16 @@
 
 
 
-/**
- * 
- * @export
- * @interface DynamicRelationshipView
- */
+
 export interface DynamicRelationshipView {
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicRelationshipView
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicRelationshipView
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof DynamicRelationshipView
-     */
     'response'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicRelationshipView
-     */
     'order'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicRelationshipView
-     */
     'routing'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof DynamicRelationshipView
-     */
     'position'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicRelationshipView
-     */
     'sourceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicRelationshipView
-     */
     'destinationId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DynamicRelationshipView
-     */
     'baseRelationshipId'?: string | null;
 }
 

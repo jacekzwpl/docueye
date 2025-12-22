@@ -14,47 +14,13 @@
 
 
 
-/**
- * 
- * @export
- * @interface ViewAutomaticLayout
- */
+
 export interface ViewAutomaticLayout {
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewAutomaticLayout
-     */
     'implementation'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewAutomaticLayout
-     */
     'rankDirection'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ViewAutomaticLayout
-     */
     'rankSeparation'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ViewAutomaticLayout
-     */
     'nodeSeparation'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ViewAutomaticLayout
-     */
     'edgeSeparation'?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ViewAutomaticLayout
-     */
     'vertices'?: boolean | null;
 }
 

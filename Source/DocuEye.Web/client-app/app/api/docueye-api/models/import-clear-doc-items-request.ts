@@ -14,23 +14,9 @@
 
 
 
-/**
- * 
- * @export
- * @interface ImportClearDocItemsRequest
- */
+
 export interface ImportClearDocItemsRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportClearDocItemsRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportClearDocItemsRequest
-     */
     'importKey'?: string | null;
 }
 

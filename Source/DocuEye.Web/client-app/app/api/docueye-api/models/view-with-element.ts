@@ -14,29 +14,10 @@
 
 
 
-/**
- * 
- * @export
- * @interface ViewWithElement
- */
+
 export interface ViewWithElement {
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewWithElement
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewWithElement
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewWithElement
-     */
     'viewType'?: string | null;
 }
 

@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type ImageToImport } from './image-to-import';
+import type { ImageToImport } from './image-to-import';
 
-/**
- * 
- * @export
- * @interface ImportImageRequest
- */
 export interface ImportImageRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportImageRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportImageRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {ImageToImport}
-     * @memberof ImportImageRequest
-     */
     'image'?: ImageToImport;
 }
 

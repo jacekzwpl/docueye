@@ -14,95 +14,21 @@
 
 
 
-/**
- * 
- * @export
- * @interface ElementStyleToImport
- */
+
 export interface ElementStyleToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'tag'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyleToImport
-     */
     'width'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyleToImport
-     */
     'height'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'background'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'stroke'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'strokeWidth'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'color'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyleToImport
-     */
     'fontSize'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'shape'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'icon'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyleToImport
-     */
     'border'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyleToImport
-     */
     'opacity'?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ElementStyleToImport
-     */
     'metadata'?: boolean | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ElementStyleToImport
-     */
     'description'?: boolean | null;
 }
 

@@ -13,51 +13,22 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ElementStyleToImport } from './element-style-to-import';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type RelationshipStyleToImport } from './relationship-style-to-import';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type TerminologyToImport } from './terminology-to-import';
 
-/**
- * 
- * @export
- * @interface ViewConfigurationToImport
- */
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ElementStyleToImport } from './element-style-to-import';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RelationshipStyleToImport } from './relationship-style-to-import';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TerminologyToImport } from './terminology-to-import';
+
 export interface ViewConfigurationToImport {
-    /**
-     * 
-     * @type {Array<ElementStyleToImport>}
-     * @memberof ViewConfigurationToImport
-     */
     'elementStyles'?: Array<ElementStyleToImport> | null;
-    /**
-     * 
-     * @type {Array<RelationshipStyleToImport>}
-     * @memberof ViewConfigurationToImport
-     */
     'relationshipStyles'?: Array<RelationshipStyleToImport> | null;
-    /**
-     * 
-     * @type {TerminologyToImport}
-     * @memberof ViewConfigurationToImport
-     */
     'terminology'?: TerminologyToImport;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ViewConfigurationToImport
-     */
     'themes'?: Array<string> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewConfigurationToImport
-     */
     'groupSeparator'?: string | null;
 }
 

@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type ElementToImport } from './element-to-import';
+import type { ElementToImport } from './element-to-import';
 
-/**
- * 
- * @export
- * @interface ImportElementsRequest
- */
 export interface ImportElementsRequest {
-    /**
-     * 
-     * @type {Array<ElementToImport>}
-     * @memberof ImportElementsRequest
-     */
     'elements'?: Array<ElementToImport> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportElementsRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportElementsRequest
-     */
     'workspaceId'?: string | null;
 }
 

@@ -14,35 +14,11 @@
 
 
 
-/**
- * 
- * @export
- * @interface ImageToImport
- */
+
 export interface ImageToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageToImport
-     */
     'documentationId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageToImport
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageToImport
-     */
     'content'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImageToImport
-     */
     'type'?: string | null;
 }
 

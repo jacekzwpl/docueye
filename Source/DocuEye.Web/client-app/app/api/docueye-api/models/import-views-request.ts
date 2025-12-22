@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type ViewToImport } from './view-to-import';
+import type { ViewToImport } from './view-to-import';
 
-/**
- * 
- * @export
- * @interface ImportViewsRequest
- */
 export interface ImportViewsRequest {
-    /**
-     * 
-     * @type {Array<ViewToImport>}
-     * @memberof ImportViewsRequest
-     */
     'views'?: Array<ViewToImport> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportViewsRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportViewsRequest
-     */
     'workspaceId'?: string | null;
 }
 

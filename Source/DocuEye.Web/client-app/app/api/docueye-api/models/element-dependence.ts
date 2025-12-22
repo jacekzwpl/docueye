@@ -14,47 +14,13 @@
 
 
 
-/**
- * 
- * @export
- * @interface ElementDependence
- */
+
 export interface ElementDependence {
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementDependence
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementDependence
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementDependence
-     */
     'type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementDependence
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementDependence
-     */
     'relationDescription'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementDependence
-     */
     'relationTechnology'?: string | null;
 }
 

@@ -29,6 +29,18 @@
         }
       }
     },
+    "/api/app/antiforgery/token": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/auth/login": {
       "get": {
         "tags": [

@@ -13,93 +13,29 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type AutomaticLayout } from './automatic-layout';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ElementView } from './element-view';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type RelationshipView } from './relationship-view';
 
-/**
- * 
- * @export
- * @interface SystemLandscapeViewDiagram
- */
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AutomaticLayout } from './automatic-layout';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ElementView } from './element-view';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RelationshipView } from './relationship-view';
+
 export interface SystemLandscapeViewDiagram {
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'viewType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'paperSize'?: string | null;
-    /**
-     * 
-     * @type {Array<ElementView>}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'elements'?: Array<ElementView> | null;
-    /**
-     * 
-     * @type {Array<RelationshipView>}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'relationships'?: Array<RelationshipView> | null;
-    /**
-     * 
-     * @type {AutomaticLayout}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'automaticLayout'?: AutomaticLayout;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'enterpriseBoundaryVisible'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemLandscapeViewDiagram
-     */
     'layoutData'?: string | null;
 }
 

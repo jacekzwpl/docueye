@@ -14,29 +14,10 @@
 
 
 
-/**
- * 
- * @export
- * @interface WorkspaceView
- */
+
 export interface WorkspaceView {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceView
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceView
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceView
-     */
     'viewType'?: string | null;
 }
 

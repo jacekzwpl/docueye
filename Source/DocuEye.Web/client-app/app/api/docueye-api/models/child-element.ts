@@ -14,41 +14,12 @@
 
 
 
-/**
- * 
- * @export
- * @interface ChildElement
- */
+
 export interface ChildElement {
-    /**
-     * 
-     * @type {string}
-     * @memberof ChildElement
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChildElement
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChildElement
-     */
     'type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChildElement
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChildElement
-     */
     'instanceOfId'?: string | null;
 }
 

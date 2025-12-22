@@ -14,29 +14,10 @@
 
 
 
-/**
- * 
- * @export
- * @interface FoundedWorkspace
- */
+
 export interface FoundedWorkspace {
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedWorkspace
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedWorkspace
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundedWorkspace
-     */
     'description'?: string | null;
 }
 

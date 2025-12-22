@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DecisionToImport } from './decision-to-import';
+import type { DecisionToImport } from './decision-to-import';
 
-/**
- * 
- * @export
- * @interface ImportDecisionRequest
- */
 export interface ImportDecisionRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDecisionRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDecisionRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {DecisionToImport}
-     * @memberof ImportDecisionRequest
-     */
     'decision'?: DecisionToImport;
 }
 

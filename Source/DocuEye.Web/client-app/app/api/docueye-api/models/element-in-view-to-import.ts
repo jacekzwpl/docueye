@@ -14,29 +14,10 @@
 
 
 
-/**
- * 
- * @export
- * @interface ElementInViewToImport
- */
+
 export interface ElementInViewToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementInViewToImport
-     */
     'structurizrId'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementInViewToImport
-     */
     'x'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementInViewToImport
-     */
     'y'?: number | null;
 }
 

@@ -13,105 +13,31 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type AutomaticLayout } from './automatic-layout';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ElementView } from './element-view';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type RelationshipView } from './relationship-view';
 
-/**
- * 
- * @export
- * @interface FilteredViewDiagram
- */
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AutomaticLayout } from './automatic-layout';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ElementView } from './element-view';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RelationshipView } from './relationship-view';
+
 export interface FilteredViewDiagram {
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'viewType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'paperSize'?: string | null;
-    /**
-     * 
-     * @type {Array<ElementView>}
-     * @memberof FilteredViewDiagram
-     */
     'elements'?: Array<ElementView> | null;
-    /**
-     * 
-     * @type {Array<RelationshipView>}
-     * @memberof FilteredViewDiagram
-     */
     'relationships'?: Array<RelationshipView> | null;
-    /**
-     * 
-     * @type {AutomaticLayout}
-     * @memberof FilteredViewDiagram
-     */
     'automaticLayout'?: AutomaticLayout;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'baseViewKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'mode'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FilteredViewDiagram
-     */
     'tags'?: Array<string> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilteredViewDiagram
-     */
     'layoutData'?: string | null;
 }
 

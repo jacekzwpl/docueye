@@ -13,69 +13,20 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DecisionLinkToImport } from './decision-link-to-import';
+import type { DecisionLinkToImport } from './decision-link-to-import';
 
-/**
- * 
- * @export
- * @interface DecisionToImport
- */
 export interface DecisionToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'documentationId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'strucuturizrId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'date'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'status'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'content'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'format'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionToImport
-     */
     'strucuturizrElementId'?: string | null;
-    /**
-     * 
-     * @type {Array<DecisionLinkToImport>}
-     * @memberof DecisionToImport
-     */
     'links'?: Array<DecisionLinkToImport> | null;
 }
 

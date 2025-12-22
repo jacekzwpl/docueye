@@ -14,77 +14,18 @@
 
 
 
-/**
- * 
- * @export
- * @interface RelationshipToImport
- */
+
 export interface RelationshipToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'structurizrId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'structurizrSourceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'structurizrDestinationId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'structurizrLinkedRelationshipId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof RelationshipToImport
-     */
     'tags'?: Array<string> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'url'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof RelationshipToImport
-     */
     'properties'?: { [key: string]: string; } | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'technology'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'interactionStyle'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RelationshipToImport
-     */
     'dslId'?: string | null;
 }
 

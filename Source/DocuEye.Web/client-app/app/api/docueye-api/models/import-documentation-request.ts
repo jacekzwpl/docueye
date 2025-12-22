@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DocumentationToImport } from './documentation-to-import';
+import type { DocumentationToImport } from './documentation-to-import';
 
-/**
- * 
- * @export
- * @interface ImportDocumentationRequest
- */
 export interface ImportDocumentationRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDocumentationRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportDocumentationRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {DocumentationToImport}
-     * @memberof ImportDocumentationRequest
-     */
     'documentation'?: DocumentationToImport;
 }
 

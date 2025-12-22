@@ -13,57 +13,18 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DeploymentNodeRelationshipItem } from './deployment-node-relationship-item';
+import type { DeploymentNodeRelationshipItem } from './deployment-node-relationship-item';
 
-/**
- * 
- * @export
- * @interface DeploymentNodeRelationship
- */
 export interface DeploymentNodeRelationship {
-    /**
-     * 
-     * @type {string}
-     * @memberof DeploymentNodeRelationship
-     */
     'sourceNodeId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeploymentNodeRelationship
-     */
     'sourceNodeName'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeploymentNodeRelationship
-     */
     'sourceNodeTechnology'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeploymentNodeRelationship
-     */
     'destinationNodeId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeploymentNodeRelationship
-     */
     'destinationNodeName'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DeploymentNodeRelationship
-     */
     'destinationTechnology'?: string | null;
-    /**
-     * 
-     * @type {Array<DeploymentNodeRelationshipItem>}
-     * @memberof DeploymentNodeRelationship
-     */
     'items'?: Array<DeploymentNodeRelationshipItem> | null;
 }
 

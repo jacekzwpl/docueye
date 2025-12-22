@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type ViewConfigurationToImport } from './view-configuration-to-import';
+import type { ViewConfigurationToImport } from './view-configuration-to-import';
 
-/**
- * 
- * @export
- * @interface ImportViewConfigurationRequest
- */
 export interface ImportViewConfigurationRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportViewConfigurationRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportViewConfigurationRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {ViewConfigurationToImport}
-     * @memberof ImportViewConfigurationRequest
-     */
     'viewConfiguration'?: ViewConfigurationToImport;
 }
 

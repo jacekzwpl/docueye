@@ -14,95 +14,21 @@
 
 
 
-/**
- * 
- * @export
- * @interface ElementStyle
- */
+
 export interface ElementStyle {
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'tag'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyle
-     */
     'width'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyle
-     */
     'height'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'background'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'stroke'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'strokeWidth'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'color'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyle
-     */
     'fontSize'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'shape'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'icon'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementStyle
-     */
     'border'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementStyle
-     */
     'opacity'?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ElementStyle
-     */
     'metadata'?: boolean | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ElementStyle
-     */
     'description'?: boolean | null;
 }
 

@@ -14,29 +14,10 @@
 
 
 
-/**
- * 
- * @export
- * @interface DocumentationSectionToImport
- */
+
 export interface DocumentationSectionToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentationSectionToImport
-     */
     'content'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentationSectionToImport
-     */
     'format'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof DocumentationSectionToImport
-     */
     'order'?: number | null;
 }
 

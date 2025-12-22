@@ -13,6 +13,7 @@
  */
 
 
+
 import type { Configuration } from '../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -23,7 +24,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 /**
  * DocumentationFilesApi - axios parameter creator
- * @export
  */
 export const DocumentationFilesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -54,7 +54,6 @@ export const DocumentationFilesApiAxiosParamCreator = function (configuration?: 
             const localVarQueryParameter = {} as any;
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -69,7 +68,6 @@ export const DocumentationFilesApiAxiosParamCreator = function (configuration?: 
 
 /**
  * DocumentationFilesApi - functional programming interface
- * @export
  */
 export const DocumentationFilesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DocumentationFilesApiAxiosParamCreator(configuration)
@@ -83,16 +81,15 @@ export const DocumentationFilesApiFp = function(configuration?: Configuration) {
          */
         async apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId: string, elementId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId, elementId, options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['DocumentationFilesApi.apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentationFilesApi.apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
  * DocumentationFilesApi - factory interface
- * @export
  */
 export const DocumentationFilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DocumentationFilesApiFp(configuration)
@@ -104,7 +101,7 @@ export const DocumentationFilesApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId: string, elementId: string, options?: any): AxiosPromise<void> {
+        apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId: string, elementId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId, elementId, options).then((request) => request(axios, basePath));
         },
     };
@@ -112,9 +109,6 @@ export const DocumentationFilesApiFactory = function (configuration?: Configurat
 
 /**
  * DocumentationFilesApi - object-oriented interface
- * @export
- * @class DocumentationFilesApi
- * @extends {BaseAPI}
  */
 export class DocumentationFilesApi extends BaseAPI {
     /**
@@ -123,7 +117,6 @@ export class DocumentationFilesApi extends BaseAPI {
      * @param {string} elementId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DocumentationFilesApi
      */
     public apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId: string, elementId: string, options?: RawAxiosRequestConfig) {
         return DocumentationFilesApiFp(this.configuration).apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId, elementId, options).then((request) => request(this.axios, this.basePath));

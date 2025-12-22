@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type RelationshipToImport } from './relationship-to-import';
+import type { RelationshipToImport } from './relationship-to-import';
 
-/**
- * 
- * @export
- * @interface ImportRelationshipsRequest
- */
 export interface ImportRelationshipsRequest {
-    /**
-     * 
-     * @type {Array<RelationshipToImport>}
-     * @memberof ImportRelationshipsRequest
-     */
     'relationships'?: Array<RelationshipToImport> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportRelationshipsRequest
-     */
     'importKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportRelationshipsRequest
-     */
     'workspaceId'?: string | null;
 }
 

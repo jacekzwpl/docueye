@@ -14,125 +14,26 @@
 
 
 
-/**
- * 
- * @export
- * @interface ElementView
- */
+
 export interface ElementView {
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementView
-     */
     'x'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ElementView
-     */
     'y'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'diagramId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'dslId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'url'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'group'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ElementView
-     */
     'tags'?: Array<string> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'location'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'technology'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'parentId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'instanceOfId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof ElementView
-     */
     'properties'?: { [key: string]: string; } | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'sourceCodeUrl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElementView
-     */
     'ownerTeam'?: string | null;
 }
 

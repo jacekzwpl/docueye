@@ -14,23 +14,9 @@
 
 
 
-/**
- * 
- * @export
- * @interface DecisionLinkToImport
- */
+
 export interface DecisionLinkToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionLinkToImport
-     */
     'structurizrId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DecisionLinkToImport
-     */
     'description'?: string | null;
 }
 

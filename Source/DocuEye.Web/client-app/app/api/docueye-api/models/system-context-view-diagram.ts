@@ -13,99 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type AutomaticLayout } from './automatic-layout';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ElementView } from './element-view';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type RelationshipView } from './relationship-view';
 
-/**
- * 
- * @export
- * @interface SystemContextViewDiagram
- */
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AutomaticLayout } from './automatic-layout';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ElementView } from './element-view';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RelationshipView } from './relationship-view';
+
 export interface SystemContextViewDiagram {
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'viewType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'paperSize'?: string | null;
-    /**
-     * 
-     * @type {Array<ElementView>}
-     * @memberof SystemContextViewDiagram
-     */
     'elements'?: Array<ElementView> | null;
-    /**
-     * 
-     * @type {Array<RelationshipView>}
-     * @memberof SystemContextViewDiagram
-     */
     'relationships'?: Array<RelationshipView> | null;
-    /**
-     * 
-     * @type {AutomaticLayout}
-     * @memberof SystemContextViewDiagram
-     */
     'automaticLayout'?: AutomaticLayout;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'softwareSystemId'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SystemContextViewDiagram
-     */
     'enterpriseBoundaryVisible'?: boolean | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SystemContextViewDiagram
-     */
     'layoutData'?: string | null;
 }
 

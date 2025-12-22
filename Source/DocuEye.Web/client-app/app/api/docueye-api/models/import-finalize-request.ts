@@ -14,23 +14,9 @@
 
 
 
-/**
- * 
- * @export
- * @interface ImportFinalizeRequest
- */
+
 export interface ImportFinalizeRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportFinalizeRequest
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportFinalizeRequest
-     */
     'importKey'?: string | null;
 }
 

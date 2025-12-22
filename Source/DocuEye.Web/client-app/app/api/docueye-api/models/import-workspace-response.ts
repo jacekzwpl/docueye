@@ -14,29 +14,10 @@
 
 
 
-/**
- * 
- * @export
- * @interface ImportWorkspaceResponse
- */
+
 export interface ImportWorkspaceResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceResponse
-     */
     'workspaceId'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportWorkspaceResponse
-     */
     'isSuccess'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportWorkspaceResponse
-     */
     'message'?: string | null;
 }
 

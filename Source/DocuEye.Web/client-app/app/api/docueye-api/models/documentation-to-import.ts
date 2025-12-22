@@ -13,33 +13,14 @@
  */
 
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import { type DocumentationSectionToImport } from './documentation-section-to-import';
+import type { DocumentationSectionToImport } from './documentation-section-to-import';
 
-/**
- * 
- * @export
- * @interface DocumentationToImport
- */
 export interface DocumentationToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentationToImport
-     */
     'id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentationToImport
-     */
     'structurizrElementId'?: string | null;
-    /**
-     * 
-     * @type {Array<DocumentationSectionToImport>}
-     * @memberof DocumentationToImport
-     */
     'sections'?: Array<DocumentationSectionToImport> | null;
 }
 

@@ -13,111 +13,32 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ElementInViewToImport } from './element-in-view-to-import';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type RelationshipInViewToImport } from './relationship-in-view-to-import';
-// May contain unused imports in some cases
-// @ts-ignore
-import { type ViewAutomaticLayout } from './view-automatic-layout';
 
-/**
- * 
- * @export
- * @interface ViewToImport
- */
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ElementInViewToImport } from './element-in-view-to-import';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RelationshipInViewToImport } from './relationship-in-view-to-import';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ViewAutomaticLayout } from './view-automatic-layout';
+
 export interface ViewToImport {
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'viewType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'title'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'paperSize'?: string | null;
-    /**
-     * 
-     * @type {Array<ElementInViewToImport>}
-     * @memberof ViewToImport
-     */
     'elements'?: Array<ElementInViewToImport> | null;
-    /**
-     * 
-     * @type {Array<RelationshipInViewToImport>}
-     * @memberof ViewToImport
-     */
     'relationships'?: Array<RelationshipInViewToImport> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'structurizrElementId'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ViewToImport
-     */
     'externalBoundariesVisible'?: boolean | null;
-    /**
-     * 
-     * @type {ViewAutomaticLayout}
-     * @memberof ViewToImport
-     */
     'automaticLayout'?: ViewAutomaticLayout;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'content'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'contentType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'baseViewKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ViewToImport
-     */
     'mode'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ViewToImport
-     */
     'tags'?: Array<string> | null;
 }
 
