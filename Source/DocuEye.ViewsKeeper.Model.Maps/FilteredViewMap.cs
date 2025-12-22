@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Application.Model;
+﻿using DocuEye.ViewsKeeper.Api.Model;
+using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Model;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,9 @@ namespace DocuEye.ViewsKeeper.Model.Maps
         public static IEnumerable<WorkspaceView> MapToWorkspaceViews(this IEnumerable<FilteredView> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToWorkspaceView();
+            var result = new List<WorkspaceView>();
+            foreach (var s in sources) result.Add(s.MapToWorkspaceView());
+            return result.ToArray();
         }
 
         public static ViewWithElement MapToViewWithElement(this FilteredView source)
@@ -41,7 +44,31 @@ namespace DocuEye.ViewsKeeper.Model.Maps
         public static IEnumerable<ViewWithElement> MapToViewWithElements(this IEnumerable<FilteredView> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToViewWithElement();
+            var result = new List<ViewWithElement>();
+            foreach (var s in sources) result.Add(s.MapToViewWithElement());
+            return result.ToArray();
+        }
+
+        public static FilteredViewDiagram MapToFilteredViewDiagram(this FilteredView source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var dest = new FilteredViewDiagram
+            {
+                Id = source.Id,
+                ViewType = source.ViewType,
+                Title = source.Title,
+                Description = source.Description,
+                Key = source.Key,
+                BaseViewKey = source.BaseViewKey,
+                Mode = source.Mode,
+                Tags = source.Tags,
+                AutomaticLayout = source.AutomaticLayout,
+                Elements = source.Elements,
+                PaperSize = source.PaperSize,
+                Relationships = source.Relationships,
+                WorkspaceId = source.WorkspaceId
+            };
+            return dest;
         }
     }
 }

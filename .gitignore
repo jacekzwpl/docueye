@@ -368,3 +368,5 @@ Documentation/workspace.json
 ExampleWorkspace/workspace.json
 
 .vscode/
+
+changelog.txt

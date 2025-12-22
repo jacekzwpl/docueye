@@ -1,4 +1,5 @@
-﻿using DocuEye.ViewsKeeper.Application.Model;
+﻿using DocuEye.ViewsKeeper.Api.Model;
+using DocuEye.ViewsKeeper.Application.Model;
 using DocuEye.WorkspacesKeeper.Model;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,9 @@ namespace DocuEye.ViewsKeeper.Model.Maps
         public static IEnumerable<WorkspaceView> MapToWorkspaceViews(this IEnumerable<DynamicView> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToWorkspaceView();
+            var result = new List<WorkspaceView>();
+            foreach (var s in sources) result.Add(s.MapToWorkspaceView());
+            return result.ToArray();
         }
 
         public static ViewWithElement MapToViewWithElement(this DynamicView source)
@@ -41,7 +44,30 @@ namespace DocuEye.ViewsKeeper.Model.Maps
         public static IEnumerable<ViewWithElement> MapToViewWithElements(this IEnumerable<DynamicView> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToViewWithElement();
+            var result = new List<ViewWithElement>();
+            foreach (var s in sources) result.Add(s.MapToViewWithElement());
+            return result.ToArray();
+        }
+
+        public static DynamicViewDiagram MapToDynamicViewDiagram(this DynamicView source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var dest = new DynamicViewDiagram
+            {
+                Id = source.Id,
+                ViewType = source.ViewType,
+                Title = source.Title,
+                Description = source.Description,
+                Key = source.Key,
+                PaperSize = source.PaperSize,
+                Elements = source.Elements,
+                Relationships = source.Relationships,
+                AutomaticLayout = source.AutomaticLayout,
+                ElementId = source.ElementId,
+                ExternalBoundariesVisible = source.ExternalBoundariesVisible,
+                WorkspaceId = source.WorkspaceId
+            };
+            return dest;
         }
     }
 }

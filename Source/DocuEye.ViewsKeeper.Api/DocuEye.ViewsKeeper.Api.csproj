@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.Infrastructure.HttpProblemDetails\DocuEye.Infrastructure.HttpProblemDetails.csproj" />
+    <ProjectReference Include="..\DocuEye.ViewsKeeper.Api.Model\DocuEye.ViewsKeeper.Api.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Application\DocuEye.ViewsKeeper.Application.csproj" />
   </ItemGroup>
 

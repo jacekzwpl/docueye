@@ -47,7 +47,9 @@ namespace DocuEye.ModelKeeper.Model.Maps
         public static IEnumerable<WorkspaceCatalogElement> MapToWorkspaceCatalogElements(this IEnumerable<Element> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToWorkspaceCatalogElement();
+            var result = new List<WorkspaceCatalogElement>();
+            foreach (var s in sources) result.Add(s.MapToWorkspaceCatalogElement());
+            return result.ToArray();
         }
 
         public static ChildElement MapToChildElement(this Element source)
@@ -66,7 +68,9 @@ namespace DocuEye.ModelKeeper.Model.Maps
         public static IEnumerable<ChildElement> MapToChildElements(this IEnumerable<Element> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToChildElement();
+            var result = new List<ChildElement>();
+            foreach (var s in sources) result.Add(s.MapToChildElement());
+            return result.ToArray();
         }
 
         public static ElementDependence MapToElementDependence(this Element source)
@@ -84,7 +88,9 @@ namespace DocuEye.ModelKeeper.Model.Maps
         public static IEnumerable<ElementDependence> MapToElementDependences(this IEnumerable<Element> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToElementDependence();
+            var result = new List<ElementDependence>();
+            foreach (var s in sources) result.Add(s.MapToElementDependence());
+            return result.ToArray();
         }
 
         public static ElementConsumer MapToElementConsumer(this Element source)
@@ -102,7 +108,9 @@ namespace DocuEye.ModelKeeper.Model.Maps
         public static IEnumerable<ElementConsumer> MapToElementConsumers(this IEnumerable<Element> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToElementConsumer();
+            var result = new List<ElementConsumer>();
+            foreach (var s in sources) result.Add(s.MapToElementConsumer());
+            return result.ToArray();
         }
     }
 }

@@ -197,6 +197,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Infrastructure.Medi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Infrastructure.Mediator.Tests", "Source\DocuEye.Infrastructure.Mediator.Tests\DocuEye.Infrastructure.Mediator.Tests.csproj", "{B39AAAE3-81E7-4C89-A532-376AD9DB5AA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.ViewsKeeper.Api.Model", "Source\DocuEye.ViewsKeeper.Api.Model\DocuEye.ViewsKeeper.Api.Model.csproj", "{0646729A-22E3-476A-B415-CD59702BAFA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -555,6 +557,10 @@ Global
 		{B39AAAE3-81E7-4C89-A532-376AD9DB5AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39AAAE3-81E7-4C89-A532-376AD9DB5AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39AAAE3-81E7-4C89-A532-376AD9DB5AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0646729A-22E3-476A-B415-CD59702BAFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0646729A-22E3-476A-B415-CD59702BAFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0646729A-22E3-476A-B415-CD59702BAFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0646729A-22E3-476A-B415-CD59702BAFA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -646,6 +652,7 @@ Global
 		{C33547E6-B842-4370-BE67-A5AE7F0E9970} = {CCD1348E-6ACE-4A93-8FD4-7E990BEBF02E}
 		{B4C98E78-8B22-43D3-9AF0-E4370AB60B00} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
 		{B39AAAE3-81E7-4C89-A532-376AD9DB5AA9} = {0E2298E5-0DB7-495D-9A09-A6A1B4C07A71}
+		{0646729A-22E3-476A-B415-CD59702BAFA2} = {8D1B1D91-B4DE-4DF9-A253-14777B4B4E40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}

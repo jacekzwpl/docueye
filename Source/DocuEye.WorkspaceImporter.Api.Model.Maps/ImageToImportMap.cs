@@ -23,7 +23,9 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
         public static IEnumerable<Image> MapToImages(this IEnumerable<ImageToImport> sources)
         {
             if (sources == null) throw new ArgumentNullException(nameof(sources));
-            foreach (var s in sources) yield return s.MapToImage();
+            var result = new List<Image>();
+            foreach (var s in sources) result.Add(s.MapToImage());
+            return result.ToArray();
         }
     }
 }

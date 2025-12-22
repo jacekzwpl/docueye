@@ -1,0 +1,45 @@
+import { type RouteConfig, index, route } from "@react-router/dev/routes";
+
+export default [
+    index("routes/home.tsx"),
+    route(
+        "workspace/:workspaceId/elements", 
+        "./routes/workspace/elements.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/element/:elementId", 
+        "./routes/workspace/element.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/documentation", 
+        "./routes/workspace/documentation.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/decisions", 
+        "./routes/workspace/decisions.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/decision/:decisionId", 
+        "./routes/workspace/decision.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/deploymentnodesmatrix", 
+        "./routes/workspace/deploymentnodesmatrix.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/modelchanges", 
+        "./routes/workspace/modelchanges.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/graph/:viewId?", 
+        "./routes/workspace/graph.tsx"
+    ),
+    route(
+        "workspace/:workspaceId/view/:viewId?", 
+        "./routes/workspace/view.tsx"
+    ),
+    route(
+        "errors/forbidden", 
+        "./routes/errors/forbidden.tsx"
+    ),
+] satisfies RouteConfig;
