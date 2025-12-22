@@ -4,8 +4,8 @@ import type { Route } from "./+types/modelchanges";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "DocuEye" },
+    { name: "description", content: "DocuEye!" },
   ];
 }
 
