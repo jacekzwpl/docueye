@@ -41,7 +41,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
             //Get existing elements for comparison
             var existingElements = (await this.mediator
                 .SendQueryAsync<GetAllWorkspaceElementsQuery,IEnumerable<Element>>(new GetAllWorkspaceElementsQuery(request.WorkspaceId))).ToList();
-
+            var oldElements = new List<Element>(existingElements);
             // Detect Changes
             var result = await this.DetectChanges(request.WorkspaceId, import, request.Elements, existingElements);
 
@@ -50,7 +50,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportElements
             {
                 ElementsToAdd = existingElements.Where(o => result.ElementsToAdd.Contains(o.Id)).ToArray(),
                 ElementsToChange = existingElements.Where(o => result.ElementsToChange.Contains(o.Id)).ToArray(),
-                ElementsToDelete = existingElements.Where(o => result.ElementsToDelete.Contains(o.Id)).ToArray()
+                ElementsToDelete = oldElements.Where(o => result.ElementsToDelete.Contains(o.Id)).ToArray()
             });
 
             return new ImportElementsResult(request.WorkspaceId, true);
