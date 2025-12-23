@@ -157,7 +157,9 @@ modelElementGroupBody : (
                             | relationship
                             | WHITESPACE | NEWLINE)* ;
 
-views               : VIEWS BEGIN (
+views               : VIEWS BEGIN viewsBody END ;
+
+viewsBody           : (
                       systemLandScape
                       | systemContext
                       | containerView
@@ -174,7 +176,7 @@ views               : VIEWS BEGIN (
                       | themeBlock
                       | themesBlock
                       | includeFile
-                      | WHITESPACE | NEWLINE)* END ;
+                      | WHITESPACE | NEWLINE)* ;
 
 
 systemLandScape     : SYSTEMLANDSCAPE key? description? NEWLINE? BEGIN systemLandScapeBody END ;

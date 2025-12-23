@@ -206,6 +206,12 @@ public interface IStructurizrDSLVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitViews([NotNull] StructurizrDSLParser.ViewsContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="StructurizrDSLParser.viewsBody"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitViewsBody([NotNull] StructurizrDSLParser.ViewsBodyContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="StructurizrDSLParser.systemLandScape"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
