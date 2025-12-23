@@ -43,7 +43,7 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
             // Get existing relationships for comparison
             var existingRelationships = (await this.mediator
                 .SendQueryAsync<GetAllWorkspaceRelationshipsQuery,IEnumerable<Relationship>>(new GetAllWorkspaceRelationshipsQuery(request.WorkspaceId))).ToList();
-
+            var oldRelationships = new List<Relationship>(existingRelationships);
             // Detect Changes
             var detector = new RelationshipsChangeDetector(this.mediator);
             var result = await detector.DetectChanges(
@@ -52,13 +52,13 @@ namespace DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships
                 request.Relationships, 
                 existingRelationships, 
                 existingElements);
-
+            
             //Save Relationships
             await this.mediator.SendCommandAsync(new SaveRelationshipsCommand()
             {
                 RelationshipsToAdd = existingRelationships.Where(o => result.RelationshipsToAdd.Contains(o.Id)).ToArray(),
                 RelationshipsToChange = existingRelationships.Where(o => result.RelationshipsToChange.Contains(o.Id)).ToArray(),
-                RelationshipsToDelete = existingRelationships.Where(o => result.RelationshipsToDelete.Contains(o.Id)).ToArray()
+                RelationshipsToDelete = oldRelationships.Where(o => result.RelationshipsToDelete.Contains(o.Id)).ToArray()
             });
 
             return new ImportRelationshipsResult(request.WorkspaceId, true);
