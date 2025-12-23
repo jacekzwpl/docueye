@@ -14,7 +14,13 @@ namespace DocuEye.Structurizr.DSL
         public override StructurizrViews VisitViews([NotNull] StructurizrDSLParser.ViewsContext context)
         {
             var views = new StructurizrViews();
+            var bodyContext = context.viewsBody();
+            return this.VisitViewsBody(bodyContext, views);
+        }
 
+        public StructurizrViews VisitViewsBody([NotNull] StructurizrDSLParser.ViewsBodyContext context, StructurizrViews views)
+        {
+           
             views.Properties = this.VisitPropertiesBlocks(context.properties());
 
             if (context.children == null)
@@ -103,7 +109,7 @@ namespace DocuEye.Structurizr.DSL
                 if (childContext is IncludeFileContext)
                 {
                     var includeFileContext = (IncludeFileContext)childContext;
-                    this.VisitIncludeFileViews(includeFileContext);
+                    this.VisitIncludeFileViews(includeFileContext, views);
                 }
             }
             return views;

@@ -7,11 +7,11 @@ namespace DocuEye.Structurizr.DSL
 {
     public partial class DSLVisitor
     {
-        public void VisitIncludeFileViews([NotNull] StructurizrDSLParser.IncludeFileContext context)
+        public void VisitIncludeFileViews([NotNull] StructurizrDSLParser.IncludeFileContext context, StructurizrViews views)
         {
             var parser = this.CreateIncludeFileParser(context);
-            var viewsContext = parser.views();
-            this.VisitViews(viewsContext);
+            var viewsContext = parser.viewsBody();
+            this.VisitViewsBody(viewsContext, views);
         }
 
         public void VisitIncludeFileModelBody([NotNull] StructurizrDSLParser.IncludeFileContext context)
