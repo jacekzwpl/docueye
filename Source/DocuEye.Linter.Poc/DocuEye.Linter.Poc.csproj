@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocuEye.Linter.Model\DocuEye.Linter.Model.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.DSL.Model\DocuEye.Structurizr.DSL.Model.csproj" />
   </ItemGroup>
 
