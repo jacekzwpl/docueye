@@ -1,0 +1,59 @@
+{
+    "MaxAllowedSeverity": "Warning",
+    "Rules": [
+        {
+            "Key": "ContainersCyclingDependency",
+            "Name": "Containers should not have cyclic dependencies",
+            "Description": "Containers must not depend on each other in a cyclic manner to avoid tight coupling and maintainability issues.",
+            "Severity": "Error",
+            "Type": "BuildIn",
+            "Expression": "BuildInRules.ContainersCyclingDependency()",
+            "HelpLink": "https://example.com/rules/containers-cycling-dependency"
+        },
+        {
+            "Key": "FrontendDbConnectionNotAllowed",
+            "Name": "Frontend can not connect directly to database",
+            "Description": "Frontend services should not connect directly to the database for security and architecture reasons.",
+            "Severity": "Error",
+            "Type": "Relationship",
+            "Expression": "source.tag==\"Frontend\" && destination.tag==\"Database\"",
+            "HelpLink": "https://example.com/rules/frontend-db-connection-not-allowed"
+        },
+        {
+            "Key": "ContainerTechnologyMustBeDefined",
+            "Name": "Container technology must be defined",
+            "Description": "Each container must have a defined technology to ensure clarity in the architecture.",
+            "Severity": "Warning",
+            "Type": "Element",
+            "Expression": "element.technology==null",
+            "HelpLink": "https://example.com/rules/container-technology-must-be-defined"
+        },
+        {
+            "Key": "ContainerAllowedTechnologies",
+            "Name": "Container technology must be one of the allowed technologies",
+            "Description": "Containers should use only approved technologies to maintain consistency and supportability.",
+            "Severity": "Warning",
+            "Type": "Element",
+            "Expression": "element.tag == \"Container\" && element.technology notin [\"Java\", \"Spring Boot\", \"Node.js\", \"Express\", \"Python\", \"Django\", \"Go\", \"Gin\", \"Ruby\", \"Rails\", \"PHP\", \"Laravel\", \"C#\", \".NET\"]",
+            "HelpLink": "https://example.com/rules/container-allowed-technologies"
+        },
+        {
+            "Key": "RelationshipsFromExternalSystemsToDatabaseNotAllowed",
+            "Name": "Relationships from external systems to database are not allowed",
+            "Description": "External systems should not have direct relationships to databases to ensure security and proper architecture.",
+            "Severity": "Error",
+            "Type": "Relationship",
+            "Expression": "source.parent != destination.parent && destination.tag==\"Database\"",
+            "HelpLink": "https://example.com/rules/relationships-from-external-systems-to-database-not-allowed"
+        },
+        {
+            "Key": "RelationshipTechnologyMustBeDefined",
+            "Name": "Relationship technology must be defined",
+            "Description": "Each relationship must have a defined technology to ensure clarity in the architecture.",
+            "Severity": "Warning",
+            "Type": "Relationship",
+            "Expression": "relationship.technology==null",  
+            "HelpLink": "https://example.com/rules/relationship-technology-must-be-defined"
+        }
+    ]
+}
