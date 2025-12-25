@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace DocuEye.Linter.Model
+{
+    public class LinterConfiguration
+    {
+
+        public string MaxAllowedSeverity { get; set; } = "Warning";
+        public IEnumerable<LinterRule> Rules { get; set; } = Enumerable.Empty<LinterRule>();
+    }
+}
