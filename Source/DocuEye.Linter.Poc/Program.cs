@@ -90,6 +90,7 @@ var rules = new List<LinterRule>
         Description = "Containers should use only approved technologies to maintain consistency and supportability.",
         Severity = "Warning",
         Type = "Element",
+        //Expression = "Tags.Contains(\"Container\") and Technology not_in @0",
         Expression = "Tags.Contains(\"Container\") and Technology not_in (\"REST\")",
         HelpLink = "https://example.com/rules/container-allowed-technologies"
     },
@@ -128,7 +129,7 @@ var rules = new List<LinterRule>
 foreach (var rule in rules.Where(o => o.Type =="Element"))
 {
     Console.WriteLine($"Rule: {rule.Name}, Expression: {rule.Expression}");
-    var result = elements.AsQueryable().Where(rule.Expression, variables).Count();
+    var result = elements.AsQueryable().Where(rule.Expression, new string[] { "REST" }).Count();
     
     Console.WriteLine(result);
 }
@@ -136,7 +137,7 @@ foreach (var rule in rules.Where(o => o.Type =="Element"))
 foreach (var rule in rules.Where(o => o.Type =="Relationship"))
 {
     Console.WriteLine($"Rule: {rule.Name}, Expression: {rule.Expression}");
-    var result = relationships.AsQueryable().Where(rule.Expression, variables).Count();
+    var result = relationships.AsQueryable().Where(rule.Expression, variables["AllowedTechnologies"]).Count();
     Console.WriteLine(result);
 }
 Console.WriteLine("ContainersCyclingDependency");
