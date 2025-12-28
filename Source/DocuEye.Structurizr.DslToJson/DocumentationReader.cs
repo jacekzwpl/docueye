@@ -3,7 +3,6 @@ using HeyRed.Mime;
 using Markdig;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
-using System.IO;
 using System.Xml.Linq;
 
 namespace DocuEye.Structurizr.DslToJson

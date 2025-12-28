@@ -5,12 +5,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.CommandLine;
 using System.CommandLine.Parsing;
+using DocuEye.Structurizr.DSL.Model.Maps;
 
 namespace DocuEye.CLI.Commands
 {
     public class WorkspaceValidateCommand : Command
     {
         Option<FileInfo> workspaceImportFileOption;
+        Option<string> linterConfiguration;
 
         public WorkspaceValidateCommand() : base("validate", "Validates dsl workspace.")
         {
@@ -19,7 +21,14 @@ namespace DocuEye.CLI.Commands
                 Description = "Path to workspace DSL file.",
                 Required = true
             };
+
+            this.linterConfiguration = new Option<string>("--linter-config", "-lc")
+            {
+                Description = "Path or Url to linter configuration file.",
+                Required = false
+            };
             this.Options.Add(this.workspaceImportFileOption);
+            this.Options.Add(this.linterConfiguration);
             this.SetAction(async parseResult => await this.Run(parseResult));
         }
 
@@ -35,6 +44,8 @@ namespace DocuEye.CLI.Commands
             }
 
             FileInfo worspaceFile = parseResult.GetValue(this.workspaceImportFileOption)!;
+            string? linterConfig = parseResult.GetValue(this.linterConfiguration);
+
 
             var host = new CliHostBuilder().Build(new CliHostOptions("https://docueye.com", "none"));
 
@@ -46,17 +57,20 @@ namespace DocuEye.CLI.Commands
                 return 1;
             }
 
-            var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
+            if(linterConfig != null)
             {
-                Elements = Enumerable.Empty<Linter.Model.LinterModelElement>(),
-                Relationships = Enumerable.Empty<Linter.Model.LinterModelRelationship>()
-            }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
-            linter.LoadConfigurationFromFile("C:\\nCode\\docueye\\Source\\DocuEye.Linter.Poc\\rules.json").GetAwaiter().GetResult();
-            
-            if (!linter.Analyze())
-            {
-                Console.Error.WriteLine("Workspace is invalid.");
-                return 1;
+                var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
+                {
+                    Elements = workspace.Model.Elements.ToLinterModelElements(), //Enumerable.Empty<Linter.Model.LinterModelElement>(),
+                    Relationships = workspace.Model.Relationships.ToLinterModelRelationships(workspace.Model.Elements),//Enumerable.Empty<Linter.Model.LinterModelRelationship>()
+                }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
+                linter.LoadConfigurationFromFile(linterConfig).GetAwaiter().GetResult();
+
+                if (!linter.Analyze())
+                {
+                    Console.Error.WriteLine("Workspace is invalid.");
+                    return 1;
+                }
             }
 
             Console.WriteLine("Workspace is valid.");

@@ -1,9 +1,6 @@
 ﻿using Antlr4.Runtime;
 using DocuEye.Structurizr.DSL.Model;
 using DocuEye.Structurizr.Json.Model;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
 
 namespace DocuEye.Structurizr.DslToJson
 {
