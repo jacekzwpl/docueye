@@ -61,8 +61,8 @@ namespace DocuEye.CLI.Commands
             {
                 var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
                 {
-                    Elements = workspace.Model.Elements.ToLinterModelElements(), //Enumerable.Empty<Linter.Model.LinterModelElement>(),
-                    Relationships = workspace.Model.Relationships.ToLinterModelRelationships(workspace.Model.Elements),//Enumerable.Empty<Linter.Model.LinterModelRelationship>()
+                    Elements = workspace.Model.Elements.ToLinterModelElements(),
+                    Relationships = workspace.Model.Relationships.ToLinterModelRelationships(workspace.Model.Elements),
                 }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
                 linter.LoadConfigurationFromFile(linterConfig).GetAwaiter().GetResult();
 
