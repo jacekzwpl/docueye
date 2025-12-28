@@ -76,7 +76,7 @@ var relationships = new List<LinterModelRelationship>
 
 Dictionary<string, object> variables = new Dictionary<string, object>
 {
-    { "AllowedTechnologies", new[] { "REST" } }
+    { "AllowedContainerTechnologies", new[] { "REST" } }
 };
 
 var rules = new List<LinterRule>
@@ -150,7 +150,7 @@ var rules = new List<LinterRule>
 //    "LinterTest.HasCycle(it, @relationships)", new { relationships }).Count();
 
 var context = new List<object>();
-var expression = "Source.Tags.Contains(\"Container\") and Destination.Tags.Contains(\"Container\") and IsCycle(\"Container\", @Relationships)";
+var expression = "Technology not_in @AllowedContainerTechnologies";
 context.Add(relationships);
 
 expression = expression.Replace("@Relationships", "@0");

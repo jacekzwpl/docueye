@@ -1,5 +1,10 @@
 {
     "MaxAllowedSeverity": "Warning",
+    "Variables": {
+        "AllowedContainerTechnologies": [
+            "ASP.NET MVC", "REST API", "MSSQL", "REDIS"
+        ]
+    },
     "Rules": [
         {
             "Key": "ContainersCyclingDependency",
@@ -34,7 +39,7 @@
             "Description": "Containers should use only approved technologies to maintain consistency and supportability.",
             "Severity": "Warning",
             "Type": "ModelElement",
-            "Expression": "Tags.Contains(\"Container\") and Technology not_in (\"ASP.NET MVC\", \"REST API\", \"MSSQL\", \"REDIS\")",
+            "Expression": "Tags.Contains(\"Container\") and Technology not_in @AllowedContainerTechnologies",
             "HelpLink": "https://example.com/rules/container-allowed-technologies"
         },
         {

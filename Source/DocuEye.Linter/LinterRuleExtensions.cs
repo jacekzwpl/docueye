@@ -23,7 +23,7 @@ namespace DocuEye.Linter
 
             if (rule.Type == LinterRuleType.ModelElement) {
                 var elements = model.Elements.AsQueryable()
-                    .Where(expression, evaluationContext).ToArray();
+                    .Where(expression, evaluationContext.ToArray()).ToArray();
                 foreach (var element in elements)
                 {
                     issues.Add(new LinterIssue { Rule = rule, Element = element });
@@ -32,7 +32,7 @@ namespace DocuEye.Linter
             if(rule.Type == LinterRuleType.ModelRelationship)
             {
                 var relationships = model.Relationships.AsQueryable()
-                    .Where(expression, evaluationContext).ToArray();
+                    .Where(expression, evaluationContext.ToArray()).ToArray();
                 foreach (var relationship in relationships)
                 {
                     issues.Add(new LinterIssue { Rule = rule, Relationship = relationship });

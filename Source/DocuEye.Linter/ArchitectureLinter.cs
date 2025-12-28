@@ -74,10 +74,21 @@ namespace DocuEye.Linter
             int iter = 1;
             foreach (var variable in Configuration.Variables)
             {
-                iter++;
                 string varKey = "@" + iter;
-                this.variablesMap.Add(variable.Key, varKey);
-                this.evaluationContext.Add(variable.Value);
+                this.variablesMap.Add("@" + variable.Key, varKey);
+                if(variable.Value is JsonElement jsonElement && jsonElement.ValueKind == JsonValueKind.Array)
+                {
+                    var value = jsonElement.EnumerateArray()
+                        .Select(e => e.GetString())
+                        .ToArray();
+                    this.evaluationContext.Add(value);
+                }
+                else
+                {
+                    this.evaluationContext.Add(variable.Value);
+                }
+                
+                iter++;
             }
         }
 
