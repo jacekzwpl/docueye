@@ -1,6 +1,8 @@
 ﻿using DocuEye.CLI.Application.Services.DSL;
 using DocuEye.CLI.Hosting;
+using DocuEye.Linter;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.CommandLine;
 using System.CommandLine.Parsing;
 
@@ -43,6 +45,20 @@ namespace DocuEye.CLI.Commands
                 Console.Error.WriteLine("Workspace validation failed.");
                 return 1;
             }
+
+            var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
+            {
+                Elements = Enumerable.Empty<Linter.Model.LinterModelElement>(),
+                Relationships = Enumerable.Empty<Linter.Model.LinterModelRelationship>()
+            }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
+            linter.LoadConfigurationFromFile("C:\\nCode\\docueye\\Source\\DocuEye.Linter.Poc\\rules.json").GetAwaiter().GetResult();
+            
+            if (!linter.Analyze())
+            {
+                Console.Error.WriteLine("Workspace is invalid.");
+                return 1;
+            }
+
             Console.WriteLine("Workspace is valid.");
             return 0;
         }
