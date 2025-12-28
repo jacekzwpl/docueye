@@ -1,4 +1,5 @@
 ﻿using DocuEye.Linter.Model;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace DocuEye.Linter.Tests
 {
@@ -24,7 +25,7 @@ namespace DocuEye.Linter.Tests
                     ]
                 }
             ";
-            var linter = new ArchitectureLinter(new LinterModel());
+            var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
 
             // Act
             linter.LoadConfiguration(config);
@@ -61,7 +62,7 @@ namespace DocuEye.Linter.Tests
                     ]
                 }
             ";
-            var linter = new ArchitectureLinter(new LinterModel());
+            var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
             // Act & Assert
             var ex = Assert.Throws<Exception>(() => linter.LoadConfiguration(config));
             Assert.That(ex.Message, Is.EqualTo("Unsupported rule type: 'InvalidType' for rule with key: 'InvalidRuleType'"));
@@ -85,7 +86,7 @@ namespace DocuEye.Linter.Tests
                     ]
                 }
             ";
-            var linter = new ArchitectureLinter(new LinterModel());
+            var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
             // Act & Assert
             var ex = Assert.Throws<Exception>(() => linter.LoadConfiguration(config));
             Assert.That(ex.Message, Is.EqualTo("Unsupported rule severity: 'Critical' for rule with key: 'InvalidRuleSeverity'"));

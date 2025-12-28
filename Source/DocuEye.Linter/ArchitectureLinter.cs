@@ -1,8 +1,13 @@
 ﻿using DocuEye.Linter.Model;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace DocuEye.Linter
 {
@@ -11,10 +16,36 @@ namespace DocuEye.Linter
         public LinterConfiguration Configuration { get; private set; } = new LinterConfiguration();
 
         private LinterModel model;
+        private readonly ILogger<ArchitectureLinter> logger;
+        private HttpClient httpClient;
+        public List<LinterIssue> Issues { get; private set; } = new List<LinterIssue>();
 
-        public ArchitectureLinter(LinterModel model)
+        public ArchitectureLinter(LinterModel model, ILogger<ArchitectureLinter> logger)
         {
             this.model = model;
+            this.httpClient = new HttpClient();
+            this.logger = logger;
+        }
+
+        public async Task LoadConfigurationFromFile(string filePath)
+        {
+            string jsonText = String.Empty;
+            Uri? validatedUri;
+            var isValid = Uri.TryCreate(filePath, UriKind.Absolute, out validatedUri);
+            if (isValid && validatedUri?.Scheme == Uri.UriSchemeHttp)
+            {
+                jsonText = await this.httpClient.GetStringAsync(filePath);
+            }
+            else
+            {
+                if (!File.Exists(filePath))
+                {
+                    throw new FileNotFoundException($"Linter configuration file not found: {filePath}");
+                }
+
+                jsonText = File.ReadAllText(filePath);
+            }
+            LoadConfiguration(jsonText);
         }
 
         public void LoadConfiguration(string json)
@@ -31,18 +62,25 @@ namespace DocuEye.Linter
             }
         }
 
-        public IEnumerable<LinterIssue> Analyze()
+        public bool Analyze()
         {
-            List<LinterIssue> issues = new List<LinterIssue>();
-            foreach (var rule in Configuration.Rules.Where(rule => rule.Enabled && rule.Type == "Element"))
+            this.Issues = new List<LinterIssue>();
+            foreach (var rule in Configuration.Rules.Where(rule => rule.Enabled))
             {
-                var elements = model.Elements.AsQueryable().Where(rule.Expression).ToArray();
-                if(elements.Count() > 0)
-                {
-                    issues.Add(new LinterIssue { Rule = rule });
-                }
+                var ruleIssues = rule.Evaluate(model);
+                Issues.AddRange(ruleIssues);
             }
-            return issues;
+
+            foreach (var issue in Issues)
+            {
+                issue.LogIssue(logger);
+            }
+
+            return Issues
+                .Where(o =>
+                    o.SeverityValue > LinterRuleSeverity
+                        .GetSeverityValue(this.Configuration.MaxAllowedSeverity)
+                ).Count() > 0 ? false : true;
         }
     }
 }
