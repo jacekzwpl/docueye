@@ -25,7 +25,7 @@
             "Description": "Containers should use only approved technologies to maintain consistency and supportability.",
             "Severity": "Warning",
             "Type": "ModelElement",
-            "Expression": "Tags.Contains(\"Container\") and Technology not_in (\"REST\")",
+            "Expression": "Tags.Contains(\"Container\") and Technology not_in (\"ASP.NET MVC\", \"REST API\", \"MSSQL\", \"REDIS\")",
             "HelpLink": "https://example.com/rules/container-allowed-technologies"
         },
         {
