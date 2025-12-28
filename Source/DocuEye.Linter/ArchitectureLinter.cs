@@ -67,6 +67,7 @@ namespace DocuEye.Linter
             this.Issues = new List<LinterIssue>();
             foreach (var rule in Configuration.Rules.Where(rule => rule.Enabled))
             {
+                this.logger.LogInformation("Evaluating rule: {RuleKey}", rule.Key);
                 var ruleIssues = rule.Evaluate(model);
                 Issues.AddRange(ruleIssues);
             }
