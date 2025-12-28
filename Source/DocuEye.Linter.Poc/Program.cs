@@ -1,8 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DocuEye.Linter.Model;
+using System.Data;
+using System.Linq;
 using System.Linq.Dynamic.Core;
 
 Console.WriteLine("Hello, World!");
+
+
 
 var elements = new List<LinterModelElement>
 {
@@ -47,22 +51,26 @@ var relationships = new List<LinterModelRelationship>
     new LinterModelRelationship
     {
         Source = elements.First(o => o.Identifier=="mysystem.frontend"),
-        Destination = elements.First(o => o.Identifier=="mysystem.database")
+        Destination = elements.First(o => o.Identifier=="mysystem.database"),
+        Technology = "REST"
     },
     new LinterModelRelationship
     {
         Source = elements.First(o => o.Identifier=="externalsystem.service"),
-        Destination = elements.First(o => o.Identifier=="mysystem.database")
+        Destination = elements.First(o => o.Identifier=="mysystem.database"),
+        Technology = "SQL"
     },
     new LinterModelRelationship
     {
         Source = elements.First(o => o.Identifier=="externalsystem.service"),
-        Destination = elements.First(o => o.Identifier=="mysystem.api")
+        Destination = elements.First(o => o.Identifier=="mysystem.api"),
+        Technology = "REST"
     },
     new LinterModelRelationship
     {
         Source = elements.First(o => o.Identifier=="mysystem.api"),
-        Destination = elements.First(o => o.Identifier=="externalsystem.service")
+        Destination = elements.First(o => o.Identifier=="externalsystem.service"),
+        Technology = "REST"
     }
 };
 
@@ -73,6 +81,17 @@ Dictionary<string, object> variables = new Dictionary<string, object>
 
 var rules = new List<LinterRule>
 {
+    new LinterRule
+    {
+        Key =  "ContainersCyclingDependency",
+        Name = "Containers must not have cycling dependencies",
+        Description = "Containers should not have direct cyclic dependencies to ensure a clean architecture.",
+        Severity = "Error",
+        Type = "Relationship",
+        Expression = "Source.Tags.Contains(\"Container\") and Destination.Tags.Contains(\"Container\") and Relationships.Any(o => o.Source.Identifier == Destination.Identifier and o.Destination.Identifier == Source.Identifier)",
+        HelpLink = "https://example.com/rules/containers-cycling-dependency"
+    },
+    /*
     new LinterRule
     {
         Key =  "ContainerTechnologyMustBeDefined",
@@ -123,9 +142,68 @@ var rules = new List<LinterRule>
         Type = "Relationship",
         Expression = "Technology == null",
         HelpLink = "https://example.com/rules/relationship-technology-must-be-defined"
-    }
+    }*/
+};
+//var result = relationships.AsQueryable().Where(
+//    "o => LinterTest.HasCycle(o,@relationships)", new { relationships = relationships }).Count();
+//var result = relationships.AsQueryable().Where(
+//    "LinterTest.HasCycle(it, @relationships)", new { relationships }).Count();
+
+var context = new List<object>();
+var expression = "Source.Tags.Contains(\"Container\") and Destination.Tags.Contains(\"Container\") and IsCycle(\"Container\", @Relationships)";
+context.Add(relationships);
+
+expression = expression.Replace("@Relationships", "@0");
+int iter = 1;
+foreach (var variable in variables)
+{
+    expression = expression.Replace("@"+ variable.Key,"@"+ iter);
+    context.Add(variable.Value);
+    iter++;
+}
+
+var result = relationships.AsQueryable()
+        .Where(expression, context.ToArray()).Count();
+Console.WriteLine(result);
+/*
+var props = new DynamicProperty[]
+{
+    new DynamicProperty("Name", typeof(string)),
+    new DynamicProperty("Birthday", typeof(DateTime))
 };
 
+/**
+
+Type type = DynamicClassFactory.CreateType(props);
+
+var dynamicClass = Activator.CreateInstance(type) as DynamicClass;
+dynamicClass.SetDynamicPropertyValue("Name", "Albert");
+dynamicClass.SetDynamicPropertyValue("Birthday", new DateTime(1879, 3, 14));
+
+relationships.AsQueryable().Where()
+*/
+/*
+var config = new ParsingConfig
+{
+    // Allow access to properties from the context object
+    ResolveTypesBySimpleName = true
+};
+
+var context = new
+{
+    Relationships = relationships,
+    Elements = elements,
+    SomeOtherValue = 42
+};
+
+var result = relationships.AsQueryable()
+    .Where(config, "LinterTest.HasCycle(it, seq)", context)
+    .Count();
+Console.WriteLine(result);
+*/
+
+
+/*
 foreach (var rule in rules.Where(o => o.Type =="Element"))
 {
     Console.WriteLine($"Rule: {rule.Name}, Expression: {rule.Expression}");
@@ -154,3 +232,4 @@ foreach (var relationship in relationships.Where(o => o.Source.Tags.Contains("Co
         Console.WriteLine($"Found cycling dependency {relationship.Source.Name} <-> {relationship.Destination.Name}"); 
     }
 }
+*/

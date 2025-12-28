@@ -10,5 +10,6 @@ namespace DocuEye.Linter.Model
 
         public string MaxAllowedSeverity { get; set; } = LinterRuleSeverity.Warning;
         public IEnumerable<LinterRule> Rules { get; set; } = Enumerable.Empty<LinterRule>();
+        public Dictionary<string, object> Variables { get; set; } = new Dictionary<string, object>();
     }
 }

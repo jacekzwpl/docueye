@@ -11,13 +11,15 @@ using System.Threading.Tasks;
 
 namespace DocuEye.Linter
 {
-    public class ArchitectureLinter
+    public class ArchitectureLinter : IDisposable
     {
         public LinterConfiguration Configuration { get; private set; } = new LinterConfiguration();
 
         private LinterModel model;
         private readonly ILogger<ArchitectureLinter> logger;
         private HttpClient httpClient;
+        private Dictionary<string,string> variablesMap = new Dictionary<string, string>();
+        private List<object> evaluationContext = new List<object>();
         public List<LinterIssue> Issues { get; private set; } = new List<LinterIssue>();
 
         public ArchitectureLinter(LinterModel model, ILogger<ArchitectureLinter> logger)
@@ -62,13 +64,31 @@ namespace DocuEye.Linter
             }
         }
 
+        private void CreateContext()
+        {
+            this.evaluationContext = new List<object>();
+            this.variablesMap = new Dictionary<string, string>();
+            this.variablesMap.Add("@ModelRelationships", "@0");
+            this.evaluationContext.Add(this.model.Relationships);
+
+            int iter = 1;
+            foreach (var variable in Configuration.Variables)
+            {
+                iter++;
+                string varKey = "@" + iter;
+                this.variablesMap.Add(variable.Key, varKey);
+                this.evaluationContext.Add(variable.Value);
+            }
+        }
+
         public bool Analyze()
         {
+            CreateContext();
             this.Issues = new List<LinterIssue>();
             foreach (var rule in Configuration.Rules.Where(rule => rule.Enabled))
             {
                 this.logger.LogInformation("Evaluating rule: {RuleKey}", rule.Key);
-                var ruleIssues = rule.Evaluate(model);
+                var ruleIssues = rule.Evaluate(model, evaluationContext, variablesMap);
                 Issues.AddRange(ruleIssues);
             }
 
@@ -82,6 +102,11 @@ namespace DocuEye.Linter
                     o.SeverityValue > LinterRuleSeverity
                         .GetSeverityValue(this.Configuration.MaxAllowedSeverity)
                 ).Count() > 0 ? false : true;
+        }
+
+        public void Dispose()
+        {
+            this.httpClient.Dispose();
         }
     }
 }
