@@ -7,8 +7,13 @@ namespace DocuEye.Linter
 {
     public static class LinterRuleExtensions
     {
-        public static IEnumerable<LinterIssue> Evaluate(this LinterRule rule, LinterModel model)
+        public static IEnumerable<LinterIssue> Evaluate(this LinterRule rule, LinterModel model, List<object> evaluationContext, Dictionary<string,string> variablesMap)
         {
+            var expression = rule.Expression;
+            foreach (var item in variablesMap) {
+                expression = expression.Replace(item.Key, item.Value);
+            }
+
             if(!rule.Enabled)
             {
                 return Enumerable.Empty<LinterIssue>();
@@ -17,7 +22,8 @@ namespace DocuEye.Linter
             var issues = new List<LinterIssue>();
 
             if (rule.Type == LinterRuleType.ModelElement) {
-                var elements = model.Elements.AsQueryable().Where(rule.Expression).ToArray();
+                var elements = model.Elements.AsQueryable()
+                    .Where(expression, evaluationContext).ToArray();
                 foreach (var element in elements)
                 {
                     issues.Add(new LinterIssue { Rule = rule, Element = element });
@@ -25,7 +31,8 @@ namespace DocuEye.Linter
             }
             if(rule.Type == LinterRuleType.ModelRelationship)
             {
-                var relationships = model.Relationships.AsQueryable().Where(rule.Expression).ToArray();
+                var relationships = model.Relationships.AsQueryable()
+                    .Where(expression, evaluationContext).ToArray();
                 foreach (var relationship in relationships)
                 {
                     issues.Add(new LinterIssue { Rule = rule, Relationship = relationship });

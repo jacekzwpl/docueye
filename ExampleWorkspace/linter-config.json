@@ -2,6 +2,15 @@
     "MaxAllowedSeverity": "Warning",
     "Rules": [
         {
+            "Key": "ContainersCyclingDependency",
+            "Name": "Containers should not have cyclic dependencies",
+            "Description": "Containers must not depend on each other in a cyclic manner to avoid tight coupling and maintainability issues.",
+            "Severity": "Error",
+            "Type": "ModelRelationship",
+            "Expression": "Source.Tags.Contains(\"Container\") and Destination.Tags.Contains(\"Container\") and IsDirectCycle(\"Container\", @ModelRelationships)",
+            "HelpLink": "https://example.com/rules/containers-cycling-dependency"
+        },
+        {
             "Key": "FrontendDbConnectionNotAllowed",
             "Name": "Frontend can not connect directly to database",
             "Description": "Frontend services should not connect directly to the database for security and architecture reasons.",

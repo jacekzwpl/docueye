@@ -11,7 +11,7 @@ namespace DocuEye.Linter.Model
         public string? Description { get; set; }
         public string Severity { get; set; } = null!;
         public string Type { get; set; } = null!;
-        public string? Expression { get; set; }
+        public string Expression { get; set; } = null!;
         public string? HelpLink { get; set; }
         public bool Enabled { get; set; } = true;
     }
