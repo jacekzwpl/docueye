@@ -254,7 +254,9 @@ namespace DocuEye.Structurizr.DslToJson
         {
 
             var themes = dslViews.Themes?
-                .Select(o => o.Replace("default", "https://static.structurizr.com/themes/default/theme.json"))
+                .Select(o => o.ToLower() == "default"
+                    ? "https://static.structurizr.com/themes/default/theme.json"
+                    : o)
                 .ToArray()
                 ?? Array.Empty<string>();
 
