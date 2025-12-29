@@ -122,7 +122,7 @@ namespace DocuEye.Structurizr.DslToJson
             return views;
         }
 
-        private (IEnumerable<StructurizrModelElement> elements, IEnumerable<StructurizrRelationship> relationships) DiscoverElementsAndRelationships(IEnumerable<string>? includes, IEnumerable<string>? excludes, Expression<Func<StructurizrModelElement, bool>> defaultElementsExpression)
+        private (IEnumerable<StructurizrModelElement> elements, IEnumerable<StructurizrRelationship> relationships) DiscoverElementsAndRelationships(IEnumerable<string>? includes, IEnumerable<string>? excludes, Expression<Func<StructurizrModelElement, bool>> defaultElementsExpression, IEnumerable<StructurizrModelElement>? additionalElements = null )
         {
 
             var elements = new List<StructurizrModelElement>();
@@ -168,7 +168,10 @@ namespace DocuEye.Structurizr.DslToJson
                 elements = new List<StructurizrModelElement>();
                 relationships = new List<StructurizrRelationship>();
             }
-
+            if(additionalElements != null)
+            {
+                elements.AddRange(additionalElements);
+            }
             //Filter the elements by type allowed for landscape view
             elements = elements.AsQueryable()
                 .Where(defaultElementsExpression)
@@ -618,10 +621,183 @@ namespace DocuEye.Structurizr.DslToJson
             };
         }
 
+
+        private IEnumerable<string> DiscoverAllowedIdsForDeploymentView(string elementIdentifier, string envirnment)
+        {
+            var deploymentNodesIds = this.dslWorkspace.Model.Elements
+                    .Where(o =>
+                        o.Type == StructurizrModelElementType.DeploymentNode
+                        && o.DeploymentEnvironmentIdentifier == envirnment
+                    ).Select(o => o.Identifier).Distinct().ToArray();
+
+            var infrastructureNodesIds = this.dslWorkspace.Model.Elements
+                .Where(o => o.Type == StructurizrModelElementType.InfrastructureNode
+                    && o.DeploymentEnvironmentIdentifier == envirnment)
+                .Select(o => o.Identifier).Distinct().ToArray();
+
+            var softwareSystemIds = this.dslWorkspace.Model.Elements
+                .Where(o => o.Type == StructurizrModelElementType.SoftwareSystemInstance
+                    && o.DeploymentEnvironmentIdentifier == envirnment)
+                .Select(o => o.Identifier).Distinct().ToArray();
+            var containerInstancesIds = new List<string>();
+            if (elementIdentifier == "*")
+            {
+                containerInstancesIds.AddRange(
+                    this.dslWorkspace.Model.Elements.Where(o =>
+                        o.Type == StructurizrModelElementType.ContainerInstance
+                        && o.DeploymentEnvironmentIdentifier == envirnment)
+                    .Select(o => o.Identifier).Distinct().ToArray()
+               );
+            }
+            else
+            {
+                var containerIds = this.dslWorkspace.Model.Elements
+                    .Where(o => o.Type == StructurizrModelElementType.Container
+                        && o.ParentIdentifier == elementIdentifier)
+                    .Select(o => o.Identifier).Distinct().ToArray();
+                containerInstancesIds.AddRange(
+                    this.dslWorkspace.Model.Elements.Where(o =>
+                        o.Type == StructurizrModelElementType.ContainerInstance
+                        && o.DeploymentEnvironmentIdentifier == envirnment
+                        && containerIds.Contains(o.InstanceOfIdentifier))
+                    .Select(o => o.Identifier).Distinct().ToArray()
+                );
+            }
+
+            return deploymentNodesIds
+                .Union(infrastructureNodesIds)
+                .Union(softwareSystemIds)
+                .Union(containerInstancesIds)
+                .Distinct()
+                .ToArray();
+        }
+
         public StructurizrJsonDeploymentView ConvertDeploymentView(StructurizrDeploymentView dslView)
         {
 
-            //var environment = this.dslWorkspace.Model.DeploymentEnvironments.FirstOrDefault(o => o.Name == dslView.Environment);
+            var allowedIds = this.DiscoverAllowedIdsForDeploymentView(dslView.ElementIdentifier, dslView.Environment);
+
+
+            // Find base elements
+            var (baseElements, baseRelationships) = this.DiscoverElementsAndRelationships(
+                dslView.Include,
+                dslView.Exclude,
+                o => ((o.Type == StructurizrModelElementType.SoftwareSystem
+                    || o.Type == StructurizrModelElementType.Container)));
+
+            //if (dslView.ElementIdentifier != "*") {
+            //    baseElements = baseElements
+            //        .Where(o => 
+            //            (   o.Type == StructurizrModelElementType.Container 
+            //                && o.ParentIdentifier == dslView.ElementIdentifier
+            //            ) || o.Type == StructurizrModelElementType.SoftwareSystem)
+            //        .ToArray();
+            //}
+
+            // Find instances for base elements
+            var baseIdentifiers = baseElements.Select(o => o.Identifier).ToArray();
+            var instances = this.dslWorkspace.Model.Elements
+                .Where(o => (o.Type == StructurizrModelElementType.ContainerInstance
+                    || o.Type == StructurizrModelElementType.SoftwareSystemInstance)
+                    && baseIdentifiers.Contains(o.InstanceOfIdentifier)
+                    && allowedIds.Contains(o.Identifier)).ToArray();
+
+            // Find deployment nodes where instances are deployed
+            var deploymentNodesFroInstancesIds = instances
+                .Select(o => o.ParentIdentifier)
+                .Distinct()
+                .ToArray();
+            var deploymentNodesForInstances = this.dslWorkspace.Model.Elements
+                .Where(o => o.Type == StructurizrModelElementType.DeploymentNode
+                    && o.DeploymentEnvironmentIdentifier == dslView.Environment
+                    && deploymentNodesFroInstancesIds.Contains(o.Identifier))
+                .ToArray();
+
+            // Find infrastructure nodes if included directly
+            var (infrastructureNodes, infrastructureNodesRelationships) = this.DiscoverElementsAndRelationships(
+                dslView.Include,
+                dslView.Exclude,
+                o => (o.Type == StructurizrModelElementType.InfrastructureNode
+                    && allowedIds.Contains(o.Identifier)));
+
+            // Find deployment nodes where infrastructure nodes are deployed
+            var deploymentNodesForInfrastructureNodesIds = infrastructureNodes
+                .Select(o => o.ParentIdentifier)
+                .Distinct()
+                .ToArray();
+            var deploymentNodesForInfrastructureNodes = this.dslWorkspace.Model.Elements
+                .Where(o => o.Type == StructurizrModelElementType.DeploymentNode
+                    && o.DeploymentEnvironmentIdentifier == dslView.Environment
+                    && deploymentNodesForInfrastructureNodesIds.Contains(o.Identifier))
+                .ToArray();
+
+            // Find deployment nodes if included directly
+            var (directDeploymentNodes, directDeploymentNodesRelationships) = this.DiscoverElementsAndRelationships(
+                dslView.Include,
+                dslView.Exclude,
+                o => ((o.Type == StructurizrModelElementType.DeploymentNode)));
+
+            // Find instances deployed on directly included deployment nodes
+            var directDeploymentNodesIds = directDeploymentNodes
+                .Select(o => o.Identifier)
+                .Distinct()
+                .ToArray();
+            var instancesOnDirectDeploymentNodes = this.dslWorkspace.Model.Elements
+                .Where(o => (o.Type == StructurizrModelElementType.ContainerInstance
+                    || o.Type == StructurizrModelElementType.SoftwareSystemInstance
+                    || o.Type == StructurizrModelElementType.InfrastructureNode)
+                    && directDeploymentNodesIds.Contains(o.ParentIdentifier)
+                    && allowedIds.Contains(o.Identifier)).ToArray();
+
+            var allElements = new List<StructurizrModelElement>();
+            allElements.AddRange(instances);
+            allElements.AddRange(deploymentNodesForInstances);
+            allElements.AddRange(directDeploymentNodes);
+            allElements.AddRange(instancesOnDirectDeploymentNodes);
+            allElements.AddRange(deploymentNodesForInfrastructureNodes);
+
+            var allElementsDistinct = allElements
+                .GroupBy(o => o.Identifier).Select(g => g.First()).ToArray();
+
+
+
+
+
+            var (elements, relationships) = this.DiscoverElementsAndRelationships(
+                dslView.Include,
+                dslView.Exclude,
+                o => ((o.Type == StructurizrModelElementType.DeploymentNode
+                    || o.Type == StructurizrModelElementType.InfrastructureNode
+                    || o.Type == StructurizrModelElementType.ContainerInstance
+                    || o.Type == StructurizrModelElementType.SoftwareSystemInstance)
+                    && allowedIds.Contains(o.Identifier)
+                    ), allElementsDistinct);
+
+           
+            var emptyNodes = elements.Where(
+                    o => o.Type == StructurizrModelElementType.DeploymentNode
+                    && !elements.Any(e => e.ParentIdentifier == o.Identifier 
+                            && (
+                                e.Type == StructurizrModelElementType.ContainerInstance
+                                || e.Type == StructurizrModelElementType.SoftwareSystemInstance
+                                || e.Type == StructurizrModelElementType.InfrastructureNode))
+                ).ToArray();
+            //var emptyNodes = elements.Where (o => o.Type == StructurizrModelElementType.DeploymentNode)
+            //   .Where(o => !elements.Any(e => e.ParentIdentifier == o.Identifier))
+            //    .Where(o => !elements.Any(e => e.Type == StructurizrModelElementType.ContainerInstance && e.ParentIdentifier == o.Identifier))
+            //    .Where(o => !elements.Any(e => e.Type == StructurizrModelElementType.InfrastructureNode && e.ParentIdentifier == o.Identifier))
+            //    .ToArray();
+
+            elements = elements.Except(emptyNodes).ToArray();
+
+
+            var contextElement = this.dslWorkspace.Model.Elements
+                .Where(o => o.Identifier == dslView.ElementIdentifier)
+                .FirstOrDefault();
+
+
+            /* 
+
 
             var deploymentNodesIds = this.dslWorkspace.Model.Elements
                     .Where(o =>
@@ -682,7 +858,7 @@ namespace DocuEye.Structurizr.DslToJson
                     || o.Type == StructurizrModelElementType.SoftwareSystemInstance)
                     ) && elementIds.Contains(o.Identifier));
 
-
+            */
             return new StructurizrJsonDeploymentView()
             {
                 AutomaticLayout = this.ConvertAutomaticLayout(dslView.AutomaticLayout),
@@ -690,7 +866,10 @@ namespace DocuEye.Structurizr.DslToJson
                 Title = dslView.Title,
                 Description = dslView.Description,
                 SoftwareSystemId = contextElement?.ModelId,//dslView.ElementIdentifier == "*" ? null : dslView.ElementIdentifier,
-                Elements = elements.Select(o => new StructurizrJsonElementView()
+                Elements = elements
+                .GroupBy(o => o.Identifier)
+                .Select(g => g.First())
+                .Select(o => new StructurizrJsonElementView()
                 {
                     Id = o.ModelId,
                     X = 0,
