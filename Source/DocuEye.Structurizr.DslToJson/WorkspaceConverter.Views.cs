@@ -674,6 +674,26 @@ namespace DocuEye.Structurizr.DslToJson
                 .ToArray();
         }
 
+        private IEnumerable<StructurizrModelElement> GetParentNodesForDeploymentView(string? identifier) { 
+            List<StructurizrModelElement> parentNodes = new List<StructurizrModelElement>();
+            if(string.IsNullOrEmpty(identifier))
+            {
+                return parentNodes.ToArray();
+            }
+            var parentNode = this.dslWorkspace.Model.Elements
+                .Where(o => o.Type == StructurizrModelElementType.DeploymentNode
+                    && o.Identifier == identifier)
+                .FirstOrDefault();
+            if(parentNode != null)
+            {
+                parentNodes.Add(parentNode);
+                var higherParentNodes = this.GetParentNodesForDeploymentView(parentNode.ParentIdentifier);
+                parentNodes.AddRange(higherParentNodes);
+
+            }
+            return parentNodes.ToArray();
+        }
+
         public StructurizrJsonDeploymentView ConvertDeploymentView(StructurizrDeploymentView dslView)
         {
 
@@ -783,10 +803,11 @@ namespace DocuEye.Structurizr.DslToJson
                     && !excludedContainerIds.Contains(o.InstanceOfIdentifier)
                     ), allElementsDistinct);
 
-           
+
+            // Remove empty deployment nodes
             var emptyNodes = elements.Where(
                     o => o.Type == StructurizrModelElementType.DeploymentNode
-                    && !elements.Any(e => e.ParentIdentifier == o.Identifier 
+                    && !elements.Any(e => e.ParentIdentifier == o.Identifier
                             && (
                                 e.Type == StructurizrModelElementType.ContainerInstance
                                 || e.Type == StructurizrModelElementType.SoftwareSystemInstance
@@ -794,6 +815,24 @@ namespace DocuEye.Structurizr.DslToJson
                 ).ToArray();
 
             elements = elements.Except(emptyNodes).ToArray();
+
+            // Ensure all parent deployment nodes are included
+            var missingNodes = this.dslWorkspace.Model.Elements
+                .Where(o => o.Type == StructurizrModelElementType.DeploymentNode
+                    && elements.Select(e => e.ParentIdentifier).Contains(o.Identifier))
+                .ToArray();
+
+            elements = elements.Concat(missingNodes).ToArray();
+
+            var missingParentNodes = new List<StructurizrModelElement>();
+            foreach (var node in elements.Where(o => o.Type == StructurizrModelElementType.DeploymentNode))
+            {
+                var parents = this.GetParentNodesForDeploymentView(node.ParentIdentifier);
+                missingParentNodes.AddRange(parents);
+            }
+            elements = elements.Concat(missingParentNodes).ToArray();
+
+
 
             var contextElement = this.dslWorkspace.Model.Elements
                 .Where(o => o.Identifier == dslView.ElementIdentifier)
