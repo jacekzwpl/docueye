@@ -60,7 +60,7 @@ namespace DocuEye.Structurizr.DslToJson.Tests
                         DeploymentEnvironmentIdentifier = "Production",
                         Type = StructurizrModelElementType.DeploymentNode
                     },
-                    new StructurizrModelElement("8","ci1")
+                    new StructurizrModelElement("9","ci1")
                     {
                         Name = "Container1",
                          DeploymentEnvironmentIdentifier = "Production",
@@ -68,7 +68,7 @@ namespace DocuEye.Structurizr.DslToJson.Tests
                         InstanceOfIdentifier = "c1",
                         ParentIdentifier = "dn1",
                     },
-                    new StructurizrModelElement("9","ci2")
+                    new StructurizrModelElement("10","ci2")
                     {
                         Name = "Container2",
                         DeploymentEnvironmentIdentifier = "Production",
@@ -76,7 +76,7 @@ namespace DocuEye.Structurizr.DslToJson.Tests
                         Type = StructurizrModelElementType.ContainerInstance,
                         ParentIdentifier = "dn2",
                     },
-                    new StructurizrModelElement("10","si3")
+                    new StructurizrModelElement("11","si3")
                     {
                         Name = "System3",
                         DeploymentEnvironmentIdentifier = "Production",
@@ -146,7 +146,7 @@ namespace DocuEye.Structurizr.DslToJson.Tests
             Assert.That(result.Title, Is.EqualTo("Test Title"));
             Assert.That(result.Description, Is.EqualTo("Test Description"));
             Assert.That(result.Elements, Is.Not.Null);
-            Assert.That(result.Elements.Count(), Is.EqualTo(5));
+            Assert.That(result.Elements.Count(), Is.EqualTo(4));
             Assert.That(result.Relationships?.Count(), Is.EqualTo(1));
         }
     }
