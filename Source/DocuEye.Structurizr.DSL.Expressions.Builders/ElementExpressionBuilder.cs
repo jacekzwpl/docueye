@@ -38,21 +38,23 @@ namespace DocuEye.Structurizr.DSL.Expressions.Builders
                     { 
                         expression = currentExpression; 
                     }
-                }else if(dslExpression.ExpressionConnector == DSLExpressionConnector.And || dslExpression.ExpressionConnector == DSLExpressionConnector.Undefined)
-                {
-                    var currentExpression = this.BuildExpression(dslExpression);
-                    if (currentExpression != null)
-                    {
-                        expression = expression.And(currentExpression);
-                    }
-                }
-                else if (dslExpression.ExpressionConnector == DSLExpressionConnector.Or)
+                }else if(dslExpression.ExpressionConnector == DSLExpressionConnector.Or || dslExpression.ExpressionConnector == DSLExpressionConnector.Undefined)
                 {
                     var currentExpression = this.BuildExpression(dslExpression);
                     if (currentExpression != null)
                     {
                         expression = expression.Or(currentExpression);
                     }
+                }
+                else if (dslExpression.ExpressionConnector == DSLExpressionConnector.And)
+                {
+                    var currentExpression = this.BuildExpression(dslExpression);
+                    if (currentExpression != null)
+                    {
+                        expression = expression.And(currentExpression);
+                    }
+
+                   
                 }
             }
             if(expression == null)
