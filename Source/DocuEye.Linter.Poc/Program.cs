@@ -149,6 +149,8 @@ var rules = new List<LinterRule>
 //var result = relationships.AsQueryable().Where(
 //    "LinterTest.HasCycle(it, @relationships)", new { relationships }).Count();
 
+
+
 var context = new List<object>();
 var expression = "Technology not_in @AllowedContainerTechnologies";
 context.Add(relationships);

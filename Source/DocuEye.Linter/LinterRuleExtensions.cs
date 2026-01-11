@@ -39,6 +39,17 @@ namespace DocuEye.Linter
                 }
             }
 
+            if(rule.Type == LinterRuleType.General)
+            {
+                var results = new List<object>() { "general" };
+                results = evaluationContext.AsQueryable()
+                    .Where(expression, evaluationContext.ToArray()).ToList();
+                if(results.Any())
+                {
+                    issues.Add(new LinterIssue { Rule = rule, Message = GeneralIssuesFinder.IssueMessage });
+                }
+            }
+
             return issues.ToArray();
         }
     }

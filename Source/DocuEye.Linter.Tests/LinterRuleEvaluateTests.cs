@@ -88,5 +88,52 @@ namespace DocuEye.Linter.Tests
             Assert.That(issues.Count(), Is.EqualTo(1));
             Assert.That(issues.First().Rule.Key, Is.EqualTo("FrontendDbConnectionNotAllowed"));
         }
+
+        [Test]
+        public void LinterRule_Evaluate_ShouldReturnIssues_ForGeneralRule()
+        {
+            // Arrange
+            var model = new LinterModel()
+            {
+                Relationships = new List<LinterModelRelationship>
+                {
+                    new LinterModelRelationship
+                    {
+                        Source = new LinterModelElement { Identifier = "containerA", Tags = new List<string> { "Container" } },
+                        Destination = new LinterModelElement { Identifier = "containerB", Tags = new List<string> { "Container" } },
+                        Technology = "HTTP"
+                    },
+                    new LinterModelRelationship
+                    {
+                        Source = new LinterModelElement { Identifier = "containerB", Tags = new List<string> { "Container" } },
+                        Destination = new LinterModelElement { Identifier = "containerA", Tags = new List<string> { "Container" } },
+                        Technology = "HTTP"
+                    }
+                }
+            };
+
+            var evaluationContext = new List<object>();
+            var variablesMap = new Dictionary<string, string>();
+            variablesMap.Add("@ModelRelationships", "@0");
+            evaluationContext.Add(model.Relationships);
+
+            var rule = new LinterRule
+            {
+                Key = "ContainersCyclingDependency",
+                Name = "Containers should not have cyclic dependencies",
+                Description = "Containers must not depend on each other in a cyclic manner to avoid tight coupling and maintainability issues.",
+                Severity = LinterRuleSeverity.Error,
+                Type = LinterRuleType.General,
+                Expression = "GeneralIssuesFinder.CyclicDependenciesExists(\"Container\",@ModelRelationships)",
+                Enabled = true
+            };
+            // Act
+            var issues = rule.Evaluate(model, evaluationContext, variablesMap);
+            // Assert
+            Assert.That(issues, Is.Not.Null);
+            Assert.That(issues.Count(), Is.EqualTo(1));
+            Assert.That(issues.First().Message, Is.EqualTo("Cyclic dependencies discovered: containerA -> containerB -> containerA"));
+            Assert.That(issues.First().Rule.Key, Is.EqualTo("ContainersCyclingDependency"));
+        }
     }
 }

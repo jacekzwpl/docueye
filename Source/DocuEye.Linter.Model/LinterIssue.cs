@@ -10,6 +10,7 @@ namespace DocuEye.Linter.Model
         public LinterRule Rule { get; set; } = null!;
         public LinterModelElement? Element { get; set; }
         public LinterModelRelationship? Relationship { get; set; }
+        public string? Message { get; set; }
 
         public int SeverityValue
         {

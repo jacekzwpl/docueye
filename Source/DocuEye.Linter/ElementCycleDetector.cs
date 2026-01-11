@@ -1,25 +1,23 @@
 ﻿using DocuEye.Linter.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 
 namespace DocuEye.Linter
 {
+
     public static class ElementCycleDetector
     {
         public static IReadOnlyList<string>? CurrentCycle = null;
-        public static bool CycleExists(IEnumerable<LinterModelRelationship> relationships)
+        public static bool CycleExists(string elementType, IEnumerable<LinterModelRelationship> relationships)
         {
-            CurrentCycle = FindCycle(relationships);
+            CurrentCycle = FindCycle(elementType, relationships);
             return CurrentCycle != null;
         }
 
 
-        private static IReadOnlyList<string>? FindCycle(IEnumerable<LinterModelRelationship> relationships)
+        private static IReadOnlyList<string>? FindCycle(string elementType, IEnumerable<LinterModelRelationship> relationships)
         {
-            var graph = relationships
+            var graph = relationships.Where(r => r.Source.Tags.Contains(elementType) && r.Destination.Tags.Contains(elementType))
             .GroupBy(d => d.Source.Identifier)
             .ToDictionary(
                 g => g.Key,
