@@ -54,7 +54,7 @@ namespace DocuEye.Linter
         {
             Configuration = JsonSerializer.Deserialize<LinterConfiguration>(json) ?? new LinterConfiguration();
             foreach (var rule in Configuration.Rules) {
-                if (!new string[] { LinterRuleType.ModelElement, LinterRuleType.ModelRelationship }.Contains(rule.Type)) { 
+                if (!LinterRuleType.AllTypes.Contains(rule.Type)) { 
                     throw new Exception($"Unsupported rule type: '{rule.Type}' for rule with key: '{rule.Key}'");
                 }
                 if (!new string[] { LinterRuleSeverity.Error, LinterRuleSeverity.Warning }.Contains(rule.Severity))

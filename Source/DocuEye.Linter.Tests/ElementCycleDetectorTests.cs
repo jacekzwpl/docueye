@@ -11,27 +11,27 @@ namespace DocuEye.Linter.Tests
             {
                 new LinterModelRelationship()
                 {
-                    Source = new LinterModelElement() { Identifier = "A" },
-                    Destination = new LinterModelElement() { Identifier = "B" },
+                    Source = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "B", Tags = new List<string> { "Container" } },
                     Technology = "Tech1"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "B" },
-                    Destination = new LinterModelElement() { Identifier = "C" },
+                    Source = new LinterModelElement() { Identifier = "B", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "C", Tags = new List<string> { "Container" } },
                     Technology = "Tech2"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "A" },
-                    Destination = new LinterModelElement() { Identifier = "D" },
+                    Source = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "D", Tags = new List<string> { "Container" } },
                     Technology = "Tech4"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "D" },
-                    Destination = new LinterModelElement() { Identifier = "A" },
+                    Source = new LinterModelElement() { Identifier = "D", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
                     Technology = "Tech4"
                 }
             };
-            var result = ElementCycleDetector.CycleExists(relationships);
+            var result = ElementCycleDetector.CycleExists("Container", relationships);
             Assert.That(result, Is.True);
             Assert.That(ElementCycleDetector.CurrentCycle, Is.Not.Null);
             Assert.That(ElementCycleDetector.CurrentCycle, Is.EquivalentTo(new string[] { "A", "D", "A" }));
@@ -44,27 +44,27 @@ namespace DocuEye.Linter.Tests
             {
                 new LinterModelRelationship()
                 {
-                    Source = new LinterModelElement() { Identifier = "A" },
-                    Destination = new LinterModelElement() { Identifier = "B" },
+                    Source = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "B", Tags = new List<string> { "Container" } },
                     Technology = "Tech1"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "B" },
-                    Destination = new LinterModelElement() { Identifier = "C" },
+                    Source = new LinterModelElement() { Identifier = "B", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "C", Tags = new List<string> { "Container" } },
                     Technology = "Tech2"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "A" },
-                    Destination = new LinterModelElement() { Identifier = "D" },
+                    Source = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "D", Tags = new List<string> { "Container" } },
                     Technology = "Tech4"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "D" },
-                    Destination = new LinterModelElement() { Identifier = "C" },
+                    Source = new LinterModelElement() { Identifier = "D", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "C", Tags = new List<string> { "Container" } },
                     Technology = "Tech4"
                 }
             };
-            var result = ElementCycleDetector.CycleExists(relationships);
+            var result = ElementCycleDetector.CycleExists("Container", relationships);
             Assert.That(result, Is.False);
             Assert.That(ElementCycleDetector.CurrentCycle, Is.Null);
         }
@@ -76,28 +76,28 @@ namespace DocuEye.Linter.Tests
             {
                 new LinterModelRelationship()
                 {
-                    Source = new LinterModelElement() { Identifier = "A" },
-                    Destination = new LinterModelElement() { Identifier = "B" },
+                    Source = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "B", Tags = new List<string> { "Container" } },
                     Technology = "Tech1"
                 },
                 new LinterModelRelationship()
                 {
-                    Source = new LinterModelElement() { Identifier = "A" },
-                    Destination = new LinterModelElement() { Identifier = "D" },
+                    Source = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "D", Tags = new List<string> { "Container" } },
                     Technology = "Tech1"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "B" },
-                    Destination = new LinterModelElement() { Identifier = "C" },
+                    Source = new LinterModelElement() { Identifier = "B", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "C", Tags = new List<string> { "Container" } },
                     Technology = "Tech2"
                 },
                 new LinterModelRelationship(){
-                    Source = new LinterModelElement() { Identifier = "C" },
-                    Destination = new LinterModelElement() { Identifier = "A" },
+                    Source = new LinterModelElement() { Identifier = "C", Tags = new List<string> { "Container" } },
+                    Destination = new LinterModelElement() { Identifier = "A", Tags = new List<string> { "Container" } },
                     Technology = "Tech3"
                 }
             };
-            var result = ElementCycleDetector.CycleExists(relationships);
+            var result = ElementCycleDetector.CycleExists("Container", relationships);
             Assert.That(result, Is.True);
             Assert.That(ElementCycleDetector.CurrentCycle, Is.Not.Null);
             Assert.That(ElementCycleDetector.CurrentCycle, Is.EquivalentTo(new string[] { "A", "B", "C", "A" }));
