@@ -3,10 +3,13 @@ using DocuEye.CLI.Application.Services.DSL;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using DocuEye.CLI.Commands;
 using DocuEye.CLI.Hosting;
+using DocuEye.Linter;
 using DocuEye.Structurizr.DslToJson;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.CommandLine;
 using System.CommandLine.Parsing;
+using DocuEye.Structurizr.DSL.Model.Maps;
 
 namespace DocuEye.CLI
 {
@@ -17,6 +20,7 @@ namespace DocuEye.CLI
         Option<string> workspaceImportIdOption;
         Option<string> workspaceImportKeyOption;
         Option<string> workspaceImportSourceLinkOption;
+        Option<string?> linterConfiguration;
 
 
         public WorkspaceImportCommand() : base("import", "Imports workspace to DocuEye.") {
@@ -51,6 +55,11 @@ namespace DocuEye.CLI
                 Description = "Link to source version from which workspace is imported ex. link to PR or commit on github."
             };
 
+            this.linterConfiguration = new Option<string?>("--linter-config", "-lc")
+            {
+                Description = "Path or Url to linter configuration file.",
+                Required = false
+            };
 
 
             this.Options.Add(CommandLineCommonOptions.DocueyeAddressOption);
@@ -60,6 +69,7 @@ namespace DocuEye.CLI
             this.Options.Add(workspaceImportIdOption);
             this.Options.Add(workspaceImportKeyOption);
             this.Options.Add(workspaceImportSourceLinkOption);
+            this.Options.Add(this.linterConfiguration);
 
             this.SetAction(async parseResult => await this.Run(parseResult));
         }
@@ -87,6 +97,8 @@ namespace DocuEye.CLI
             string workspaceId = parseResult.GetValue<string>(this.workspaceImportIdOption)!;
             string importKey = parseResult.GetValue<string>(this.workspaceImportKeyOption)!;
             string sourceLink = parseResult.GetValue<string>(this.workspaceImportSourceLinkOption)!;
+            string? linterConfig = parseResult.GetValue<string?>(this.linterConfiguration);
+
 
             importKey ??= Guid.NewGuid().ToString();
 
@@ -108,6 +120,22 @@ namespace DocuEye.CLI
                 if (workspace == null)
                 {
                     return 1;
+                }
+
+                if (linterConfig != null)
+                {
+                    var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
+                    {
+                        Elements = workspace.Model.Elements.ToLinterModelElements(),
+                        Relationships = workspace.Model.Relationships.ToLinterModelRelationships(workspace.Model.Elements),
+                    }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
+                    linter.LoadConfigurationFromFile(linterConfig).GetAwaiter().GetResult();
+
+                    if (!linter.Analyze())
+                    {
+                        Console.Error.WriteLine("Workspace is invalid.");
+                        return 1;
+                    }
                 }
 
                 var converter = new WorkspaceConverter(workspace, worspaceFile.DirectoryName);

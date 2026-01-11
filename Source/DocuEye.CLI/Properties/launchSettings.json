@@ -22,7 +22,7 @@
     },
     "DocuEye.workspace-import-dsl": {
       "commandName": "Project",
-      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+      "commandLineArgs": "workspace import --linter-config=http://localhost:8081/linter-config.json --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
     },
     "DocuEye.workspace-import-json": {
       "commandName": "Project",
