@@ -55,11 +55,11 @@ namespace DocuEye.Linter
             Configuration = JsonSerializer.Deserialize<LinterConfiguration>(json) ?? new LinterConfiguration();
             foreach (var rule in Configuration.Rules) {
                 if (!LinterRuleType.AllTypes.Contains(rule.Type)) { 
-                    throw new Exception($"Unsupported rule type: '{rule.Type}' for rule with key: '{rule.Key}'");
+                    throw new Exception($"Unsupported rule type: '{rule.Type}' for rule with id: '{rule.Id}'");
                 }
                 if (!new string[] { LinterRuleSeverity.Error, LinterRuleSeverity.Warning }.Contains(rule.Severity))
                 {
-                    throw new Exception($"Unsupported rule severity: '{rule.Severity}' for rule with key: '{rule.Key}'");
+                    throw new Exception($"Unsupported rule severity: '{rule.Severity}' for rule with id: '{rule.Id}'");
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace DocuEye.Linter
             this.Issues = new List<LinterIssue>();
             foreach (var rule in Configuration.Rules.Where(rule => rule.Enabled))
             {
-                this.logger.LogInformation("Evaluating rule: {RuleKey}", rule.Key);
+                this.logger.LogInformation("Evaluating rule: {RuleId}", rule.Id);
                 var ruleIssues = rule.Evaluate(model, evaluationContext, variablesMap);
                 Issues.AddRange(ruleIssues);
             }

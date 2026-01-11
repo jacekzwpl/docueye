@@ -60,7 +60,7 @@ namespace DocuEye.Linter.Tests
                     ""MaxAllowedSeverity"": ""Warning"",
                     ""Rules"": [
                         {
-                            ""Key"": ""FrontendDbConnectionNotAllowed"",
+                            ""Id"": ""FrontendDbConnectionNotAllowed"",
                             ""Name"": ""Frontend can not connect directly to database"",
                             ""Description"": ""Frontend services should not connect directly to the database for security and architecture reasons."",
                             ""Severity"": ""Error"",
@@ -77,7 +77,7 @@ namespace DocuEye.Linter.Tests
             // Assert
             Assert.That(result, Is.EqualTo(false));
             Assert.That(linter.Issues.Count(), Is.EqualTo(1));
-            Assert.That(linter.Issues.First().Rule.Key, Is.EqualTo("FrontendDbConnectionNotAllowed"));
+            Assert.That(linter.Issues.First().Rule.Id, Is.EqualTo("FrontendDbConnectionNotAllowed"));
         }
     }
 }

@@ -83,7 +83,7 @@ var rules = new List<LinterRule>
 {
     new LinterRule
     {
-        Key =  "ContainersCyclingDependency",
+        Id =  "ContainersCyclingDependency",
         Name = "Containers must not have cycling dependencies",
         Description = "Containers should not have direct cyclic dependencies to ensure a clean architecture.",
         Severity = "Error",

@@ -14,7 +14,7 @@ namespace DocuEye.Linter.Tests
                     ""MaxAllowedSeverity"": ""Error"",
                     ""Rules"": [
                         {
-                            ""Key"": ""FrontendDbConnectionNotAllowed"",
+                            ""Id"": ""FrontendDbConnectionNotAllowed"",
                             ""Name"": ""Frontend can not connect directly to database"",
                             ""Description"": ""Frontend services should not connect directly to the database for security and architecture reasons."",
                             ""Severity"": ""Error"",
@@ -34,7 +34,7 @@ namespace DocuEye.Linter.Tests
             Assert.That(config, Is.Not.Null);
             Assert.That(linter.Configuration.MaxAllowedSeverity, Is.EqualTo(LinterRuleSeverity.Error));
             Assert.That(linter.Configuration.Rules.Count(), Is.EqualTo(1));
-            Assert.That(linter.Configuration.Rules.First().Key, Is.EqualTo("FrontendDbConnectionNotAllowed"));
+            Assert.That(linter.Configuration.Rules.First().Id, Is.EqualTo("FrontendDbConnectionNotAllowed"));
             Assert.That(linter.Configuration.Rules.First().Name, Is.EqualTo("Frontend can not connect directly to database"));
             Assert.That(linter.Configuration.Rules.First().Description, Is.EqualTo("Frontend services should not connect directly to the database for security and architecture reasons."));
             Assert.That(linter.Configuration.Rules.First().Severity, Is.EqualTo(LinterRuleSeverity.Error));
@@ -53,7 +53,7 @@ namespace DocuEye.Linter.Tests
                     ""MaxAllowedSeverity"": ""Warning"",
                     ""Rules"": [
                         {
-                            ""Key"": ""InvalidRuleType"",
+                            ""Id"": ""InvalidRuleType"",
                             ""Name"": ""Invalid Rule Type Example"",
                             ""Severity"": ""Warning"",
                             ""Type"": ""InvalidType"",
@@ -77,7 +77,7 @@ namespace DocuEye.Linter.Tests
                     ""MaxAllowedSeverity"": ""Warning"",
                     ""Rules"": [
                         {
-                            ""Key"": ""InvalidRuleSeverity"",
+                            ""Id"": ""InvalidRuleSeverity"",
                             ""Name"": ""Invalid Rule Severity Example"",
                             ""Severity"": ""Critical"",
                             ""Type"": ""ModelElement"",

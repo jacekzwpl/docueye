@@ -33,7 +33,7 @@ namespace DocuEye.Linter.Tests
             };
             var rule = new LinterRule
             {
-                Key = "TestRule",
+                Id = "TestRule",
                 Name = "Test Rule for Model Elements",
                 Description = "This rule checks for elements with Tag1",
                 Severity = LinterRuleSeverity.Warning,
@@ -46,7 +46,7 @@ namespace DocuEye.Linter.Tests
             // Assert
             Assert.That(issues, Is.Not.Null);
             Assert.That(issues.Count(), Is.EqualTo(1));
-            Assert.That(issues.First().Rule.Key, Is.EqualTo("TestRule"));
+            Assert.That(issues.First().Rule.Id, Is.EqualTo("TestRule"));
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace DocuEye.Linter.Tests
             };
             var rule = new LinterRule
             {
-                Key = "FrontendDbConnectionNotAllowed",
+                Id = "FrontendDbConnectionNotAllowed",
                 Name = "Frontend can not connect directly to database",
                 Description = "Frontend services should not connect directly to the database for security and architecture reasons.",
                 Severity = LinterRuleSeverity.Error,
@@ -86,7 +86,7 @@ namespace DocuEye.Linter.Tests
             // Assert
             Assert.That(issues, Is.Not.Null);
             Assert.That(issues.Count(), Is.EqualTo(1));
-            Assert.That(issues.First().Rule.Key, Is.EqualTo("FrontendDbConnectionNotAllowed"));
+            Assert.That(issues.First().Rule.Id, Is.EqualTo("FrontendDbConnectionNotAllowed"));
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace DocuEye.Linter.Tests
 
             var rule = new LinterRule
             {
-                Key = "ContainersCyclingDependency",
+                Id = "ContainersCyclingDependency",
                 Name = "Containers should not have cyclic dependencies",
                 Description = "Containers must not depend on each other in a cyclic manner to avoid tight coupling and maintainability issues.",
                 Severity = LinterRuleSeverity.Error,
@@ -133,7 +133,7 @@ namespace DocuEye.Linter.Tests
             Assert.That(issues, Is.Not.Null);
             Assert.That(issues.Count(), Is.EqualTo(1));
             Assert.That(issues.First().Message, Is.EqualTo("Cyclic dependencies discovered: containerA -> containerB -> containerA"));
-            Assert.That(issues.First().Rule.Key, Is.EqualTo("ContainersCyclingDependency"));
+            Assert.That(issues.First().Rule.Id, Is.EqualTo("ContainersCyclingDependency"));
         }
     }
 }
