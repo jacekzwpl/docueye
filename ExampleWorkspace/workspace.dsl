@@ -83,6 +83,8 @@ workspace "Example Online Shop 1" "Example DocuEye workspace" {
         relation4 = onlineshop.web -> onlineshop.orders "Creates orders" "HTTPS"
         relation5 = onlineshop.web -> onlineshop.payment "Creates payments request" "HTTPS"
 
+        aaa = onlineshop.payment -> onlineshop.web "Returns payment status" "HTTPS"
+
         relation6 = onlineshop.orders -> emailsystem "Sends mails using" "HTTPS"
 
         relation7 = onlineshop.catalog -> onlineshop.catalogdb "Reads/Writes data" "TCP 1433"

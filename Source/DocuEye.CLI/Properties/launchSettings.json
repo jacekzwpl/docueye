@@ -54,7 +54,7 @@
     },
     "DocuEye.workspace-validate-with-linter": {
       "commandName": "Project",
-      "commandLineArgs": "workspace validate --linter-config=\"..\\..\\..\\..\\..\\ExampleWorkspace\\linter-config.json\" --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+      "commandLineArgs": "workspace validate --linter-config=\"..\\..\\..\\..\\..\\ExampleWorkspace\\linter-config2.json\" --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
     },
     "DocuEye.openapi-import-help": {
       "commandName": "Project",

@@ -29,7 +29,24 @@ namespace DocuEye.Linter
             this.logger = logger;
         }
 
+        public ArchitectureLinter(LinterModel model, ILogger<ArchitectureLinter> logger, HttpClient httpClient)
+        {
+            this.model = model;
+            this.httpClient = httpClient;
+            this.logger = logger;
+        }
+
         public async Task LoadConfigurationFromFile(string filePath)
+        {
+            Configuration = await ReadConfigurationFromFile(filePath);
+        }
+
+        public async Task LoadConfiguration(string json)
+        {
+            Configuration = await ReadConfiguration(json);
+        }
+
+        private async Task<LinterConfiguration> ReadConfigurationFromFile(string filePath)
         {
             string jsonText = String.Empty;
             Uri? validatedUri;
@@ -47,14 +64,35 @@ namespace DocuEye.Linter
 
                 jsonText = File.ReadAllText(filePath);
             }
-            LoadConfiguration(jsonText);
+            return await ReadConfiguration(jsonText);
         }
 
-        public void LoadConfiguration(string json)
+        private async Task<LinterConfiguration> ReadConfiguration(string json)
         {
-            Configuration = JsonSerializer.Deserialize<LinterConfiguration>(json) ?? new LinterConfiguration();
-            foreach (var rule in Configuration.Rules) {
-                if (!LinterRuleType.AllTypes.Contains(rule.Type)) { 
+            var configuration = JsonSerializer.Deserialize<LinterConfiguration>(json) ?? new LinterConfiguration();
+            
+            if (!string.IsNullOrWhiteSpace(configuration.Extends))
+            {
+                var extendedConfiguration = await ReadConfigurationFromFile(configuration.Extends);
+                configuration = extendedConfiguration.Merge(configuration);
+            }
+
+            foreach (var rule in configuration.Rules)
+            {
+                if(string.IsNullOrWhiteSpace(rule.Id))
+                {
+                    throw new Exception("Rule id cannot be null or empty.");
+                }
+                if (string.IsNullOrWhiteSpace(rule.Name))
+                {
+                    throw new Exception($"Rule name cannot be null or empty for rule with id: '{rule.Id}'");
+                }
+                if (string.IsNullOrWhiteSpace(rule.Expression))
+                {
+                    throw new Exception($"Rule expression cannot be null or empty for rule with id: '{rule.Id}'");
+                }
+                if (!LinterRuleType.AllTypes.Contains(rule.Type))
+                {
                     throw new Exception($"Unsupported rule type: '{rule.Type}' for rule with id: '{rule.Id}'");
                 }
                 if (!new string[] { LinterRuleSeverity.Error, LinterRuleSeverity.Warning }.Contains(rule.Severity))
@@ -62,6 +100,7 @@ namespace DocuEye.Linter
                     throw new Exception($"Unsupported rule severity: '{rule.Severity}' for rule with id: '{rule.Id}'");
                 }
             }
+            return configuration;
         }
 
         private void CreateContext()

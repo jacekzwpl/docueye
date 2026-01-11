@@ -6,7 +6,55 @@ namespace DocuEye.Linter.Tests
     public class LoadConfigurationTests
     {
         [Test]
-        public void LoadConfiguration_ShouldLoadAllConfigurationOptions()
+        public async Task LoadConfigurationFromFile_ShouldLoadAllConfigurationOptions()
+        {
+            // Arrange
+            var config = @"
+                {
+                    ""MaxAllowedSeverity"": ""Warning"",
+                    ""Rules"": []
+                }
+            ";
+            var linter = new ArchitectureLinter(
+                new LinterModel(), 
+                NullLogger<ArchitectureLinter>.Instance,
+                new HttpClient(new GetFileHttpMessageHandler("./TestData/test-linter-config.json","application/json")));
+            // Act
+            await linter.LoadConfigurationFromFile("http://localhost/test-config.json");
+            // Assert
+            Assert.That(config, Is.Not.Null);
+            Assert.That(linter.Configuration.MaxAllowedSeverity, Is.EqualTo(LinterRuleSeverity.Warning));
+            Assert.That(linter.Configuration.Rules.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task LoadConfigurationWithExtends_ShouldLoadAllConfigurationOptions()
+        {
+            // Arrange
+            var config = @"
+                {
+                    ""Extends"": ""./TestData/test-linter-config.json"",
+                    ""MaxAllowedSeverity"": ""Information"",
+                    ""Rules"": [
+                        {
+                            ""Id"": ""DE-ARCH-001"",
+                            ""Severity"": ""Warning""
+                        }
+                    ]
+                }
+            ";
+            var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
+            // Act
+            await linter.LoadConfiguration(config);
+            // Assert
+            Assert.That(config, Is.Not.Null);
+            Assert.That(linter.Configuration.MaxAllowedSeverity, Is.EqualTo(LinterRuleSeverity.Information));
+            Assert.That(linter.Configuration.Rules.Count(), Is.EqualTo(2));
+            Assert.That(linter.Configuration.Rules.First(r => r.Id == "DE-ARCH-001").Severity, Is.EqualTo(LinterRuleSeverity.Warning));
+        }
+
+        [Test]
+        public async Task LoadConfiguration_ShouldLoadAllConfigurationOptions()
         {
             // Arrange
             var config = @"
@@ -28,7 +76,7 @@ namespace DocuEye.Linter.Tests
             var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
 
             // Act
-            linter.LoadConfiguration(config);
+            await linter.LoadConfiguration(config);
 
             // Assert
             Assert.That(config, Is.Not.Null);
@@ -45,7 +93,7 @@ namespace DocuEye.Linter.Tests
         }
 
         [Test]
-        public void LoadConfiguration_ShouldThrowException_ForUnsupportedRuleType()
+        public async Task LoadConfiguration_ShouldThrowException_ForUnsupportedRuleType()
         {
             // Arrange
             var config = @"
@@ -64,12 +112,12 @@ namespace DocuEye.Linter.Tests
             ";
             var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => linter.LoadConfiguration(config));
-            Assert.That(ex.Message, Is.EqualTo("Unsupported rule type: 'InvalidType' for rule with key: 'InvalidRuleType'"));
+            var ex = Assert.ThrowsAsync<Exception>(async () => await linter.LoadConfiguration(config));
+            Assert.That(ex.Message, Is.EqualTo("Unsupported rule type: 'InvalidType' for rule with id: 'InvalidRuleType'"));
         }
 
         [Test]
-        public void LoadConfiguration_ShouldThrowException_ForUnsupportedRuleSeverity()
+        public async Task LoadConfiguration_ShouldThrowException_ForUnsupportedRuleSeverity()
         {
             // Arrange
             var config = @"
@@ -88,8 +136,8 @@ namespace DocuEye.Linter.Tests
             ";
             var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => linter.LoadConfiguration(config));
-            Assert.That(ex.Message, Is.EqualTo("Unsupported rule severity: 'Critical' for rule with key: 'InvalidRuleSeverity'"));
+            var ex = Assert.ThrowsAsync<Exception>(async () => await linter.LoadConfiguration(config));
+            Assert.That(ex.Message, Is.EqualTo("Unsupported rule severity: 'Critical' for rule with id: 'InvalidRuleSeverity'"));
         }
     }
 }
