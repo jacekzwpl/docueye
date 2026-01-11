@@ -64,7 +64,6 @@ namespace DocuEye.Linter
                     }
                     else if (inStack.Contains(neighbor))
                     {
-                        // Odtworzenie cyklu
                         return BuildCyclePath(stack, neighbor);
                     }
                 }
@@ -88,7 +87,7 @@ namespace DocuEye.Linter
             }
 
             path.Reverse();
-            path.Add(cycleStart); // domknięcie cyklu
+            path.Add(cycleStart);
 
             return path;
         }

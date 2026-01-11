@@ -6,7 +6,7 @@ namespace DocuEye.Linter.Model
 {
     public class LinterRule
     {
-        public string Key { get; set; } = null!;
+        public string Id { get; set; } = null!;
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string Severity { get; set; } = null!;

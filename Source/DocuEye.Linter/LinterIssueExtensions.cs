@@ -25,7 +25,7 @@ namespace DocuEye.Linter
                         logger.LogError(LogMessageWithRelationship, issue.Rule.Name, issue.Relationship.Source.Name + " -> " + issue.Relationship.Destination.Name, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
                     }
-                    else if (string.IsNullOrEmpty(issue.Message))
+                    else if (!string.IsNullOrEmpty(issue.Message))
                     {
                         logger.LogError(LogMessageWithMessage, issue.Rule.Name, issue.Message, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
@@ -41,7 +41,7 @@ namespace DocuEye.Linter
                     {
                         logger.LogWarning(LogMessageWithRelationship, issue.Rule.Name, issue.Relationship.Source.Name + " -> " + issue.Relationship.Destination.Name, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
-                    }else if(string.IsNullOrEmpty(issue.Message))
+                    }else if(!string.IsNullOrEmpty(issue.Message))
                     {
                         logger.LogWarning(LogMessageWithMessage, issue.Rule.Name, issue.Message, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
@@ -58,7 +58,7 @@ namespace DocuEye.Linter
                         logger.LogInformation(LogMessageWithRelationship, issue.Rule.Name, issue.Relationship.Source.Name + " -> " + issue.Relationship.Destination.Name, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
                     }
-                    else if (string.IsNullOrEmpty(issue.Message))
+                    else if (!string.IsNullOrEmpty(issue.Message))
                     {
                         logger.LogInformation(LogMessageWithMessage, issue.Rule.Name, issue.Message, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
@@ -75,7 +75,7 @@ namespace DocuEye.Linter
                         logger.LogInformation(LogMessageWithRelationship, issue.Rule.Name, issue.Relationship.Source.Name + " -> " + issue.Relationship.Destination.Name, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
                     }
-                    else if (string.IsNullOrEmpty(issue.Message))
+                    else if (!string.IsNullOrEmpty(issue.Message))
                     {
                         logger.LogInformation(LogMessageWithMessage, issue.Rule.Name, issue.Message, issue.Rule.Description ?? "", issue.Rule.HelpLink ?? "");
                         break;
