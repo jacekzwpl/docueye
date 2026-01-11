@@ -7,6 +7,50 @@ namespace DocuEye.Linter
 {
     public static class LinterRuleExtensions
     {
+
+        public static void Merge(this LinterRule target, LinterRule source)
+        {
+            if (source == null)
+            {
+                return;
+            }
+            
+            if (!string.IsNullOrWhiteSpace(source.Name)) 
+            {
+                target.Name = source.Name;
+            }
+
+            if (!string.IsNullOrWhiteSpace(source.Description))
+            {
+                target.Description = source.Description;
+            }
+            
+            if (!string.IsNullOrWhiteSpace(source.Severity))
+            {
+                target.Severity = source.Severity;
+            }
+            
+            if (!string.IsNullOrWhiteSpace(source.Type))
+            {
+                target.Type = source.Type;
+            }
+
+            if (!string.IsNullOrWhiteSpace(source.Expression))
+            {
+                target.Expression = source.Expression;
+            }
+
+            if (!string.IsNullOrWhiteSpace(source.HelpLink))
+            {
+                target.HelpLink = source.HelpLink;
+            }
+
+            if (!source.Enabled != target.Enabled)
+            {
+                target.Enabled = source.Enabled;
+            }
+        }
+
         public static IEnumerable<LinterIssue> Evaluate(this LinterRule rule, LinterModel model, List<object> evaluationContext, Dictionary<string,string> variablesMap)
         {
             var expression = rule.Expression;

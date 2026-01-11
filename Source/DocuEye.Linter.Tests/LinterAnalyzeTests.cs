@@ -1,15 +1,12 @@
 ﻿using DocuEye.Linter.Model;
 using Microsoft.Extensions.Logging.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DocuEye.Linter.Tests
 {
     public class LinterAnalyzeTests
     {
         [Test]
-        public void Linter_Analyze_ShouldReturnFalse_BasedOnConfiguration()
+        public async Task Linter_Analyze_ShouldReturnFalse_BasedOnConfiguration()
         {
             // Arrange
             var model = new LinterModel()
@@ -71,7 +68,7 @@ namespace DocuEye.Linter.Tests
                     ]
                 }
             ";
-            linter.LoadConfiguration(config);
+            await linter.LoadConfiguration(config);
             // Act
             var result = linter.Analyze();
             // Assert
