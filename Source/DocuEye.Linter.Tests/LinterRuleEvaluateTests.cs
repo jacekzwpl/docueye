@@ -42,7 +42,7 @@ namespace DocuEye.Linter.Tests
                 Enabled = true
             };
             // Act
-            var issues = rule.Evaluate(model);
+            var issues = rule.Evaluate(model, new List<object>(), new Dictionary<string, string>());
             // Assert
             Assert.That(issues, Is.Not.Null);
             Assert.That(issues.Count(), Is.EqualTo(1));
@@ -82,7 +82,7 @@ namespace DocuEye.Linter.Tests
                 Enabled = true
             };
             // Act
-            var issues = rule.Evaluate(model);
+            var issues = rule.Evaluate(model, new List<object>(), new Dictionary<string, string>());
             // Assert
             Assert.That(issues, Is.Not.Null);
             Assert.That(issues.Count(), Is.EqualTo(1));
