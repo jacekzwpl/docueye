@@ -13,7 +13,10 @@ namespace DocuEye.Structurizr.DSL.Model.Maps
             {
                 Source = elements.Where(o => o.Identifier == relationship.SourceIdentifier).First().ToLinterModelElement(),
                 Destination = elements.Where(o => o.Identifier == relationship.DestinationIdentifier).First().ToLinterModelElement(),
-                Technology = relationship.Technology ?? string.Empty
+                Technology = relationship.Technology ?? string.Empty,
+                Description = relationship.Description ?? string.Empty,
+                Properties = new Dictionary<string, string>(relationship.Properties),
+                Tags = new List<string>(relationship.Tags)
             };
         }
 
