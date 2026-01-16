@@ -211,6 +211,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Linter.Tests", "Sou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.DSL.Model.Maps", "Source\DocuEye.Structurizr.DSL.Model.Maps\DocuEye.Structurizr.DSL.Model.Maps.csproj", "{2642CF6A-1F8D-4436-93A4-8D0DEF44D932}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.DSL.Model.Maps.Tests", "Source\DocuEye.Structurizr.DSL.Model.Maps.Tests\DocuEye.Structurizr.DSL.Model.Maps.Tests.csproj", "{A5083611-3A81-40D1-9012-6E28B545EF91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -593,6 +595,10 @@ Global
 		{2642CF6A-1F8D-4436-93A4-8D0DEF44D932}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2642CF6A-1F8D-4436-93A4-8D0DEF44D932}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2642CF6A-1F8D-4436-93A4-8D0DEF44D932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5083611-3A81-40D1-9012-6E28B545EF91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5083611-3A81-40D1-9012-6E28B545EF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5083611-3A81-40D1-9012-6E28B545EF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5083611-3A81-40D1-9012-6E28B545EF91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -690,6 +696,7 @@ Global
 		{A4EEA94D-44D7-40B2-A04E-D0B7A3D9E16C} = {EEECF3A6-0315-4C0A-8052-A0781EF962F0}
 		{B89E50CC-4F25-4A2D-B570-614A580084DA} = {EEECF3A6-0315-4C0A-8052-A0781EF962F0}
 		{2642CF6A-1F8D-4436-93A4-8D0DEF44D932} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
+		{A5083611-3A81-40D1-9012-6E28B545EF91} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
