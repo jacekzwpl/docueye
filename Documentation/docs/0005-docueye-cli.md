@@ -21,13 +21,13 @@ docueye workspace import --help # shows help for workspace import
 
 Commands for managing workspaces
 
-[import](0006-docueye-cli-workspace-commands.md#workspace-import-command) - Imports workspace to DocuEye.  
+[import](0006-docueye-cli-workspace-commands.md#workspace-import-command.md) - Imports workspace to DocuEye.  
 
-[delete](0006-docueye-cli-workspace-commands.md#workspace-delete-command) - Deletes a workspace from DocuEye.  
+[delete](0006-docueye-cli-workspace-commands.md#workspace-delete-command.md) - Deletes a workspace from DocuEye.  
 
-[export](0006-docueye-cli-workspace-commands.md#workspace-export-command) - Exports a workspace to given format.  
+[export](0006-docueye-cli-workspace-commands.md#workspace-export-command.md) - Exports a workspace to given format.  
 
-[validate](0006-docueye-cli-workspace-commands.md#workspace-export-command) - Validates dsl workspace.  
+[validate](0006-docueye-cli-workspace-commands.md#workspace-export-command.md) - Validates dsl workspace.  
 
 
 
