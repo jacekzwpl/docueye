@@ -26,15 +26,47 @@ You can define configuration for linter rules via json files.
 | `Description` | No | string | Description for the rule. |
 | `Severity` | Yes if adding new rule | string | The rule severity. Allowed values are `Information`, `Warning`, `Error`.  |
 | `Scope` | Yes if adding new rule | string | The rule scope. Allowed values are `ModelRelationship`, `ModelElement`, `General`. |
-| `Expression` | Yes if adding new rule | string | The rule expression that will be used to find issues. Expression should return `true` if issue was found. |
+| `Expression` | Yes if adding new rule | string | The rule expression that will be used to find issues. Expression should return `true` if issue was found. <br /> For more details on supported expression language refer - [expression language](https://dynamic-linq.net/expression-language) <br /> For supported linq operations refer - [sequence operators](https://dynamic-linq.net/expression-language#sequence-operators).|
 | `HelpLink` | No | string | Link that points to more information/help about the rule. |
 | `Enabled` | No | boolean | Determines if the rule will be executed. Default value is `true`. |
 
 ### Rule scope
 The rule scope determines in witch context the rule expression will be evaluated.  
-`ModelRelationship` - The rule is evaluated against relationships in the architecture model. You can use [Relationship Properties]() in expressions.  
-`ModelElement` - The rule is evaluated against elements in the architecture model. You can use [Element Properties]() in expressions.  
-`General` - The rule is evaluated against the overall architecture model. Only [predefined linter functions]() can be used in this scope.
+`ModelRelationship` - The rule is evaluated against relationships in the architecture model. You can use [Relationship Properties](#relationship-properties) in expressions.  
+`ModelElement` - The rule is evaluated against elements in the architecture model. You can use [Element Properties](#element-properties) in expressions.  
+`General` - The rule is evaluated against the overall architecture model. Only [general expression functions](#general-expression-functions) can be used in this scope.
 
 
 ### Element Properties
+
+| Field | Type | Nullable | Description |
+| --- | -- | -- | ----- |
+| `Identifier` | `string` | No | Model element identifier. |
+| `ParentIdentifier` | `string` | Yes | Identifier of the parent model element. |
+| `Name` | `string` | No | Model element name. |
+| `Tags` | `IEnumerable<string>` | No | Model element tags. |
+| `Technology` | `string` | Yes | Technology associated with the model element. |
+| `Description` | `string` | Yes | Model element description. |
+| `Properties` | `IDictionary<string, string>` | No | Model element properties. |
+| `InstanceOfIdentifier` | `string` | Yes | Identifier of the model element this instance is based on. |
+
+### Relationship Properties
+
+| Field | Type | Nullable | Description |
+| --- | -- | -- | ----- |
+| `Source` | [Model element](#element-properties) | No | Relationship source element. |
+| `Destination` | [Model element](#element-properties) | No | Relationship destination element. |
+| `Technology` | `string` | Yes | Technology associated with the relationship. |
+| `Description` | `string` | Yes | Description of the relationship. |
+| `Properties` | `IDictionary<string, string>` | No | Properties of the relationship. |
+| `Tags` | `IEnumerable<string>` | No | Tags associated with the relationship. |
+
+### General expression functions
+
+Name: `GeneralIssuesFinder.CyclicDependenciesExists`  
+Description: Finds cyclic dependencies between elements with same tags.  
+Return value: `boolean` - true if cyclic dependencies were found.  
+Parameters:  
+`elementTag` - tag that is used to filter model elements.  
+`relationships` - array of [Model relationships](#relationship-properties).  
+Example: `GeneralIssuesFinder.CyclicDependenciesExists("Container",@ModelRelationships)`

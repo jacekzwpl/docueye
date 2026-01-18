@@ -8,16 +8,16 @@ namespace DocuEye.Linter
     public static class ElementCycleDetector
     {
         public static IReadOnlyList<string>? CurrentCycle = null;
-        public static bool CycleExists(string elementType, IEnumerable<LinterModelRelationship> relationships)
+        public static bool CycleExists(string elementTag, IEnumerable<LinterModelRelationship> relationships)
         {
-            CurrentCycle = FindCycle(elementType, relationships);
+            CurrentCycle = FindCycle(elementTag, relationships);
             return CurrentCycle != null;
         }
 
 
-        private static IReadOnlyList<string>? FindCycle(string elementType, IEnumerable<LinterModelRelationship> relationships)
+        private static IReadOnlyList<string>? FindCycle(string elementTag, IEnumerable<LinterModelRelationship> relationships)
         {
-            var graph = relationships.Where(r => r.Source.Tags.Contains(elementType) && r.Destination.Tags.Contains(elementType))
+            var graph = relationships.Where(r => r.Source.Tags.Contains(elementTag) && r.Destination.Tags.Contains(elementTag))
             .GroupBy(d => d.Source.Identifier)
             .ToDictionary(
                 g => g.Key,

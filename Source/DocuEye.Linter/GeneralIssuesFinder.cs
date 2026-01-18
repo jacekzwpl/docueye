@@ -9,10 +9,10 @@ namespace DocuEye.Linter
     public static class GeneralIssuesFinder
     {
         public static string? IssueMessage;
-        public static bool CyclicDependenciesExists(string elementType, IEnumerable<LinterModelRelationship> relationships)
+        public static bool CyclicDependenciesExists(string elementTag, IEnumerable<LinterModelRelationship> relationships)
         {
             IssueMessage = null;
-            var result = ElementCycleDetector.CycleExists(elementType, relationships);
+            var result = ElementCycleDetector.CycleExists(elementTag, relationships);
 
             if (result && ElementCycleDetector.CurrentCycle != null) {
                 IssueMessage = "Cyclic dependencies discovered: " + string.Join(" -> ", ElementCycleDetector.CurrentCycle);
