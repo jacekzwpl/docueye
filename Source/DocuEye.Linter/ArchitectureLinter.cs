@@ -161,14 +161,35 @@ namespace DocuEye.Linter
                     case JsonValueKind.Array:
                         var list = new List<object?>();
                         Type? itemType = null;
-                        //jsonElement.EnumerateArray().FirstOrDefault().TryGetProperty("ValueKind", out var firstItem);
+                        
                         foreach (var item in jsonElement.EnumerateArray())
                         {
-                            list.Add(GetVariableValue(item, out itemType));
+                            list.Add(GetVariableValue(item, out var elementType));
+                            if(itemType == null && elementType != null)
+                            {
+                                itemType = elementType;
+                            }
                         }
-                        type = typeof(List<object?>);
-                        //var containedType = type.GenericTypeArguments.First();
-                        return list.Select(item => Convert.ChangeType(item, itemType)).ToList();
+                        
+                        // Jeśli tablica jest pusta, zwróć pustą listę obiektów
+                        if (itemType == null || list.Count == 0)
+                        {
+                            type = typeof(List<object?>);
+                            return list;
+                        }
+                        
+                        // Utwórz generyczny typ List<T> z właściwym typem elementu
+                        var genericListType = typeof(List<>).MakeGenericType(itemType);
+                        var typedList = (System.Collections.IList)Activator.CreateInstance(genericListType);
+                        
+                        // Skopiuj elementy do typowanej listy
+                        foreach (var item in list)
+                        {
+                            typedList.Add(item);
+                        }
+                        
+                        type = genericListType;
+                        return typedList;
                     default:
                         type = null;
                         return null;
