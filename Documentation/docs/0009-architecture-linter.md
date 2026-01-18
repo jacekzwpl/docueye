@@ -72,8 +72,20 @@ Parameters:
 Example: `GeneralIssuesFinder.CyclicDependenciesExists("Container",@ModelRelationships)`
 
 ### Using variables
-
-
+Variables can be defined in `Variables` section in linter configuration. For example:  
+```json
+"Variables": {
+    "AllowedContainerTechnologies": [
+        "ASP.NET MVC", "REST API", "MSSQL", "REDIS"
+    ],
+    "TheOnlyOneRelationshipTechnology": "HTTPS"
+}
+```
+Then You can use this variables in rules expressions preceding the name with the `@`.  
+For example:  
+```
+Source.Technology not_in @AllowedContainerTechnologies AND Technology != @TheOnlyOneRelationshipTechnology
+```
 
 
 ### Extending configuration file example
