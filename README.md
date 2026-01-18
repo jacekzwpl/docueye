@@ -5,13 +5,15 @@ Currently there is no demo but you can see [DocuEye product page](https://docuey
 ## Features
 - Import workspace via REST API
 - Dedicated CLI
+- Architecture Linter [Read more about architecture linter](Documentation/docs/0009-architecture-linter.md)
 - Diagram viewer - You can view all diagrams in nice user friendly way (in my opinion :))
     - Automatic layout
-    - Manual move elements
+    - Manual move elements (Save manual layout)
     - Diagram navigation
     - Export to PNG
 - Graph viewer - You can view diagrams as graphs
     - Focusing on selected node
+
 - Elements catalog - You can search, navigate through your model elements 
     - View element properties. [See extra DocueEye properties](Documentation/docs/0003-element-extra-properties.md)
     - View element dependencies

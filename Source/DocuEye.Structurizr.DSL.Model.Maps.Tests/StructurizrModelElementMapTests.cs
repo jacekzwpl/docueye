@@ -2,7 +2,7 @@
 
 namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
 {
-    public class Tests
+    public class StructurizrModelElementMapTests
     {
 
         [Test]

@@ -7,6 +7,7 @@ namespace DocuEye.Linter.Tests
 {
     public class LinterRuleEvaluateTests
     {
+
         [Test]
         public void LinterRule_Evaluate_ShouldReturnIssues_ForModelElementRule()
         {
@@ -134,6 +135,63 @@ namespace DocuEye.Linter.Tests
             Assert.That(issues.Count(), Is.EqualTo(1));
             Assert.That(issues.First().Message, Is.EqualTo("Cyclic dependencies discovered: containerA -> containerB -> containerA"));
             Assert.That(issues.First().Rule.Id, Is.EqualTo("ContainersCyclingDependency"));
+        }
+
+        [Test]
+        public void LinterRule_Evaluate_OnAllModelElementProperties_ShouldReturnIssues()
+        {
+            var model = new LinterModel()
+            {
+                Elements = new List<LinterModelElement>
+                {
+                    new LinterModelElement
+                    {
+                        Identifier = "1",
+                        Name = "Element1",
+                        Tags = new List<string> { "Tag1", "Tag3" },
+                        Technology = "TechA",
+                        Properties = new Dictionary<string, string>
+                        {
+                            { "Owner", "TeamA" },
+                            { "Criticality", "High" }
+                        },
+                        Description = "This is a critical element owned by TeamA",
+                        InstanceOfIdentifier = "BaseElement",
+                        ParentIdentifier = "ParentElement"
+                    },
+                    new LinterModelElement
+                    {
+                        Identifier = "2",
+                        Name = "Element2",
+                        Tags = new List<string> { "Tag2" },
+                        Technology = "TechB"
+                    }
+                }
+            };
+            var expression = "Identifier == \"1\" AND Name == \"Element1\" AND Tags.Contains(\"Tag1\") " +
+                             "AND Technology == \"TechA\" " +
+                             "AND Properties[\"Owner\"] == \"TeamA\" " +
+                             "AND Properties[\"Criticality\"] == \"High\" " +
+                             "AND Description.Contains(\"critical\") " +
+                             "AND InstanceOfIdentifier == \"BaseElement\" " +
+                             "AND ParentIdentifier == \"ParentElement\"";
+
+            var rule = new LinterRule
+            {
+                Id = "TestRule",
+                Name = "Test Rule for Model Elements",
+                Description = "This rule checks for elements with Tag1",
+                Severity = LinterRuleSeverity.Warning,
+                Type = LinterRuleType.ModelElement,
+                Expression = expression,
+                Enabled = true
+            };
+            // Act
+            var issues = rule.Evaluate(model, new List<object>(), new Dictionary<string, string>());
+            // Assert
+            Assert.That(issues, Is.Not.Null);
+            Assert.That(issues.Count(), Is.EqualTo(1));
+            Assert.That(issues.First().Rule.Id, Is.EqualTo("TestRule"));
         }
     }
 }
