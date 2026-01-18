@@ -21,7 +21,7 @@ namespace DocuEye.Linter.Model
         /// <summary>
         /// Model element tags
         /// </summary>
-        public IEnumerable<string> Tags { get; set; } = Enumerable.Empty<string>();
+        public List<string> Tags { get; set; } = new List<string>();
         /// <summary>
         /// Technology associated with the model element, if any
         /// </summary>

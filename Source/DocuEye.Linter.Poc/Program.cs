@@ -5,7 +5,8 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 
 Console.WriteLine("Hello, World!");
-
+var list = new List<object>();
+list.Contains("test");
 
 
 var elements = new List<LinterModelElement>

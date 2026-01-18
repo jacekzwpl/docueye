@@ -51,7 +51,7 @@ namespace DocuEye.Linter
             }
         }
 
-        public static IEnumerable<LinterIssue> Evaluate(this LinterRule rule, LinterModel model, List<object> evaluationContext, Dictionary<string,string> variablesMap)
+        public static IEnumerable<LinterIssue> Evaluate(this LinterRule rule, LinterModel model, List<object?> evaluationContext, Dictionary<string,string> variablesMap)
         {
             var expression = rule.Expression;
             foreach (var item in variablesMap) {
@@ -85,8 +85,7 @@ namespace DocuEye.Linter
 
             if(rule.Type == LinterRuleType.General)
             {
-                var results = new List<object>() { "general" };
-                results = evaluationContext.AsQueryable()
+                var results = new List<object>() { "general" }.AsQueryable()
                     .Where(expression, evaluationContext.ToArray()).ToList();
                 if(results.Any())
                 {

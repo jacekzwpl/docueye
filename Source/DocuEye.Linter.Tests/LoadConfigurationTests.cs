@@ -139,5 +139,45 @@ namespace DocuEye.Linter.Tests
             var ex = Assert.ThrowsAsync<Exception>(async () => await linter.LoadConfiguration(config));
             Assert.That(ex.Message, Is.EqualTo("Unsupported rule severity: 'Critical' for rule with id: 'InvalidRuleSeverity'"));
         }
+
+        [Test]
+        public async Task LoadConfiguration_WithMultipleVariables_ShouldLoadCorrectly()
+        {
+            // Arrange
+            var config = @"
+                {
+                    ""MaxAllowedSeverity"": ""Warning"",
+                    ""Variables"": {
+                        ""StringArrayVariable"": [""Value1"", ""Value2"", ""Value3""],
+                        ""IntArrayVariable"": [1, 2, 3],
+                        ""StringVariable"": ""SomeStringValue"",
+                        ""NumberVariable"": 42,
+                        ""BooleanVariable"": true,
+                        ""ObjectVariable"": { ""Key1"": ""Value1"", ""Key2"": 2 }
+                    },
+                    ""Rules"": [
+                        {
+                            ""Id"": ""RuleWithoutEnabled"",
+                            ""Name"": ""Rule Without Enabled Property"",
+                            ""Severity"": ""Warning"",
+                            ""Type"": ""ModelElement"",
+                            ""Expression"": ""SomeExpression""
+                        }
+                    ]
+                }
+            ";
+            var linter = new ArchitectureLinter(new LinterModel(), NullLogger<ArchitectureLinter>.Instance);
+            // Act
+            await linter.LoadConfiguration(config);
+            // Assert
+
+            Assert.That(linter.Configuration.Variables.Keys.Count(), Is.EqualTo(6));
+            Assert.That(linter.Configuration.Variables["StringArrayVariable"], Is.EquivalentTo(new string[] { "Value1", "Value2", "Value3" }));
+            Assert.That(linter.Configuration.Variables["IntArrayVariable"], Is.EquivalentTo(new int[] { 1, 2, 3 }));
+            Assert.That(linter.Configuration.Variables["StringVariable"], Is.EqualTo("SomeStringValue"));
+            Assert.That(linter.Configuration.Variables["NumberVariable"], Is.EqualTo(42));
+            Assert.That(linter.Configuration.Variables["BooleanVariable"], Is.EqualTo(true));
+            Assert.That(linter.Configuration.Variables["ObjectVariable"], Is.EquivalentTo(new Dictionary<string, object> { { "Key1", "Value1" }, { "Key2", 2 } }));
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace DocuEye.Linter
         private readonly ILogger<ArchitectureLinter> logger;
         private HttpClient httpClient;
         private Dictionary<string,string> variablesMap = new Dictionary<string, string>();
-        private List<object> evaluationContext = new List<object>();
+        private List<object?> evaluationContext = new List<object?>();
         public List<LinterIssue> Issues { get; private set; } = new List<LinterIssue>();
 
         public ArchitectureLinter(LinterModel model, ILogger<ArchitectureLinter> logger)
@@ -77,6 +77,8 @@ namespace DocuEye.Linter
                 configuration = extendedConfiguration.Merge(configuration);
             }
 
+            configuration.Variables = ParseConfigurationVariables(configuration.Variables);
+
             foreach (var rule in configuration.Rules)
             {
                 if(string.IsNullOrWhiteSpace(rule.Id))
@@ -103,9 +105,84 @@ namespace DocuEye.Linter
             return configuration;
         }
 
+        private Dictionary<string, object?> ParseConfigurationVariables(Dictionary<string, object?> variables)
+        {
+            var parsedVariables = new Dictionary<string, object?>();
+            foreach (var kvp in variables)
+            {
+                parsedVariables[kvp.Key] = GetVariableValue(kvp.Value, out _);
+            }
+            return parsedVariables;
+        }
+
+        private object? GetVariableValue(object? value, out Type? type)
+        {
+            if (value == null)
+            {
+                type = null;
+                return null;
+            }
+                
+            if (value is JsonElement jsonElement)
+            {
+                switch (jsonElement.ValueKind)
+                {
+                    case JsonValueKind.String:
+                        type = typeof(string);
+                        return jsonElement.GetString() ?? string.Empty;
+                    case JsonValueKind.Number:
+                        if (jsonElement.TryGetInt32(out int intValue))
+                        {
+                            type = typeof(int);
+                            return intValue;
+                        }
+                        else if (jsonElement.TryGetDouble(out double doubleValue))
+                        {
+                            type = typeof(double);
+                            return doubleValue;
+                        }
+                        else
+                        {
+                            type = typeof(int);
+                            return 0;
+                        }
+                    case JsonValueKind.True:
+                    case JsonValueKind.False:
+                        type = typeof(bool);
+                        return jsonElement.GetBoolean();
+                    case JsonValueKind.Object:
+                        var dict = new Dictionary<string, object?>();
+                        foreach (var prop in jsonElement.EnumerateObject())
+                        {
+                            dict[prop.Name] = GetVariableValue(prop.Value, out _);
+                        }
+                        type = typeof(Dictionary<string, object?>);
+                        return dict;
+                    case JsonValueKind.Array:
+                        var list = new List<object?>();
+                        Type? itemType = null;
+                        //jsonElement.EnumerateArray().FirstOrDefault().TryGetProperty("ValueKind", out var firstItem);
+                        foreach (var item in jsonElement.EnumerateArray())
+                        {
+                            list.Add(GetVariableValue(item, out itemType));
+                        }
+                        type = typeof(List<object?>);
+                        //var containedType = type.GenericTypeArguments.First();
+                        return list.Select(item => Convert.ChangeType(item, itemType)).ToList();
+                    default:
+                        type = null;
+                        return null;
+                }
+            }
+            type = value.GetType();
+            return value;
+        }
+
+        
+
         private void CreateContext()
         {
-            this.evaluationContext = new List<object>();
+            this.evaluationContext = new List<object?>();
             this.variablesMap = new Dictionary<string, string>();
             this.variablesMap.Add("@ModelRelationships", "@0");
             this.evaluationContext.Add(this.model.Relationships);
@@ -115,18 +192,7 @@ namespace DocuEye.Linter
             {
                 string varKey = "@" + iter;
                 this.variablesMap.Add("@" + variable.Key, varKey);
-                if(variable.Value is JsonElement jsonElement && jsonElement.ValueKind == JsonValueKind.Array)
-                {
-                    var value = jsonElement.EnumerateArray()
-                        .Select(e => e.GetString())
-                        .ToArray();
-                    this.evaluationContext.Add(value);
-                }
-                else
-                {
-                    this.evaluationContext.Add(variable.Value);
-                }
-                
+                this.evaluationContext.Add(variable.Value);
                 iter++;
             }
         }
