@@ -12,7 +12,7 @@ namespace DocuEye.Structurizr.DSL.Model.Maps
                 Identifier = element.Identifier,
                 ParentIdentifier = element.ParentIdentifier,
                 Name = element.Name,
-                Tags = new List<string>(element.Tags ?? new List<string>()).ToArray() ?? Array.Empty<string>(),
+                Tags = new List<string>(element.Tags ?? new List<string>()),
                 Technology = element.Technology ?? string.Empty,
                 Description = element.Description ?? string.Empty,
                 InstanceOfIdentifier = element.InstanceOfIdentifier,

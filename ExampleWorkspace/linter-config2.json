@@ -2,10 +2,5 @@
     "MaxAllowedSeverity": "Warning",
     "Extends": "http://localhost:8081/linter-config.json",
     "Rules": [
-        {
-            "Id": "DE-aaaaa",
-            "Severity": "Warning",
-            "Expression": "Tags.Contains(\"Container\") and Technology == null"
-        }
     ]
 }

@@ -13,7 +13,7 @@ You can define configuration for linter rules via json files.
 | Field | Required | Type | Description |
 | --- | -- | ---- | ----- |
 | `MaxAllowedSeverity` | No | string | Max allowed issue severity that will result linter validation success. Allowed values are `Information`, `Warning`, `Error`. Default value is `Warning`.  |
-| `Extends` | No | string | | Url or path to configuration file that will be extended. |
+| `Extends` | No | string | Url or path to configuration file that will be extended. |
 | `Variables` | No | object | Variables dictionary that can be used in rules expressions. |
 | `Rules` | Yes | array of Rules | List of rules definitions. | 
 
@@ -70,3 +70,78 @@ Parameters:
 `elementTag` - tag that is used to filter model elements.  
 `relationships` - array of [Model relationships](#relationship-properties).  
 Example: `GeneralIssuesFinder.CyclicDependenciesExists("Container",@ModelRelationships)`
+
+### Using variables
+
+
+
+
+### Extending configuration file example
+
+BaseLinterRules.json
+```json
+{
+    "MaxAllowedSeverity": "Warning",
+    "Variables": {
+        "AllowedContainerTechnologies": [
+            "ASP.NET MVC", "REST API", "MSSQL", "REDIS"
+        ]
+    },
+    "Rules": [
+        {
+            "Id": "DE-ARCH-001",
+            "Name": "Containers should not have cyclic dependencies",
+            "Description": "Containers must not depend on each other in a cyclic manner to avoid tight coupling and maintainability issues.",
+            "Severity": "Error",
+            "Type": "General",
+            "Expression": "GeneralIssuesFinder.CyclicDependenciesExists(\"Container\",@ModelRelationships)",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-001"
+        },
+        {
+            "Id": "DE-ARCH-002",
+            "Name": "Frontend can not connect directly to database",
+            "Description": "Frontend services should not connect directly to the database for security and architecture reasons.",
+            "Severity": "Error",
+            "Type": "ModelRelationship",
+            "Expression": "Source.Tags.Contains(\"Frontend\") and Destination.Tags.Contains(\"Database\")",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-002"
+        },
+        {
+            "Id": "DE-ARCH-003",
+            "Name": "Container technology must be defined",
+            "Description": "Each container must have a defined technology to ensure clarity in the architecture.",
+            "Severity": "Warning",
+            "Type": "ModelElement",
+            "Expression": "Tags.Contains(\"Container\") and Technology == null",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-003"
+        },
+        {
+            "Id": "DE-ARCH-004",
+            "Name": "Container technology must be one of the allowed technologies",
+            "Description": "Containers should use only approved technologies to maintain consistency and supportability.",
+            "Severity": "Warning",
+            "Type": "ModelElement",
+            "Expression": "Tags.Contains(\"Container\") and Technology not_in @AllowedContainerTechnologies",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-004"
+        },
+        {
+            "Id": "DE-ARCH-005",
+            "Name": "Relationships from external systems to database are not allowed",
+            "Description": "External systems should not have direct relationships to databases to ensure security and proper architecture.",
+            "Severity": "Error",
+            "Type": "ModelRelationship",
+            "Expression": "Source.ParentIdentifier != Destination.ParentIdentifier and Destination.Tags.Contains(\"Database\")",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-005"
+        },
+        {
+            "Id": "DE-ARCH-006",
+            "Name": "Relationship technology must be defined",
+            "Description": "Each relationship must have a defined technology to ensure clarity in the architecture.",
+            "Severity": "Warning",
+            "Type": "ModelRelationship",
+            "Expression": "Technology == null",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-006"
+        }
+    ]
+}
+```
