@@ -110,9 +110,14 @@ namespace DocuEye.Linter
             var parsedVariables = new Dictionary<string, object?>();
             foreach (var kvp in variables)
             {
-                parsedVariables[kvp.Key] = GetVariableValue(kvp.Value, out _);
+                parsedVariables[kvp.Key] = GetVariableValue(kvp.Value);
             }
             return parsedVariables;
+        }
+
+        private object? GetVariableValue(object? value)
+        {
+            return GetVariableValue(value, out _);
         }
 
         private object? GetVariableValue(object? value, out Type? type)
@@ -154,7 +159,7 @@ namespace DocuEye.Linter
                         var dict = new Dictionary<string, object?>();
                         foreach (var prop in jsonElement.EnumerateObject())
                         {
-                            dict[prop.Name] = GetVariableValue(prop.Value, out _);
+                            dict[prop.Name] = GetVariableValue(prop.Value);
                         }
                         type = typeof(Dictionary<string, object?>);
                         return dict;
@@ -171,18 +176,18 @@ namespace DocuEye.Linter
                             }
                         }
                         
-                        // Jeśli tablica jest pusta, zwróć pustą listę obiektów
+                        // if itemType is still null, it means all items were null
                         if (itemType == null || list.Count == 0)
                         {
                             type = typeof(List<object?>);
                             return list;
                         }
                         
-                        // Utwórz generyczny typ List<T> z właściwym typem elementu
+                        // Create a typed List<T>
                         var genericListType = typeof(List<>).MakeGenericType(itemType);
                         var typedList = (System.Collections.IList)Activator.CreateInstance(genericListType);
                         
-                        // Skopiuj elementy do typowanej listy
+                        // Copy elements to the typed list
                         foreach (var item in list)
                         {
                             typedList.Add(item);
