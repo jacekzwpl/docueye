@@ -36,7 +36,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             return new LinterModelElement()
             {
                 Identifier = source.DslId,
-                Name = source?.Name ?? string.Empty,
+                Name = source.Name ?? string.Empty,
+                Tags = string.IsNullOrWhiteSpace(source.Tags) ? new List<string>() : source.Tags.Split(",").ToList(),
+                Description = source.Description,
+                Properties = source.Properties != null ? new Dictionary<string,string>(source.Properties) : new Dictionary<string, string>(),
             };
         }
     }

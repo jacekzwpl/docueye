@@ -1,7 +1,5 @@
 ﻿using DocuEye.Infrastructure.Tests.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using DocuEye.Linter.Model;
 
 namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
 {
@@ -32,8 +30,13 @@ namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
             var result = source.ToLinterModelRelationship(elements);
             // Assert
             MappingAssert.AssertMapped(
-                source, result
+                source, result, new[] {
+                    nameof(LinterModelRelationship.Source),
+                    nameof(LinterModelRelationship.Destination)
+                }
             );
+            Assert.That(result.Source.Identifier, Is.EqualTo(source.SourceIdentifier));
+            Assert.That(result.Destination.Identifier, Is.EqualTo(source.DestinationIdentifier));
         }
     }
 }

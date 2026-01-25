@@ -32,11 +32,11 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
             // Assert
             MappingAssert.AssertMapped(
                 person, element,
-                ignoreDestProps: new[] { 
-                    nameof(ElementToImport.StructurizrParentId), 
+                ignoreDestProps: new[] {
+                    nameof(ElementToImport.StructurizrParentId),
                     nameof(ElementToImport.StructurizrInstanceOfId),
                     nameof(ElementToImport.Technology),
-                }, 
+                },
                 customSourceResolvers: new Dictionary<string, Func<StructurizrJsonPerson, object?>>
                 {
                     [nameof(ElementToImport.StructurizrId)] = s => s.Id,
@@ -45,5 +45,33 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 }
             );
         }
+   
+
+        [Test]
+        public void Mapping_StructurizrJsonPerson_To_LinterModelElement_Works()
+        {
+            // Arrange
+            var source = new StructurizrJsonPerson
+            {
+                Id = "PersonId",
+                Group = "Person Group",
+                Location = "Person Location",
+                Url = "http://person.url",
+                Name = "Person Name",
+                Tags = "Tag1,Tag2",
+                Description = "Person Description",
+                Properties = new Dictionary<string, string>
+                {
+                    { "Key1", "Value1" },
+                    { "Key2", "Value2" }
+                },
+            };
+            // Act
+            var result = source.ToLinterModelElement();
+            // Assert
+            MappingAssert.AssertMapped(
+                source, result
+            );
+        } 
     }
 }
