@@ -1,6 +1,9 @@
 using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.Linter.Model;
 using DocuEye.ModelKeeper.Model;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
+using DocuEye.WorkspaceImporter.Api.Model.Views;
 using NUnit.Framework.Internal;
 
 namespace DocuEye.Structurizr.Json.Model.Maps.Tests
@@ -53,16 +56,16 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
             // Arrange
             var source = new StructurizrJsonPerson
             {
-                Id = "PersonId",
-                Group = "Person Group",
-                Location = "Person Location",
+                Id = "Element-ID",
+                Group = "Element Group",
+                Location = "Element Location",
                 Url = "http://person.url",
-                Name = "Person Name",
+                Name = "Element Name",
                 Tags = "Tag1,Tag2",
-                Description = "Person Description",
+                Description = "Element Description",
                 Properties = new Dictionary<string, string>
                 {
-                    { "Key1", "Value1" },
+                    { DslPropertyNames.DslIdProperty, "MyIdentyfier" },
                     { "Key2", "Value2" }
                 },
             };
@@ -70,7 +73,18 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
             var result = source.ToLinterModelElement();
             // Assert
             MappingAssert.AssertMapped(
-                source, result
+                source, result, 
+                ignoreDestProps: new []
+                {
+                    nameof(LinterModelElement.InstanceOfIdentifier),
+                    nameof(LinterModelElement.ParentIdentifier),
+                    nameof(LinterModelElement.Technology),
+                },
+                customSourceResolvers: new Dictionary<string, Func<StructurizrJsonPerson, object?>>
+                {
+                    { nameof(LinterModelElement.Identifier), s => s.DslId },
+                    { nameof(LinterModelElement.Tags), s => string.IsNullOrWhiteSpace(s.Tags) ? new List<string>() : s.Tags.Split(',').Select(t => t.Trim()).ToList() }
+                }
             );
         } 
     }
