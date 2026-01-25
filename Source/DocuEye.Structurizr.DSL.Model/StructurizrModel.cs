@@ -76,6 +76,7 @@ namespace DocuEye.Structurizr.DSL.Model
             var modelElement = element.ToModelElement(modelId);
             modelElement.Name = systemElement.Name;
             modelElement.Technology = systemElement.Technology;
+            modelElement.Description = systemElement.Description;
             modelElement.InstanceIndex = count + 1;
 
             this.Elements.Add(modelElement);
@@ -94,6 +95,7 @@ namespace DocuEye.Structurizr.DSL.Model
             var modelElement = element.ToModelElement(modelId);
             modelElement.Name = systemElement.Name;
             modelElement.Technology = systemElement.Technology;
+            modelElement.Description = systemElement.Description;
             modelElement.InstanceIndex = count + 1;
             this.Elements.Add(modelElement);
         }
