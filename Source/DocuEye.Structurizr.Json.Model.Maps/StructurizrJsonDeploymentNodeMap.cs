@@ -29,7 +29,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             };
         }
 
-        public static LinterModelElement ToLinterModelElement(this StructurizrJsonDeploymentNode source, string parentIdentifier)
+        public static LinterModelElement ToLinterModelElement(this StructurizrJsonDeploymentNode source, string? parentIdentifier)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new LinterModelElement()
