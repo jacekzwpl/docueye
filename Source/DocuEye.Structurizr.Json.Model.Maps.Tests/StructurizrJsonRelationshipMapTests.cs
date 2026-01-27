@@ -22,7 +22,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 Url = "http://example.com",
                 Properties = new Dictionary<string, string>
                 {
-                    ["key1"] = "value1",
+                    [DslPropertyNames.DslIdProperty] = "value1",
                     ["key2"] = "value2"
                 }
             };

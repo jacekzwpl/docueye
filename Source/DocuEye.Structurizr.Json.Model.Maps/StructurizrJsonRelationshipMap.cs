@@ -21,7 +21,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Description = source.Description,
                 Url = source.Url,
                 Properties = source.Properties ?? new Dictionary<string, string>(),
-                DslId = source.DslId,
+                DslId = string.IsNullOrWhiteSpace(source.DslId) ? Guid.NewGuid().ToString() : source.DslId,
                 InteractionStyle = source.InteractionStyle,
                 Technology = source.Technology,
                 StructurizrSourceId = source.SourceId,
