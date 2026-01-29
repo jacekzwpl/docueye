@@ -38,6 +38,10 @@ namespace DocuEye.Linter.Model
         /// Identifier of the model element this instance is based on, if any
         /// </summary>
         public string? InstanceOfIdentifier { get; set; } = null;
+        /// <summary>
+        /// Identifier of the JSON model element this instance is based on, if any
+        /// </summary>
+        public string? JsonModelId { get; set; }
 
     }
 }

@@ -36,18 +36,20 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             {
                 foreach (var deploymentNode in source.DeploymentNodes)
                 {
-                    elements.Add(deploymentNode.ToLinterModelElement(null));
+                    elements.AddRange(deploymentNode.ToLinterModelElements(null, elements));
                 }
             }
-            /*
+            
             if (source.CustomElements != null)
             {
                 foreach (var customElement in source.CustomElements)
                 {
-                    elements.Add(customElement.ToLinterModelElement());
+                    //elements.Add(customElement.ToLinterModelElement());
                 }
-            }*/
+            }
             return elements;
         }
+
+        
     }
 }

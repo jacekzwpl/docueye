@@ -40,8 +40,49 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Description = source.Description,
                 Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
                 Technology = source.Technology,
-                ParentIdentifier = parentIdentifier
+                ParentIdentifier = parentIdentifier,
+                JsonModelId = source.Id
             };
+        }
+
+        public static IEnumerable<LinterModelElement> ToLinterModelElements(this StructurizrJsonDeploymentNode source, string? parentIdentifier, IEnumerable<LinterModelElement> currentElements)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var elements = new List<LinterModelElement>
+            {
+                source.ToLinterModelElement(parentIdentifier)
+            };
+            if (source.Children != null)
+            {
+                foreach (var childNode in source.Children)
+                {
+                    elements.AddRange(childNode.ToLinterModelElements(source.DslId, currentElements));
+                }
+            }
+            source.ContainerInstances?.ToList().ForEach(ci =>
+            {
+                var existingElement = currentElements.FirstOrDefault(e => e.JsonModelId == ci.ContainerId);
+                if (existingElement != null)
+                {
+                    elements.Add(ci.ToLinterModelElement(source.DslId, existingElement));
+                }
+            });
+
+            source.SoftwareSystemInstances?.ToList().ForEach(ssi =>
+            {
+                var existingElement = currentElements.FirstOrDefault(e => e.JsonModelId == ssi.SoftwareSystemId);
+                if (existingElement != null)
+                {
+                    elements.Add(ssi.ToLinterModelElement(source.DslId, existingElement));
+                }
+            });
+            source.InfrastructureNodes?.ToList().ForEach(inode =>
+            {
+                elements.Add(inode.ToLinterModelElement(source.DslId));
+            });
+
+            
+            return elements;
         }
     }
 }

@@ -84,6 +84,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 customSourceResolvers: new Dictionary<string, Func<StructurizrJsonInfrastructureNode, object?>>
                 {
                     { nameof(LinterModelElement.Identifier), s => s.DslId },
+                    { nameof(LinterModelElement.JsonModelId), s => s.Id  },
                     { nameof(LinterModelElement.Tags), s => string.IsNullOrWhiteSpace(s.Tags) ? new List<string>() : s.Tags.Split(',').Select(t => t.Trim()).ToList() },
                     { nameof(LinterModelElement.ParentIdentifier), s => "parent-id" }
                 }

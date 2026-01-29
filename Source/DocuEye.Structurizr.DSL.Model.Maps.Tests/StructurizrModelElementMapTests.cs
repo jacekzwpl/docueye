@@ -1,4 +1,5 @@
 ﻿using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.Linter.Model;
 
 namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
 {
@@ -30,7 +31,8 @@ namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
             var result = source.ToLinterModelElement();
             // Assert
             MappingAssert.AssertMapped(
-                source, result
+                source, result, 
+                ignoreDestProps: new[] { nameof(LinterModelElement.JsonModelId) }
             );
 
         }

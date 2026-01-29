@@ -35,7 +35,8 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 ParentIdentifier = parentIdentifier,
                 InstanceOfIdentifier = instanceOfElement.Identifier,
                 Name = instanceOfElement.Name ?? string.Empty,
-                Description = instanceOfElement.Description
+                Description = instanceOfElement.Description,
+                JsonModelId = source.Id
             };
         }
     }

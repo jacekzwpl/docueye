@@ -36,7 +36,8 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 InstanceOfIdentifier = instanceOfElement.Identifier,
                 Name = instanceOfElement.Name ?? string.Empty,
                 Description = instanceOfElement.Description,
-                Technology = instanceOfElement.Technology
+                Technology = instanceOfElement.Technology,
+                JsonModelId = source.Id
             };
         }
     }

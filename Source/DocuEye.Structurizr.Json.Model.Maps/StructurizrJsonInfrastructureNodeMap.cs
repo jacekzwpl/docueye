@@ -41,8 +41,9 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Description = source.Description,
                 Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
                 Technology = source.Technology,
-                ParentIdentifier = parentIdentifier
-                
+                ParentIdentifier = parentIdentifier,
+                JsonModelId = source.Id
+
             };
         }
     }
