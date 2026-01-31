@@ -60,6 +60,17 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                         Tags = "Tag7,Tag8"
                     }
                 },
+                CustomElements = new[] {
+                    new StructurizrJsonCustomElement
+                    {
+                        Id = "cust1",
+                        Name = "Custom Element 1",
+                        Properties = new Dictionary<string, string>() {
+                           { DslPropertyNames.DslIdProperty, "cust1-dsl-id" },
+                        },
+                        Tags = "Tag7,Tag8"
+                    }
+                },
                 DeploymentNodes = new[]
                 {
                     new StructurizrJsonDeploymentNode
@@ -122,7 +133,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
             // Act
             var elements = source.ToLinterModelElements();
             // Assert
-            Assert.That(elements.Count(), Is.EqualTo(9));
+            Assert.That(elements.Count(), Is.EqualTo(10));
             Assert.That(elements.Any(e => e.Identifier == "ss1-dsl-id"));
             Assert.That(elements.Any(e => e.Identifier == "c1-dsl-id"));
             Assert.That(elements.Any(e => e.Identifier == "comp1-dsl-id"));
@@ -132,6 +143,7 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
             Assert.That(elements.Any(e => e.Identifier == "ci1-dsl-id"));
             Assert.That(elements.Any(e => e.Identifier == "ssi1-dsl-id"));
             Assert.That(elements.Any(e => e.Identifier == "dn1-1-dsl-id"));
+            Assert.That(elements.Any(e => e.Identifier == "cust1-dsl-id"));
 
         }
     }

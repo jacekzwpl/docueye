@@ -44,12 +44,40 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             {
                 foreach (var customElement in source.CustomElements)
                 {
-                    //elements.Add(customElement.ToLinterModelElement());
+                    elements.Add(customElement.ToLinterModelElement());
                 }
             }
             return elements;
         }
 
-        
+        public static IEnumerable<LinterModelRelationship> ToLinterModelRelationships(this StructurizrJsonModel source, IEnumerable<LinterModelElement> elements)
+        {
+            var jsonRelationships = new List<StructurizrJsonRelationship>();
+            var relationships = new List<LinterModelRelationship>();
+
+
+            if (source.SoftwareSystems != null)
+            {
+                foreach (var softwareSystem in source.SoftwareSystems)
+                {
+                    jsonRelationships.AddRange(softwareSystem.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+                    
+                    foreach (var container in softwareSystem.Containers ?? Array.Empty<StructurizrJsonContainer>())
+                    {
+                        jsonRelationships.AddRange(container.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+                        foreach (var component in container.Components ?? Array.Empty<StructurizrJsonComponent>())
+                        {
+                            jsonRelationships.AddRange(component.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+                        }
+                    }
+                }
+            }
+
+
+            
+            return relationships;
+        }
+
+
     }
 }

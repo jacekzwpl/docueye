@@ -1,4 +1,5 @@
-﻿using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.Linter.Model;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using DocuEye.WorkspaceImporter.Api.Model.Relationships;
 using System;
@@ -38,6 +39,38 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             foreach (var item in source)
             {
                 result.Add(item.ConvertToApiModel());
+            }
+            return result.AsEnumerable();
+        }
+
+        public static LinterModelRelationship ToLinterModelRelationship(this StructurizrJsonRelationship source, LinterModelElement sourceElem, LinterModelElement detinationElem, LinterModelElement destinationElem)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            return new LinterModelRelationship()
+            {
+                Description = source.Description,
+                Tags = string.IsNullOrWhiteSpace(source.Tags) ? new List<string>() : source.Tags.Split(",").ToList(),
+                Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
+                Technology = source.Technology,
+                Destination = detinationElem,
+                Source = sourceElem
+            };
+        }
+
+        public static IEnumerable<LinterModelRelationship> ToLinterModelRelationships(this IEnumerable<StructurizrJsonRelationship> source, IEnumerable<LinterModelElement> elements)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var result = new List<LinterModelRelationship>();
+            foreach (var item in source)
+            {
+
+                var sourceElem = elements.FirstOrDefault(e => e.JsonModelId == item.SourceId);
+                var destinationElem = elements.FirstOrDefault(e => e.JsonModelId == item.DestinationId);
+                if (sourceElem == null || destinationElem == null)
+                {
+                    continue;
+                }
+                result.Add(item.ToLinterModelRelationship(sourceElem, destinationElem, destinationElem));
             }
             return result.AsEnumerable();
         }
