@@ -1,6 +1,8 @@
 ﻿using DocuEye.Linter.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Text;
 
 namespace DocuEye.Structurizr.Json.Model.Maps
@@ -73,8 +75,35 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 }
             }
 
+            if (source.People != null)
+            {
+                foreach (var person in source.People)
+                {
+                    jsonRelationships.AddRange(person.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+                }
+            }
+            if (source.DeploymentNodes != null)
+            {
+                foreach (var deploymentNode in source.DeploymentNodes)
+                {
+                    jsonRelationships.AddRange(deploymentNode.GetAllRelationships());
+                }
+            }
 
-            
+            if (source.CustomElements != null)
+            {
+                foreach (var customElement in source.CustomElements)
+                {
+                    jsonRelationships.AddRange(customElement.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+                }
+            }
+
+            var definedRelationships = jsonRelationships.Where(o => string.IsNullOrEmpty(o.LinkedRelationshipId)).ToArray();
+            var linkedRelationships = jsonRelationships.Where(o => !string.IsNullOrEmpty(o.LinkedRelationshipId)).ToArray();
+            relationships.AddRange(definedRelationships.ToLinterModelRelationships(elements));
+            relationships.AddRange(linkedRelationships.ToLinterModelRelationships(elements, relationships));
+
+
             return relationships;
         }
 

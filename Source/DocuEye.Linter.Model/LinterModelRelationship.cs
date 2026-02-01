@@ -6,7 +6,8 @@ namespace DocuEye.Linter.Model
 {
     public class LinterModelRelationship
     {
-        
+
+        public string Identifier { get; set; } = null!;
         /// <summary>
         /// Relationship source element.
         /// </summary>
@@ -31,6 +32,7 @@ namespace DocuEye.Linter.Model
         /// Tags associated with the relationship
         /// </summary>
         public List<string> Tags { get; set; } = new List<string>();
+        public string? JsonModelId { get; set; }
 
     }
 }

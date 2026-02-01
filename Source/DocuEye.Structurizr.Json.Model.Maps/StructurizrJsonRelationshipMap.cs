@@ -43,21 +43,37 @@ namespace DocuEye.Structurizr.Json.Model.Maps
             return result.AsEnumerable();
         }
 
-        public static LinterModelRelationship ToLinterModelRelationship(this StructurizrJsonRelationship source, LinterModelElement sourceElem, LinterModelElement detinationElem, LinterModelElement destinationElem)
+        public static LinterModelRelationship ToLinterModelRelationship(this StructurizrJsonRelationship source, LinterModelElement sourceElem, LinterModelElement destinationElem)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return new LinterModelRelationship()
             {
+                Identifier = source.DslId,
                 Description = source.Description,
                 Tags = string.IsNullOrWhiteSpace(source.Tags) ? new List<string>() : source.Tags.Split(",").ToList(),
                 Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
                 Technology = source.Technology,
-                Destination = detinationElem,
+                Destination = destinationElem,
                 Source = sourceElem
             };
         }
 
-        public static IEnumerable<LinterModelRelationship> ToLinterModelRelationships(this IEnumerable<StructurizrJsonRelationship> source, IEnumerable<LinterModelElement> elements)
+        public static LinterModelRelationship ToLinterModelRelationship(this StructurizrJsonRelationship source, LinterModelRelationship linkedRelationship, LinterModelElement sourceElem, LinterModelElement destinationElem)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            return new LinterModelRelationship()
+            {
+                Identifier = source.DslId,
+                Description = linkedRelationship.Description,
+                Tags = new List<string>(linkedRelationship.Tags),
+                Properties = linkedRelationship.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
+                Technology = linkedRelationship.Technology,
+                Destination = destinationElem,
+                Source = sourceElem
+            };
+        }
+
+        public static IEnumerable<LinterModelRelationship> ToLinterModelRelationships(this IEnumerable<StructurizrJsonRelationship> source, IEnumerable<LinterModelElement> elements, IEnumerable<LinterModelRelationship>? relationships = null)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             var result = new List<LinterModelRelationship>();
@@ -70,7 +86,16 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 {
                     continue;
                 }
-                result.Add(item.ToLinterModelRelationship(sourceElem, destinationElem, destinationElem));
+                if(!string.IsNullOrWhiteSpace(item.LinkedRelationshipId) && relationships != null)
+                {
+                    var linkedRelationship = relationships.FirstOrDefault(r => r.JsonModelId == item.LinkedRelationshipId);
+                    if (linkedRelationship != null)
+                    {
+                        result.Add(item.ToLinterModelRelationship(linkedRelationship, sourceElem, destinationElem));
+                        continue;
+                    }
+                }
+                result.Add(item.ToLinterModelRelationship(sourceElem, destinationElem));
             }
             return result.AsEnumerable();
         }

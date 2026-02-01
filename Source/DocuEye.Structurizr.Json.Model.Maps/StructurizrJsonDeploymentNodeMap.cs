@@ -4,6 +4,7 @@ using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace DocuEye.Structurizr.Json.Model.Maps
 {
@@ -83,6 +84,39 @@ namespace DocuEye.Structurizr.Json.Model.Maps
 
             
             return elements;
+        }
+
+        public static IEnumerable<StructurizrJsonRelationship> GetAllRelationships(this StructurizrJsonDeploymentNode source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            var relationships = new List<StructurizrJsonRelationship>();
+            if (source.Relationships != null)
+            {
+                relationships.AddRange(source.Relationships);
+            }
+            if (source.Children != null)
+            {
+                foreach (var childNode in source.Children)
+                {
+                    relationships.AddRange(childNode.GetAllRelationships());
+                }
+            }
+
+            source.ContainerInstances?.ToList().ForEach(ci =>
+            {
+                relationships.AddRange(ci.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+            });
+
+            source.SoftwareSystemInstances?.ToList().ForEach(ssi =>
+            {
+                relationships.AddRange(ssi.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+            });
+            source.InfrastructureNodes?.ToList().ForEach(inode =>
+            {
+                relationships.AddRange(inode.Relationships ?? Array.Empty<StructurizrJsonRelationship>());
+            });
+
+            return relationships;
         }
     }
 }
