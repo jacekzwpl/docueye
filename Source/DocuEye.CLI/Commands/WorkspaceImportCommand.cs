@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System.CommandLine;
 using System.CommandLine.Parsing;
 using DocuEye.Structurizr.DSL.Model.Maps;
+using DocuEye.Structurizr.Json.Model.Maps;
 
 namespace DocuEye.CLI
 {
@@ -150,6 +151,27 @@ namespace DocuEye.CLI
             {
                 var jsonText = File.ReadAllText(worspaceFile.FullName);
                 var jsonWorkspace = new WorkspaceSerializer().Deserialize(jsonText); //JsonSerializer.Deserialize<StructurizrJsonWorkspace>(jsonText, this.serializerOptions);
+
+                if (linterConfig != null && jsonWorkspace.Model != null)
+                {
+                    var elements = jsonWorkspace.Model.ToLinterModelElements();
+                    var relationships = jsonWorkspace.Model.ToLinterModelRelationships(elements);
+
+                    var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
+                    {
+                        Elements = elements,
+                        Relationships = relationships,
+                    }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
+                    linter.LoadConfigurationFromFile(linterConfig).GetAwaiter().GetResult();
+
+                    if (!linter.Analyze())
+                    {
+                        Console.Error.WriteLine("Workspace is invalid.");
+                        return 1;
+                    }
+                }
+
+
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
                         importKey, jsonWorkspace, workspaceId, sourceLink));

@@ -1,5 +1,6 @@
 ﻿using DocuEye.Infrastructure.Tests.Common;
 using DocuEye.Linter.Model;
+using DocuEye.Structurizr.Json.Model;
 
 namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
 {
@@ -16,13 +17,15 @@ namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
             };
             var source = new StructurizrRelationship("model-1",new string[] {"element-1", "element-2"})
             {
+                ModelId = "modelid-1",
+
                 SourceIdentifier = "element-1",
                 DestinationIdentifier = "element-2",
                 Technology = "HTTP",
                 Description = "Communicates with",
                 Properties = new Dictionary<string, string>
                 {
-                    { "KeyA", "ValueA" },
+                    { DslPropertyNames.DslIdProperty, "ValueA" },
                     { "KeyB", "ValueB" }
                 }
             };
@@ -30,9 +33,14 @@ namespace DocuEye.Structurizr.DSL.Model.Maps.Tests
             var result = source.ToLinterModelRelationship(elements);
             // Assert
             MappingAssert.AssertMapped(
-                source, result, new[] {
+                source, result, 
+                ignoreDestProps: new[] {
                     nameof(LinterModelRelationship.Source),
                     nameof(LinterModelRelationship.Destination)
+                },
+                customSourceResolvers: new Dictionary<string, Func<StructurizrRelationship, object?>>
+                {
+                    { nameof(LinterModelRelationship.JsonModelId), src => src.ModelId }
                 }
             );
             Assert.That(result.Source.Identifier, Is.EqualTo(source.SourceIdentifier));

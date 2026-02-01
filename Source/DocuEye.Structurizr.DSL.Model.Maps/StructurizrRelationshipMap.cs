@@ -11,12 +11,14 @@ namespace DocuEye.Structurizr.DSL.Model.Maps
         public static LinterModelRelationship ToLinterModelRelationship(this StructurizrRelationship relationship, IEnumerable<StructurizrModelElement> elements) { 
             return new LinterModelRelationship
             {
+                Identifier = relationship.Identifier,
                 Source = elements.Where(o => o.Identifier == relationship.SourceIdentifier).First().ToLinterModelElement(),
                 Destination = elements.Where(o => o.Identifier == relationship.DestinationIdentifier).First().ToLinterModelElement(),
                 Technology = relationship.Technology ?? string.Empty,
                 Description = relationship.Description ?? string.Empty,
                 Properties = new Dictionary<string, string>(relationship.Properties),
-                Tags = new List<string>(relationship.Tags)
+                Tags = new List<string>(relationship.Tags),
+                JsonModelId = relationship.ModelId
             };
         }
 

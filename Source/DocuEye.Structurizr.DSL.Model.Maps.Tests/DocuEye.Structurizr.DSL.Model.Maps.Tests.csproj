@@ -20,6 +20,7 @@
     <ProjectReference Include="..\DocuEye.Infrastructure.Tests.Common\DocuEye.Infrastructure.Tests.Common.csproj" />
     <ProjectReference Include="..\DocuEye.Linter.Model\DocuEye.Linter.Model.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.DSL.Model.Maps\DocuEye.Structurizr.DSL.Model.Maps.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.Json.Model\DocuEye.Structurizr.Json.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
