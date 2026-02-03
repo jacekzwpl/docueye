@@ -213,6 +213,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.DSL.Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.Structurizr.DSL.Model.Maps.Tests", "Source\DocuEye.Structurizr.DSL.Model.Maps.Tests\DocuEye.Structurizr.DSL.Model.Maps.Tests.csproj", "{A5083611-3A81-40D1-9012-6E28B545EF91}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IssueTracker", "IssueTracker", "{FD40575A-E88D-4198-B94C-74951783603D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.IssueTracker.Model", "Source\DocuEye.IssueTracker.Model\DocuEye.IssueTracker.Model.csproj", "{EC5C3636-AB9A-470F-8174-2DD776656DA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.IssueTracker.Persistence", "Source\DocuEye.IssueTracker.Persistence\DocuEye.IssueTracker.Persistence.csproj", "{63284E4D-1791-40EF-8FB4-7649962EE83A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.IssueTracker.Application.Commands", "Source\DocuEye.IssueTracker.Application.Commands\DocuEye.IssueTracker.Application.Commands.csproj", "{CDFC6B06-9E54-4161-B4A5-E3012FAC509B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuEye.IssueTracker.Application", "Source\DocuEye.IssueTracker.Application\DocuEye.IssueTracker.Application.csproj", "{A582BF77-DF40-4E03-AB11-7DC12041D88E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -599,6 +609,22 @@ Global
 		{A5083611-3A81-40D1-9012-6E28B545EF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5083611-3A81-40D1-9012-6E28B545EF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5083611-3A81-40D1-9012-6E28B545EF91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5C3636-AB9A-470F-8174-2DD776656DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5C3636-AB9A-470F-8174-2DD776656DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5C3636-AB9A-470F-8174-2DD776656DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5C3636-AB9A-470F-8174-2DD776656DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63284E4D-1791-40EF-8FB4-7649962EE83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63284E4D-1791-40EF-8FB4-7649962EE83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63284E4D-1791-40EF-8FB4-7649962EE83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63284E4D-1791-40EF-8FB4-7649962EE83A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFC6B06-9E54-4161-B4A5-E3012FAC509B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFC6B06-9E54-4161-B4A5-E3012FAC509B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFC6B06-9E54-4161-B4A5-E3012FAC509B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFC6B06-9E54-4161-B4A5-E3012FAC509B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A582BF77-DF40-4E03-AB11-7DC12041D88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A582BF77-DF40-4E03-AB11-7DC12041D88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A582BF77-DF40-4E03-AB11-7DC12041D88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A582BF77-DF40-4E03-AB11-7DC12041D88E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -697,6 +723,10 @@ Global
 		{B89E50CC-4F25-4A2D-B570-614A580084DA} = {EEECF3A6-0315-4C0A-8052-A0781EF962F0}
 		{2642CF6A-1F8D-4436-93A4-8D0DEF44D932} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
 		{A5083611-3A81-40D1-9012-6E28B545EF91} = {A3E976D3-CB28-4BE0-9C02-3DC16A985A93}
+		{EC5C3636-AB9A-470F-8174-2DD776656DA0} = {FD40575A-E88D-4198-B94C-74951783603D}
+		{63284E4D-1791-40EF-8FB4-7649962EE83A} = {FD40575A-E88D-4198-B94C-74951783603D}
+		{CDFC6B06-9E54-4161-B4A5-E3012FAC509B} = {FD40575A-E88D-4198-B94C-74951783603D}
+		{A582BF77-DF40-4E03-AB11-7DC12041D88E} = {FD40575A-E88D-4198-B94C-74951783603D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E15A334-12AA-4627-A727-84897967A10F}
