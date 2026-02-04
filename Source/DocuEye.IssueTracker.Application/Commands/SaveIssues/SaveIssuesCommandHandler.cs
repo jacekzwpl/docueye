@@ -1,5 +1,6 @@
 ﻿using DocuEye.Infrastructure.Mediator.Commands;
 using DocuEye.IssueTracker.Persistence;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +18,10 @@ namespace DocuEye.IssueTracker.Application.Commands.SaveIssues
         public async Task HandleAsync(SaveIssuesCommand request, CancellationToken cancellationToken)
         {
             await this.dbContext.Issues.DeleteManyAsync(o => o.WorkspaceId == request.WorkspaceId);
-            await this.dbContext.Issues.InsertManyAsync(request.Issues);
+            if(request.Issues != null && request.Issues.Count() > 0)
+            {
+                await this.dbContext.Issues.InsertManyAsync(request.Issues);
+            }
         }
     }
 }

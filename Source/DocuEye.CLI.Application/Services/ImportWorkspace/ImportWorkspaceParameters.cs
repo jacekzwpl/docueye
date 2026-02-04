@@ -46,12 +46,16 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
         /// <param name="workspaceData">Workspace Json Data</param>
         /// <param name="workspaceId">The ID of the Workspace.</param>
         /// <param name="sourceLink">Link to source version from whitch workspace is imported</param>
-        public ImportWorkspaceParameters(string importKey, StructurizrJsonWorkspace workspaceData, string? workspaceId = null, string? sourceLink = null)
+        public ImportWorkspaceParameters(string importKey, StructurizrJsonWorkspace workspaceData, string? workspaceId = null, string? sourceLink = null, IEnumerable<IssueToImport>? issues = null)
         {
             this.ImportKey = importKey;
             this.WorkspaceData = workspaceData;
             this.WorkspaceId = workspaceId;
             this.SourceLink = sourceLink;
+            if (issues != null)
+            {
+                this.Issues = issues;
+            }
         }
     }
 }

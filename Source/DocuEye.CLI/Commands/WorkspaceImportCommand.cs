@@ -140,7 +140,7 @@ namespace DocuEye.CLI
 
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
-                        importKey, jsonWorkspace, workspaceId, sourceLink));
+                        importKey, jsonWorkspace, workspaceId, sourceLink, issuesToImport));
             }else if(importMode == "json")
             {
                 var jsonText = File.ReadAllText(worspaceFile.FullName);
@@ -154,7 +154,7 @@ namespace DocuEye.CLI
 
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
-                        importKey, jsonWorkspace, workspaceId, sourceLink));
+                        importKey, jsonWorkspace, workspaceId, sourceLink, issuesToImport));
             }
 
             return 0;
