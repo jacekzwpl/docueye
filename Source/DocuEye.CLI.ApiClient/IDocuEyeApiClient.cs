@@ -23,6 +23,7 @@ namespace DocuEye.CLI.ApiClient
         Task<ImportWorkspaceResponse> ImportImage(ImportImageRequest data);
         Task<ImportWorkspaceResponse> ImportDecisionLinks(ImportDecisionsLinksRequest data);
         Task<ImportWorkspaceResponse> ImportClearDecisions(ImportClearDecisionsRequest data);
+        Task<ImportWorkspaceResponse> ImportIssues(ImportIssuesRequest data);
         Task<ImportWorkspaceResponse> ImportFinish(ImportFinalizeRequest data);
 
         Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request);

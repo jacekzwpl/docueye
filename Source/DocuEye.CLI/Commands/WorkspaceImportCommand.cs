@@ -4,13 +4,17 @@ using DocuEye.CLI.Application.Services.ImportWorkspace;
 using DocuEye.CLI.Commands;
 using DocuEye.CLI.Hosting;
 using DocuEye.Linter;
+using DocuEye.Structurizr.DSL.Model;
+using DocuEye.Structurizr.DSL.Model.Maps;
 using DocuEye.Structurizr.DslToJson;
+using DocuEye.Structurizr.Json.Model;
+using DocuEye.Structurizr.Json.Model.Maps;
+using DocuEye.WorkspaceImporter.Api.Model.Issues;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.CommandLine;
 using System.CommandLine.Parsing;
-using DocuEye.Structurizr.DSL.Model.Maps;
-using DocuEye.Structurizr.Json.Model.Maps;
 
 namespace DocuEye.CLI
 {
@@ -123,20 +127,10 @@ namespace DocuEye.CLI
                     return 1;
                 }
 
-                if (linterConfig != null)
+                var issuesToImport = this.RunLinter(host, linterConfig, workspace: workspace);
+                if (issuesToImport == null)
                 {
-                    var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
-                    {
-                        Elements = workspace.Model.Elements.ToLinterModelElements(),
-                        Relationships = workspace.Model.Relationships.ToLinterModelRelationships(workspace.Model.Elements),
-                    }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
-                    linter.LoadConfigurationFromFile(linterConfig).GetAwaiter().GetResult();
-
-                    if (!linter.Analyze())
-                    {
-                        Console.Error.WriteLine("Workspace is invalid.");
-                        return 1;
-                    }
+                    return 1;
                 }
 
                 var converter = new WorkspaceConverter(workspace, worspaceFile.DirectoryName);
@@ -152,25 +146,11 @@ namespace DocuEye.CLI
                 var jsonText = File.ReadAllText(worspaceFile.FullName);
                 var jsonWorkspace = new WorkspaceSerializer().Deserialize(jsonText); //JsonSerializer.Deserialize<StructurizrJsonWorkspace>(jsonText, this.serializerOptions);
 
-                if (linterConfig != null && jsonWorkspace.Model != null)
+                var issuesToImport = this.RunLinter(host, linterConfig, jsonWorkspace: jsonWorkspace);
+                if (issuesToImport == null)
                 {
-                    var elements = jsonWorkspace.Model.ToLinterModelElements();
-                    var relationships = jsonWorkspace.Model.ToLinterModelRelationships(elements);
-
-                    var linter = new ArchitectureLinter(new Linter.Model.LinterModel()
-                    {
-                        Elements = elements,
-                        Relationships = relationships,
-                    }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
-                    linter.LoadConfigurationFromFile(linterConfig).GetAwaiter().GetResult();
-
-                    if (!linter.Analyze())
-                    {
-                        Console.Error.WriteLine("Workspace is invalid.");
-                        return 1;
-                    }
+                    return 1;
                 }
-
 
                 await importWorkspaceService.Import(
                     new ImportWorkspaceParameters(
@@ -180,6 +160,81 @@ namespace DocuEye.CLI
             return 0;
 
 
-        } 
+        }
+
+        private ArchitectureLinter CreateLinter(IHost host,  StructurizrWorkspace workspace)
+        {
+            return new ArchitectureLinter(new Linter.Model.LinterModel()
+            {
+                Elements = workspace.Model.Elements.ToLinterModelElements(),
+                Relationships = workspace.Model.Relationships.ToLinterModelRelationships(workspace.Model.Elements),
+            }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
+        }
+
+        private ArchitectureLinter CreateLinter(IHost host, StructurizrJsonWorkspace jsonWorkspace)
+        {
+            var elements = jsonWorkspace.Model?.ToLinterModelElements();
+            var relationships = jsonWorkspace.Model?.ToLinterModelRelationships(elements);
+
+            return new ArchitectureLinter(new Linter.Model.LinterModel()
+            {
+                Elements = elements ?? Enumerable.Empty<Linter.Model.LinterModelElement>(),
+                Relationships = relationships ?? Enumerable.Empty<Linter.Model.LinterModelRelationship>(),
+            }, host.Services.GetRequiredService<ILogger<ArchitectureLinter>>());
+        }
+
+        private IEnumerable<IssueToImport>? RunLinter(IHost host, string? linterConfig, StructurizrWorkspace? workspace = null, StructurizrJsonWorkspace? jsonWorkspace = null) {
+            
+            if (string.IsNullOrWhiteSpace(linterConfig)) 
+            {  
+                return Enumerable.Empty<IssueToImport>(); 
+            }
+            if (workspace == null && jsonWorkspace == null)
+            {
+                Console.Error.WriteLine("Workspace is invalid. Workspace is not provided for linter.");
+                return null;
+            }
+            var linter = workspace != null ? 
+                    this.CreateLinter(host, workspace) :
+                    this.CreateLinter(host, jsonWorkspace!);
+                linter.LoadConfigurationFromFile(linterConfig).GetAwaiter().GetResult();
+
+            if (!linter.Analyze())
+            {
+                Console.Error.WriteLine("Workspace is invalid.");
+                return null;
+            }
+
+            return linter.Issues.Select(i => new IssueToImport()
+            {
+                Element = i.Element != null ? new IssueElementToImport()
+                {
+                    Identifier = i.Element.Identifier,
+                    Name = i.Element.Name,
+                } : null,
+                Relationship = i.Relationship != null ? new IssueRelationshipToImport()
+                {
+                    Source = new IssueElementToImport()
+                    {
+                        Identifier = i.Relationship.Source.Identifier,
+                        Name = i.Relationship.Source.Name,
+                    },
+                    Destination = new IssueElementToImport()
+                    {
+                        Identifier = i.Relationship.Destination.Identifier,
+                        Name = i.Relationship.Destination.Name,
+                    }
+                } : null,
+                Message = i.Message,
+                SeverityValue = i.SeverityValue,
+                Rule = new IssueRuleToImport()
+                {
+                    Id = i.Rule.Id,
+                    Name = i.Rule.Name,
+                    Description = i.Rule.Description,
+                    HelpLink = i.Rule.HelpLink
+                }
+            }).ToArray();
+        }
     }
 }

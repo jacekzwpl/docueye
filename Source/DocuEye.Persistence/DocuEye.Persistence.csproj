@@ -13,6 +13,7 @@
     <ProjectReference Include="..\DocuEye.ChangeTracker.Persistence\DocuEye.ChangeTracker.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Persistence\DocuEye.DocsKeeper.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.Infrastructure.DataProtection\DocuEye.Infrastructure.DataProtection.csproj" />
+    <ProjectReference Include="..\DocuEye.IssueTracker.Persistence\DocuEye.IssueTracker.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Persistence\DocuEye.ModelKeeper.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Persistence\DocuEye.ViewsKeeper.Persistence.csproj" />
     <ProjectReference Include="..\DocuEye.WorkspaceImporter.Persistence\DocuEye.WorkspaceImporter.Persistence.csproj" />

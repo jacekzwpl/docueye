@@ -6,7 +6,7 @@ namespace DocuEye.IssueTracker.Model
 {
     public class IssueElement
     {
-        public string Id { get; set; } = null!;
+        public string DslId { get; set; } = null!;
         public string Name { get; set; } = null!;
     }
 }
