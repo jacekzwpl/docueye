@@ -871,6 +871,54 @@
         }
       }
     },
+    "/api/workspaces/{workspaceId}/issues": {
+      "get": {
+        "tags": [
+          "Issues"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Issue"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Issue"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Issue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/{workspaceId}/modelchanges": {
       "get": {
         "tags": [
@@ -2077,6 +2125,54 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ImportClearDecisionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportWorkspaceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/import/issues": {
+      "put": {
+        "tags": [
+          "WorkspacesImport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportIssuesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportIssuesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportIssuesRequest"
               }
             }
           }
@@ -3475,6 +3571,27 @@
         },
         "additionalProperties": false
       },
+      "ImportIssuesRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "importKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IssueToImport"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ImportOpenApiFileRequest": {
         "type": "object",
         "properties": {
@@ -3606,6 +3723,160 @@
               "$ref": "#/components/schemas/WorkspaceAccessRuleToImport"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Issue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "workspaceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "severity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "rule": {
+            "$ref": "#/components/schemas/IssueRule"
+          },
+          "relationship": {
+            "$ref": "#/components/schemas/IssueRelationship"
+          },
+          "element": {
+            "$ref": "#/components/schemas/IssueElement"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IssueElement": {
+        "type": "object",
+        "properties": {
+          "dslId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IssueElementToImport": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IssueRelationship": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/IssueElement"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/IssueElement"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IssueRelationshipToImport": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/IssueElementToImport"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/IssueElementToImport"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IssueRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "helpLink": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IssueRuleToImport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "helpLink": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IssueToImport": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "severityValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "element": {
+            "$ref": "#/components/schemas/IssueElementToImport"
+          },
+          "relationship": {
+            "$ref": "#/components/schemas/IssueRelationshipToImport"
+          },
+          "rule": {
+            "$ref": "#/components/schemas/IssueRuleToImport"
           }
         },
         "additionalProperties": false
@@ -4444,6 +4715,9 @@
     },
     {
       "name": "Elements"
+    },
+    {
+      "name": "Issues"
     },
     {
       "name": "ModelChanges"

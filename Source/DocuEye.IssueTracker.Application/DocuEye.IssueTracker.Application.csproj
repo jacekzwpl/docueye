@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.Infrastructure.Mediator\DocuEye.Infrastructure.Mediator.csproj" />
     <ProjectReference Include="..\DocuEye.IssueTracker.Application.Commands\DocuEye.IssueTracker.Application.Commands.csproj" />
+    <ProjectReference Include="..\DocuEye.IssueTracker.Application.Queries\DocuEye.IssueTracker.Application.Queries.csproj" />
     <ProjectReference Include="..\DocuEye.IssueTracker.Persistence\DocuEye.IssueTracker.Persistence.csproj" />
   </ItemGroup>
 

@@ -7,6 +7,7 @@ using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.DataProtection;
 using DocuEye.Infrastructure.Mediator;
+using DocuEye.IssueTracker.Api.Controller;
 using DocuEye.IssueTracker.Application.Commands.SaveIssues;
 using DocuEye.IssueTracker.Persistence;
 using DocuEye.ModelKeeper.Api.Controllers;
@@ -228,6 +229,7 @@ namespace DocuEye.Web
                 .AddApplicationPart(typeof(ElementsController).Assembly)
                 .AddApplicationPart(typeof(DecisionsController).Assembly)
                 .AddApplicationPart(typeof(ModelChangesController).Assembly)
+                .AddApplicationPart(typeof(IssuesController).Assembly)
                 .AddControllersAsServices();
 
             

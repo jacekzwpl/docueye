@@ -39,6 +39,8 @@ import type { ImportFinalizeRequest } from '../models';
 // @ts-ignore
 import type { ImportImageRequest } from '../models';
 // @ts-ignore
+import type { ImportIssuesRequest } from '../models';
+// @ts-ignore
 import type { ImportRelationshipsRequest } from '../models';
 // @ts-ignore
 import type { ImportViewConfigurationRequest } from '../models';
@@ -311,6 +313,38 @@ export const WorkspacesImportApiAxiosParamCreator = function (configuration?: Co
         },
         /**
          * 
+         * @param {ImportIssuesRequest} [importIssuesRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesImportIssuesPut: async (importIssuesRequest?: ImportIssuesRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/workspaces/import/issues`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(importIssuesRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {ImportRelationshipsRequest} [importRelationshipsRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -544,6 +578,18 @@ export const WorkspacesImportApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {ImportIssuesRequest} [importIssuesRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiWorkspacesImportIssuesPut(importIssuesRequest?: ImportIssuesRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImportWorkspaceResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesImportIssuesPut(importIssuesRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesImportApi.apiWorkspacesImportIssuesPut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {ImportRelationshipsRequest} [importRelationshipsRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -673,6 +719,15 @@ export const WorkspacesImportApiFactory = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {ImportIssuesRequest} [importIssuesRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesImportIssuesPut(importIssuesRequest?: ImportIssuesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ImportWorkspaceResponse> {
+            return localVarFp.apiWorkspacesImportIssuesPut(importIssuesRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {ImportRelationshipsRequest} [importRelationshipsRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -792,6 +847,16 @@ export class WorkspacesImportApi extends BaseAPI {
      */
     public apiWorkspacesImportImagePut(importImageRequest?: ImportImageRequest, options?: RawAxiosRequestConfig) {
         return WorkspacesImportApiFp(this.configuration).apiWorkspacesImportImagePut(importImageRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ImportIssuesRequest} [importIssuesRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public apiWorkspacesImportIssuesPut(importIssuesRequest?: ImportIssuesRequest, options?: RawAxiosRequestConfig) {
+        return WorkspacesImportApiFp(this.configuration).apiWorkspacesImportIssuesPut(importIssuesRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

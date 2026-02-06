@@ -8,6 +8,7 @@ api/documentation-files-api.ts
 api/documentation-files-import-api.ts
 api/documentations-api.ts
 api/elements-api.ts
+api/issues-api.ts
 api/model-changes-api.ts
 api/views-api.ts
 api/workspaces-api.ts
@@ -54,6 +55,7 @@ models/import-documentation-request.ts
 models/import-elements-request.ts
 models/import-finalize-request.ts
 models/import-image-request.ts
+models/import-issues-request.ts
 models/import-open-api-file-request.ts
 models/import-relationships-request.ts
 models/import-view-configuration-request.ts
@@ -61,6 +63,14 @@ models/import-views-request.ts
 models/import-workspace-response.ts
 models/import-workspace-start-request.ts
 models/index.ts
+models/issue-element-to-import.ts
+models/issue-element.ts
+models/issue-relationship-to-import.ts
+models/issue-relationship.ts
+models/issue-rule-to-import.ts
+models/issue-rule.ts
+models/issue-to-import.ts
+models/issue.ts
 models/model-change.ts
 models/relationship-in-view-to-import.ts
 models/relationship-style-to-import.ts
