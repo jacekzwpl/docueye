@@ -39,6 +39,10 @@ export default [
         "./routes/workspace/view.tsx"
     ),
     route(
+        "workspace/:workspaceId/issues", 
+        "./routes/workspace/issues.tsx"
+    ),
+    route(
         "errors/forbidden", 
         "./routes/errors/forbidden.tsx"
     ),

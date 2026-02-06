@@ -80,6 +80,13 @@ export const MainMenu = () => {
         </ListItemIcon>
         <ListItemText primary="Model Changes" />
       </ListItemButton> }
+      {currentWorkspace.value &&
+      <ListItemButton onClick={() => goToPage('/workspace/' + currentWorkspace.value?.id + '/issues')}>
+        <ListItemIcon>
+          <HistoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="Issues" />
+      </ListItemButton> }
     </List>
   );
 };
