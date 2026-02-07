@@ -11,6 +11,7 @@ import PivotTableChartIcon from '@mui/icons-material/PivotTableChart';
 //import { IWorkspaceState } from "../../../store/slices/workspace/IWorkspaceState";
 import { useSelector } from "react-redux";
 import type { IWorkspaceState } from "~/store/slices/workspace/IWorkspaceState";
+import BugReportIcon from '@mui/icons-material/BugReport';
 
 export const MainMenu = () => {
 
@@ -83,7 +84,7 @@ export const MainMenu = () => {
       {currentWorkspace.value &&
       <ListItemButton onClick={() => goToPage('/workspace/' + currentWorkspace.value?.id + '/issues')}>
         <ListItemIcon>
-          <HistoryIcon />
+          <BugReportIcon />
         </ListItemIcon>
         <ListItemText primary="Issues" />
       </ListItemButton> }
