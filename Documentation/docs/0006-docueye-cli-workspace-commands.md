@@ -15,6 +15,8 @@ Imports workspace to DocuEye.
 | `--id` | No | The ID of the Workspace. If not provided the new workspace will be created. Also if workspace with given id does not exists new workspace will be created. **It is recommended to allays pass workspace ID.** | `--id=638d0822-12c7-4998-8647-9c7af7ad2989` |
 | `--key` | No | Unique for workspace import key. If not provided, one will be generated. <br /> Import Key connects changes and prevents from running multiple imports for workspace at the same time. It can be for example commit hash that points to source version from witch workspace is imported. | `--key=09bb3efb-6de6-486d-9e90-b7aab8e36b7f` | 
 | `--source-link` | No | Link to source version from which workspace is imported ex. link to PR or commit on github. | `--source-link=https://localhost:8443` |
+| `--linter-config` | No | Path or Url to linter configuration file. | `--source-link=https://docueye.com/architecture-linter-rules/latest/linter-config.json` |
+
 
 **Example import workspace from dsl file**
 ```Powershell
@@ -61,6 +63,8 @@ Validates dsl workspace.
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
 | `--file` | Yes | Path to workspace file. | `--file=workspace.dsl` |
+| `--mode` | No | Specifies import mode. [default: dsl] <br /> `dsl` for import from dsl file. <br /> `json` for import from json file.  | `--mode=dsl` |
+| `--linter-config` | No | Path or Url to linter configuration file. | `--source-link=https://docueye.com/architecture-linter-rules/latest/linter-config.json` |
 
 **Example validate workspace**
 ```Powershell
