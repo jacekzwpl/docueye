@@ -210,10 +210,14 @@ namespace DocuEye.Linter
         {
             this.evaluationContext = new List<object?>();
             this.variablesMap = new Dictionary<string, string>();
+            // Add model relationships and elements to the context with reserved keys
             this.variablesMap.Add("@ModelRelationships", "@0");
             this.evaluationContext.Add(this.model.Relationships);
+            this.variablesMap.Add("@ModelElements", "@1");
+            this.evaluationContext.Add(this.model.Elements);
 
-            int iter = 1;
+
+            int iter = 2;
             foreach (var variable in Configuration.Variables)
             {
                 string varKey = "@" + iter;

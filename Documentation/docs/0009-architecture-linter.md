@@ -92,6 +92,7 @@ Source.Technology not_in @AllowedContainerTechnologies AND Technology != @TheOnl
 | Name | Type | Description | 
 | --- | --- | ----- |
 | ModelRelationships | IEnumerable<[Model Relationship](#model-relationship-properties)> | Array of Model Relationships | 
+| ModelElements | IEnumerable<[Model Element](#model-element-properties)> | Array of Model Relationships | 
 
 
 
