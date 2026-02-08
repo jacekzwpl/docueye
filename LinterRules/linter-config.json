@@ -110,6 +110,15 @@
             "Type": "ModelRelationship",
             "Expression": "Destination.Tags.Contains(\"Container\") and @AllowedRelationshipTechnologies.ContainsKey(Destination.Technology) and Technology not_in @AllowedRelationshipTechnologies[Destination.Technology]",  
             "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-011"
+        },
+        {
+            "Id": "C4-ARCH-012",
+            "Name": "Containers must specify SLA / criticality tier",
+            "Description": "Each container must specify its SLA or criticality tier to ensure proper prioritization and resource allocation.",
+            "Severity": "Information",
+            "Type": "ModelElement",
+            "Expression": "Tags.Contains(\"Container\") and Tags.Where(t => t.StartsWith(\"BusinessCriticality-\")).FirstOrDefault() == null",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-012"
         }
     ]
 }
