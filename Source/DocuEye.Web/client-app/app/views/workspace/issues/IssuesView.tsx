@@ -82,7 +82,7 @@ export const IssuesView = () => {
                                         )}
                                     </TableCell>
                                     <TableCell align="right">
-                                        {issue.severity === 1 && <Stack direction="row" alignItems="center" gap={1}>
+                                        {issue.severity === 3 && <Stack direction="row" alignItems="center" gap={1}>
                                             <ErrorOutlineIcon color="error" />
                                             <Typography color="error">
                                                 Error
@@ -96,7 +96,7 @@ export const IssuesView = () => {
                                                 </Typography>
                                             </Stack>
                                         }
-                                        {issue.severity === 3 && <Stack direction="row" alignItems="center" gap={1}>
+                                        {issue.severity === 1 && <Stack direction="row" alignItems="center" gap={1}>
                                             <ErrorOutlineIcon color="info" />
                                             <Typography color="info">
                                                 Info

@@ -97,7 +97,7 @@ namespace DocuEye.Linter
                 {
                     throw new Exception($"Unsupported rule type: '{rule.Type}' for rule with id: '{rule.Id}'");
                 }
-                if (!new string[] { LinterRuleSeverity.Error, LinterRuleSeverity.Warning }.Contains(rule.Severity))
+                if (!new string[] { LinterRuleSeverity.Error, LinterRuleSeverity.Warning, LinterRuleSeverity.Information }.Contains(rule.Severity))
                 {
                     throw new Exception($"Unsupported rule severity: '{rule.Severity}' for rule with id: '{rule.Id}'");
                 }
