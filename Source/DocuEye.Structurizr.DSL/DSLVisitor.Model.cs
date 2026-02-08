@@ -226,7 +226,7 @@ namespace DocuEye.Structurizr.DSL
                 foreach (var relationship in relationships)
                 {
                     var destination = this.workspace.Model.Elements.Where(o => o.Identifier == relationship.DestinationIdentifier).FirstOrDefault();
-                    if(destination == null)
+                    if(destination == null || destination.ParentIdentifier == element.ParentIdentifier)
                     {
                         continue;
                     }
