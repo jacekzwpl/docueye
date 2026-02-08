@@ -73,7 +73,7 @@ namespace DocuEye.Linter
                     issues.Add(new LinterIssue { Rule = rule, Element = element });
                 }
             }
-            if(rule.Type == LinterRuleType.ModelRelationship)
+            if (rule.Type == LinterRuleType.ModelRelationship)
             {
                 var relationships = model.Relationships.AsQueryable()
                     .Where(expression, evaluationContext.ToArray()).ToArray();

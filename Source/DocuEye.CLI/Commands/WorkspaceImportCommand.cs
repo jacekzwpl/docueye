@@ -214,6 +214,7 @@ namespace DocuEye.CLI
                 } : null,
                 Relationship = i.Relationship != null ? new IssueRelationshipToImport()
                 {
+                    Identifier = i.Relationship.Identifier,
                     Source = new IssueElementToImport()
                     {
                         Identifier = i.Relationship.Source.Identifier,

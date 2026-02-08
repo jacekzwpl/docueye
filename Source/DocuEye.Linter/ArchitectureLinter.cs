@@ -157,12 +157,23 @@ namespace DocuEye.Linter
                         return jsonElement.GetBoolean();
                     case JsonValueKind.Object:
                         var dict = new Dictionary<string, object?>();
+                        Type? dictItemType = null;
                         foreach (var prop in jsonElement.EnumerateObject())
                         {
-                            dict[prop.Name] = GetVariableValue(prop.Value);
+                            dict[prop.Name] = GetVariableValue(prop.Value, out var elementType);
+                            if(dictItemType == null && elementType != null)
+                            {
+                                dictItemType = elementType;
+                            }
                         }
-                        type = typeof(Dictionary<string, object?>);
-                        return dict;
+                        type = typeof(Dictionary<,>).MakeGenericType(typeof(string), dictItemType ?? typeof(object));
+                        var destDict = (System.Collections.IDictionary)Activator.CreateInstance(type);
+                        foreach(var key in dict.Keys)
+                        {
+                            destDict[key] = dict[key];
+                        }
+
+                        return destDict;
                     case JsonValueKind.Array:
                         var list = new List<object?>();
                         Type? itemType = null;
