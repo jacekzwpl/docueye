@@ -78,10 +78,10 @@
         {
             "Id": "C4-ARCH-008",
             "Name": "Database container must not have outgoing relationships",
-            "Description": "Database containers should not have outgoing relationships to ensure data integrity and proper architecture.",
+            "Description": "Database containers should not have outgoing relationships, because databases should be passive infrastructure components and must not depend on or call other containers. Replication and backup relationships may be allowed as an exception.",
             "Severity": "Error",
             "Type": "ModelRelationship",
-            "Expression": "Source.Tags.Contains(\"Database\") and Source.Tags.Contains(\"Container\")",
+            "Expression": "Source.Tags.Contains(\"Database\") and Source.Tags.Contains(\"Container\") and Description not_contains \"replication\" and Description not_contains \"backup\"",
             "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-008"
         },
         {
