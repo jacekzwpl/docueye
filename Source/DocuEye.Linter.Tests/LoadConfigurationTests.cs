@@ -153,7 +153,7 @@ namespace DocuEye.Linter.Tests
                         ""StringVariable"": ""SomeStringValue"",
                         ""NumberVariable"": 42,
                         ""BooleanVariable"": true,
-                        ""ObjectVariable"": { ""Key1"": ""Value1"", ""Key2"": 2 }
+                        ""ObjectVariable"": { ""Key1"": ""Value1"", ""Key2"": ""2"" }
                     },
                     ""Rules"": [
                         {
@@ -177,7 +177,7 @@ namespace DocuEye.Linter.Tests
             Assert.That(linter.Configuration.Variables["StringVariable"], Is.EqualTo("SomeStringValue"));
             Assert.That(linter.Configuration.Variables["NumberVariable"], Is.EqualTo(42));
             Assert.That(linter.Configuration.Variables["BooleanVariable"], Is.EqualTo(true));
-            Assert.That(linter.Configuration.Variables["ObjectVariable"], Is.EquivalentTo(new Dictionary<string, object> { { "Key1", "Value1" }, { "Key2", 2 } }));
+            Assert.That(linter.Configuration.Variables["ObjectVariable"], Is.EquivalentTo(new Dictionary<string, object> { { "Key1", "Value1" }, { "Key2", "2" } }));
         }
     }
 }
