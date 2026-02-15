@@ -70,6 +70,10 @@
     },
     "Docker": {
       "commandName": "Docker"
+    },
+    "DocuEye.workspace-import-docueye": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --linter-config=\"..\\..\\..\\..\\..\\Documentation\\linter-config.json\" --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file=\"..\\..\\..\\..\\..\\Documentation\\workspace.dsl\""
     }
   }
 }
