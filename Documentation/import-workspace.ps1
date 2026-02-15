@@ -16,12 +16,13 @@ Param(
 )
 
 ####
-# .\import.ps1 -docueyeAddress http://localhost:8080 -adminToken docueyedmintoken -workspaceId 638d0822-12c7-4998-8647-9c7af7ad2989 
+# .\import-workspace.ps1 -docueyeAddress http://localhost:8080 -adminToken docueyedmintoken -workspaceId 638d0822-12c7-4998-8647-9c7af7ad2989 
 ####
 
 if(!$useDotNetTool) {
-docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
+docker run -it --rm --network="host" -v "$($PWD):/app/import" local-docueye-cli:1.2.0-rc1  `
 workspace import  `
+--linter-config=./import/linter-config.json  `
 --docueye-address="$docueyeAddress"  `
 --admin-token="$adminToken"  `
 --key="$importKey"  `
@@ -29,6 +30,7 @@ workspace import  `
 --file=./import/workspace.dsl
 }else {
 docueye workspace import  `
+--linter-config=./linter-config.json  `
 --docueye-address="$docueyeAddress"  `
 --admin-token="$adminToken"  `
 --key="$importKey"  `

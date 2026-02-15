@@ -81,7 +81,7 @@
             "Description": "Database containers should not have outgoing relationships, because databases should be passive infrastructure components and must not depend on or call other containers. Replication and backup relationships may be allowed as an exception.",
             "Severity": "Error",
             "Type": "ModelRelationship",
-            "Expression": "Source.Tags.Contains(\"Database\") and Source.Tags.Contains(\"Container\") and Description not_contains \"replication\" and Description not_contains \"backup\"",
+            "Expression": "Source.Tags.Contains(\"Database\") and Source.Tags.Contains(\"Container\")",
             "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-008"
         },
         {
