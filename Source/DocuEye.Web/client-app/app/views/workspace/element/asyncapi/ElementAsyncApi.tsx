@@ -3,7 +3,13 @@ import SwaggerUI from "swagger-ui-react"
 import "swagger-ui-react/swagger-ui.css"
 import DocuEyeApi from "../../../../api"
 import Loader from "../../../../components/loader"
+import AsyncApiComponent, { type ConfigInterface } from "@asyncapi/react-component";
 import type { IElementAsyncApiProps } from "./IElementAsyncApiProps"
+import "@asyncapi/react-component/styles/default.css";
+
+const config: ConfigInterface = {
+  schemaID: 'custom-spec',
+};
 
 export const ElementAsyncApi = (props: IElementAsyncApiProps) => {
     const [spec, setSpec] = useState<string>("");
@@ -21,6 +27,7 @@ export const ElementAsyncApi = (props: IElementAsyncApiProps) => {
             })
             .then((resp:any) => {
                 if(resp.status !== 404) { 
+                    console.log(resp.data);
                     setSpec(resp.data);
                 }
             }).finally(() => {
@@ -33,7 +40,7 @@ export const ElementAsyncApi = (props: IElementAsyncApiProps) => {
 
     return (
        <>
-        {/*spec !== "" && <SwaggerUI spec={spec} /> */}
+        {spec !== "" && <AsyncApiComponent schema={spec} config={config} /> }
         {!isLoading && spec === "" && "No Async API documentation found"}
         {isLoading && <Loader />}
        </>
