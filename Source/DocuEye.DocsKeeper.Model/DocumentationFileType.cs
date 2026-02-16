@@ -13,7 +13,7 @@ namespace DocuEye.DocsKeeper.Model
             AsyncApiDefinition
         };
 
-        public static string MapFromCliType(string type)
+        public static string MapFromDocumentationType(string type)
         {
             switch (type)
             {

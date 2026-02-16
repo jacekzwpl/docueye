@@ -91,7 +91,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 elementId,
                 data.Content,
                 data.Name,
-                DocumentationFileType.MapFromCliType(data.DocumentationType));
+                DocumentationFileType.MapFromDocumentationType(data.DocumentationType));
             await this.mediator.SendCommandAsync(command);
             return this.NoContent();
         }

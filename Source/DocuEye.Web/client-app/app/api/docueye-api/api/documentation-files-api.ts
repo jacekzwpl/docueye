@@ -31,15 +31,16 @@ export const DocumentationFilesApiAxiosParamCreator = function (configuration?: 
          * 
          * @param {string} workspaceId 
          * @param {string} elementId 
+         * @param {string} [documentationType] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet: async (workspaceId: string, elementId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet: async (workspaceId: string, elementId: string, documentationType?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet', 'workspaceId', workspaceId)
+            assertParamExists('apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet', 'workspaceId', workspaceId)
             // verify required parameter 'elementId' is not null or undefined
-            assertParamExists('apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet', 'elementId', elementId)
-            const localVarPath = `/api/workspaces/{workspaceId}/documentationfiles/openapi/{elementId}`
+            assertParamExists('apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet', 'elementId', elementId)
+            const localVarPath = `/api/workspaces/{workspaceId}/documentationfiles/{elementId}`
                 .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"elementId"}}`, encodeURIComponent(String(elementId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -52,6 +53,10 @@ export const DocumentationFilesApiAxiosParamCreator = function (configuration?: 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (documentationType !== undefined) {
+                localVarQueryParameter['documentationType'] = documentationType;
+            }
 
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -76,13 +81,14 @@ export const DocumentationFilesApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} workspaceId 
          * @param {string} elementId 
+         * @param {string} [documentationType] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId: string, elementId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId, elementId, options);
+        async apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet(workspaceId: string, elementId: string, documentationType?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet(workspaceId, elementId, documentationType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DocumentationFilesApi.apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['DocumentationFilesApi.apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -98,11 +104,12 @@ export const DocumentationFilesApiFactory = function (configuration?: Configurat
          * 
          * @param {string} workspaceId 
          * @param {string} elementId 
+         * @param {string} [documentationType] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId: string, elementId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId, elementId, options).then((request) => request(axios, basePath));
+        apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet(workspaceId: string, elementId: string, documentationType?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet(workspaceId, elementId, documentationType, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -115,11 +122,12 @@ export class DocumentationFilesApi extends BaseAPI {
      * 
      * @param {string} workspaceId 
      * @param {string} elementId 
+     * @param {string} [documentationType] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId: string, elementId: string, options?: RawAxiosRequestConfig) {
-        return DocumentationFilesApiFp(this.configuration).apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(workspaceId, elementId, options).then((request) => request(this.axios, this.basePath));
+    public apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet(workspaceId: string, elementId: string, documentationType?: string, options?: RawAxiosRequestConfig) {
+        return DocumentationFilesApiFp(this.configuration).apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet(workspaceId, elementId, documentationType, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

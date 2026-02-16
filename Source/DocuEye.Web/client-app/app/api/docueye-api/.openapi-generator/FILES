@@ -51,6 +51,7 @@ models/import-clear-decisions-request.ts
 models/import-clear-doc-items-request.ts
 models/import-decision-request.ts
 models/import-decisions-links-request.ts
+models/import-documentation-file-request.ts
 models/import-documentation-request.ts
 models/import-elements-request.ts
 models/import-finalize-request.ts
