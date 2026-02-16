@@ -1,4 +1,7 @@
 ﻿using DocuEye.Structurizr.Json.Model;
+using DocuEye.WorkspaceImporter.Api.Model.Issues;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DocuEye.CLI.Application.Services.ImportWorkspace
 {
@@ -24,6 +27,10 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
         /// </summary>
         public string? SourceLink { get; set; }
         /// <summary>
+        /// List of workspace issues found during import
+        /// </summary>
+        public IEnumerable<IssueToImport> Issues { get; set; } = Enumerable.Empty<IssueToImport>();
+        /// <summary>
         /// Creates instance
         /// </summary>
         /// <param name="importKey">Unique import key.</param>
@@ -39,12 +46,16 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
         /// <param name="workspaceData">Workspace Json Data</param>
         /// <param name="workspaceId">The ID of the Workspace.</param>
         /// <param name="sourceLink">Link to source version from whitch workspace is imported</param>
-        public ImportWorkspaceParameters(string importKey, StructurizrJsonWorkspace workspaceData, string? workspaceId = null, string? sourceLink = null)
+        public ImportWorkspaceParameters(string importKey, StructurizrJsonWorkspace workspaceData, string? workspaceId = null, string? sourceLink = null, IEnumerable<IssueToImport>? issues = null)
         {
             this.ImportKey = importKey;
             this.WorkspaceData = workspaceData;
             this.WorkspaceId = workspaceId;
             this.SourceLink = sourceLink;
+            if (issues != null)
+            {
+                this.Issues = issues;
+            }
         }
     }
 }

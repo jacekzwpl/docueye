@@ -11,6 +11,7 @@
     <ProjectReference Include="..\DocuEye.DocsKeeper.Application.Queries\DocuEye.DocsKeeper.Application.Queries.csproj" />
     <ProjectReference Include="..\DocuEye.DocsKeeper.Model\DocuEye.DocsKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.Infrastructure.Mediator\DocuEye.Infrastructure.Mediator.csproj" />
+    <ProjectReference Include="..\DocuEye.IssueTracker.Application.Commands\DocuEye.IssueTracker.Application.Commands.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Application.Commands\DocuEye.ModelKeeper.Application.Commands.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Application.Queries\DocuEye.ModelKeeper.Application.Queries.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Model\DocuEye.ModelKeeper.Model.csproj" />

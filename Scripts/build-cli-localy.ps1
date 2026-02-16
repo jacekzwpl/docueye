@@ -4,7 +4,7 @@ Param(
 )
 
 ####
-#   .\Scripts\build-cli-localy.ps1 -version 1.0.0-rc1
+#   .\Scripts\build-cli-localy.ps1 -version 1.2.0-rc3
 ####
 
 docker build -t local-docueye-cli:$version -f ./Source/DocuEye.CLI/Dockerfile .

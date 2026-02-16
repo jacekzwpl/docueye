@@ -4,6 +4,8 @@ using DocuEye.DocsKeeper.Model;
 using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.DataProtection;
 using DocuEye.Infrastructure.MongoDB;
+using DocuEye.IssueTracker.Model;
+using DocuEye.IssueTracker.Persistence;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.ModelKeeper.Persistence;
 using DocuEye.ViewsKeeper.Model;
@@ -27,7 +29,8 @@ namespace DocuEye.Persistence
         IModelKeeperDBContext,
         IWorkspacesKeeperDBContext,
         IWorkspaceImporterDBContext,
-        IDataProtectionDBContext
+        IDataProtectionDBContext,
+        IIssueTrackerDBContext
     {
         private MongoClient client;
         private IMongoDatabase database;
@@ -84,6 +87,11 @@ namespace DocuEye.Persistence
         /// Name of collection containing documentation files
         /// </summary>
         private const string documentationFilesCollectionName = "DocumentationFiles";
+        /// <summary>
+        /// Name of collection containing issues
+        /// </summary>
+        private const string issuesCollectionName = "Issues";
+
 
         /// <summary>
         /// Creates db context instance
@@ -304,6 +312,17 @@ namespace DocuEye.Persistence
                 return new GenericCollection<DocumentationFile>(this.database.GetCollection<DocumentationFile>(documentationFilesCollectionName));
             }
         }
+        /// <summary>
+        /// Collection of issues
+        /// </summary>
+        public IGenericCollection<Issue> Issues
+        {
+            get
+            {
+                return new GenericCollection<Issue>(this.database.GetCollection<Issue>(issuesCollectionName));
+            }
+        }
+       
 
         /// <summary>
         /// Creates DB indexes
@@ -320,6 +339,7 @@ namespace DocuEye.Persistence
             await this.CreateDecisionsCollectionIndexes();
             await this.CreateModelChangesCollectionIndexes();
             await this.CreateDocumentationFilesCollectionIndexes();
+            await this.CreateIssuesCollectionIndexes();
         }
         /// <summary>
         /// Creates indexes for Elements collection
@@ -421,6 +441,17 @@ namespace DocuEye.Persistence
             await collection.Indexes.CreateOneAsync(workspaceIndexModel);
             var elementIndexModel = new CreateIndexModel<DocumentationFile>(logBuilder.Ascending(x => x.ElementId));
             await collection.Indexes.CreateOneAsync(elementIndexModel);
+        }
+
+        /// <summary>
+        /// Create indexes fo Issues collection
+        /// </summary>
+        /// <returns></returns>
+        private async Task CreateIssuesCollectionIndexes() { 
+            var collection = this.database.GetCollection<Issue>(issuesCollectionName);
+            var logBuilder = Builders<Issue>.IndexKeys;
+            var workspaceIndexModel = new CreateIndexModel<Issue>(logBuilder.Ascending(x => x.WorkspaceId));
+            await collection.Indexes.CreateOneAsync(workspaceIndexModel);
         }
     }
 }

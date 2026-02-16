@@ -22,6 +22,7 @@ export * from './api/documentation-files-api';
 export * from './api/documentation-files-import-api';
 export * from './api/documentations-api';
 export * from './api/elements-api';
+export * from './api/issues-api';
 export * from './api/model-changes-api';
 export * from './api/views-api';
 export * from './api/workspaces-api';

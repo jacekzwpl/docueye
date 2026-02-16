@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocuEye.Linter.Model\DocuEye.Linter.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ModelKeeper.Model\DocuEye.ModelKeeper.Model.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.Json.Model\DocuEye.Structurizr.Json.Model.csproj" />
     <ProjectReference Include="..\DocuEye.ViewsKeeper.Model\DocuEye.ViewsKeeper.Model.csproj" />

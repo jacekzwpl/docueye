@@ -171,6 +171,13 @@ namespace DocuEye.CLI.ApiClient
             return await this.ImportAction(message);
         }
 
+        public async Task<ImportWorkspaceResponse> ImportIssues(ImportIssuesRequest data)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/issues");
+            message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
+            return await this.ImportAction(message);
+        }
+
         public async Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request)
         {
             var message = new HttpRequestMessage(HttpMethod.Put, string.Format("api/workspaces/{0}/docfile/openapi", workspaceId));

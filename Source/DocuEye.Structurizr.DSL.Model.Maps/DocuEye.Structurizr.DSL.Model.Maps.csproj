@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocuEye.Linter.Model\DocuEye.Linter.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.DSL.Model\DocuEye.Structurizr.DSL.Model.csproj" />
+  </ItemGroup>
+
+</Project>

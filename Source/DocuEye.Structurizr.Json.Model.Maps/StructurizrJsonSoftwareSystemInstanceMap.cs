@@ -1,4 +1,5 @@
-﻿using DocuEye.ModelKeeper.Model;
+﻿using DocuEye.Linter.Model;
+using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,22 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Tags = string.IsNullOrWhiteSpace(source.Tags) ? null : source.Tags.Split(",").ToArray(),
                 Properties = source.Properties ?? new Dictionary<string, string>(),
                 DslId = source.DslId
+            };
+        }
+
+        public static LinterModelElement ToLinterModelElement(this StructurizrJsonSoftwareSystemInstance source, string parentIdentifier, LinterModelElement instanceOfElement)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            return new LinterModelElement()
+            {
+                Identifier = source.DslId,
+                Tags = string.IsNullOrWhiteSpace(source.Tags) ? new List<string>() : source.Tags.Split(",").ToList(),
+                Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
+                ParentIdentifier = parentIdentifier,
+                InstanceOfIdentifier = instanceOfElement.Identifier,
+                Name = instanceOfElement.Name ?? string.Empty,
+                Description = instanceOfElement.Description,
+                JsonModelId = source.Id
             };
         }
     }

@@ -1,0 +1,28 @@
+{
+    "MaxAllowedSeverity": "Warning",
+    "Variables": {
+        "AllowedContainerTechnologies": [
+            "ASP.NET MVC", "REST API", "MSSQL", "REDIS"
+        ]
+    },
+    "Rules": [
+        {
+            "Id": "DE-ARCH-001",
+            "Name": "Containers should not have cyclic dependencies",
+            "Description": "Containers must not depend on each other in a cyclic manner to avoid tight coupling and maintainability issues.",
+            "Severity": "Error",
+            "Type": "General",
+            "Expression": "GeneralIssuesFinder.CyclicDependenciesExists(\"Container\",@ModelRelationships)",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-001"
+        },
+        {
+            "Id": "DE-ARCH-002",
+            "Name": "Frontend can not connect directly to database",
+            "Description": "Frontend services should not connect directly to the database for security and architecture reasons.",
+            "Severity": "Error",
+            "Type": "ModelRelationship",
+            "Expression": "Source.Tags.Contains(\"Frontend\") and Destination.Tags.Contains(\"Database\")",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/DE-ARCH-002"
+        }
+    ]
+}

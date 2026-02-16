@@ -9,7 +9,7 @@
     <ToolCommandName>docueye</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.5</Version>
+    <Version>1.2.0</Version>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <Title>DocuEye CLI</Title>
@@ -31,6 +31,8 @@
   <ItemGroup>
     <ProjectReference Include="..\DocuEye.CLI.ApiClient\DocuEye.CLI.ApiClient.csproj" />
     <ProjectReference Include="..\DocuEye.CLI.Application\DocuEye.CLI.Application.csproj" />
+    <ProjectReference Include="..\DocuEye.Linter\DocuEye.Linter.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.DSL.Model.Maps\DocuEye.Structurizr.DSL.Model.Maps.csproj" />
     <ProjectReference Include="..\DocuEye.Structurizr.DslToJson\DocuEye.Structurizr.DslToJson.csproj" />
   </ItemGroup>
 

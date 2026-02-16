@@ -1,0 +1,124 @@
+{
+    "MaxAllowedSeverity": "Warning",
+    "Variables": {
+        "AllowedContainerTechnologies": [
+            "ASP.NET MVC", "REST API", "MSSQL", "REDIS"
+        ],
+        "AllowedRelationshipTechnologies": {
+            "REST API": ["HTTPS"],
+            "MSSQL": ["TCP/1433"],
+            "REDIS": ["TCP/6379"],
+            "ASP.NET MVC": ["HTTPS"]
+        }
+    },
+    "Rules": [
+        {
+            "Id": "C4-ARCH-001",
+            "Name": "Containers should not have cyclic dependencies",
+            "Description": "Containers must not depend on each other in a cyclic manner to avoid tight coupling and maintainability issues.",
+            "Severity": "Error",
+            "Type": "General",
+            "Expression": "GeneralIssuesFinder.CyclicDependenciesExists(\"Container\",@ModelRelationships)",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-001"
+        },
+        {
+            "Id": "C4-ARCH-002",
+            "Name": "Frontend can not connect directly to database",
+            "Description": "Data access must be provided through a backend/API layer to ensure security, access control, validation, and separation of responsibility.",
+            "Severity": "Error",
+            "Type": "ModelRelationship",
+            "Expression": "Source.Tags.Contains(\"Frontend\") and Destination.Tags.Contains(\"Database\")",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-002"
+        },
+        {
+            "Id": "C4-ARCH-003",
+            "Name": "Container technology must be defined",
+            "Description": "The lack of information about technology makes it difficult to analyze the architecture, validate dependencies, and assess technological compatibility.",
+            "Severity": "Warning",
+            "Type": "ModelElement",
+            "Expression": "Tags.Contains(\"Container\") and Technology == null",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-003"
+        },
+        {
+            "Id": "C4-ARCH-004",
+            "Name": "Container technology must be one of the allowed technologies",
+            "Description": "The container technology must be from the organization's list of permitted technologies. This rule ensures consistency across the technology stack, limits shadow IT, and simplifies system maintenance and support.",
+            "Severity": "Warning",
+            "Type": "ModelElement",
+            "Expression": "Tags.Contains(\"Container\") and Technology not_in @AllowedContainerTechnologies",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-004"
+        },
+        {
+            "Id": "C4-ARCH-005",
+            "Name": "Relationships from external systems to database are not allowed",
+            "Description": "External systems cannot have direct relationships to the database. Data access must be mediated through a controlled application interface (API/service layer) to reduce the risk of security breaches and maintain data integrity.",
+            "Severity": "Error",
+            "Type": "ModelRelationship",
+            "Expression": "Source.ParentIdentifier != Destination.ParentIdentifier and Destination.Tags.Contains(\"Database\")",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-005"
+        },
+        {
+            "Id": "C4-ARCH-006",
+            "Name": "Relationship technology must be defined",
+            "Description": "Each relationship between components must have a defined communication technology. This allows for integration analysis, architectural error detection, and infrastructure requirements assessment.",
+            "Severity": "Warning",
+            "Type": "ModelRelationship",
+            "Expression": "Technology == null",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-006"
+        },
+        {
+            "Id": "C4-ARCH-007",
+            "Name": "Every container should have instance",
+            "Description": "Each container should have at least one instance to ensure it is deployed and operational.",
+            "Severity": "Warning",
+            "Type": "ModelElement",
+            "Expression": "Tags.Contains(\"Container\") and Identifier not_in @ModelElements.Where(e => e.Tags.Contains(\"Container Instance\")).Select(e => e.InstanceOfIdentifier)",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-007"
+        },
+        {
+            "Id": "C4-ARCH-008",
+            "Name": "Database container must not have outgoing relationships",
+            "Description": "Database containers should not have outgoing relationships, because databases should be passive infrastructure components and must not depend on or call other containers. Replication and backup relationships may be allowed as an exception.",
+            "Severity": "Error",
+            "Type": "ModelRelationship",
+            "Expression": "Source.Tags.Contains(\"Database\") and Source.Tags.Contains(\"Container\")",
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-008"
+        },
+        {
+            "Id": "C4-ARCH-009",
+            "Name": "Relationship description must be defined",
+            "Description": "Each relationship should have a description explaining the purpose of the communication. This ensures clarity of the model and supports architectural reviews and onboarding.",
+            "Severity": "Warning",
+            "Type": "ModelRelationship",
+            "Expression": "string.IsNullOrEmpty(Description)",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-009"
+        },
+        {
+            "Id": "C4-ARCH-010",
+            "Name": "Element description must be defined",
+            "Description": "Each element must have a description of its role and responsibility. Without a description, the model loses its documentary value and complicates architecture analysis.",
+            "Severity": "Warning",
+            "Type": "ModelElement",
+            "Expression": "string.IsNullOrEmpty(Description)",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-010"
+        },
+        {
+            "Id": "C4-ARCH-011",
+            "Name": "Relationship technology must be consistent with destination container technology",
+            "Description": "The relationship technology must be compatible with the target container's technology. This rule prevents incorrect or unrealistic integrations in the model.",
+            "Severity": "Warning",
+            "Type": "ModelRelationship",
+            "Expression": "Destination.Tags.Contains(\"Container\") and @AllowedRelationshipTechnologies.ContainsKey(Destination.Technology) and Technology not_in @AllowedRelationshipTechnologies[Destination.Technology]",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-011"
+        },
+        {
+            "Id": "C4-ARCH-012",
+            "Name": "Containers must specify SLA / criticality tier",
+            "Description": "Each container must specify its SLA or criticality tier to ensure proper prioritization and resource allocation.",
+            "Severity": "Information",
+            "Type": "ModelElement",
+            "Expression": "Tags.Contains(\"Container\") and Tags.Where(t => t.StartsWith(\"BusinessCriticality-\")).FirstOrDefault() == null",  
+            "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-012"
+        }
+    ]
+}

@@ -171,8 +171,14 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
                 return false;
             }
 
+            // Import issues
+            if(!await this.RunImportIssues(parameters))
+            {
+                return false;
+            }
+
             // Finish import
-            if(!await this.RunImportFinish(parameters))
+            if (!await this.RunImportFinish(parameters))
             {
                 return false;
             }
@@ -377,6 +383,21 @@ namespace DocuEye.CLI.Application.Services.ImportWorkspace
             {
                 ImportKey = parameters.ImportKey,
                 WorkspaceId = parameters.WorkspaceId
+            });
+
+            this.LogImportStepResult(result, stepName);
+            return result.IsSuccess;
+        }
+
+        private async Task<bool> RunImportIssues(ImportWorkspaceParameters parameters)
+        {
+            string stepName = "Import Isses";
+            this.logger.LogInformation("Running Step: {0}", stepName);
+            var result = await this.apiClient.ImportIssues(new ImportIssuesRequest()
+            {
+                ImportKey = parameters.ImportKey,
+                WorkspaceId = parameters.WorkspaceId,
+                Issues = parameters.Issues
             });
 
             this.LogImportStepResult(result, stepName);

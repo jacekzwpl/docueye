@@ -27,5 +27,7 @@ namespace DocuEye.Structurizr.Json.Model
                 return "|";
             }
         }
+
+        
     }
 }

@@ -22,7 +22,7 @@
     },
     "DocuEye.workspace-import-dsl": {
       "commandName": "Project",
-      "commandLineArgs": "workspace import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+      "commandLineArgs": "workspace import --linter-config=\"..\\..\\..\\..\\..\\LinterRules\\linter-config.json\" --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
     },
     "DocuEye.workspace-import-json": {
       "commandName": "Project",
@@ -52,6 +52,10 @@
       "commandName": "Project",
       "commandLineArgs": "workspace validate --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
     },
+    "DocuEye.workspace-validate-with-linter": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace validate --linter-config=\"..\\..\\..\\..\\..\\LinterRules\\linter-config.json\" --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\workspace.dsl\""
+    },
     "DocuEye.openapi-import-help": {
       "commandName": "Project",
       "commandLineArgs": "openapi import --help"
@@ -66,6 +70,10 @@
     },
     "Docker": {
       "commandName": "Docker"
+    },
+    "DocuEye.workspace-import-docueye": {
+      "commandName": "Project",
+      "commandLineArgs": "workspace import --linter-config=\"..\\..\\..\\..\\..\\Documentation\\linter-config.json\" --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file=\"..\\..\\..\\..\\..\\Documentation\\workspace.dsl\""
     }
   }
 }

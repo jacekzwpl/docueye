@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocuEye.Linter.Model\DocuEye.Linter.Model.csproj" />
+    <ProjectReference Include="..\DocuEye.Structurizr.DSL.Model\DocuEye.Structurizr.DSL.Model.csproj" />
+  </ItemGroup>
+
+</Project>

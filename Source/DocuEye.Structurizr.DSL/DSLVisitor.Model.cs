@@ -221,19 +221,21 @@ namespace DocuEye.Structurizr.DSL
                     continue;
                 }
 
-                var sourceParentIdentifiers = GetParentIdetifiers(element.Identifier);
+                var allsourceParentIdentifiers = GetParentIdetifiers(element.Identifier);
 
                 foreach (var relationship in relationships)
                 {
                     var destination = this.workspace.Model.Elements.Where(o => o.Identifier == relationship.DestinationIdentifier).FirstOrDefault();
-                    if(destination == null)
+                    if(destination == null || destination.ParentIdentifier == element.ParentIdentifier)
                     {
                         continue;
                     }
 
-                    var destinationParentIdentifiers = GetParentIdetifiers(destination.Identifier);
+                    var alldestinationParentIdentifiers = GetParentIdetifiers(destination.Identifier);
 
-                    foreach(var destinationParentIdentifier in destinationParentIdentifiers)
+                    var (sourceParentIdentifiers, destinationParentIdentifiers) = RemoveParentIdetifiersDuplicates(allsourceParentIdentifiers, alldestinationParentIdentifiers);
+
+                    foreach (var destinationParentIdentifier in destinationParentIdentifiers)
                     {
                         this.AddImpliedRelationship(relationship,
                                 element.Identifier,
@@ -254,6 +256,20 @@ namespace DocuEye.Structurizr.DSL
                     }
                 }
             }
+        }
+
+        public static (string[] Left, string[] Right) RemoveParentIdetifiersDuplicates(IEnumerable<string> a, IEnumerable<string> b)
+        {
+            var setA = new HashSet<string>(a);
+            var setB = new HashSet<string>(b);
+
+            var common = new HashSet<string>(setA);
+            common.IntersectWith(setB);
+
+            var left = a.Where(x => !common.Contains(x)).ToArray();
+            var right = b.Where(x => !common.Contains(x)).ToArray();
+
+            return (left, right);
         }
 
         private IEnumerable<string> GetParentIdetifiers(string elementIdentifier)

@@ -9,6 +9,7 @@ using DocuEye.WorkspaceImporter.Application.Commands.ImportDecisionsLinks;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportDocumentation;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportElements;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportImage;
+using DocuEye.WorkspaceImporter.Application.Commands.ImportIssues;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportRelationships;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportViewConfiguration;
 using DocuEye.WorkspaceImporter.Application.Commands.ImportViews;
@@ -347,6 +348,36 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
         {
             var command = new ClearDecisionsCommand(data.WorkspaceId, data.ImportKey);
             var result = await this.mediator.SendCommandAsync<ClearDecisionsCommand,ClearDecisionsResult>(command);
+            if (result.IsSuccess)
+            {
+                return this.Ok(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+            else
+            {
+                return this.BadRequest(new ImportWorkspaceResponse()
+                {
+                    IsSuccess = result.IsSuccess,
+                    WorkspaceId = result.WorkspaceId,
+                    Message = result.Message
+                });
+            }
+        }
+
+        [Route("import/issues")]
+        [HttpPut]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult<ImportWorkspaceResponse>> ImportIssues(ImportIssuesRequest data)
+        {
+            var command = new ImportIssuesCommand(
+                data.WorkspaceId, 
+                data.ImportKey, 
+                data.Issues);
+            var result = await this.mediator.SendCommandAsync<ImportIssuesCommand, ImportIssuesResult>(command);
             if (result.IsSuccess)
             {
                 return this.Ok(new ImportWorkspaceResponse()

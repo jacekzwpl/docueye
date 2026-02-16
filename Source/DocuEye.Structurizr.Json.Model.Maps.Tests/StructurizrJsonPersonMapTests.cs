@@ -1,6 +1,9 @@
 using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.Linter.Model;
 using DocuEye.ModelKeeper.Model;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Elements;
+using DocuEye.WorkspaceImporter.Api.Model.Views;
 using NUnit.Framework.Internal;
 
 namespace DocuEye.Structurizr.Json.Model.Maps.Tests
@@ -32,11 +35,11 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
             // Assert
             MappingAssert.AssertMapped(
                 person, element,
-                ignoreDestProps: new[] { 
-                    nameof(ElementToImport.StructurizrParentId), 
+                ignoreDestProps: new[] {
+                    nameof(ElementToImport.StructurizrParentId),
                     nameof(ElementToImport.StructurizrInstanceOfId),
                     nameof(ElementToImport.Technology),
-                }, 
+                },
                 customSourceResolvers: new Dictionary<string, Func<StructurizrJsonPerson, object?>>
                 {
                     [nameof(ElementToImport.StructurizrId)] = s => s.Id,
@@ -45,5 +48,47 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 }
             );
         }
+   
+
+        [Test]
+        public void Mapping_StructurizrJsonPerson_To_LinterModelElement_Works()
+        {
+            // Arrange
+            var source = new StructurizrJsonPerson
+            {
+                Id = "Element-ID",
+                Group = "Element Group",
+                Location = "Element Location",
+                Url = "http://person.url",
+                Name = "Element Name",
+                Tags = "Tag1,Tag2",
+                Description = "Element Description",
+                Properties = new Dictionary<string, string>
+                {
+                    { DslPropertyNames.DslIdProperty, "MyIdentyfier" },
+                    { "Key2", "Value2" }
+                },
+            };
+            // Act
+            var result = source.ToLinterModelElement();
+            // Assert
+            MappingAssert.AssertMapped(
+                source, result, 
+                ignoreDestProps: new []
+                {
+                    nameof(LinterModelElement.InstanceOfIdentifier),
+                    nameof(LinterModelElement.ParentIdentifier),
+                    nameof(LinterModelElement.Technology),
+                },
+                customSourceResolvers: new Dictionary<string, Func<StructurizrJsonPerson, object?>>
+                {
+                    { nameof(LinterModelElement.Identifier), s => s.DslId },
+                    { nameof(LinterModelElement.JsonModelId), s => s.Id  },
+                    { nameof(LinterModelElement.Tags), s => string.IsNullOrWhiteSpace(s.Tags) ? new List<string>() : s.Tags.Split(',').Select(t => t.Trim()).ToList() }
+                }
+            );
+        } 
+
+
     }
 }

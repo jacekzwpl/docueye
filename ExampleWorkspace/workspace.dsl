@@ -1,4 +1,4 @@
-workspace "Example Online Shop 1" "Example DocuEye workspace" {
+workspace "Example Online Shop" "Example DocuEye workspace" {
     
     !identifiers hierarchical
 
@@ -12,7 +12,7 @@ workspace "Example Online Shop 1" "Example DocuEye workspace" {
         client = person "Client" "Online shop client"
 
         emailsystem = softwareSystem "Email System" {
-            test = container "Test" "Test" "Test"
+            smtpService = container "SMTP Service" "Handles email sending" "SMTP"
         }
 
         onlineshop = softwareSystem "Online Shop" "Online shop system" {
@@ -38,7 +38,9 @@ workspace "Example Online Shop 1" "Example DocuEye workspace" {
                 }
             } 
 
-            catalogdb = container "Products Database" "Products persistence" "MSSQL"
+            catalogdb = container "Products Database" "Products persistence" "MSSQL" {
+                tags "Database"
+            }
 
             basket = container "Basket Service" {
                 !docs docs/onlineshop/basket
@@ -50,7 +52,9 @@ workspace "Example Online Shop 1" "Example DocuEye workspace" {
                 }
             }
 
-            basketdb = container "Basket Persistence" "Basket persistence" "REDIS"
+            basketdb = container "Basket Persistence" "Basket persistence" "REDIS" {
+                tags "Database"
+            }
 
             orders = container "Orders Processor Service" {
                 !docs docs/onlineshop/orders
@@ -62,7 +66,9 @@ workspace "Example Online Shop 1" "Example DocuEye workspace" {
                 }
             }
 
-            ordersdb = container "Orders Database" "Orders persistence" "MSSQL"
+            ordersdb = container "Orders Database" "Orders persistence" "MSSQL" {
+                tags "Database"
+            }
 
             payment = container "Payment Service" {
                 !docs docs/onlineshop/payment
@@ -82,6 +88,7 @@ workspace "Example Online Shop 1" "Example DocuEye workspace" {
         relation3 = onlineshop.web -> onlineshop.basket "Adds/Removes products from basket" "HTTPS"
         relation4 = onlineshop.web -> onlineshop.orders "Creates orders" "HTTPS"
         relation5 = onlineshop.web -> onlineshop.payment "Creates payments request" "HTTPS"
+
 
         relation6 = onlineshop.orders -> emailsystem "Sends mails using" "HTTPS"
 

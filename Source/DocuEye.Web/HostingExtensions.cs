@@ -7,6 +7,9 @@ using DocuEye.DocsKeeper.Persistence;
 using DocuEye.Infrastructure.Authentication.OIDC;
 using DocuEye.Infrastructure.DataProtection;
 using DocuEye.Infrastructure.Mediator;
+using DocuEye.IssueTracker.Api.Controller;
+using DocuEye.IssueTracker.Application.Commands.SaveIssues;
+using DocuEye.IssueTracker.Persistence;
 using DocuEye.ModelKeeper.Api.Controllers;
 using DocuEye.ModelKeeper.Application.Commands.SaveElements;
 using DocuEye.ModelKeeper.Persistence;
@@ -99,6 +102,7 @@ namespace DocuEye.Web
             builder.Services.AddSingleton<IWorkspacesKeeperDBContext>(x => x.GetRequiredService<MongoDBContext>());
             builder.Services.AddSingleton<IWorkspaceImporterDBContext>(x => x.GetRequiredService<MongoDBContext>());
             builder.Services.AddSingleton<IDataProtectionDBContext>(x => x.GetRequiredService<MongoDBContext>());
+            builder.Services.AddSingleton<IIssueTrackerDBContext>(x => x.GetRequiredService<MongoDBContext>());
 
             builder.Services.AddDataProtection().PersistKeysToMongoDB();
 
@@ -206,6 +210,7 @@ namespace DocuEye.Web
                 options.UseAssembly(typeof(SaveSingleDecisionCommandHandler).Assembly);
                 options.UseAssembly(typeof(SaveElementsCommandHandler).Assembly);
                 options.UseAssembly(typeof(SaveWorkspaceCommandHandler).Assembly);
+                options.UseAssembly(typeof(SaveIssuesCommandHandler).Assembly);
             });
 
             builder.Services.AddAntiforgery(options =>
@@ -224,6 +229,7 @@ namespace DocuEye.Web
                 .AddApplicationPart(typeof(ElementsController).Assembly)
                 .AddApplicationPart(typeof(DecisionsController).Assembly)
                 .AddApplicationPart(typeof(ModelChangesController).Assembly)
+                .AddApplicationPart(typeof(IssuesController).Assembly)
                 .AddControllersAsServices();
 
             
