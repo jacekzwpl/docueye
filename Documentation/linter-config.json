@@ -1,5 +1,5 @@
 {
-    "Extends": "http://localhost:8081/architecture-linter-rules/latest/linter-config.json",
+    "Extends": "https://docueye.com/architecture-linter-rules/latest/linter-config.json",
     "Variables": {
         "AllowedContainerTechnologies": [
             "Mongo DB", "ASP.NET"

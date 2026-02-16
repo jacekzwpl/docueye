@@ -17,6 +17,8 @@ You can define configuration for linter rules via json files.
 | `Variables` | No | object | Variables dictionary that can be used in rules expressions. |
 | `Rules` | Yes | array of Rules | List of rules definitions. | 
 
+Example ready to use rules can be found [here](../../LinterRules/linter-config.json)
+
 ### Linter Rules Model
 
 | Field | Required | Type | Description |
