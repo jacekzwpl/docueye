@@ -1,18 +1,17 @@
 ﻿using DocuEye.DocsKeeper.Application.Commads.DeleteOpenApiFile;
-using DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile;
+using DocuEye.DocsKeeper.Application.Commads.SaveDocumentationFile;
+using DocuEye.DocsKeeper.Model;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.Infrastructure.Mediator;
 using DocuEye.ModelKeeper.Application.Queries.GetElementByDslId;
 using DocuEye.ModelKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DocuEye.WorkspaceImporter.Api.Controllers
 {
@@ -73,7 +72,12 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 elementId = element.Id;
             }
 
-            var command = new SaveOpenApiFileCommand(workspaceId, elementId, data.Content, data.Name);
+            var command = new SaveDocumentationFileCommand(
+                workspaceId, 
+                elementId, 
+                data.Content, 
+                data.Name, 
+                DocumentationFileType.OpenApiDefinition);
             await this.mediator.SendCommandAsync(command);
             return this.NoContent();
         }

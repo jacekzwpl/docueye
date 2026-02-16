@@ -1,5 +1,4 @@
-﻿using DocuEye.DocsKeeper.Application.Commands.SaveOpenApiFile;
-using DocuEye.DocsKeeper.Application.Queries.GetOpenApiFile;
+﻿using DocuEye.DocsKeeper.Application.Queries.GetOpenApiFile;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.Infrastructure.Mediator;
@@ -7,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DocuEye.DocsKeeper.Api.Controllers
