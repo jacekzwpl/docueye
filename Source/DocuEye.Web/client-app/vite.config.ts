@@ -35,6 +35,6 @@ export default defineConfig({
     "process.env": {},
   },
   optimizeDeps: {
-    include: ["util", "process"]
+    include: ["util", "process"] //"buffer"
   },
 });
