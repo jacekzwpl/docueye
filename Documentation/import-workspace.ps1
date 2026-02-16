@@ -20,7 +20,7 @@ Param(
 ####
 
 if(!$useDotNetTool) {
-docker run -it --rm --network="host" -v "$($PWD):/app/import" local-docueye-cli:1.2.0-rc1  `
+docker run -it --rm --network="host" -v "$($PWD):/app/import" jacekzwpl/docueye-cli  `
 workspace import  `
 --linter-config=./import/linter-config.json  `
 --docueye-address="$docueyeAddress"  `

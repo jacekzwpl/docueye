@@ -1,4 +1,4 @@
-workspace "Example Online Shop 1" "Example DocuEye workspace" {
+workspace "Example Online Shop" "Example DocuEye workspace" {
     
     !identifiers hierarchical
 
