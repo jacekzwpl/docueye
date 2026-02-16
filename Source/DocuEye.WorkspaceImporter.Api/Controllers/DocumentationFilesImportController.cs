@@ -60,11 +60,11 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                     "To import documentation file ElementId or ElementDslId must be provided."));
             }
 
-            if(!DocumentationFileType.AllTypes.Contains(data.DocumentationType))
+            if(!new string[] { "openapi", "asyncapi" }.Contains(data.DocumentationType))
             {
                 return this.BadRequest(new BadRequestProblemDetails(
                     "Documentation File Type is not supported",
-                    "Supported file types are: " + string.Join(",", DocumentationFileType.AllTypes)));
+                    "Supported file types are: openapi, asyncapi"));
             }
 
             var elementId = string.Empty;
@@ -91,7 +91,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 elementId,
                 data.Content,
                 data.Name,
-                data.DocumentationType);
+                DocumentationFileType.MapFromCliType(data.DocumentationType));
             await this.mediator.SendCommandAsync(command);
             return this.NoContent();
         }

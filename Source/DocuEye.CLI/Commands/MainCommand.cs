@@ -10,10 +10,12 @@ namespace DocuEye.CLI.Commands
             var workspaceCommand = new WorkspaceCommand();
             // Create openapi command
             var openapiCommand = new OpenapiCommand();
-            
+            var docFileCommand = new DocFileCommand();
+
             // Add subcommands to root command
             this.Subcommands.Add(workspaceCommand);
             this.Subcommands.Add(openapiCommand);
+            this.Subcommands.Add(docFileCommand);
         }
     }
 }

@@ -31,5 +31,10 @@ namespace DocuEye.CLI.ApiClient
         Task<string?> DeleteWorkspace(string workspaceId);
         Task<string?> CompatibilityInfo();
 
+        Task<string?> ImportDocumentationFile(string workspaceId, ImportDocumentationFileRequest request);
+        Task<string?> DeleteDocumentationFile(string workspaceId, string? elementId = null, string? elementDslId = null);
+
+
+
     }
 }

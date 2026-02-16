@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DocuEye.DocsKeeper.Model
 {
@@ -14,5 +12,18 @@ namespace DocuEye.DocsKeeper.Model
             OpenApiDefinition,
             AsyncApiDefinition
         };
+
+        public static string MapFromCliType(string type)
+        {
+            switch (type)
+            {
+                case "openapi":
+                    return OpenApiDefinition;
+                case "asyncapi":
+                    return AsyncApiDefinition;
+                default:
+                    throw new ArgumentException($"Unsupported documentation file type {type}.");
+            }
+        }
     }
 }

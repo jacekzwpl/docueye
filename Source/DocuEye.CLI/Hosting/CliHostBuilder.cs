@@ -3,6 +3,7 @@ using DocuEye.CLI.Application.Services.Compatibility;
 using DocuEye.CLI.Application.Services.DeleteOpenApiFile;
 using DocuEye.CLI.Application.Services.DeleteWorkspace;
 using DocuEye.CLI.Application.Services.DSL;
+using DocuEye.CLI.Application.Services.ImportDocumentationFile;
 using DocuEye.CLI.Application.Services.ImportOpenApiFile;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +49,7 @@ namespace DocuEye.CLI.Hosting
             builder.Services.AddTransient<IDeleteWorkspaceService, DeleteWorkspaceService>();
             builder.Services.AddTransient<IImportOpenApiFileService, ImportOpenApiFileService>();
             builder.Services.AddTransient<IDeleteOpenApiFileService, DeleteOpenApiFileService>();
+            builder.Services.AddTransient<IImportDocumentationFileService, ImportDocumentationFileService>();
             return builder.Build();
         }
     }
