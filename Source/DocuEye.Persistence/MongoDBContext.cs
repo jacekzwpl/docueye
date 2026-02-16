@@ -339,6 +339,7 @@ namespace DocuEye.Persistence
             await this.CreateDecisionsCollectionIndexes();
             await this.CreateModelChangesCollectionIndexes();
             await this.CreateDocumentationFilesCollectionIndexes();
+            await this.CreateIssuesCollectionIndexes();
         }
         /// <summary>
         /// Creates indexes for Elements collection
@@ -440,6 +441,17 @@ namespace DocuEye.Persistence
             await collection.Indexes.CreateOneAsync(workspaceIndexModel);
             var elementIndexModel = new CreateIndexModel<DocumentationFile>(logBuilder.Ascending(x => x.ElementId));
             await collection.Indexes.CreateOneAsync(elementIndexModel);
+        }
+
+        /// <summary>
+        /// Create indexes fo Issues collection
+        /// </summary>
+        /// <returns></returns>
+        private async Task CreateIssuesCollectionIndexes() { 
+            var collection = this.database.GetCollection<Issue>(issuesCollectionName);
+            var logBuilder = Builders<Issue>.IndexKeys;
+            var workspaceIndexModel = new CreateIndexModel<Issue>(logBuilder.Ascending(x => x.WorkspaceId));
+            await collection.Indexes.CreateOneAsync(workspaceIndexModel);
         }
     }
 }
