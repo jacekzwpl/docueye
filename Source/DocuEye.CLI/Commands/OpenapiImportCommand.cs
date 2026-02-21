@@ -1,5 +1,5 @@
 ﻿using DocuEye.CLI.Application.Services.Compatibility;
-using DocuEye.CLI.Application.Services.ImportOpenApiFile;
+using DocuEye.CLI.Application.Services.ImportDocumentationFile;
 using DocuEye.CLI.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
@@ -75,13 +75,14 @@ namespace DocuEye.CLI.Commands
                 return 1;
             }
 
-            var importOpenApiFileService = host.Services.GetRequiredService<IImportOpenApiFileService>();
+            var importOpenApiFileService = host.Services.GetRequiredService<IImportDocumentationFileService>();
 
-            var result = await importOpenApiFileService.Import(new ImportOpenApiFileParameters() { 
+            var result = await importOpenApiFileService.Import(new ImportDocumentationFileParameters() { 
                 ElementDslId = elementDslId,
                 ElementId = elementId,
-                OpenApiFile = file,
-                WorkspaceId = workspaceId
+                DocumentationFile = file,
+                WorkspaceId = workspaceId,
+                DocumentationFileType = "openapi"
             });
 
             if (!result)

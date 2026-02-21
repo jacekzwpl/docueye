@@ -1,5 +1,5 @@
 ﻿using DocuEye.CLI.Application.Services.Compatibility;
-using DocuEye.CLI.Application.Services.DeleteOpenApiFile;
+using DocuEye.CLI.Application.Services.DeleteDocumentationFile;
 using DocuEye.CLI.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
@@ -63,9 +63,9 @@ namespace DocuEye.CLI.Commands
                 return 1;
             }
 
-            var deleteOpenApiFileService = host.Services.GetRequiredService<IDeleteOpenApiFileService>();
+            var deleteOpenApiFileService = host.Services.GetRequiredService<IDeleteDocumentationFileService>();
 
-            var result = await deleteOpenApiFileService.DeleteOpenApiFile(workspaceId, elementId, elementDslId);
+            var result = await deleteOpenApiFileService.DeleteDocumentaionFile(workspaceId, "openapi", elementId, elementDslId);
 
             return result ? 0 : 1;
         }

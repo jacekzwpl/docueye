@@ -1,6 +1,5 @@
 ﻿using DocuEye.CLI.Application.Services.Compatibility;
 using DocuEye.CLI.Application.Services.ImportDocumentationFile;
-using DocuEye.CLI.Application.Services.ImportOpenApiFile;
 using DocuEye.CLI.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;

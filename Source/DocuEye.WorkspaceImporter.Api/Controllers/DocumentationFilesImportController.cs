@@ -1,4 +1,4 @@
-﻿using DocuEye.DocsKeeper.Application.Commads.DeleteOpenApiFile;
+﻿using DocuEye.DocsKeeper.Application.Commads.DeleteDocumentationFile;
 using DocuEye.DocsKeeper.Application.Commads.SaveDocumentationFile;
 using DocuEye.DocsKeeper.Model;
 using DocuEye.Infrastructure.HttpProblemDetails;
@@ -64,7 +64,7 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
             {
                 return this.BadRequest(new BadRequestProblemDetails(
                     "Documentation File Type is not supported",
-                    "Supported file types are: openapi, asyncapi"));
+                    "Supported documentation types are: openapi, asyncapi"));
             }
 
             var elementId = string.Empty;
@@ -95,69 +95,24 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
             await this.mediator.SendCommandAsync(command);
             return this.NoContent();
         }
-        
-        /// <summary>
-        /// Imports openapi definition for element in workspace
-        /// </summary>
-        /// <param name="workspaceId">Workspace ID</param>
-        /// <param name="data">Request data</param>
-        /// <returns></returns>
-        [Route("openapi")]
-        [HttpPut]
-        [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> SaveOpenApiDocumentationFile([FromRoute]string workspaceId, ImportOpenApiFileRequest data)
-        {
-            if (!new string[] { ".json", ".yaml", ".yml" }.Contains(Path.GetExtension(data.Name)))
-            {
-                return this.BadRequest(new BadRequestProblemDetails(
-                    "File type not supported", 
-                    "Supported file types are \".json\",\".yaml\",\".yml\""));
-            }
 
-            if(string.IsNullOrEmpty(data.ElementId) && string.IsNullOrEmpty(data.ElementDslId))
-            {
-                return this.BadRequest(new BadRequestProblemDetails(
-                    "Element identifier is missing", 
-                    "To import openapi definition ElementId or ElementDslId must be provided."));
-            }
-            var elementId = string.Empty;
-            
-            if(!string.IsNullOrEmpty(data.ElementId))
-            {
-                elementId = data.ElementId;
-            }else
-            {
-                var query = new GetElementByDslIdQuery(data.ElementDslId ?? "", workspaceId);
-                var element = await this.mediator.SendQueryAsync<GetElementByDslIdQuery,Element?>(query);
-                if(element == null)
-                {
-                    return this.NotFound(new NotFoundProblemDetails(
-                        "Element not found", 
-                        string.Format("Element with dsl id = {0} was not found in workspace.", data.ElementDslId)));
-                }
-                elementId = element.Id;
-            }
-
-            var command = new SaveDocumentationFileCommand(
-                workspaceId, 
-                elementId, 
-                data.Content, 
-                data.Name, 
-                DocumentationFileType.OpenApiDefinition);
-            await this.mediator.SendCommandAsync(command);
-            return this.NoContent();
-        }
-
-        [Route("openapi")]
+        [Route("")]
         [HttpDelete]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> DeleteOpenApiDocumentationFile([FromRoute]string workspaceId, [FromQuery]string? elementId, [FromQuery]string? elementDslId)
+        public async Task<IActionResult> DeleteDocumentationFile([FromRoute] string workspaceId, [FromQuery] string? elementId, [FromQuery] string? elementDslId, [FromQuery] string documentationType)
         {
             if (string.IsNullOrEmpty(elementId) && string.IsNullOrEmpty(elementDslId))
             {
                 return this.BadRequest(new BadRequestProblemDetails(
                     "Element identifier is missing",
                     "To delete openapi definition ElementId or ElementDslId must be provided."));
+            }
+
+            if (!new string[] { "openapi", "asyncapi" }.Contains(documentationType))
+            {
+                return this.BadRequest(new BadRequestProblemDetails(
+                    "Documentation File Type is not supported",
+                    "Supported documentation types are: openapi, asyncapi"));
             }
 
             if (string.IsNullOrEmpty(elementId))
@@ -173,9 +128,15 @@ namespace DocuEye.WorkspaceImporter.Api.Controllers
                 elementId = element.Id;
             }
 
-            var command = new DeleteOpenApiFileCommand(workspaceId, elementId);
+            var command = new DeleteDocumentationFileCommand(
+                workspaceId, 
+                elementId, 
+                DocumentationFileType.MapFromDocumentationType(documentationType));
             await this.mediator.SendCommandAsync(command);
             return this.NoContent();
         }
+
+
+        
     }
 }
