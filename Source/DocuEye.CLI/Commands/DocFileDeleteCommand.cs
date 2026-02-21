@@ -13,7 +13,7 @@ namespace DocuEye.CLI.Commands
         private Option<string> docFileImportElementDslIdOption;
         private Option<string> docFileImportWorkspaceIdOption;
         Option<string> docFileTypeOption;
-        public DocFileDeleteCommand() : base("delete", "Delete documentation file for element.")
+        public DocFileDeleteCommand() : base("delete", "Deletes documentation file for element.")
         {
             this.docFileImportElementIdOption = new("--element-id", "-e")
             {

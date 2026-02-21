@@ -25,6 +25,11 @@ docueye openapi import --docueye-address=http://localhost:8080 --admin-token=doc
 
 ### openapi delete command
 
+Deletes openapi specification for element  
+
+> [!WARNING]
+> This cli is deprecated and will be removed in future releases use [docfile cli](0007-docueye-cli-docfile-commands.md)
+
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
 | `--docueye-address` | Yes | DocuEye address. | `--docueyeAddress=http://localhost:8080` |

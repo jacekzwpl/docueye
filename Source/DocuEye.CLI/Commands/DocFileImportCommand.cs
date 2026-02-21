@@ -41,7 +41,7 @@ namespace DocuEye.CLI.Commands
 
             this.docFileTypeOption = new("--type", "-t")
             {
-                Description = "Specifies import mode 'dsl' for import from dsl file, 'json; for import from json file.",
+                Description = "Specifies documentation file type. Allowed values are 'openapi' and 'asyncapi'.",
                 Required = true
             };
             this.docFileTypeOption.AcceptOnlyFromAmong("openapi", "asyncapi");
