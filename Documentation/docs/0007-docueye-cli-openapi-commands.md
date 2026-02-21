@@ -5,8 +5,8 @@ Commands for working with OpenAPI specifications.
 ### openapi import command
 
 Imports or updates OpenAPI specification for given element.  
-[!WARNING]
-This cli is deprecated and will be removed in future releases use [docfile cli](0007-docueye-cli-docfile-commands.md)
+> [!WARNING]
+> This cli is deprecated and will be removed in future releases use [docfile cli](0007-docueye-cli-docfile-commands.md)
 
 
 | Option | Required | Description | Example |
