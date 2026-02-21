@@ -25,16 +25,16 @@ export default defineConfig({
     }
   },
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-  resolve: {
-    alias: {
-      util: "util/",
-      process: "process/browser"
-    },
-  },
-  define: {
-    "process.env": {},
-  },
-  optimizeDeps: {
-    include: ["util", "process"] //"buffer"
-  },
+  // resolve: {
+  //   alias: {
+  //     util: "util/",
+  //     process: "process/browser"
+  //   },
+  // },
+  // define: {
+  //   "process.env": {},
+  // },
+  // optimizeDeps: {
+  //   include: ["util", "process"]
+  // },
 });
