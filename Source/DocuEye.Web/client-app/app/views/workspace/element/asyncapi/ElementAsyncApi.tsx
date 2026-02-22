@@ -28,7 +28,6 @@ export const ElementAsyncApi = (props: IElementAsyncApiProps) => {
             })
             .then(async (resp:any) => {
                 if(resp.status !== 404) { 
-                    console.log(resp.data);
                     const parser = new Parser();
                     const { document } = await parser.parse(resp.data);
                     setSpec(document);
