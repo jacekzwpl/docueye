@@ -14,6 +14,18 @@ import { prepareDynamicDiagramElements } from "./functions/prepareDynamicDiagram
 import { prepareDeploymentDiagramElements } from "./functions/prepareDeploymentDiagramElements";
 import ImageViewer from "./ImageViewer";
 import { snackbarUtils } from "~/snackbar/snackbarUtils";
+import mermaid from "mermaid";
+
+ const diagram = `graph TD
+        A[Client] --> B[Load Balancer]
+        B --> C[Server01]
+        B --> D[Server02]
+    `;
+ const diagram2 = `graph TD
+        A1[Client] --> B1[Load Balancer]
+        B1 --> C1[Server01]
+        B1 --> D1[Server02]
+    `;
 
 const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
     const [selectedView, setSelectedView] = useState(props.selectedView);
@@ -25,6 +37,8 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
     const [currentImageView, setCurrentImageView] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [rfInstance, setRfInstance] = useState<any>(null);
+    const [diagramEngine, setDiagramEngine] = useState<"reactflow" | "mermaid">("reactflow");
+    const [mermaidDiagram, setMermaidDiagram] = useState<string>("");
 
     const loadSystemLandscapeView = useCallback((workspaceId: string, viewId: string, viewConfiguration?: ViewConfiguration | null) => {
         setIsLoading(true);
@@ -209,6 +223,8 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
     }, [setIsLoading, setCurrentImageView]);
 
     useEffect(() => {
+        
+
         if (!selectedView || selectedView?.id !== props.selectedView?.id) {
             setSelectedView(props.selectedView);
             setWorkspaceId(props.workspaceId);
@@ -217,46 +233,75 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
     }, [props, selectedView])
 
     useEffect(() => {
+        mermaid.initialize({ startOnLoad: false });
+        console.log("Diagram engine changed to", diagramEngine);
+        if (diagramEngine === "mermaid" && mermaidDiagram) {
+            const element = window.document.getElementById("test-mermaid")!;
+            if(element.attributes.getNamedItem("data-processed") !== null) {
+                element.attributes.removeNamedItem("data-processed");
+            }
+            setTimeout(async () => {
+                console.log("Rendering mermaid diagram", mermaidDiagram);
+                await mermaid.run({
+                    nodes: [element]
+                });
+            }, 500);
+
+        }
+    }, [mermaidDiagram])
+
+    useEffect(() => {
         setCurrentImageView(null);
+        
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "SystemLandscapeView") {
-
+                setDiagramEngine("reactflow");
                 loadSystemLandscapeView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "SystemContextView") {
+                setDiagramEngine("mermaid");
+                setMermaidDiagram(diagram2);
+
                 loadSystemContextView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "ContainerView") {
+                setDiagramEngine("reactflow");
                 loadContainerView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "ComponentView") {
+                setDiagramEngine("reactflow");
                 loadComponentView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "FilteredView") {
+                setDiagramEngine("reactflow");
                 loadFilteredView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "DeploymentView") {
+                setDiagramEngine("reactflow");
                 loadDeploymentView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "DynamicView") {
+                setDiagramEngine("mermaid");
+                setMermaidDiagram(diagram);
+
                 loadDynamicView(workspaceId, selectedView.id, viewConfiguration);
             }
         }
@@ -276,7 +321,9 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         loadDeploymentView,
         loadDynamicView,
         loadImageView,
-        setCurrentImageView
+        setCurrentImageView,
+        setDiagramEngine,
+        setMermaidDiagram
     ]);
 
     const loadSavedLayout = (layoutData: string) => {
@@ -315,10 +362,14 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
     }));
 
 
+   
     return (
         <>
+            {diagramEngine === "mermaid" && <pre id="test-mermaid">
+                {mermaidDiagram}
+            </pre>}
             {currentImageView !== null && <ImageViewer image={currentImageView} />}
-            {currentImageView === null &&
+            {currentImageView === null && diagramEngine === "reactflow" &&
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
