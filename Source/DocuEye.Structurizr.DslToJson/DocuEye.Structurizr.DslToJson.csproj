@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.44.0" />
+    <PackageReference Include="Markdig" Version="0.45.0" />
     <PackageReference Include="MimeTypesMap" Version="1.0.9" />
   </ItemGroup>
 
