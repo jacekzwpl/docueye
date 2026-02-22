@@ -35,7 +35,7 @@ namespace DocuEye.Web.Controllers
             // https://learn.microsoft.com/en-us/nuget/concepts/package-versioning?tabs=semver20sort
             return this.Ok(new
             {
-                acceptedVersions = "[1.0.0,2.0.0]"
+                acceptedVersions = "[1.3.0,2.0.0]"
             });
 
         }

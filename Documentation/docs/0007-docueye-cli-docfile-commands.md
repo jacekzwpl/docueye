@@ -1,13 +1,13 @@
 ## DocueEye CLI - Workspace commands
 
-Commands for working with OpenAPI specifications.
+Commands for working with documentation files for components.
 
-### openapi import command
+### docfile import command
 
-Imports or updates OpenAPI specification for given element.  
-> [!WARNING]
-> This cli is deprecated and will be removed in future releases use [docfile cli](0007-docueye-cli-docfile-commands.md)
+Imports or updates documentation file for given element.
 
+> [!NOTE]
+> Available from version 1.3.0
 
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
@@ -17,18 +17,19 @@ Imports or updates OpenAPI specification for given element.
 | `--id` | Yes | The ID of the Workspace. | `--id=638d0822-12c7-4998-8647-9c7af7ad2989` |
 | `--element-id` | No | The ID of element for which this import is created. Required only if --element-dsl-id option is not set. | `--element-id=e7e7d436-ac1e-4e73-b36b-d34dc32c9bbc` | 
 | `--element-dsl-id` | No | The DSL ID of element for which this import is created. Required only if --element-id option is not set. | `--element-dsl-id=docueye.app` | 
+| `--type` | Yes | Specifies documentation file type. Allowed values are 'openapi' and 'asyncapi'. | `--type=openapi` | 
 
 **Example import openapi specification for element from dsl file**
 ```Powershell
-docueye openapi import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file="/path/to/openapi.yml" --element-dsl-id=docueye.app
+docueye docfile import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=638d0822-12c7-4998-8647-9c7af7ad2989 --file="/path/to/openapi.yml" --element-dsl-id=docueye.app --type=openapi
 ```
 
-### openapi delete command
+### docfile delete command
 
-Deletes openapi specification for element  
+Deletes documentation file for element.
 
-> [!WARNING]
-> This cli is deprecated and will be removed in future releases use [docfile cli](0007-docueye-cli-docfile-commands.md)
+> [!NOTE]
+> Available from version 1.3.0
 
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
@@ -37,8 +38,9 @@ Deletes openapi specification for element
 | `--id` | Yes | The ID of the Workspace. | `--id=638d0822-12c7-4998-8647-9c7af7ad2989` |
 | `--element-id` | No | The ID of element for which this import is created. Required only if --element-dsl-id option is not set. | `--element-id=e7e7d436-ac1e-4e73-b36b-d34dc32c9bbc` | 
 | `--element-dsl-id` | No | The DSL ID of element for which this import is created. Required only if --element-id option is not set. | `--element-dsl-id=docueye.app` | 
+| `--type` | Yes | Specifies documentation file type. Allowed values are 'openapi' and 'asyncapi'. | `--type=openapi` | 
 
 **Example delete openapi specification for element from dsl file**
 ```Powershell
-docueye openapi delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=638d0822-12c7-4998-8647-9c7af7ad2989 --element-dsl-id=docueye.app
+docueye docfile delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=638d0822-12c7-4998-8647-9c7af7ad2989 --element-dsl-id=docueye.app --type=openapi
 ```

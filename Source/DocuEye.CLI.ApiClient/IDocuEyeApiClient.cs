@@ -25,11 +25,13 @@ namespace DocuEye.CLI.ApiClient
         Task<ImportWorkspaceResponse> ImportClearDecisions(ImportClearDecisionsRequest data);
         Task<ImportWorkspaceResponse> ImportIssues(ImportIssuesRequest data);
         Task<ImportWorkspaceResponse> ImportFinish(ImportFinalizeRequest data);
-
-        Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request);
-        Task<string?> DeleteOpenApiFile(string workspaceId, string? elementId = null, string? elementDslId = null);
         Task<string?> DeleteWorkspace(string workspaceId);
         Task<string?> CompatibilityInfo();
+
+        Task<string?> ImportDocumentationFile(string workspaceId, ImportDocumentationFileRequest request);
+        Task<string?> DeleteDocumentationFile(string workspaceId, string documentationFileType, string? elementId = null, string? elementDslId = null);
+
+
 
     }
 }

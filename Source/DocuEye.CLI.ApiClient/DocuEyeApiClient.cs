@@ -53,41 +53,6 @@ namespace DocuEye.CLI.ApiClient
             }
         }
 
-        public async Task<string?> DeleteOpenApiFile(string workspaceId, string? elementId = null, string? elementDslId = null)
-        {
-            string baseUrl = string.Format("api/workspaces/{0}/docfile/openapi", workspaceId);
-            var parts = new List<string>();
-
-            if (!string.IsNullOrEmpty(elementId))
-                parts.Add($"elementId={Uri.EscapeDataString(elementId)}");
-
-            if (!string.IsNullOrEmpty(elementDslId))
-                parts.Add($"elementDslId={Uri.EscapeDataString(elementDslId)}");
-            string url = parts.Count == 0 ? baseUrl : $"{baseUrl}?{string.Join("&", parts)}";
-            var message = new HttpRequestMessage(HttpMethod.Delete, url);
-            using (var response = await this.httpClient.SendAsync(message))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    return null;
-                }
-                else if (response.Content.Headers.ContentType?.MediaType == "application/problem+json")
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
-                    if (problemData == null)
-                    {
-                        return "Delete openapi file failed. Reason of failure is unkonown";
-                    }
-                    return problemData.Detail ?? problemData.Title;
-                }
-                else
-                {
-                    return "Delete openapi file failed. Reason of failure is unkonown";
-                }
-            }
-        }
-
         public async Task<string?> DeleteWorkspace(string workspaceId)
         {
             var message = new HttpRequestMessage(HttpMethod.Delete, string.Format("api/workspaces/{0}", workspaceId));
@@ -176,31 +141,6 @@ namespace DocuEye.CLI.ApiClient
             var message = new HttpRequestMessage(HttpMethod.Put, "/api/workspaces/import/issues");
             message.Content = new StringContent(JsonSerializer.Serialize(data, this.serializerOptions), Encoding.UTF8, "application/json");
             return await this.ImportAction(message);
-        }
-
-        public async Task<string?> ImportOpenApiFile(string workspaceId, ImportOpenApiFileRequest request)
-        {
-            var message = new HttpRequestMessage(HttpMethod.Put, string.Format("api/workspaces/{0}/docfile/openapi", workspaceId));
-            message.Content = new StringContent(JsonSerializer.Serialize(request, this.serializerOptions), Encoding.UTF8, "application/json");
-            using (var response = await this.httpClient.SendAsync(message))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    return null;
-                }else if (response.Content.Headers.ContentType?.MediaType == "application/problem+json")
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
-                    if (problemData == null)
-                    {
-                        return "Import failed. Reason of failure is unkonown";
-                    }
-                    return problemData.Detail ?? problemData.Title;
-                }else
-                {
-                    return "Import failed. Reason of failure is unkonown";
-                }
-            }
         }
 
         public async Task<ImportWorkspaceResponse> ImportRelationships(ImportRelationshipsRequest data)
@@ -299,6 +239,69 @@ namespace DocuEye.CLI.ApiClient
                         IsSuccess = false,
                         Message = "There was no conntent in response. Import staus is unknown"
                     };
+                }
+            }
+        }
+
+        public async Task<string?> ImportDocumentationFile(string workspaceId, ImportDocumentationFileRequest request)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Put, string.Format("api/workspaces/{0}/docfile", workspaceId));
+            message.Content = new StringContent(JsonSerializer.Serialize(request, this.serializerOptions), Encoding.UTF8, "application/json");
+            using (var response = await this.httpClient.SendAsync(message))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                else if (response.Content.Headers.ContentType?.MediaType == "application/problem+json")
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
+                    if (problemData == null)
+                    {
+                        return "Import failed. Reason of failure is unkonown";
+                    }
+                    return problemData.Detail ?? problemData.Title;
+                }
+                else
+                {
+                    return "Import failed. Reason of failure is unkonown";
+                }
+            }
+        }
+
+        public async Task<string?> DeleteDocumentationFile(string workspaceId, string documentationFileType, string? elementId = null, string? elementDslId = null)
+        {
+            string baseUrl = string.Format("api/workspaces/{0}/docfile", workspaceId);
+            var parts = new List<string>();
+
+            if (!string.IsNullOrEmpty(elementId))
+                parts.Add($"elementId={Uri.EscapeDataString(elementId)}");
+
+            if (!string.IsNullOrEmpty(elementDslId))
+                parts.Add($"elementDslId={Uri.EscapeDataString(elementDslId)}");
+            parts.Add($"documentationType={Uri.EscapeDataString(documentationFileType)}");
+            string url = parts.Count == 0 ? baseUrl : $"{baseUrl}?{string.Join("&", parts)}";
+            var message = new HttpRequestMessage(HttpMethod.Delete, url);
+            using (var response = await this.httpClient.SendAsync(message))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                else if (response.Content.Headers.ContentType?.MediaType == "application/problem+json")
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var problemData = JsonSerializer.Deserialize<ProblemDetailsResponse>(responseBody, this.serializerOptions);
+                    if (problemData == null)
+                    {
+                        return "Delete openapi file failed. Reason of failure is unkonown";
+                    }
+                    return problemData.Detail ?? problemData.Title;
+                }
+                else
+                {
+                    return "Delete openapi file failed. Reason of failure is unkonown";
                 }
             }
         }

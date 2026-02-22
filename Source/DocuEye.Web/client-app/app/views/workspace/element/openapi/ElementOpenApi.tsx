@@ -13,8 +13,8 @@ export const ElementOpenApi = (props: IElementOpenApiProps) => {
         if(props.elementId && props.workspaceId) {
             setIsLoading(true);
             DocuEyeApi.DocumentationFilesApi
-            .apiWorkspacesWorkspaceIdDocumentationfilesOpenapiElementIdGet(
-                props.workspaceId, props.elementId, {
+            .apiWorkspacesWorkspaceIdDocumentationfilesElementIdGet(
+                props.workspaceId, props.elementId, "openapi", {
                 validateStatus: (status) => {
                     return (status >= 200 && status < 300) || status === 404; 
                 }

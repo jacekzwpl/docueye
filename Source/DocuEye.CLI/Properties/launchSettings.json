@@ -68,6 +68,22 @@
       "commandName": "Project",
       "commandLineArgs": "openapi delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket"
     },
+    "DocuEye.docfile-openapi-import": {
+      "commandName": "Project",
+      "commandLineArgs": "docfile import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket --type=openapi --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\openapi\\onlineshop\\basket\\swagger.yml\""
+    },
+    "DocuEye.docfile-openapi-delete": {
+      "commandName": "Project",
+      "commandLineArgs": "docfile delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket --type=openapi"
+    },
+    "DocuEye.docfile-asyncapi-import": {
+      "commandName": "Project",
+      "commandLineArgs": "docfile import --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket --type=asyncapi --file=\"..\\..\\..\\..\\..\\ExampleWorkspace\\asyncapi\\onlineshop\\basket\\asyncapi.yaml\""
+    },
+    "DocuEye.docfile-asyncapi-delete": {
+      "commandName": "Project",
+      "commandLineArgs": "docfile delete --docueye-address=http://localhost:8080 --admin-token=docueyedmintoken --id=debugtest --element-dsl-id=onlineshop.basket --type=asyncapi"
+    },
     "Docker": {
       "commandName": "Docker"
     },

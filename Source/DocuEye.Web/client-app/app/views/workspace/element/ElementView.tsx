@@ -16,6 +16,7 @@ import DocumentationViewer from "../../../components/documentationviewer";
 import ElementConsumers from "./consumers";
 import { setWorkspaceData } from "../../../store/slices/workspace/workspaceSlice";
 import { ElementOpenApi } from "./openapi/ElementOpenApi";
+import { ElementAsyncApi } from "./asyncapi/ElementAsyncApi";
 
 export const ElementView = () => {
 
@@ -84,6 +85,7 @@ export const ElementView = () => {
                 <Tab label="Documentation" value="3" />
                 <Tab label="Decisions" value="4" />
                 <Tab label="Open Api" value="5" />
+                <Tab label="Async Api" value="6" />
             </Tabs>
             <TabPanel value="0"  >
                 {element && <OverView element={element} /> }
@@ -102,6 +104,9 @@ export const ElementView = () => {
             </TabPanel>
             <TabPanel value="5"  >
                 <ElementOpenApi workspaceId={workspaceId} elementId={element?.id}  />
+            </TabPanel>
+            <TabPanel value="6"  >
+                <ElementAsyncApi workspaceId={workspaceId} elementId={element?.id}  />
             </TabPanel>
         </TabContext>
         {isLoading && <Loader />}

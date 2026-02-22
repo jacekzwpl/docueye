@@ -264,7 +264,7 @@
         }
       }
     },
-    "/api/workspaces/{workspaceId}/documentationfiles/openapi/{elementId}": {
+    "/api/workspaces/{workspaceId}/documentationfiles/{elementId}": {
       "get": {
         "tags": [
           "DocumentationFiles"
@@ -285,8 +285,56 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "documentationType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/workspaces/{workspaceId}/docfile": {
+      "put": {
+        "tags": [
+          "DocumentationFilesImport"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDocumentationFileRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDocumentationFileRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDocumentationFileRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -3497,6 +3545,32 @@
             "items": {
               "$ref": "#/components/schemas/DecisionLinkToImport"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportDocumentationFileRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "elementDslId": {
+            "type": "string",
+            "nullable": true
+          },
+          "elementId": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentationType": {
+            "type": "string",
             "nullable": true
           }
         },

@@ -31,6 +31,7 @@ export * from './import-clear-decisions-request';
 export * from './import-clear-doc-items-request';
 export * from './import-decision-request';
 export * from './import-decisions-links-request';
+export * from './import-documentation-file-request';
 export * from './import-documentation-request';
 export * from './import-elements-request';
 export * from './import-finalize-request';

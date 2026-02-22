@@ -7,44 +7,52 @@ using System.CommandLine.Parsing;
 
 namespace DocuEye.CLI.Commands
 {
-    public class OpenapiImportCommand : Command
+    public class DocFileImportCommand : Command
     {
-        private Option<string> openApiImportFileOption;
-        private Option<string> openApiImportElementIdOption;
-        private Option<string> openApiImportElementDslIdOption;
-        private Option<string> openApiImportWorkspaceIdOption;
+        private Option<string> docFileImportFileOption;
+        private Option<string> docFileImportElementIdOption;
+        private Option<string> docFileImportElementDslIdOption;
+        private Option<string> docFileImportWorkspaceIdOption;
+        Option<string> docFileTypeOption;
 
-        public OpenapiImportCommand() : base("import", "Imports or updates OpenAPI specification for given element.")
+        public DocFileImportCommand() : base("import", "Imports or updates documentation file for given element.")
         {
-
-            this.openApiImportFileOption = new("--file", "-f")
+            this.docFileImportFileOption = new("--file", "-f")
             {
                 Description = "Path to openapi specification file for element.",
                 Required = true
             };
 
-            this.openApiImportElementIdOption = new("--element-id", "-e")
+            this.docFileImportElementIdOption = new("--element-id", "-e")
             {
                 Description = "The ID of element for which this import is created. Required only if --element-dsl-id option is not set.",
             };
 
-            this.openApiImportElementDslIdOption = new("--element-dsl-id", "-d")
+            this.docFileImportElementDslIdOption = new("--element-dsl-id", "-d")
             {
                 Description = "The DSL ID of element for which this import is created. Required only if --element-id option is not set.",
             };
 
-            this.openApiImportWorkspaceIdOption = new("--id", "-i")
+            this.docFileImportWorkspaceIdOption = new("--id", "-i")
             {
                 Description = "The ID of the Workspace where element exists.",
                 Required = true
             };
 
+            this.docFileTypeOption = new("--type", "-t")
+            {
+                Description = "Specifies documentation file type. Allowed values are 'openapi' and 'asyncapi'.",
+                Required = true
+            };
+            this.docFileTypeOption.AcceptOnlyFromAmong("openapi", "asyncapi");
+
             this.Options.Add(CommandLineCommonOptions.DocueyeAddressOption);
             this.Options.Add(CommandLineCommonOptions.AdminTokenOption);
-            this.Options.Add(this.openApiImportFileOption);
-            this.Options.Add(this.openApiImportWorkspaceIdOption);
-            this.Options.Add(this.openApiImportElementIdOption);
-            this.Options.Add(this.openApiImportElementDslIdOption);
+            this.Options.Add(this.docFileImportFileOption);
+            this.Options.Add(this.docFileImportElementIdOption);
+            this.Options.Add(this.docFileImportElementDslIdOption);
+            this.Options.Add(this.docFileImportWorkspaceIdOption);
+            this.Options.Add(this.docFileTypeOption);
             this.SetAction(async parseResult => await this.Run(parseResult));
         }
 
@@ -61,10 +69,11 @@ namespace DocuEye.CLI.Commands
 
             string docueyeAddress = parseResult.GetValue(CommandLineCommonOptions.DocueyeAddressOption)!;
             string adminToken = parseResult.GetValue(CommandLineCommonOptions.AdminTokenOption)!;
-            string? elementDslId = parseResult.GetValue(this.openApiImportElementDslIdOption);
-            string? elementId = parseResult.GetValue(this.openApiImportElementIdOption);
-            string file = parseResult.GetValue(this.openApiImportFileOption)!;
-            string workspaceId = parseResult.GetValue(this.openApiImportWorkspaceIdOption)!;
+            string? elementDslId = parseResult.GetValue(this.docFileImportElementDslIdOption);
+            string? elementId = parseResult.GetValue(this.docFileImportElementIdOption);
+            string file = parseResult.GetValue(this.docFileImportFileOption)!;
+            string workspaceId = parseResult.GetValue(this.docFileImportWorkspaceIdOption)!;
+            string type = parseResult.GetValue(this.docFileTypeOption)!;
 
             var host = new CliHostBuilder().Build(new CliHostOptions(docueyeAddress, adminToken));
 
@@ -75,14 +84,15 @@ namespace DocuEye.CLI.Commands
                 return 1;
             }
 
-            var importOpenApiFileService = host.Services.GetRequiredService<IImportDocumentationFileService>();
+            var importDocumentationFileService = host.Services.GetRequiredService<IImportDocumentationFileService>();
 
-            var result = await importOpenApiFileService.Import(new ImportDocumentationFileParameters() { 
+            var result = await importDocumentationFileService.Import(new ImportDocumentationFileParameters()
+            {
                 ElementDslId = elementDslId,
                 ElementId = elementId,
                 DocumentationFile = file,
                 WorkspaceId = workspaceId,
-                DocumentationFileType = "openapi"
+                DocumentationFileType = type
             });
 
             if (!result)

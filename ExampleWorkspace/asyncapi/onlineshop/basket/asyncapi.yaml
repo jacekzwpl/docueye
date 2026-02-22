@@ -1,0 +1,25 @@
+asyncapi: '3.0.0'
+info:
+  title: Example
+  version: '0.1.0'
+channels:
+  example-channel:
+    messages:
+      exampleMessage:
+        payload:
+          type: object
+          properties:
+            exampleField:
+              type: string
+            exampleNumber:
+              type: number
+            exampleDate:
+              type: string
+              format: date-time
+operations:
+  receiveExampleMessage:
+    action: receive
+    channel:
+      $ref: '#/channels/example-channel'
+    messages:
+      - $ref: '#/channels/example-channel/messages/exampleMessage'

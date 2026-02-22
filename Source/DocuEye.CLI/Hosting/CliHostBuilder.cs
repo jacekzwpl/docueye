@@ -1,9 +1,9 @@
 ﻿using DocuEye.CLI.ApiClient;
 using DocuEye.CLI.Application.Services.Compatibility;
-using DocuEye.CLI.Application.Services.DeleteOpenApiFile;
+using DocuEye.CLI.Application.Services.DeleteDocumentationFile;
 using DocuEye.CLI.Application.Services.DeleteWorkspace;
 using DocuEye.CLI.Application.Services.DSL;
-using DocuEye.CLI.Application.Services.ImportOpenApiFile;
+using DocuEye.CLI.Application.Services.ImportDocumentationFile;
 using DocuEye.CLI.Application.Services.ImportWorkspace;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,8 +46,8 @@ namespace DocuEye.CLI.Hosting
             builder.Services.AddTransient<IWorkspaceParserService, WorkspaceParserService>();
             builder.Services.AddTransient<IImportWorkspaceService, ImportWorkspaceService>();
             builder.Services.AddTransient<IDeleteWorkspaceService, DeleteWorkspaceService>();
-            builder.Services.AddTransient<IImportOpenApiFileService, ImportOpenApiFileService>();
-            builder.Services.AddTransient<IDeleteOpenApiFileService, DeleteOpenApiFileService>();
+            builder.Services.AddTransient<IImportDocumentationFileService, ImportDocumentationFileService>();
+            builder.Services.AddTransient<IDeleteDocumentationFileService, DeleteDocumentationFileService>();
             return builder.Build();
         }
     }
