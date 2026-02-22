@@ -6,6 +6,9 @@ Commands for working with documentation files for components.
 
 Imports or updates documentation file for given element.
 
+> [!NOTE]
+> Available from version 1.3.0
+
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
 | `--docueye-address` | Yes | DocuEye address. | `--docueyeAddress=http://localhost:8080` |
@@ -24,6 +27,9 @@ docueye docfile import --docueye-address=http://localhost:8080 --admin-token=doc
 ### docfile delete command
 
 Deletes documentation file for element.
+
+> [!NOTE]
+> Available from version 1.3.0
 
 | Option | Required | Description | Example |
 | --- | -- | ------- | ---- |
