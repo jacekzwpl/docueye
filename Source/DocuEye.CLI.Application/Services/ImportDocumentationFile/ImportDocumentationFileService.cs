@@ -27,7 +27,7 @@ namespace DocuEye.CLI.Application.Services.ImportDocumentationFile
             string content = string.Empty;
             Uri? validatedUri;
             var isValid = Uri.TryCreate(parameters.DocumentationFile, UriKind.Absolute, out validatedUri);
-            if (isValid && validatedUri?.Scheme == Uri.UriSchemeHttp)
+            if (isValid && (validatedUri?.Scheme == Uri.UriSchemeHttp || validatedUri?.Scheme == Uri.UriSchemeHttps))
             {
                 var fileContent = await this.httpClient.GetStringAsync(parameters.DocumentationFile);
                 var bytes = System.Text.Encoding.UTF8.GetBytes(fileContent);

@@ -51,7 +51,7 @@ namespace DocuEye.Linter
             string jsonText = String.Empty;
             Uri? validatedUri;
             var isValid = Uri.TryCreate(filePath, UriKind.Absolute, out validatedUri);
-            if (isValid && validatedUri?.Scheme == Uri.UriSchemeHttp)
+            if (isValid && (validatedUri?.Scheme == Uri.UriSchemeHttp || validatedUri?.Scheme == Uri.UriSchemeHttps))
             {
                 jsonText = await this.httpClient.GetStringAsync(filePath);
             }
