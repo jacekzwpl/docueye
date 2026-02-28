@@ -108,7 +108,7 @@
             "Description": "The relationship technology must be compatible with the target container's technology. This rule prevents incorrect or unrealistic integrations in the model.",
             "Severity": "Warning",
             "Type": "ModelRelationship",
-            "Expression": "Destination.Tags.Contains(\"Container\") and @AllowedRelationshipTechnologies.ContainsKey(Destination.Technology) and Technology not_in @AllowedRelationshipTechnologies[Destination.Technology]",  
+            "Expression": "Destination.Tags.Contains(\"Container\") and Destination.Technology != null and @AllowedRelationshipTechnologies.ContainsKey(Destination.Technology) and Technology not_in @AllowedRelationshipTechnologies[Destination.Technology]",  
             "HelpLink": "https://docueye.com/architecture-linter/rules/C4-ARCH-011"
         },
         {
