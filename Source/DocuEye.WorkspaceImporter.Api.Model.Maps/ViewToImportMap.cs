@@ -12,6 +12,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             return new SystemLandscapeView
             {
                 Key = source.Key,
+                DiagramEngine = source.DiagramEngine,
                 Description = source.Description,
                 EnterpriseBoundaryVisible = source.ExternalBoundariesVisible,
                 AutomaticLayout = source.AutomaticLayout?.ToAutomaticLayout(),
@@ -27,6 +28,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             return new SystemContextView
             {
                 Key = source.Key,
+                DiagramEngine = source.DiagramEngine,
                 Description = source.Description,
                 EnterpriseBoundaryVisible = source.ExternalBoundariesVisible,
                 AutomaticLayout = source.AutomaticLayout?.ToAutomaticLayout(),
@@ -43,6 +45,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             {
                 Key = source.Key,
                 Description = source.Description,
+                DiagramEngine = source.DiagramEngine,
                 ExternalSoftwareSystemBoundariesVisible = source.ExternalBoundariesVisible,
                 AutomaticLayout = source.AutomaticLayout?.ToAutomaticLayout(),
                 PaperSize = source.PaperSize,
@@ -58,6 +61,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             {
                 Key = source.Key,
                 Description = source.Description,
+                DiagramEngine = source.DiagramEngine,
                 ExternalContainerBoundariesVisible = source.ExternalBoundariesVisible,
                 AutomaticLayout = source.AutomaticLayout?.ToAutomaticLayout(),
                 PaperSize = source.PaperSize,
@@ -73,6 +77,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             {
                 Key = source.Key,
                 Description = source.Description,
+                DiagramEngine = source.DiagramEngine,
                 AutomaticLayout = source.AutomaticLayout?.ToAutomaticLayout(),
                 PaperSize = source.PaperSize,
                 Title = source.Title,
@@ -87,6 +92,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
             {
                 Key = source.Key,
                 Content = source.Content,
+                DiagramEngine = source.DiagramEngine,
                 ContentType = source.ContentType,
                 Title = source.Title,
                 Description = source.Description,
@@ -120,6 +126,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
                 AutomaticLayout = source.AutomaticLayout?.ToAutomaticLayout(),
                 PaperSize = source.PaperSize,
                 Title = source.Title,
+                DiagramEngine = source.DiagramEngine,
                 BaseViewKey = source.BaseViewKey ?? string.Empty,
                 Mode = source.Mode,
                 Tags = source.Tags,

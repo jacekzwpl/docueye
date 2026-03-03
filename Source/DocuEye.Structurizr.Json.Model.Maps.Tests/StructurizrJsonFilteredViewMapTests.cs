@@ -1,4 +1,5 @@
 ﻿using DocuEye.Infrastructure.Tests.Common;
+using DocuEye.ViewsKeeper.Model;
 using DocuEye.WorkspaceImporter.Api.Model.Views;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 BaseViewKey = "base-view-1",
                 Description = "A description of the filtered view.",
                 Mode = "SomeMode",
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 Tags = new List<string> { "TagA", "TagB" }
                 
             };
@@ -41,6 +46,14 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                     nameof(ViewToImport.PaperSize),
                     nameof(ViewToImport.ExternalBoundariesVisible)
 
+                },
+                customSourceResolvers: new Dictionary<string, Func<StructurizrJsonFilteredView, object?>>
+                {
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        }
+                    }
                 }
             );
         }   

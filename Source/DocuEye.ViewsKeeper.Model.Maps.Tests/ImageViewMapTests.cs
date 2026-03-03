@@ -18,6 +18,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "image-123",
                 ViewType = "Image",
+                DiagramEngine = "mermaid",
                 Title = "Image View Title",
                 Description = "A description of the image view",
                 Key = "image-view-key"
@@ -41,6 +42,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "image-123",
                 ViewType = "Image",
+                DiagramEngine = "mermaid",
                 Title = "Image View Title",
                 Description = "A description of the image view",
                 Key = "image-view-key"

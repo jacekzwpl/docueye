@@ -19,6 +19,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "filter-123",
                 ViewType = "Filtered",
+                DiagramEngine = "mermaid",
                 Title = "Filtered View Title",
                 Description = "A description of the filtered view",
                 Key = "filter-view-key"
@@ -43,6 +44,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 Id = "filter-123",
                 ViewType = "Filtered",
                 Title = "Filtered View Title",
+                DiagramEngine = "mermaid",
                 Description = "A description of the filtered view",
                 Key = "filter-view-key"
             };
@@ -66,6 +68,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 Id = "filter-123",
                 ViewType = "Filtered",
                 Title = "Filtered View Title",
+                DiagramEngine = "mermaid",
                 Description = "A description of the filtered view",
                 Key = "filter-view-key",
                 Elements = new[]

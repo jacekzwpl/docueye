@@ -22,7 +22,8 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 ViewType = "Component",
                 Title = "Component View Title",
                 Description = "A description of the component view",
-                Key = "comp-view-key"
+                Key = "comp-view-key",
+                DiagramEngine = "mermaid"
             };
             var result = source.MapToWorkspaceView();
             MappingAssert.AssertMapped(
@@ -69,6 +70,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 Title = "Diagram Title",
                 Description = "Diagram Description",
                 Key = "comp-diagram-key",
+                DiagramEngine = "mermaid",
                 AutomaticLayout = new AutomaticLayout
                 {
                     Implementation = "dot",

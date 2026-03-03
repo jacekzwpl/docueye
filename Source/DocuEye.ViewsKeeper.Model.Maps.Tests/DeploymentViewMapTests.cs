@@ -18,6 +18,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             var source = new DeploymentView
             {
                 Id = "deploy-123",
+                DiagramEngine = "mermaid",
                 ViewType = "Deployment",
                 Title = "Deployment View Title",
                 Description = "A description of the deployment view",
@@ -43,6 +44,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 Id = "deploy-123",
                 ViewType = "Deployment",
                 Title = "Deployment View Title",
+                DiagramEngine = "mermaid",
                 Description = "A description of the deployment view",
                 Key = "deploy-view-key"
             };
@@ -68,6 +70,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 Title = "Deployment View Diagram Title",
                 Description = "A description of the deployment view diagram",
                 Key = "deploy-view-diagram-key",
+                DiagramEngine = "mermaid",
                 Elements = new[]
                 {
                     new ElementView(),

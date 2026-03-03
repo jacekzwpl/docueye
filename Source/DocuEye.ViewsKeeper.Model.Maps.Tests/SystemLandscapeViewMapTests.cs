@@ -19,6 +19,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "landscape-123",
                 ViewType = "SystemLandscape",
+                DiagramEngine = "mermaid",
                 Title = "System Landscape View Title",
                 Description = "A description of the system landscape view",
                 Key = "system-landscape-view-key"
@@ -40,6 +41,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             var source = new SystemLandscapeView
             {
                 Id = "landscape-123",
+                DiagramEngine = "mermaid",
                 ViewType = "SystemLandscape",
                 Title = "System Landscape View Title",
                 Description = "A description of the system landscape view",
@@ -63,6 +65,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             var source = new SystemLandscapeView
             {
                 Id = "landscape-123",
+                DiagramEngine = "mermaid",
                 ViewType = "SystemLandscape",
                 Title = "System Landscape View Title",
                 Description = "A description of the system landscape view",

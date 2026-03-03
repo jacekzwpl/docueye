@@ -17,6 +17,8 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Title = source.Title,
                 Description = source.Description,
                 Key = source.Key ?? string.Empty,
+                DiagramEngine = source.DiagramEngine,
+                Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
                 PaperSize = source.PaperSize ?? string.Empty,
                 AutomaticLayout = source.AutomaticLayout?.ToViewAutomaticLayoutToImport(),
                 ExternalBoundariesVisible = source.EnterpriseBoundaryVisible,

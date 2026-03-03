@@ -20,6 +20,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 Id = "dynamic-123",
                 ViewType = "Dynamic",
                 Title = "Dynamic View Title",
+                DiagramEngine = "mermaid",
                 Description = "A description of the dynamic view",
                 Key = "dynamic-view-key"
             };
@@ -41,6 +42,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "dynamic-123",
                 ViewType = "Dynamic",
+                DiagramEngine = "mermaid",
                 Title = "Dynamic View Title",
                 Description = "A description of the dynamic view",
                 Key = "dynamic-view-key"
@@ -64,6 +66,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "dynamic-123",
                 ViewType = "Dynamic",
+                DiagramEngine = "mermaid",
                 Title = "Dynamic View Title",
                 Description = "A description of the dynamic view",
                 Key = "dynamic-view-key",

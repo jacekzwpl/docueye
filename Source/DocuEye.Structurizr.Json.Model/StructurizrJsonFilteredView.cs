@@ -30,5 +30,19 @@ namespace DocuEye.Structurizr.Json.Model
         /// The set of tags to include/exclude elements/relationships when rendering this filtered view.
         /// </summary>
         public IEnumerable<string>? Tags { get; set; }
+
+        public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+
+        public string? DiagramEngine
+        {
+            get
+            {
+                if (this.Properties.ContainsKey(DslPropertyNames.DiagramEngine))
+                {
+                    return this.Properties[DslPropertyNames.DiagramEngine];
+                }
+                return null;
+            }
+        }
     }
 }

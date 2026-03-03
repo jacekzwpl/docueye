@@ -17,6 +17,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps
             {
                 Id = source.Id,
                 ViewType = source.ViewType,
+                DiagramEngine = source.DiagramEngine,
                 Name = string.Format("[{0}]{1}", source.ViewType, source.Title ?? source.Description ?? source.Key)
             };
             return dest;
@@ -66,7 +67,8 @@ namespace DocuEye.ViewsKeeper.Model.Maps
                 Elements = source.Elements,
                 PaperSize = source.PaperSize,
                 Relationships = source.Relationships,
-                WorkspaceId = source.WorkspaceId
+                WorkspaceId = source.WorkspaceId,
+                DiagramEngine = source.DiagramEngine
             };
             return dest;
         }

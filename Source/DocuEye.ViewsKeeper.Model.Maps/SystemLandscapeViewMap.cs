@@ -14,6 +14,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps
             var dest = new WorkspaceView
             {
                 Id = source.Id,
+                DiagramEngine = source.DiagramEngine,
                 ViewType = source.ViewType,
                 Name = string.Format("[{0}]{1}", source.ViewType, source.Title ?? source.Description ?? source.Key)
             };
@@ -56,6 +57,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps
                 Id = source.Id,
                 ViewType = source.ViewType,
                 Key = source.Key,
+                DiagramEngine = source.DiagramEngine,
                 Title = source.Title,
                 Description = source.Description,
                 EnterpriseBoundaryVisible = source.EnterpriseBoundaryVisible,

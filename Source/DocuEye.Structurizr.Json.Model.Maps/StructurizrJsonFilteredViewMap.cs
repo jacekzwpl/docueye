@@ -17,8 +17,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 ViewType = ViewType.FilteredView,
                 Key = source.Key ?? string.Empty,
                 Title = source.Title,
+                Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
                 Description = source.Description,
                 BaseViewKey = source.BaseViewKey,
+                DiagramEngine = source.DiagramEngine,
                 Tags = source.Tags,
                 Mode = source.Mode
             };

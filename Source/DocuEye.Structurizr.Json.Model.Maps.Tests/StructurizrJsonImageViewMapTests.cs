@@ -21,6 +21,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 Description = "A description of the image view.",
                 Content = "base64encodedcontent",
                 ContentType = "image/png",
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 ElementId = "element-123"
 
             };
@@ -43,7 +47,12 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 },
                 customSourceResolvers: new Dictionary<string, Func<StructurizrJsonImageView, object?>>
                 {
-                    { nameof(ViewToImport.StructurizrElementId), src => src.ElementId }
+                    { nameof(ViewToImport.StructurizrElementId), src => src.ElementId },
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        }
+                    }
                 }
             );
         }

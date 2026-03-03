@@ -17,9 +17,11 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 ViewType = ViewType.DeploymentView,
                 Key = source.Key ?? string.Empty,
                 Title = source.Title,
+                Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
                 Description = source.Description,
                 StructurizrElementId = source.SoftwareSystemId,
                 PaperSize = source.PaperSize,
+                DiagramEngine = source.DiagramEngine,
                 AutomaticLayout = source.AutomaticLayout?.ToViewAutomaticLayoutToImport(),
                 Elements = source.Elements?.ToElementInViewToImport() ?? Array.Empty<ElementInViewToImport>(),
                 Relationships = source.Relationships?.ToRelationshipInViewToImport() ?? Array.Empty<RelationshipInViewToImport>()

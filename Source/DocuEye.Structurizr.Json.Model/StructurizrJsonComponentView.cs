@@ -48,5 +48,19 @@ namespace DocuEye.Structurizr.Json.Model
         /// Specifies whether container boundaries should be visible for \"external\" components (those outside the container in scope).
         /// </summary>
         public bool? ExternalContainerBoundariesVisible { get; set; }
+
+        public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+
+        public string? DiagramEngine
+        {
+            get
+            {
+                if (this.Properties.ContainsKey(DslPropertyNames.DiagramEngine))
+                {
+                    return this.Properties[DslPropertyNames.DiagramEngine];
+                }
+                return null;
+            }
+        }
     }
 }

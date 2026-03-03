@@ -12,6 +12,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps.Tests
         private readonly ViewToImport source = new ViewToImport
         {
             Key = "key",
+            DiagramEngine = "diagramEngine",
             AutomaticLayout = new ViewAutomaticLayout()
             {
                 EdgeSeparation = 10,

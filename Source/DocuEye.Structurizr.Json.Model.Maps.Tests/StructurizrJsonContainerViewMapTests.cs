@@ -17,6 +17,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 SoftwareSystemId = "software-system-1",
                 PaperSize = "A3_Landscape",
                 Description = "A description of the container view.",
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 AutomaticLayout = new StructurizrJsonAutomaticLayout
                 {
                     Implementation = "implementation",
@@ -58,7 +62,12 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 {
                     { nameof(ViewToImport.ViewType), s => ViewType.ContainerView },
                     { nameof(ViewToImport.StructurizrElementId), s => s.SoftwareSystemId },
-                    { nameof(ViewToImport.ExternalBoundariesVisible), s => s.ExternalSoftwareSystemBoundariesVisible }
+                    { nameof(ViewToImport.ExternalBoundariesVisible), s => s.ExternalSoftwareSystemBoundariesVisible },
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        }
+                    }
                 }
             );
         }

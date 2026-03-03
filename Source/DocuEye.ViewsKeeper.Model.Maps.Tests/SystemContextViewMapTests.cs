@@ -19,6 +19,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "system-123",
                 ViewType = "SystemContext",
+                DiagramEngine = "mermaid",
                 Title = "System Context View Title",
                 Description = "A description of the system context view",
                 Key = "system-context-view-key"
@@ -42,6 +43,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "system-123",
                 ViewType = "SystemContext",
+                DiagramEngine = "mermaid",
                 Title = "System Context View Title",
                 Description = "A description of the system context view",
                 Key = "system-context-view-key"
@@ -65,6 +67,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
             {
                 Id = "system-123",
                 ViewType = "SystemContext",
+                DiagramEngine = "mermaid",
                 Title = "System Context View Title",
                 Description = "A description of the system context view",
                 Key = "system-context-view-key",

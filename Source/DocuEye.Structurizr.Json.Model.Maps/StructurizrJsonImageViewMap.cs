@@ -18,7 +18,9 @@ namespace DocuEye.Structurizr.Json.Model.Maps
                 Key = source.Key ?? string.Empty,
                 Title = source.Title,
                 Description = source.Description,
+                Properties = source.Properties != null ? new Dictionary<string, string>(source.Properties) : new Dictionary<string, string>(),
                 Content = source.Content,
+                DiagramEngine = source.DiagramEngine,
                 ContentType = source.ContentType,
                 StructurizrElementId = source.ElementId
 

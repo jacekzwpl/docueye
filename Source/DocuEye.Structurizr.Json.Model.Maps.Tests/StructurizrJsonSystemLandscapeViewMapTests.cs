@@ -28,6 +28,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                     Width = 1920,
                     Height = 1080
                 },
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 Animations = new List<StructurizrJsonAnimationStep>
                 {
                     new StructurizrJsonAnimationStep
@@ -76,7 +80,12 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 customSourceResolvers: new Dictionary<string, Func<StructurizrJsonSystemLandscapeView, object?>>
                 {
                     { nameof(ViewToImport.ViewType), s => ViewType.SystemLandscapeView },
-                    { nameof(ViewToImport.ExternalBoundariesVisible), s => s.EnterpriseBoundaryVisible  }
+                    { nameof(ViewToImport.ExternalBoundariesVisible), s => s.EnterpriseBoundaryVisible  },
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        }
+                    }
                 }
             );
         }

@@ -22,6 +22,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 SoftwareSystemId = "software-system-1",
                 Description = "A description of the deployment view.",
                 PaperSize = "A1_Landscape",
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 AutomaticLayout = new StructurizrJsonAutomaticLayout
                 {
                     Implementation = "implementation",
@@ -62,6 +66,11 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 {
                     { nameof(ViewToImport.ViewType), s => ViewType.DeploymentView },
                     { nameof(ViewToImport.StructurizrElementId), s => s.SoftwareSystemId },
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        }
+                    }
                 }
             );
         }

@@ -21,7 +21,8 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 ViewType = "Container",
                 Title = "Container View Title",
                 Description = "A description of the container view",
-                Key = "cont-view-key"
+                Key = "cont-view-key",
+                DiagramEngine = "mermaid"
             };
             var result = source.MapToWorkspaceView();
             MappingAssert.AssertMapped(
@@ -68,6 +69,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps.Tests
                 Description = "Description of another container view",
                 Key = "another-cont-view-key",
                 SoftwareSystemId = "sys-789",
+                DiagramEngine = "mermaid",
                 ExternalSoftwareSystemBoundariesVisible = true,
                 AutomaticLayout = new AutomaticLayout()
                 {

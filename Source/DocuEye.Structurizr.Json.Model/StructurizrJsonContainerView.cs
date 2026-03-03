@@ -48,5 +48,19 @@ namespace DocuEye.Structurizr.Json.Model
         /// Specifies whether software system boundaries should be visible for \"external\" containers (those outside the software system in scope).
         /// </summary>
         public bool? ExternalSoftwareSystemBoundariesVisible { get; set; }
+
+        public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+
+        public string? DiagramEngine
+        {
+            get
+            {
+                if (this.Properties.ContainsKey(DslPropertyNames.DiagramEngine))
+                {
+                    return this.Properties[DslPropertyNames.DiagramEngine];
+                }
+                return null;
+            }
+        }
     }
 }

@@ -22,6 +22,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 ContainerId = "container-1",
                 PaperSize = "A2_Portrait",
                 Description = "A description of the component view.",
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 AutomaticLayout = new StructurizrJsonAutomaticLayout
                 {
                     Implementation = "implementation",
@@ -62,7 +66,12 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 {
                     { nameof(ViewToImport.ViewType), s => ViewType.ComponentView },
                     { nameof(ViewToImport.StructurizrElementId), s => s.ContainerId },
-                    { nameof(ViewToImport.ExternalBoundariesVisible), s => s.ExternalContainerBoundariesVisible }
+                    { nameof(ViewToImport.ExternalBoundariesVisible), s => s.ExternalContainerBoundariesVisible },
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        }
+                    }
                 });
         }
     }

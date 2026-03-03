@@ -58,6 +58,7 @@ namespace DocuEye.ViewsKeeper.Model.Maps
                 Id = source.Id,
                 ViewType = source.ViewType,
                 Title = source.Title,
+                DiagramEngine = source.DiagramEngine,
                 Description = source.Description,
                 Key = source.Key,
                 PaperSize = source.PaperSize,

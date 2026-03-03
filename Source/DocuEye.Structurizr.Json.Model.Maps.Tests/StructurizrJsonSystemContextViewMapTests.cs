@@ -27,6 +27,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                     EdgeSeparation = 15,
                     Vertices = true
                 },
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 Elements = new List<StructurizrJsonElementView>
                 {
                     new StructurizrJsonElementView { Id = "element-1", X = 150, Y = 250 },
@@ -57,7 +61,12 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 {
                     { nameof(ViewToImport.ViewType), s => ViewType.SystemContextView },
                     { nameof(ViewToImport.ExternalBoundariesVisible), s => s.EnterpriseBoundaryVisible  },
-                    { nameof(ViewToImport.StructurizrElementId), s => s.SoftwareSystemId }
+                    { nameof(ViewToImport.StructurizrElementId), s => s.SoftwareSystemId },
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        }
+                    }
                 }
 
 
