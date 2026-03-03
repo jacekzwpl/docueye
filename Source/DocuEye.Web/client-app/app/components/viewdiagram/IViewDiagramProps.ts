@@ -4,4 +4,5 @@ export interface IViewDiagramProps {
     selectedView: any;
     workspaceId: string | null | undefined;
     viewConfiguration?: ViewConfiguration | null;
+    onDiagramEngineChange?: (diagramEngine: string) => void;
 }

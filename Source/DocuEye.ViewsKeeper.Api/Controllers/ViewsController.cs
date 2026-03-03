@@ -1,5 +1,6 @@
 ﻿using DocuEye.Infrastructure.HttpProblemDetails;
 using DocuEye.Infrastructure.Mediator;
+using DocuEye.Mermaid;
 using DocuEye.ViewsKeeper.Api.Model;
 using DocuEye.ViewsKeeper.Application.Commands.SaveViewLayout;
 using DocuEye.ViewsKeeper.Application.Model;
@@ -170,6 +171,33 @@ namespace DocuEye.ViewsKeeper.Api.Controllers
             var result = view.MapToDynamicViewDiagram();
             result.LayoutData = layout?.LayoutData;
             return this.Ok(result);
+        }
+
+        /// <summary>
+        /// Retrieves a Mermaid sequence diagram representing the dynamic view specified by the given workspace and view
+        /// identifiers.
+        /// </summary>
+        /// <remarks>Use this endpoint to visualize dynamic views as Mermaid sequence diagrams for
+        /// documentation or analysis purposes.</remarks>
+        /// <param name="workspaceId">The unique identifier of the workspace containing the dynamic view.</param>
+        /// <param name="id">The unique identifier of the dynamic view to retrieve.</param>
+        /// <returns>An <see cref="ActionResult{MermaidDiagram}"/> containing the Mermaid diagram for the specified dynamic view.
+        /// Returns a 404 response if the view is not found.</returns>
+        [Route("dynamic/{id}/mermaid")]
+        [HttpGet]
+        public async Task<ActionResult<MermaidDiagram>> GetDynamicViewMermaid([FromRoute] string workspaceId, [FromRoute] string id)
+        {
+            var query = new GetDynamicViewQuery(id, workspaceId);
+            var view = await this.mediator.SendQueryAsync<GetDynamicViewQuery, DynamicView?>(query);
+            if (view == null)
+            {
+                return this.NotFound(new NotFoundProblemDetails(DiagramNotFound, DiagramNotFoundDetails));
+            }
+
+            var creator = new SequenceDiagramCreator();
+            var content = creator.Create(view);
+
+            return this.Ok(new MermaidDiagram { Content = content });
         }
         /// <summary>
         /// Gets Deployment view

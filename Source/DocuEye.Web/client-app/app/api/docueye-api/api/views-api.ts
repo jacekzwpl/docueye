@@ -35,6 +35,8 @@ import type { FilteredViewDiagram } from '../models';
 // @ts-ignore
 import type { ImageView } from '../models';
 // @ts-ignore
+import type { MermaidDiagram } from '../models';
+// @ts-ignore
 import type { SaveViewLayout } from '../models';
 // @ts-ignore
 import type { SystemContextViewDiagram } from '../models';
@@ -208,6 +210,43 @@ export const ViewsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'id' is not null or undefined
             assertParamExists('apiWorkspacesWorkspaceIdViewsDynamicIdGet', 'id', id)
             const localVarPath = `/api/workspaces/{workspaceId}/views/dynamic/{id}`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet: async (workspaceId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet', 'workspaceId', workspaceId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet', 'id', id)
+            const localVarPath = `/api/workspaces/{workspaceId}/views/dynamic/{id}/mermaid`
                 .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -500,6 +539,19 @@ export const ViewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MermaidDiagram>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet(workspaceId, id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ViewsApi.apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FilteredViewDiagram>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
@@ -625,6 +677,16 @@ export const ViewsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): AxiosPromise<MermaidDiagram> {
+            return localVarFp.apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet(workspaceId, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig): AxiosPromise<FilteredViewDiagram> {
             return localVarFp.apiWorkspacesWorkspaceIdViewsFilteredIdGet(workspaceId, id, options).then((request) => request(axios, basePath));
         },
@@ -729,6 +791,17 @@ export class ViewsApi extends BaseAPI {
      */
     public apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig) {
         return ViewsApiFp(this.configuration).apiWorkspacesWorkspaceIdViewsDynamicIdGet(workspaceId, id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet(workspaceId: string, id: string, options?: RawAxiosRequestConfig) {
+        return ViewsApiFp(this.configuration).apiWorkspacesWorkspaceIdViewsDynamicIdMermaidGet(workspaceId, id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

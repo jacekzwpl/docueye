@@ -340,47 +340,6 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/api/workspaces/{workspaceId}/docfile/openapi": {
-      "put": {
-        "tags": [
-          "DocumentationFilesImport"
-        ],
-        "parameters": [
-          {
-            "name": "workspaceId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ImportOpenApiFileRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ImportOpenApiFileRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ImportOpenApiFileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       },
       "delete": {
         "tags": [
@@ -404,6 +363,13 @@
           },
           {
             "name": "elementDslId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "documentationType",
             "in": "query",
             "schema": {
               "type": "string"
@@ -1315,6 +1281,53 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DynamicViewDiagram"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspaces/{workspaceId}/views/dynamic/{id}/mermaid": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MermaidDiagram"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MermaidDiagram"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MermaidDiagram"
                 }
               }
             }
@@ -3666,28 +3679,6 @@
         },
         "additionalProperties": false
       },
-      "ImportOpenApiFileRequest": {
-        "type": "object",
-        "properties": {
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "elementDslId": {
-            "type": "string",
-            "nullable": true
-          },
-          "elementId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ImportRelationshipsRequest": {
         "type": "object",
         "properties": {
@@ -3951,6 +3942,16 @@
           },
           "rule": {
             "$ref": "#/components/schemas/IssueRuleToImport"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MermaidDiagram": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

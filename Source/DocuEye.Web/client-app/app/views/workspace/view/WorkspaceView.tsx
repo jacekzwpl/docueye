@@ -21,8 +21,11 @@ export const WorkspaceView = () => {
     const [availableViews, setAvailableViews] = useState<any[]>([]);
     const [selectedView, setSelectedView] = useState<any | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [exportImageElementId, setExportImageElementId] = useState<string>("");
 
     const [canSaveLayout, setCanSaveLayout] = useState<boolean>(false);
+
+    const [isSaveLayoutVisible, setIsSaveLayoutVisible] = useState<boolean>(true);
 
     const viewConfiguration: IViewConfigurationState =
         useSelector((state: any) => state.viewConfiguration);
@@ -96,7 +99,15 @@ export const WorkspaceView = () => {
         }
     };
 
-    
+    const diagramEngineChanged = (diagramEngine: string) => {
+        if (diagramEngine === "mermaid") {
+            setIsSaveLayoutVisible(false);
+            setExportImageElementId("test-mermaid");
+        } else {
+            setIsSaveLayoutVisible(true);
+            setExportImageElementId("");
+        }
+    };
 
 
     const container = useRef<any>(null);
@@ -117,10 +128,12 @@ export const WorkspaceView = () => {
                             disableClearable={true}
                             renderInput={(params) => <TextField {...params} label="Diagram" />}
                         />
-                        <ExportButton />
+                        <ExportButton elementId={exportImageElementId} />
+                        { isSaveLayoutVisible &&
                         <IconButton disabled={!canSaveLayout} aria-label="export to png" size="small" onClick={saveLayout}>
                             <SaveIcon fontSize="small" />
                         </IconButton>
+                        }
                         
                         </Toolbar>
 
@@ -131,6 +144,7 @@ export const WorkspaceView = () => {
                         selectedView={selectedView}
                         workspaceId={workspaceId}
                         viewConfiguration={viewConfiguration.value}
+                        onDiagramEngineChange={diagramEngineChanged}
                     />
                 </Box>
             </ReactFlowProvider>

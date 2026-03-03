@@ -158,7 +158,7 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
         }
 
         dynamic onlineshop "BuyProduct" "Summarises how the sign in feature works in the single-page application." {
-            onlineshop.web -> onlineshop.catalog "Serarch product"
+            onlineshop.web -> onlineshop.catalog "Search product"
             onlineshop.catalog -> onlineshop.web "Return product"
             onlineshop.web -> onlineshop.basket "Add product to basket"
             onlineshop.web -> onlineshop.orders "Create order"

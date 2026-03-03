@@ -57,7 +57,6 @@ models/import-elements-request.ts
 models/import-finalize-request.ts
 models/import-image-request.ts
 models/import-issues-request.ts
-models/import-open-api-file-request.ts
 models/import-relationships-request.ts
 models/import-view-configuration-request.ts
 models/import-views-request.ts
@@ -72,6 +71,7 @@ models/issue-rule-to-import.ts
 models/issue-rule.ts
 models/issue-to-import.ts
 models/issue.ts
+models/mermaid-diagram.ts
 models/model-change.ts
 models/relationship-in-view-to-import.ts
 models/relationship-style-to-import.ts
