@@ -11,5 +11,6 @@ namespace DocuEye.Structurizr.Json.Model
 
         public const string OwnerTeam = "docueye.ownerteam";
         public const string SourceCodeUrl = "docueye.sourcecodeurl";
+        public const string DiagramEngine = "docueye.diagramengine";
     }
 }

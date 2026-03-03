@@ -27,5 +27,8 @@ namespace DocuEye.ViewsKeeper.Model
         /// The View Type
         /// </summary>
         public string ViewType { get; set; } = string.Empty;
+
+        public string? DiagramEngine { get; set; } = null;
+        
     }
 }

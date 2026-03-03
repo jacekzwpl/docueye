@@ -11,6 +11,11 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Views
         /// </summary>
         public string ViewType { get; set; } = string.Empty;
 
+        public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+
+        public string? DiagramEngine { get; set; } = null;
+
+
         /// <summary>
         /// The title of this view (optional).
         /// </summary>

@@ -104,6 +104,7 @@ namespace DocuEye.WorkspaceImporter.Api.Model.Maps
                 AutomaticLayout = source.AutomaticLayout?.ToAutomaticLayout(),
                 PaperSize = source.PaperSize,
                 Title = source.Title,
+                DiagramEngine = source.DiagramEngine,
                 ExternalBoundariesVisible = source.ExternalBoundariesVisible,
                 ViewType = ViewType.DynamicView
             };

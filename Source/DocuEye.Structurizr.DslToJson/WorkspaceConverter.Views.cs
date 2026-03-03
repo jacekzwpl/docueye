@@ -4,6 +4,7 @@ using DocuEye.Structurizr.DSL.Expressions.Model;
 using DocuEye.Structurizr.DSL.Model;
 using DocuEye.Structurizr.Json.Model;
 using System.Linq.Expressions;
+using System.Xml.Linq;
 
 namespace DocuEye.Structurizr.DslToJson
 {
@@ -619,6 +620,9 @@ namespace DocuEye.Structurizr.DslToJson
                 Relationships = relationships.ToArray(),
                 Elements = elements,
                 ExternalBoundariesVisible = true,
+                Properties = dslView.Properties != null ? 
+                    new Dictionary<string, string>(dslView.Properties) 
+                    : new Dictionary<string, string>(),
                 AutomaticLayout = this.ConvertAutomaticLayout(dslView.AutomaticLayout)
             };
         }

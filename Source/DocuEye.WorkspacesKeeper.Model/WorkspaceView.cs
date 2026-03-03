@@ -17,5 +17,8 @@
         /// Views type
         /// </summary>
         public string ViewType { get; set; } = null!;
+
+        public string? DiagramEngine { get; set; } = null;
+
     }
 }
