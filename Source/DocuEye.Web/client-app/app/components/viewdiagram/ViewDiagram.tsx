@@ -248,16 +248,12 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
     }, [diagramEngine, props]);
 
     useEffect(() => {
-        
-        console.log("Diagram engine changed to", diagramEngine);
         if (diagramEngine === "mermaid" && mermaidDiagram && mermaidDiagram.length > 0) {
-            const element = window.document.getElementById("test-mermaid")!;
+            const element = window.document.getElementById("mermaid-diagram")!;
             if(element.attributes.getNamedItem("data-processed") !== null) {
-                console.log("Removing data-processed attribute to re-render mermaid diagram");
                 element.attributes.removeNamedItem("data-processed");
             }
             setTimeout(async () => {
-                console.log("Rendering mermaid diagram", mermaidDiagram);
                 await mermaid.run({
                     nodes: [element]
                 });
@@ -320,7 +316,6 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "DynamicView") {
-                console.log(selectedView);
                 setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
                 if(selectedView.diagramEngine === "mermaid") {
@@ -391,7 +386,7 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
    
     return (
         <>
-            {currentImageView === null && diagramEngine === "mermaid" && <pre id="test-mermaid">
+            {currentImageView === null && diagramEngine === "mermaid" && <pre id="mermaid-diagram">
                 {mermaidDiagram}
             </pre>}
             {currentImageView !== null && <ImageViewer image={currentImageView} />}

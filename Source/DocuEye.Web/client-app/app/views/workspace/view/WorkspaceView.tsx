@@ -106,7 +106,7 @@ export const WorkspaceView = () => {
     const diagramEngineChanged = (diagramEngine: string) => {
         if (diagramEngine === "mermaid") {
             setCanSaveLayout(false);
-            setExportImageElementId("test-mermaid");
+            setExportImageElementId("mermaid-diagram");
         } else {
             setCanSaveLayout(true);
             setExportImageElementId("");

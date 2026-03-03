@@ -23,6 +23,10 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 Description = "A description of the dynamic view.",
                 PaperSize = "A3_Portrait",
                 ExternalBoundariesVisible = true,
+                Properties = new Dictionary<string, string>
+                {
+                    { "docueye.diagramengine", "mermaid" }
+                },
                 Elements = new List<StructurizrJsonElementView>
                 {
                     new StructurizrJsonElementView { Id = "element-1", X = 300, Y = 400 },
@@ -52,7 +56,12 @@ namespace DocuEye.Structurizr.Json.Model.Maps.Tests
                 customSourceResolvers: new Dictionary<string, Func<StructurizrJsonDynamicView, object?>>
                 {
                     { nameof(ViewToImport.ViewType), s => ViewType.DynamicView },
-                    { nameof(ViewToImport.StructurizrElementId), s => s.ElementId  }
+                    { nameof(ViewToImport.StructurizrElementId), s => s.ElementId  },
+                    { nameof(ViewToImport.Properties), s => new Dictionary<string, string>
+                        {
+                            { "docueye.diagramengine", "mermaid" }
+                        } 
+                    }
                 }
             );
         }
