@@ -271,7 +271,7 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
         
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "SystemLandscapeView") {
-                setDiagramEngine("reactflow");
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
                 loadSystemLandscapeView(workspaceId, selectedView.id, viewConfiguration);
             }
@@ -279,7 +279,7 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "SystemContextView") {
-                setDiagramEngine("reactflow");
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
 
                 loadSystemContextView(workspaceId, selectedView.id, viewConfiguration);
@@ -288,7 +288,7 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "ContainerView") {
-                setDiagramEngine("reactflow");
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
                 loadContainerView(workspaceId, selectedView.id, viewConfiguration);
             }
@@ -296,7 +296,7 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "ComponentView") {
-                setDiagramEngine("reactflow");
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
                 loadComponentView(workspaceId, selectedView.id, viewConfiguration);
             }
@@ -304,7 +304,7 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "FilteredView") {
-                setDiagramEngine("reactflow");
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
                 loadFilteredView(workspaceId, selectedView.id, viewConfiguration);
             }
@@ -312,7 +312,7 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "DeploymentView") {
-                setDiagramEngine("reactflow");
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
                 loadDeploymentView(workspaceId, selectedView.id, viewConfiguration);
             }
@@ -320,10 +320,14 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "DynamicView") {
-                setDiagramEngine("mermaid");
+                console.log(selectedView);
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
                 setMermaidDiagram("");
-                loadMermaidDiagram(workspaceId, selectedView.id, "DynamicView");
-                //loadDynamicView(workspaceId, selectedView.id, viewConfiguration);
+                if(selectedView.diagramEngine === "mermaid") {
+                    loadMermaidDiagram(workspaceId, selectedView.id, "DynamicView");
+                }else {
+                    loadDynamicView(workspaceId, selectedView.id, viewConfiguration);
+                }
             }
         }
 

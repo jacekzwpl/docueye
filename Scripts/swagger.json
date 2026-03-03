@@ -2399,6 +2399,10 @@
             "type": "string",
             "nullable": true
           },
+          "diagramEngine": {
+            "type": "string",
+            "nullable": true
+          },
           "paperSize": {
             "type": "string",
             "nullable": true
@@ -2459,6 +2463,10 @@
             "nullable": true
           },
           "viewType": {
+            "type": "string",
+            "nullable": true
+          },
+          "diagramEngine": {
             "type": "string",
             "nullable": true
           },
@@ -2666,6 +2674,10 @@
             "type": "string",
             "nullable": true
           },
+          "diagramEngine": {
+            "type": "string",
+            "nullable": true
+          },
           "paperSize": {
             "type": "string",
             "nullable": true
@@ -2815,6 +2827,10 @@
             "nullable": true
           },
           "viewType": {
+            "type": "string",
+            "nullable": true
+          },
+          "diagramEngine": {
             "type": "string",
             "nullable": true
           },
@@ -3335,6 +3351,10 @@
             "type": "string",
             "nullable": true
           },
+          "diagramEngine": {
+            "type": "string",
+            "nullable": true
+          },
           "paperSize": {
             "type": "string",
             "nullable": true
@@ -3471,6 +3491,10 @@
             "nullable": true
           },
           "viewType": {
+            "type": "string",
+            "nullable": true
+          },
+          "diagramEngine": {
             "type": "string",
             "nullable": true
           },
@@ -4288,6 +4312,10 @@
             "type": "string",
             "nullable": true
           },
+          "diagramEngine": {
+            "type": "string",
+            "nullable": true
+          },
           "paperSize": {
             "type": "string",
             "nullable": true
@@ -4348,6 +4376,10 @@
             "nullable": true
           },
           "viewType": {
+            "type": "string",
+            "nullable": true
+          },
+          "diagramEngine": {
             "type": "string",
             "nullable": true
           },
@@ -4579,6 +4611,17 @@
             "type": "string",
             "nullable": true
           },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "diagramEngine": {
+            "type": "string",
+            "nullable": true
+          },
           "title": {
             "type": "string",
             "nullable": true
@@ -4761,6 +4804,10 @@
             "nullable": true
           },
           "viewType": {
+            "type": "string",
+            "nullable": true
+          },
+          "diagramEngine": {
             "type": "string",
             "nullable": true
           }

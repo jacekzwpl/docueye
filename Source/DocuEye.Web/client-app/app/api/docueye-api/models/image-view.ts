@@ -22,6 +22,7 @@ export interface ImageView {
     'key'?: string | null;
     'workspaceId'?: string | null;
     'viewType'?: string | null;
+    'diagramEngine'?: string | null;
     'elementId'?: string | null;
     'content'?: string | null;
     'contentType'?: string | null;

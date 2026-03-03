@@ -31,6 +31,7 @@ export interface ComponentViewDiagram {
     'key'?: string | null;
     'workspaceId'?: string | null;
     'viewType'?: string | null;
+    'diagramEngine'?: string | null;
     'paperSize'?: string | null;
     'elements'?: Array<ElementView> | null;
     'relationships'?: Array<RelationshipView> | null;

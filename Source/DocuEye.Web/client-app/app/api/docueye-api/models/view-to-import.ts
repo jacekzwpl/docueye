@@ -26,6 +26,8 @@ import type { ViewAutomaticLayout } from './view-automatic-layout';
 
 export interface ViewToImport {
     'viewType'?: string | null;
+    'properties'?: { [key: string]: string; } | null;
+    'diagramEngine'?: string | null;
     'title'?: string | null;
     'description'?: string | null;
     'key'?: string | null;

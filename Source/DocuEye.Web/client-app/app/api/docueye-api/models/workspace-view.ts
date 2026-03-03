@@ -19,5 +19,6 @@ export interface WorkspaceView {
     'id'?: string | null;
     'name'?: string | null;
     'viewType'?: string | null;
+    'diagramEngine'?: string | null;
 }
 

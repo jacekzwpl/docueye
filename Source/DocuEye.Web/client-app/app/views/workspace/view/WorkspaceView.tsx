@@ -25,8 +25,6 @@ export const WorkspaceView = () => {
 
     const [canSaveLayout, setCanSaveLayout] = useState<boolean>(false);
 
-    const [isSaveLayoutVisible, setIsSaveLayoutVisible] = useState<boolean>(true);
-
     const viewConfiguration: IViewConfigurationState =
         useSelector((state: any) => state.viewConfiguration);
     const dispatch = useDispatch();
@@ -56,7 +54,13 @@ export const WorkspaceView = () => {
 
                 const avViews: any[] = [];
                 getWorkspaceResponse.data.views?.forEach(view => {
-                    avViews.push({ id: view.id, label: view.name, viewType: view.viewType });
+                    avViews.push(
+                        { 
+                            id: view.id, 
+                            label: view.name, 
+                            viewType: view.viewType, 
+                            diagramEngine: view.diagramEngine
+                        });
                 });
 
                 dispatch(setWorkspaceData(getWorkspaceResponse.data));
@@ -101,10 +105,10 @@ export const WorkspaceView = () => {
 
     const diagramEngineChanged = (diagramEngine: string) => {
         if (diagramEngine === "mermaid") {
-            setIsSaveLayoutVisible(false);
+            setCanSaveLayout(false);
             setExportImageElementId("test-mermaid");
         } else {
-            setIsSaveLayoutVisible(true);
+            setCanSaveLayout(true);
             setExportImageElementId("");
         }
     };
@@ -129,11 +133,10 @@ export const WorkspaceView = () => {
                             renderInput={(params) => <TextField {...params} label="Diagram" />}
                         />
                         <ExportButton elementId={exportImageElementId} />
-                        { isSaveLayoutVisible &&
                         <IconButton disabled={!canSaveLayout} aria-label="export to png" size="small" onClick={saveLayout}>
                             <SaveIcon fontSize="small" />
                         </IconButton>
-                        }
+                        
                         
                         </Toolbar>
 
