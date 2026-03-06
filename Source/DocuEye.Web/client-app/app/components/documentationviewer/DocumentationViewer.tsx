@@ -5,10 +5,15 @@ import DocuEyeApi from "../../api";
 import type { DocumentationContent } from "../../api/docueye-api";
 import Loader from "../loader";
 import type { IDocumentationViewerProps } from "./IDocumentationViewerProps";
+import mermaid from "mermaid";
 
 export const DocumentationViewer = (props: IDocumentationViewerProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [docHtml, setDocHtml] = useState<string>("");
+
+    useEffect(() => {
+        mermaid.initialize({ startOnLoad: false });
+    }, []);
 
     useEffect(() => {
         if (!props.workspaceId) {
@@ -30,23 +35,25 @@ export const DocumentationViewer = (props: IDocumentationViewerProps) => {
             })
             : DocuEyeApi.DocumentationsApi.apiWorkspacesWorkspaceIdDocumentationsWorskpaceGet(props.workspaceId, currentHost, {
                 validateStatus: (status) => {
-                    return (status >= 200 && status < 300) || status === 404; 
+                    return (status >= 200 && status < 300) || status === 404;
                 }
             });
 
         getDocumentation.then((response: AxiosResponse<DocumentationContent>) => {
             if (response.data.htmlContent) {
                 setDocHtml(response.data.htmlContent);
-            }else {
+                setTimeout(async () => {
+                    await mermaid.run({
+                        querySelector: '.mermaid'
+                    });
+                }, 100);
+            } else {
                 setDocHtml("No documentation found");
             }
 
         }).finally(() => {
             setIsLoading(false);
         })
-
-
-
 
     }, [setIsLoading, props, setDocHtml]);
 
