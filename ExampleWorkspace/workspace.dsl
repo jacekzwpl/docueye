@@ -133,6 +133,11 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
 
     views {
 
+        properties {
+            "mermaid.url" "http://docueye.com"
+            "mermaid.format" "svg"
+        }
+
         systemContext onlineshop "onlineshopContext" {
             title "Online Shop"
             include * 
@@ -168,6 +173,11 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
             onlineshop.web -> onlineshop.payment "Create payment"
             autoLayout
             description "Summarises how the sign in feature works in the single-page application."
+        }
+
+        image onlineshop "onlineshopMerimaid" {
+            title "Online shop mermaid diagram"
+            mermaid "diagrams/mermaid.md"
         }
 
         themes default
