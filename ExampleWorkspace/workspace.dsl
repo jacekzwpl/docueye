@@ -178,6 +178,9 @@ workspace "Example Online Shop" "Example DocuEye workspace" {
         image onlineshop "onlineshopMerimaid" {
             title "Online shop mermaid diagram"
             mermaid "diagrams/mermaid.md"
+            properties {
+                "docueye.diagramengine" "mermaid"
+            }
         }
 
         themes default
