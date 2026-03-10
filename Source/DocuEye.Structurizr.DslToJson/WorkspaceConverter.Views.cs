@@ -4,7 +4,6 @@ using DocuEye.Structurizr.DSL.Expressions.Model;
 using DocuEye.Structurizr.DSL.Model;
 using DocuEye.Structurizr.Json.Model;
 using System.Linq.Expressions;
-using System.Xml.Linq;
 
 namespace DocuEye.Structurizr.DslToJson
 {
@@ -910,19 +909,71 @@ namespace DocuEye.Structurizr.DslToJson
                 { ".pjp",  "image/pjpeg" }
             };
 
-            string extension = GetImageExtension(dslView.ImageSource ?? string.Empty);
-            string content = ImageToBase64Async(dslView.ImageSource ?? string.Empty, this.workspaceDirectory)
-                .GetAwaiter().GetResult();
-            string contentType = imageContentTypes.ContainsKey(extension) ? imageContentTypes[extension] : "application/octet-stream";
-            return new StructurizrJsonImageView()
+            
+            if(!string.IsNullOrWhiteSpace(dslView.ImageSource))
             {
-                Key = dslView.Identifier,
-                Title = dslView.Title,
-                Description = dslView.Description,
-                ElementId = dslView.ElementIdentifier,
-                Content =  $"data:{contentType};base64,{content}",
-                ContentType = contentType
-            };
+                string extension = GetImageExtension(dslView.ImageSource ?? string.Empty);
+                string content = ImageToBase64Async(dslView.ImageSource ?? string.Empty, this.workspaceDirectory)
+                    .GetAwaiter().GetResult();
+                string contentType = imageContentTypes.ContainsKey(extension) ? imageContentTypes[extension] : "application/octet-stream";
+                return new StructurizrJsonImageView()
+                {
+                    Key = dslView.Identifier,
+                    Title = dslView.Title,
+                    Description = dslView.Description,
+                    ElementId = dslView.ElementIdentifier,
+                    Content = $"data:{contentType};base64,{content}",
+                    ContentType = contentType,
+                    Properties = new Dictionary<string,string>(dslView.Properties)
+                };
+            } else if(!string.IsNullOrWhiteSpace(dslView.MermaidSource))
+            {
+                string mermaidUrl = "https://localhost";
+                string mermaidFormat = "svg";
+                
+                if(!this.dslWorkspace.Views.Properties.ContainsKey("mermaid.url"))
+                {
+                    throw new Exception("mermaid.url is required if not using docueye.diagramengine = mermaid");
+                }else
+                {
+                    mermaidUrl = this.dslWorkspace.Views.Properties["mermaid.url"];
+                }
+                if (!this.dslWorkspace.Views.Properties.ContainsKey("mermaid.format"))
+                {
+                    throw new Exception("mermaid.format is required if not using docueye.diagramengine = mermaid");
+                }else
+                {
+                    mermaidFormat = this.dslWorkspace.Views.Properties["mermaid.format"] == "png" ? "img" : "svg";
+                }
+                string content = ImageToBase64Async(dslView.MermaidSource ?? string.Empty, this.workspaceDirectory)
+                    .GetAwaiter().GetResult();
+                
+
+                return new StructurizrJsonImageView()
+                {
+                    Key = dslView.Identifier,
+                    Title = dslView.Title,
+                    Description = dslView.Description,
+                    ElementId = dslView.ElementIdentifier,
+                    Content = $"{mermaidUrl.TrimEnd("/")}/{mermaidFormat}/{content}",
+                    ContentType = mermaidFormat == "img" ? "image/png" : "image/svg+xml",
+                    Properties = new Dictionary<string, string>(dslView.Properties)
+                };
+            }
+            else if (!string.IsNullOrWhiteSpace(dslView.PlantUMLSource))
+            {
+                throw new NotImplementedException("PlantUML source is not yet implemented for image view");
+            }
+            else
+            {
+                throw new Exception("Only image,mermaid, plantuml, sources are supported for image view");
+            }
+
+
+
+            
+            
+            
         }
 
         private static async Task<string> ImageToBase64Async(string pathOrUrl, string workspaceDirectory)

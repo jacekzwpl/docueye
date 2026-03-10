@@ -222,6 +222,17 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
                 }).finally(() => {
                     setIsLoading(false);
                 });
+        }else if(diagramType === "ImageView") {
+            DocuEyeApi.ViewsApi
+            .apiWorkspacesWorkspaceIdViewsImageIdGet(workspaceId, viewId)
+            .then((response: AxiosResponse<ImageView>) => {
+                if (response.data.content) {
+                    const urlArray = response.data.content.split("/");
+                    setMermaidDiagram(atob(urlArray[urlArray.length - 1]) ?? "");
+                }
+            }).finally(() => {
+                setIsLoading(false);
+            });
         }else {
             setIsLoading(false);
         }
@@ -328,7 +339,14 @@ const ViewDiagram = forwardRef((props: IViewDiagramProps, ref) => {
 
         if (selectedView && workspaceId) {
             if (selectedView.viewType === "ImageView") {
-                loadImageView(workspaceId, selectedView.id);
+                setDiagramEngine(selectedView.diagramEngine ?? "reactflow");
+                setMermaidDiagram("");
+                if(selectedView.diagramEngine === "mermaid") {
+                    loadMermaidDiagram(workspaceId, selectedView.id, "ImageView");
+                }else {
+                    loadImageView(workspaceId, selectedView.id);
+                }
+                
             }
         }
     }, [
