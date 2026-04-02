@@ -8,7 +8,8 @@
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "check-updates": "ncu --interactive",
-    "audit": "npm audit"
+    "audit": "npm audit",
+    "install": "sfw npm install"
   },
   "dependencies": {
     "@asyncapi/react-component": "^3.0.2",
